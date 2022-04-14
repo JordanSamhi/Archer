@@ -43,4 +43,11 @@ public class Constants {
 	 */
 	public static final String CLASSES_TO_METHODS = "/classes_to_methods.txt";
 	public static final String LIBRARIES_FILE = "/libraries.txt";
+
+	/**
+	 * Classes
+	 */
+	public static final String PERIODIC_WORK_REQUEST = "androidx.work.PeriodicWorkRequest$Builder";
+	public static final String ONE_TIME_WORK_REQUEST = "androidx.work.OneTimeWorkRequest$Builder";
+	public static final String WORK_REQUEST = "androidx.work.WorkRequest$Builder";
 }
