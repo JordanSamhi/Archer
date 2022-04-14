@@ -48,6 +48,7 @@ public class CommandLineOptions {
 	private static final Triplet<String, String, String> REDIS_SERVER = new Triplet<>("redis-srv", "s", "Sets the redis server address");
 	private static final Triplet<String, String, String> REDIS_PORT = new Triplet<>("redis-port", "n", "Sets the redis port to connect to");
 	private static final Triplet<String, String, String> REDIS_PWD = new Triplet<>("redis-pwd", "w", "Sets the redis password");
+	private static final Triplet<String, String, String> TAINT_ANALYSIS = new Triplet<>("taint-analysis", "t", "Run taint analysis on the app");
 
 	private final Options options;
 	private final Options firstOptions;
@@ -145,11 +146,20 @@ public class CommandLineOptions {
 				.argName(HELP.getValue0())
 				.build();
 
+		final Option taintAnalysis = Option.builder(TAINT_ANALYSIS.getValue1())
+				.longOpt(TAINT_ANALYSIS.getValue0())
+				.desc(TAINT_ANALYSIS.getValue2())
+				.argName(TAINT_ANALYSIS.getValue0())
+				.required(false)
+				.hasArg(false)
+				.build();
+
 		this.firstOptions.addOption(help);
 
 		this.options.addOption(apk);
 		this.options.addOption(platform);
 		this.options.addOption(redisPwd);
+		this.options.addOption(taintAnalysis);
 		this.options.addOption(redisPort);
 		this.options.addOption(redisServer);
 
@@ -176,6 +186,10 @@ public class CommandLineOptions {
 
 	public boolean hasRedisPort() {
 		return this.cmdLine.hasOption(REDIS_PORT.getValue1());
+	}
+
+	public boolean hasTaintAnalysis() {
+		return this.cmdLine.hasOption(TAINT_ANALYSIS.getValue1());
 	}
 
 	public boolean hasRedisEnv() {
