@@ -6,10 +6,6 @@ import soot.Scene;
 import soot.SootClass;
 import soot.SootMethod;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.*;
 
 /*-
@@ -38,7 +34,7 @@ import java.util.*;
  * #L%
  */
 
-public class MethodsManager {
+public class MethodsManager extends FileLoader {
 
     private final Map<String, String> executorsToExecutees;
     private final List<String> executees;
@@ -54,58 +50,45 @@ public class MethodsManager {
         interfaces = new ArrayList<>();
         classes = new ArrayList<>();
         executeeClasses = new ArrayList<>();
-        loadFile(this.getFile());
+        this.loadMethods();
     }
 
     protected String getFile() {
         return Constants.CLASSES_TO_METHODS;
     }
 
-    protected void loadFile(String file) {
-        InputStream fis;
-        BufferedReader br;
-        String line;
-        try {
-            fis = this.getClass().getResourceAsStream(file);
-            br = new BufferedReader(new InputStreamReader(fis));
-            while ((line = br.readLine()) != null) {
-                if (!line.startsWith("%") && !line.isEmpty()) {
-                    String[] split = line.split("\\|");
-                    if (split.length == 4) {
-                        String clazz = split[0];
-                        int type = Integer.parseInt(split[1]);
-                        int classOrInterface = Integer.parseInt(split[2]);
-                        String methods = split[3];
-                        String[] sms;
-                        SootClass sc = Scene.v().getSootClass(clazz);
-                        if (classOrInterface == 1) {
-                            Utils.add(this.classes, sc);
-                        } else if (classOrInterface == 2) {
-                            Utils.add(this.interfaces, sc);
-                        }
-                        sms = methods.split("&");
-                        if (type == 1) {
-                            for (String s : sms) {
-                                String[] splitSrcTgt = s.split("@");
-                                String src = splitSrcTgt[0];
-                                String tgt = splitSrcTgt[1];
-                                this.executorsToExecutees.put(src, tgt);
-                            }
-                        } else {
-                            if (type == 2) {
-                                Utils.addAll(Arrays.asList(sms), this.executees);
-                                this.executeeClasses.add(sc);
-                            } else if (type == 3) {
-                                Utils.addAll(Arrays.asList(sms), this.helpers);
-                            }
-                        }
+    protected void loadMethods() {
+        for (String line : this.items) {
+            String[] split = line.split("\\|");
+            if (split.length == 4) {
+                String clazz = split[0];
+                int type = Integer.parseInt(split[1]);
+                int classOrInterface = Integer.parseInt(split[2]);
+                String methods = split[3];
+                String[] sms;
+                SootClass sc = Scene.v().getSootClass(clazz);
+                if (classOrInterface == 1) {
+                    Utils.add(this.classes, sc);
+                } else if (classOrInterface == 2) {
+                    Utils.add(this.interfaces, sc);
+                }
+                sms = methods.split("&");
+                if (type == 1) {
+                    for (String s : sms) {
+                        String[] splitSrcTgt = s.split("@");
+                        String src = splitSrcTgt[0];
+                        String tgt = splitSrcTgt[1];
+                        this.executorsToExecutees.put(src, tgt);
+                    }
+                } else {
+                    if (type == 2) {
+                        Utils.addAll(Arrays.asList(sms), this.executees);
+                        this.executeeClasses.add(sc);
+                    } else if (type == 3) {
+                        Utils.addAll(Arrays.asList(sms), this.helpers);
                     }
                 }
             }
-            br.close();
-            fis.close();
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
         }
     }
 
