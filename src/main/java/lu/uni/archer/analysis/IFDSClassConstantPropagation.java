@@ -7,10 +7,12 @@ import heros.InterproceduralCFG;
 import heros.flowfunc.Identity;
 import heros.flowfunc.KillAll;
 import lu.uni.archer.utils.ClassConstantMethods;
+import lu.uni.archer.utils.Constants;
 import soot.*;
 import soot.jimple.*;
-import soot.jimple.toolkits.ide.DefaultJimpleIFDSTabulationProblem;
+import soot.jimple.toolkits.ide.icfg.JimpleBasedInterproceduralCFG;
 import soot.toolkits.scalar.Pair;
+
 import java.util.*;
 
 /*-
@@ -41,10 +43,18 @@ import java.util.*;
 
 // TODO: refactor
 
-public class IFDSClassConstant extends IFDSProblem {
+public class IFDSClassConstantPropagation extends IFDSProblem {
 
-    public IFDSClassConstant(InterproceduralCFG<Unit, SootMethod> icfg) {
+    public IFDSClassConstantPropagation() {
+        this(new JimpleBasedInterproceduralCFG());
+    }
+    public IFDSClassConstantPropagation(InterproceduralCFG<Unit, SootMethod> icfg) {
         super(icfg);
+    }
+
+    @Override
+    public String getAnalysisName() {
+        return Constants.CLASS_CONSTANT_PROPAGATION;
     }
 
     @Override
