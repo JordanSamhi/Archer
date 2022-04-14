@@ -50,4 +50,9 @@ public class Constants {
 	public static final String PERIODIC_WORK_REQUEST = "androidx.work.PeriodicWorkRequest$Builder";
 	public static final String ONE_TIME_WORK_REQUEST = "androidx.work.OneTimeWorkRequest$Builder";
 	public static final String WORK_REQUEST = "androidx.work.WorkRequest$Builder";
+
+	/**
+	 * Analysis names
+	 */
+	public static final String CLASS_CONSTANT_PROPAGATION = "ClassConstantPropagation";
 }
