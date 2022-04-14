@@ -41,7 +41,7 @@ import java.util.*;
 
 // TODO: refactor
 
-public class IFDSClassConstant extends DefaultJimpleIFDSTabulationProblem<Pair<Value, ClassConstant>, InterproceduralCFG<Unit, SootMethod>> {
+public class IFDSClassConstant extends IFDSProblem {
 
     public IFDSClassConstant(InterproceduralCFG<Unit, SootMethod> icfg) {
         super(icfg);
