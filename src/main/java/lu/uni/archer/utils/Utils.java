@@ -91,4 +91,33 @@ public class Utils {
         }
         return names;
     }
+
+    public static String getClassNameFromSignature(String sig) {
+        String tmp = sig.split(" ")[0];
+        return tmp.substring(1, tmp.length() - 1);
+    }
+
+    public static String getMethodNameFromSignature(String sig) {
+        String tmp = sig.split(" ")[2];
+        return tmp.substring(0, tmp.indexOf("("));
+    }
+
+    public static String getReturnNameFromSignature(String sig) {
+        return sig.split(" ")[1];
+    }
+
+    public static List<String> getParametersNamesFromSignature(String sig) {
+        String tmp = sig.split(" ")[2];
+        String params = tmp.substring(tmp.indexOf("(") + 1, tmp.indexOf(")"));
+        String[] paramsArray = params.split(",");
+        List<String> parameters = new ArrayList<String>();
+        String p = null;
+        for (int i = 0; i < paramsArray.length; i++) {
+            p = paramsArray[i];
+            if (!p.isEmpty()) {
+                parameters.add(p);
+            }
+        }
+        return parameters;
+    }
 }

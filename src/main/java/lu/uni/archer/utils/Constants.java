@@ -37,12 +37,15 @@ public class Constants {
 	 * Misc names
 	 */
 	public static final String TOOL_NAME = "Archer";
+	public static final String SOURCE = "SOURCE";
+	public static final String SINK = "SINK";
 
 	/**
 	 * Files
 	 */
 	public static final String CLASSES_TO_METHODS = "/classes_to_methods.txt";
 	public static final String LIBRARIES_FILE = "/libraries.txt";
+	public static final String SOURCES_SINKS_FILE = "/SourcesSinks.txt";
 
 	/**
 	 * Classes
