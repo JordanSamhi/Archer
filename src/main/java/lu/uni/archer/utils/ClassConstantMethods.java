@@ -34,8 +34,8 @@ import java.util.List;
  */
 
 public class ClassConstantMethods {
-    List<String> classConstantMethods;
-    List<String> propagationMethods;
+    List<String> methodsThatPropagateToBase;
+    List<String> methodsThatPropagateToReceiver;
     private static ClassConstantMethods instance;
 
     public static ClassConstantMethods v() {
@@ -46,83 +46,86 @@ public class ClassConstantMethods {
     }
 
     private ClassConstantMethods() {
-        this.classConstantMethods = new ArrayList<>();
-        this.propagationMethods = new ArrayList<>();
-        this.classConstantMethods.add("<androidx.work.PeriodicWorkRequest$Builder: void <init>(java.lang.Class,long,java.util.concurrent.TimeUnit)>");
-        this.classConstantMethods.add("<androidx.work.PeriodicWorkRequest$Builder: void <init>(java.lang.Class,java.time.Duration)>");
-        this.classConstantMethods.add("<androidx.work.PeriodicWorkRequest$Builder: void <init>(java.lang.Class,long,java.util.concurrent.TimeUnit,long,java.util.concurrent.TimeUnit)>");
-        this.classConstantMethods.add("<androidx.work.PeriodicWorkRequest$Builder: void <init>(java.lang.Class,java.time.Duration,java.time.Duration)>");
-        this.classConstantMethods.add("<androidx.work.OneTimeWorkRequest$Builder: void <init>(java.lang.Class)>");
+        this.methodsThatPropagateToBase = new ArrayList<>();
+        this.methodsThatPropagateToReceiver = new ArrayList<>();
+        this.methodsThatPropagateToBase.add("<androidx.work.PeriodicWorkRequest$Builder: void <init>(java.lang.Class,long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToBase.add("<androidx.work.PeriodicWorkRequest$Builder: void <init>(java.lang.Class,java.time.Duration)>");
+        this.methodsThatPropagateToBase.add("<androidx.work.PeriodicWorkRequest$Builder: void <init>(java.lang.Class,long,java.util.concurrent.TimeUnit,long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToBase.add("<androidx.work.PeriodicWorkRequest$Builder: void <init>(java.lang.Class,java.time.Duration,java.time.Duration)>");
+        this.methodsThatPropagateToBase.add("<androidx.work.OneTimeWorkRequest$Builder: void <init>(java.lang.Class)>");
+        this.methodsThatPropagateToBase.add("<android.content.ComponentName: void <init>(android.content.Context,java.lang.Class)>");
 
-        this.propagationMethods.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder getThis()>");
-        this.propagationMethods.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder keepResultsForAtLeast(long,java.util.concurrent.TimeUnit)>");
-        this.propagationMethods.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder keepResultsForAtLeast(java.time.Duration)>");
-        this.propagationMethods.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setBackoffCriteria(androidx.work.BackoffPolicy,long,java.util.concurrent.TimeUnit)>");
-        this.propagationMethods.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setBackoffCriteria(androidx.work.BackoffPolicy,java.time.Duration)>");
-        this.propagationMethods.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setConstraints(androidx.work.Constraints)>");
-        this.propagationMethods.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setExpedited(androidx.work.OutOfQuotaPolicy)>");
-        this.propagationMethods.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialDelay(long,java.util.concurrent.TimeUnit)>");
-        this.propagationMethods.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialDelay(java.time.Duration)>");
-        this.propagationMethods.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialRunAttemptCount(int)>");
-        this.propagationMethods.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialState(androidx.work.WorkInfo$State)>");
-        this.propagationMethods.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setInputData(androidx.work.Data)>");
-        this.propagationMethods.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setPeriodStartTime(long,java.util.concurrent.TimeUnit)>");
-        this.propagationMethods.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setScheduleRequestedAt(long,java.util.concurrent.TimeUnit)>");
-        this.propagationMethods.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest build()>");
-        this.propagationMethods.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest buildInternal()>");
-        this.propagationMethods.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder addTag(java.lang.String)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder getThis()>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder keepResultsForAtLeast(long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder keepResultsForAtLeast(java.time.Duration)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setBackoffCriteria(androidx.work.BackoffPolicy,long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setBackoffCriteria(androidx.work.BackoffPolicy,java.time.Duration)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setConstraints(androidx.work.Constraints)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setExpedited(androidx.work.OutOfQuotaPolicy)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialDelay(long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialDelay(java.time.Duration)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialRunAttemptCount(int)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialState(androidx.work.WorkInfo$State)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setInputData(androidx.work.Data)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setPeriodStartTime(long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setScheduleRequestedAt(long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest build()>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest buildInternal()>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder addTag(java.lang.String)>");
 
-        this.propagationMethods.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder getThis()>");
-        this.propagationMethods.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder keepResultsForAtLeast(long,java.util.concurrent.TimeUnit)>");
-        this.propagationMethods.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder keepResultsForAtLeast(java.time.Duration)>");
-        this.propagationMethods.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setBackoffCriteria(androidx.work.BackoffPolicy,long,java.util.concurrent.TimeUnit)>");
-        this.propagationMethods.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setBackoffCriteria(androidx.work.BackoffPolicy,java.time.Duration)>");
-        this.propagationMethods.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setConstraints(androidx.work.Constraints)>");
-        this.propagationMethods.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setExpedited(androidx.work.OutOfQuotaPolicy)>");
-        this.propagationMethods.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialDelay(long,java.util.concurrent.TimeUnit)>");
-        this.propagationMethods.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialDelay(java.time.Duration)>");
-        this.propagationMethods.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialRunAttemptCount(int)>");
-        this.propagationMethods.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialState(androidx.work.WorkInfo$State)>");
-        this.propagationMethods.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setInputData(androidx.work.Data)>");
-        this.propagationMethods.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setPeriodStartTime(long,java.util.concurrent.TimeUnit)>");
-        this.propagationMethods.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setScheduleRequestedAt(long,java.util.concurrent.TimeUnit)>");
-        this.propagationMethods.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest build()>");
-        this.propagationMethods.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest buildInternal()>");
-        this.propagationMethods.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder addTag(java.lang.String)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder getThis()>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder keepResultsForAtLeast(long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder keepResultsForAtLeast(java.time.Duration)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setBackoffCriteria(androidx.work.BackoffPolicy,long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setBackoffCriteria(androidx.work.BackoffPolicy,java.time.Duration)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setConstraints(androidx.work.Constraints)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setExpedited(androidx.work.OutOfQuotaPolicy)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialDelay(long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialDelay(java.time.Duration)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialRunAttemptCount(int)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialState(androidx.work.WorkInfo$State)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setInputData(androidx.work.Data)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setPeriodStartTime(long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setScheduleRequestedAt(long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest build()>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest buildInternal()>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder addTag(java.lang.String)>");
 
-        this.propagationMethods.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder getThis()>");
-        this.propagationMethods.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder keepResultsForAtLeast(long,java.util.concurrent.TimeUnit)>");
-        this.propagationMethods.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder keepResultsForAtLeast(java.time.Duration)>");
-        this.propagationMethods.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setBackoffCriteria(androidx.work.BackoffPolicy,long,java.util.concurrent.TimeUnit)>");
-        this.propagationMethods.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setBackoffCriteria(androidx.work.BackoffPolicy,java.time.Duration)>");
-        this.propagationMethods.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setConstraints(androidx.work.Constraints)>");
-        this.propagationMethods.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setExpedited(androidx.work.OutOfQuotaPolicy)>");
-        this.propagationMethods.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialDelay(long,java.util.concurrent.TimeUnit)>");
-        this.propagationMethods.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialDelay(java.time.Duration)>");
-        this.propagationMethods.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialRunAttemptCount(int)>");
-        this.propagationMethods.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialState(androidx.work.WorkInfo$State)>");
-        this.propagationMethods.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setInputData(androidx.work.Data)>");
-        this.propagationMethods.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setPeriodStartTime(long,java.util.concurrent.TimeUnit)>");
-        this.propagationMethods.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setScheduleRequestedAt(long,java.util.concurrent.TimeUnit)>");
-        this.propagationMethods.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest build()>");
-        this.propagationMethods.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest buildInternal()>");
-        this.propagationMethods.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder addTag(java.lang.String)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder getThis()>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder keepResultsForAtLeast(long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder keepResultsForAtLeast(java.time.Duration)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setBackoffCriteria(androidx.work.BackoffPolicy,long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setBackoffCriteria(androidx.work.BackoffPolicy,java.time.Duration)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setConstraints(androidx.work.Constraints)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setExpedited(androidx.work.OutOfQuotaPolicy)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialDelay(long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialDelay(java.time.Duration)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialRunAttemptCount(int)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setInitialState(androidx.work.WorkInfo$State)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setInputData(androidx.work.Data)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setPeriodStartTime(long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setScheduleRequestedAt(long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest build()>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest buildInternal()>");
+        this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder addTag(java.lang.String)>");
     }
 
-    public boolean containsMethodUsingClassConstant(SootMethod sm) {
-        return this.classConstantMethods.contains(sm.getSignature());
+    public boolean isInMethodsThatPropagateToBase(SootMethod sm) {
+        return this.methodsThatPropagateToBase.contains(sm.getSignature());
     }
 
-    public boolean containsPropagationMethods(SootMethod sm) {
-        return this.propagationMethods.contains(sm.getSignature());
+    public boolean isInMethodsThatPropagateToReceiver(SootMethod sm) {
+        return this.methodsThatPropagateToReceiver.contains(sm.getSignature());
     }
 
     public Value getClassConstant(InvokeExpr ie) {
         SootMethod sm = ie.getMethod();
-        if (this.containsMethodUsingClassConstant(sm)) {
+        if (this.isInMethodsThatPropagateToBase(sm)) {
             String className = sm.getDeclaringClass().getName();
             if (className.equals(Constants.PERIODIC_WORK_REQUEST) || className.equals(Constants.ONE_TIME_WORK_REQUEST) || className.equals(Constants.WORK_REQUEST)) {
                 return ie.getArg(0);
+            } else if (className.equals(Constants.COMPONENT_NAME)) {
+                return ie.getArg(1);
             }
         }
         return null;

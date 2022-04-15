@@ -48,6 +48,7 @@ public class IFDSClassConstantPropagation extends IFDSProblem {
     public IFDSClassConstantPropagation() {
         this(new JimpleBasedInterproceduralCFG());
     }
+
     public IFDSClassConstantPropagation(InterproceduralCFG<Unit, SootMethod> icfg) {
         super(icfg);
     }
@@ -195,74 +196,79 @@ public class IFDSClassConstantPropagation extends IFDSProblem {
                     InvokeStmt is = (InvokeStmt) callSite;
                     InvokeExpr ie = is.getInvokeExpr();
                     SootMethod callee = ie.getMethod();
-                    if (ClassConstantMethods.v().containsMethodUsingClassConstant(callee)) {
-                        SpecialInvokeExpr sie = (SpecialInvokeExpr) ie;
-                        Value base = sie.getBase();
-                        Value v = ClassConstantMethods.v().getClassConstant(ie);
-                        if (v != null) {
-                            if (v instanceof ClassConstant) {
-                                return new FlowFunction<Pair<Value, ClassConstant>>() {
+                    if (ClassConstantMethods.v().isInMethodsThatPropagateToBase(callee)) {
+                        if (ie instanceof InstanceInvokeExpr) {
+                            InstanceInvokeExpr iie = (InstanceInvokeExpr) ie;
+                            Value base = iie.getBase();
+                            Value classConstant = ClassConstantMethods.v().getClassConstant(ie);
+                            if (classConstant != null) {
+                                if (classConstant instanceof ClassConstant) {
+                                    return new FlowFunction<Pair<Value, ClassConstant>>() {
 
-                                    @Override
-                                    public Set<Pair<Value, ClassConstant>> computeTargets(Pair<Value, ClassConstant> in) {
-                                        if (in.equals(zeroValue())) {
-                                            Set<Pair<Value, ClassConstant>> set = new HashSet<>();
-                                            set.add(zeroValue());
-                                            set.add(new Pair<>(base, (ClassConstant) v));
-                                            return set;
-                                        } else if (in.getO1().equivTo(base)) {
-                                            return Collections.emptySet();
-                                        } else {
-                                            return Collections.singleton(in);
+                                        @Override
+                                        public Set<Pair<Value, ClassConstant>> computeTargets(Pair<Value, ClassConstant> in) {
+                                            if (in.equals(zeroValue())) {
+                                                Set<Pair<Value, ClassConstant>> set = new HashSet<>();
+                                                set.add(zeroValue());
+                                                set.add(new Pair<>(base, (ClassConstant) classConstant));
+                                                return set;
+                                            } else if (in.getO1().equivTo(base)) {
+                                                return Collections.emptySet();
+                                            } else {
+                                                return Collections.singleton(in);
+                                            }
                                         }
-                                    }
-                                };
-                            } else if (v instanceof Ref || v instanceof Local) {
+                                    };
+                                } else if (classConstant instanceof Ref || classConstant instanceof Local) {
+                                    return new FlowFunction<Pair<Value, ClassConstant>>() {
+
+                                        @Override
+                                        public Set<Pair<Value, ClassConstant>> computeTargets(Pair<Value, ClassConstant> in) {
+                                            if (in.getO1().equivTo(base)) {
+                                                return Collections.emptySet();
+                                            } else if (classConstant.equivTo(in.getO1())) {
+                                                Set<Pair<Value, ClassConstant>> set = new HashSet<>();
+                                                set.add(new Pair<>(base, in.getO2()));
+                                                set.add(in);
+                                                return set;
+                                            } else {
+                                                return Collections.singleton(in);
+                                            }
+                                        }
+                                    };
+                                }
+                            }
+                        }
+                    }
+
+
+                } else if (callSite instanceof DefinitionStmt) {
+                    DefinitionStmt ds = (DefinitionStmt) callSite;
+                    Value left = ds.getLeftOp();
+                    if (ds.containsInvokeExpr()) {
+                        InvokeExpr ie = ds.getInvokeExpr();
+                        SootMethod callee = ie.getMethod();
+                        if (ClassConstantMethods.v().isInMethodsThatPropagateToReceiver(callee)) {
+                            if (ie instanceof InstanceInvokeExpr) {
+                                InstanceInvokeExpr iie = (InstanceInvokeExpr) ie;
+                                Value base = iie.getBase();
                                 return new FlowFunction<Pair<Value, ClassConstant>>() {
 
                                     @Override
                                     public Set<Pair<Value, ClassConstant>> computeTargets(Pair<Value, ClassConstant> in) {
                                         if (in.getO1().equivTo(base)) {
-                                            return Collections.emptySet();
-                                        } else if (v.equivTo(in.getO1())) {
                                             Set<Pair<Value, ClassConstant>> set = new HashSet<>();
-                                            set.add(new Pair<>(base, in.getO2()));
+                                            set.add(new Pair<>(left, in.getO2()));
                                             set.add(in);
                                             return set;
+                                        } else if (left.equivTo(in.getO1())) {
+                                            return Collections.emptySet();
                                         } else {
                                             return Collections.singleton(in);
                                         }
                                     }
                                 };
                             }
-                        }
-                    }
-                } else if (callSite instanceof DefinitionStmt) {
-                    DefinitionStmt ds = (DefinitionStmt) callSite;
-                    Value left = ds.getLeftOp();
-                    Value right = ds.getRightOp();
-                    if (right instanceof InvokeExpr) {
-                        InvokeExpr ie = (InvokeExpr) right;
-                        SootMethod callee = ie.getMethod();
-                        if (ClassConstantMethods.v().containsPropagationMethods(callee)) {
-                            VirtualInvokeExpr vie = (VirtualInvokeExpr) ie;
-                            Value base = vie.getBase();
-                            return new FlowFunction<Pair<Value, ClassConstant>>() {
-
-                                @Override
-                                public Set<Pair<Value, ClassConstant>> computeTargets(Pair<Value, ClassConstant> in) {
-                                    if (in.getO1().equivTo(base)) {
-                                        Set<Pair<Value, ClassConstant>> set = new HashSet<>();
-                                        set.add(new Pair<>(left, in.getO2()));
-                                        set.add(in);
-                                        return set;
-                                    } else if (left.equivTo(in.getO1())) {
-                                        return Collections.emptySet();
-                                    } else {
-                                        return Collections.singleton(in);
-                                    }
-                                }
-                            };
                         }
                     }
                 }
