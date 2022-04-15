@@ -34,7 +34,8 @@ import java.util.List;
  */
 
 public class ClassConstantMethods {
-    List<String> methodsThatPropagateToBase;
+    List<String> methodsThatPropagateToBase0;
+    List<String> methodsThatPropagateToBase1;
     List<String> methodsThatPropagateToReceiver;
     private static ClassConstantMethods instance;
 
@@ -46,14 +47,20 @@ public class ClassConstantMethods {
     }
 
     private ClassConstantMethods() {
-        this.methodsThatPropagateToBase = new ArrayList<>();
+        this.methodsThatPropagateToBase0 = new ArrayList<>();
+        this.methodsThatPropagateToBase1 = new ArrayList<>();
         this.methodsThatPropagateToReceiver = new ArrayList<>();
-        this.methodsThatPropagateToBase.add("<androidx.work.PeriodicWorkRequest$Builder: void <init>(java.lang.Class,long,java.util.concurrent.TimeUnit)>");
-        this.methodsThatPropagateToBase.add("<androidx.work.PeriodicWorkRequest$Builder: void <init>(java.lang.Class,java.time.Duration)>");
-        this.methodsThatPropagateToBase.add("<androidx.work.PeriodicWorkRequest$Builder: void <init>(java.lang.Class,long,java.util.concurrent.TimeUnit,long,java.util.concurrent.TimeUnit)>");
-        this.methodsThatPropagateToBase.add("<androidx.work.PeriodicWorkRequest$Builder: void <init>(java.lang.Class,java.time.Duration,java.time.Duration)>");
-        this.methodsThatPropagateToBase.add("<androidx.work.OneTimeWorkRequest$Builder: void <init>(java.lang.Class)>");
-        this.methodsThatPropagateToBase.add("<android.content.ComponentName: void <init>(android.content.Context,java.lang.Class)>");
+
+        // parameter of interest is arg 0
+        this.methodsThatPropagateToBase0.add("<androidx.work.PeriodicWorkRequest$Builder: void <init>(java.lang.Class,long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToBase0.add("<androidx.work.PeriodicWorkRequest$Builder: void <init>(java.lang.Class,java.time.Duration)>");
+        this.methodsThatPropagateToBase0.add("<androidx.work.PeriodicWorkRequest$Builder: void <init>(java.lang.Class,long,java.util.concurrent.TimeUnit,long,java.util.concurrent.TimeUnit)>");
+        this.methodsThatPropagateToBase0.add("<androidx.work.PeriodicWorkRequest$Builder: void <init>(java.lang.Class,java.time.Duration,java.time.Duration)>");
+        this.methodsThatPropagateToBase0.add("<androidx.work.OneTimeWorkRequest$Builder: void <init>(java.lang.Class)>");
+
+        // parameter of interest is arg 1
+        this.methodsThatPropagateToBase1.add("<android.content.ComponentName: void <init>(android.content.Context,java.lang.Class)>");
+        this.methodsThatPropagateToBase1.add("<android.app.job.JobInfo$Builder: void <init>(int,android.content.ComponentName)>");
 
         this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder getThis()>");
         this.methodsThatPropagateToReceiver.add("<androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder keepResultsForAtLeast(long,java.util.concurrent.TimeUnit)>");
@@ -108,10 +115,25 @@ public class ClassConstantMethods {
         this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest build()>");
         this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest buildInternal()>");
         this.methodsThatPropagateToReceiver.add("<androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder addTag(java.lang.String)>");
+
+        this.methodsThatPropagateToReceiver.add("<android.app.job.JobInfo$Builder: android.app.job.JobInfo$Builder setRequiredNetworkType(int)>");
+        this.methodsThatPropagateToReceiver.add("<android.app.job.JobInfo$Builder: android.app.job.JobInfo$Builder setRequiresCharging(boolean)>");
+        this.methodsThatPropagateToReceiver.add("<android.app.job.JobInfo$Builder: android.app.job.JobInfo$Builder setMinimumLatency(long)>");
+        this.methodsThatPropagateToReceiver.add("<android.app.job.JobInfo$Builder: android.app.job.JobInfo build()>");
+        this.methodsThatPropagateToReceiver.add("<android.app.job.JobInfo$Builder: android.app.job.JobInfo$Builder setExtras(android.os.PersistableBundle)>");
+        this.methodsThatPropagateToReceiver.add("<android.app.job.JobInfo$Builder: android.app.job.JobInfo$Builder setRequiresDeviceIdle(boolean)>");
+        this.methodsThatPropagateToReceiver.add("<android.app.job.JobInfo$Builder: android.app.job.JobInfo$Builder addTriggerContentUri(android.app.job.JobInfo$TriggerContentUri)>");
+        this.methodsThatPropagateToReceiver.add("<android.app.job.JobInfo$Builder: android.app.job.JobInfo$Builder setTriggerContentUpdateDelay(long)>");
+        this.methodsThatPropagateToReceiver.add("<android.app.job.JobInfo$Builder: android.app.job.JobInfo$Builder setTriggerContentMaxDelay(long)>");
+        this.methodsThatPropagateToReceiver.add("<android.app.job.JobInfo$Builder: android.app.job.JobInfo$Builder setPeriodic(long)>");
+        this.methodsThatPropagateToReceiver.add("<android.app.job.JobInfo$Builder: android.app.job.JobInfo$Builder setPeriodic(long,long)>");
+        this.methodsThatPropagateToReceiver.add("<android.app.job.JobInfo$Builder: android.app.job.JobInfo$Builder setOverrideDeadline(long)>");
+        this.methodsThatPropagateToReceiver.add("<android.app.job.JobInfo$Builder: android.app.job.JobInfo$Builder setBackoffCriteria(long,int)>");
+        this.methodsThatPropagateToReceiver.add("<android.app.job.JobInfo$Builder: android.app.job.JobInfo$Builder setPersisted(boolean)>");
     }
 
     public boolean isInMethodsThatPropagateToBase(SootMethod sm) {
-        return this.methodsThatPropagateToBase.contains(sm.getSignature());
+        return this.methodsThatPropagateToBase0.contains(sm.getSignature()) || this.methodsThatPropagateToBase1.contains(sm.getSignature());
     }
 
     public boolean isInMethodsThatPropagateToReceiver(SootMethod sm) {
@@ -121,10 +143,9 @@ public class ClassConstantMethods {
     public Value getClassConstant(InvokeExpr ie) {
         SootMethod sm = ie.getMethod();
         if (this.isInMethodsThatPropagateToBase(sm)) {
-            String className = sm.getDeclaringClass().getName();
-            if (className.equals(Constants.PERIODIC_WORK_REQUEST) || className.equals(Constants.ONE_TIME_WORK_REQUEST) || className.equals(Constants.WORK_REQUEST)) {
+            if (this.methodsThatPropagateToBase0.contains(sm.getSignature())) {
                 return ie.getArg(0);
-            } else if (className.equals(Constants.COMPONENT_NAME)) {
+            } else if (this.methodsThatPropagateToBase1.contains(sm.getSignature())) {
                 return ie.getArg(1);
             }
         }
