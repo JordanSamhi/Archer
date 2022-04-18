@@ -45,15 +45,8 @@ public class Constants {
 	 */
 	public static final String CLASSES_TO_METHODS = "/classes_to_methods.txt";
 	public static final String LIBRARIES_FILE = "/libraries.txt";
-	public static final String SOURCES_SINKS_FILE = "/SourcesSinks.txt";
-
-	/**
-	 * Classes
-	 */
-	public static final String PERIODIC_WORK_REQUEST = "androidx.work.PeriodicWorkRequest$Builder";
-	public static final String ONE_TIME_WORK_REQUEST = "androidx.work.OneTimeWorkRequest$Builder";
-	public static final String WORK_REQUEST = "androidx.work.WorkRequest$Builder";
-	public static final String COMPONENT_NAME = "android.content.ComponentName";
+	public static final String SOURCES_SINKS_FILE = "/sourcesAndSinks.txt";
+	public static final String DATALOW_PROPAGATION_METHODS = "/dataflow_propagation_methods.txt";
 
 	/**
 	 * Analysis names

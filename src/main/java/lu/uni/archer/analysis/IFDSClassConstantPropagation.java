@@ -6,7 +6,7 @@ import heros.FlowFunctions;
 import heros.InterproceduralCFG;
 import heros.flowfunc.Identity;
 import heros.flowfunc.KillAll;
-import lu.uni.archer.utils.ClassConstantMethods;
+import lu.uni.archer.files.DataFlowMethodsManager;
 import lu.uni.archer.utils.Constants;
 import soot.*;
 import soot.jimple.*;
@@ -196,11 +196,11 @@ public class IFDSClassConstantPropagation extends IFDSProblem {
                     InvokeStmt is = (InvokeStmt) callSite;
                     InvokeExpr ie = is.getInvokeExpr();
                     SootMethod callee = ie.getMethod();
-                    if (ClassConstantMethods.v().isInMethodsThatPropagateToBase(callee)) {
+                    if (DataFlowMethodsManager.v().isInMethodsThatGenerateToBase(callee)) {
                         if (ie instanceof InstanceInvokeExpr) {
                             InstanceInvokeExpr iie = (InstanceInvokeExpr) ie;
                             Value base = iie.getBase();
-                            Value classConstant = ClassConstantMethods.v().getClassConstant(ie);
+                            Value classConstant = DataFlowMethodsManager.v().getClassConstant(ie);
                             if (classConstant != null) {
                                 if (classConstant instanceof ClassConstant) {
                                     return new FlowFunction<Pair<Value, ClassConstant>>() {
@@ -248,7 +248,7 @@ public class IFDSClassConstantPropagation extends IFDSProblem {
                     if (ds.containsInvokeExpr()) {
                         InvokeExpr ie = ds.getInvokeExpr();
                         SootMethod callee = ie.getMethod();
-                        if (ClassConstantMethods.v().isInMethodsThatPropagateBaseToReceiver(callee)) {
+                        if (DataFlowMethodsManager.v().isInMethodsThatPropagateBaseToReceiver(callee)) {
                             if (ie instanceof InstanceInvokeExpr) {
                                 InstanceInvokeExpr iie = (InstanceInvokeExpr) ie;
                                 Value base = iie.getBase();
