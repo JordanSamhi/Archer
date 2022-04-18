@@ -43,7 +43,10 @@ public class MethodsManager extends FileLoader {
     private final List<SootClass> classes;
     private final List<SootClass> executeeClasses;
 
-    public MethodsManager() {
+    private static MethodsManager instance;
+
+    private MethodsManager() {
+        super();
         executorsToExecutees = new HashMap<>();
         executees = new ArrayList<>();
         helpers = new ArrayList<>();
@@ -51,6 +54,13 @@ public class MethodsManager extends FileLoader {
         classes = new ArrayList<>();
         executeeClasses = new ArrayList<>();
         this.loadMethods();
+    }
+
+    public static MethodsManager v() {
+        if(instance == null) {
+            instance = new MethodsManager();
+        }
+        return instance;
     }
 
     protected String getFile() {
