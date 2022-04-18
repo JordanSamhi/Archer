@@ -41,6 +41,7 @@ public class MethodCallMethodsManager extends FileLoader {
     private final List<String> methodsThatPropagateBaseToReceiver;
     private final Map<String, Integer> methodsThatGenerateBaseToReceiver;
     private final Map<String, Integer> methodsThatPropagateParameterToReceiverToParameterPosition;
+    private final Map<String, String> methodToLabel;
 
     private static MethodCallMethodsManager instance;
 
@@ -49,6 +50,7 @@ public class MethodCallMethodsManager extends FileLoader {
         this.methodsThatPropagateBaseToReceiver = new ArrayList<>();
         this.methodsThatGenerateBaseToReceiver = new HashMap<>();
         this.methodsThatPropagateParameterToReceiverToParameterPosition = new HashMap<>();
+        this.methodToLabel = new HashMap<>();
         this.loadMethods();
     }
 
@@ -75,6 +77,8 @@ public class MethodCallMethodsManager extends FileLoader {
             switch (type) {
                 case 1:
                     paramPosition = Integer.parseInt(split[2]);
+                    String label = split[3];
+                    this.methodToLabel.put(method, label);
                     this.methodsThatGenerateBaseToReceiver.put(method, paramPosition);
                     break;
                 case 2:
@@ -98,6 +102,10 @@ public class MethodCallMethodsManager extends FileLoader {
 
     public boolean isInMethodsThatPropagateParameterToReceiver(SootMethod sm) {
         return this.methodsThatPropagateParameterToReceiverToParameterPosition.containsKey(sm.getSignature());
+    }
+
+    public String getLabel(SootMethod sm) {
+        return this.methodToLabel.get(sm.getSignature());
     }
 
     public Value getMethodCallParameter(InvokeExpr ie) {
