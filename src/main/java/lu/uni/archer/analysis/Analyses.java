@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Analyses {
-    private final List<IFDSProblem> problems;
+    private final List<IFDSProblem<?>> problems;
     private final Map<String, JimpleIFDSSolver<?, InterproceduralCFG<Unit, SootMethod>>> solvers;
 
     private static Analyses instance;
@@ -28,7 +28,7 @@ public class Analyses {
         this.solvers = new HashMap<>();
     }
 
-    public void addProblem(IFDSProblem p) {
+    public void addProblem(IFDSProblem<?> p) {
         if (!this.problems.contains(p)) {
             this.problems.add(p);
         }
@@ -36,7 +36,7 @@ public class Analyses {
 
     public void solveProblems() {
         JimpleIFDSSolver<?, InterproceduralCFG<Unit, SootMethod>> solver;
-        for (IFDSProblem problem : this.problems) {
+        for (IFDSProblem<?> problem : this.problems) {
             solver = new JimpleIFDSSolver<>(problem);
             this.solvers.put(problem.getAnalysisName(), solver);
             solver.solve();

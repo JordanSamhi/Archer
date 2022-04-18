@@ -6,7 +6,7 @@ import heros.FlowFunctions;
 import heros.InterproceduralCFG;
 import heros.flowfunc.Identity;
 import heros.flowfunc.KillAll;
-import lu.uni.archer.files.DataFlowMethodsManager;
+import lu.uni.archer.files.ClassConstantMethodsManager;
 import lu.uni.archer.utils.Constants;
 import soot.*;
 import soot.jimple.*;
@@ -196,11 +196,11 @@ public class IFDSClassConstantPropagation extends IFDSProblem<Pair<Value, ClassC
                     InvokeStmt is = (InvokeStmt) callSite;
                     InvokeExpr ie = is.getInvokeExpr();
                     SootMethod callee = ie.getMethod();
-                    if (DataFlowMethodsManager.v().isInMethodsThatGenerateToBase(callee)) {
+                    if (ClassConstantMethodsManager.v().isInMethodsThatGenerateToBase(callee)) {
                         if (ie instanceof InstanceInvokeExpr) {
                             InstanceInvokeExpr iie = (InstanceInvokeExpr) ie;
                             Value base = iie.getBase();
-                            Value classConstant = DataFlowMethodsManager.v().getClassConstant(ie);
+                            Value classConstant = ClassConstantMethodsManager.v().getClassConstant(ie);
                             if (classConstant != null) {
                                 if (classConstant instanceof ClassConstant) {
                                     return new FlowFunction<Pair<Value, ClassConstant>>() {
@@ -240,15 +240,13 @@ public class IFDSClassConstantPropagation extends IFDSProblem<Pair<Value, ClassC
                             }
                         }
                     }
-
-
                 } else if (callSite instanceof DefinitionStmt) {
                     DefinitionStmt ds = (DefinitionStmt) callSite;
                     Value left = ds.getLeftOp();
                     if (ds.containsInvokeExpr()) {
                         InvokeExpr ie = ds.getInvokeExpr();
                         SootMethod callee = ie.getMethod();
-                        if (DataFlowMethodsManager.v().isInMethodsThatPropagateBaseToReceiver(callee)) {
+                        if (ClassConstantMethodsManager.v().isInMethodsThatPropagateBaseToReceiver(callee)) {
                             if (ie instanceof InstanceInvokeExpr) {
                                 InstanceInvokeExpr iie = (InstanceInvokeExpr) ie;
                                 Value base = iie.getBase();

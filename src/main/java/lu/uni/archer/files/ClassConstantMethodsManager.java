@@ -36,31 +36,29 @@ import java.util.Map;
  * #L%
  */
 
-public class DataFlowMethodsManager extends FileLoader {
+public class ClassConstantMethodsManager extends FileLoader {
 
-    private Map<String, Integer> methodsThatGenerateToBaseToParameterPosition;
-    private List<String> methodsThatPropagateBaseToReceiver;
-    private List<String> methodsThatGenerateToBase;
+    private final Map<String, Integer> methodsThatGenerateToBaseToParameterPosition;
+    private final List<String> methodsThatPropagateBaseToReceiver;
 
-    private static DataFlowMethodsManager instance;
+    private static ClassConstantMethodsManager instance;
 
-    private DataFlowMethodsManager() {
+    private ClassConstantMethodsManager() {
         super();
         this.methodsThatGenerateToBaseToParameterPosition = new HashMap<>();
-        this.methodsThatGenerateToBase = new ArrayList<>();
         this.methodsThatPropagateBaseToReceiver = new ArrayList<>();
         this.loadMethods();
     }
 
-    public static DataFlowMethodsManager v() {
+    public static ClassConstantMethodsManager v() {
         if (instance == null) {
-            instance = new DataFlowMethodsManager();
+            instance = new ClassConstantMethodsManager();
         }
         return instance;
     }
 
     protected String getFile() {
-        return Constants.DATALOW_PROPAGATION_METHODS;
+        return Constants.CLASS_CONSTANT_PROPAGATION_METHODS;
     }
 
     protected void loadMethods() {
@@ -69,20 +67,23 @@ public class DataFlowMethodsManager extends FileLoader {
             if (split.length <= 1) {
                 continue;
             }
-            String methods = split[0];
+            String method = split[0];
             int type = Integer.parseInt(split[1]);
-            if (type == 1) {
-                int paramPosition = Integer.parseInt(split[2]);
-                this.methodsThatGenerateToBase.add(methods);
-                this.methodsThatGenerateToBaseToParameterPosition.put(methods, paramPosition);
-            } else if (type == 2) {
-                this.methodsThatPropagateBaseToReceiver.add(methods);
+            int paramPosition;
+            switch (type) {
+                case 1:
+                    paramPosition = Integer.parseInt(split[2]);
+                    this.methodsThatGenerateToBaseToParameterPosition.put(method, paramPosition);
+                    break;
+                case 2:
+                    this.methodsThatPropagateBaseToReceiver.add(method);
+                    break;
             }
         }
     }
 
     public boolean isInMethodsThatGenerateToBase(SootMethod sm) {
-        return this.methodsThatGenerateToBase.contains(sm.getSignature());
+        return this.methodsThatGenerateToBaseToParameterPosition.containsKey(sm.getSignature());
     }
 
     public boolean isInMethodsThatPropagateBaseToReceiver(SootMethod sm) {
