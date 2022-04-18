@@ -43,7 +43,7 @@ import java.util.*;
 
 // TODO: refactor
 
-public class IFDSClassConstantPropagation extends IFDSProblem {
+public class IFDSClassConstantPropagation extends IFDSProblem<Pair<Value, ClassConstant>> {
 
     public IFDSClassConstantPropagation() {
         this(new JimpleBasedInterproceduralCFG());
