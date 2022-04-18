@@ -248,7 +248,7 @@ public class IFDSClassConstantPropagation extends IFDSProblem {
                     if (ds.containsInvokeExpr()) {
                         InvokeExpr ie = ds.getInvokeExpr();
                         SootMethod callee = ie.getMethod();
-                        if (ClassConstantMethods.v().isInMethodsThatPropagateToReceiver(callee)) {
+                        if (ClassConstantMethods.v().isInMethodsThatPropagateBaseToReceiver(callee)) {
                             if (ie instanceof InstanceInvokeExpr) {
                                 InstanceInvokeExpr iie = (InstanceInvokeExpr) ie;
                                 Value base = iie.getBase();
