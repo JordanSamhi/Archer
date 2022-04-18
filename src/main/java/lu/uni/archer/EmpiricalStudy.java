@@ -51,7 +51,7 @@ public class EmpiricalStudy {
     public EmpiricalStudy(String redisServer, String redisPort, String redisPwd) {
         this.rm = new RedisManager(redisServer, redisPort, redisPwd);
         this.fileUnderStudyName = FilenameUtils.getBaseName(CommandLineOptions.v().getApk());
-        mm = new MethodsManager();
+        this.mm = MethodsManager.v();
     }
 
     public void run() {
