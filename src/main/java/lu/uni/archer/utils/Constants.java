@@ -48,6 +48,7 @@ public class Constants {
 	public static final String SOURCES_SINKS_FILE = "/sourcesAndSinks.txt";
 	public static final String CLASS_CONSTANT_PROPAGATION_METHODS = "/classConstant_propagation_methods.txt";
 	public static final String METHOD_CALL_PROPAGATION_METHODS = "/methodCall_propagation_methods.txt";
+	public static final String TO_REMOVE_CG_METHODS = "/call_graph_methods_to_remove.txt";
 
 	/**
 	 * Analysis names
