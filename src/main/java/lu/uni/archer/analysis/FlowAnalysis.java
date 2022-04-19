@@ -31,26 +31,30 @@ public class FlowAnalysis {
     public void printResults() {
         InfoflowCFG icfg = new InfoflowCFG();
         MultiMap<ResultSinkInfo, ResultSourceInfo> res = this.ir.getResults();
-        Iterator<Pair<ResultSinkInfo, ResultSourceInfo>> it = res.iterator();
-        Pair<ResultSinkInfo, ResultSourceInfo> next;
-        ResultSinkInfo sink;
-        ResultSourceInfo source;
-        Writer.v().psuccess("Flowdroid found leaks:");
-        int i = 0;
-        while (it.hasNext()) {
-            Writer.v().pinfo(String.format("Leak %d: ", ++i));
-            next = it.next();
-            source = next.getO2();
-            sink = next.getO1();
-            System.out.println("    From: " + source.getStmt());
-            System.out.println("    To: " + sink.getStmt());
-            Stmt[] path = source.getPath();
-            if (path != null) {
-                System.out.println("    Detailed path:");
-                for (Stmt s : path) {
-                    System.out.println("      -" + s + " => in method: " + icfg.getMethodOf(s));
+        if (res != null) {
+            Iterator<Pair<ResultSinkInfo, ResultSourceInfo>> it = res.iterator();
+            Pair<ResultSinkInfo, ResultSourceInfo> next;
+            ResultSinkInfo sink;
+            ResultSourceInfo source;
+            Writer.v().psuccess("Flowdroid found leaks:");
+            int i = 0;
+            while (it.hasNext()) {
+                Writer.v().pinfo(String.format("Leak %d: ", ++i));
+                next = it.next();
+                source = next.getO2();
+                sink = next.getO1();
+                System.out.println("    From: " + source.getStmt());
+                System.out.println("    To: " + sink.getStmt());
+                Stmt[] path = source.getPath();
+                if (path != null) {
+                    System.out.println("    Detailed path:");
+                    for (Stmt s : path) {
+                        System.out.println("      -" + s + " => in method: " + icfg.getMethodOf(s));
+                    }
                 }
             }
+        } else {
+            Writer.v().pwarning("No leak found");
         }
     }
 }
