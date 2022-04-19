@@ -120,4 +120,8 @@ public class Utils {
         }
         return parameters;
     }
+
+    public static String javaSigToSootSig(String sig) {
+        return sig.substring(1, sig.length() - 1).replace("/", ".");
+    }
 }
