@@ -124,4 +124,13 @@ public class Utils {
     public static String javaSigToSootSig(String sig) {
         return sig.substring(1, sig.length() - 1).replace("/", ".");
     }
+
+    public static String sigToSubSig(String sig) {
+        StringBuilder sb = new StringBuilder();
+        String[] split = sig.split(" ");
+        sb.append(split[1]);
+        sb.append(" ");
+        sb.append(split[2]);
+        return sb.substring(0, sb.length() - 1);
+    }
 }

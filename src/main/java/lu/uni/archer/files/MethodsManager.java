@@ -37,8 +37,10 @@ import java.util.*;
 public class MethodsManager extends FileLoader {
 
     private final Map<String, String> executorsToExecutees;
+    private final Map<String, Integer> executorsToArgPos;
     private final List<String> executees;
     private final List<String> helpers;
+    private final List<String> methodsThatNeedClassConstant;
     private final List<SootClass> interfaces;
     private final List<SootClass> classes;
     private final List<SootClass> executeeClasses;
@@ -53,11 +55,13 @@ public class MethodsManager extends FileLoader {
         interfaces = new ArrayList<>();
         classes = new ArrayList<>();
         executeeClasses = new ArrayList<>();
+        executorsToArgPos = new HashMap<>();
+        methodsThatNeedClassConstant = new ArrayList<>();
         this.loadMethods();
     }
 
     public static MethodsManager v() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new MethodsManager();
         }
         return instance;
@@ -70,27 +74,37 @@ public class MethodsManager extends FileLoader {
     protected void loadMethods() {
         for (String line : this.items) {
             String[] split = line.split("\\|");
-            if (split.length == 4) {
-                String clazz = split[0];
-                int type = Integer.parseInt(split[1]);
-                int classOrInterface = Integer.parseInt(split[2]);
-                String methods = split[3];
-                String[] sms;
-                SootClass sc = Scene.v().getSootClass(clazz);
-                if (classOrInterface == 1) {
-                    Utils.add(this.classes, sc);
-                } else if (classOrInterface == 2) {
-                    Utils.add(this.interfaces, sc);
-                }
+            String clazz = split[0];
+            int type = Integer.parseInt(split[1]);
+            int classOrInterface = Integer.parseInt(split[2]);
+            String[] sms;
+            SootClass sc = Scene.v().getSootClass(clazz);
+            if (classOrInterface == 1) {
+                Utils.add(this.classes, sc);
+            } else if (classOrInterface == 2) {
+                Utils.add(this.interfaces, sc);
+            }
+            if (type == 1) {
+                int needsClassConstant = Integer.parseInt(split[3]);
+                String methods = split[4];
                 sms = methods.split("&");
-                if (type == 1) {
-                    for (String s : sms) {
-                        String[] splitSrcTgt = s.split("@");
-                        String src = splitSrcTgt[0];
-                        String tgt = splitSrcTgt[1];
-                        this.executorsToExecutees.put(src, tgt);
+                for (String s : sms) {
+                    String[] splitSrcTgt = s.split("@");
+                    String srcToArgPosition = splitSrcTgt[0];
+                    String[] splitSrcToArgPosition = srcToArgPosition.split("%");
+                    String src = splitSrcToArgPosition[0];
+                    int argPos = Integer.parseInt(splitSrcToArgPosition[1]);
+                    String tgt = splitSrcTgt[1];
+                    this.executorsToArgPos.put(src, argPos);
+                    this.executorsToExecutees.put(src, tgt);
+                    if (needsClassConstant == 1) {
+                        methodsThatNeedClassConstant.add(src);
                     }
-                } else {
+                }
+            } else {
+                if (split.length == 4) {
+                    String methods = split[3];
+                    sms = methods.split("&");
                     if (type == 2) {
                         Utils.addAll(Arrays.asList(sms), this.executees);
                         this.executeeClasses.add(sc);
@@ -99,6 +113,8 @@ public class MethodsManager extends FileLoader {
                     }
                 }
             }
+
+
         }
     }
 
@@ -140,5 +156,23 @@ public class MethodsManager extends FileLoader {
 
     public boolean isExecuteeClass(SootClass sc) {
         return this.executeeClasses.contains(sc);
+    }
+
+    public SootMethod getExecutee(SootMethod sm) {
+        if (this.executorsToExecutees.containsKey(sm.getSignature())) {
+            return Scene.v().getMethod(this.executorsToExecutees.get(sm.getSignature()));
+        }
+        return null;
+    }
+
+    public int getExecutorArgPosition(SootMethod sm) {
+        if (this.executorsToArgPos.containsKey(sm.getSignature())) {
+            return this.executorsToArgPos.get(sm.getSignature());
+        }
+        return -1;
+    }
+
+    public boolean needsClassConstant(SootMethod sm) {
+        return this.methodsThatNeedClassConstant.contains(sm.getSignature());
     }
 }
