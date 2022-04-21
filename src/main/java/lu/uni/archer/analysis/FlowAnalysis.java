@@ -4,6 +4,7 @@ import heros.solver.Pair;
 import lu.uni.archer.files.SourcesSinksManager;
 import lu.uni.archer.utils.Writer;
 import soot.jimple.Stmt;
+import soot.jimple.infoflow.android.InfoflowAndroidConfiguration;
 import soot.jimple.infoflow.android.SetupApplication;
 import soot.jimple.infoflow.results.InfoflowResults;
 import soot.jimple.infoflow.results.ResultSinkInfo;
@@ -19,12 +20,16 @@ public class FlowAnalysis {
 
     public FlowAnalysis(SetupApplication sa) {
         this.sa = sa;
+        sa.getConfig().setSootIntegrationMode(InfoflowAndroidConfiguration.SootIntegrationMode.UseExistingCallgraph);
+        sa.getConfig().getPathConfiguration().setPathReconstructionMode(InfoflowAndroidConfiguration.PathReconstructionMode.Precise);
+        sa.getConfig().setCodeEliminationMode(InfoflowAndroidConfiguration.CodeEliminationMode.NoCodeElimination);
     }
 
     public void runTaintAnalysis() {
         try {
             this.ir = sa.runInfoflow(SourcesSinksManager.v().getSources(), SourcesSinksManager.v().getSinks());
         } catch (Exception ignored) {
+        	ignored.printStackTrace();
         }
     }
 
@@ -43,8 +48,8 @@ public class FlowAnalysis {
                 next = it.next();
                 source = next.getO2();
                 sink = next.getO1();
-                System.out.println("    From: " + source.getStmt());
-                System.out.println("    To: " + sink.getStmt());
+                System.out.println("    From: " + source.getStmt() + " in method: " + icfg.getMethodOf(source.getStmt()));
+                System.out.println("    To: " + sink.getStmt() + " in method: " + icfg.getMethodOf(sink.getStmt()));
                 Stmt[] path = source.getPath();
                 if (path != null) {
                     System.out.println("    Detailed path:");

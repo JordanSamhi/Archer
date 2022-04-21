@@ -41,8 +41,6 @@ import java.util.*;
  * #L%
  */
 
-// TODO: refactor
-
 public class IFDSClassConstantPropagation extends IFDSProblem<Pair<Value, ClassConstant>> {
 
     public IFDSClassConstantPropagation() {

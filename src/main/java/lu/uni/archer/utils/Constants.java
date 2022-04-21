@@ -49,11 +49,18 @@ public class Constants {
 	public static final String CLASS_CONSTANT_PROPAGATION_METHODS = "/classConstant_propagation_methods.txt";
 	public static final String METHOD_CALL_PROPAGATION_METHODS = "/methodCall_propagation_methods.txt";
 	public static final String TO_REMOVE_CG_METHODS = "/call_graph_methods_to_remove.txt";
+	public static final String COLLECTION_METHODS = "/collection_methods.txt";
 
 	/**
 	 * Analysis names
 	 */
 	public static final String CLASS_CONSTANT_PROPAGATION = "ClassConstantPropagation";
 	public static final String METHODS_CALLED_PROPAGATION = "MethodsCalledPropagation";
+	public static final String POSSIBLE_TYPES = "PossibleTypes";
 	public static final String FIELD_PROPAGATION = "FieldPropagation";
+
+	/**
+	 * Methods
+	 */
+	public static final String INIT = "void <init>()";
 }

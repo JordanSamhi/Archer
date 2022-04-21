@@ -1,6 +1,8 @@
 package lu.uni.archer.utils;
 
+import soot.Scene;
 import soot.SootClass;
+import soot.SootMethodRef;
 import soot.util.Chain;
 
 import java.util.ArrayList;
@@ -33,6 +35,16 @@ import java.util.List;
  */
 
 public class Utils {
+
+    private static int idx = 0;
+
+    public static int getNextIdx() {
+        return ++idx;
+    }
+
+    public static SootMethodRef getMethodRef(String className, String methodName) {
+        return Scene.v().getSootClass(className).getMethod(methodName).makeRef();
+    }
 
     public static void add(List<SootClass> l, SootClass o) {
         if (!l.contains(o)) {

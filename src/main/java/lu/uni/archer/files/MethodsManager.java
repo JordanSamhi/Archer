@@ -41,6 +41,7 @@ public class MethodsManager extends FileLoader {
     private final List<String> executees;
     private final List<String> helpers;
     private final List<String> methodsThatNeedClassConstant;
+    private final List<String> methodsThatNeedCollectionPropagation;
     private final List<SootClass> interfaces;
     private final List<SootClass> classes;
     private final List<SootClass> executeeClasses;
@@ -57,6 +58,7 @@ public class MethodsManager extends FileLoader {
         executeeClasses = new ArrayList<>();
         executorsToArgPos = new HashMap<>();
         methodsThatNeedClassConstant = new ArrayList<>();
+        methodsThatNeedCollectionPropagation = new ArrayList<>();
         this.loadMethods();
     }
 
@@ -94,11 +96,15 @@ public class MethodsManager extends FileLoader {
                     String[] splitSrcToArgPosition = srcToArgPosition.split("%");
                     String src = splitSrcToArgPosition[0];
                     int argPos = Integer.parseInt(splitSrcToArgPosition[1]);
+                    int needsCollectionPropagation = Integer.parseInt(splitSrcToArgPosition[2]);
                     String tgt = splitSrcTgt[1];
                     this.executorsToArgPos.put(src, argPos);
                     this.executorsToExecutees.put(src, tgt);
                     if (needsClassConstant == 1) {
                         methodsThatNeedClassConstant.add(src);
+                    }
+                    if (needsCollectionPropagation == 1) {
+                        methodsThatNeedCollectionPropagation.add(src);
                     }
                 }
             } else {
@@ -174,5 +180,9 @@ public class MethodsManager extends FileLoader {
 
     public boolean needsClassConstant(SootMethod sm) {
         return this.methodsThatNeedClassConstant.contains(sm.getSignature());
+    }
+
+    public boolean needsCollectionPropagation(SootMethod sm) {
+        return this.methodsThatNeedCollectionPropagation.contains(sm.getSignature());
     }
 }

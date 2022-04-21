@@ -40,8 +40,6 @@ import java.util.*;
  * #L%
  */
 
-// TODO: refactor
-
 public class IFDSFieldPropagation extends IFDSProblem<Pair<Local, FieldRef>> {
 
     public IFDSFieldPropagation() {

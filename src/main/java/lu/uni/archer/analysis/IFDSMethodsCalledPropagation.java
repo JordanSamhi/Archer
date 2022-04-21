@@ -41,8 +41,6 @@ import java.util.*;
  * #L%
  */
 
-// TODO: refactor
-
 public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Local, Pair<String, Value>>> {
 
     public IFDSMethodsCalledPropagation() {

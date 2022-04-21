@@ -2,6 +2,12 @@ package lu.uni.archer.utils;
 
 public class Writer {
 
+    private final String end = "\u001B[0m";
+    private final String red = "\u001B[31m";
+    private final String green = "\u001B[32m";
+    private final String blue = "\u001B[36m";
+    private final String yellow = "\u001B[33m";
+
     private static Writer instance;
 
     public static Writer v() {
@@ -11,24 +17,24 @@ public class Writer {
         return instance;
     }
 
-    public void perror(String s) {
-        this.print('x', s);
+    private void pprint(String prefix, String message, String color) {
+        System.out.printf("%s[%s] %s%s%n", color, prefix, message, end);
     }
 
-    public void psuccess(String s) {
-        this.print('✓', s);
+    public void perror(String message) {
+        pprint("!", message, red);
     }
 
-    public void pwarning(String s) {
-        this.print('!', s);
+    public void psuccess(String message) {
+        pprint("✓", message, green);
     }
 
-    public void pinfo(String s) {
-        this.print('*', s);
+    public void pinfo(String message) {
+        pprint("*", message, blue);
     }
 
-    private void print(char c, String s) {
-        System.out.printf("[%c] %s%n", c, s);
+    public void pwarning(String message) {
+        pprint("*", message, yellow);
     }
 }
 
