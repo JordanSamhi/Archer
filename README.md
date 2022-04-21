@@ -18,6 +18,13 @@ mvn clean install:install-file -Dfile=libs/soot-infoflow-android-classes.jar -Dg
 mvn clean install
 </pre>
 
+OR
+
+<pre>
+cd Archer
+sh build.sh
+</pre>
+
 ### Issues
 
 If you stumble upon a stack overflow error while building Archer, increase memory available with this command:
