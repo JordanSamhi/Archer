@@ -57,9 +57,6 @@ public class Instrumenter {
                                     Value arg = ie.getArg(MethodsManager.v().getExecutorArgPosition(callee));
                                     if (MethodsManager.v().needsClassConstant(callee)) {
                                         elementsForPatchingMethodsThatNeedClassConstantAnalysis.add(new Quartet<>(callee, stmt, arg, sm));
-                                        if (MethodsManager.v().needsCollectionPropagation(callee)) {
-                                            //TODO
-                                        }
                                     } else if (MethodsManager.v().needsCollectionPropagation(callee)) {
                                         elementsForPatchingMethodsThatNeedCollectionMethodPropagation.add(new Quartet<>(callee, stmt, arg, sm));
                                     } else {

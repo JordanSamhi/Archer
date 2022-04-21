@@ -5,7 +5,7 @@ import lu.uni.archer.config.SootConfig;
 import lu.uni.archer.utils.CommandLineOptions;
 import lu.uni.archer.utils.Constants;
 import lu.uni.archer.utils.Writer;
-import soot.G;
+import soot.*;
 import soot.jimple.infoflow.android.InfoflowAndroidConfiguration;
 import soot.jimple.infoflow.android.SetupApplication;
 import soot.jimple.infoflow.android.manifest.ProcessManifest;
@@ -48,7 +48,7 @@ public class Main {
             pm = new ProcessManifest(CommandLineOptions.v().getApk());
         } catch (Exception ignored) {
         }
-        if(pm != null) {
+        if (pm != null) {
             Writer.v().pinfo(String.format("Processing: %s", pm.getPackageName()));
         }
 

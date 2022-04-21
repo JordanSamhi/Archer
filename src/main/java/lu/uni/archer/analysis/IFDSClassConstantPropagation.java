@@ -7,6 +7,7 @@ import heros.InterproceduralCFG;
 import heros.flowfunc.Identity;
 import heros.flowfunc.KillAll;
 import lu.uni.archer.files.ClassConstantMethodsManager;
+import lu.uni.archer.files.CollectionMethodsToPropagateTypeManager;
 import lu.uni.archer.utils.Constants;
 import soot.*;
 import soot.jimple.*;
@@ -194,10 +195,10 @@ public class IFDSClassConstantPropagation extends IFDSProblem<Pair<Value, ClassC
                     InvokeStmt is = (InvokeStmt) callSite;
                     InvokeExpr ie = is.getInvokeExpr();
                     SootMethod callee = ie.getMethod();
-                    if (ClassConstantMethodsManager.v().isInMethodsThatGenerateToBase(callee)) {
-                        if (ie instanceof InstanceInvokeExpr) {
-                            InstanceInvokeExpr iie = (InstanceInvokeExpr) ie;
-                            Value base = iie.getBase();
+                    if (ie instanceof InstanceInvokeExpr) {
+                        InstanceInvokeExpr iie = (InstanceInvokeExpr) ie;
+                        Value base = iie.getBase();
+                        if (ClassConstantMethodsManager.v().isInMethodsThatGenerateToBase(callee)) {
                             Value classConstant = ClassConstantMethodsManager.v().getClassConstant(ie);
                             if (classConstant != null) {
                                 if (classConstant instanceof ClassConstant) {
@@ -235,6 +236,27 @@ public class IFDSClassConstantPropagation extends IFDSProblem<Pair<Value, ClassC
                                         }
                                     };
                                 }
+                            }
+                        } else if (CollectionMethodsToPropagateTypeManager.v().isCollectionMethodToPropagatyeType(callee)) {
+                            int argPosition = CollectionMethodsToPropagateTypeManager.v().getArgPosition(callee);
+                            if (argPosition != -1) {
+                                Value arg = iie.getArg(argPosition);
+                                return new FlowFunction<Pair<Value, ClassConstant>>() {
+
+                                    @Override
+                                    public Set<Pair<Value, ClassConstant>> computeTargets(Pair<Value, ClassConstant> in) {
+                                        if (in.getO1().equivTo(arg)) {
+                                            Set<Pair<Value, ClassConstant>> set = new HashSet<>();
+                                            set.add(in);
+                                            set.add(new Pair<>(base, in.getO2()));
+                                            return set;
+                                        } else if (in.getO1().equivTo(base)) {
+                                            return Collections.emptySet();
+                                        } else {
+                                            return Collections.singleton(in);
+                                        }
+                                    }
+                                };
                             }
                         }
                     }
