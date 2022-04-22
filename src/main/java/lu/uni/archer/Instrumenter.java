@@ -81,12 +81,18 @@ public class Instrumenter {
     private void patchMethodsThatUsePointsTo(SootMethod callee, Stmt currentStmt, Value arg, SootMethod currentMethod) {
         RefType rt;
         List<SootClass> possibleClasses = new ArrayList<>();
+        Hierarchy hierarchy = Scene.v().getActiveHierarchy();
         if (arg instanceof Local) {
             Set<Type> possibleTypes = Scene.v().getPointsToAnalysis().reachingObjects((Local) arg).possibleTypes();
             for (Type t : possibleTypes) {
                 if (t instanceof AnySubType) {
                     rt = ((AnySubType) t).getBase();
-                    possibleClasses.addAll(Scene.v().getActiveHierarchy().getSubclassesOfIncluding(rt.getSootClass()));
+                    SootClass rtClass = rt.getSootClass();
+                    if (rtClass.isInterface()) {
+                        possibleClasses.addAll(hierarchy.getImplementersOf(rtClass));
+                    } else {
+                        possibleClasses.addAll(hierarchy.getSubclassesOfIncluding(rt.getSootClass()));
+                    }
                 } else if (t instanceof RefType) {
                     rt = (RefType) t;
                     possibleClasses.add(rt.getSootClass());

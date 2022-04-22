@@ -35,6 +35,8 @@ public class ResultsAccumulator {
     private long taintAnalysisElapsedTime;
     private long instrumentationElapsedTime;
     private int newEdgesInCG;
+    private int numberOfExtraStmtCovered;
+    private int numberOfStmtCovered;
 
     private ResultsAccumulator() {
         this.setAppName("");
@@ -42,6 +44,7 @@ public class ResultsAccumulator {
         this.setInstrumentationElapsedTime(0);
         this.setTaintAnalysisElapsedTime(0);
         this.setNewEdgesInCG(0);
+        this.setNumberOfExtraStmtCovered(0);
     }
 
     public static ResultsAccumulator v() {
@@ -64,9 +67,9 @@ public class ResultsAccumulator {
     }
 
     private String generateVector() {
-        return String.format("%s,%d,%d,%d,%d", this.getAppName(), this.getAnalysisElapsedTime(),
+        return String.format("%s,%d,%d,%d,%d,%d,%.2f", this.getAppName(), this.getAnalysisElapsedTime(),
                 this.getInstrumentationElapsedTime(), this.getTaintAnalysisElapsedTime(),
-                this.newEdgesInCG);
+                this.newEdgesInCG, this.numberOfExtraStmtCovered, (double) this.numberOfExtraStmtCovered * 100 / this.numberOfStmtCovered);
     }
 
     public void printResults() {
@@ -76,6 +79,8 @@ public class ResultsAccumulator {
         System.out.printf(" - Instrumentation elapsed time: %d%n", this.getInstrumentationElapsedTime());
         System.out.printf(" - Taint Analysis elapsed time: %d%n", this.getTaintAnalysisElapsedTime());
         System.out.printf(" - Number of new Edges in call graph: %d%n", this.newEdgesInCG);
+        System.out.printf(" - Number of extra statement covered: %d%n", this.numberOfExtraStmtCovered);
+        System.out.printf(" - Proportion of extra code covered: %.2f%% %n", (double) this.numberOfExtraStmtCovered * 100 / this.numberOfStmtCovered);
     }
 
     public long getAnalysisElapsedTime() {
@@ -106,7 +111,23 @@ public class ResultsAccumulator {
         this.newEdgesInCG++;
     }
 
+    public void addNumberOfExtraStmtCovered(int i) {
+        this.numberOfExtraStmtCovered += i;
+    }
+
+    public void addNumberOfStmtCovered(int i) {
+        this.numberOfStmtCovered += i;
+    }
+
     public void setNewEdgesInCG(int newEdgesInCG) {
         this.newEdgesInCG = newEdgesInCG;
+    }
+
+    public void setNumberOfExtraStmtCovered(int i) {
+        this.numberOfExtraStmtCovered = i;
+    }
+
+    public void setNumberOfStmtCovered(int i) {
+        this.numberOfStmtCovered = i;
     }
 }

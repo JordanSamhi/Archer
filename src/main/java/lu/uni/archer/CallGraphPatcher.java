@@ -1,6 +1,7 @@
 package lu.uni.archer;
 
 import lu.uni.archer.files.MethodsManager;
+import lu.uni.archer.utils.Utils;
 import soot.Scene;
 import soot.SootMethod;
 import soot.Unit;
@@ -44,11 +45,13 @@ public class CallGraphPatcher {
         for (Edge e : this.edges) {
             if (MethodsManager.v().isClassAndMethodExecutee(e.tgt().getDeclaringClass(), e.tgt())) {
                 ResultsAccumulator.v().incrementNumberOfNewEdge();
+                ResultsAccumulator.v().addNumberOfExtraStmtCovered(Utils.getNumberOfStmt(e.tgt()));
             }
             if (!this.edgeAlreadyExists(e)) {
                 Scene.v().getCallGraph().addEdge(e);
             }
         }
+        ResultsAccumulator.v().addNumberOfStmtCovered(Utils.getNumberOfStmtInApp());
     }
 
     public void addEdge(Edge e) {
