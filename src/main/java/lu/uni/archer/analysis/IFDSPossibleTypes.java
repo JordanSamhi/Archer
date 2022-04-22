@@ -131,7 +131,7 @@ public class IFDSPossibleTypes extends IFDSProblem<Pair<Value, Type>> {
                         if (!dest.getName().equals("<clinit>") && !dest.getSubSignature().equals("void run()")) {
                             Value value = source.getO1();
                             int argIndex = callArgs.indexOf(value);
-                            if (argIndex > -1) {
+                            if (argIndex > -1 && paramLocals.size() > argIndex) {
                                 return Collections.singleton(new Pair<>(paramLocals.get(argIndex), source.getO2()));
                             }
                         }

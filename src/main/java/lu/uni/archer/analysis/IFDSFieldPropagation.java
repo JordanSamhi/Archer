@@ -119,7 +119,7 @@ public class IFDSFieldPropagation extends IFDSProblem<Pair<Local, FieldRef>> {
                     public Set<Pair<Local, FieldRef>> computeTargets(Pair<Local, FieldRef> in) {
                         Value v = in.getO1();
                         int idx = args.indexOf(v);
-                        if (idx >= 0 && params.size() > 0) {
+                        if (idx >= 0 && params.size() > idx) {
                             return Collections.singleton(new Pair<>(params.get(idx), in.getO2()));
                         }
                         return Collections.emptySet();

@@ -141,7 +141,7 @@ public class IFDSClassConstantPropagation extends IFDSProblem<Pair<Value, ClassC
                     public Set<Pair<Value, ClassConstant>> computeTargets(Pair<Value, ClassConstant> in) {
                         Value v = in.getO1();
                         int idx = args.indexOf(v);
-                        if (idx >= 0) {
+                        if (idx >= 0  && params.size() > idx) {
                             return Collections.singleton(new Pair<>(params.get(idx), in.getO2()));
                         }
                         return Collections.emptySet();
