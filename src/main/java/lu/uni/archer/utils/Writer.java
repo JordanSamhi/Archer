@@ -18,7 +18,9 @@ public class Writer {
     }
 
     private void pprint(String prefix, String message, String color) {
-        System.out.printf("%s[%s] %s%s%n", color, prefix, message, end);
+        if (!CommandLineOptions.v().hasRaw()) {
+            System.out.printf("%s[%s] %s%s%n", color, prefix, message, end);
+        }
     }
 
     public void perror(String message) {

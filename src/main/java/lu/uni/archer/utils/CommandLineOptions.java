@@ -37,174 +37,189 @@ import org.javatuples.Triplet;
 
 /**
  * This class sets the different option for the application
- * @author Jordan Samhi
  *
+ * @author Jordan Samhi
  */
 public class CommandLineOptions {
 
-	private static final Triplet<String, String, String> APK = new Triplet<>("apk", "a", "Apk file");
-	private static final Triplet<String, String, String> PLATFORMS = new Triplet<>("platforms", "p", "Platform file");
-	private static final Triplet<String, String, String> HELP = new Triplet<>("help", "h", "Print this message");
-	private static final Triplet<String, String, String> REDIS_SERVER = new Triplet<>("redis-srv", "s", "Sets the redis server address");
-	private static final Triplet<String, String, String> REDIS_PORT = new Triplet<>("redis-port", "n", "Sets the redis port to connect to");
-	private static final Triplet<String, String, String> REDIS_PWD = new Triplet<>("redis-pwd", "w", "Sets the redis password");
-	private static final Triplet<String, String, String> TAINT_ANALYSIS = new Triplet<>("taint-analysis", "t", "Run taint analysis on the app");
+    private static final Triplet<String, String, String> APK = new Triplet<>("apk", "a", "Apk file");
+    private static final Triplet<String, String, String> PLATFORMS = new Triplet<>("platforms", "p", "Platform file");
+    private static final Triplet<String, String, String> HELP = new Triplet<>("help", "h", "Print this message");
+    private static final Triplet<String, String, String> REDIS_SERVER = new Triplet<>("redis-srv", "s", "Sets the redis server address");
+    private static final Triplet<String, String, String> REDIS_PORT = new Triplet<>("redis-port", "n", "Sets the redis port to connect to");
+    private static final Triplet<String, String, String> REDIS_PWD = new Triplet<>("redis-pwd", "w", "Sets the redis password");
+    private static final Triplet<String, String, String> TAINT_ANALYSIS = new Triplet<>("taint-analysis", "t", "Run taint analysis on the app");
+    private static final Triplet<String, String, String> RAW = new Triplet<>("raw", "r", "Print raw results");
 
-	private final Options options;
-	private final Options firstOptions;
-	private final CommandLineParser parser;
-	private CommandLine cmdLine;
+    private final Options options;
+    private final Options firstOptions;
+    private final CommandLineParser parser;
+    private CommandLine cmdLine;
 
-	private static CommandLineOptions instance;
-	
-	public CommandLineOptions() {
-		this.options = new Options();
-		this.firstOptions = new Options();
-		this.initOptions();
-		this.parser = new DefaultParser();
-	}
-	
-	public static CommandLineOptions v() {
-		if(instance == null) {
-			instance = new CommandLineOptions();
-		}
-		return instance;
-	}
-	
-	public void parseArgs(String[] args) {
-		this.parse(args);
-	}
+    private static CommandLineOptions instance;
 
-	/**
-	 * This method does the parsing of the arguments.
-	 * It distinguished, real options and help option.
-	 * @param args the arguments of the application
-	 */
-	private void parse(String[] args) {
-		HelpFormatter formatter;
-		try {
-			CommandLine cmdFirstLine = this.parser.parse(this.firstOptions, args, true);
-			if (cmdFirstLine.hasOption(HELP.getValue0())) {
-				formatter = new HelpFormatter();
-				formatter.printHelp(Constants.TOOL_NAME, this.options, true);
-				System.exit(0);
-			}
-			this.cmdLine = this.parser.parse(this.options, args);
-		} catch (ParseException e) {
-			System.err.println(e.getMessage());
-			System.exit(1);
-		}
-	}
+    public CommandLineOptions() {
+        this.options = new Options();
+        this.firstOptions = new Options();
+        this.initOptions();
+        this.parser = new DefaultParser();
+    }
 
-	/**
-	 * Initialization of all recognized options
-	 */
-	private void initOptions() {
-		final Option apk = Option.builder(APK.getValue1())
-				.longOpt(APK.getValue0())
-				.desc(APK.getValue2())
-				.hasArg(true)
-				.argName(APK.getValue0())
-				.required(true)
-				.build();
-		
-		final Option platform = Option.builder(PLATFORMS.getValue1())
-				.longOpt(PLATFORMS.getValue0())
-				.desc(PLATFORMS.getValue2())
-				.hasArg(true)
-				.argName(PLATFORMS.getValue0())
-				.required(true)
-				.build();
+    public static CommandLineOptions v() {
+        if (instance == null) {
+            instance = new CommandLineOptions();
+        }
+        return instance;
+    }
 
-		final Option redisServer = Option.builder(REDIS_SERVER.getValue1())
-				.longOpt(REDIS_SERVER.getValue0())
-				.desc(REDIS_SERVER.getValue2())
-				.hasArg(true)
-				.argName(REDIS_SERVER.getValue0())
-				.required(false)
-				.build();
+    public void parseArgs(String[] args) {
+        this.parse(args);
+    }
 
-		final Option redisPort = Option.builder(REDIS_PORT.getValue1())
-				.longOpt(REDIS_PORT.getValue0())
-				.desc(REDIS_PORT.getValue2())
-				.hasArg(true)
-				.argName(REDIS_PORT.getValue0())
-				.required(false)
-				.build();
+    /**
+     * This method does the parsing of the arguments.
+     * It distinguished, real options and help option.
+     *
+     * @param args the arguments of the application
+     */
+    private void parse(String[] args) {
+        HelpFormatter formatter;
+        try {
+            CommandLine cmdFirstLine = this.parser.parse(this.firstOptions, args, true);
+            if (cmdFirstLine.hasOption(HELP.getValue0())) {
+                formatter = new HelpFormatter();
+                formatter.printHelp(Constants.TOOL_NAME, this.options, true);
+                System.exit(0);
+            }
+            this.cmdLine = this.parser.parse(this.options, args);
+        } catch (ParseException e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
+    }
 
-		final Option redisPwd = Option.builder(REDIS_PWD.getValue1())
-				.longOpt(REDIS_PWD.getValue0())
-				.desc(REDIS_PWD.getValue2())
-				.hasArg(true)
-				.argName(REDIS_PWD.getValue0())
-				.required(false)
-				.build();
+    /**
+     * Initialization of all recognized options
+     */
+    private void initOptions() {
+        final Option apk = Option.builder(APK.getValue1())
+                .longOpt(APK.getValue0())
+                .desc(APK.getValue2())
+                .hasArg(true)
+                .argName(APK.getValue0())
+                .required(true)
+                .build();
 
-		final Option help = Option.builder(HELP.getValue1())
-				.longOpt(HELP.getValue0())
-				.desc(HELP.getValue2())
-				.argName(HELP.getValue0())
-				.build();
+        final Option raw = Option.builder(RAW.getValue1())
+                .longOpt(RAW.getValue0())
+                .desc(RAW.getValue2())
+                .hasArg(false)
+                .argName(RAW.getValue0())
+                .required(false)
+                .build();
 
-		final Option taintAnalysis = Option.builder(TAINT_ANALYSIS.getValue1())
-				.longOpt(TAINT_ANALYSIS.getValue0())
-				.desc(TAINT_ANALYSIS.getValue2())
-				.argName(TAINT_ANALYSIS.getValue0())
-				.required(false)
-				.hasArg(false)
-				.build();
+        final Option platform = Option.builder(PLATFORMS.getValue1())
+                .longOpt(PLATFORMS.getValue0())
+                .desc(PLATFORMS.getValue2())
+                .hasArg(true)
+                .argName(PLATFORMS.getValue0())
+                .required(true)
+                .build();
 
-		this.firstOptions.addOption(help);
+        final Option redisServer = Option.builder(REDIS_SERVER.getValue1())
+                .longOpt(REDIS_SERVER.getValue0())
+                .desc(REDIS_SERVER.getValue2())
+                .hasArg(true)
+                .argName(REDIS_SERVER.getValue0())
+                .required(false)
+                .build();
 
-		this.options.addOption(apk);
-		this.options.addOption(platform);
-		this.options.addOption(redisPwd);
-		this.options.addOption(taintAnalysis);
-		this.options.addOption(redisPort);
-		this.options.addOption(redisServer);
+        final Option redisPort = Option.builder(REDIS_PORT.getValue1())
+                .longOpt(REDIS_PORT.getValue0())
+                .desc(REDIS_PORT.getValue2())
+                .hasArg(true)
+                .argName(REDIS_PORT.getValue0())
+                .required(false)
+                .build();
 
-		for(Option o : this.firstOptions.getOptions()) {
-			this.options.addOption(o);
-		}
-	}
-	
-	public String getApk() {
-		return cmdLine.getOptionValue(APK.getValue0());
-	}
-	
-	public String getPlatforms() {
-		return cmdLine.getOptionValue(PLATFORMS.getValue0());
-	}
+        final Option redisPwd = Option.builder(REDIS_PWD.getValue1())
+                .longOpt(REDIS_PWD.getValue0())
+                .desc(REDIS_PWD.getValue2())
+                .hasArg(true)
+                .argName(REDIS_PWD.getValue0())
+                .required(false)
+                .build();
 
-	public boolean hasRedisServer() {
-		return this.cmdLine.hasOption(REDIS_SERVER.getValue1());
-	}
+        final Option help = Option.builder(HELP.getValue1())
+                .longOpt(HELP.getValue0())
+                .desc(HELP.getValue2())
+                .argName(HELP.getValue0())
+                .build();
 
-	public boolean hasRedisPwd() {
-		return this.cmdLine.hasOption(REDIS_PWD.getValue1());
-	}
+        final Option taintAnalysis = Option.builder(TAINT_ANALYSIS.getValue1())
+                .longOpt(TAINT_ANALYSIS.getValue0())
+                .desc(TAINT_ANALYSIS.getValue2())
+                .argName(TAINT_ANALYSIS.getValue0())
+                .required(false)
+                .hasArg(false)
+                .build();
 
-	public boolean hasRedisPort() {
-		return this.cmdLine.hasOption(REDIS_PORT.getValue1());
-	}
+        this.firstOptions.addOption(help);
 
-	public boolean hasTaintAnalysis() {
-		return this.cmdLine.hasOption(TAINT_ANALYSIS.getValue1());
-	}
+        this.options.addOption(apk);
+        this.options.addOption(platform);
+        this.options.addOption(redisPwd);
+        this.options.addOption(raw);
+        this.options.addOption(taintAnalysis);
+        this.options.addOption(redisPort);
+        this.options.addOption(redisServer);
 
-	public boolean hasRedisEnv() {
-		return this.hasRedisServer() && this.hasRedisPort() && this.hasRedisPwd();
-	}
+        for (Option o : this.firstOptions.getOptions()) {
+            this.options.addOption(o);
+        }
+    }
 
-	public String getRedisServer() {
-		return cmdLine.getOptionValue(REDIS_SERVER.getValue0());
-	}
+    public String getApk() {
+        return cmdLine.getOptionValue(APK.getValue0());
+    }
 
-	public String getRedisPwd() {
-		return cmdLine.getOptionValue(REDIS_PWD.getValue0());
-	}
+    public String getPlatforms() {
+        return cmdLine.getOptionValue(PLATFORMS.getValue0());
+    }
 
-	public String getRedisPort() {
-		return cmdLine.getOptionValue(REDIS_PORT.getValue0());
-	}
+    public boolean hasRedisServer() {
+        return this.cmdLine.hasOption(REDIS_SERVER.getValue1());
+    }
+
+    public boolean hasRedisPwd() {
+        return this.cmdLine.hasOption(REDIS_PWD.getValue1());
+    }
+
+    public boolean hasRedisPort() {
+        return this.cmdLine.hasOption(REDIS_PORT.getValue1());
+    }
+
+    public boolean hasTaintAnalysis() {
+        return this.cmdLine.hasOption(TAINT_ANALYSIS.getValue1());
+    }
+
+    public boolean hasRedisEnv() {
+        return this.hasRedisServer() && this.hasRedisPort() && this.hasRedisPwd();
+    }
+
+    public String getRedisServer() {
+        return cmdLine.getOptionValue(REDIS_SERVER.getValue0());
+    }
+
+    public String getRedisPwd() {
+        return cmdLine.getOptionValue(REDIS_PWD.getValue0());
+    }
+
+    public String getRedisPort() {
+        return cmdLine.getOptionValue(REDIS_PORT.getValue0());
+    }
+
+    public boolean hasRaw() {
+        return this.cmdLine.hasOption(RAW.getValue1());
+    }
 }

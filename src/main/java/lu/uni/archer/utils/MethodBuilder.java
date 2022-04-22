@@ -80,8 +80,27 @@ public class MethodBuilder {
             b.getUnits().add(Jimple.v().newReturnStmt(NullConstant.v()));
         }
         b.validate();
+        List<InvokeExpr> invokeExprs = new ArrayList<>();
+        for(SootClass sootClass: Scene.v().getClasses()) {
+            for(SootMethod sm: sootClass.getMethods()){
+                if(sm.isConcrete()) {
+                    for(Unit u: sm.retrieveActiveBody().getUnits()){
+                        Stmt stmt = (Stmt) u;
+                        if(stmt.containsInvokeExpr()){
+                            InvokeExpr ie = stmt.getInvokeExpr();
+                            if(ie.getMethod().equals(methodToInstrument)) {
+                                invokeExprs.add(ie);
+                            }
+                        }
+                    }
+                }
+            }
+        }
         methodClass.removeMethod(methodToInstrument);
         methodClass.addMethod(newMethod);
+        for(InvokeExpr ie: invokeExprs){
+            ie.setMethodRef(newMethod.makeRef());
+        }
         InvokeExpr ie = currentStmt.getInvokeExpr();
         ie.setMethodRef(newMethod.makeRef());
     }

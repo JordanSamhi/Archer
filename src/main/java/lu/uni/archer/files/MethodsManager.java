@@ -2,6 +2,7 @@ package lu.uni.archer.files;
 
 import lu.uni.archer.utils.Constants;
 import lu.uni.archer.utils.Utils;
+import soot.Hierarchy;
 import soot.Scene;
 import soot.SootClass;
 import soot.SootMethod;
@@ -119,8 +120,6 @@ public class MethodsManager extends FileLoader {
                     }
                 }
             }
-
-
         }
     }
 
@@ -146,6 +145,21 @@ public class MethodsManager extends FileLoader {
 
     public boolean isExecutee(SootMethod sm) {
         return this.executees.contains(sm.getSignature());
+    }
+
+    public boolean isClassAndMethodExecutee(SootClass sc, SootMethod sm) {
+        Hierarchy hierarchy = Scene.v().getActiveHierarchy();
+        List<SootClass> parents = new ArrayList<>();
+        parents.addAll(Utils.getAllSuperClasses(sc));
+        parents.addAll(Utils.getAllInterfaces(sc));
+        for (SootClass parent : parents) {
+            for (SootMethod parentMethod : parent.getMethods()) {
+                if (parentMethod.getSubSignature().equals(sm.getSubSignature())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean isHelper(SootMethod sm) {

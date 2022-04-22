@@ -5,6 +5,8 @@ import lu.uni.archer.config.SootConfig;
 import lu.uni.archer.utils.CommandLineOptions;
 import lu.uni.archer.utils.Constants;
 import lu.uni.archer.utils.Writer;
+import org.apache.commons.io.FilenameUtils;
+import org.slf4j.profiler.StopWatch;
 import soot.*;
 import soot.jimple.infoflow.android.InfoflowAndroidConfiguration;
 import soot.jimple.infoflow.android.SetupApplication;
@@ -40,8 +42,10 @@ import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.printf("%s v1.0 started on %s\n%n", Constants.TOOL_NAME, new Date());
+        StopWatch analysisTime = new StopWatch("Analysis");
+        analysisTime.start("Analysis");
         CommandLineOptions.v().parseArgs(args);
+        Writer.v().pinfo(String.format("%s v1.0 started on %s\n", Constants.TOOL_NAME, new Date()));
 
         ProcessManifest pm = null;
         try {
@@ -63,6 +67,8 @@ public class Main {
             Writer.v().psuccess("End of empirical study");
         }
 
+        StopWatch instrumentationTime = new StopWatch("Instrumentation");
+        instrumentationTime.start("Instrumentation");
         Writer.v().pinfo("Solving data flow problems...");
         Analyses.v().addProblem(new IFDSFieldPropagation());
         Analyses.v().addProblem(new IFDSClassConstantPropagation());
@@ -71,18 +77,35 @@ public class Main {
         Analyses.v().solveProblems();
         Writer.v().psuccess("Done");
 
+
         Writer.v().pinfo("Patching Call graph...");
         Instrumenter.v().instrument();
+        instrumentationTime.stop();
+        ResultsAccumulator.v().setInstrumentationElapsedTime(instrumentationTime.elapsedTime() / 1000000000);
+
         sa.constructCallgraph();
         CallGraphPatcher.v().patch();
         Writer.v().psuccess("Done");
 
         if (CommandLineOptions.v().hasTaintAnalysis()) {
+            StopWatch taintAnalysisTime = new StopWatch("Taint Analysis");
+            taintAnalysisTime.start("Taint Analysis");
             Writer.v().pinfo("Running taint analysis");
             FlowAnalysis fa = new FlowAnalysis(sa);
             fa.runTaintAnalysis();
             Writer.v().psuccess("Taint analysis terminated");
             fa.printResults();
+            taintAnalysisTime.stop();
+            ResultsAccumulator.v().setTaintAnalysisElapsedTime(taintAnalysisTime.elapsedTime() / 1000000000);
+        }
+
+        analysisTime.stop();
+        ResultsAccumulator.v().setAppName(FilenameUtils.getBaseName(CommandLineOptions.v().getApk()));
+        ResultsAccumulator.v().setAnalysisElapsedTime(analysisTime.elapsedTime() / 1000000000);
+        if (CommandLineOptions.v().hasRaw()) {
+            ResultsAccumulator.v().printVectorResults();
+        } else {
+            ResultsAccumulator.v().printResults();
         }
     }
 
