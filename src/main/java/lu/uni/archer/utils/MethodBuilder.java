@@ -81,14 +81,14 @@ public class MethodBuilder {
         }
         b.validate();
         List<InvokeExpr> invokeExprs = new ArrayList<>();
-        for(SootClass sootClass: Scene.v().getClasses()) {
-            for(SootMethod sm: sootClass.getMethods()){
-                if(sm.isConcrete()) {
-                    for(Unit u: sm.retrieveActiveBody().getUnits()){
-                        Stmt stmt = (Stmt) u;
-                        if(stmt.containsInvokeExpr()){
-                            InvokeExpr ie = stmt.getInvokeExpr();
-                            if(ie.getMethod().equals(methodToInstrument)) {
+        for (SootClass sootClass : Scene.v().getClasses()) {
+            if (!sootClass.equals(methodClass)) {
+                for (SootMethod sm : sootClass.getMethods()) {
+                    if (sm.isConcrete() && !sm.equals(methodToInstrument) && !sm.equals(currentMethod) && !sm.equals(newMethod)) {
+                        for (Unit u : sm.retrieveActiveBody().getUnits()) {
+                            Stmt stmt = (Stmt) u;
+                            if (stmt.containsInvokeExpr()) {
+                                InvokeExpr ie = stmt.getInvokeExpr();
                                 invokeExprs.add(ie);
                             }
                         }
@@ -98,8 +98,10 @@ public class MethodBuilder {
         }
         methodClass.removeMethod(methodToInstrument);
         methodClass.addMethod(newMethod);
-        for(InvokeExpr ie: invokeExprs){
-            ie.setMethodRef(newMethod.makeRef());
+        for (InvokeExpr ie : invokeExprs) {
+            if (ie.getMethod().equals(methodToInstrument)) {
+                ie.setMethodRef(newMethod.makeRef());
+            }
         }
         InvokeExpr ie = currentStmt.getInvokeExpr();
         ie.setMethodRef(newMethod.makeRef());
