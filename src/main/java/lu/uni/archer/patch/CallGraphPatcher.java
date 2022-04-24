@@ -43,10 +43,14 @@ public class CallGraphPatcher {
     }
 
     public void patch() {
+        List<SootMethod> counted = new ArrayList<>();
         for (Edge e : this.edges) {
             if (MethodsManager.v().isClassAndMethodExecutee(e.tgt().getDeclaringClass(), e.tgt())) {
                 ResultsAccumulator.v().incrementNumberOfNewEdge();
-                ResultsAccumulator.v().addNumberOfExtraStmtCovered(Utils.getNumberOfStmt(e.tgt()));
+                if (!counted.contains(e.tgt())) {
+                    ResultsAccumulator.v().addNumberOfExtraStmtCovered(Utils.getNumberOfStmt(e.tgt()));
+                    counted.add(e.tgt());
+                }
             }
             if (!this.edgeAlreadyExists(e)) {
                 Scene.v().getCallGraph().addEdge(e);

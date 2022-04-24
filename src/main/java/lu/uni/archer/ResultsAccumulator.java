@@ -130,4 +130,12 @@ public class ResultsAccumulator {
     public void setNumberOfStmtCovered(int i) {
         this.numberOfStmtCovered = i;
     }
+
+    public int getNumberOfExtraStmtCovered() {
+        return numberOfExtraStmtCovered;
+    }
+
+    public int getNumberOfStmtCovered() {
+        return numberOfStmtCovered;
+    }
 }

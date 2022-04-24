@@ -10,6 +10,7 @@ import soot.jimple.toolkits.callgraph.Edge;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MethodBuilder {
     private static MethodBuilder instance;
@@ -25,7 +26,7 @@ public class MethodBuilder {
             List<SootMethod> methods = sootClass.getMethods();
             for (SootMethod sm : methods) {
                 if (sm.isConcrete() && sm.getDeclaringClass().resolvingLevel() == SootClass.BODIES && sm.hasActiveBody()) {
-                    for(Unit u: sm.retrieveActiveBody().getUnits()) {
+                    for (Unit u : sm.retrieveActiveBody().getUnits()) {
                         Stmt stmt = (Stmt) u;
                         if (stmt.containsInvokeExpr()) {
                             InvokeExpr ie = stmt.getInvokeExpr();
@@ -44,7 +45,7 @@ public class MethodBuilder {
         return instance;
     }
 
-    public void buildMethod(List<SootClass> potentialClassTargets, SootMethod methodToInstrument, Stmt currentStmt, SootMethod currentMethod) {
+    public void buildMethod(Set<SootClass> potentialClassTargets, SootMethod methodToInstrument, Stmt currentStmt, SootMethod currentMethod) {
         SootClass methodClass = methodToInstrument.getDeclaringClass();
         methodClass.setLibraryClass();
         List<Type> paramTypes = methodToInstrument.getParameterTypes();

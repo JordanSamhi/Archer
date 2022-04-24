@@ -16,7 +16,7 @@ import java.util.*;
 
 public class ImplicitCallingRelationshipResolver {
 
-    private final Map<SootMethod, Triplet<List<SootClass>, Stmt, SootMethod>> executorToPotentialTargets;
+    private final Map<SootMethod, Triplet<Set<SootClass>, Stmt, SootMethod>> executorToPotentialTargets;
 
     private static ImplicitCallingRelationshipResolver instance;
 
@@ -82,7 +82,7 @@ public class ImplicitCallingRelationshipResolver {
     }
 
     private void patchMethodsThatUseCollectionPropagation(SootMethod callee, Stmt currentStmt, Value arg, SootMethod currentMethod) {
-        List<SootClass> potentialClassTargets = new ArrayList<>();
+        Set<SootClass> potentialClassTargets = new HashSet<>();
         Set<Type> potentialTypes = (Set<Type>) Analyses.v().getResults(Constants.POSSIBLE_TYPES, arg, currentStmt);
         for (Type t : potentialTypes) {
             potentialClassTargets.add(Scene.v().getSootClass(t.toString()));
@@ -92,7 +92,7 @@ public class ImplicitCallingRelationshipResolver {
 
     private void patchMethodsThatUsePointsTo(SootMethod callee, Stmt currentStmt, Value arg, SootMethod currentMethod) {
         RefType rt;
-        List<SootClass> possibleClasses = new ArrayList<>();
+        Set<SootClass> possibleClasses = new HashSet<>();
         Hierarchy hierarchy = Scene.v().getActiveHierarchy();
         if (arg instanceof Local) {
             Set<Type> possibleTypes = new HashSet<>();
@@ -117,7 +117,7 @@ public class ImplicitCallingRelationshipResolver {
     }
 
     private void patchMethodsThatNeedClassConstantAnalysis(SootMethod callee, Stmt currentStmt, Value arg, SootMethod currentMethod) {
-        List<SootClass> potentialClassTargets = new ArrayList<>();
+        Set<SootClass> potentialClassTargets = new HashSet<>();
         Set<ClassConstant> classConstants = (Set<ClassConstant>) Analyses.v().getResults(Constants.CLASS_CONSTANT_PROPAGATION, arg, currentStmt);
         for (ClassConstant cc : classConstants) {
             potentialClassTargets.add(Scene.v().getSootClass(Utils.javaSigToSootSig(cc.value)));
@@ -126,13 +126,13 @@ public class ImplicitCallingRelationshipResolver {
     }
 
     private void patch() {
-        for (Map.Entry<SootMethod, Triplet<List<SootClass>, Stmt, SootMethod>> entry : this.executorToPotentialTargets.entrySet()) {
+        for (Map.Entry<SootMethod, Triplet<Set<SootClass>, Stmt, SootMethod>> entry : this.executorToPotentialTargets.entrySet()) {
             SootMethod callee = entry.getKey();
-            Triplet<List<SootClass>, Stmt, SootMethod> triplet = entry.getValue();
-            List<SootClass> potentialClassTargets = triplet.getValue0();
+            Triplet<Set<SootClass>, Stmt, SootMethod> triplet = entry.getValue();
+            Set<SootClass> potentialClassTargets = triplet.getValue0();
             Stmt currentStmt = triplet.getValue1();
             SootMethod currentMethod = triplet.getValue2();
-            List<SootClass> potentialClassTargetsWithTargetMethod = new ArrayList<>();
+            Set<SootClass> potentialClassTargetsWithTargetMethod = new HashSet<>();
             for (SootClass clazz : potentialClassTargets) {
                 SootMethod potentialTgt = clazz.getMethodUnsafe(MethodsManager.v().getExecutee(callee).getSubSignature());
                 if (potentialTgt != null) {
@@ -143,13 +143,13 @@ public class ImplicitCallingRelationshipResolver {
         }
     }
 
-    private void populatePotentialTargets(SootMethod callee, List<SootClass> potentialClassTargets, Stmt currentStmt, SootMethod currentMethod) {
-        Triplet<List<SootClass>, Stmt, SootMethod> triplet = this.executorToPotentialTargets.get(callee);
+    private void populatePotentialTargets(SootMethod callee, Set<SootClass> potentialClassTargets, Stmt currentStmt, SootMethod currentMethod) {
+        Triplet<Set<SootClass>, Stmt, SootMethod> triplet = this.executorToPotentialTargets.get(callee);
         if (triplet == null) {
-            triplet = new Triplet<>(new ArrayList<>(), currentStmt, currentMethod);
+            triplet = new Triplet<>(new HashSet<>(), currentStmt, currentMethod);
             this.executorToPotentialTargets.put(callee, triplet);
         }
-        List<SootClass> potentialTargets = triplet.getValue0();
+        Set<SootClass> potentialTargets = triplet.getValue0();
         potentialTargets.addAll(potentialClassTargets);
     }
 }
