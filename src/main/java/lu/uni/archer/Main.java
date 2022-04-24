@@ -1,9 +1,18 @@
 package lu.uni.archer;
 
-import lu.uni.archer.analysis.*;
+import lu.uni.archer.analysis.Analyses;
+import lu.uni.archer.analysis.FlowAnalysis;
 import lu.uni.archer.config.SootConfig;
+import lu.uni.archer.dataflowproblem.inter.IFDSClassConstantPropagation;
+import lu.uni.archer.dataflowproblem.inter.IFDSFieldPropagation;
+import lu.uni.archer.dataflowproblem.inter.IFDSMethodsCalledPropagation;
+import lu.uni.archer.dataflowproblem.inter.IFDSPossibleTypes;
+import lu.uni.archer.dataflowproblem.intra.IntraPossibleTypes;
+import lu.uni.archer.patch.CallGraphPatcher;
+import lu.uni.archer.patch.ImplicitCallingRelationshipResolver;
 import lu.uni.archer.utils.CommandLineOptions;
 import lu.uni.archer.utils.Constants;
+import lu.uni.archer.utils.Utils;
 import lu.uni.archer.utils.Writer;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.profiler.StopWatch;
@@ -74,17 +83,19 @@ public class Main {
         Analyses.v().addProblem(new IFDSClassConstantPropagation());
         Analyses.v().addProblem(new IFDSMethodsCalledPropagation());
         Analyses.v().addProblem(new IFDSPossibleTypes());
+        Analyses.v().addProblem(new IntraPossibleTypes());
         Analyses.v().solveProblems();
         Writer.v().psuccess("Done");
 
 
         Writer.v().pinfo("Patching Call graph...");
-        Instrumenter.v().instrument();
+        ImplicitCallingRelationshipResolver.v().instrument();
         instrumentationTime.stop();
         ResultsAccumulator.v().setInstrumentationElapsedTime(instrumentationTime.elapsedTime() / 1000000000);
 
         sa.constructCallgraph();
         CallGraphPatcher.v().patch();
+        ResultsAccumulator.v().addNumberOfStmtCovered(Utils.getNumberOfStmtInApp());
         Writer.v().psuccess("Done");
 
         if (CommandLineOptions.v().hasTaintAnalysis()) {

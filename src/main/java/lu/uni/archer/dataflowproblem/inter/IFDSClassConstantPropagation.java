@@ -1,4 +1,4 @@
-package lu.uni.archer.analysis;
+package lu.uni.archer.dataflowproblem.inter;
 
 import heros.DefaultSeeds;
 import heros.FlowFunction;
@@ -6,6 +6,7 @@ import heros.FlowFunctions;
 import heros.InterproceduralCFG;
 import heros.flowfunc.Identity;
 import heros.flowfunc.KillAll;
+import lu.uni.archer.dataflowproblem.IFDSProblem;
 import lu.uni.archer.files.ClassConstantMethodsManager;
 import lu.uni.archer.files.CollectionMethodsToPropagateTypeManager;
 import lu.uni.archer.utils.Constants;
@@ -53,8 +54,20 @@ public class IFDSClassConstantPropagation extends IFDSProblem<Pair<Value, ClassC
     }
 
     @Override
-    public String getAnalysisName() {
-        return Constants.CLASS_CONSTANT_PROPAGATION;
+    public String getProblemName() {
+        return Constants.IFDS_CLASS_CONSTANT_PROPAGATION;
+    }
+
+    @Override
+    public Set<ClassConstant> getResults(Value v, Unit u) {
+        Set<ClassConstant> results = new HashSet<>();
+        Set<Pair<Value, ClassConstant>> resultsComputed = (Set<Pair<Value, ClassConstant>>) this.solver.ifdsResultsAt(u);
+        for (Pair<Value, ClassConstant> pair : resultsComputed) {
+            if (pair.getO1().equals(v)) {
+                results.add(pair.getO2());
+            }
+        }
+        return results;
     }
 
     @Override
@@ -141,7 +154,7 @@ public class IFDSClassConstantPropagation extends IFDSProblem<Pair<Value, ClassC
                     public Set<Pair<Value, ClassConstant>> computeTargets(Pair<Value, ClassConstant> in) {
                         Value v = in.getO1();
                         int idx = args.indexOf(v);
-                        if (idx >= 0  && params.size() > idx) {
+                        if (idx >= 0 && params.size() > idx) {
                             return Collections.singleton(new Pair<>(params.get(idx), in.getO2()));
                         }
                         return Collections.emptySet();

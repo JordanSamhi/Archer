@@ -1,4 +1,4 @@
-package lu.uni.archer.analysis;
+package lu.uni.archer.dataflowproblem.inter;
 
 import heros.DefaultSeeds;
 import heros.FlowFunction;
@@ -6,6 +6,7 @@ import heros.FlowFunctions;
 import heros.InterproceduralCFG;
 import heros.flowfunc.Identity;
 import heros.flowfunc.KillAll;
+import lu.uni.archer.dataflowproblem.IFDSProblem;
 import lu.uni.archer.files.CollectionMethodsToPropagateTypeManager;
 import lu.uni.archer.utils.Constants;
 import soot.*;
@@ -14,10 +15,6 @@ import soot.jimple.toolkits.ide.icfg.JimpleBasedInterproceduralCFG;
 import soot.toolkits.scalar.Pair;
 
 import java.util.*;
-
-/**
- * This class is based on: https://github.com/soot-oss/soot/blob/develop/src/main/java/soot/jimple/toolkits/ide/exampleproblems/IFDSPossibleTypes.java
- */
 
 public class IFDSPossibleTypes extends IFDSProblem<Pair<Value, Type>> {
 
@@ -30,8 +27,20 @@ public class IFDSPossibleTypes extends IFDSProblem<Pair<Value, Type>> {
     }
 
     @Override
-    public String getAnalysisName() {
-        return Constants.POSSIBLE_TYPES;
+    public Set<Type> getResults(Value v, Unit u) {
+        Set<Type> results = new HashSet<>();
+        Set<Pair<Value, Type>> resultsComputed = (Set<Pair<Value, Type>>) this.solver.ifdsResultsAt(u);
+        for (Pair<Value, Type> pair : resultsComputed) {
+            if (pair.getO1().equals(v)) {
+                results.add(pair.getO2());
+            }
+        }
+        return results;
+    }
+
+    @Override
+    public String getProblemName() {
+        return Constants.IFDS_POSSIBLE_TYPES;
     }
 
     public FlowFunctions<Unit, Pair<Value, Type>, SootMethod> createFlowFunctionsFactory() {
@@ -172,7 +181,7 @@ public class IFDSPossibleTypes extends IFDSProblem<Pair<Value, Type>> {
             public FlowFunction<Pair<Value, Type>> getCallToReturnFlowFunction(Unit call, Unit returnSite) {
                 Stmt s = (Stmt) call;
                 if (s.containsInvokeExpr()) {
-                    InvokeExpr ie = (InvokeExpr) s.getInvokeExpr();
+                    InvokeExpr ie = s.getInvokeExpr();
                     SootMethod callee = ie.getMethod();
                     if (ie instanceof InstanceInvokeExpr) {
                         InstanceInvokeExpr iie = (InstanceInvokeExpr) ie;

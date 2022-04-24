@@ -1,7 +1,8 @@
-package lu.uni.archer.utils;
+package lu.uni.archer.patch;
 
-import lu.uni.archer.CallGraphPatcher;
 import lu.uni.archer.files.MethodsManager;
+import lu.uni.archer.utils.Constants;
+import lu.uni.archer.utils.Utils;
 import soot.*;
 import soot.jimple.*;
 import soot.jimple.infoflow.cfg.FlowDroidEssentialMethodTag;
@@ -12,6 +13,29 @@ import java.util.List;
 
 public class MethodBuilder {
     private static MethodBuilder instance;
+    List<InvokeExpr> invokeExprs;
+
+    private MethodBuilder() {
+        this.invokeExprs = new ArrayList<>();
+        this.populateInvokeExprs();
+    }
+
+    private void populateInvokeExprs() {
+        for (SootClass sootClass : Scene.v().getClasses()) {
+            List<SootMethod> methods = sootClass.getMethods();
+            for (SootMethod sm : methods) {
+                if (sm.isConcrete() && sm.getDeclaringClass().resolvingLevel() == SootClass.BODIES && sm.hasActiveBody()) {
+                    for(Unit u: sm.retrieveActiveBody().getUnits()) {
+                        Stmt stmt = (Stmt) u;
+                        if (stmt.containsInvokeExpr()) {
+                            InvokeExpr ie = stmt.getInvokeExpr();
+                            invokeExprs.add(ie);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     public static MethodBuilder v() {
         if (instance == null) {
@@ -80,28 +104,17 @@ public class MethodBuilder {
             b.getUnits().add(Jimple.v().newReturnStmt(NullConstant.v()));
         }
         b.validate();
-        List<InvokeExpr> invokeExprs = new ArrayList<>();
-        for (SootClass sootClass : Scene.v().getClasses()) {
-            if (!sootClass.equals(methodClass)) {
-                for (SootMethod sm : sootClass.getMethods()) {
-                    if (sm.isConcrete() && !sm.equals(methodToInstrument) && !sm.equals(currentMethod) && !sm.equals(newMethod)) {
-                        for (Unit u : sm.retrieveActiveBody().getUnits()) {
-                            Stmt stmt = (Stmt) u;
-                            if (stmt.containsInvokeExpr()) {
-                                InvokeExpr ie = stmt.getInvokeExpr();
-                                invokeExprs.add(ie);
-                            }
-                        }
-                    }
-                }
+        List<InvokeExpr> invokeExprsToModify = new ArrayList<>();
+        for (InvokeExpr ie : this.invokeExprs) {
+            if (ie.getMethod().equals(methodToInstrument)) {
+                invokeExprsToModify.add(ie);
             }
         }
         methodClass.removeMethod(methodToInstrument);
         methodClass.addMethod(newMethod);
-        for (InvokeExpr ie : invokeExprs) {
-            if (ie.getMethod().equals(methodToInstrument)) {
-                ie.setMethodRef(newMethod.makeRef());
-            }
+        for (InvokeExpr ie : invokeExprsToModify) {
+            ie.setMethodRef(newMethod.makeRef());
+            this.invokeExprs.remove(ie);
         }
         InvokeExpr ie = currentStmt.getInvokeExpr();
         ie.setMethodRef(newMethod.makeRef());

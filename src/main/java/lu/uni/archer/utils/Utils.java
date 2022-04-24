@@ -158,9 +158,9 @@ public class Utils {
     public static int getNumberOfStmtInApp() {
         int total = 0;
         for (SootClass sc : Scene.v().getApplicationClasses()) {
-            if (!Utils.isSystemClass(sc) && !LibrariesManager.v().isLibrary(sc) && sc.resolvingLevel() >= 3) {
+            if (!Utils.isSystemClass(sc) && !LibrariesManager.v().isLibrary(sc)) {
                 for (SootMethod sm : sc.getMethods()) {
-                    if (sm.hasActiveBody()) {
+                    if (sm.isConcrete()) {
                         total += sm.retrieveActiveBody().getUnits().size();
                     }
                 }

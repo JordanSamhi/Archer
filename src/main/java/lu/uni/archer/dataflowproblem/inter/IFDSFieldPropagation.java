@@ -1,4 +1,4 @@
-package lu.uni.archer.analysis;
+package lu.uni.archer.dataflowproblem.inter;
 
 import heros.DefaultSeeds;
 import heros.FlowFunction;
@@ -6,6 +6,7 @@ import heros.FlowFunctions;
 import heros.InterproceduralCFG;
 import heros.flowfunc.Identity;
 import heros.flowfunc.KillAll;
+import lu.uni.archer.dataflowproblem.IFDSProblem;
 import lu.uni.archer.utils.Constants;
 import soot.*;
 import soot.jimple.*;
@@ -40,7 +41,7 @@ import java.util.*;
  * #L%
  */
 
-public class IFDSFieldPropagation extends IFDSProblem<Pair<Local, FieldRef>> {
+public class IFDSFieldPropagation extends IFDSProblem<Pair<Value, FieldRef>> {
 
     public IFDSFieldPropagation() {
         this(new JimpleBasedInterproceduralCFG());
@@ -51,11 +52,11 @@ public class IFDSFieldPropagation extends IFDSProblem<Pair<Local, FieldRef>> {
     }
 
     @Override
-    protected FlowFunctions<Unit, Pair<Local, FieldRef>, SootMethod> createFlowFunctionsFactory() {
-        return new FlowFunctions<Unit, Pair<Local, FieldRef>, SootMethod>() {
+    protected FlowFunctions<Unit, Pair<Value, FieldRef>, SootMethod> createFlowFunctionsFactory() {
+        return new FlowFunctions<Unit, Pair<Value, FieldRef>, SootMethod>() {
 
             @Override
-            public FlowFunction<Pair<Local, FieldRef>> getNormalFlowFunction(Unit current, Unit succ) {
+            public FlowFunction<Pair<Value, FieldRef>> getNormalFlowFunction(Unit current, Unit succ) {
                 if (current instanceof DefinitionStmt) {
                     DefinitionStmt ds = (DefinitionStmt) current;
                     if (ds.containsInvokeExpr()) {
@@ -67,12 +68,12 @@ public class IFDSFieldPropagation extends IFDSProblem<Pair<Local, FieldRef>> {
                         final Local leftLocal = (Local) left;
                         if (right instanceof FieldRef) {
                             FieldRef fr = (FieldRef) right;
-                            return new FlowFunction<Pair<Local, FieldRef>>() {
+                            return new FlowFunction<Pair<Value, FieldRef>>() {
 
                                 @Override
-                                public Set<Pair<Local, FieldRef>> computeTargets(Pair<Local, FieldRef> in) {
+                                public Set<Pair<Value, FieldRef>> computeTargets(Pair<Value, FieldRef> in) {
                                     if (in.equals(zeroValue())) {
-                                        Set<Pair<Local, FieldRef>> set = new HashSet<>();
+                                        Set<Pair<Value, FieldRef>> set = new HashSet<>();
                                         set.add(new Pair<>(leftLocal, fr));
                                         set.add(in);
                                         return set;
@@ -84,14 +85,14 @@ public class IFDSFieldPropagation extends IFDSProblem<Pair<Local, FieldRef>> {
                                 }
                             };
                         } else if (right instanceof Local) {
-                            return new FlowFunction<Pair<Local, FieldRef>>() {
+                            return new FlowFunction<Pair<Value, FieldRef>>() {
 
                                 @Override
-                                public Set<Pair<Local, FieldRef>> computeTargets(Pair<Local, FieldRef> in) {
+                                public Set<Pair<Value, FieldRef>> computeTargets(Pair<Value, FieldRef> in) {
                                     if (in.getO1().equivTo(left)) {
                                         return Collections.emptySet();
                                     } else if (right.equivTo(in.getO1())) {
-                                        Set<Pair<Local, FieldRef>> set = new HashSet<>();
+                                        Set<Pair<Value, FieldRef>> set = new HashSet<>();
                                         set.add(new Pair<>(leftLocal, in.getO2()));
                                         set.add(in);
                                         return set;
@@ -107,16 +108,16 @@ public class IFDSFieldPropagation extends IFDSProblem<Pair<Local, FieldRef>> {
             }
 
             @Override
-            public FlowFunction<Pair<Local, FieldRef>> getCallFlowFunction(Unit current, SootMethod target) {
+            public FlowFunction<Pair<Value, FieldRef>> getCallFlowFunction(Unit current, SootMethod target) {
                 InvokeExpr ie = ((Stmt) current).getInvokeExpr();
                 final List<Value> args = ie.getArgs();
                 final List<Local> params = new ArrayList<>();
                 for (int i = 0; i < target.getParameterCount(); i++) {
                     params.add(target.getActiveBody().getParameterLocal(i));
                 }
-                return new FlowFunction<Pair<Local, FieldRef>>() {
+                return new FlowFunction<Pair<Value, FieldRef>>() {
                     @Override
-                    public Set<Pair<Local, FieldRef>> computeTargets(Pair<Local, FieldRef> in) {
+                    public Set<Pair<Value, FieldRef>> computeTargets(Pair<Value, FieldRef> in) {
                         Value v = in.getO1();
                         int idx = args.indexOf(v);
                         if (idx >= 0 && params.size() > idx) {
@@ -128,7 +129,7 @@ public class IFDSFieldPropagation extends IFDSProblem<Pair<Local, FieldRef>> {
             }
 
             @Override
-            public FlowFunction<Pair<Local, FieldRef>> getReturnFlowFunction(Unit callSite, SootMethod callee, Unit exit, Unit returnSite) {
+            public FlowFunction<Pair<Value, FieldRef>> getReturnFlowFunction(Unit callSite, SootMethod callee, Unit exit, Unit returnSite) {
                 if (exit instanceof ReturnStmt) {
                     ReturnStmt returnStmt = (ReturnStmt) exit;
                     Value op = returnStmt.getOp();
@@ -139,9 +140,9 @@ public class IFDSFieldPropagation extends IFDSProblem<Pair<Local, FieldRef>> {
                             final Local tgtLocal = (Local) lOp;
                             if (op instanceof Local) {
                                 final Local retLocal = (Local) op;
-                                return new FlowFunction<Pair<Local, FieldRef>>() {
+                                return new FlowFunction<Pair<Value, FieldRef>>() {
                                     @Override
-                                    public Set<Pair<Local, FieldRef>> computeTargets(Pair<Local, FieldRef> in) {
+                                    public Set<Pair<Value, FieldRef>> computeTargets(Pair<Value, FieldRef> in) {
                                         if (in.getO1().equivTo(retLocal)) {
                                             return Collections.singleton(new Pair<>(tgtLocal, in.getO2()));
                                         }
@@ -157,25 +158,37 @@ public class IFDSFieldPropagation extends IFDSProblem<Pair<Local, FieldRef>> {
             }
 
             @Override
-            public FlowFunction<Pair<Local, FieldRef>> getCallToReturnFlowFunction(Unit callSite, Unit returnSite) {
+            public FlowFunction<Pair<Value, FieldRef>> getCallToReturnFlowFunction(Unit callSite, Unit returnSite) {
                 return Identity.v();
             }
         };
     }
 
     @Override
-    protected Pair<Local, FieldRef> createZeroValue() {
+    protected Pair<Value, FieldRef> createZeroValue() {
         return new Pair<>(Jimple.v().newLocal("<<zero>>", NullType.v()), null);
     }
 
     @Override
-    public String getAnalysisName() {
-        return Constants.FIELD_PROPAGATION;
+    public String getProblemName() {
+        return Constants.IFDS_FIELD_PROPAGATION;
+    }
+
+    @Override
+    public Set<FieldRef> getResults(Value v, Unit u) {
+        Set<FieldRef> results = new HashSet<>();
+        Set<Pair<Value, FieldRef>> resultsComputed = (Set<Pair<Value, FieldRef>>) this.solver.ifdsResultsAt(u);
+        for (Pair<Value, FieldRef> pair : resultsComputed) {
+            if (pair.getO1().equals(v)) {
+                results.add(pair.getO2());
+            }
+        }
+        return results;
     }
 
 
     @Override
-    public Map<Unit, Set<Pair<Local, FieldRef>>> initialSeeds() {
+    public Map<Unit, Set<Pair<Value, FieldRef>>> initialSeeds() {
         return DefaultSeeds.make(Collections.singleton(Scene.v().getEntryPoints().get(0).getActiveBody().getUnits().getFirst()), zeroValue());
     }
 }

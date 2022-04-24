@@ -1,4 +1,4 @@
-package lu.uni.archer.analysis;
+package lu.uni.archer.dataflowproblem.inter;
 
 import heros.DefaultSeeds;
 import heros.FlowFunction;
@@ -6,6 +6,8 @@ import heros.FlowFunctions;
 import heros.InterproceduralCFG;
 import heros.flowfunc.Identity;
 import heros.flowfunc.KillAll;
+import lu.uni.archer.analysis.Analyses;
+import lu.uni.archer.dataflowproblem.IFDSProblem;
 import lu.uni.archer.files.MethodCallMethodsManager;
 import lu.uni.archer.utils.Constants;
 import soot.*;
@@ -41,7 +43,7 @@ import java.util.*;
  * #L%
  */
 
-public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Local, Pair<String, Value>>> {
+public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Value, Pair<String, Value>>> {
 
     public IFDSMethodsCalledPropagation() {
         this(new JimpleBasedInterproceduralCFG());
@@ -52,16 +54,28 @@ public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Local, Pair<S
     }
 
     @Override
-    public String getAnalysisName() {
-        return Constants.METHODS_CALLED_PROPAGATION;
+    public String getProblemName() {
+        return Constants.IFDS_METHODS_CALLED_PROPAGATION;
     }
 
     @Override
-    protected FlowFunctions<Unit, Pair<Local, Pair<String, Value>>, SootMethod> createFlowFunctionsFactory() {
-        return new FlowFunctions<Unit, Pair<Local, Pair<String, Value>>, SootMethod>() {
+    public Set<Pair<String, Value>> getResults(Value v, Unit u) {
+        Set<Pair<String, Value>> results = new HashSet<>();
+        Set<Pair<Value, Pair<String, Value>>> resultsComputed = (Set<Pair<Value, Pair<String, Value>>>) this.solver.ifdsResultsAt(u);
+        for (Pair<Value, Pair<String, Value>> pair : resultsComputed) {
+            if (pair.getO1().equals(v)) {
+                results.add(pair.getO2());
+            }
+        }
+        return results;
+    }
+
+    @Override
+    protected FlowFunctions<Unit, Pair<Value, Pair<String, Value>>, SootMethod> createFlowFunctionsFactory() {
+        return new FlowFunctions<Unit, Pair<Value, Pair<String, Value>>, SootMethod>() {
 
             @Override
-            public FlowFunction<Pair<Local, Pair<String, Value>>> getNormalFlowFunction(Unit current, Unit succ) {
+            public FlowFunction<Pair<Value, Pair<String, Value>>> getNormalFlowFunction(Unit current, Unit succ) {
                 if (current instanceof DefinitionStmt) {
                     DefinitionStmt ds = (DefinitionStmt) current;
                     if (ds.containsInvokeExpr()) {
@@ -74,12 +88,12 @@ public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Local, Pair<S
                         if (right instanceof CastExpr) {
                             CastExpr ce = (CastExpr) right;
                             Value v = ce.getOp();
-                            return new FlowFunction<Pair<Local, Pair<String, Value>>>() {
+                            return new FlowFunction<Pair<Value, Pair<String, Value>>>() {
 
                                 @Override
-                                public Set<Pair<Local, Pair<String, Value>>> computeTargets(Pair<Local, Pair<String, Value>> in) {
+                                public Set<Pair<Value, Pair<String, Value>>> computeTargets(Pair<Value, Pair<String, Value>> in) {
                                     if (in.getO1().equivTo(v)) {
-                                        Set<Pair<Local, Pair<String, Value>>> set = new HashSet<>();
+                                        Set<Pair<Value, Pair<String, Value>>> set = new HashSet<>();
                                         set.add(new Pair<>(leftLocal, in.getO2()));
                                         set.add(in);
                                         return set;
@@ -91,14 +105,14 @@ public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Local, Pair<S
                                 }
                             };
                         } else if (right instanceof Local) {
-                            return new FlowFunction<Pair<Local, Pair<String, Value>>>() {
+                            return new FlowFunction<Pair<Value, Pair<String, Value>>>() {
 
                                 @Override
-                                public Set<Pair<Local, Pair<String, Value>>> computeTargets(Pair<Local, Pair<String, Value>> in) {
+                                public Set<Pair<Value, Pair<String, Value>>> computeTargets(Pair<Value, Pair<String, Value>> in) {
                                     if (in.getO1().equivTo(left)) {
                                         return Collections.emptySet();
                                     } else if (right.equivTo(in.getO1())) {
-                                        Set<Pair<Local, Pair<String, Value>>> set = new HashSet<>();
+                                        Set<Pair<Value, Pair<String, Value>>> set = new HashSet<>();
                                         set.add(new Pair<>(leftLocal, in.getO2()));
                                         set.add(in);
                                         return set;
@@ -114,16 +128,16 @@ public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Local, Pair<S
             }
 
             @Override
-            public FlowFunction<Pair<Local, Pair<String, Value>>> getCallFlowFunction(Unit current, SootMethod target) {
+            public FlowFunction<Pair<Value, Pair<String, Value>>> getCallFlowFunction(Unit current, SootMethod target) {
                 InvokeExpr ie = ((Stmt) current).getInvokeExpr();
                 final List<Value> args = ie.getArgs();
                 final List<Local> params = new ArrayList<>();
                 for (int i = 0; i < target.getParameterCount(); i++) {
                     params.add(target.getActiveBody().getParameterLocal(i));
                 }
-                return new FlowFunction<Pair<Local, Pair<String, Value>>>() {
+                return new FlowFunction<Pair<Value, Pair<String, Value>>>() {
                     @Override
-                    public Set<Pair<Local, Pair<String, Value>>> computeTargets(Pair<Local, Pair<String, Value>> in) {
+                    public Set<Pair<Value, Pair<String, Value>>> computeTargets(Pair<Value, Pair<String, Value>> in) {
                         Value v = in.getO1();
                         int idx = args.indexOf(v);
                         if (idx >= 0 && params.size() > idx) {
@@ -135,7 +149,7 @@ public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Local, Pair<S
             }
 
             @Override
-            public FlowFunction<Pair<Local, Pair<String, Value>>> getReturnFlowFunction(Unit callSite, SootMethod callee, Unit exit, Unit returnSite) {
+            public FlowFunction<Pair<Value, Pair<String, Value>>> getReturnFlowFunction(Unit callSite, SootMethod callee, Unit exit, Unit returnSite) {
                 if (exit instanceof ReturnStmt) {
                     ReturnStmt returnStmt = (ReturnStmt) exit;
                     Value op = returnStmt.getOp();
@@ -146,9 +160,9 @@ public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Local, Pair<S
                             final Local tgtLocal = (Local) lOp;
                             if (op instanceof Local) {
                                 final Local retLocal = (Local) op;
-                                return new FlowFunction<Pair<Local, Pair<String, Value>>>() {
+                                return new FlowFunction<Pair<Value, Pair<String, Value>>>() {
                                     @Override
-                                    public Set<Pair<Local, Pair<String, Value>>> computeTargets(Pair<Local, Pair<String, Value>> in) {
+                                    public Set<Pair<Value, Pair<String, Value>>> computeTargets(Pair<Value, Pair<String, Value>> in) {
                                         if (in.getO1().equivTo(retLocal)) {
                                             return Collections.singleton(new Pair<>(tgtLocal, in.getO2()));
                                         }
@@ -164,7 +178,7 @@ public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Local, Pair<S
             }
 
             @Override
-            public FlowFunction<Pair<Local, Pair<String, Value>>> getCallToReturnFlowFunction(Unit callSite, Unit returnSite) {
+            public FlowFunction<Pair<Value, Pair<String, Value>>> getCallToReturnFlowFunction(Unit callSite, Unit returnSite) {
                 if (callSite instanceof DefinitionStmt) {
                     DefinitionStmt ds = (DefinitionStmt) callSite;
                     Value left = ds.getLeftOp();
@@ -179,30 +193,25 @@ public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Local, Pair<S
                                 if (MethodCallMethodsManager.v().isInMethodsThatGenerateBaseToReceiver(callee)) {
                                     Value valueInMethodCallTmp = MethodCallMethodsManager.v().getMethodCallParameter(ie);
                                     if (!(valueInMethodCallTmp instanceof Constant)) {
-                                        List<FieldRef> potentialFields = new ArrayList<>();
-                                        for (Object elt : Analyses.v().getSolver(Constants.FIELD_PROPAGATION).ifdsResultsAt(callSite)) {
-                                            Pair<Local, FieldRef> pair = (Pair<Local, FieldRef>) elt;
-                                            if (pair.getO1().equivTo(valueInMethodCallTmp)) {
-                                                potentialFields.add(pair.getO2());
-                                            }
-                                        }
-                                        if (potentialFields.size() == 1) {
-                                            valueInMethodCallTmp = potentialFields.get(0);
+                                        Set<FieldRef> potentialFields = (Set<FieldRef>) Analyses.v().getResults(Constants.FIELD_PROPAGATION, valueInMethodCallTmp, callSite);
+                                        List<FieldRef> potentialFieldsList = new ArrayList<>(potentialFields);
+                                        if (potentialFieldsList.size() == 1) {
+                                            valueInMethodCallTmp = potentialFieldsList.get(0);
                                         } else {
                                             valueInMethodCallTmp = null;
                                         }
                                     }
                                     Value valueInMethodCall = valueInMethodCallTmp;
-                                    return new FlowFunction<Pair<Local, Pair<String, Value>>>() {
+                                    return new FlowFunction<Pair<Value, Pair<String, Value>>>() {
 
                                         @Override
-                                        public Set<Pair<Local, Pair<String, Value>>> computeTargets(Pair<Local, Pair<String, Value>> in) {
+                                        public Set<Pair<Value, Pair<String, Value>>> computeTargets(Pair<Value, Pair<String, Value>> in) {
                                             if (!base.equivTo(left)) {
                                                 if (in.equals(zeroValue())) {
-                                                    Set<Pair<Local, Pair<String, Value>>> set = new HashSet<>();
+                                                    Set<Pair<Value, Pair<String, Value>>> set = new HashSet<>();
                                                     set.add(new Pair<>(leftLocal, new Pair<>(MethodCallMethodsManager.v().getLabel(callee), valueInMethodCall)));
                                                     if (base instanceof Local) {
-                                                        set.add(new Pair<>((Local) base, new Pair<>(MethodCallMethodsManager.v().getLabel(callee), valueInMethodCall)));
+                                                        set.add(new Pair<>(base, new Pair<>(MethodCallMethodsManager.v().getLabel(callee), valueInMethodCall)));
                                                     }
                                                     set.add(in);
                                                     return set;
@@ -214,7 +223,7 @@ public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Local, Pair<S
                                             } else {
                                                 Pair<String, Value> pair = new Pair<>(MethodCallMethodsManager.v().getLabel(callee), valueInMethodCall);
                                                 if (in.equals(zeroValue())) {
-                                                    Set<Pair<Local, Pair<String, Value>>> set = new HashSet<>();
+                                                    Set<Pair<Value, Pair<String, Value>>> set = new HashSet<>();
                                                     set.add(new Pair<>(leftLocal, pair)); // TODO: update to real value
                                                     set.add(in);
                                                     return set;
@@ -227,12 +236,12 @@ public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Local, Pair<S
                                         }
                                     };
                                 } else if (MethodCallMethodsManager.v().isInMethodsThatPropagateBaseToReceiver(callee)) {
-                                    return new FlowFunction<Pair<Local, Pair<String, Value>>>() {
+                                    return new FlowFunction<Pair<Value, Pair<String, Value>>>() {
 
                                         @Override
-                                        public Set<Pair<Local, Pair<String, Value>>> computeTargets(Pair<Local, Pair<String, Value>> in) {
+                                        public Set<Pair<Value, Pair<String, Value>>> computeTargets(Pair<Value, Pair<String, Value>> in) {
                                             if (in.getO1().equivTo(base)) {
-                                                Set<Pair<Local, Pair<String, Value>>> set = new HashSet<>();
+                                                Set<Pair<Value, Pair<String, Value>>> set = new HashSet<>();
                                                 set.add(new Pair<>(leftLocal, in.getO2()));
                                                 set.add(in);
                                                 return set;
@@ -244,13 +253,13 @@ public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Local, Pair<S
                                         }
                                     };
                                 } else if (MethodCallMethodsManager.v().isInMethodsThatPropagateParameterToReceiver(callee)) {
-                                    return new FlowFunction<Pair<Local, Pair<String, Value>>>() {
+                                    return new FlowFunction<Pair<Value, Pair<String, Value>>>() {
 
                                         @Override
-                                        public Set<Pair<Local, Pair<String, Value>>> computeTargets(Pair<Local, Pair<String, Value>> in) {
+                                        public Set<Pair<Value, Pair<String, Value>>> computeTargets(Pair<Value, Pair<String, Value>> in) {
                                             Value v = MethodCallMethodsManager.v().getMethodCallParameter(ie);
                                             if (in.getO1().equivTo(v)) {
-                                                Set<Pair<Local, Pair<String, Value>>> set = new HashSet<>();
+                                                Set<Pair<Value, Pair<String, Value>>> set = new HashSet<>();
                                                 set.add(new Pair<>(leftLocal, in.getO2()));
                                                 set.add(in);
                                                 return set;
@@ -275,13 +284,13 @@ public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Local, Pair<S
                             InstanceInvokeExpr iie = (InstanceInvokeExpr) ie;
                             Value base = iie.getBase();
                             if (base instanceof Local) {
-                                return new FlowFunction<Pair<Local, Pair<String, Value>>>() {
+                                return new FlowFunction<Pair<Value, Pair<String, Value>>>() {
 
                                     @Override
-                                    public Set<Pair<Local, Pair<String, Value>>> computeTargets(Pair<Local, Pair<String, Value>> in) {
+                                    public Set<Pair<Value, Pair<String, Value>>> computeTargets(Pair<Value, Pair<String, Value>> in) {
                                         if (in.equals(zeroValue())) {
-                                            Set<Pair<Local, Pair<String, Value>>> set = new HashSet<>();
-                                            set.add(new Pair<>((Local) base, new Pair<>(MethodCallMethodsManager.v().getLabel(callee), MethodCallMethodsManager.v().getMethodCallParameter(ie)))); // TODO: update to real value
+                                            Set<Pair<Value, Pair<String, Value>>> set = new HashSet<>();
+                                            set.add(new Pair<>(base, new Pair<>(MethodCallMethodsManager.v().getLabel(callee), MethodCallMethodsManager.v().getMethodCallParameter(ie)))); // TODO: update to real value
                                             set.add(in);
                                             return set;
                                         } else {
@@ -299,12 +308,12 @@ public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Local, Pair<S
     }
 
     @Override
-    protected Pair<Local, Pair<String, Value>> createZeroValue() {
+    protected Pair<Value, Pair<String, Value>> createZeroValue() {
         return new Pair<>(Jimple.v().newLocal("<<zero>>", NullType.v()), new Pair<>("<<zero>>", IntConstant.v(0)));
     }
 
     @Override
-    public Map<Unit, Set<Pair<Local, Pair<String, Value>>>> initialSeeds() {
+    public Map<Unit, Set<Pair<Value, Pair<String, Value>>>> initialSeeds() {
         return DefaultSeeds.make(Collections.singleton(Scene.v().getEntryPoints().get(0).getActiveBody().getUnits().getFirst()), zeroValue());
     }
 }

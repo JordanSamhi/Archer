@@ -1,37 +1,33 @@
-package lu.uni.archer;
+package lu.uni.archer.patch;
 
 import lu.uni.archer.analysis.Analyses;
 import lu.uni.archer.files.LibrariesManager;
 import lu.uni.archer.files.MethodsManager;
 import lu.uni.archer.utils.Constants;
-import lu.uni.archer.utils.MethodBuilder;
 import lu.uni.archer.utils.Utils;
+import org.javatuples.Quartet;
 import org.javatuples.Triplet;
 import soot.*;
 import soot.jimple.ClassConstant;
 import soot.jimple.InvokeExpr;
 import soot.jimple.Stmt;
-import soot.jimple.toolkits.callgraph.CallGraph;
-import soot.toolkits.scalar.Pair;
 
 import java.util.*;
 
-public class Instrumenter {
+public class ImplicitCallingRelationshipResolver {
 
-    private final CallGraph cg;
     private final Map<SootMethod, Triplet<List<SootClass>, Stmt, SootMethod>> executorToPotentialTargets;
 
-    private static Instrumenter instance;
+    private static ImplicitCallingRelationshipResolver instance;
 
-    public static Instrumenter v() {
+    public static ImplicitCallingRelationshipResolver v() {
         if (instance == null) {
-            instance = new Instrumenter();
+            instance = new ImplicitCallingRelationshipResolver();
         }
         return instance;
     }
 
-    private Instrumenter() {
-        this.cg = Scene.v().getCallGraph();
+    private ImplicitCallingRelationshipResolver() {
         this.executorToPotentialTargets = new HashMap<>();
     }
 
@@ -39,41 +35,57 @@ public class Instrumenter {
         Stmt stmt;
         InvokeExpr ie;
         SootMethod callee;
+        List<Quartet<SootMethod, Stmt, Value, SootMethod>> methodsThatNeedClassConstantAnalysis = new ArrayList<>();
+        List<Quartet<SootMethod, Stmt, Value, SootMethod>> methodsThatUseCollectionPropagation = new ArrayList<>();
+        List<Quartet<SootMethod, Stmt, Value, SootMethod>> methodsThatUsePointsTo = new ArrayList<>();
+        List<Triplet<InvokeExpr, Stmt, SootMethod>> infoOfInterest = new ArrayList<>();
         for (SootClass sc : Scene.v().getApplicationClasses()) {
             if (!Utils.isSystemClass(sc) && !LibrariesManager.v().isLibrary(sc)) {
                 for (SootMethod sm : sc.getMethods()) {
-                    if (sm.hasActiveBody()) {
+                    if (sm.isConcrete()) {
                         for (Unit u : sm.retrieveActiveBody().getUnits()) {
                             stmt = (Stmt) u;
                             if (stmt.containsInvokeExpr()) {
-                                ie = stmt.getInvokeExpr();
-                                callee = ie.getMethod();
-                                if (MethodsManager.v().isExecutor(callee)) {
-                                    Value arg = ie.getArg(MethodsManager.v().getExecutorArgPosition(callee));
-                                    if (MethodsManager.v().needsClassConstant(callee)) {
-                                        patchMethodsThatNeedClassConstantAnalysis(callee, stmt, arg, sm);
-                                    } else if (MethodsManager.v().needsCollectionPropagation(callee)) {
-                                        patchMethodsThatUseCollectionPropagation(callee, stmt, arg, sm);
-                                    } else {
-                                        patchMethodsThatUsePointsTo(callee, stmt, arg, sm);
-                                    }
-                                }
+                                infoOfInterest.add(new Triplet<>(stmt.getInvokeExpr(), stmt, sm));
                             }
                         }
                     }
                 }
             }
         }
+        for (Triplet<InvokeExpr, Stmt, SootMethod> triplet : infoOfInterest) {
+            InvokeExpr invokeExpr = triplet.getValue0();
+            Stmt s = triplet.getValue1();
+            SootMethod sm = triplet.getValue2();
+            callee = invokeExpr.getMethod();
+            if (MethodsManager.v().isExecutor(callee)) {
+                Value arg = invokeExpr.getArg(MethodsManager.v().getExecutorArgPosition(callee));
+                if (MethodsManager.v().needsClassConstant(callee)) {
+                    methodsThatNeedClassConstantAnalysis.add(new Quartet<>(callee, s, arg, sm));
+                } else if (MethodsManager.v().needsCollectionPropagation(callee)) {
+                    methodsThatUseCollectionPropagation.add(new Quartet<>(callee, s, arg, sm));
+                } else {
+                    methodsThatUsePointsTo.add(new Quartet<>(callee, s, arg, sm));
+                }
+            }
+        }
+        for (Quartet<SootMethod, Stmt, Value, SootMethod> q : methodsThatNeedClassConstantAnalysis) {
+            patchMethodsThatNeedClassConstantAnalysis(q.getValue0(), q.getValue1(), q.getValue2(), q.getValue3());
+        }
+        for (Quartet<SootMethod, Stmt, Value, SootMethod> q : methodsThatUseCollectionPropagation) {
+            patchMethodsThatUseCollectionPropagation(q.getValue0(), q.getValue1(), q.getValue2(), q.getValue3());
+        }
+        for (Quartet<SootMethod, Stmt, Value, SootMethod> q : methodsThatUsePointsTo) {
+            patchMethodsThatUsePointsTo(q.getValue0(), q.getValue1(), q.getValue2(), q.getValue3());
+        }
         this.patch();
     }
 
     private void patchMethodsThatUseCollectionPropagation(SootMethod callee, Stmt currentStmt, Value arg, SootMethod currentMethod) {
         List<SootClass> potentialClassTargets = new ArrayList<>();
-        for (Object o : Analyses.v().getSolver(Constants.POSSIBLE_TYPES).ifdsResultsAt(currentStmt)) {
-            Pair<Value, Type> pair = (Pair<Value, Type>) o;
-            if (arg.equals(pair.getO1())) {
-                potentialClassTargets.add(Scene.v().getSootClass(pair.getO2().toString()));
-            }
+        Set<Type> potentialTypes = (Set<Type>) Analyses.v().getResults(Constants.POSSIBLE_TYPES, arg, currentStmt);
+        for (Type t : potentialTypes) {
+            potentialClassTargets.add(Scene.v().getSootClass(t.toString()));
         }
         populatePotentialTargets(callee, potentialClassTargets, currentStmt, currentMethod);
     }
@@ -83,7 +95,9 @@ public class Instrumenter {
         List<SootClass> possibleClasses = new ArrayList<>();
         Hierarchy hierarchy = Scene.v().getActiveHierarchy();
         if (arg instanceof Local) {
-            Set<Type> possibleTypes = Scene.v().getPointsToAnalysis().reachingObjects((Local) arg).possibleTypes();
+            Set<Type> possibleTypes = new HashSet<>();
+            possibleTypes.addAll(Scene.v().getPointsToAnalysis().reachingObjects((Local) arg).possibleTypes());
+            possibleTypes.addAll((Set<Type>) Analyses.v().getResults(Constants.POSSIBLE_TYPES, arg, currentStmt));
             for (Type t : possibleTypes) {
                 if (t instanceof AnySubType) {
                     rt = ((AnySubType) t).getBase();
@@ -104,11 +118,9 @@ public class Instrumenter {
 
     private void patchMethodsThatNeedClassConstantAnalysis(SootMethod callee, Stmt currentStmt, Value arg, SootMethod currentMethod) {
         List<SootClass> potentialClassTargets = new ArrayList<>();
-        for (Object o : Analyses.v().getSolver(Constants.CLASS_CONSTANT_PROPAGATION).ifdsResultsAt(currentStmt)) {
-            Pair<Local, ClassConstant> pair = (Pair<Local, ClassConstant>) o;
-            if (arg.equals(pair.getO1())) {
-                potentialClassTargets.add(Scene.v().getSootClass(Utils.javaSigToSootSig(pair.getO2().value)));
-            }
+        Set<ClassConstant> classConstants = (Set<ClassConstant>) Analyses.v().getResults(Constants.CLASS_CONSTANT_PROPAGATION, arg, currentStmt);
+        for (ClassConstant cc : classConstants) {
+            potentialClassTargets.add(Scene.v().getSootClass(Utils.javaSigToSootSig(cc.value)));
         }
         populatePotentialTargets(callee, potentialClassTargets, currentStmt, currentMethod);
     }

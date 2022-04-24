@@ -1,5 +1,6 @@
-package lu.uni.archer;
+package lu.uni.archer.patch;
 
+import lu.uni.archer.ResultsAccumulator;
 import lu.uni.archer.files.MethodsManager;
 import lu.uni.archer.utils.Utils;
 import soot.Scene;
@@ -51,7 +52,6 @@ public class CallGraphPatcher {
                 Scene.v().getCallGraph().addEdge(e);
             }
         }
-        ResultsAccumulator.v().addNumberOfStmtCovered(Utils.getNumberOfStmtInApp());
     }
 
     public void addEdge(Edge e) {

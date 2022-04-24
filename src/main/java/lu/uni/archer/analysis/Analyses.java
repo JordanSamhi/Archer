@@ -1,18 +1,18 @@
 package lu.uni.archer.analysis;
 
-import heros.InterproceduralCFG;
-import soot.SootMethod;
+import lu.uni.archer.dataflowproblem.Problem;
 import soot.Unit;
-import soot.jimple.toolkits.ide.JimpleIFDSSolver;
+import soot.Value;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 public class Analyses {
-    private final List<IFDSProblem<?>> problems;
-    private final Map<String, JimpleIFDSSolver<?, InterproceduralCFG<Unit, SootMethod>>> solvers;
+    private final List<Problem> problems;
+//    private final Map<String, JimpleIFDSSolver<?, InterproceduralCFG<Unit, SootMethod>>> IFDSSolvers;
+//    private final Map<String, IntraProblem> intraSolvers;
 
     private static Analyses instance;
 
@@ -25,27 +25,42 @@ public class Analyses {
 
     private Analyses() {
         this.problems = new ArrayList<>();
-        this.solvers = new HashMap<>();
+//        this.IFDSSolvers = new HashMap<>();
+//        this.intraSolvers = new HashMap<>();
     }
 
-    public void addProblem(IFDSProblem<?> p) {
+    public void addProblem(Problem p) {
         if (!this.problems.contains(p)) {
             this.problems.add(p);
         }
     }
 
     public void solveProblems() {
-        JimpleIFDSSolver<?, InterproceduralCFG<Unit, SootMethod>> solver;
-        for (IFDSProblem<?> problem : this.problems) {
-            solver = new JimpleIFDSSolver<>(problem);
-            this.solvers.put(problem.getAnalysisName(), solver);
-            solver.solve();
+        for (Problem problem : this.problems) {
+            problem.solve();
         }
     }
 
-    public JimpleIFDSSolver<?, InterproceduralCFG<Unit, SootMethod>> getSolver(String analysisName) {
-        if (this.solvers.containsKey(analysisName)) {
-            return this.solvers.get(analysisName);
+    public Set<?> getResults(String problemName, Value v, Unit u) {
+        String IFDSProblemName = String.format("IFDS%s", problemName);
+        String INTRAProblemName = String.format("INTRA%s", problemName);
+        Set<Object> results = new HashSet<>();
+        Problem ifdsProblem = this.getProblem(IFDSProblemName);
+        Problem intraProblem = this.getProblem(INTRAProblemName);
+        if (ifdsProblem != null) {
+            results.addAll(ifdsProblem.getResults(v, u));
+        }
+        if (intraProblem != null) {
+            results.addAll(intraProblem.getResults(v, u));
+        }
+        return results;
+    }
+
+    private Problem getProblem(String problemName) {
+        for (Problem p : this.problems) {
+            if (p.getProblemName().equals(problemName)) {
+                return p;
+            }
         }
         return null;
     }
