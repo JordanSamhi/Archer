@@ -250,7 +250,7 @@ public class IFDSClassConstantPropagation extends IFDSProblem<Pair<Value, ClassC
                                     };
                                 }
                             }
-                        } else if (CollectionMethodsToPropagateTypeManager.v().isCollectionMethodToPropagatyeType(callee)) {
+                        } else if (CollectionMethodsToPropagateTypeManager.v().isCollectionMethodToPropagateType(callee)) {
                             int argPosition = CollectionMethodsToPropagateTypeManager.v().getArgPosition(callee);
                             if (argPosition != -1) {
                                 Value arg = iie.getArg(argPosition);

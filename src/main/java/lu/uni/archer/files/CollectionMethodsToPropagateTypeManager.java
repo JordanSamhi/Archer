@@ -42,12 +42,12 @@ public class CollectionMethodsToPropagateTypeManager extends FileLoader {
         return Constants.COLLECTION_METHODS;
     }
 
-    public boolean isCollectionMethodToPropagatyeType(SootMethod sm) {
+    public boolean isCollectionMethodToPropagateType(SootMethod sm) {
         return this.methodToArgPosition.containsKey(sm.getSignature());
     }
 
     public int getArgPosition(SootMethod sm) {
-        if (this.isCollectionMethodToPropagatyeType(sm)) {
+        if (this.isCollectionMethodToPropagateType(sm)) {
             return this.methodToArgPosition.get(sm.getSignature());
         }
         return -1;

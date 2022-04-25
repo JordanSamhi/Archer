@@ -1,6 +1,5 @@
 package lu.uni.archer.utils;
 
-import lu.uni.archer.files.LibrariesManager;
 import soot.Scene;
 import soot.SootClass;
 import soot.SootMethod;
@@ -149,7 +148,7 @@ public class Utils {
     }
 
     public static int getNumberOfStmt(SootMethod sm) {
-        if (sm.getDeclaringClass().resolvingLevel() >= SootClass.BODIES) {
+        if (sm.isConcrete()) {
             return sm.retrieveActiveBody().getUnits().size();
         }
         return 0;
@@ -158,11 +157,9 @@ public class Utils {
     public static int getNumberOfStmtInApp() {
         int total = 0;
         for (SootClass sc : Scene.v().getApplicationClasses()) {
-            if (!Utils.isSystemClass(sc) && !LibrariesManager.v().isLibrary(sc)) {
-                for (SootMethod sm : sc.getMethods()) {
-                    if (sm.isConcrete()) {
-                        total += sm.retrieveActiveBody().getUnits().size();
-                    }
+            for (SootMethod sm : sc.getMethods()) {
+                if (sm.isConcrete()) {
+                    total += sm.retrieveActiveBody().getUnits().size();
                 }
             }
         }

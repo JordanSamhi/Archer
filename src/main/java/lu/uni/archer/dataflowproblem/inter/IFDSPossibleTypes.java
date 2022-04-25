@@ -186,7 +186,7 @@ public class IFDSPossibleTypes extends IFDSProblem<Pair<Value, Type>> {
                     if (ie instanceof InstanceInvokeExpr) {
                         InstanceInvokeExpr iie = (InstanceInvokeExpr) ie;
                         Value base = iie.getBase();
-                        if (CollectionMethodsToPropagateTypeManager.v().isCollectionMethodToPropagatyeType(callee)) {
+                        if (CollectionMethodsToPropagateTypeManager.v().isCollectionMethodToPropagateType(callee)) {
                             int argPosition = CollectionMethodsToPropagateTypeManager.v().getArgPosition(callee);
                             if (argPosition != -1) {
                                 Value arg = iie.getArg(argPosition);

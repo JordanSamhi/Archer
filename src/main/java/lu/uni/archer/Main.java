@@ -7,6 +7,7 @@ import lu.uni.archer.dataflowproblem.inter.IFDSClassConstantPropagation;
 import lu.uni.archer.dataflowproblem.inter.IFDSFieldPropagation;
 import lu.uni.archer.dataflowproblem.inter.IFDSMethodsCalledPropagation;
 import lu.uni.archer.dataflowproblem.inter.IFDSPossibleTypes;
+import lu.uni.archer.dataflowproblem.intra.IntraFieldPropagation;
 import lu.uni.archer.dataflowproblem.intra.IntraPossibleTypes;
 import lu.uni.archer.patch.CallGraphPatcher;
 import lu.uni.archer.patch.ImplicitCallingRelationshipResolver;
@@ -16,7 +17,7 @@ import lu.uni.archer.utils.Utils;
 import lu.uni.archer.utils.Writer;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.profiler.StopWatch;
-import soot.*;
+import soot.G;
 import soot.jimple.infoflow.android.InfoflowAndroidConfiguration;
 import soot.jimple.infoflow.android.SetupApplication;
 import soot.jimple.infoflow.android.manifest.ProcessManifest;
@@ -84,6 +85,7 @@ public class Main {
         Analyses.v().addProblem(new IFDSMethodsCalledPropagation());
         Analyses.v().addProblem(new IFDSPossibleTypes());
         Analyses.v().addProblem(new IntraPossibleTypes());
+        Analyses.v().addProblem(new IntraFieldPropagation());
         Analyses.v().solveProblems();
         Writer.v().psuccess("Done");
 
@@ -92,7 +94,6 @@ public class Main {
         ImplicitCallingRelationshipResolver.v().instrument();
         instrumentationTime.stop();
         ResultsAccumulator.v().setInstrumentationElapsedTime(instrumentationTime.elapsedTime() / 1000000000);
-
         sa.constructCallgraph();
         CallGraphPatcher.v().patch();
         ResultsAccumulator.v().addNumberOfStmtCovered(Utils.getNumberOfStmtInApp());
