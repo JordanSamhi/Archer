@@ -61,6 +61,6 @@ public class IntraFieldPropagation extends IntraProblem {
 
     @Override
     public String getProblemName() {
-        return Constants.INTRA_CLASS_CONSTANT_PROPAGATION;
+        return Constants.INTRA_FIELD_PROPAGATION;
     }
 }
