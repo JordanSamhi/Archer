@@ -48,6 +48,7 @@ public class CommandLineOptions {
     private static final Triplet<String, String, String> REDIS_SERVER = new Triplet<>("redis-srv", "s", "Sets the redis server address");
     private static final Triplet<String, String, String> REDIS_PORT = new Triplet<>("redis-port", "n", "Sets the redis port to connect to");
     private static final Triplet<String, String, String> REDIS_PWD = new Triplet<>("redis-pwd", "w", "Sets the redis password");
+    private static final Triplet<String, String, String> CALL_GRAPH = new Triplet<>("callgraph", "c", "Sets the call graph algorithm (CHA, RTA, VTA, SPARK)");
     private static final Triplet<String, String, String> TAINT_ANALYSIS = new Triplet<>("taint-analysis", "t", "Run taint analysis on the app");
     private static final Triplet<String, String, String> RAW = new Triplet<>("raw", "r", "Print raw results");
 
@@ -110,6 +111,14 @@ public class CommandLineOptions {
                 .required(true)
                 .build();
 
+        final Option cg = Option.builder(CALL_GRAPH.getValue1())
+                .longOpt(CALL_GRAPH.getValue0())
+                .desc(CALL_GRAPH.getValue2())
+                .hasArg(true)
+                .argName(CALL_GRAPH.getValue0())
+                .required(false)
+                .build();
+
         final Option raw = Option.builder(RAW.getValue1())
                 .longOpt(RAW.getValue0())
                 .desc(RAW.getValue2())
@@ -170,6 +179,7 @@ public class CommandLineOptions {
         this.options.addOption(platform);
         this.options.addOption(redisPwd);
         this.options.addOption(raw);
+        this.options.addOption(cg);
         this.options.addOption(taintAnalysis);
         this.options.addOption(redisPort);
         this.options.addOption(redisServer);
@@ -199,6 +209,10 @@ public class CommandLineOptions {
         return this.cmdLine.hasOption(REDIS_PORT.getValue1());
     }
 
+    public boolean hasCallGraph() {
+        return this.cmdLine.hasOption(CALL_GRAPH.getValue1());
+    }
+
     public boolean hasTaintAnalysis() {
         return this.cmdLine.hasOption(TAINT_ANALYSIS.getValue1());
     }
@@ -217,6 +231,10 @@ public class CommandLineOptions {
 
     public String getRedisPort() {
         return cmdLine.getOptionValue(REDIS_PORT.getValue0());
+    }
+
+    public String getCallGraph() {
+        return cmdLine.getOptionValue(CALL_GRAPH.getValue0());
     }
 
     public boolean hasRaw() {

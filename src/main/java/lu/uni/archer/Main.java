@@ -18,6 +18,7 @@ import lu.uni.archer.utils.Writer;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.profiler.StopWatch;
 import soot.G;
+import soot.jimple.infoflow.InfoflowConfiguration;
 import soot.jimple.infoflow.android.InfoflowAndroidConfiguration;
 import soot.jimple.infoflow.android.SetupApplication;
 import soot.jimple.infoflow.android.manifest.ProcessManifest;
@@ -133,6 +134,21 @@ public class Main {
         SetupApplication sa = new SetupApplication(ifac);
         sa.setSootConfig(new SootConfig());
         sa.getConfig().setIgnoreFlowsInSystemPackages(false);
+        InfoflowConfiguration.CallgraphAlgorithm cgAlgo = InfoflowConfiguration.CallgraphAlgorithm.CHA;
+        if (CommandLineOptions.v().hasCallGraph()) {
+            switch (CommandLineOptions.v().getCallGraph()) {
+                case "RTA":
+                    cgAlgo = InfoflowConfiguration.CallgraphAlgorithm.RTA;
+                    break;
+                case "VTA":
+                    cgAlgo = InfoflowConfiguration.CallgraphAlgorithm.VTA;
+                    break;
+                case "SPARK":
+                    cgAlgo = InfoflowConfiguration.CallgraphAlgorithm.SPARK;
+                    break;
+            }
+        }
+        sa.getConfig().setCallgraphAlgorithm(cgAlgo);
         sa.constructCallgraph();
         sa.getConfig().setSootIntegrationMode(InfoflowAndroidConfiguration.SootIntegrationMode.UseExistingInstance);
         return sa;
