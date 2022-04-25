@@ -145,11 +145,13 @@ public class ImplicitCallingRelationshipResolver {
 
     private void populatePotentialTargets(SootMethod callee, Set<SootClass> potentialClassTargets, Stmt currentStmt, SootMethod currentMethod) {
         Triplet<Set<SootClass>, Stmt, SootMethod> triplet = this.executorToPotentialTargets.get(callee);
-        if (triplet == null) {
-            triplet = new Triplet<>(new HashSet<>(), currentStmt, currentMethod);
-            this.executorToPotentialTargets.put(callee, triplet);
+        if (!potentialClassTargets.isEmpty()) {
+            if (triplet == null) {
+                triplet = new Triplet<>(new HashSet<>(), currentStmt, currentMethod);
+                this.executorToPotentialTargets.put(callee, triplet);
+            }
+            Set<SootClass> potentialTargets = triplet.getValue0();
+            potentialTargets.addAll(potentialClassTargets);
         }
-        Set<SootClass> potentialTargets = triplet.getValue0();
-        potentialTargets.addAll(potentialClassTargets);
     }
 }

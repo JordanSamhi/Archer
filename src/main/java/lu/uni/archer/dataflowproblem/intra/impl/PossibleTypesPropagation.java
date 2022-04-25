@@ -16,9 +16,9 @@ import java.util.Set;
 /**
  * This class is based on: https://github.com/soot-oss/soot/blob/develop/src/main/java/soot/jimple/toolkits/ide/exampleproblems/IFDSPossibleTypes.java
  */
-public class PossibleTypes extends ForwardFlowAnalysis<Unit, Set<Pair<Value, Type>>> {
+public class PossibleTypesPropagation extends ForwardFlowAnalysis<Unit, Set<Pair<Value, Type>>> {
 
-    public PossibleTypes(DirectedGraph<Unit> graph) {
+    public PossibleTypesPropagation(DirectedGraph<Unit> graph) {
         super(graph);
         doAnalysis();
     }

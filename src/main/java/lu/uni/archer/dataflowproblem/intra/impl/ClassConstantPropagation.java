@@ -14,9 +14,9 @@ import soot.toolkits.scalar.Pair;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ClassConstant extends ForwardFlowAnalysis<Unit, Set<Pair<Value, ClassConstant>>> {
+public class ClassConstantPropagation extends ForwardFlowAnalysis<Unit, Set<Pair<Value, ClassConstant>>> {
 
-    public ClassConstant(DirectedGraph<Unit> graph) {
+    public ClassConstantPropagation(DirectedGraph<Unit> graph) {
         super(graph);
         doAnalysis();
     }

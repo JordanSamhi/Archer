@@ -7,6 +7,7 @@ import lu.uni.archer.dataflowproblem.inter.IFDSClassConstantPropagation;
 import lu.uni.archer.dataflowproblem.inter.IFDSFieldPropagation;
 import lu.uni.archer.dataflowproblem.inter.IFDSMethodsCalledPropagation;
 import lu.uni.archer.dataflowproblem.inter.IFDSPossibleTypes;
+import lu.uni.archer.dataflowproblem.intra.IntraClassConstant;
 import lu.uni.archer.dataflowproblem.intra.IntraFieldPropagation;
 import lu.uni.archer.dataflowproblem.intra.IntraPossibleTypes;
 import lu.uni.archer.patch.CallGraphPatcher;
@@ -87,6 +88,7 @@ public class Main {
         Analyses.v().addProblem(new IFDSPossibleTypes());
         Analyses.v().addProblem(new IntraPossibleTypes());
         Analyses.v().addProblem(new IntraFieldPropagation());
+        Analyses.v().addProblem(new IntraClassConstant());
         Analyses.v().solveProblems();
         Writer.v().psuccess("Done");
 

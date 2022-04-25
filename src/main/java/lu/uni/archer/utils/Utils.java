@@ -1,9 +1,6 @@
 package lu.uni.archer.utils;
 
-import soot.Scene;
-import soot.SootClass;
-import soot.SootMethod;
-import soot.SootMethodRef;
+import soot.*;
 import soot.util.Chain;
 
 import java.util.ArrayList;
@@ -158,8 +155,11 @@ public class Utils {
         int total = 0;
         for (SootClass sc : Scene.v().getApplicationClasses()) {
             for (SootMethod sm : sc.getMethods()) {
-                if (sm.isConcrete()) {
-                    total += sm.retrieveActiveBody().getUnits().size();
+                if (sm.isConcrete() && sm.hasActiveBody()) {
+                    Body b = sm.getActiveBody();
+                    if (b != null) {
+                        total += b.getUnits().size();
+                    }
                 }
             }
         }

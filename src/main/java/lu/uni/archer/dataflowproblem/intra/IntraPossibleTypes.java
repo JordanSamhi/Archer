@@ -1,7 +1,7 @@
 package lu.uni.archer.dataflowproblem.intra;
 
 import lu.uni.archer.dataflowproblem.IntraProblem;
-import lu.uni.archer.dataflowproblem.intra.impl.PossibleTypes;
+import lu.uni.archer.dataflowproblem.intra.impl.PossibleTypesPropagation;
 import lu.uni.archer.files.LibrariesManager;
 import lu.uni.archer.utils.Constants;
 import lu.uni.archer.utils.Utils;
@@ -12,7 +12,7 @@ import soot.toolkits.scalar.Pair;
 import java.util.*;
 
 public class IntraPossibleTypes extends IntraProblem {
-    Map<SootMethod, PossibleTypes> results;
+    Map<SootMethod, PossibleTypesPropagation> results;
 
     public IntraPossibleTypes() {
         super();
@@ -32,7 +32,7 @@ public class IntraPossibleTypes extends IntraProblem {
             }
         }
         for (SootMethod sm : methodsToSolve) {
-            PossibleTypes pt = new PossibleTypes(new ExceptionalUnitGraph(sm.retrieveActiveBody()));
+            PossibleTypesPropagation pt = new PossibleTypesPropagation(new ExceptionalUnitGraph(sm.retrieveActiveBody()));
             results.put(sm, pt);
         }
     }
@@ -41,7 +41,7 @@ public class IntraPossibleTypes extends IntraProblem {
     public Set<Type> getResults(Value v, Unit u) {
         Set<Type> results = new HashSet<>();
         Set<Pair<Value, Type>> resultsComputed = null;
-        for (Map.Entry<SootMethod, PossibleTypes> entry : this.results.entrySet()) {
+        for (Map.Entry<SootMethod, PossibleTypesPropagation> entry : this.results.entrySet()) {
             for (Unit unit : entry.getKey().retrieveActiveBody().getUnits()) {
                 if (unit.equals(u)) {
                     resultsComputed = entry.getValue().getFlowAfter(u);

@@ -1,18 +1,19 @@
 package lu.uni.archer.dataflowproblem.intra;
 
 import lu.uni.archer.dataflowproblem.IntraProblem;
-import lu.uni.archer.dataflowproblem.intra.impl.ClassConstant;
+import lu.uni.archer.dataflowproblem.intra.impl.ClassConstantPropagation;
 import lu.uni.archer.files.LibrariesManager;
 import lu.uni.archer.utils.Constants;
 import lu.uni.archer.utils.Utils;
 import soot.*;
+import soot.jimple.ClassConstant;
 import soot.toolkits.graph.ExceptionalUnitGraph;
 import soot.toolkits.scalar.Pair;
 
 import java.util.*;
 
 public class IntraClassConstant extends IntraProblem {
-    Map<SootMethod, ClassConstant> results;
+    Map<SootMethod, ClassConstantPropagation> results;
 
     public IntraClassConstant() {
         super();
@@ -32,7 +33,7 @@ public class IntraClassConstant extends IntraProblem {
             }
         }
         for (SootMethod sm : methodsToSolve) {
-            ClassConstant cc = new ClassConstant(new ExceptionalUnitGraph(sm.retrieveActiveBody()));
+            ClassConstantPropagation cc = new ClassConstantPropagation(new ExceptionalUnitGraph(sm.retrieveActiveBody()));
             results.put(sm, cc);
         }
     }
@@ -41,7 +42,7 @@ public class IntraClassConstant extends IntraProblem {
     public Set<ClassConstant> getResults(Value v, Unit u) {
         Set<ClassConstant> results = new HashSet<>();
         Set<Pair<Value, ClassConstant>> resultsComputed = null;
-        for (Map.Entry<SootMethod, ClassConstant> entry : this.results.entrySet()) {
+        for (Map.Entry<SootMethod, ClassConstantPropagation> entry : this.results.entrySet()) {
             for (Unit unit : entry.getKey().retrieveActiveBody().getUnits()) {
                 if (unit.equals(u)) {
                     resultsComputed = entry.getValue().getFlowAfter(u);
