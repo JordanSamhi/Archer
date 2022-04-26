@@ -85,7 +85,7 @@ public class ResultsAccumulator {
         System.out.printf(" - Number of new Edges in call graph: %d%n", this.newEdgesInCG);
         System.out.printf(" - Number of extra statement covered: %d%n", this.numberOfExtraStmtCovered);
         System.out.printf(" - Proportion of extra code covered: %.2f%% %n", (double) this.numberOfExtraStmtCovered * 100 / this.numberOfStmtCovered);
-        System.out.printf(" - Reached timeout: %s", this.reachedTimeout ? "yes" : "no");
+        System.out.printf(" - Reached timeout: %s%n", this.reachedTimeout ? "yes" : "no");
     }
 
     public long getAnalysisElapsedTime() {
