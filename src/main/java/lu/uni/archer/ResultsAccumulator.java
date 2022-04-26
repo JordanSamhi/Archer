@@ -37,6 +37,7 @@ public class ResultsAccumulator {
     private int newEdgesInCG;
     private int numberOfExtraStmtCovered;
     private int numberOfStmtCovered;
+    private boolean reachedTimeout;
 
     private ResultsAccumulator() {
         this.setAppName("");
@@ -45,6 +46,8 @@ public class ResultsAccumulator {
         this.setTaintAnalysisElapsedTime(0);
         this.setNewEdgesInCG(0);
         this.setNumberOfExtraStmtCovered(0);
+        this.setNumberOfStmtCovered(0);
+        this.setReachedTimeout(false);
     }
 
     public static ResultsAccumulator v() {
@@ -67,9 +70,10 @@ public class ResultsAccumulator {
     }
 
     private String generateVector() {
-        return String.format("%s,%d,%d,%d,%d,%d,%.2f", this.getAppName(), this.getAnalysisElapsedTime(),
+        return String.format("%s,%d,%d,%d,%d,%d,%.2f,%d", this.getAppName(), this.getAnalysisElapsedTime(),
                 this.getInstrumentationElapsedTime(), this.getTaintAnalysisElapsedTime(),
-                this.newEdgesInCG, this.numberOfExtraStmtCovered, (double) this.numberOfExtraStmtCovered * 100 / this.numberOfStmtCovered);
+                this.newEdgesInCG, this.numberOfExtraStmtCovered, (double) this.numberOfExtraStmtCovered * 100 / this.numberOfStmtCovered,
+                this.reachedTimeout ? 1 : 0);
     }
 
     public void printResults() {
@@ -81,6 +85,7 @@ public class ResultsAccumulator {
         System.out.printf(" - Number of new Edges in call graph: %d%n", this.newEdgesInCG);
         System.out.printf(" - Number of extra statement covered: %d%n", this.numberOfExtraStmtCovered);
         System.out.printf(" - Proportion of extra code covered: %.2f%% %n", (double) this.numberOfExtraStmtCovered * 100 / this.numberOfStmtCovered);
+        System.out.printf(" - Reached timeout: %s", this.reachedTimeout ? "yes" : "no");
     }
 
     public long getAnalysisElapsedTime() {
@@ -137,5 +142,13 @@ public class ResultsAccumulator {
 
     public int getNumberOfStmtCovered() {
         return numberOfStmtCovered;
+    }
+
+    public boolean isReachedTimeout() {
+        return reachedTimeout;
+    }
+
+    public void setReachedTimeout(boolean reachedTimeout) {
+        this.reachedTimeout = reachedTimeout;
     }
 }

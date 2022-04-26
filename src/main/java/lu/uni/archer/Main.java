@@ -12,10 +12,7 @@ import lu.uni.archer.dataflowproblem.intra.IntraFieldPropagation;
 import lu.uni.archer.dataflowproblem.intra.IntraPossibleTypes;
 import lu.uni.archer.patch.CallGraphPatcher;
 import lu.uni.archer.patch.ImplicitCallingRelationshipResolver;
-import lu.uni.archer.utils.CommandLineOptions;
-import lu.uni.archer.utils.Constants;
-import lu.uni.archer.utils.Utils;
-import lu.uni.archer.utils.Writer;
+import lu.uni.archer.utils.*;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.profiler.StopWatch;
 import soot.G;
@@ -58,6 +55,14 @@ public class Main {
         analysisTime.start("Analysis");
         CommandLineOptions.v().parseArgs(args);
         Writer.v().pinfo(String.format("%s v1.0 started on %s\n", Constants.TOOL_NAME, new Date()));
+
+        if (CommandLineOptions.v().hasTimeout()) {
+            int timeout = CommandLineOptions.v().getTimeout();
+            if (timeout != 0) {
+                TimeOut to = new TimeOut(timeout);
+                to.launch();
+            }
+        }
 
         ProcessManifest pm = null;
         try {

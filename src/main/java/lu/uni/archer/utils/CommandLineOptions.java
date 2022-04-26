@@ -49,6 +49,7 @@ public class CommandLineOptions {
     private static final Triplet<String, String, String> REDIS_PORT = new Triplet<>("redis-port", "n", "Sets the redis port to connect to");
     private static final Triplet<String, String, String> REDIS_PWD = new Triplet<>("redis-pwd", "w", "Sets the redis password");
     private static final Triplet<String, String, String> CALL_GRAPH = new Triplet<>("callgraph", "c", "Sets the call graph algorithm (CHA, RTA, VTA, SPARK)");
+    private static final Triplet<String, String, String> TIMEOUT = new Triplet<>("timeout", "to", "Sets the timeout for the analysis");
     private static final Triplet<String, String, String> TAINT_ANALYSIS = new Triplet<>("taint-analysis", "t", "Run taint analysis on the app");
     private static final Triplet<String, String, String> RAW = new Triplet<>("raw", "r", "Print raw results");
 
@@ -135,6 +136,13 @@ public class CommandLineOptions {
                 .required(true)
                 .build();
 
+        final Option timeout = Option.builder(TIMEOUT.getValue1())
+                .longOpt(TIMEOUT.getValue0())
+                .desc(TIMEOUT.getValue2())
+                .argName(TIMEOUT.getValue0())
+                .hasArg(true)
+                .build();
+
         final Option redisServer = Option.builder(REDIS_SERVER.getValue1())
                 .longOpt(REDIS_SERVER.getValue0())
                 .desc(REDIS_SERVER.getValue2())
@@ -179,6 +187,7 @@ public class CommandLineOptions {
         this.options.addOption(platform);
         this.options.addOption(redisPwd);
         this.options.addOption(raw);
+        this.options.addOption(timeout);
         this.options.addOption(cg);
         this.options.addOption(taintAnalysis);
         this.options.addOption(redisPort);
@@ -239,5 +248,19 @@ public class CommandLineOptions {
 
     public boolean hasRaw() {
         return this.cmdLine.hasOption(RAW.getValue1());
+    }
+
+    public boolean hasTimeout() {
+        return this.cmdLine.hasOption(TIMEOUT.getValue1());
+    }
+
+    public int getTimeout() {
+        int n;
+        try {
+            n = Integer.parseInt(cmdLine.getOptionValue(TIMEOUT.getValue0()));
+        } catch (NumberFormatException ignored) {
+            return 60;
+        }
+        return n;
     }
 }
