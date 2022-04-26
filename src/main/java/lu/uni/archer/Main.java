@@ -56,10 +56,11 @@ public class Main {
         CommandLineOptions.v().parseArgs(args);
         Writer.v().pinfo(String.format("%s v1.0 started on %s\n", Constants.TOOL_NAME, new Date()));
 
+        TimeOut to = null;
         if (CommandLineOptions.v().hasTimeout()) {
             int timeout = CommandLineOptions.v().getTimeout();
             if (timeout != 0) {
-                TimeOut to = new TimeOut(timeout);
+                to = new TimeOut(timeout);
                 to.launch();
             }
         }
@@ -126,6 +127,9 @@ public class Main {
             ResultsAccumulator.v().printVectorResults();
         } else {
             ResultsAccumulator.v().printResults();
+        }
+        if (to != null) {
+            to.cancel();
         }
     }
 
