@@ -1,6 +1,6 @@
 # Archer
 
-Implicit-control-flow-aware static analyzer.
+Implicit-calling-relationship-aware static Android app analyzer.
 
 ## Getting started
 
@@ -38,7 +38,7 @@ Then, try to rebuild.
 ### Using the tool
 
 <pre>
-java -jar Archer/target/Archer-1.0-jar-with-dependencies.jar<i>options</i>
+java -jar Archer/target/Archer-1.0-jar-with-dependencies.jar <i>options</i>
 </pre>
 
 Options:
@@ -46,6 +46,9 @@ Options:
 * ```-a``` : The path to the APK to process.
 * ```-p``` : The path to Android platofrms folder.
 * ```-t``` : Perform taint analysis.
+* ```-r``` : Provides raw results.
+* ```-to``` : Sets a timeout (in minutes).
+* ```-c``` : Sets the call graph algorithm (CHA, RTA, VTA, SPARK)
 
 ## Built With
 
