@@ -9,6 +9,7 @@ import heros.flowfunc.KillAll;
 import lu.uni.archer.analysis.Analyses;
 import lu.uni.archer.dataflowproblem.IFDSProblem;
 import lu.uni.archer.files.MethodCallMethodsManager;
+import lu.uni.archer.files.MethodsManager;
 import lu.uni.archer.utils.Constants;
 import soot.*;
 import soot.jimple.*;
@@ -206,7 +207,7 @@ public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Value, Pair<S
 
                                         @Override
                                         public Set<Pair<Value, Pair<String, Value>>> computeTargets(Pair<Value, Pair<String, Value>> in) {
-                                            if (!base.equivTo(left)) {
+                                            if (!base.equals(left)) {
                                                 if (in.equals(zeroValue())) {
                                                     Set<Pair<Value, Pair<String, Value>>> set = new HashSet<>();
                                                     set.add(new Pair<>(leftLocal, new Pair<>(MethodCallMethodsManager.v().getLabel(callee), valueInMethodCall)));
@@ -300,6 +301,39 @@ public class IFDSMethodsCalledPropagation extends IFDSProblem<Pair<Value, Pair<S
                                 };
                             }
                         }
+                    } else if (MethodCallMethodsManager.v().isInMethodsThatAreExecutorsAndSetConstraints(callee)) {
+                        Map<Integer, String> labels = MethodCallMethodsManager.v().getLabels(callee);
+                        return new FlowFunction<Pair<Value, Pair<String, Value>>>() {
+
+                            @Override
+                            public Set<Pair<Value, Pair<String, Value>>> computeTargets(Pair<Value, Pair<String, Value>> in) {
+                                Value argToPropagateTo = ie.getArg(MethodsManager.v().getExecutorArgPosition(callee));
+                                if (in.equals(zeroValue())) {
+                                    Set<Pair<Value, Pair<String, Value>>> set = new HashSet<>();
+                                    for (Map.Entry<Integer, String> entry : labels.entrySet()) {
+                                        int argPosition = entry.getKey();
+                                        String label = entry.getValue();
+                                        Value v = ie.getArg(argPosition);
+                                        if (!(v instanceof Constant)) {
+                                            Set<FieldRef> potentialFields = (Set<FieldRef>) Analyses.v().getResults(Constants.FIELD_PROPAGATION, v, callSite);
+                                            List<FieldRef> potentialFieldsList = new ArrayList<>(potentialFields);
+                                            if (potentialFieldsList.size() == 1) {
+                                                v = potentialFieldsList.get(0);
+                                            } else {
+                                                v = null;
+                                            }
+                                        }
+                                        Pair<String, Value> pair = new Pair<>(label, v);
+                                        set.add(new Pair<>(argToPropagateTo, pair));
+                                    }
+                                    return set;
+                                } else if (argToPropagateTo.equivTo(in.getO1())) {
+                                    return Collections.emptySet();
+                                } else {
+                                    return Collections.singleton(in);
+                                }
+                            }
+                        };
                     }
                 }
                 return Identity.v();

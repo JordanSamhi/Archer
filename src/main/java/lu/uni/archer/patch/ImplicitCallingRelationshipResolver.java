@@ -137,6 +137,14 @@ public class ImplicitCallingRelationshipResolver {
                 SootMethod potentialTgt = clazz.getMethodUnsafe(MethodsManager.v().getExecutee(callee).getSubSignature());
                 if (potentialTgt != null) {
                     potentialClassTargetsWithTargetMethod.add(clazz);
+                } else {
+                    List<SootClass> parents = Utils.getAllSuperClasses(clazz);
+                    for (SootClass parent : parents) {
+                        potentialTgt = parent.getMethodUnsafe(MethodsManager.v().getExecutee(callee).getSubSignature());
+                        if (potentialTgt != null) {
+                            potentialClassTargetsWithTargetMethod.add(parent);
+                        }
+                    }
                 }
             }
             MethodBuilder.v().buildMethod(potentialClassTargetsWithTargetMethod, callee, currentStmt, currentMethod);
@@ -153,5 +161,9 @@ public class ImplicitCallingRelationshipResolver {
             Set<SootClass> potentialTargets = triplet.getValue0();
             potentialTargets.addAll(potentialClassTargets);
         }
+    }
+
+    public Map<SootMethod, Triplet<Set<SootClass>, Stmt, SootMethod>> getExecutorToPotentialTargets() {
+        return executorToPotentialTargets;
     }
 }

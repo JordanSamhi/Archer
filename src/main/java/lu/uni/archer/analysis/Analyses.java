@@ -11,8 +11,6 @@ import java.util.Set;
 
 public class Analyses {
     private final List<Problem> problems;
-//    private final Map<String, JimpleIFDSSolver<?, InterproceduralCFG<Unit, SootMethod>>> IFDSSolvers;
-//    private final Map<String, IntraProblem> intraSolvers;
 
     private static Analyses instance;
 
@@ -25,8 +23,6 @@ public class Analyses {
 
     private Analyses() {
         this.problems = new ArrayList<>();
-//        this.IFDSSolvers = new HashMap<>();
-//        this.intraSolvers = new HashMap<>();
     }
 
     public void addProblem(Problem p) {
@@ -56,7 +52,7 @@ public class Analyses {
         return results;
     }
 
-    private Problem getProblem(String problemName) {
+    public Problem getProblem(String problemName) {
         for (Problem p : this.problems) {
             if (p.getProblemName().equals(problemName)) {
                 return p;

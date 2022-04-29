@@ -42,6 +42,7 @@ public class MethodCallMethodsManager extends FileLoader {
     private final Map<String, Integer> methodsThatGenerateBaseToReceiver;
     private final Map<String, Integer> methodsThatPropagateParameterToReceiverToParameterPosition;
     private final Map<String, String> methodToLabel;
+    private final Map<String, Map<Integer, String>> methodToLabels;
 
     private static MethodCallMethodsManager instance;
 
@@ -51,6 +52,7 @@ public class MethodCallMethodsManager extends FileLoader {
         this.methodsThatGenerateBaseToReceiver = new HashMap<>();
         this.methodsThatPropagateParameterToReceiverToParameterPosition = new HashMap<>();
         this.methodToLabel = new HashMap<>();
+        this.methodToLabels = new HashMap<>();
         this.loadMethods();
     }
 
@@ -74,10 +76,11 @@ public class MethodCallMethodsManager extends FileLoader {
             String method = split[0];
             int type = Integer.parseInt(split[1]);
             int paramPosition;
+            String label;
             switch (type) {
                 case 1:
                     paramPosition = Integer.parseInt(split[2]);
-                    String label = split[3];
+                    label = split[3];
                     this.methodToLabel.put(method, label);
                     this.methodsThatGenerateBaseToReceiver.put(method, paramPosition);
                     break;
@@ -87,6 +90,17 @@ public class MethodCallMethodsManager extends FileLoader {
                 case 3:
                     paramPosition = Integer.parseInt(split[2]);
                     this.methodsThatPropagateParameterToReceiverToParameterPosition.put(method, paramPosition);
+                    break;
+                case 4:
+                    String[] constraintSplit = split[2].split("&");
+                    Map<Integer, String> argToLabel = new HashMap<>();
+                    for (String s : constraintSplit) {
+                        String[] argPositionToLabel = s.split(";");
+                        int argPosition = Integer.parseInt(argPositionToLabel[0]);
+                        label = argPositionToLabel[1];
+                        argToLabel.put(argPosition, label);
+                    }
+                    this.methodToLabels.put(method, argToLabel);
                     break;
             }
         }
@@ -104,6 +118,10 @@ public class MethodCallMethodsManager extends FileLoader {
         return this.methodsThatPropagateParameterToReceiverToParameterPosition.containsKey(sm.getSignature());
     }
 
+    public boolean isInMethodsThatAreExecutorsAndSetConstraints(SootMethod sm) {
+        return this.methodToLabels.containsKey(sm.getSignature());
+    }
+
     public String getLabel(SootMethod sm) {
         return this.methodToLabel.get(sm.getSignature());
     }
@@ -116,5 +134,9 @@ public class MethodCallMethodsManager extends FileLoader {
             return ie.getArg(this.methodsThatPropagateParameterToReceiverToParameterPosition.get(sm.getSignature()));
         }
         return null;
+    }
+
+    public Map<Integer, String> getLabels(SootMethod sm) {
+        return this.methodToLabels.get(sm.getSignature());
     }
 }

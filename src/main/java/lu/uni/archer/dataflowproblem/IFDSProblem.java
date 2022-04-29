@@ -19,4 +19,8 @@ public abstract class IFDSProblem<T> extends DefaultJimpleIFDSTabulationProblem<
     public void solve() {
         this.solver.solve();
     }
+
+    public JimpleIFDSSolver<?, InterproceduralCFG<Unit, SootMethod>> getSolver() {
+        return solver;
+    }
 }

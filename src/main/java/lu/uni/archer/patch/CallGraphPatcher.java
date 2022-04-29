@@ -48,6 +48,7 @@ public class CallGraphPatcher {
             if (MethodsManager.v().isClassAndMethodExecutee(e.tgt().getDeclaringClass(), e.tgt())) {
                 ResultsAccumulator.v().incrementNumberOfNewEdge();
                 if (!counted.contains(e.tgt())) {
+                    ResultsAccumulator.v().incrementNumberOfNewNodes();
                     ResultsAccumulator.v().addNumberOfExtraStmtCovered(Utils.getNumberOfStmt(e.tgt()));
                     counted.add(e.tgt());
                 }

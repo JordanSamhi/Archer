@@ -8,15 +8,15 @@ import soot.jimple.*;
 import soot.jimple.infoflow.cfg.FlowDroidEssentialMethodTag;
 import soot.jimple.toolkits.callgraph.Edge;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class MethodBuilder {
     private static MethodBuilder instance;
     List<InvokeExpr> invokeExprs;
+    private final Map<SootMethod, SootMethod> oldToNewMethod;
 
     private MethodBuilder() {
+        this.oldToNewMethod = new HashMap<>();
         this.invokeExprs = new ArrayList<>();
         this.populateInvokeExprs();
     }
@@ -111,6 +111,7 @@ public class MethodBuilder {
                 invokeExprsToModify.add(ie);
             }
         }
+        this.oldToNewMethod.put(methodToInstrument, newMethod);
         methodClass.removeMethod(methodToInstrument);
         methodClass.addMethod(newMethod);
         for (InvokeExpr ie : invokeExprsToModify) {
@@ -138,5 +139,9 @@ public class MethodBuilder {
         b.getUnits().add(Jimple.v().newReturnVoidStmt());
         b.validate();
         clazz.addMethod(classConstructor);
+    }
+
+    public Map<SootMethod, SootMethod> getOldToNewMethod() {
+        return oldToNewMethod;
     }
 }

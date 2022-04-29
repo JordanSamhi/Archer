@@ -16,6 +16,7 @@ import lu.uni.archer.utils.*;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.profiler.StopWatch;
 import soot.G;
+import soot.Scene;
 import soot.jimple.infoflow.InfoflowConfiguration;
 import soot.jimple.infoflow.android.InfoflowAndroidConfiguration;
 import soot.jimple.infoflow.android.SetupApplication;
@@ -51,85 +52,95 @@ import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
-        StopWatch analysisTime = new StopWatch("Analysis");
-        analysisTime.start("Analysis");
-        CommandLineOptions.v().parseArgs(args);
-        Writer.v().pinfo(String.format("%s v1.0 started on %s\n", Constants.TOOL_NAME, new Date()));
-
         TimeOut to = null;
-        if (CommandLineOptions.v().hasTimeout()) {
-            int timeout = CommandLineOptions.v().getTimeout();
-            if (timeout != 0) {
-                to = new TimeOut(timeout);
-                to.launch();
-            }
-        }
-
-        ProcessManifest pm = null;
         try {
-            pm = new ProcessManifest(CommandLineOptions.v().getApk());
-        } catch (Exception ignored) {
-        }
-        if (pm != null) {
-            Writer.v().pinfo(String.format("Processing: %s", pm.getPackageName()));
-        }
+            StopWatch analysisTime = new StopWatch("Analysis");
+            analysisTime.start("Analysis");
+            CommandLineOptions.v().parseArgs(args);
+            ResultsAccumulator.v().setAppName(FilenameUtils.getBaseName(CommandLineOptions.v().getApk()));
+            Writer.v().pinfo(String.format("%s v1.0 started on %s\n", Constants.TOOL_NAME, new Date()));
 
-        Writer.v().pinfo("Initializing Environment");
-        SetupApplication sa = initializeSoot();
-        Writer.v().psuccess("Done");
+            if (CommandLineOptions.v().hasTimeout()) {
+                int timeout = CommandLineOptions.v().getTimeout();
+                if (timeout != 0) {
+                    to = new TimeOut(timeout);
+                    to.launch();
+                }
+            }
 
-        if (CommandLineOptions.v().hasRedisEnv()) {
-            Writer.v().pinfo("Executing empirical study");
-            EmpiricalStudy es = new EmpiricalStudy(CommandLineOptions.v().getRedisServer(), CommandLineOptions.v().getRedisPort(), CommandLineOptions.v().getRedisPwd());
-            es.run();
-            Writer.v().psuccess("End of empirical study");
-        }
+            ProcessManifest pm = null;
+            try {
+                pm = new ProcessManifest(CommandLineOptions.v().getApk());
+            } catch (Exception ignored) {
+            }
+            if (pm != null) {
+                Writer.v().pinfo(String.format("Processing: %s", pm.getPackageName()));
+            }
 
-        StopWatch instrumentationTime = new StopWatch("Instrumentation");
-        instrumentationTime.start("Instrumentation");
-        Writer.v().pinfo("Solving data flow problems...");
-        Analyses.v().addProblem(new IFDSFieldPropagation());
-        Analyses.v().addProblem(new IFDSClassConstantPropagation());
-        Analyses.v().addProblem(new IFDSMethodsCalledPropagation());
-        Analyses.v().addProblem(new IFDSPossibleTypes());
-        Analyses.v().addProblem(new IntraPossibleTypes());
-        Analyses.v().addProblem(new IntraFieldPropagation());
-        Analyses.v().addProblem(new IntraClassConstant());
-        Analyses.v().solveProblems();
-        Writer.v().psuccess("Done");
+            Writer.v().pinfo("Initializing Environment");
+            SetupApplication sa = initializeSoot();
+            Writer.v().psuccess("Done");
+
+            if (CommandLineOptions.v().hasRedisEnv()) {
+                Writer.v().pinfo("Executing empirical study");
+                EmpiricalStudy es = new EmpiricalStudy(CommandLineOptions.v().getRedisServer(), CommandLineOptions.v().getRedisPort(), CommandLineOptions.v().getRedisPwd());
+                es.run();
+                Writer.v().psuccess("End of empirical study");
+            }
+
+            StopWatch instrumentationTime = new StopWatch("Instrumentation");
+            instrumentationTime.start("Instrumentation");
+            Writer.v().pinfo("Solving data flow problems...");
+            Analyses.v().addProblem(new IFDSFieldPropagation());
+            Analyses.v().addProblem(new IFDSClassConstantPropagation());
+            Analyses.v().addProblem(new IFDSPossibleTypes());
+            Analyses.v().addProblem(new IntraPossibleTypes());
+            Analyses.v().addProblem(new IntraFieldPropagation());
+            Analyses.v().addProblem(new IntraClassConstant());
+            Analyses.v().addProblem(new IFDSMethodsCalledPropagation());
+            Analyses.v().solveProblems();
+            Writer.v().psuccess("Done");
 
 
-        Writer.v().pinfo("Patching Call graph...");
-        ImplicitCallingRelationshipResolver.v().instrument();
-        instrumentationTime.stop();
-        ResultsAccumulator.v().setInstrumentationElapsedTime(instrumentationTime.elapsedTime() / 1000000000);
-        sa.constructCallgraph();
-        CallGraphPatcher.v().patch();
-        ResultsAccumulator.v().addNumberOfStmtCovered(Utils.getNumberOfStmtInApp());
-        Writer.v().psuccess("Done");
+            Writer.v().pinfo("Patching Call graph...");
+            ImplicitCallingRelationshipResolver.v().instrument();
+            instrumentationTime.stop();
+            ResultsAccumulator.v().setInstrumentationElapsedTime(instrumentationTime.elapsedTime() / 1000000000);
+            sa.constructCallgraph();
+            CallGraphPatcher.v().patch();
+            ResultsAccumulator.v().addNumberOfStmtCovered(Utils.getNumberOfStmtInApp());
+            Writer.v().psuccess("Done");
 
-        if (CommandLineOptions.v().hasTaintAnalysis()) {
-            StopWatch taintAnalysisTime = new StopWatch("Taint Analysis");
-            taintAnalysisTime.start("Taint Analysis");
-            Writer.v().pinfo("Running taint analysis");
-            FlowAnalysis fa = new FlowAnalysis(sa);
-            fa.runTaintAnalysis();
-            Writer.v().psuccess("Taint analysis terminated");
-            fa.printResults();
-            taintAnalysisTime.stop();
-            ResultsAccumulator.v().setTaintAnalysisElapsedTime(taintAnalysisTime.elapsedTime() / 1000000000);
-        }
+            if (CommandLineOptions.v().hasTaintAnalysis()) {
+                StopWatch taintAnalysisTime = new StopWatch("Taint Analysis");
+                taintAnalysisTime.start("Taint Analysis");
+                Writer.v().pinfo("Running taint analysis");
+                FlowAnalysis fa = new FlowAnalysis(sa);
+                fa.runTaintAnalysis();
+                Writer.v().psuccess("Taint analysis terminated");
+                fa.printResults();
+                taintAnalysisTime.stop();
+                ResultsAccumulator.v().setTaintAnalysisElapsedTime(taintAnalysisTime.elapsedTime() / 1000000000);
+            }
 
-        analysisTime.stop();
-        ResultsAccumulator.v().setAppName(FilenameUtils.getBaseName(CommandLineOptions.v().getApk()));
-        ResultsAccumulator.v().setAnalysisElapsedTime(analysisTime.elapsedTime() / 1000000000);
-        if (CommandLineOptions.v().hasRaw()) {
-            ResultsAccumulator.v().printVectorResults();
-        } else {
-            ResultsAccumulator.v().printResults();
-        }
-        if (to != null) {
-            to.cancel();
+            analysisTime.stop();
+            ResultsAccumulator.v().setAppName(FilenameUtils.getBaseName(CommandLineOptions.v().getApk()));
+            ResultsAccumulator.v().setAnalysisElapsedTime(analysisTime.elapsedTime() / 1000000000);
+            ResultsAccumulator.v().setNumberOfNodesInCG(Utils.getCountOfNodes(Scene.v().getCallGraph()));
+            ResultsAccumulator.v().setNumberOfEdgesInCG(Utils.getCountOfEdges(Scene.v().getCallGraph()));
+            if (CommandLineOptions.v().hasRaw()) {
+                ResultsAccumulator.v().printVectorResults();
+            } else {
+                ResultsAccumulator.v().printResults();
+            }
+            if (to != null) {
+                to.cancel();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (to != null) {
+                to.cancel();
+            }
         }
     }
 
@@ -144,7 +155,6 @@ public class Main {
         ifac.setMergeDexFiles(true);
         SetupApplication sa = new SetupApplication(ifac);
         sa.setSootConfig(new SootConfig());
-        sa.getConfig().setIgnoreFlowsInSystemPackages(false);
         InfoflowConfiguration.CallgraphAlgorithm cgAlgo = InfoflowConfiguration.CallgraphAlgorithm.CHA;
         if (CommandLineOptions.v().hasCallGraph()) {
             switch (CommandLineOptions.v().getCallGraph()) {

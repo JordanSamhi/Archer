@@ -1,9 +1,12 @@
 package lu.uni.archer.utils;
 
 import soot.*;
+import soot.jimple.toolkits.callgraph.CallGraph;
+import soot.jimple.toolkits.callgraph.Edge;
 import soot.util.Chain;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /*-
@@ -164,5 +167,28 @@ public class Utils {
             }
         }
         return total;
+    }
+
+    public static int getCountOfEdges(CallGraph cg) {
+        return cg.size();
+    }
+
+    public static int getCountOfNodes(CallGraph cg) {
+        Iterator<Edge> it = cg.iterator();
+        Edge next;
+        SootMethod src, tgt;
+        List<SootMethod> nodes = new ArrayList<>();
+        while (it.hasNext()) {
+            next = it.next();
+            src = next.src();
+            tgt = next.tgt();
+            if (!nodes.contains(src)) {
+                nodes.add(src);
+            }
+            if (!nodes.contains(tgt)) {
+                nodes.add(tgt);
+            }
+        }
+        return nodes.size();
     }
 }

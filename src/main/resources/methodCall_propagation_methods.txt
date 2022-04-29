@@ -19,9 +19,33 @@
 <androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest build()>|2
 <androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest build()>|2
 <androidx.work.WorkRequest$Builder: androidx.work.WorkRequest build()>|2
+<android.app.job.JobInfo$Builder: android.app.job.JobInfo build()>|2
 
 # method that propagate SootMethod -> Value to receiver:
 # method|3|x -> x is the parameter position, first parameter is 0
 <androidx.work.OneTimeWorkRequest$Builder: androidx.work.WorkRequest$Builder setConstraints(androidx.work.Constraints)>|3|0
 <androidx.work.PeriodicWorkRequest$Builder: androidx.work.WorkRequest$Builder setConstraints(androidx.work.Constraints)>|3|0
 <androidx.work.WorkRequest$Builder: androidx.work.WorkRequest$Builder setConstraints(androidx.work.Constraints)>|3|0
+
+
+# method that are executors and set contraints: propagate to executee
+# method|4|a;b&c;d -> a is position of arg; b is label
+<com.android.systemui.util.concurrency.DelayableExecutor: java.lang.Runnable executeAtTime(java.lang.Runnable,long)>|4|1;Seconds before execution
+<com.android.systemui.util.concurrency.DelayableExecutor: java.lang.Runnable executeAtTime(java.lang.Runnable,long,java.util.concurrent.TimeUnit)>|4|1;Time before execution&2;TimeUnit
+<com.android.systemui.util.concurrency.DelayableExecutor: java.lang.Runnable executeDelayed(java.lang.Runnable,long)>|4|1;Seconds before execution
+<com.android.systemui.util.concurrency.DelayableExecutor: java.lang.Runnable executeDelayed(java.lang.Runnable,long,java.util.concurrent.TimeUnit)>|4|1;Time before execution&2;TimeUnit
+<com.android.systemui.util.concurrency.RepeatableExecutor: java.lang.Runnable executeRepeatedly(java.lang.Runnable,long,long)>|4|1;Seconds before execution
+<com.android.systemui.util.concurrency.RepeatableExecutor: java.lang.Runnable executeRepeatedly(java.lang.Runnable,long,long,java.util.concurrent.TimeUnit)>|4|1;Time before execution&3;TimeUnit
+<java.util.Timer: void schedule(java.util.TimerTask,java.util.Date,long)>|4|2;Period after next execution in ms
+<java.util.Timer: void schedule(java.util.TimerTask,long)>|4|1;Delay of execution in ms
+<java.util.Timer: void schedule(java.util.TimerTask,long,long)>|4|1;Delay of execution in ms&2;Period after next execution in ms
+<java.util.Timer: void scheduleAtFixedRate(java.util.TimerTask,java.util.Date,long)>|4|2;Period after next execution in ms
+<java.util.Timer: void scheduleAtFixedRate(java.util.TimerTask,long,long)>|4|1;Delay of execution in ms&2;Period after next execution in ms
+<java.util.concurrent.ScheduledExecutorService: java.util.concurrent.ScheduledFuture schedule(java.lang.Runnable,long,java.util.concurrent.TimeUnit)>|4|1;Time before execution&2;TimeUnit
+<java.util.concurrent.ScheduledExecutorService: java.util.concurrent.ScheduledFuture schedule(java.util.concurrent.Callable,long,java.util.concurrent.TimeUnit)>|4|1;Time before execution&2;TimeUnit
+<java.util.concurrent.ScheduledExecutorService: java.util.concurrent.ScheduledFuture scheduleAtFixedRate(java.lang.Runnable,long,long,java.util.concurrent.TimeUnit)>|4|1;Time before execution&2;Period after next execution&3;TimeUnit
+<java.util.concurrent.ScheduledExecutorService: java.util.concurrent.ScheduledFuture scheduleWithFixedDelay(java.lang.Runnable,long,long,java.util.concurrent.TimeUnit)>|4|1;Time before execution&2;Period after next execution&3;TimeUnit
+<java.util.concurrent.ScheduledThreadPoolExecutor: java.util.concurrent.ScheduledFuture schedule(java.lang.Runnable,long,java.util.concurrent.TimeUnit)>|4|1;Time before execution&2;TimeUnit
+<java.util.concurrent.ScheduledThreadPoolExecutor: java.util.concurrent.ScheduledFuture schedule(java.util.concurrent.Callable,long,java.util.concurrent.TimeUnit)>|4|1;Time before execution&2;TimeUnit
+<java.util.concurrent.ScheduledThreadPoolExecutor: java.util.concurrent.ScheduledFuture scheduleAtFixedRate(java.lang.Runnable,long,long,java.util.concurrent.TimeUnit)>|4|1;Time before execution&2;Period after next execution&3;TimeUnit
+<java.util.concurrent.ScheduledThreadPoolExecutor: java.util.concurrent.ScheduledFuture scheduleWithFixedDelay(java.lang.Runnable,long,long,java.util.concurrent.TimeUnit)>|4|1;Time before execution&2;Period after next execution&3;TimeUnit
