@@ -53,6 +53,7 @@ public class CommandLineOptions {
     private static final Triplet<String, String, String> TAINT_ANALYSIS = new Triplet<>("taint-analysis", "t", "Run taint analysis on the app");
     private static final Triplet<String, String, String> RAW = new Triplet<>("raw", "r", "Print raw results");
     private static final Triplet<String, String, String> OUTPUT = new Triplet<>("output", "o", "Write instrumented file in given folder");
+    private static final Triplet<String, String, String> SOURCESINK = new Triplet<>("sourcesink", "ss", "Sets the source and sink file to use");
 
     private final Options options;
     private final Options firstOptions;
@@ -176,6 +177,14 @@ public class CommandLineOptions {
                 .required(false)
                 .build();
 
+        final Option sourcesink = Option.builder(SOURCESINK.getValue1())
+                .longOpt(SOURCESINK.getValue0())
+                .desc(SOURCESINK.getValue2())
+                .hasArg(true)
+                .argName(SOURCESINK.getValue0())
+                .required(false)
+                .build();
+
         final Option help = Option.builder(HELP.getValue1())
                 .longOpt(HELP.getValue0())
                 .desc(HELP.getValue2())
@@ -199,6 +208,7 @@ public class CommandLineOptions {
         this.options.addOption(timeout);
         this.options.addOption(cg);
         this.options.addOption(output);
+        this.options.addOption(sourcesink);
         this.options.addOption(taintAnalysis);
         this.options.addOption(redisPort);
         this.options.addOption(redisServer);
@@ -218,6 +228,10 @@ public class CommandLineOptions {
 
     public boolean hasRedisServer() {
         return this.cmdLine.hasOption(REDIS_SERVER.getValue1());
+    }
+
+    public boolean hasSourceSink() {
+        return this.cmdLine.hasOption(SOURCESINK.getValue1());
     }
 
     public boolean hasRedisPwd() {
@@ -242,6 +256,10 @@ public class CommandLineOptions {
 
     public String getRedisServer() {
         return cmdLine.getOptionValue(REDIS_SERVER.getValue0());
+    }
+
+    public String getSourceSinkFile() {
+        return cmdLine.getOptionValue(SOURCESINK.getValue0());
     }
 
     public String getRedisPwd() {

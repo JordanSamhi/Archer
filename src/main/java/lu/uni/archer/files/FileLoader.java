@@ -34,31 +34,31 @@ import java.util.Set;
  */
 
 public abstract class FileLoader {
-	protected Set<String> items;
+    protected Set<String> items;
 
-	protected FileLoader () {
-		this.items = new HashSet<>();
-		this.loadFile(this.getFile());
-	}
+    protected FileLoader() {
+        this.items = new HashSet<>();
+        this.loadFile(this.getFile());
+    }
 
-	protected abstract String getFile();
+    protected abstract String getFile();
 
-	protected void loadFile(String file) {
-		InputStream fis;
-		BufferedReader br;
-		String line;
-		try {
-			fis = this.getClass().getResourceAsStream(file);
-			br = new BufferedReader(new InputStreamReader(fis));
-			while ((line = br.readLine()) != null)   {
-				if(!line.startsWith("#") && !line.isEmpty()) {
-					this.items.add(line);
-				}
-			}
-			br.close();
-			fis.close();
-		} catch (IOException e) {
-			System.err.println(e.getMessage());
-		}
-	}
+    protected void loadFile(String file) {
+        InputStream fis;
+        BufferedReader br;
+        String line;
+        try {
+            fis = this.getClass().getResourceAsStream(file);
+            br = new BufferedReader(new InputStreamReader(fis));
+            while ((line = br.readLine()) != null) {
+                if (!line.startsWith("#") && !line.isEmpty()) {
+                    this.items.add(line);
+                }
+            }
+            br.close();
+            fis.close();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 }
