@@ -52,6 +52,7 @@ public class CommandLineOptions {
     private static final Triplet<String, String, String> TIMEOUT = new Triplet<>("timeout", "to", "Sets the timeout for the analysis");
     private static final Triplet<String, String, String> TAINT_ANALYSIS = new Triplet<>("taint-analysis", "t", "Run taint analysis on the app");
     private static final Triplet<String, String, String> RAW = new Triplet<>("raw", "r", "Print raw results");
+    private static final Triplet<String, String, String> OUTPUT = new Triplet<>("output", "o", "Write instrumented file in given folder");
 
     private final Options options;
     private final Options firstOptions;
@@ -110,6 +111,14 @@ public class CommandLineOptions {
                 .hasArg(true)
                 .argName(APK.getValue0())
                 .required(true)
+                .build();
+
+        final Option output = Option.builder(OUTPUT.getValue1())
+                .longOpt(OUTPUT.getValue0())
+                .desc(OUTPUT.getValue2())
+                .hasArg(true)
+                .argName(OUTPUT.getValue0())
+                .required(false)
                 .build();
 
         final Option cg = Option.builder(CALL_GRAPH.getValue1())
@@ -189,6 +198,7 @@ public class CommandLineOptions {
         this.options.addOption(raw);
         this.options.addOption(timeout);
         this.options.addOption(cg);
+        this.options.addOption(output);
         this.options.addOption(taintAnalysis);
         this.options.addOption(redisPort);
         this.options.addOption(redisServer);
@@ -248,6 +258,14 @@ public class CommandLineOptions {
 
     public boolean hasRaw() {
         return this.cmdLine.hasOption(RAW.getValue1());
+    }
+
+    public boolean hasOutput() {
+        return this.cmdLine.hasOption(OUTPUT.getValue1());
+    }
+
+    public String getOutput() {
+        return cmdLine.getOptionValue(OUTPUT.getValue0());
     }
 
     public boolean hasTimeout() {

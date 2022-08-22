@@ -1,5 +1,6 @@
 package lu.uni.archer.config;
 
+import lu.uni.archer.utils.CommandLineOptions;
 import soot.jimple.infoflow.InfoflowConfiguration;
 import soot.jimple.infoflow.config.IInfoflowConfig;
 import soot.options.Options;
@@ -35,7 +36,13 @@ public class SootConfig implements IInfoflowConfig {
     public void setSootOptions(Options options, InfoflowConfiguration config) {
         Options.v().set_process_multiple_dex(true);
         Options.v().set_allow_phantom_refs(true);
-        Options.v().set_output_format(Options.output_format_none);
+        if(CommandLineOptions.v().hasOutput()){
+            Options.v().set_output_format(Options.output_format_dex);
+            Options.v().set_output_dir(CommandLineOptions.v().getOutput());
+            Options.v().set_force_overwrite(true);
+        } else {
+            Options.v().set_output_format(Options.output_format_none);
+        }
         Options.v().set_whole_program(true);
         Options.v().setPhaseOption("cg", "enabled:true");
         config.setCallgraphAlgorithm(InfoflowConfiguration.CallgraphAlgorithm.SPARK);

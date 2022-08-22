@@ -16,6 +16,7 @@ import lu.uni.archer.utils.*;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.profiler.StopWatch;
 import soot.G;
+import soot.PackManager;
 import soot.Scene;
 import soot.jimple.infoflow.InfoflowConfiguration;
 import soot.jimple.infoflow.android.InfoflowAndroidConfiguration;
@@ -110,6 +111,12 @@ public class Main {
             CallGraphPatcher.v().patch();
             ResultsAccumulator.v().addNumberOfStmtCovered(Utils.getNumberOfStmtInApp());
             Writer.v().psuccess("Done");
+
+            if(CommandLineOptions.v().hasOutput()) {
+                Writer.v().pinfo("Writing app...");
+                PackManager.v().writeOutput();
+                Writer.v().psuccess("Done");
+            }
 
             if (CommandLineOptions.v().hasTaintAnalysis()) {
                 StopWatch taintAnalysisTime = new StopWatch("Taint Analysis");
