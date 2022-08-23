@@ -54,6 +54,13 @@ Options:
 
 * [Maven](https://maven.apache.org/) - Dependency Management
 
+## Data
+
+### Table 1
+
+![Different constraints that can be set to executor classes to trigger CI calls](https://github.com/JordanSamhi/Archer/blob/main/data/constraints.png)
+Different constraints that can be set to executor classes to trigger CI calls (NS = Network Status, NT = Network Type, BL = Battery Level, CS = Charging Status, IS = Idle Status, SL = Storage Level).
+
 ## License
 
 This project is licensed under the GNU LESSER GENERAL PUBLIC LICENSE 2.1 - see the [LICENSE](LICENSE) file for details
