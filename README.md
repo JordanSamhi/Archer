@@ -56,6 +56,17 @@ Options:
 
 ## Data
 
+### Algorithm 1
+<img src="https://github.com/JordanSamhi/Archer/blob/main/data/algorithm.png" alt="Transfer functions for class literals data flow analysis" width="500"/>
+An edge $\langle s_0, d_0 \rangle \rightarrow \langle n, d \rangle$ means
+that, according to the analysis, data flow value $d$ holds at statement
+$n$ if and only if data flow value $d_0$ holds at statement $s_0$.
+workList temporarily stores edges that serve to propagate data flow values.
+pathEdges stores the edges from the initial node to reachable nodes in the exploded super graph.
+callToBase is a set of methods taking class literals as parameter that we manually vetted which generate new dataflow values for caller objects (e.g., $a.f(c)$ would generate a new dataflow value $a \mapsto \{c\}$).
+callToReceiver is a set of methods that we manually vetted which propagate dataflow values held by caller object to a potential receiver (e.g., $a = b.f()$ would propagate any dataflow value held by $b$ to $a$).
+
+
 ### Table 1
 
 ![Different constraints that can be set to executor classes to trigger CI calls](https://github.com/JordanSamhi/Archer/blob/main/data/constraints.png)
