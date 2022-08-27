@@ -57,7 +57,7 @@ Options:
 ## Data
 
 ### Algorithm 1
-<img src="https://github.com/JordanSamhi/Archer/blob/main/data/algorithm.png" alt="Transfer functions for class literals data flow analysis" width="500"/>
+<img src="data/algorithm.png" alt="Transfer functions for class literals data flow analysis" width="500"/>
 An edge $\langle s_0, d_0 \rangle \rightarrow \langle n, d \rangle$ means
 that, according to the analysis, data flow value $d$ holds at statement
 $n$ if and only if data flow value $d_0$ holds at statement $s_0$.
@@ -69,7 +69,7 @@ callToReceiver is a set of methods that we manually vetted which propagate dataf
 
 ### Table 1
 
-![Different constraints that can be set to executor classes to trigger CI calls](https://github.com/JordanSamhi/Archer/blob/main/data/constraints.png)
+![Different constraints that can be set to executor classes to trigger CI calls](data/constraints.png)
 Different constraints that can be set to executor classes to trigger CI calls (NS = Network Status, NT = Network Type, BL = Battery Level, CS = Charging Status, IS = Idle Status, SL = Storage Level).
 
 ## License
