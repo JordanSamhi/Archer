@@ -17,6 +17,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         MyRunnable.tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         ScheduledThreadPoolExecutor stpe = new ScheduledThreadPoolExecutor(1);
-        stpe.scheduleAtFixedRate(new MyRunnable(), 1, 1, TimeUnit.SECONDS);
+        stpe.scheduleAtFixedRate(new MyRunnable(), 10, 1, TimeUnit.SECONDS);
     }
 }

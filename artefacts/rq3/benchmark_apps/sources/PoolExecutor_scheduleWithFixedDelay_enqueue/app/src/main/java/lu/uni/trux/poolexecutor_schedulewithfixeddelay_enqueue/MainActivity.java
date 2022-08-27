@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         MyRunnable.c = this;
         ScheduledThreadPoolExecutor stpe = new ScheduledThreadPoolExecutor(1);
         try {
-            stpe.scheduleWithFixedDelay(new MyRunnable(), 1, 1, TimeUnit.SECONDS);
+            stpe.scheduleWithFixedDelay(new MyRunnable(), 10, 1, TimeUnit.SECONDS);
         } catch (Exception e) {
             System.out.println("Something wrong happened");
             e.printStackTrace();

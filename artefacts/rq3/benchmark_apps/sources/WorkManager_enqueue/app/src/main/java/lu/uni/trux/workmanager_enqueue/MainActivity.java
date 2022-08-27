@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         Constraints constraints = new Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
-                .setRequiresCharging(false)
+                .setRequiresCharging(true)
                 .build();
         PeriodicWorkRequest wr = new PeriodicWorkRequest.Builder(MyWorker.class, 1, TimeUnit.SECONDS)
                 .setConstraints(constraints)

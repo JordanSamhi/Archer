@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         ComponentName cn = new ComponentName(getApplicationContext(), ReceiverService.class);
         JobInfo.Builder builder = new JobInfo.Builder(44, cn)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
-                .setRequiresCharging(false);
+                .setRequiresCharging(true);
         builder.setMinimumLatency(1000);
         JobScheduler js = getSystemService(JobScheduler.class);
         js.schedule(builder.build());
