@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">okhttp3</a></li>
+        <li><i class="ico ico-class"></i> CacheControl.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public final Lokhttp3/CacheControl;
+.super Ljava/lang/Object;
+.source "CacheControl.java"
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Lokhttp3/CacheControl$Builder;
+}
+.end annotation
+
+.field public static final FORCE_CACHE:Lokhttp3/CacheControl;
+.field public static final FORCE_NETWORK:Lokhttp3/CacheControl;
+.field  headerValue:Ljava/lang/String;
+.annotation runtime Ljavax/annotation/Nullable;
+.end annotation
+.end field
+.field private final immutable:Z
+.field private final isPrivate:Z
+.field private final isPublic:Z
+.field private final maxAgeSeconds:I
+.field private final maxStaleSeconds:I
+.field private final minFreshSeconds:I
+.field private final mustRevalidate:Z
+.field private final noCache:Z
+.field private final noStore:Z
+.field private final noTransform:Z
+.field private final onlyIfCached:Z
+.field private final sMaxAgeSeconds:I
+
+
+.method static constructor <clinit>()V
+<span class="">	.locals 3</span>
+
+<span class="">	new-instance v0, Lokhttp3/CacheControl$Builder;</span>
+<span class="">	invoke-direct {v0}, Lokhttp3/CacheControl$Builder;-><init>()V</span>
+<span class="">	invoke-virtual {v0}, Lokhttp3/CacheControl$Builder;->noCache()Lokhttp3/CacheControl$Builder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Lokhttp3/CacheControl$Builder;->build()Lokhttp3/CacheControl;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/CacheControl;->FORCE_NETWORK:Lokhttp3/CacheControl;</span>
+<span class="">	new-instance v0, Lokhttp3/CacheControl$Builder;</span>
+<span class="">	invoke-direct {v0}, Lokhttp3/CacheControl$Builder;-><init>()V</span>
+<span class="">	invoke-virtual {v0}, Lokhttp3/CacheControl$Builder;->onlyIfCached()Lokhttp3/CacheControl$Builder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sget-object v1, Ljava/util/concurrent/TimeUnit;->SECONDS:Ljava/util/concurrent/TimeUnit;</span>
+<span class="">	const v2, 0x7fffffff</span>
+<span class="">	invoke-virtual {v0, v2, v1}, Lokhttp3/CacheControl$Builder;->maxStale(ILjava/util/concurrent/TimeUnit;)Lokhttp3/CacheControl$Builder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Lokhttp3/CacheControl$Builder;->build()Lokhttp3/CacheControl;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/CacheControl;->FORCE_CACHE:Lokhttp3/CacheControl;</span>
+.end method
+
+.method constructor <init>(Lokhttp3/CacheControl$Builder;)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	iget-boolean v0, p1, Lokhttp3/CacheControl$Builder;->noCache:Z</span>
+<span class="">	iput-boolean v0, p0, Lokhttp3/CacheControl;->noCache:Z</span>
+<span class="">	iget-boolean v0, p1, Lokhttp3/CacheControl$Builder;->noStore:Z</span>
+<span class="">	iput-boolean v0, p0, Lokhttp3/CacheControl;->noStore:Z</span>
+<span class="">	iget v0, p1, Lokhttp3/CacheControl$Builder;->maxAgeSeconds:I</span>
+<span class="">	iput v0, p0, Lokhttp3/CacheControl;->maxAgeSeconds:I</span>
+<span class="">	const/4 v0, -0x1</span>
+<span class="">	iput v0, p0, Lokhttp3/CacheControl;->sMaxAgeSeconds:I</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-boolean v0, p0, Lokhttp3/CacheControl;->isPrivate:Z</span>
+<span class="">	iput-boolean v0, p0, Lokhttp3/CacheControl;->isPublic:Z</span>
+<span class="">	iput-boolean v0, p0, Lokhttp3/CacheControl;->mustRevalidate:Z</span>
+<span class="">	iget v0, p1, Lokhttp3/CacheControl$Builder;->maxStaleSeconds:I</span>
+<span class="">	iput v0, p0, Lokhttp3/CacheControl;->maxStaleSeconds:I</span>
+<span class="">	iget v0, p1, Lokhttp3/CacheControl$Builder;->minFreshSeconds:I</span>
+<span class="">	iput v0, p0, Lokhttp3/CacheControl;->minFreshSeconds:I</span>
+<span class="">	iget-boolean v0, p1, Lokhttp3/CacheControl$Builder;->onlyIfCached:Z</span>
+<span class="">	iput-boolean v0, p0, Lokhttp3/CacheControl;->onlyIfCached:Z</span>
+<span class="">	iget-boolean v0, p1, Lokhttp3/CacheControl$Builder;->noTransform:Z</span>
+<span class="">	iput-boolean v0, p0, Lokhttp3/CacheControl;->noTransform:Z</span>
+<span class="">	iget-boolean p1, p1, Lokhttp3/CacheControl$Builder;->immutable:Z</span>
+<span class="">	iput-boolean p1, p0, Lokhttp3/CacheControl;->immutable:Z</span>
+.end method
+
+.method private constructor <init>(ZZIIZZZIIZZZLjava/lang/String;)V
+<span class="">	.locals 0</span>
+<span class="">	.param p13    # Ljava/lang/String;</span>
+<span class="">	.annotation runtime Ljavax/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	iput-boolean p1, p0, Lokhttp3/CacheControl;->noCache:Z</span>
+<span class="">	iput-boolean p2, p0, Lokhttp3/CacheControl;->noStore:Z</span>
+<span class="">	iput p3, p0, Lokhttp3/CacheControl;->maxAgeSeconds:I</span>
+<span class="">	iput p4, p0, Lokhttp3/CacheControl;->sMaxAgeSeconds:I</span>
+<span class="">	iput-boolean p5, p0, Lokhttp3/CacheControl;->isPrivate:Z</span>
+<span class="">	iput-boolean p6, p0, Lokhttp3/CacheControl;->isPublic:Z</span>
+<span class="">	iput-boolean p7, p0, Lokhttp3/CacheControl;->mustRevalidate:Z</span>
+<span class="">	iput p8, p0, Lokhttp3/CacheControl;->maxStaleSeconds:I</span>
+<span class="">	iput p9, p0, Lokhttp3/CacheControl;->minFreshSeconds:I</span>
+<span class="">	iput-boolean p10, p0, Lokhttp3/CacheControl;->onlyIfCached:Z</span>
+<span class="">	iput-boolean p11, p0, Lokhttp3/CacheControl;->noTransform:Z</span>
+<span class="">	iput-boolean p12, p0, Lokhttp3/CacheControl;->immutable:Z</span>
+<span class="">	iput-object p13, p0, Lokhttp3/CacheControl;->headerValue:Ljava/lang/String;</span>
+.end method
+
+.method private headerValue()Ljava/lang/String;
+<span class="">	.locals 3</span>
+
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	iget-boolean v1, p0, Lokhttp3/CacheControl;->noCache:Z</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	const-string v1, "no-cache, "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-boolean v1, p0, Lokhttp3/CacheControl;->noStore:Z</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	const-string v1, "no-store, "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_1</span>
+<span class="">	iget v1, p0, Lokhttp3/CacheControl;->maxAgeSeconds:I</span>
+<span class="">	const/4 v2, -0x1</span>
+<span class="">	if-eq v1, v2, :cond_2</span>
+<span class="">	const-string v1, "max-age="</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget v1, p0, Lokhttp3/CacheControl;->maxAgeSeconds:I</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, ", "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_2</span>
+<span class="">	iget v1, p0, Lokhttp3/CacheControl;->sMaxAgeSeconds:I</span>
+<span class="">	if-eq v1, v2, :cond_3</span>
+<span class="">	const-string v1, "s-maxage="</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget v1, p0, Lokhttp3/CacheControl;->sMaxAgeSeconds:I</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, ", "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_3</span>
+<span class="">	iget-boolean v1, p0, Lokhttp3/CacheControl;->isPrivate:Z</span>
+<span class="">	if-eqz v1, :cond_4</span>
+<span class="">	const-string v1, "private, "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_4</span>
+<span class="">	iget-boolean v1, p0, Lokhttp3/CacheControl;->isPublic:Z</span>
+<span class="">	if-eqz v1, :cond_5</span>
+<span class="">	const-string v1, "public, "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_5</span>
+<span class="">	iget-boolean v1, p0, Lokhttp3/CacheControl;->mustRevalidate:Z</span>
+<span class="">	if-eqz v1, :cond_6</span>
+<span class="">	const-string v1, "must-revalidate, "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_6</span>
+<span class="">	iget v1, p0, Lokhttp3/CacheControl;->maxStaleSeconds:I</span>
+<span class="">	if-eq v1, v2, :cond_7</span>
+<span class="">	const-string v1, "max-stale="</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget v1, p0, Lokhttp3/CacheControl;->maxStaleSeconds:I</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, ", "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_7</span>
+<span class="">	iget v1, p0, Lokhttp3/CacheControl;->minFreshSeconds:I</span>
+<span class="">	if-eq v1, v2, :cond_8</span>
+<span class="">	const-string v1, "min-fresh="</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget v1, p0, Lokhttp3/CacheControl;->minFreshSeconds:I</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, ", "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_8</span>
+<span class="">	iget-boolean v1, p0, Lokhttp3/CacheControl;->onlyIfCached:Z</span>
+<span class="">	if-eqz v1, :cond_9</span>
+<span class="">	const-string v1, "only-if-cached, "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_9</span>
+<span class="">	iget-boolean v1, p0, Lokhttp3/CacheControl;->noTransform:Z</span>
+<span class="">	if-eqz v1, :cond_a</span>
+<span class="">	const-string v1, "no-transform, "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_a</span>
+<span class="">	iget-boolean v1, p0, Lokhttp3/CacheControl;->immutable:Z</span>
+<span class="">	if-eqz v1, :cond_b</span>
+<span class="">	const-string v1, "immutable, "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_b</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->length()I</span>
+<span class="">	move-result v1</span>
+<span class="">	if-nez v1, :cond_c</span>
+<span class="">	const-string v0, ""</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->length()I</span>
+<span class="">	:cond_c</span>
+<span class="">	move-result v1</span>
+<span class="">	add-int/lit8 v1, v1, -0x2</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->length()I</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->delete(II)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public static parse(Lokhttp3/Headers;)Lokhttp3/CacheControl;
+<span class="">	.locals 24</span>
+
+<span class="">	move-object/from16 v0, p0</span>
+<span class="">	invoke-virtual/range {p0 .. p0}, Lokhttp3/Headers;->size()I</span>
+<span class="">	move-result v1</span>
+<span class="">	const/4 v6, 0x0</span>
+<span class="">	const/4 v7, 0x1</span>
+<span class="">	const/4 v8, 0x0</span>
+<span class="">	const/4 v10, 0x0</span>
+<span class="">	const/4 v11, 0x0</span>
+<span class="">	const/4 v12, -0x1</span>
+<span class="">	const/4 v13, -0x1</span>
+<span class="">	const/4 v14, 0x0</span>
+<span class="">	const/4 v15, 0x0</span>
+<span class="">	const/16 v16, 0x0</span>
+<span class="">	const/16 v17, -0x1</span>
+<span class="">	const/16 v18, -0x1</span>
+<span class="">	const/16 v19, 0x0</span>
+<span class="">	const/16 v20, 0x0</span>
+<span class="">	const/16 v21, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v6, v1, :cond_12</span>
+<span class="">	invoke-virtual {v0, v6}, Lokhttp3/Headers;->name(I)Ljava/lang/String;</span>
+<span class="">	move-result-object v9</span>
+<span class="">	invoke-virtual {v0, v6}, Lokhttp3/Headers;->value(I)Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	const-string v4, "Cache-Control"</span>
+<span class="">	invoke-virtual {v9, v4}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v4</span>
+<span class="">	if-eqz v4, :cond_1</span>
+<span class="">	if-eqz v8, :cond_0</span>
+<span class="">	:goto_1</span>
+<span class="">	const/4 v7, 0x0</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_0</span>
+<span class="">	move-object v8, v2</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_1</span>
+<span class="">	const-string v4, "Pragma"</span>
+<span class="">	invoke-virtual {v9, v4}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v4</span>
+<span class="">	if-eqz v4, :cond_11</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:goto_2</span>
+<span class="">	const/4 v4, 0x0</span>
+<span class="">	:goto_3</span>
+<span class="">	invoke-virtual {v2}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v9</span>
+<span class="">	if-ge v4, v9, :cond_11</span>
+<span class="">	const-string v9, "=,;"</span>
+<span class="">	invoke-static {v2, v4, v9}, Lokhttp3/internal/http/HttpHeaders;->skipUntil(Ljava/lang/String;ILjava/lang/String;)I</span>
+<span class="">	move-result v9</span>
+<span class="">	invoke-virtual {v2, v4, v9}, Ljava/lang/String;->substring(II)Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v4}, Ljava/lang/String;->trim()Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v2}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eq v9, v3, :cond_4</span>
+<span class="">	invoke-virtual {v2, v9}, Ljava/lang/String;->charAt(I)C</span>
+<span class="">	move-result v3</span>
+<span class="">	const/16 v5, 0x2c</span>
+<span class="">	if-eq v3, v5, :cond_4</span>
+<span class="">	invoke-virtual {v2, v9}, Ljava/lang/String;->charAt(I)C</span>
+<span class="">	move-result v3</span>
+<span class="">	const/16 v5, 0x3b</span>
+<span class="">	if-ne v3, v5, :cond_2</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:cond_2</span>
+<span class="">	add-int/lit8 v9, v9, 0x1</span>
+<span class="">	invoke-static {v2, v9}, Lokhttp3/internal/http/HttpHeaders;->skipWhitespace(Ljava/lang/String;I)I</span>
+<span class="">	move-result v3</span>
+<span class="">	invoke-virtual {v2}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v5</span>
+<span class="">	if-ge v3, v5, :cond_3</span>
+<span class="">	invoke-virtual {v2, v3}, Ljava/lang/String;->charAt(I)C</span>
+<span class="">	move-result v5</span>
+<span class="">	const/16 v9, 0x22</span>
+<span class="">	if-ne v5, v9, :cond_3</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	const-string v5, "\""</span>
+<span class="">	invoke-static {v2, v3, v5}, Lokhttp3/internal/http/HttpHeaders;->skipUntil(Ljava/lang/String;ILjava/lang/String;)I</span>
+<span class="">	move-result v5</span>
+<span class="">	invoke-virtual {v2, v3, v5}, Ljava/lang/String;->substring(II)Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	const/16 v22, 0x1</span>
+<span class="">	add-int/lit8 v5, v5, 0x1</span>
+<span class="">	goto :goto_5</span>
+<span class="">	:cond_3</span>
+<span class="">	const/16 v22, 0x1</span>
+<span class="">	const-string v5, ",;"</span>
+<span class="">	invoke-static {v2, v3, v5}, Lokhttp3/internal/http/HttpHeaders;->skipUntil(Ljava/lang/String;ILjava/lang/String;)I</span>
+<span class="">	move-result v5</span>
+<span class="">	invoke-virtual {v2, v3, v5}, Ljava/lang/String;->substring(II)Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {v3}, Ljava/lang/String;->trim()Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	goto :goto_5</span>
+<span class="">	:goto_4</span>
+<span class="">	:cond_4</span>
+<span class="">	const/16 v22, 0x1</span>
+<span class="">	add-int/lit8 v9, v9, 0x1</span>
+<span class="">	move v5, v9</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	:goto_5</span>
+<span class="">	const-string v9, "no-cache"</span>
+<span class="">	invoke-virtual {v9, v4}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v9</span>
+<span class="">	if-eqz v9, :cond_5</span>
+<span class="">	move/from16 v10, v22</span>
+<span class="">	:goto_6</span>
+<span class="">	const/4 v9, -0x1</span>
+<span class="">	goto/16 :goto_7</span>
+<span class="">	:cond_5</span>
+<span class="">	const-string v9, "no-store"</span>
+<span class="">	invoke-virtual {v9, v4}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v9</span>
+<span class="">	if-eqz v9, :cond_6</span>
+<span class="">	move/from16 v11, v22</span>
+<span class="">	goto :goto_6</span>
+<span class="">	:cond_6</span>
+<span class="">	const-string v9, "max-age"</span>
+<span class="">	invoke-virtual {v9, v4}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v9</span>
+<span class="">	if-eqz v9, :cond_7</span>
+<span class="">	const/4 v9, -0x1</span>
+<span class="">	invoke-static {v3, v9}, Lokhttp3/internal/http/HttpHeaders;->parseSeconds(Ljava/lang/String;I)I</span>
+<span class="">	move-result v3</span>
+<span class="">	move v12, v3</span>
+<span class="">	goto/16 :goto_7</span>
+<span class="">	:cond_7</span>
+<span class="">	const-string v9, "s-maxage"</span>
+<span class="">	invoke-virtual {v9, v4}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v9</span>
+<span class="">	if-eqz v9, :cond_8</span>
+<span class="">	const/4 v9, -0x1</span>
+<span class="">	invoke-static {v3, v9}, Lokhttp3/internal/http/HttpHeaders;->parseSeconds(Ljava/lang/String;I)I</span>
+<span class="">	move-result v3</span>
+<span class="">	move v13, v3</span>
+<span class="">	goto/16 :goto_7</span>
+<span class="">	:cond_8</span>
+<span class="">	const-string v9, "private"</span>
+<span class="">	invoke-virtual {v9, v4}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v9</span>
+<span class="">	if-eqz v9, :cond_9</span>
+<span class="">	move/from16 v14, v22</span>
+<span class="">	goto :goto_6</span>
+<span class="">	:cond_9</span>
+<span class="">	const-string v9, "public"</span>
+<span class="">	invoke-virtual {v9, v4}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v9</span>
+<span class="">	if-eqz v9, :cond_a</span>
+<span class="">	move/from16 v15, v22</span>
+<span class="">	goto :goto_6</span>
+<span class="">	:cond_a</span>
+<span class="">	const-string v9, "must-revalidate"</span>
+<span class="">	invoke-virtual {v9, v4}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v9</span>
+<span class="">	if-eqz v9, :cond_b</span>
+<span class="">	move/from16 v16, v22</span>
+<span class="">	goto :goto_6</span>
+<span class="">	:cond_b</span>
+<span class="">	const-string v9, "max-stale"</span>
+<span class="">	invoke-virtual {v9, v4}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v9</span>
+<span class="">	if-eqz v9, :cond_c</span>
+<span class="">	const v4, 0x7fffffff</span>
+<span class="">	invoke-static {v3, v4}, Lokhttp3/internal/http/HttpHeaders;->parseSeconds(Ljava/lang/String;I)I</span>
+<span class="">	move-result v3</span>
+<span class="">	move/from16 v17, v3</span>
+<span class="">	goto :goto_6</span>
+<span class="">	:cond_c</span>
+<span class="">	const-string v9, "min-fresh"</span>
+<span class="">	invoke-virtual {v9, v4}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v9</span>
+<span class="">	if-eqz v9, :cond_d</span>
+<span class="">	const/4 v9, -0x1</span>
+<span class="">	invoke-static {v3, v9}, Lokhttp3/internal/http/HttpHeaders;->parseSeconds(Ljava/lang/String;I)I</span>
+<span class="">	move-result v3</span>
+<span class="">	move/from16 v18, v3</span>
+<span class="">	goto :goto_7</span>
+<span class="">	:cond_d</span>
+<span class="">	const/4 v9, -0x1</span>
+<span class="">	const-string v3, "only-if-cached"</span>
+<span class="">	invoke-virtual {v3, v4}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_e</span>
+<span class="">	move/from16 v19, v22</span>
+<span class="">	goto :goto_7</span>
+<span class="">	:cond_e</span>
+<span class="">	const-string v3, "no-transform"</span>
+<span class="">	invoke-virtual {v3, v4}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_f</span>
+<span class="">	move/from16 v20, v22</span>
+<span class="">	goto :goto_7</span>
+<span class="">	:cond_f</span>
+<span class="">	const-string v3, "immutable"</span>
+<span class="">	invoke-virtual {v3, v4}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_10</span>
+<span class="">	move/from16 v21, v22</span>
+<span class="">	:cond_10</span>
+<span class="">	:goto_7</span>
+<span class="">	move v4, v5</span>
+<span class="">	goto/16 :goto_3</span>
+<span class="">	:cond_11</span>
+<span class="">	const/4 v9, -0x1</span>
+<span class="">	const/16 v22, 0x1</span>
+<span class="">	add-int/lit8 v6, v6, 0x1</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	:cond_12</span>
+<span class="">	if-nez v7, :cond_13</span>
+<span class="">	const/16 v22, 0x0</span>
+<span class="">	goto :goto_8</span>
+<span class="">	:cond_13</span>
+<span class="">	move-object/from16 v22, v8</span>
+<span class="">	:goto_8</span>
+<span class="">	new-instance v0, Lokhttp3/CacheControl;</span>
+<span class="">	move-object v9, v0</span>
+<span class="">	invoke-direct/range {v9 .. v22}, Lokhttp3/CacheControl;-><init>(ZZIIZZZIIZZZLjava/lang/String;)V</span>
+.end method
+
+.method public immutable()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Lokhttp3/CacheControl;->immutable:Z</span>
+.end method
+
+.method public isPrivate()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Lokhttp3/CacheControl;->isPrivate:Z</span>
+.end method
+
+.method public isPublic()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Lokhttp3/CacheControl;->isPublic:Z</span>
+.end method
+
+.method public maxAgeSeconds()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lokhttp3/CacheControl;->maxAgeSeconds:I</span>
+.end method
+
+.method public maxStaleSeconds()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lokhttp3/CacheControl;->maxStaleSeconds:I</span>
+.end method
+
+.method public minFreshSeconds()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lokhttp3/CacheControl;->minFreshSeconds:I</span>
+.end method
+
+.method public mustRevalidate()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Lokhttp3/CacheControl;->mustRevalidate:Z</span>
+.end method
+
+.method public noCache()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Lokhttp3/CacheControl;->noCache:Z</span>
+.end method
+
+.method public noStore()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Lokhttp3/CacheControl;->noStore:Z</span>
+.end method
+
+.method public noTransform()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Lokhttp3/CacheControl;->noTransform:Z</span>
+.end method
+
+.method public onlyIfCached()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Lokhttp3/CacheControl;->onlyIfCached:Z</span>
+.end method
+
+.method public sMaxAgeSeconds()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lokhttp3/CacheControl;->sMaxAgeSeconds:I</span>
+.end method
+
+.method public toString()Ljava/lang/String;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lokhttp3/CacheControl;->headerValue:Ljava/lang/String;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-direct {p0}, Lokhttp3/CacheControl;->headerValue()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Lokhttp3/CacheControl;->headerValue:Ljava/lang/String;</span>
+<span class="">	:goto_0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../.resources/report.js"></script>
+</body>
+</html>

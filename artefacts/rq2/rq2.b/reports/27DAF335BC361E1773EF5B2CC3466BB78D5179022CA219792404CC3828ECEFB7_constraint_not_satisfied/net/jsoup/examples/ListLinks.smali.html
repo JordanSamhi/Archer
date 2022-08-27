@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">net.jsoup.examples</a></li>
+        <li><i class="ico ico-class"></i> ListLinks.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Lnet/jsoup/examples/ListLinks;
+.super Ljava/lang/Object;
+.source "ListLinks.java"
+
+
+
+
+.method public constructor <init>()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+.end method
+
+.method public static main([Ljava/lang/String;)V
+<span class="">	.locals 10</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	array-length v2, p0</span>
+<span class="">	if-ne v2, v1, :cond_0</span>
+<span class="">	move v2, v1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	move v2, v0</span>
+<span class="">	:goto_0</span>
+<span class="">	const-string v3, "usage: supply url to fetch"</span>
+<span class="">	invoke-static {v2, v3}, Lnet/jsoup/helper/Validate;->isTrue(ZLjava/lang/String;)V</span>
+<span class="">	aget-object p0, p0, v0</span>
+<span class="">	const-string v2, "Fetching %s..."</span>
+<span class="">	new-array v3, v1, [Ljava/lang/Object;</span>
+<span class="">	aput-object p0, v3, v0</span>
+<span class="">	invoke-static {v2, v3}, Lnet/jsoup/examples/ListLinks;->print(Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-static {p0}, Lnet/jsoup/Jsoup;->connect(Ljava/lang/String;)Lnet/jsoup/Connection;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection;->get()Lnet/jsoup/nodes/Document;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const-string v2, "a[href]"</span>
+<span class="">	invoke-virtual {p0, v2}, Lnet/jsoup/nodes/Document;->select(Ljava/lang/String;)Lnet/jsoup/select/Elements;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	const-string v3, "[src]"</span>
+<span class="">	invoke-virtual {p0, v3}, Lnet/jsoup/nodes/Document;->select(Ljava/lang/String;)Lnet/jsoup/select/Elements;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	const-string v4, "link[href]"</span>
+<span class="">	invoke-virtual {p0, v4}, Lnet/jsoup/nodes/Document;->select(Ljava/lang/String;)Lnet/jsoup/select/Elements;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const-string v4, "\nMedia: (%d)"</span>
+<span class="">	new-array v5, v1, [Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {v3}, Lnet/jsoup/select/Elements;->size()I</span>
+<span class="">	move-result v6</span>
+<span class="">	invoke-static {v6}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object v6</span>
+<span class="">	aput-object v6, v5, v0</span>
+<span class="">	invoke-static {v4, v5}, Lnet/jsoup/examples/ListLinks;->print(Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-virtual {v3}, Lnet/jsoup/select/Elements;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	:goto_1</span>
+<span class="">	invoke-interface {v3}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v4</span>
+<span class="">	const/4 v5, 0x3</span>
+<span class="">	const/4 v6, 0x2</span>
+<span class="">	if-eqz v4, :cond_2</span>
+<span class="">	invoke-interface {v3}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	check-cast v4, Lnet/jsoup/nodes/Element;</span>
+<span class="">	invoke-virtual {v4}, Lnet/jsoup/nodes/Element;->tagName()Ljava/lang/String;</span>
+<span class="">	move-result-object v7</span>
+<span class="">	const-string v8, "img"</span>
+<span class="">	invoke-virtual {v7, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v7</span>
+<span class="">	if-eqz v7, :cond_1</span>
+<span class="">	const-string v7, " * %s: <%s> %sx%s (%s)"</span>
+<span class="">	const/4 v8, 0x5</span>
+<span class="">	new-array v8, v8, [Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {v4}, Lnet/jsoup/nodes/Element;->tagName()Ljava/lang/String;</span>
+<span class="">	move-result-object v9</span>
+<span class="">	aput-object v9, v8, v0</span>
+<span class="">	const-string v9, "abs:src"</span>
+<span class="">	invoke-virtual {v4, v9}, Lnet/jsoup/nodes/Element;->attr(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v9</span>
+<span class="">	aput-object v9, v8, v1</span>
+<span class="">	const-string v9, "width"</span>
+<span class="">	invoke-virtual {v4, v9}, Lnet/jsoup/nodes/Element;->attr(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v9</span>
+<span class="">	aput-object v9, v8, v6</span>
+<span class="">	const-string v6, "height"</span>
+<span class="">	invoke-virtual {v4, v6}, Lnet/jsoup/nodes/Element;->attr(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v6</span>
+<span class="">	aput-object v6, v8, v5</span>
+<span class="">	const/4 v5, 0x4</span>
+<span class="">	const-string v6, "alt"</span>
+<span class="">	invoke-virtual {v4, v6}, Lnet/jsoup/nodes/Element;->attr(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	const/16 v6, 0x14</span>
+<span class="">	invoke-static {v4, v6}, Lnet/jsoup/examples/ListLinks;->trim(Ljava/lang/String;I)Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	aput-object v4, v8, v5</span>
+<span class="">	invoke-static {v7, v8}, Lnet/jsoup/examples/ListLinks;->print(Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	const-string v5, " * %s: <%s>"</span>
+<span class="">	new-array v6, v6, [Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {v4}, Lnet/jsoup/nodes/Element;->tagName()Ljava/lang/String;</span>
+<span class="">	move-result-object v7</span>
+<span class="">	aput-object v7, v6, v0</span>
+<span class="">	const-string v7, "abs:src"</span>
+<span class="">	invoke-virtual {v4, v7}, Lnet/jsoup/nodes/Element;->attr(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	aput-object v4, v6, v1</span>
+<span class="">	invoke-static {v5, v6}, Lnet/jsoup/examples/ListLinks;->print(Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_2</span>
+<span class="">	const-string v3, "\nImports: (%d)"</span>
+<span class="">	new-array v4, v1, [Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {p0}, Lnet/jsoup/select/Elements;->size()I</span>
+<span class="">	move-result v7</span>
+<span class="">	invoke-static {v7}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object v7</span>
+<span class="">	aput-object v7, v4, v0</span>
+<span class="">	invoke-static {v3, v4}, Lnet/jsoup/examples/ListLinks;->print(Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-virtual {p0}, Lnet/jsoup/select/Elements;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	:goto_2</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_3</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	check-cast v3, Lnet/jsoup/nodes/Element;</span>
+<span class="">	const-string v4, " * %s <%s> (%s)"</span>
+<span class="">	new-array v7, v5, [Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {v3}, Lnet/jsoup/nodes/Element;->tagName()Ljava/lang/String;</span>
+<span class="">	move-result-object v8</span>
+<span class="">	aput-object v8, v7, v0</span>
+<span class="">	const-string v8, "abs:href"</span>
+<span class="">	invoke-virtual {v3, v8}, Lnet/jsoup/nodes/Element;->attr(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v8</span>
+<span class="">	aput-object v8, v7, v1</span>
+<span class="">	const-string v8, "rel"</span>
+<span class="">	invoke-virtual {v3, v8}, Lnet/jsoup/nodes/Element;->attr(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	aput-object v3, v7, v6</span>
+<span class="">	invoke-static {v4, v7}, Lnet/jsoup/examples/ListLinks;->print(Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_3</span>
+<span class="">	const-string p0, "\nLinks: (%d)"</span>
+<span class="">	new-array v3, v1, [Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {v2}, Lnet/jsoup/select/Elements;->size()I</span>
+<span class="">	move-result v4</span>
+<span class="">	invoke-static {v4}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	aput-object v4, v3, v0</span>
+<span class="">	invoke-static {p0, v3}, Lnet/jsoup/examples/ListLinks;->print(Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-virtual {v2}, Lnet/jsoup/select/Elements;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	:goto_3</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_4</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Lnet/jsoup/nodes/Element;</span>
+<span class="">	const-string v3, " * a: <%s>  (%s)"</span>
+<span class="">	new-array v4, v6, [Ljava/lang/Object;</span>
+<span class="">	const-string v5, "abs:href"</span>
+<span class="">	invoke-virtual {v2, v5}, Lnet/jsoup/nodes/Element;->attr(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	aput-object v5, v4, v0</span>
+<span class="">	invoke-virtual {v2}, Lnet/jsoup/nodes/Element;->text()Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	const/16 v5, 0x23</span>
+<span class="">	invoke-static {v2, v5}, Lnet/jsoup/examples/ListLinks;->trim(Ljava/lang/String;I)Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	aput-object v2, v4, v1</span>
+<span class="">	invoke-static {v3, v4}, Lnet/jsoup/examples/ListLinks;->print(Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:cond_4</span>
+.end method
+
+.method private static varargs print(Ljava/lang/String;[Ljava/lang/Object;)V
+<span class="">	.locals 1</span>
+
+<span class="">	sget-object v0, Ljava/lang/System;->out:Ljava/io/PrintStream;</span>
+<span class="">	invoke-static {p0, p1}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {v0, p0}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V</span>
+.end method
+
+.method private static trim(Ljava/lang/String;I)Ljava/lang/String;
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-virtual {p0}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-le v0, p1, :cond_0</span>
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	add-int/lit8 p1, p1, -0x1</span>
+<span class="">	invoke-virtual {p0, v1, p1}, Ljava/lang/String;->substring(II)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p0, "."</span>
+<span class="">	invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	:cond_0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

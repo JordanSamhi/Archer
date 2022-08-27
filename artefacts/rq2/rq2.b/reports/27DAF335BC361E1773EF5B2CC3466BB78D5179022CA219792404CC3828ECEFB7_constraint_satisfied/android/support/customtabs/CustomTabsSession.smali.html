@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">android.support.customtabs</a></li>
+        <li><i class="ico ico-class"></i> CustomTabsSession.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public final Landroid/support/customtabs/CustomTabsSession;
+.super Ljava/lang/Object;
+.source "CustomTabsSession.java"
+
+
+.field private static final TAG:Ljava/lang/String; = "CustomTabsSession"
+.field private final mCallback:Landroid/support/customtabs/ICustomTabsCallback;
+.field private final mComponentName:Landroid/content/ComponentName;
+.field private final mLock:Ljava/lang/Object;
+.field private final mService:Landroid/support/customtabs/ICustomTabsService;
+
+
+.method constructor <init>(Landroid/support/customtabs/ICustomTabsService;Landroid/support/customtabs/ICustomTabsCallback;Landroid/content/ComponentName;)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	new-instance v0, Ljava/lang/Object;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroid/support/customtabs/CustomTabsSession;->mLock:Ljava/lang/Object;</span>
+<span class="">	iput-object p1, p0, Landroid/support/customtabs/CustomTabsSession;->mService:Landroid/support/customtabs/ICustomTabsService;</span>
+<span class="">	iput-object p2, p0, Landroid/support/customtabs/CustomTabsSession;->mCallback:Landroid/support/customtabs/ICustomTabsCallback;</span>
+<span class="">	iput-object p3, p0, Landroid/support/customtabs/CustomTabsSession;->mComponentName:Landroid/content/ComponentName;</span>
+.end method
+
+.method  getBinder()Landroid/os/IBinder;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/customtabs/CustomTabsSession;->mCallback:Landroid/support/customtabs/ICustomTabsCallback;</span>
+<span class="">	invoke-interface {v0}, Landroid/support/customtabs/ICustomTabsCallback;->asBinder()Landroid/os/IBinder;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method  getComponentName()Landroid/content/ComponentName;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/customtabs/CustomTabsSession;->mComponentName:Landroid/content/ComponentName;</span>
+.end method
+
+.method public mayLaunchUrl(Landroid/net/Uri;Landroid/os/Bundle;Ljava/util/List;)Z
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Landroid/net/Uri;",</span>
+<span class="">	"Landroid/os/Bundle;",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Landroid/os/Bundle;",</span>
+<span class="">	">;)Z"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	:try_start_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/customtabs/CustomTabsSession;->mService:Landroid/support/customtabs/ICustomTabsService;</span>
+<span class="">	iget-object v1, p0, Landroid/support/customtabs/CustomTabsSession;->mCallback:Landroid/support/customtabs/ICustomTabsCallback;</span>
+<span class="">	invoke-interface {v0, v1, p1, p2, p3}, Landroid/support/customtabs/ICustomTabsService;->mayLaunchUrl(Landroid/support/customtabs/ICustomTabsCallback;Landroid/net/Uri;Landroid/os/Bundle;Ljava/util/List;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:catch_0</span>
+.end method
+
+.method public postMessage(Ljava/lang/String;Landroid/os/Bundle;)I
+<span class="">	.locals 3</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/customtabs/CustomTabsSession;->mLock:Ljava/lang/Object;</span>
+<span class="">	monitor-enter v0</span>
+<span class="">	:try_start_0</span>
+<span class="">	iget-object v1, p0, Landroid/support/customtabs/CustomTabsSession;->mService:Landroid/support/customtabs/ICustomTabsService;</span>
+<span class="">	iget-object v2, p0, Landroid/support/customtabs/CustomTabsSession;->mCallback:Landroid/support/customtabs/ICustomTabsCallback;</span>
+<span class="">	invoke-interface {v1, v2, p1, p2}, Landroid/support/customtabs/ICustomTabsService;->postMessage(Landroid/support/customtabs/ICustomTabsCallback;Ljava/lang/String;Landroid/os/Bundle;)I</span>
+<span class="">	move-result p1</span>
+<span class="">	:try_start_1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	monitor-exit v0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	const/4 p1, -0x2</span>
+<span class="">	:catch_0</span>
+<span class="">	monitor-exit v0</span>
+<span class="">	monitor-exit v0</span>
+<span class="">	throw p1</span>
+<span class="">	:goto_0</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_0</span>
+.end method
+
+.method public requestPostMessageChannel(Landroid/net/Uri;)Z
+<span class="">	.locals 2</span>
+
+<span class="">	:try_start_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/customtabs/CustomTabsSession;->mService:Landroid/support/customtabs/ICustomTabsService;</span>
+<span class="">	iget-object v1, p0, Landroid/support/customtabs/CustomTabsSession;->mCallback:Landroid/support/customtabs/ICustomTabsCallback;</span>
+<span class="">	invoke-interface {v0, v1, p1}, Landroid/support/customtabs/ICustomTabsService;->requestPostMessageChannel(Landroid/support/customtabs/ICustomTabsCallback;Landroid/net/Uri;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:catch_0</span>
+.end method
+
+.method public setActionButton(Landroid/graphics/Bitmap;Ljava/lang/String;)Z
+<span class="">	.locals 2</span>
+<span class="">	.param p1    # Landroid/graphics/Bitmap;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.param p2    # Ljava/lang/String;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	new-instance v0, Landroid/os/Bundle;</span>
+<span class="">	invoke-direct {v0}, Landroid/os/Bundle;-><init>()V</span>
+<span class="">	const-string v1, "android.support.customtabs.customaction.ICON"</span>
+<span class="">	invoke-virtual {v0, v1, p1}, Landroid/os/Bundle;->putParcelable(Ljava/lang/String;Landroid/os/Parcelable;)V</span>
+<span class="">	const-string p1, "android.support.customtabs.customaction.DESCRIPTION"</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V</span>
+<span class="">	new-instance p1, Landroid/os/Bundle;</span>
+<span class="">	invoke-direct {p1}, Landroid/os/Bundle;-><init>()V</span>
+<span class="">	const-string p2, "android.support.customtabs.extra.ACTION_BUTTON_BUNDLE"</span>
+<span class="">	invoke-virtual {p1, p2, v0}, Landroid/os/Bundle;->putBundle(Ljava/lang/String;Landroid/os/Bundle;)V</span>
+<span class="">	:try_start_0</span>
+<span class="">	iget-object p2, p0, Landroid/support/customtabs/CustomTabsSession;->mService:Landroid/support/customtabs/ICustomTabsService;</span>
+<span class="">	iget-object v0, p0, Landroid/support/customtabs/CustomTabsSession;->mCallback:Landroid/support/customtabs/ICustomTabsCallback;</span>
+<span class="">	invoke-interface {p2, v0, p1}, Landroid/support/customtabs/ICustomTabsService;->updateVisuals(Landroid/support/customtabs/ICustomTabsCallback;Landroid/os/Bundle;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:catch_0</span>
+.end method
+
+.method public setSecondaryToolbarViews(Landroid/widget/RemoteViews;[ILandroid/app/PendingIntent;)Z
+<span class="">	.locals 2</span>
+<span class="">	.param p1    # Landroid/widget/RemoteViews;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.param p2    # [I</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.param p3    # Landroid/app/PendingIntent;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	new-instance v0, Landroid/os/Bundle;</span>
+<span class="">	invoke-direct {v0}, Landroid/os/Bundle;-><init>()V</span>
+<span class="">	const-string v1, "android.support.customtabs.extra.EXTRA_REMOTEVIEWS"</span>
+<span class="">	invoke-virtual {v0, v1, p1}, Landroid/os/Bundle;->putParcelable(Ljava/lang/String;Landroid/os/Parcelable;)V</span>
+<span class="">	const-string p1, "android.support.customtabs.extra.EXTRA_REMOTEVIEWS_VIEW_IDS"</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroid/os/Bundle;->putIntArray(Ljava/lang/String;[I)V</span>
+<span class="">	const-string p1, "android.support.customtabs.extra.EXTRA_REMOTEVIEWS_PENDINGINTENT"</span>
+<span class="">	invoke-virtual {v0, p1, p3}, Landroid/os/Bundle;->putParcelable(Ljava/lang/String;Landroid/os/Parcelable;)V</span>
+<span class="">	:try_start_0</span>
+<span class="">	iget-object p1, p0, Landroid/support/customtabs/CustomTabsSession;->mService:Landroid/support/customtabs/ICustomTabsService;</span>
+<span class="">	iget-object p2, p0, Landroid/support/customtabs/CustomTabsSession;->mCallback:Landroid/support/customtabs/ICustomTabsCallback;</span>
+<span class="">	invoke-interface {p1, p2, v0}, Landroid/support/customtabs/ICustomTabsService;->updateVisuals(Landroid/support/customtabs/ICustomTabsCallback;Landroid/os/Bundle;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:catch_0</span>
+.end method
+
+.method public setToolbarItem(ILandroid/graphics/Bitmap;Ljava/lang/String;)Z
+<span class="">	.locals 2</span>
+<span class="">	.param p2    # Landroid/graphics/Bitmap;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.param p3    # Ljava/lang/String;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.annotation runtime Ljava/lang/Deprecated;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Landroid/os/Bundle;</span>
+<span class="">	invoke-direct {v0}, Landroid/os/Bundle;-><init>()V</span>
+<span class="">	const-string v1, "android.support.customtabs.customaction.ID"</span>
+<span class="">	invoke-virtual {v0, v1, p1}, Landroid/os/Bundle;->putInt(Ljava/lang/String;I)V</span>
+<span class="">	const-string p1, "android.support.customtabs.customaction.ICON"</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroid/os/Bundle;->putParcelable(Ljava/lang/String;Landroid/os/Parcelable;)V</span>
+<span class="">	const-string p1, "android.support.customtabs.customaction.DESCRIPTION"</span>
+<span class="">	invoke-virtual {v0, p1, p3}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V</span>
+<span class="">	new-instance p1, Landroid/os/Bundle;</span>
+<span class="">	invoke-direct {p1}, Landroid/os/Bundle;-><init>()V</span>
+<span class="">	const-string p2, "android.support.customtabs.extra.ACTION_BUTTON_BUNDLE"</span>
+<span class="">	invoke-virtual {p1, p2, v0}, Landroid/os/Bundle;->putBundle(Ljava/lang/String;Landroid/os/Bundle;)V</span>
+<span class="">	:try_start_0</span>
+<span class="">	iget-object p2, p0, Landroid/support/customtabs/CustomTabsSession;->mService:Landroid/support/customtabs/ICustomTabsService;</span>
+<span class="">	iget-object p3, p0, Landroid/support/customtabs/CustomTabsSession;->mCallback:Landroid/support/customtabs/ICustomTabsCallback;</span>
+<span class="">	invoke-interface {p2, p3, p1}, Landroid/support/customtabs/ICustomTabsService;->updateVisuals(Landroid/support/customtabs/ICustomTabsCallback;Landroid/os/Bundle;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:catch_0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

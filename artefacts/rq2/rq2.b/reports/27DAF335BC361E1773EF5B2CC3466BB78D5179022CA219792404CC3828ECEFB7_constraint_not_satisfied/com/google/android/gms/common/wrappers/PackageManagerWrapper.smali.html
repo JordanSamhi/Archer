@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.gms.common.wrappers</a></li>
+        <li><i class="ico ico-class"></i> PackageManagerWrapper.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;
+.super Ljava/lang/Object;
+
+
+.field private final zzjp:Landroid/content/Context;
+
+
+.method public constructor <init>(Landroid/content/Context;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	iput-object p1, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+.end method
+
+.method public allowApiAccess(Ljava/lang/String;I)Z
+<span class="">	.locals 0</span>
+
+<span class="">	const/4 p1, 0x1</span>
+.end method
+
+.method public checkCallerIsNotInstantApp()V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-virtual {p0}, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->isCallerInstantApp()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	new-instance v0, Ljava/lang/SecurityException;</span>
+<span class="">	const-string v1, "This operation is not supported for instant apps."</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/lang/SecurityException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw v0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public checkCallingOrSelfPermission(Ljava/lang/String;)I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/content/Context;->checkCallingOrSelfPermission(Ljava/lang/String;)I</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public checkCallingOrSelfPermissionAndAppOps(Ljava/lang/String;)I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-static {v0, p1}, Landroid/support/v4/content/PermissionChecker;->checkCallingOrSelfPermission(Landroid/content/Context;Ljava/lang/String;)I</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public checkCallingPermission(Ljava/lang/String;)I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/content/Context;->checkCallingPermission(Ljava/lang/String;)I</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public checkCallingPermission(Ljava/lang/String;Ljava/lang/String;)I
+<span class="">	.locals 0</span>
+<span class="">	.annotation runtime Ljava/lang/Deprecated;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0, p1, p2}, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->checkPermission(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public checkCallingPermissionAndAppOps(Ljava/lang/String;Ljava/lang/String;)I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-static {v0, p1, p2}, Landroid/support/v4/content/PermissionChecker;->checkCallingPermission(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public checkPackage(ILjava/lang/String;)V
+<span class="">	.locals 3</span>
+
+<span class="">	invoke-virtual {p0, p1, p2}, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->uidHasPackageName(ILjava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	new-instance v0, Ljava/lang/SecurityException;</span>
+<span class="">	const/16 v1, 0x27</span>
+<span class="">	invoke-static {p2}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v2}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v2</span>
+<span class="">	add-int/2addr v1, v2</span>
+<span class="">	new-instance v2, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v2, v1}, Ljava/lang/StringBuilder;-><init>(I)V</span>
+<span class="">	const-string v1, "Package "</span>
+<span class="">	invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v2, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p2, " does not belong to "</span>
+<span class="">	invoke-virtual {v2, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v2, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {v0, p1}, Ljava/lang/SecurityException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw v0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public checkPermission(Ljava/lang/String;II)I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v0, p1, p2, p3}, Landroid/content/Context;->checkPermission(Ljava/lang/String;II)I</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public checkPermission(Ljava/lang/String;IILjava/lang/String;)I
+<span class="">	.locals 0</span>
+<span class="">	.annotation runtime Ljava/lang/Deprecated;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0, p1, p2, p3}, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->checkPermission(Ljava/lang/String;II)I</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public checkPermission(Ljava/lang/String;Ljava/lang/String;)I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroid/content/pm/PackageManager;->checkPermission(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public checkPermissionAndAppOps(Ljava/lang/String;IILjava/lang/String;)I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-static {v0, p1, p2, p3, p4}, Landroid/support/v4/content/PermissionChecker;->checkPermission(Landroid/content/Context;Ljava/lang/String;IILjava/lang/String;)I</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public getApplicationInfo(Ljava/lang/String;I)Landroid/content/pm/ApplicationInfo;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Landroid/content/pm/PackageManager$NameNotFoundException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroid/content/pm/PackageManager;->getApplicationInfo(Ljava/lang/String;I)Landroid/content/pm/ApplicationInfo;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public getApplicationLabel(Ljava/lang/String;)Ljava/lang/CharSequence;
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Landroid/content/pm/PackageManager$NameNotFoundException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v1}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-virtual {v1, p1, v2}, Landroid/content/pm/PackageManager;->getApplicationInfo(Ljava/lang/String;I)Landroid/content/pm/ApplicationInfo;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/content/pm/PackageManager;->getApplicationLabel(Landroid/content/pm/ApplicationInfo;)Ljava/lang/CharSequence;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public getApplicationLabelAndIcon(Ljava/lang/String;)Landroid/support/v4/util/Pair;
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Landroid/content/pm/PackageManager$NameNotFoundException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	")",</span>
+<span class="">	"Landroid/support/v4/util/Pair<",</span>
+<span class="">	"Ljava/lang/CharSequence;",</span>
+<span class="">	"Landroid/graphics/drawable/Drawable;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-virtual {v0, p1, v1}, Landroid/content/pm/PackageManager;->getApplicationInfo(Ljava/lang/String;I)Landroid/content/pm/ApplicationInfo;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/content/pm/PackageManager;->getApplicationLabel(Landroid/content/pm/ApplicationInfo;)Ljava/lang/CharSequence;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v1}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1, p1}, Landroid/content/pm/PackageManager;->getApplicationIcon(Landroid/content/pm/ApplicationInfo;)Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-static {v0, p1}, Landroid/support/v4/util/Pair;->create(Ljava/lang/Object;Ljava/lang/Object;)Landroid/support/v4/util/Pair;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public getCallingActivity(Landroid/app/Activity;)Landroid/content/ComponentName;
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-virtual {p1}, Landroid/app/Activity;->getCallingActivity()Landroid/content/ComponentName;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public getCallingPackage(Landroid/app/Activity;)Ljava/lang/String;
+<span class="">	.locals 4</span>
+
+<span class="">	invoke-virtual {p1}, Landroid/app/Activity;->getCallingActivity()Landroid/content/ComponentName;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	invoke-virtual {p1}, Landroid/content/ComponentName;->getPackageName()Ljava/lang/String;</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object v1</span>
+<span class="">	if-nez v1, :cond_1</span>
+<span class="">	const-string v1, "PackageManagerWrapper"</span>
+<span class="">	invoke-static {p1}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const/16 v2, 0x36</span>
+<span class="">	invoke-static {p1}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {v3}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v3</span>
+<span class="">	add-int/2addr v2, v3</span>
+<span class="">	new-instance v3, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v3, v2}, Ljava/lang/StringBuilder;-><init>(I)V</span>
+<span class="">	const-string v2, "getCallingPackage(): Couldn\'t get a package name from "</span>
+<span class="">	invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v3, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-static {v1, p1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method protected getContext()Landroid/content/Context;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+.end method
+
+.method public getPackageInfo(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Landroid/content/pm/PackageManager$NameNotFoundException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public getPackagesForUid(I)[Ljava/lang/String;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/content/pm/PackageManager;->getPackagesForUid(I)[Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public isCallerInstantApp()Z
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-static {}, Landroid/os/Binder;->getCallingUid()I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-static {}, Landroid/os/Process;->myUid()I</span>
+<span class="">	move-result v1</span>
+<span class="">	if-ne v0, v1, :cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-static {v0}, Lcom/google/android/gms/common/wrappers/InstantApps;->isInstantApp(Landroid/content/Context;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-static {}, Lcom/google/android/gms/common/util/PlatformVersion;->isAtLeastO()Z</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {}, Landroid/os/Binder;->getCallingUid()I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/content/pm/PackageManager;->getNameForUid(I)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v1}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1, v0}, Landroid/content/pm/PackageManager;->isInstantApp(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public isInstantAppUid(I)Z
+<span class="">	.locals 0</span>
+
+<span class="">	const/4 p1, 0x0</span>
+.end method
+
+.method public uidHasPackageName(ILjava/lang/String;)Z
+<span class="">	.locals 4</span>
+<span class="">	.annotation build Landroid/annotation/TargetApi;</span>
+<span class="">	value = 0x13</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {}, Lcom/google/android/gms/common/util/PlatformVersion;->isAtLeastKitKat()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	:try_start_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	const-string v3, "appops"</span>
+<span class="">	invoke-virtual {v0, v3}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroid/app/AppOpsManager;</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroid/app/AppOpsManager;->checkPackage(ILjava/lang/String;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/SecurityException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->zzjp:Landroid/content/Context;</span>
+<span class="">	:catch_0</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/content/pm/PackageManager;->getPackagesForUid(I)[Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	if-eqz p2, :cond_2</span>
+<span class="">	if-eqz p1, :cond_2</span>
+<span class="">	move v0, v1</span>
+<span class="">	array-length v3, p1</span>
+<span class="">	if-ge v0, v3, :cond_2</span>
+<span class="">	:goto_0</span>
+<span class="">	aget-object v3, p1, v0</span>
+<span class="">	invoke-virtual {p2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_1</span>
+<span class="">	add-int/lit8 v0, v0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	:cond_2</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../../.resources/report.js"></script>
+</body>
+</html>

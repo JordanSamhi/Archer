@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">okhttp3.internal.http2</a></li>
+        <li><i class="ico ico-class"></i> Http2Codec.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public final Lokhttp3/internal/http2/Http2Codec;
+.super Ljava/lang/Object;
+.source "Http2Codec.java"
+.implements Lokhttp3/internal/http/HttpCodec;
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Lokhttp3/internal/http2/Http2Codec$StreamFinishingSource;
+}
+.end annotation
+
+.field private static final CONNECTION:Lokio/ByteString;
+.field private static final ENCODING:Lokio/ByteString;
+.field private static final HOST:Lokio/ByteString;
+.field private static final HTTP_2_SKIPPED_REQUEST_HEADERS:Ljava/util/List;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/List<",
+"Lokio/ByteString;",
+">;"
+}
+.end annotation
+.end field
+.field private static final HTTP_2_SKIPPED_RESPONSE_HEADERS:Ljava/util/List;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/List<",
+"Lokio/ByteString;",
+">;"
+}
+.end annotation
+.end field
+.field private static final KEEP_ALIVE:Lokio/ByteString;
+.field private static final PROXY_CONNECTION:Lokio/ByteString;
+.field private static final TE:Lokio/ByteString;
+.field private static final TRANSFER_ENCODING:Lokio/ByteString;
+.field private static final UPGRADE:Lokio/ByteString;
+.field private final chain:Lokhttp3/Interceptor$Chain;
+.field private final client:Lokhttp3/OkHttpClient;
+.field private final connection:Lokhttp3/internal/http2/Http2Connection;
+.field private stream:Lokhttp3/internal/http2/Http2Stream;
+.field final streamAllocation:Lokhttp3/internal/connection/StreamAllocation;
+
+
+.method static constructor <clinit>()V
+<span class="">	.locals 12</span>
+
+<span class="">	const-string v0, "connection"</span>
+<span class="">	invoke-static {v0}, Lokio/ByteString;->encodeUtf8(Ljava/lang/String;)Lokio/ByteString;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/http2/Http2Codec;->CONNECTION:Lokio/ByteString;</span>
+<span class="">	const-string v0, "host"</span>
+<span class="">	invoke-static {v0}, Lokio/ByteString;->encodeUtf8(Ljava/lang/String;)Lokio/ByteString;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/http2/Http2Codec;->HOST:Lokio/ByteString;</span>
+<span class="">	const-string v0, "keep-alive"</span>
+<span class="">	invoke-static {v0}, Lokio/ByteString;->encodeUtf8(Ljava/lang/String;)Lokio/ByteString;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/http2/Http2Codec;->KEEP_ALIVE:Lokio/ByteString;</span>
+<span class="">	const-string v0, "proxy-connection"</span>
+<span class="">	invoke-static {v0}, Lokio/ByteString;->encodeUtf8(Ljava/lang/String;)Lokio/ByteString;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/http2/Http2Codec;->PROXY_CONNECTION:Lokio/ByteString;</span>
+<span class="">	const-string v0, "transfer-encoding"</span>
+<span class="">	invoke-static {v0}, Lokio/ByteString;->encodeUtf8(Ljava/lang/String;)Lokio/ByteString;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/http2/Http2Codec;->TRANSFER_ENCODING:Lokio/ByteString;</span>
+<span class="">	const-string v0, "te"</span>
+<span class="">	invoke-static {v0}, Lokio/ByteString;->encodeUtf8(Ljava/lang/String;)Lokio/ByteString;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/http2/Http2Codec;->TE:Lokio/ByteString;</span>
+<span class="">	const-string v0, "encoding"</span>
+<span class="">	invoke-static {v0}, Lokio/ByteString;->encodeUtf8(Ljava/lang/String;)Lokio/ByteString;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/http2/Http2Codec;->ENCODING:Lokio/ByteString;</span>
+<span class="">	const-string v0, "upgrade"</span>
+<span class="">	invoke-static {v0}, Lokio/ByteString;->encodeUtf8(Ljava/lang/String;)Lokio/ByteString;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/http2/Http2Codec;->UPGRADE:Lokio/ByteString;</span>
+<span class="">	const/16 v0, 0xc</span>
+<span class="">	new-array v0, v0, [Lokio/ByteString;</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Http2Codec;->CONNECTION:Lokio/ByteString;</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	aput-object v1, v0, v2</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Http2Codec;->HOST:Lokio/ByteString;</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	aput-object v1, v0, v3</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Http2Codec;->KEEP_ALIVE:Lokio/ByteString;</span>
+<span class="">	const/4 v4, 0x2</span>
+<span class="">	aput-object v1, v0, v4</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Http2Codec;->PROXY_CONNECTION:Lokio/ByteString;</span>
+<span class="">	const/4 v5, 0x3</span>
+<span class="">	aput-object v1, v0, v5</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Http2Codec;->TE:Lokio/ByteString;</span>
+<span class="">	const/4 v6, 0x4</span>
+<span class="">	aput-object v1, v0, v6</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Http2Codec;->TRANSFER_ENCODING:Lokio/ByteString;</span>
+<span class="">	const/4 v7, 0x5</span>
+<span class="">	aput-object v1, v0, v7</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Http2Codec;->ENCODING:Lokio/ByteString;</span>
+<span class="">	const/4 v8, 0x6</span>
+<span class="">	aput-object v1, v0, v8</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Http2Codec;->UPGRADE:Lokio/ByteString;</span>
+<span class="">	const/4 v9, 0x7</span>
+<span class="">	aput-object v1, v0, v9</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Header;->TARGET_METHOD:Lokio/ByteString;</span>
+<span class="">	const/16 v10, 0x8</span>
+<span class="">	aput-object v1, v0, v10</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Header;->TARGET_PATH:Lokio/ByteString;</span>
+<span class="">	const/16 v11, 0x9</span>
+<span class="">	aput-object v1, v0, v11</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Header;->TARGET_SCHEME:Lokio/ByteString;</span>
+<span class="">	const/16 v11, 0xa</span>
+<span class="">	aput-object v1, v0, v11</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Header;->TARGET_AUTHORITY:Lokio/ByteString;</span>
+<span class="">	const/16 v11, 0xb</span>
+<span class="">	aput-object v1, v0, v11</span>
+<span class="">	invoke-static {v0}, Lokhttp3/internal/Util;->immutableList([Ljava/lang/Object;)Ljava/util/List;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/http2/Http2Codec;->HTTP_2_SKIPPED_REQUEST_HEADERS:Ljava/util/List;</span>
+<span class="">	new-array v0, v10, [Lokio/ByteString;</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Http2Codec;->CONNECTION:Lokio/ByteString;</span>
+<span class="">	aput-object v1, v0, v2</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Http2Codec;->HOST:Lokio/ByteString;</span>
+<span class="">	aput-object v1, v0, v3</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Http2Codec;->KEEP_ALIVE:Lokio/ByteString;</span>
+<span class="">	aput-object v1, v0, v4</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Http2Codec;->PROXY_CONNECTION:Lokio/ByteString;</span>
+<span class="">	aput-object v1, v0, v5</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Http2Codec;->TE:Lokio/ByteString;</span>
+<span class="">	aput-object v1, v0, v6</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Http2Codec;->TRANSFER_ENCODING:Lokio/ByteString;</span>
+<span class="">	aput-object v1, v0, v7</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Http2Codec;->ENCODING:Lokio/ByteString;</span>
+<span class="">	aput-object v1, v0, v8</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/Http2Codec;->UPGRADE:Lokio/ByteString;</span>
+<span class="">	aput-object v1, v0, v9</span>
+<span class="">	invoke-static {v0}, Lokhttp3/internal/Util;->immutableList([Ljava/lang/Object;)Ljava/util/List;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/http2/Http2Codec;->HTTP_2_SKIPPED_RESPONSE_HEADERS:Ljava/util/List;</span>
+.end method
+
+.method public constructor <init>(Lokhttp3/OkHttpClient;Lokhttp3/Interceptor$Chain;Lokhttp3/internal/connection/StreamAllocation;Lokhttp3/internal/http2/Http2Connection;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	iput-object p1, p0, Lokhttp3/internal/http2/Http2Codec;->client:Lokhttp3/OkHttpClient;</span>
+<span class="">	iput-object p2, p0, Lokhttp3/internal/http2/Http2Codec;->chain:Lokhttp3/Interceptor$Chain;</span>
+<span class="">	iput-object p3, p0, Lokhttp3/internal/http2/Http2Codec;->streamAllocation:Lokhttp3/internal/connection/StreamAllocation;</span>
+<span class="">	iput-object p4, p0, Lokhttp3/internal/http2/Http2Codec;->connection:Lokhttp3/internal/http2/Http2Connection;</span>
+.end method
+
+.method public static http2HeadersList(Lokhttp3/Request;)Ljava/util/List;
+<span class="">	.locals 6</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Lokhttp3/Request;",</span>
+<span class="">	")",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Lokhttp3/internal/http2/Header;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Lokhttp3/Request;->headers()Lokhttp3/Headers;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	new-instance v1, Ljava/util/ArrayList;</span>
+<span class="">	invoke-virtual {v0}, Lokhttp3/Headers;->size()I</span>
+<span class="">	move-result v2</span>
+<span class="">	add-int/lit8 v2, v2, 0x4</span>
+<span class="">	invoke-direct {v1, v2}, Ljava/util/ArrayList;-><init>(I)V</span>
+<span class="">	new-instance v2, Lokhttp3/internal/http2/Header;</span>
+<span class="">	sget-object v3, Lokhttp3/internal/http2/Header;->TARGET_METHOD:Lokio/ByteString;</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/Request;->method()Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-direct {v2, v3, v4}, Lokhttp3/internal/http2/Header;-><init>(Lokio/ByteString;Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {v1, v2}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	new-instance v2, Lokhttp3/internal/http2/Header;</span>
+<span class="">	sget-object v3, Lokhttp3/internal/http2/Header;->TARGET_PATH:Lokio/ByteString;</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/Request;->url()Lokhttp3/HttpUrl;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-static {v4}, Lokhttp3/internal/http/RequestLine;->requestPath(Lokhttp3/HttpUrl;)Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-direct {v2, v3, v4}, Lokhttp3/internal/http2/Header;-><init>(Lokio/ByteString;Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {v1, v2}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	const-string v2, "Host"</span>
+<span class="">	invoke-virtual {p0, v2}, Lokhttp3/Request;->header(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	if-eqz v2, :cond_0</span>
+<span class="">	new-instance v3, Lokhttp3/internal/http2/Header;</span>
+<span class="">	sget-object v4, Lokhttp3/internal/http2/Header;->TARGET_AUTHORITY:Lokio/ByteString;</span>
+<span class="">	invoke-direct {v3, v4, v2}, Lokhttp3/internal/http2/Header;-><init>(Lokio/ByteString;Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {v1, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:cond_0</span>
+<span class="">	new-instance v2, Lokhttp3/internal/http2/Header;</span>
+<span class="">	sget-object v3, Lokhttp3/internal/http2/Header;->TARGET_SCHEME:Lokio/ByteString;</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/Request;->url()Lokhttp3/HttpUrl;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/HttpUrl;->scheme()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-direct {v2, v3, p0}, Lokhttp3/internal/http2/Header;-><init>(Lokio/ByteString;Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {v1, v2}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	invoke-virtual {v0}, Lokhttp3/Headers;->size()I</span>
+<span class="">	move-result v2</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge p0, v2, :cond_2</span>
+<span class="">	invoke-virtual {v0, p0}, Lokhttp3/Headers;->name(I)Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	sget-object v4, Ljava/util/Locale;->US:Ljava/util/Locale;</span>
+<span class="">	invoke-virtual {v3, v4}, Ljava/lang/String;->toLowerCase(Ljava/util/Locale;)Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-static {v3}, Lokio/ByteString;->encodeUtf8(Ljava/lang/String;)Lokio/ByteString;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	sget-object v4, Lokhttp3/internal/http2/Http2Codec;->HTTP_2_SKIPPED_REQUEST_HEADERS:Ljava/util/List;</span>
+<span class="">	invoke-interface {v4, v3}, Ljava/util/List;->contains(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v4</span>
+<span class="">	if-nez v4, :cond_1</span>
+<span class="">	new-instance v4, Lokhttp3/internal/http2/Header;</span>
+<span class="">	invoke-virtual {v0, p0}, Lokhttp3/Headers;->value(I)Ljava/lang/String;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-direct {v4, v3, v5}, Lokhttp3/internal/http2/Header;-><init>(Lokio/ByteString;Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {v1, v4}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:cond_1</span>
+<span class="">	add-int/lit8 p0, p0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method public static readHttp2HeadersList(Ljava/util/List;)Lokhttp3/Response$Builder;
+<span class="">	.locals 8</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Lokhttp3/internal/http2/Header;",</span>
+<span class="">	">;)",</span>
+<span class="">	"Lokhttp3/Response$Builder;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Lokhttp3/Headers$Builder;</span>
+<span class="">	invoke-direct {v0}, Lokhttp3/Headers$Builder;-><init>()V</span>
+<span class="">	invoke-interface {p0}, Ljava/util/List;->size()I</span>
+<span class="">	move-result v1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	move-object v4, v0</span>
+<span class="">	move-object v0, v2</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v3, v1, :cond_3</span>
+<span class="">	invoke-interface {p0, v3}, Ljava/util/List;->get(I)Ljava/lang/Object;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	check-cast v5, Lokhttp3/internal/http2/Header;</span>
+<span class="">	if-nez v5, :cond_0</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iget v5, v0, Lokhttp3/internal/http/StatusLine;->code:I</span>
+<span class="">	const/16 v6, 0x64</span>
+<span class="">	if-ne v5, v6, :cond_2</span>
+<span class="">	new-instance v0, Lokhttp3/Headers$Builder;</span>
+<span class="">	invoke-direct {v0}, Lokhttp3/Headers$Builder;-><init>()V</span>
+<span class="">	move-object v4, v0</span>
+<span class="">	move-object v0, v2</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v6, v5, Lokhttp3/internal/http2/Header;->name:Lokio/ByteString;</span>
+<span class="">	iget-object v5, v5, Lokhttp3/internal/http2/Header;->value:Lokio/ByteString;</span>
+<span class="">	invoke-virtual {v5}, Lokio/ByteString;->utf8()Ljava/lang/String;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	sget-object v7, Lokhttp3/internal/http2/Header;->RESPONSE_STATUS:Lokio/ByteString;</span>
+<span class="">	invoke-virtual {v6, v7}, Lokio/ByteString;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v7</span>
+<span class="">	if-eqz v7, :cond_1</span>
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v6, "HTTP/1.1 "</span>
+<span class="">	invoke-virtual {v0, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Lokhttp3/internal/http/StatusLine;->parse(Ljava/lang/String;)Lokhttp3/internal/http/StatusLine;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	sget-object v7, Lokhttp3/internal/http2/Http2Codec;->HTTP_2_SKIPPED_RESPONSE_HEADERS:Ljava/util/List;</span>
+<span class="">	invoke-interface {v7, v6}, Ljava/util/List;->contains(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v7</span>
+<span class="">	if-nez v7, :cond_2</span>
+<span class="">	sget-object v7, Lokhttp3/internal/Internal;->instance:Lokhttp3/internal/Internal;</span>
+<span class="">	invoke-virtual {v6}, Lokio/ByteString;->utf8()Ljava/lang/String;</span>
+<span class="">	move-result-object v6</span>
+<span class="">	invoke-virtual {v7, v4, v6, v5}, Lokhttp3/internal/Internal;->addLenient(Lokhttp3/Headers$Builder;Ljava/lang/String;Ljava/lang/String;)V</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_2</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_3</span>
+<span class="">	if-nez v0, :cond_4</span>
+<span class="">	new-instance p0, Ljava/net/ProtocolException;</span>
+<span class="">	const-string v0, "Expected \':status\' header not present"</span>
+<span class="">	invoke-direct {p0, v0}, Ljava/net/ProtocolException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p0</span>
+<span class="">	:cond_4</span>
+<span class="">	new-instance p0, Lokhttp3/Response$Builder;</span>
+<span class="">	invoke-direct {p0}, Lokhttp3/Response$Builder;-><init>()V</span>
+<span class="">	sget-object v1, Lokhttp3/Protocol;->HTTP_2:Lokhttp3/Protocol;</span>
+<span class="">	invoke-virtual {p0, v1}, Lokhttp3/Response$Builder;->protocol(Lokhttp3/Protocol;)Lokhttp3/Response$Builder;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	iget v1, v0, Lokhttp3/internal/http/StatusLine;->code:I</span>
+<span class="">	invoke-virtual {p0, v1}, Lokhttp3/Response$Builder;->code(I)Lokhttp3/Response$Builder;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	iget-object v0, v0, Lokhttp3/internal/http/StatusLine;->message:Ljava/lang/String;</span>
+<span class="">	invoke-virtual {p0, v0}, Lokhttp3/Response$Builder;->message(Ljava/lang/String;)Lokhttp3/Response$Builder;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {v4}, Lokhttp3/Headers$Builder;->build()Lokhttp3/Headers;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p0, v0}, Lokhttp3/Response$Builder;->headers(Lokhttp3/Headers;)Lokhttp3/Response$Builder;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method public cancel()V
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lokhttp3/internal/http2/Http2Codec;->stream:Lokhttp3/internal/http2/Http2Stream;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/http2/Http2Codec;->stream:Lokhttp3/internal/http2/Http2Stream;</span>
+<span class="">	sget-object v1, Lokhttp3/internal/http2/ErrorCode;->CANCEL:Lokhttp3/internal/http2/ErrorCode;</span>
+<span class="">	invoke-virtual {v0, v1}, Lokhttp3/internal/http2/Http2Stream;->closeLater(Lokhttp3/internal/http2/ErrorCode;)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public createRequestBody(Lokhttp3/Request;J)Lokio/Sink;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p1, p0, Lokhttp3/internal/http2/Http2Codec;->stream:Lokhttp3/internal/http2/Http2Stream;</span>
+<span class="">	invoke-virtual {p1}, Lokhttp3/internal/http2/Http2Stream;->getSink()Lokio/Sink;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public finishRequest()V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lokhttp3/internal/http2/Http2Codec;->stream:Lokhttp3/internal/http2/Http2Stream;</span>
+<span class="">	invoke-virtual {v0}, Lokhttp3/internal/http2/Http2Stream;->getSink()Lokio/Sink;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0}, Lokio/Sink;->close()V</span>
+.end method
+
+.method public flushRequest()V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lokhttp3/internal/http2/Http2Codec;->connection:Lokhttp3/internal/http2/Http2Connection;</span>
+<span class="">	invoke-virtual {v0}, Lokhttp3/internal/http2/Http2Connection;->flush()V</span>
+.end method
+
+.method public openResponseBody(Lokhttp3/Response;)Lokhttp3/ResponseBody;
+<span class="">	.locals 4</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lokhttp3/internal/http2/Http2Codec;->streamAllocation:Lokhttp3/internal/connection/StreamAllocation;</span>
+<span class="">	iget-object v0, v0, Lokhttp3/internal/connection/StreamAllocation;->eventListener:Lokhttp3/EventListener;</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/http2/Http2Codec;->streamAllocation:Lokhttp3/internal/connection/StreamAllocation;</span>
+<span class="">	iget-object v1, v1, Lokhttp3/internal/connection/StreamAllocation;->call:Lokhttp3/Call;</span>
+<span class="">	invoke-virtual {v0, v1}, Lokhttp3/EventListener;->responseBodyStart(Lokhttp3/Call;)V</span>
+<span class="">	const-string v0, "Content-Type"</span>
+<span class="">	invoke-virtual {p1, v0}, Lokhttp3/Response;->header(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {p1}, Lokhttp3/internal/http/HttpHeaders;->contentLength(Lokhttp3/Response;)J</span>
+<span class="">	move-result-wide v1</span>
+<span class="">	new-instance p1, Lokhttp3/internal/http2/Http2Codec$StreamFinishingSource;</span>
+<span class="">	iget-object v3, p0, Lokhttp3/internal/http2/Http2Codec;->stream:Lokhttp3/internal/http2/Http2Stream;</span>
+<span class="">	invoke-virtual {v3}, Lokhttp3/internal/http2/Http2Stream;->getSource()Lokio/Source;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-direct {p1, p0, v3}, Lokhttp3/internal/http2/Http2Codec$StreamFinishingSource;-><init>(Lokhttp3/internal/http2/Http2Codec;Lokio/Source;)V</span>
+<span class="">	new-instance v3, Lokhttp3/internal/http/RealResponseBody;</span>
+<span class="">	invoke-static {p1}, Lokio/Okio;->buffer(Lokio/Source;)Lokio/BufferedSource;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {v3, v0, v1, v2, p1}, Lokhttp3/internal/http/RealResponseBody;-><init>(Ljava/lang/String;JLokio/BufferedSource;)V</span>
+.end method
+
+.method public readResponseHeaders(Z)Lokhttp3/Response$Builder;
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lokhttp3/internal/http2/Http2Codec;->stream:Lokhttp3/internal/http2/Http2Stream;</span>
+<span class="">	invoke-virtual {v0}, Lokhttp3/internal/http2/Http2Stream;->takeResponseHeaders()Ljava/util/List;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Lokhttp3/internal/http2/Http2Codec;->readHttp2HeadersList(Ljava/util/List;)Lokhttp3/Response$Builder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	sget-object p1, Lokhttp3/internal/Internal;->instance:Lokhttp3/internal/Internal;</span>
+<span class="">	invoke-virtual {p1, v0}, Lokhttp3/internal/Internal;->code(Lokhttp3/Response$Builder;)I</span>
+<span class="">	move-result p1</span>
+<span class="">	const/16 v1, 0x64</span>
+<span class="">	if-ne p1, v1, :cond_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public writeRequestHeaders(Lokhttp3/Request;)V
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lokhttp3/internal/http2/Http2Codec;->stream:Lokhttp3/internal/http2/Http2Stream;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {p1}, Lokhttp3/Request;->body()Lokhttp3/RequestBody;</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-static {p1}, Lokhttp3/internal/http2/Http2Codec;->http2HeadersList(Lokhttp3/Request;)Ljava/util/List;</span>
+<span class="">	:goto_0</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/http2/Http2Codec;->connection:Lokhttp3/internal/http2/Http2Connection;</span>
+<span class="">	invoke-virtual {v1, p1, v0}, Lokhttp3/internal/http2/Http2Connection;->newStream(Ljava/util/List;Z)Lokhttp3/internal/http2/Http2Stream;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iput-object p1, p0, Lokhttp3/internal/http2/Http2Codec;->stream:Lokhttp3/internal/http2/Http2Stream;</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/http2/Http2Codec;->stream:Lokhttp3/internal/http2/Http2Stream;</span>
+<span class="">	invoke-virtual {p1}, Lokhttp3/internal/http2/Http2Stream;->readTimeout()Lokio/Timeout;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/http2/Http2Codec;->chain:Lokhttp3/Interceptor$Chain;</span>
+<span class="">	invoke-interface {v0}, Lokhttp3/Interceptor$Chain;->readTimeoutMillis()I</span>
+<span class="">	move-result v0</span>
+<span class="">	int-to-long v0, v0</span>
+<span class="">	sget-object v2, Ljava/util/concurrent/TimeUnit;->MILLISECONDS:Ljava/util/concurrent/TimeUnit;</span>
+<span class="">	invoke-virtual {p1, v0, v1, v2}, Lokio/Timeout;->timeout(JLjava/util/concurrent/TimeUnit;)Lokio/Timeout;</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/http2/Http2Codec;->stream:Lokhttp3/internal/http2/Http2Stream;</span>
+<span class="">	invoke-virtual {p1}, Lokhttp3/internal/http2/Http2Stream;->writeTimeout()Lokio/Timeout;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/http2/Http2Codec;->chain:Lokhttp3/Interceptor$Chain;</span>
+<span class="">	invoke-interface {v0}, Lokhttp3/Interceptor$Chain;->writeTimeoutMillis()I</span>
+<span class="">	move-result v0</span>
+<span class="">	int-to-long v0, v0</span>
+<span class="">	sget-object v2, Ljava/util/concurrent/TimeUnit;->MILLISECONDS:Ljava/util/concurrent/TimeUnit;</span>
+<span class="">	invoke-virtual {p1, v0, v1, v2}, Lokio/Timeout;->timeout(JLjava/util/concurrent/TimeUnit;)Lokio/Timeout;</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

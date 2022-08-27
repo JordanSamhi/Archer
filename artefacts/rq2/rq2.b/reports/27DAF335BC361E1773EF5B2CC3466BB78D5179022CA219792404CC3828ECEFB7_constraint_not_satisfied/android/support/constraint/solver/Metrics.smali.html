@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">android.support.constraint.solver</a></li>
+        <li><i class="ico ico-class"></i> Metrics.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Landroid/support/constraint/solver/Metrics;
+.super Ljava/lang/Object;
+.source "Metrics.java"
+
+
+.field public additionalMeasures:J
+.field public barrierConnectionResolved:J
+.field public bfs:J
+.field public centerConnectionResolved:J
+.field public chainConnectionResolved:J
+.field public constraints:J
+.field public errors:J
+.field public extravariables:J
+.field public fullySolved:J
+.field public graphOptimizer:J
+.field public iterations:J
+.field public lastTableSize:J
+.field public matchConnectionResolved:J
+.field public maxRows:J
+.field public maxTableSize:J
+.field public maxVariables:J
+.field public measures:J
+.field public minimize:J
+.field public minimizeGoal:J
+.field public nonresolvedWidgets:J
+.field public oldresolvedWidgets:J
+.field public optimize:J
+.field public pivots:J
+.field public problematicLayouts:Ljava/util/ArrayList;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/ArrayList<",
+"Ljava/lang/String;",
+">;"
+}
+.end annotation
+.end field
+.field public resolutions:J
+.field public resolvedWidgets:J
+.field public simpleconstraints:J
+.field public slackvariables:J
+.field public tableSizeIncrease:J
+.field public variables:J
+
+
+.method public constructor <init>()V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroid/support/constraint/solver/Metrics;->problematicLayouts:Ljava/util/ArrayList;</span>
+.end method
+
+.method public reset()V
+<span class="">	.locals 2</span>
+
+<span class="">	const-wide/16 v0, 0x0</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->measures:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->additionalMeasures:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->resolutions:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->tableSizeIncrease:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->maxTableSize:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->lastTableSize:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->maxVariables:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->maxRows:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->minimize:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->minimizeGoal:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->constraints:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->simpleconstraints:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->optimize:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->iterations:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->pivots:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->bfs:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->variables:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->errors:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->slackvariables:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->extravariables:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->fullySolved:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->graphOptimizer:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->resolvedWidgets:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->oldresolvedWidgets:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->nonresolvedWidgets:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->centerConnectionResolved:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->matchConnectionResolved:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->chainConnectionResolved:J</span>
+<span class="">	iput-wide v0, p0, Landroid/support/constraint/solver/Metrics;->barrierConnectionResolved:J</span>
+<span class="">	iget-object v0, p0, Landroid/support/constraint/solver/Metrics;->problematicLayouts:Ljava/util/ArrayList;</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/ArrayList;->clear()V</span>
+.end method
+
+.method public toString()Ljava/lang/String;
+<span class="">	.locals 3</span>
+
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v1, "\n*** Metrics ***\nmeasures: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->measures:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nadditionalMeasures: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->additionalMeasures:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nresolutions passes: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->resolutions:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\ntable increases: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->tableSizeIncrease:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nmaxTableSize: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->maxTableSize:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nmaxVariables: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->maxVariables:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nmaxRows: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->maxRows:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\n\nminimize: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->minimize:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nminimizeGoal: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->minimizeGoal:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nconstraints: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->constraints:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nsimpleconstraints: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->simpleconstraints:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\noptimize: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->optimize:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\niterations: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->iterations:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\npivots: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->pivots:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nbfs: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->bfs:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nvariables: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->variables:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nerrors: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->errors:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nslackvariables: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->slackvariables:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nextravariables: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->extravariables:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nfullySolved: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->fullySolved:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\ngraphOptimizer: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->graphOptimizer:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nresolvedWidgets: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->resolvedWidgets:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\noldresolvedWidgets: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->oldresolvedWidgets:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nnonresolvedWidgets: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->nonresolvedWidgets:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\ncenterConnectionResolved: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->centerConnectionResolved:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nmatchConnectionResolved: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->matchConnectionResolved:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nchainConnectionResolved: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->chainConnectionResolved:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nbarrierConnectionResolved: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-wide v1, p0, Landroid/support/constraint/solver/Metrics;->barrierConnectionResolved:J</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\nproblematicsLayouts: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-object v1, p0, Landroid/support/constraint/solver/Metrics;->problematicLayouts:Ljava/util/ArrayList;</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "\n"</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../.resources/report.js"></script>
+</body>
+</html>

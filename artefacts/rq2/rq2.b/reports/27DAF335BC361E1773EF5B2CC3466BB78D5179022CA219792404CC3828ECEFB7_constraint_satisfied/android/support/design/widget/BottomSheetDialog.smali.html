@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">android.support.design.widget</a></li>
+        <li><i class="ico ico-class"></i> BottomSheetDialog.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Landroid/support/design/widget/BottomSheetDialog;
+.super Landroid/support/v7/app/AppCompatDialog;
+.source "BottomSheetDialog.java"
+
+
+.field private mBehavior:Landroid/support/design/widget/BottomSheetBehavior;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Landroid/support/design/widget/BottomSheetBehavior<",
+"Landroid/widget/FrameLayout;",
+">;"
+}
+.end annotation
+.end field
+.field private mBottomSheetCallback:Landroid/support/design/widget/BottomSheetBehavior$BottomSheetCallback;
+.field  mCancelable:Z
+.field private mCanceledOnTouchOutside:Z
+.field private mCanceledOnTouchOutsideSet:Z
+
+
+.method public constructor <init>(Landroid/content/Context;)V
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # Landroid/content/Context;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-direct {p0, p1, v0}, Landroid/support/design/widget/BottomSheetDialog;-><init>(Landroid/content/Context;I)V</span>
+.end method
+
+.method public constructor <init>(Landroid/content/Context;I)V
+<span class="">	.locals 0</span>
+<span class="">	.param p1    # Landroid/content/Context;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.param p2    # I</span>
+<span class="">	.annotation build Landroid/support/annotation/StyleRes;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	invoke-static {p1, p2}, Landroid/support/design/widget/BottomSheetDialog;->getThemeResId(Landroid/content/Context;I)I</span>
+<span class="">	move-result p2</span>
+<span class="">	invoke-direct {p0, p1, p2}, Landroid/support/v7/app/AppCompatDialog;-><init>(Landroid/content/Context;I)V</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	iput-boolean p1, p0, Landroid/support/design/widget/BottomSheetDialog;->mCancelable:Z</span>
+<span class="">	iput-boolean p1, p0, Landroid/support/design/widget/BottomSheetDialog;->mCanceledOnTouchOutside:Z</span>
+<span class="">	new-instance p2, Landroid/support/design/widget/BottomSheetDialog$4;</span>
+<span class="">	invoke-direct {p2, p0}, Landroid/support/design/widget/BottomSheetDialog$4;-><init>(Landroid/support/design/widget/BottomSheetDialog;)V</span>
+<span class="">	iput-object p2, p0, Landroid/support/design/widget/BottomSheetDialog;->mBottomSheetCallback:Landroid/support/design/widget/BottomSheetBehavior$BottomSheetCallback;</span>
+<span class="">	invoke-virtual {p0, p1}, Landroid/support/design/widget/BottomSheetDialog;->supportRequestWindowFeature(I)Z</span>
+.end method
+
+.method protected constructor <init>(Landroid/content/Context;ZLandroid/content/DialogInterface$OnCancelListener;)V
+<span class="">	.locals 0</span>
+<span class="">	.param p1    # Landroid/content/Context;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	invoke-direct {p0, p1, p2, p3}, Landroid/support/v7/app/AppCompatDialog;-><init>(Landroid/content/Context;ZLandroid/content/DialogInterface$OnCancelListener;)V</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	iput-boolean p1, p0, Landroid/support/design/widget/BottomSheetDialog;->mCancelable:Z</span>
+<span class="">	iput-boolean p1, p0, Landroid/support/design/widget/BottomSheetDialog;->mCanceledOnTouchOutside:Z</span>
+<span class="">	new-instance p3, Landroid/support/design/widget/BottomSheetDialog$4;</span>
+<span class="">	invoke-direct {p3, p0}, Landroid/support/design/widget/BottomSheetDialog$4;-><init>(Landroid/support/design/widget/BottomSheetDialog;)V</span>
+<span class="">	iput-object p3, p0, Landroid/support/design/widget/BottomSheetDialog;->mBottomSheetCallback:Landroid/support/design/widget/BottomSheetBehavior$BottomSheetCallback;</span>
+<span class="">	invoke-virtual {p0, p1}, Landroid/support/design/widget/BottomSheetDialog;->supportRequestWindowFeature(I)Z</span>
+<span class="">	iput-boolean p2, p0, Landroid/support/design/widget/BottomSheetDialog;->mCancelable:Z</span>
+.end method
+
+.method private static getThemeResId(Landroid/content/Context;I)I
+<span class="">	.locals 2</span>
+
+<span class="">	if-nez p1, :cond_1</span>
+<span class="">	new-instance p1, Landroid/util/TypedValue;</span>
+<span class="">	invoke-direct {p1}, Landroid/util/TypedValue;-><init>()V</span>
+<span class="">	invoke-virtual {p0}, Landroid/content/Context;->getTheme()Landroid/content/res/Resources$Theme;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	sget v0, Landroid/support/design/R$attr;->bottomSheetDialogTheme:I</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	invoke-virtual {p0, v0, p1, v1}, Landroid/content/res/Resources$Theme;->resolveAttribute(ILandroid/util/TypedValue;Z)Z</span>
+<span class="">	move-result p0</span>
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	iget p1, p1, Landroid/util/TypedValue;->resourceId:I</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	sget p1, Landroid/support/design/R$style;->Theme_Design_Light_BottomSheetDialog:I</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method private wrapInBottomSheet(ILandroid/view/View;Landroid/view/ViewGroup$LayoutParams;)Landroid/view/View;
+<span class="">	.locals 4</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/BottomSheetDialog;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sget v1, Landroid/support/design/R$layout;->design_bottom_sheet_dialog:I</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-static {v0, v1, v2}, Landroid/view/View;->inflate(Landroid/content/Context;ILandroid/view/ViewGroup;)Landroid/view/View;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroid/widget/FrameLayout;</span>
+<span class="">	sget v1, Landroid/support/design/R$id;->coordinator:I</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/FrameLayout;->findViewById(I)Landroid/view/View;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Landroid/support/design/widget/CoordinatorLayout;</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	if-nez p2, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/BottomSheetDialog;->getLayoutInflater()Landroid/view/LayoutInflater;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-virtual {p2, p1, v1, v2}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	:cond_0</span>
+<span class="">	sget p1, Landroid/support/design/R$id;->design_bottom_sheet:I</span>
+<span class="">	invoke-virtual {v1, p1}, Landroid/support/design/widget/CoordinatorLayout;->findViewById(I)Landroid/view/View;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Landroid/widget/FrameLayout;</span>
+<span class="">	invoke-static {p1}, Landroid/support/design/widget/BottomSheetBehavior;->from(Landroid/view/View;)Landroid/support/design/widget/BottomSheetBehavior;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	iput-object v2, p0, Landroid/support/design/widget/BottomSheetDialog;->mBehavior:Landroid/support/design/widget/BottomSheetBehavior;</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/BottomSheetDialog;->mBehavior:Landroid/support/design/widget/BottomSheetBehavior;</span>
+<span class="">	iget-object v3, p0, Landroid/support/design/widget/BottomSheetDialog;->mBottomSheetCallback:Landroid/support/design/widget/BottomSheetBehavior$BottomSheetCallback;</span>
+<span class="">	invoke-virtual {v2, v3}, Landroid/support/design/widget/BottomSheetBehavior;->setBottomSheetCallback(Landroid/support/design/widget/BottomSheetBehavior$BottomSheetCallback;)V</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/BottomSheetDialog;->mBehavior:Landroid/support/design/widget/BottomSheetBehavior;</span>
+<span class="">	iget-boolean v3, p0, Landroid/support/design/widget/BottomSheetDialog;->mCancelable:Z</span>
+<span class="">	invoke-virtual {v2, v3}, Landroid/support/design/widget/BottomSheetBehavior;->setHideable(Z)V</span>
+<span class="">	if-nez p3, :cond_1</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/widget/FrameLayout;->addView(Landroid/view/View;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {p1, p2, p3}, Landroid/widget/FrameLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V</span>
+<span class="">	:goto_0</span>
+<span class="">	sget p2, Landroid/support/design/R$id;->touch_outside:I</span>
+<span class="">	invoke-virtual {v1, p2}, Landroid/support/design/widget/CoordinatorLayout;->findViewById(I)Landroid/view/View;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	new-instance p3, Landroid/support/design/widget/BottomSheetDialog$1;</span>
+<span class="">	invoke-direct {p3, p0}, Landroid/support/design/widget/BottomSheetDialog$1;-><init>(Landroid/support/design/widget/BottomSheetDialog;)V</span>
+<span class="">	invoke-virtual {p2, p3}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V</span>
+<span class="">	new-instance p2, Landroid/support/design/widget/BottomSheetDialog$2;</span>
+<span class="">	invoke-direct {p2, p0}, Landroid/support/design/widget/BottomSheetDialog$2;-><init>(Landroid/support/design/widget/BottomSheetDialog;)V</span>
+<span class="">	invoke-static {p1, p2}, Landroid/support/v4/view/ViewCompat;->setAccessibilityDelegate(Landroid/view/View;Landroid/support/v4/view/AccessibilityDelegateCompat;)V</span>
+<span class="">	new-instance p2, Landroid/support/design/widget/BottomSheetDialog$3;</span>
+<span class="">	invoke-direct {p2, p0}, Landroid/support/design/widget/BottomSheetDialog$3;-><init>(Landroid/support/design/widget/BottomSheetDialog;)V</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/widget/FrameLayout;->setOnTouchListener(Landroid/view/View$OnTouchListener;)V</span>
+.end method
+
+.method protected onCreate(Landroid/os/Bundle;)V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-super {p0, p1}, Landroid/support/v7/app/AppCompatDialog;->onCreate(Landroid/os/Bundle;)V</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/BottomSheetDialog;->getWindow()Landroid/view/Window;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v1, 0x15</span>
+<span class="">	if-lt v0, v1, :cond_0</span>
+<span class="">	const/high16 v0, 0x4000000</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/view/Window;->clearFlags(I)V</span>
+<span class="">	const/high16 v0, -0x80000000</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/view/Window;->addFlags(I)V</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, -0x1</span>
+<span class="">	invoke-virtual {p1, v0, v0}, Landroid/view/Window;->setLayout(II)V</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method protected onStart()V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-super {p0}, Landroid/support/v7/app/AppCompatDialog;->onStart()V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/BottomSheetDialog;->mBehavior:Landroid/support/design/widget/BottomSheetBehavior;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/BottomSheetDialog;->mBehavior:Landroid/support/design/widget/BottomSheetBehavior;</span>
+<span class="">	const/4 v1, 0x4</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/support/design/widget/BottomSheetBehavior;->setState(I)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public setCancelable(Z)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0, p1}, Landroid/support/v7/app/AppCompatDialog;->setCancelable(Z)V</span>
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/BottomSheetDialog;->mCancelable:Z</span>
+<span class="">	if-eq v0, p1, :cond_0</span>
+<span class="">	iput-boolean p1, p0, Landroid/support/design/widget/BottomSheetDialog;->mCancelable:Z</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/BottomSheetDialog;->mBehavior:Landroid/support/design/widget/BottomSheetBehavior;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/BottomSheetDialog;->mBehavior:Landroid/support/design/widget/BottomSheetBehavior;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/design/widget/BottomSheetBehavior;->setHideable(Z)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public setCanceledOnTouchOutside(Z)V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-super {p0, p1}, Landroid/support/v7/app/AppCompatDialog;->setCanceledOnTouchOutside(Z)V</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	iget-boolean v1, p0, Landroid/support/design/widget/BottomSheetDialog;->mCancelable:Z</span>
+<span class="">	if-nez v1, :cond_0</span>
+<span class="">	iput-boolean v0, p0, Landroid/support/design/widget/BottomSheetDialog;->mCancelable:Z</span>
+<span class="">	:cond_0</span>
+<span class="">	iput-boolean p1, p0, Landroid/support/design/widget/BottomSheetDialog;->mCanceledOnTouchOutside:Z</span>
+<span class="">	iput-boolean v0, p0, Landroid/support/design/widget/BottomSheetDialog;->mCanceledOnTouchOutsideSet:Z</span>
+.end method
+
+.method public setContentView(I)V
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # I</span>
+<span class="">	.annotation build Landroid/support/annotation/LayoutRes;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-direct {p0, p1, v0, v0}, Landroid/support/design/widget/BottomSheetDialog;->wrapInBottomSheet(ILandroid/view/View;Landroid/view/ViewGroup$LayoutParams;)Landroid/view/View;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-super {p0, p1}, Landroid/support/v7/app/AppCompatDialog;->setContentView(Landroid/view/View;)V</span>
+.end method
+
+.method public setContentView(Landroid/view/View;)V
+<span class="">	.locals 2</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-direct {p0, v0, p1, v1}, Landroid/support/design/widget/BottomSheetDialog;->wrapInBottomSheet(ILandroid/view/View;Landroid/view/ViewGroup$LayoutParams;)Landroid/view/View;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-super {p0, p1}, Landroid/support/v7/app/AppCompatDialog;->setContentView(Landroid/view/View;)V</span>
+.end method
+
+.method public setContentView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-direct {p0, v0, p1, p2}, Landroid/support/design/widget/BottomSheetDialog;->wrapInBottomSheet(ILandroid/view/View;Landroid/view/ViewGroup$LayoutParams;)Landroid/view/View;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-super {p0, p1}, Landroid/support/v7/app/AppCompatDialog;->setContentView(Landroid/view/View;)V</span>
+.end method
+
+.method  shouldWindowCloseOnTouchOutside()Z
+<span class="">	.locals 5</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/BottomSheetDialog;->mCanceledOnTouchOutsideSet:Z</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v1, 0xb</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	if-ge v0, v1, :cond_0</span>
+<span class="">	iput-boolean v2, p0, Landroid/support/design/widget/BottomSheetDialog;->mCanceledOnTouchOutside:Z</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/BottomSheetDialog;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	new-array v1, v2, [I</span>
+<span class="">	const v3, 0x101035b</span>
+<span class="">	const/4 v4, 0x0</span>
+<span class="">	aput v3, v1, v4</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/content/Context;->obtainStyledAttributes([I)Landroid/content/res/TypedArray;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, v4, v2}, Landroid/content/res/TypedArray;->getBoolean(IZ)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	iput-boolean v1, p0, Landroid/support/design/widget/BottomSheetDialog;->mCanceledOnTouchOutside:Z</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/res/TypedArray;->recycle()V</span>
+<span class="">	:goto_0</span>
+<span class="">	iput-boolean v2, p0, Landroid/support/design/widget/BottomSheetDialog;->mCanceledOnTouchOutsideSet:Z</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/BottomSheetDialog;->mCanceledOnTouchOutside:Z</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../.resources/report.js"></script>
+</body>
+</html>

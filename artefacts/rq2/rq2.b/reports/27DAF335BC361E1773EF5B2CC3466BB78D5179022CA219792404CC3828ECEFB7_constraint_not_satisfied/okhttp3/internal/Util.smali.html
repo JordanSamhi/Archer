@@ -1,0 +1,1285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">okhttp3.internal</a></li>
+        <li><i class="ico ico-class"></i> Util.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public final Lokhttp3/internal/Util;
+.super Ljava/lang/Object;
+.source "Util.java"
+
+
+.field public static final EMPTY_BYTE_ARRAY:[B
+.field public static final EMPTY_REQUEST:Lokhttp3/RequestBody;
+.field public static final EMPTY_RESPONSE:Lokhttp3/ResponseBody;
+.field public static final EMPTY_STRING_ARRAY:[Ljava/lang/String;
+.field public static final ISO_8859_1:Ljava/nio/charset/Charset;
+.field public static final NATURAL_ORDER:Ljava/util/Comparator;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/Comparator<",
+"Ljava/lang/String;",
+">;"
+}
+.end annotation
+.end field
+.field public static final UTC:Ljava/util/TimeZone;
+.field private static final UTF_16_BE:Ljava/nio/charset/Charset;
+.field private static final UTF_16_BE_BOM:Lokio/ByteString;
+.field private static final UTF_16_LE:Ljava/nio/charset/Charset;
+.field private static final UTF_16_LE_BOM:Lokio/ByteString;
+.field private static final UTF_32_BE:Ljava/nio/charset/Charset;
+.field private static final UTF_32_BE_BOM:Lokio/ByteString;
+.field private static final UTF_32_LE:Ljava/nio/charset/Charset;
+.field private static final UTF_32_LE_BOM:Lokio/ByteString;
+.field public static final UTF_8:Ljava/nio/charset/Charset;
+.field private static final UTF_8_BOM:Lokio/ByteString;
+.field private static final VERIFY_AS_IP_ADDRESS:Ljava/util/regex/Pattern;
+
+
+.method static constructor <clinit>()V
+<span class="">	.locals 2</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	new-array v1, v0, [B</span>
+<span class="">	sput-object v1, Lokhttp3/internal/Util;->EMPTY_BYTE_ARRAY:[B</span>
+<span class="">	new-array v0, v0, [Ljava/lang/String;</span>
+<span class="">	sput-object v0, Lokhttp3/internal/Util;->EMPTY_STRING_ARRAY:[Ljava/lang/String;</span>
+<span class="">	sget-object v0, Lokhttp3/internal/Util;->EMPTY_BYTE_ARRAY:[B</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-static {v1, v0}, Lokhttp3/ResponseBody;->create(Lokhttp3/MediaType;[B)Lokhttp3/ResponseBody;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/Util;->EMPTY_RESPONSE:Lokhttp3/ResponseBody;</span>
+<span class="">	sget-object v0, Lokhttp3/internal/Util;->EMPTY_BYTE_ARRAY:[B</span>
+<span class="">	invoke-static {v1, v0}, Lokhttp3/RequestBody;->create(Lokhttp3/MediaType;[B)Lokhttp3/RequestBody;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/Util;->EMPTY_REQUEST:Lokhttp3/RequestBody;</span>
+<span class="">	const-string v0, "efbbbf"</span>
+<span class="">	invoke-static {v0}, Lokio/ByteString;->decodeHex(Ljava/lang/String;)Lokio/ByteString;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/Util;->UTF_8_BOM:Lokio/ByteString;</span>
+<span class="">	const-string v0, "feff"</span>
+<span class="">	invoke-static {v0}, Lokio/ByteString;->decodeHex(Ljava/lang/String;)Lokio/ByteString;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/Util;->UTF_16_BE_BOM:Lokio/ByteString;</span>
+<span class="">	const-string v0, "fffe"</span>
+<span class="">	invoke-static {v0}, Lokio/ByteString;->decodeHex(Ljava/lang/String;)Lokio/ByteString;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/Util;->UTF_16_LE_BOM:Lokio/ByteString;</span>
+<span class="">	const-string v0, "0000ffff"</span>
+<span class="">	invoke-static {v0}, Lokio/ByteString;->decodeHex(Ljava/lang/String;)Lokio/ByteString;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/Util;->UTF_32_BE_BOM:Lokio/ByteString;</span>
+<span class="">	const-string v0, "ffff0000"</span>
+<span class="">	invoke-static {v0}, Lokio/ByteString;->decodeHex(Ljava/lang/String;)Lokio/ByteString;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/Util;->UTF_32_LE_BOM:Lokio/ByteString;</span>
+<span class="">	const-string v0, "UTF-8"</span>
+<span class="">	invoke-static {v0}, Ljava/nio/charset/Charset;->forName(Ljava/lang/String;)Ljava/nio/charset/Charset;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/Util;->UTF_8:Ljava/nio/charset/Charset;</span>
+<span class="">	const-string v0, "ISO-8859-1"</span>
+<span class="">	invoke-static {v0}, Ljava/nio/charset/Charset;->forName(Ljava/lang/String;)Ljava/nio/charset/Charset;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/Util;->ISO_8859_1:Ljava/nio/charset/Charset;</span>
+<span class="">	const-string v0, "UTF-16BE"</span>
+<span class="">	invoke-static {v0}, Ljava/nio/charset/Charset;->forName(Ljava/lang/String;)Ljava/nio/charset/Charset;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/Util;->UTF_16_BE:Ljava/nio/charset/Charset;</span>
+<span class="">	const-string v0, "UTF-16LE"</span>
+<span class="">	invoke-static {v0}, Ljava/nio/charset/Charset;->forName(Ljava/lang/String;)Ljava/nio/charset/Charset;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/Util;->UTF_16_LE:Ljava/nio/charset/Charset;</span>
+<span class="">	const-string v0, "UTF-32BE"</span>
+<span class="">	invoke-static {v0}, Ljava/nio/charset/Charset;->forName(Ljava/lang/String;)Ljava/nio/charset/Charset;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/Util;->UTF_32_BE:Ljava/nio/charset/Charset;</span>
+<span class="">	const-string v0, "UTF-32LE"</span>
+<span class="">	invoke-static {v0}, Ljava/nio/charset/Charset;->forName(Ljava/lang/String;)Ljava/nio/charset/Charset;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/Util;->UTF_32_LE:Ljava/nio/charset/Charset;</span>
+<span class="">	const-string v0, "GMT"</span>
+<span class="">	invoke-static {v0}, Ljava/util/TimeZone;->getTimeZone(Ljava/lang/String;)Ljava/util/TimeZone;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/Util;->UTC:Ljava/util/TimeZone;</span>
+<span class="">	new-instance v0, Lokhttp3/internal/Util$1;</span>
+<span class="">	invoke-direct {v0}, Lokhttp3/internal/Util$1;-><init>()V</span>
+<span class="">	sput-object v0, Lokhttp3/internal/Util;->NATURAL_ORDER:Ljava/util/Comparator;</span>
+<span class="">	const-string v0, "([0-9a-fA-F]*:[0-9a-fA-F:.]*)|([\\d.]+)"</span>
+<span class="">	invoke-static {v0}, Ljava/util/regex/Pattern;->compile(Ljava/lang/String;)Ljava/util/regex/Pattern;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/Util;->VERIFY_AS_IP_ADDRESS:Ljava/util/regex/Pattern;</span>
+.end method
+
+.method private constructor <init>()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+.end method
+
+.method public static assertionError(Ljava/lang/String;Ljava/lang/Exception;)Ljava/lang/AssertionError;
+<span class="">	.locals 1</span>
+
+<span class="">	new-instance v0, Ljava/lang/AssertionError;</span>
+<span class="">	invoke-direct {v0, p0}, Ljava/lang/AssertionError;-><init>(Ljava/lang/Object;)V</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/lang/AssertionError;->initCause(Ljava/lang/Throwable;)Ljava/lang/Throwable;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	check-cast p0, Ljava/lang/AssertionError;</span>
+.end method
+
+.method public static bomAwareCharset(Lokio/BufferedSource;Ljava/nio/charset/Charset;)Ljava/nio/charset/Charset;
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	sget-object v0, Lokhttp3/internal/Util;->UTF_8_BOM:Lokio/ByteString;</span>
+<span class="">	const-wide/16 v1, 0x0</span>
+<span class="">	invoke-interface {p0, v1, v2, v0}, Lokio/BufferedSource;->rangeEquals(JLokio/ByteString;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	sget-object p1, Lokhttp3/internal/Util;->UTF_8_BOM:Lokio/ByteString;</span>
+<span class="">	invoke-virtual {p1}, Lokio/ByteString;->size()I</span>
+<span class="">	move-result p1</span>
+<span class="">	int-to-long v0, p1</span>
+<span class="">	invoke-interface {p0, v0, v1}, Lokio/BufferedSource;->skip(J)V</span>
+<span class="">	sget-object p0, Lokhttp3/internal/Util;->UTF_8:Ljava/nio/charset/Charset;</span>
+<span class="">	sget-object v0, Lokhttp3/internal/Util;->UTF_16_BE_BOM:Lokio/ByteString;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {p0, v1, v2, v0}, Lokio/BufferedSource;->rangeEquals(JLokio/ByteString;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	sget-object p1, Lokhttp3/internal/Util;->UTF_16_BE_BOM:Lokio/ByteString;</span>
+<span class="">	invoke-virtual {p1}, Lokio/ByteString;->size()I</span>
+<span class="">	move-result p1</span>
+<span class="">	int-to-long v0, p1</span>
+<span class="">	invoke-interface {p0, v0, v1}, Lokio/BufferedSource;->skip(J)V</span>
+<span class="">	sget-object p0, Lokhttp3/internal/Util;->UTF_16_BE:Ljava/nio/charset/Charset;</span>
+<span class="">	sget-object v0, Lokhttp3/internal/Util;->UTF_16_LE_BOM:Lokio/ByteString;</span>
+<span class="">	invoke-interface {p0, v1, v2, v0}, Lokio/BufferedSource;->rangeEquals(JLokio/ByteString;)Z</span>
+<span class="">	:cond_1</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	sget-object p1, Lokhttp3/internal/Util;->UTF_16_LE_BOM:Lokio/ByteString;</span>
+<span class="">	invoke-virtual {p1}, Lokio/ByteString;->size()I</span>
+<span class="">	move-result p1</span>
+<span class="">	int-to-long v0, p1</span>
+<span class="">	invoke-interface {p0, v0, v1}, Lokio/BufferedSource;->skip(J)V</span>
+<span class="">	sget-object p0, Lokhttp3/internal/Util;->UTF_16_LE:Ljava/nio/charset/Charset;</span>
+<span class="">	sget-object v0, Lokhttp3/internal/Util;->UTF_32_BE_BOM:Lokio/ByteString;</span>
+<span class="">	invoke-interface {p0, v1, v2, v0}, Lokio/BufferedSource;->rangeEquals(JLokio/ByteString;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	:cond_2</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	sget-object p1, Lokhttp3/internal/Util;->UTF_32_BE_BOM:Lokio/ByteString;</span>
+<span class="">	invoke-virtual {p1}, Lokio/ByteString;->size()I</span>
+<span class="">	move-result p1</span>
+<span class="">	int-to-long v0, p1</span>
+<span class="">	invoke-interface {p0, v0, v1}, Lokio/BufferedSource;->skip(J)V</span>
+<span class="">	sget-object p0, Lokhttp3/internal/Util;->UTF_32_BE:Ljava/nio/charset/Charset;</span>
+<span class="">	sget-object v0, Lokhttp3/internal/Util;->UTF_32_LE_BOM:Lokio/ByteString;</span>
+<span class="">	invoke-interface {p0, v1, v2, v0}, Lokio/BufferedSource;->rangeEquals(JLokio/ByteString;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_4</span>
+<span class="">	:cond_3</span>
+<span class="">	sget-object p1, Lokhttp3/internal/Util;->UTF_32_LE_BOM:Lokio/ByteString;</span>
+<span class="">	invoke-virtual {p1}, Lokio/ByteString;->size()I</span>
+<span class="">	move-result p1</span>
+<span class="">	int-to-long v0, p1</span>
+<span class="">	invoke-interface {p0, v0, v1}, Lokio/BufferedSource;->skip(J)V</span>
+<span class="">	sget-object p0, Lokhttp3/internal/Util;->UTF_32_LE:Ljava/nio/charset/Charset;</span>
+<span class="">	:cond_4</span>
+.end method
+
+.method public static canonicalizeHost(Ljava/lang/String;)Ljava/lang/String;
+<span class="">	.locals 3</span>
+
+<span class="">	const-string v0, ":"</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	const-string v0, "["</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const-string v0, "]"</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/lang/String;->endsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	sub-int/2addr v0, v2</span>
+<span class="">	invoke-static {p0, v2, v0}, Lokhttp3/internal/Util;->decodeIpv6(Ljava/lang/String;II)Ljava/net/InetAddress;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-static {p0, v0, v2}, Lokhttp3/internal/Util;->decodeIpv6(Ljava/lang/String;II)Ljava/net/InetAddress;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:goto_0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	invoke-virtual {v0}, Ljava/net/InetAddress;->getAddress()[B</span>
+<span class="">	:cond_1</span>
+<span class="">	move-result-object v0</span>
+<span class="">	array-length v1, v0</span>
+<span class="">	const/16 v2, 0x10</span>
+<span class="">	if-ne v1, v2, :cond_2</span>
+<span class="">	invoke-static {v0}, Lokhttp3/internal/Util;->inet6AddressToAscii([B)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	new-instance v0, Ljava/lang/AssertionError;</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v2, "Invalid IPv6 address: \'"</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v1, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p0, "\'"</span>
+<span class="">	invoke-virtual {v1, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-direct {v0, p0}, Ljava/lang/AssertionError;-><init>(Ljava/lang/Object;)V</span>
+<span class="">	throw v0</span>
+<span class="">	invoke-static {p0}, Ljava/net/IDN;->toASCII(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	:cond_3</span>
+<span class="">	sget-object v0, Ljava/util/Locale;->US:Ljava/util/Locale;</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/lang/String;->toLowerCase(Ljava/util/Locale;)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/String;->isEmpty()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_4</span>
+<span class="">	invoke-static {p0}, Lokhttp3/internal/Util;->containsInvalidHostnameAsciiCodes(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_5</span>
+<span class="">	:cond_4</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/IllegalArgumentException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	:cond_5</span>
+<span class="">	:catch_0</span>
+.end method
+
+.method public static checkDuration(Ljava/lang/String;JLjava/util/concurrent/TimeUnit;)I
+<span class="">	.locals 6</span>
+
+<span class="">	const-wide/16 v0, 0x0</span>
+<span class="">	cmp-long v2, p1, v0</span>
+<span class="">	if-gez v2, :cond_0</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	new-instance p2, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {p2, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p0, " < 0"</span>
+<span class="">	invoke-virtual {p2, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-direct {p1, p0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	:cond_0</span>
+<span class="">	if-nez p3, :cond_1</span>
+<span class="">	new-instance p0, Ljava/lang/NullPointerException;</span>
+<span class="">	const-string p1, "unit == null"</span>
+<span class="">	invoke-direct {p0, p1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p0</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {p3, p1, p2}, Ljava/util/concurrent/TimeUnit;->toMillis(J)J</span>
+<span class="">	move-result-wide v2</span>
+<span class="">	const-wide/32 v4, 0x7fffffff</span>
+<span class="">	cmp-long p3, v2, v4</span>
+<span class="">	if-lez p3, :cond_2</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	new-instance p2, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {p2, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p0, " too large."</span>
+<span class="">	invoke-virtual {p2, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-direct {p1, p0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	:cond_2</span>
+<span class="">	cmp-long p3, v2, v0</span>
+<span class="">	if-nez p3, :cond_3</span>
+<span class="">	cmp-long p3, p1, v0</span>
+<span class="">	if-lez p3, :cond_3</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	new-instance p2, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {p2, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p0, " too small."</span>
+<span class="">	invoke-virtual {p2, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-direct {p1, p0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	:cond_3</span>
+<span class="">	long-to-int p0, v2</span>
+.end method
+
+.method public static checkOffsetAndCount(JJJ)V
+<span class="">	.locals 5</span>
+
+<span class="">	or-long v0, p2, p4</span>
+<span class="">	const-wide/16 v2, 0x0</span>
+<span class="">	cmp-long v4, v0, v2</span>
+<span class="">	if-ltz v4, :cond_1</span>
+<span class="">	cmp-long v0, p2, p0</span>
+<span class="">	if-gtz v0, :cond_1</span>
+<span class="">	sub-long v0, p0, p2</span>
+<span class="">	cmp-long p0, v0, p4</span>
+<span class="">	if-gez p0, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	new-instance p0, Ljava/lang/ArrayIndexOutOfBoundsException;</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-direct {p0}, Ljava/lang/ArrayIndexOutOfBoundsException;-><init>()V</span>
+<span class="">	throw p0</span>
+.end method
+
+.method public static closeQuietly(Ljava/io/Closeable;)V
+<span class="">	.locals 0</span>
+
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-interface {p0}, Ljava/io/Closeable;->close()V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catch_0</span>
+<span class="">	move-exception p0</span>
+<span class="">	throw p0</span>
+<span class="">	:goto_0</span>
+<span class="">	:catch_1</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public static closeQuietly(Ljava/net/ServerSocket;)V
+<span class="">	.locals 0</span>
+
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p0}, Ljava/net/ServerSocket;->close()V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catch_0</span>
+<span class="">	move-exception p0</span>
+<span class="">	throw p0</span>
+<span class="">	:goto_0</span>
+<span class="">	:catch_1</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public static closeQuietly(Ljava/net/Socket;)V
+<span class="">	.locals 1</span>
+
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p0}, Ljava/net/Socket;->close()V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/AssertionError; {:try_start_0 .. :try_end_0} :catch_1</span>
+<span class="">	.catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_2</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catch_0</span>
+<span class="">	move-exception p0</span>
+<span class="">	throw p0</span>
+<span class="">	:catch_1</span>
+<span class="">	move-exception p0</span>
+<span class="">	invoke-static {p0}, Lokhttp3/internal/Util;->isAndroidGetsocknameError(Ljava/lang/AssertionError;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	throw p0</span>
+<span class="">	:goto_0</span>
+<span class="">	:catch_2</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public static concat([Ljava/lang/String;Ljava/lang/String;)[Ljava/lang/String;
+<span class="">	.locals 3</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	array-length v1, p0</span>
+<span class="">	add-int/lit8 v1, v1, 0x1</span>
+<span class="">	new-array v1, v1, [Ljava/lang/String;</span>
+<span class="">	array-length v2, p0</span>
+<span class="">	invoke-static {p0, v0, v1, v0, v2}, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V</span>
+<span class="">	array-length p0, v1</span>
+<span class="">	add-int/lit8 p0, p0, -0x1</span>
+<span class="">	aput-object p1, v1, p0</span>
+.end method
+
+.method private static containsInvalidHostnameAsciiCodes(Ljava/lang/String;)Z
+<span class="">	.locals 5</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	move v1, v0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-ge v1, v2, :cond_3</span>
+<span class="">	invoke-virtual {p0, v1}, Ljava/lang/String;->charAt(I)C</span>
+<span class="">	move-result v2</span>
+<span class="">	const/16 v3, 0x1f</span>
+<span class="">	const/4 v4, 0x1</span>
+<span class="">	if-le v2, v3, :cond_2</span>
+<span class="">	const/16 v3, 0x7f</span>
+<span class="">	if-lt v2, v3, :cond_0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	const-string v3, " #%/:?@[\\]"</span>
+<span class="">	invoke-virtual {v3, v2}, Ljava/lang/String;->indexOf(I)I</span>
+<span class="">	move-result v2</span>
+<span class="">	const/4 v3, -0x1</span>
+<span class="">	if-eq v2, v3, :cond_1</span>
+<span class="">	add-int/lit8 v1, v1, 0x1</span>
+<span class="">	:cond_1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_2</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method public static decodeHexDigit(C)I
+<span class="">	.locals 2</span>
+
+<span class="">	const/16 v0, 0x30</span>
+<span class="">	if-lt p0, v0, :cond_0</span>
+<span class="">	const/16 v1, 0x39</span>
+<span class="">	if-gt p0, v1, :cond_0</span>
+<span class="">	sub-int/2addr p0, v0</span>
+<span class="">	const/16 v0, 0x61</span>
+<span class="">	:cond_0</span>
+<span class="">	if-lt p0, v0, :cond_1</span>
+<span class="">	const/16 v1, 0x66</span>
+<span class="">	if-gt p0, v1, :cond_1</span>
+<span class="">	sub-int/2addr p0, v0</span>
+<span class="">	add-int/lit8 p0, p0, 0xa</span>
+<span class="">	const/16 v0, 0x41</span>
+<span class="">	if-lt p0, v0, :cond_2</span>
+<span class="">	:cond_1</span>
+<span class="">	const/16 v1, 0x46</span>
+<span class="">	if-gt p0, v1, :cond_2</span>
+<span class="">	sub-int/2addr p0, v0</span>
+<span class="">	add-int/lit8 p0, p0, 0xa</span>
+<span class="">	const/4 p0, -0x1</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method private static decodeIpv4Suffix(Ljava/lang/String;II[BI)Z
+<span class="">	.locals 7</span>
+
+<span class="">	move v0, p4</span>
+<span class="">	:goto_0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-ge p1, p2, :cond_8</span>
+<span class="">	array-length v2, p3</span>
+<span class="">	if-ne v0, v2, :cond_0</span>
+<span class="">	if-eq v0, p4, :cond_2</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0, p1}, Ljava/lang/String;->charAt(I)C</span>
+<span class="">	move-result v2</span>
+<span class="">	const/16 v3, 0x2e</span>
+<span class="">	if-eq v2, v3, :cond_1</span>
+<span class="">	add-int/lit8 p1, p1, 0x1</span>
+<span class="">	move v2, p1</span>
+<span class="">	:cond_1</span>
+<span class="">	move v3, v1</span>
+<span class="">	:cond_2</span>
+<span class="">	if-ge v2, p2, :cond_6</span>
+<span class="">	invoke-virtual {p0, v2}, Ljava/lang/String;->charAt(I)C</span>
+<span class="">	:goto_1</span>
+<span class="">	move-result v4</span>
+<span class="">	const/16 v5, 0x30</span>
+<span class="">	if-lt v4, v5, :cond_6</span>
+<span class="">	const/16 v6, 0x39</span>
+<span class="">	if-le v4, v6, :cond_3</span>
+<span class="">	goto :goto_2</span>
+<span class="">	if-nez v3, :cond_4</span>
+<span class="">	if-eq p1, v2, :cond_4</span>
+<span class="">	:cond_3</span>
+<span class="">	mul-int/lit8 v3, v3, 0xa</span>
+<span class="">	add-int/2addr v3, v4</span>
+<span class="">	sub-int/2addr v3, v5</span>
+<span class="">	:cond_4</span>
+<span class="">	const/16 v4, 0xff</span>
+<span class="">	if-le v3, v4, :cond_5</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	sub-int p1, v2, p1</span>
+<span class="">	if-nez p1, :cond_7</span>
+<span class="">	:cond_5</span>
+<span class="">	add-int/lit8 p1, v0, 0x1</span>
+<span class="">	int-to-byte v1, v3</span>
+<span class="">	:goto_2</span>
+<span class="">	:cond_6</span>
+<span class="">	aput-byte v1, p3, v0</span>
+<span class="">	move v0, p1</span>
+<span class="">	move p1, v2</span>
+<span class="">	:cond_7</span>
+<span class="">	goto :goto_0</span>
+<span class="">	add-int/lit8 p4, p4, 0x4</span>
+<span class="">	if-eq v0, p4, :cond_9</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	:cond_8</span>
+<span class="">	:cond_9</span>
+.end method
+
+.method private static decodeIpv6(Ljava/lang/String;II)Ljava/net/InetAddress;
+<span class="">	.locals 10</span>
+<span class="">	.annotation runtime Ljavax/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/16 v0, 0x10</span>
+<span class="">	new-array v0, v0, [B</span>
+<span class="">	const/4 v1, -0x1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	move v4, v1</span>
+<span class="">	move v5, v4</span>
+<span class="">	move v3, v2</span>
+<span class="">	:goto_0</span>
+<span class="">	const/4 v6, 0x0</span>
+<span class="">	if-ge p1, p2, :cond_c</span>
+<span class="">	array-length v7, v0</span>
+<span class="">	if-ne v3, v7, :cond_0</span>
+<span class="">	add-int/lit8 v7, p1, 0x2</span>
+<span class="">	:cond_0</span>
+<span class="">	if-gt v7, p2, :cond_3</span>
+<span class="">	const-string v8, "::"</span>
+<span class="">	const/4 v9, 0x2</span>
+<span class="">	invoke-virtual {p0, p1, v8, v2, v9}, Ljava/lang/String;->regionMatches(ILjava/lang/String;II)Z</span>
+<span class="">	move-result v8</span>
+<span class="">	if-eqz v8, :cond_3</span>
+<span class="">	if-eq v4, v1, :cond_1</span>
+<span class="">	add-int/lit8 v3, v3, 0x2</span>
+<span class="">	if-ne v7, p2, :cond_2</span>
+<span class="">	:cond_1</span>
+<span class="">	move v4, v3</span>
+<span class="">	goto :goto_6</span>
+<span class="">	move v4, v3</span>
+<span class="">	move v5, v7</span>
+<span class="">	:cond_2</span>
+<span class="">	goto :goto_2</span>
+<span class="">	if-eqz v3, :cond_7</span>
+<span class="">	const-string v7, ":"</span>
+<span class="">	:cond_3</span>
+<span class="">	const/4 v8, 0x1</span>
+<span class="">	invoke-virtual {p0, p1, v7, v2, v8}, Ljava/lang/String;->regionMatches(ILjava/lang/String;II)Z</span>
+<span class="">	move-result v7</span>
+<span class="">	if-eqz v7, :cond_4</span>
+<span class="">	add-int/lit8 p1, p1, 0x1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	const-string v7, "."</span>
+<span class="">	invoke-virtual {p0, p1, v7, v2, v8}, Ljava/lang/String;->regionMatches(ILjava/lang/String;II)Z</span>
+<span class="">	:cond_4</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_6</span>
+<span class="">	add-int/lit8 p1, v3, -0x2</span>
+<span class="">	invoke-static {p0, v5, p2, v0, p1}, Lokhttp3/internal/Util;->decodeIpv4Suffix(Ljava/lang/String;II[BI)Z</span>
+<span class="">	move-result p0</span>
+<span class="">	if-nez p0, :cond_5</span>
+<span class="">	add-int/lit8 v3, v3, 0x2</span>
+<span class="">	goto :goto_6</span>
+<span class="">	move v5, p1</span>
+<span class="">	:cond_5</span>
+<span class="">	move v7, v2</span>
+<span class="">	move p1, v5</span>
+<span class="">	:cond_6</span>
+<span class="">	if-ge p1, p2, :cond_9</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_7</span>
+<span class="">	invoke-virtual {p0, p1}, Ljava/lang/String;->charAt(I)C</span>
+<span class="">	:goto_2</span>
+<span class="">	move-result v8</span>
+<span class="">	invoke-static {v8}, Lokhttp3/internal/Util;->decodeHexDigit(C)I</span>
+<span class="">	:goto_3</span>
+<span class="">	move-result v8</span>
+<span class="">	if-ne v8, v1, :cond_8</span>
+<span class="">	goto :goto_4</span>
+<span class="">	shl-int/lit8 v7, v7, 0x4</span>
+<span class="">	add-int/2addr v7, v8</span>
+<span class="">	add-int/lit8 p1, p1, 0x1</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:cond_8</span>
+<span class="">	sub-int v8, p1, v5</span>
+<span class="">	if-eqz v8, :cond_b</span>
+<span class="">	const/4 v9, 0x4</span>
+<span class="">	if-le v8, v9, :cond_a</span>
+<span class="">	:goto_4</span>
+<span class="">	:cond_9</span>
+<span class="">	goto :goto_5</span>
+<span class="">	add-int/lit8 v6, v3, 0x1</span>
+<span class="">	ushr-int/lit8 v8, v7, 0x8</span>
+<span class="">	and-int/lit16 v8, v8, 0xff</span>
+<span class="">	int-to-byte v8, v8</span>
+<span class="">	:cond_a</span>
+<span class="">	aput-byte v8, v0, v3</span>
+<span class="">	add-int/lit8 v3, v6, 0x1</span>
+<span class="">	and-int/lit16 v7, v7, 0xff</span>
+<span class="">	int-to-byte v7, v7</span>
+<span class="">	aput-byte v7, v0, v6</span>
+<span class="">	goto :goto_0</span>
+<span class="">	array-length p0, v0</span>
+<span class="">	if-eq v3, p0, :cond_e</span>
+<span class="">	if-ne v4, v1, :cond_d</span>
+<span class="">	array-length p0, v0</span>
+<span class="">	:goto_5</span>
+<span class="">	:cond_b</span>
+<span class="">	sub-int p1, v3, v4</span>
+<span class="">	:goto_6</span>
+<span class="">	:cond_c</span>
+<span class="">	sub-int/2addr p0, p1</span>
+<span class="">	invoke-static {v0, v4, v0, p0, p1}, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V</span>
+<span class="">	array-length p0, v0</span>
+<span class="">	sub-int/2addr p0, v3</span>
+<span class="">	:cond_d</span>
+<span class="">	add-int/2addr p0, v4</span>
+<span class="">	invoke-static {v0, v4, p0, v2}, Ljava/util/Arrays;->fill([BIIB)V</span>
+<span class="">	invoke-static {v0}, Ljava/net/InetAddress;->getByAddress([B)Ljava/net/InetAddress;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	new-instance p0, Ljava/lang/AssertionError;</span>
+<span class="">	invoke-direct {p0}, Ljava/lang/AssertionError;-><init>()V</span>
+<span class="">	throw p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	:cond_e</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/net/UnknownHostException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	:catch_0</span>
+.end method
+
+.method public static delimiterOffset(Ljava/lang/String;IIC)I
+<span class="">	.locals 1</span>
+
+<span class="">	:goto_0</span>
+<span class="">	if-ge p1, p2, :cond_1</span>
+<span class="">	invoke-virtual {p0, p1}, Ljava/lang/String;->charAt(I)C</span>
+<span class="">	move-result v0</span>
+<span class="">	if-ne v0, p3, :cond_0</span>
+<span class="">	add-int/lit8 p1, p1, 0x1</span>
+<span class="">	:cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public static delimiterOffset(Ljava/lang/String;IILjava/lang/String;)I
+<span class="">	.locals 2</span>
+
+<span class="">	:goto_0</span>
+<span class="">	if-ge p1, p2, :cond_1</span>
+<span class="">	invoke-virtual {p0, p1}, Ljava/lang/String;->charAt(I)C</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-virtual {p3, v0}, Ljava/lang/String;->indexOf(I)I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, -0x1</span>
+<span class="">	if-eq v0, v1, :cond_0</span>
+<span class="">	add-int/lit8 p1, p1, 0x1</span>
+<span class="">	:cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public static discard(Lokio/Source;ILjava/util/concurrent/TimeUnit;)Z
+<span class="">	.locals 0</span>
+
+<span class="">	:try_start_0</span>
+<span class="">	invoke-static {p0, p1, p2}, Lokhttp3/internal/Util;->skipAll(Lokio/Source;ILjava/util/concurrent/TimeUnit;)Z</span>
+<span class="">	move-result p0</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	:catch_0</span>
+.end method
+
+.method public static equal(Ljava/lang/Object;Ljava/lang/Object;)Z
+<span class="">	.locals 0</span>
+
+<span class="">	if-eq p0, p1, :cond_1</span>
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	invoke-virtual {p0, p1}, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result p0</span>
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	:goto_1</span>
+.end method
+
+.method public static varargs format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+<span class="">	.locals 1</span>
+
+<span class="">	sget-object v0, Ljava/util/Locale;->US:Ljava/util/Locale;</span>
+<span class="">	invoke-static {v0, p0, p1}, Ljava/lang/String;->format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method public static hostHeader(Lokhttp3/HttpUrl;Z)Ljava/lang/String;
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-virtual {p0}, Lokhttp3/HttpUrl;->host()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v1, ":"</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v1, "["</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/HttpUrl;->host()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "]"</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/HttpUrl;->host()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:goto_0</span>
+<span class="">	if-nez p1, :cond_1</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/HttpUrl;->port()I</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/HttpUrl;->scheme()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-static {v1}, Lokhttp3/HttpUrl;->defaultPort(Ljava/lang/String;)I</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eq p1, v1, :cond_2</span>
+<span class="">	:cond_1</span>
+<span class="">	new-instance p1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {p1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v0, ":"</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/HttpUrl;->port()I</span>
+<span class="">	move-result p0</span>
+<span class="">	invoke-virtual {p1, p0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method public static immutableList(Ljava/util/List;)Ljava/util/List;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"<T:",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	">(",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"TT;>;)",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"TT;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v0, p0}, Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V</span>
+<span class="">	invoke-static {v0}, Ljava/util/Collections;->unmodifiableList(Ljava/util/List;)Ljava/util/List;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method public static varargs immutableList([Ljava/lang/Object;)Ljava/util/List;
+<span class="">	.locals 0</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"<T:",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	">([TT;)",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"TT;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, [Ljava/lang/Object;->clone()Ljava/lang/Object;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	check-cast p0, [Ljava/lang/Object;</span>
+<span class="">	invoke-static {p0}, Ljava/util/Arrays;->asList([Ljava/lang/Object;)Ljava/util/List;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-static {p0}, Ljava/util/Collections;->unmodifiableList(Ljava/util/List;)Ljava/util/List;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method public static indexOf(Ljava/util/Comparator;[Ljava/lang/String;Ljava/lang/String;)I
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/Comparator<",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	">;[",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	")I"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	array-length v1, p1</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v0, v1, :cond_1</span>
+<span class="">	aget-object v2, p1, v0</span>
+<span class="">	invoke-interface {p0, v2, p2}, Ljava/util/Comparator;->compare(Ljava/lang/Object;Ljava/lang/Object;)I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-nez v2, :cond_0</span>
+<span class="">	add-int/lit8 v0, v0, 0x1</span>
+<span class="">	:cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	const/4 p0, -0x1</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public static indexOfControlOrNonAscii(Ljava/lang/String;)I
+<span class="">	.locals 4</span>
+
+<span class="">	invoke-virtual {p0}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v1, v0, :cond_2</span>
+<span class="">	invoke-virtual {p0, v1}, Ljava/lang/String;->charAt(I)C</span>
+<span class="">	move-result v2</span>
+<span class="">	const/16 v3, 0x1f</span>
+<span class="">	if-le v2, v3, :cond_1</span>
+<span class="">	const/16 v3, 0x7f</span>
+<span class="">	if-lt v2, v3, :cond_0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	add-int/lit8 v1, v1, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_1</span>
+<span class="">	const/4 p0, -0x1</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method private static inet6AddressToAscii([B)Ljava/lang/String;
+<span class="">	.locals 7</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	const/4 v1, -0x1</span>
+<span class="">	move v2, v0</span>
+<span class="">	move v3, v1</span>
+<span class="">	move v1, v2</span>
+<span class="">	:goto_0</span>
+<span class="">	const/16 v4, 0x10</span>
+<span class="">	array-length v5, p0</span>
+<span class="">	if-ge v1, v5, :cond_2</span>
+<span class="">	move v5, v1</span>
+<span class="">	:goto_1</span>
+<span class="">	if-ge v5, v4, :cond_0</span>
+<span class="">	aget-byte v6, p0, v5</span>
+<span class="">	if-nez v6, :cond_0</span>
+<span class="">	add-int/lit8 v6, v5, 0x1</span>
+<span class="">	aget-byte v6, p0, v6</span>
+<span class="">	if-nez v6, :cond_0</span>
+<span class="">	add-int/lit8 v5, v5, 0x2</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	sub-int v4, v5, v1</span>
+<span class="">	if-le v4, v2, :cond_1</span>
+<span class="">	const/4 v6, 0x4</span>
+<span class="">	if-lt v4, v6, :cond_1</span>
+<span class="">	move v3, v1</span>
+<span class="">	move v2, v4</span>
+<span class="">	:cond_1</span>
+<span class="">	add-int/lit8 v1, v5, 0x2</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_2</span>
+<span class="">	new-instance v1, Lokio/Buffer;</span>
+<span class="">	invoke-direct {v1}, Lokio/Buffer;-><init>()V</span>
+<span class="">	:goto_2</span>
+<span class="">	:cond_3</span>
+<span class="">	array-length v5, p0</span>
+<span class="">	if-ge v0, v5, :cond_6</span>
+<span class="">	const/16 v5, 0x3a</span>
+<span class="">	if-ne v0, v3, :cond_4</span>
+<span class="">	invoke-virtual {v1, v5}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;</span>
+<span class="">	add-int/2addr v0, v2</span>
+<span class="">	if-ne v0, v4, :cond_3</span>
+<span class="">	invoke-virtual {v1, v5}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_4</span>
+<span class="">	if-lez v0, :cond_5</span>
+<span class="">	invoke-virtual {v1, v5}, Lokio/Buffer;->writeByte(I)Lokio/Buffer;</span>
+<span class="">	:cond_5</span>
+<span class="">	aget-byte v5, p0, v0</span>
+<span class="">	and-int/lit16 v5, v5, 0xff</span>
+<span class="">	shl-int/lit8 v5, v5, 0x8</span>
+<span class="">	add-int/lit8 v6, v0, 0x1</span>
+<span class="">	aget-byte v6, p0, v6</span>
+<span class="">	and-int/lit16 v6, v6, 0xff</span>
+<span class="">	or-int/2addr v5, v6</span>
+<span class="">	int-to-long v5, v5</span>
+<span class="">	invoke-virtual {v1, v5, v6}, Lokio/Buffer;->writeHexadecimalUnsignedLong(J)Lokio/Buffer;</span>
+<span class="">	add-int/lit8 v0, v0, 0x2</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_6</span>
+<span class="">	invoke-virtual {v1}, Lokio/Buffer;->readUtf8()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method public static intersect(Ljava/util/Comparator;[Ljava/lang/String;[Ljava/lang/String;)[Ljava/lang/String;
+<span class="">	.locals 8</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/Comparator<",</span>
+<span class="">	"-",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	">;[",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	"[",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	")[",</span>
+<span class="">	"Ljava/lang/String;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	array-length v2, p1</span>
+<span class="">	move v3, v1</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v3, v2, :cond_2</span>
+<span class="">	aget-object v4, p1, v3</span>
+<span class="">	array-length v5, p2</span>
+<span class="">	move v6, v1</span>
+<span class="">	:goto_1</span>
+<span class="">	if-ge v6, v5, :cond_1</span>
+<span class="">	aget-object v7, p2, v6</span>
+<span class="">	invoke-interface {p0, v4, v7}, Ljava/util/Comparator;->compare(Ljava/lang/Object;Ljava/lang/Object;)I</span>
+<span class="">	move-result v7</span>
+<span class="">	if-nez v7, :cond_0</span>
+<span class="">	invoke-interface {v0, v4}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_0</span>
+<span class="">	add-int/lit8 v6, v6, 0x1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:goto_2</span>
+<span class="">	:cond_1</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->size()I</span>
+<span class="">	move-result p0</span>
+<span class="">	new-array p0, p0, [Ljava/lang/String;</span>
+<span class="">	invoke-interface {v0, p0}, Ljava/util/List;->toArray([Ljava/lang/Object;)[Ljava/lang/Object;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	check-cast p0, [Ljava/lang/String;</span>
+.end method
+
+.method public static isAndroidGetsocknameError(Ljava/lang/AssertionError;)Z
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Ljava/lang/AssertionError;->getCause()Ljava/lang/Throwable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/AssertionError;->getMessage()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/AssertionError;->getMessage()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const-string v0, "getsockname failed"</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result p0</span>
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public static nonEmptyIntersection(Ljava/util/Comparator;[Ljava/lang/String;[Ljava/lang/String;)Z
+<span class="">	.locals 7</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/Comparator<",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	">;[",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	"[",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	")Z"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	if-eqz p1, :cond_4</span>
+<span class="">	if-eqz p2, :cond_4</span>
+<span class="">	array-length v1, p1</span>
+<span class="">	if-eqz v1, :cond_4</span>
+<span class="">	array-length v1, p2</span>
+<span class="">	if-nez v1, :cond_0</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_0</span>
+<span class="">	array-length v1, p1</span>
+<span class="">	move v2, v0</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v2, v1, :cond_3</span>
+<span class="">	aget-object v3, p1, v2</span>
+<span class="">	array-length v4, p2</span>
+<span class="">	move v5, v0</span>
+<span class="">	:goto_1</span>
+<span class="">	if-ge v5, v4, :cond_2</span>
+<span class="">	aget-object v6, p2, v5</span>
+<span class="">	invoke-interface {p0, v3, v6}, Ljava/util/Comparator;->compare(Ljava/lang/Object;Ljava/lang/Object;)I</span>
+<span class="">	move-result v6</span>
+<span class="">	if-nez v6, :cond_1</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	add-int/lit8 v5, v5, 0x1</span>
+<span class="">	:cond_1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	:cond_2</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_3</span>
+<span class="">	:goto_2</span>
+<span class="">	:cond_4</span>
+.end method
+
+.method public static skipAll(Lokio/Source;ILjava/util/concurrent/TimeUnit;)Z
+<span class="">	.locals 11</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {}, Ljava/lang/System;->nanoTime()J</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	invoke-interface {p0}, Lokio/Source;->timeout()Lokio/Timeout;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v2}, Lokio/Timeout;->hasDeadline()Z</span>
+<span class="">	move-result v2</span>
+<span class="">	const-wide v3, 0x7fffffffffffffffL</span>
+<span class="">	if-eqz v2, :cond_0</span>
+<span class="">	invoke-interface {p0}, Lokio/Source;->timeout()Lokio/Timeout;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v2}, Lokio/Timeout;->deadlineNanoTime()J</span>
+<span class="">	move-result-wide v5</span>
+<span class="">	sub-long v7, v5, v0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	move-wide v7, v3</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {p0}, Lokio/Source;->timeout()Lokio/Timeout;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	int-to-long v5, p1</span>
+<span class="">	invoke-virtual {p2, v5, v6}, Ljava/util/concurrent/TimeUnit;->toNanos(J)J</span>
+<span class="">	move-result-wide p1</span>
+<span class="">	invoke-static {v7, v8, p1, p2}, Ljava/lang/Math;->min(JJ)J</span>
+<span class="">	move-result-wide p1</span>
+<span class="">	add-long v5, v0, p1</span>
+<span class="">	invoke-virtual {v2, v5, v6}, Lokio/Timeout;->deadlineNanoTime(J)Lokio/Timeout;</span>
+<span class="">	:try_start_0</span>
+<span class="">	new-instance p1, Lokio/Buffer;</span>
+<span class="">	invoke-direct {p1}, Lokio/Buffer;-><init>()V</span>
+<span class="">	:goto_1</span>
+<span class="">	const-wide/16 v5, 0x2000</span>
+<span class="">	invoke-interface {p0, p1, v5, v6}, Lokio/Source;->read(Lokio/Buffer;J)J</span>
+<span class="">	move-result-wide v5</span>
+<span class="">	const-wide/16 v9, -0x1</span>
+<span class="">	cmp-long p2, v5, v9</span>
+<span class="">	if-eqz p2, :cond_1</span>
+<span class="">	invoke-virtual {p1}, Lokio/Buffer;->clear()V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/io/InterruptedIOException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	cmp-long p2, v7, v3</span>
+<span class="">	if-nez p2, :cond_2</span>
+<span class="">	invoke-interface {p0}, Lokio/Source;->timeout()Lokio/Timeout;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0}, Lokio/Timeout;->clearDeadline()Lokio/Timeout;</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-interface {p0}, Lokio/Source;->timeout()Lokio/Timeout;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	add-long v2, v0, v7</span>
+<span class="">	invoke-virtual {p0, v2, v3}, Lokio/Timeout;->deadlineNanoTime(J)Lokio/Timeout;</span>
+<span class="">	:goto_2</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	cmp-long p2, v7, v3</span>
+<span class="">	if-nez p2, :cond_3</span>
+<span class="">	invoke-interface {p0}, Lokio/Source;->timeout()Lokio/Timeout;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0}, Lokio/Timeout;->clearDeadline()Lokio/Timeout;</span>
+<span class="">	goto :goto_3</span>
+<span class="">	invoke-interface {p0}, Lokio/Source;->timeout()Lokio/Timeout;</span>
+<span class="">	:cond_3</span>
+<span class="">	move-result-object p0</span>
+<span class="">	add-long v2, v0, v7</span>
+<span class="">	invoke-virtual {p0, v2, v3}, Lokio/Timeout;->deadlineNanoTime(J)Lokio/Timeout;</span>
+<span class="">	throw p1</span>
+<span class="">	:goto_3</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:catch_0</span>
+<span class="">	cmp-long p2, v7, v3</span>
+<span class="">	if-nez p2, :cond_4</span>
+<span class="">	invoke-interface {p0}, Lokio/Source;->timeout()Lokio/Timeout;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0}, Lokio/Timeout;->clearDeadline()Lokio/Timeout;</span>
+<span class="">	goto :goto_4</span>
+<span class="">	invoke-interface {p0}, Lokio/Source;->timeout()Lokio/Timeout;</span>
+<span class="">	:cond_4</span>
+<span class="">	move-result-object p0</span>
+<span class="">	add-long v2, v0, v7</span>
+<span class="">	invoke-virtual {p0, v2, v3}, Lokio/Timeout;->deadlineNanoTime(J)Lokio/Timeout;</span>
+<span class="">	:goto_4</span>
+.end method
+
+.method public static skipLeadingAsciiWhitespace(Ljava/lang/String;II)I
+<span class="">	.locals 1</span>
+
+<span class="">	:goto_0</span>
+<span class="">	if-ge p1, p2, :cond_0</span>
+<span class="">	invoke-virtual {p0, p1}, Ljava/lang/String;->charAt(I)C</span>
+<span class="">	move-result v0</span>
+<span class="">	sparse-switch v0, :sswitch_data_0</span>
+<span class="">	add-int/lit8 p1, p1, 0x1</span>
+<span class="">	:sswitch_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	:sswitch_data_0</span>
+<span class="">	.sparse-switch</span>
+<span class="">	0x9 -> :sswitch_0</span>
+<span class="">	0xa -> :sswitch_0</span>
+<span class="">	0xc -> :sswitch_0</span>
+<span class="">	0xd -> :sswitch_0</span>
+<span class="">	0x20 -> :sswitch_0</span>
+<span class="">	.end sparse-switch</span>
+.end method
+
+.method public static skipTrailingAsciiWhitespace(Ljava/lang/String;II)I
+<span class="">	.locals 1</span>
+
+<span class="">	add-int/lit8 p2, p2, -0x1</span>
+<span class="">	:goto_0</span>
+<span class="">	if-lt p2, p1, :cond_0</span>
+<span class="">	invoke-virtual {p0, p2}, Ljava/lang/String;->charAt(I)C</span>
+<span class="">	move-result v0</span>
+<span class="">	sparse-switch v0, :sswitch_data_0</span>
+<span class="">	add-int/lit8 p2, p2, 0x1</span>
+<span class="">	add-int/lit8 p2, p2, -0x1</span>
+<span class="">	:sswitch_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	:sswitch_data_0</span>
+<span class="">	.sparse-switch</span>
+<span class="">	0x9 -> :sswitch_0</span>
+<span class="">	0xa -> :sswitch_0</span>
+<span class="">	0xc -> :sswitch_0</span>
+<span class="">	0xd -> :sswitch_0</span>
+<span class="">	0x20 -> :sswitch_0</span>
+<span class="">	.end sparse-switch</span>
+.end method
+
+.method public static threadFactory(Ljava/lang/String;Z)Ljava/util/concurrent/ThreadFactory;
+<span class="">	.locals 1</span>
+
+<span class="">	new-instance v0, Lokhttp3/internal/Util$2;</span>
+<span class="">	invoke-direct {v0, p0, p1}, Lokhttp3/internal/Util$2;-><init>(Ljava/lang/String;Z)V</span>
+.end method
+
+.method public static toHumanReadableAscii(Ljava/lang/String;)Ljava/lang/String;
+<span class="">	.locals 7</span>
+
+<span class="">	invoke-virtual {p0}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	move v2, v1</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v2, v0, :cond_3</span>
+<span class="">	invoke-virtual {p0, v2}, Ljava/lang/String;->codePointAt(I)I</span>
+<span class="">	move-result v3</span>
+<span class="">	const/16 v4, 0x7f</span>
+<span class="">	const/16 v5, 0x1f</span>
+<span class="">	if-le v3, v5, :cond_0</span>
+<span class="">	if-ge v3, v4, :cond_0</span>
+<span class="">	invoke-static {v3}, Ljava/lang/Character;->charCount(I)I</span>
+<span class="">	move-result v3</span>
+<span class="">	add-int/2addr v2, v3</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	new-instance v3, Lokio/Buffer;</span>
+<span class="">	invoke-direct {v3}, Lokio/Buffer;-><init>()V</span>
+<span class="">	invoke-virtual {v3, p0, v1, v2}, Lokio/Buffer;->writeUtf8(Ljava/lang/String;II)Lokio/Buffer;</span>
+<span class="">	:goto_1</span>
+<span class="">	if-ge v2, v0, :cond_2</span>
+<span class="">	invoke-virtual {p0, v2}, Ljava/lang/String;->codePointAt(I)I</span>
+<span class="">	move-result v1</span>
+<span class="">	if-le v1, v5, :cond_1</span>
+<span class="">	if-ge v1, v4, :cond_1</span>
+<span class="">	move v6, v1</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_1</span>
+<span class="">	const/16 v6, 0x3f</span>
+<span class="">	:goto_2</span>
+<span class="">	invoke-virtual {v3, v6}, Lokio/Buffer;->writeUtf8CodePoint(I)Lokio/Buffer;</span>
+<span class="">	invoke-static {v1}, Ljava/lang/Character;->charCount(I)I</span>
+<span class="">	move-result v1</span>
+<span class="">	add-int/2addr v2, v1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-virtual {v3}, Lokio/Buffer;->readUtf8()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method public static trimSubstring(Ljava/lang/String;II)Ljava/lang/String;
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-static {p0, p1, p2}, Lokhttp3/internal/Util;->skipLeadingAsciiWhitespace(Ljava/lang/String;II)I</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-static {p0, p1, p2}, Lokhttp3/internal/Util;->skipTrailingAsciiWhitespace(Ljava/lang/String;II)I</span>
+<span class="">	move-result p2</span>
+<span class="">	invoke-virtual {p0, p1, p2}, Ljava/lang/String;->substring(II)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method public static verifyAsIpAddress(Ljava/lang/String;)Z
+<span class="">	.locals 1</span>
+
+<span class="">	sget-object v0, Lokhttp3/internal/Util;->VERIFY_AS_IP_ADDRESS:Ljava/util/regex/Pattern;</span>
+<span class="">	invoke-virtual {v0, p0}, Ljava/util/regex/Pattern;->matcher(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0}, Ljava/util/regex/Matcher;->matches()Z</span>
+<span class="">	move-result p0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../.resources/report.js"></script>
+</body>
+</html>

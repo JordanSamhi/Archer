@@ -1,0 +1,1474 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">okhttp3.internal.cache</a></li>
+        <li><i class="ico ico-class"></i> DiskLruCache.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public final Lokhttp3/internal/cache/DiskLruCache;
+.super Ljava/lang/Object;
+.source "DiskLruCache.java"
+.implements Ljava/io/Closeable;
+.implements Ljava/io/Flushable;
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Lokhttp3/internal/cache/DiskLruCache$Entry;,
+Lokhttp3/internal/cache/DiskLruCache$Editor;,
+Lokhttp3/internal/cache/DiskLruCache$Snapshot;
+}
+.end annotation
+
+.field static final synthetic $assertionsDisabled:Z = false
+.field static final ANY_SEQUENCE_NUMBER:J = -0x1L
+.field private static final CLEAN:Ljava/lang/String; = "CLEAN"
+.field private static final DIRTY:Ljava/lang/String; = "DIRTY"
+.field static final JOURNAL_FILE:Ljava/lang/String; = "journal"
+.field static final JOURNAL_FILE_BACKUP:Ljava/lang/String; = "journal.bkp"
+.field static final JOURNAL_FILE_TEMP:Ljava/lang/String; = "journal.tmp"
+.field static final LEGAL_KEY_PATTERN:Ljava/util/regex/Pattern;
+.field static final MAGIC:Ljava/lang/String; = "libcore.io.DiskLruCache"
+.field private static final READ:Ljava/lang/String; = "READ"
+.field private static final REMOVE:Ljava/lang/String; = "REMOVE"
+.field static final VERSION_1:Ljava/lang/String; = "1"
+.field private final appVersion:I
+.field private final cleanupRunnable:Ljava/lang/Runnable;
+.field  closed:Z
+.field final directory:Ljava/io/File;
+.field private final executor:Ljava/util/concurrent/Executor;
+.field final fileSystem:Lokhttp3/internal/io/FileSystem;
+.field  hasJournalErrors:Z
+.field  initialized:Z
+.field private final journalFile:Ljava/io/File;
+.field private final journalFileBackup:Ljava/io/File;
+.field private final journalFileTmp:Ljava/io/File;
+.field  journalWriter:Lokio/BufferedSink;
+.field final lruEntries:Ljava/util/LinkedHashMap;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/LinkedHashMap<",
+"Ljava/lang/String;",
+"Lokhttp3/internal/cache/DiskLruCache$Entry;",
+">;"
+}
+.end annotation
+.end field
+.field private maxSize:J
+.field  mostRecentRebuildFailed:Z
+.field  mostRecentTrimFailed:Z
+.field private nextSequenceNumber:J
+.field  redundantOpCount:I
+.field private size:J
+.field final valueCount:I
+
+
+.method static constructor <clinit>()V
+<span class="">	.locals 1</span>
+
+<span class="">	const-string v0, "[a-z0-9_-]{1,120}"</span>
+<span class="">	invoke-static {v0}, Ljava/util/regex/Pattern;->compile(Ljava/lang/String;)Ljava/util/regex/Pattern;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lokhttp3/internal/cache/DiskLruCache;->LEGAL_KEY_PATTERN:Ljava/util/regex/Pattern;</span>
+.end method
+
+.method constructor <init>(Lokhttp3/internal/io/FileSystem;Ljava/io/File;IIJLjava/util/concurrent/Executor;)V
+<span class="">	.locals 6</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	const-wide/16 v0, 0x0</span>
+<span class="">	iput-wide v0, p0, Lokhttp3/internal/cache/DiskLruCache;->size:J</span>
+<span class="">	new-instance v2, Ljava/util/LinkedHashMap;</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	const/high16 v4, 0x3f400000    # 0.75f</span>
+<span class="">	const/4 v5, 0x1</span>
+<span class="">	invoke-direct {v2, v3, v4, v5}, Ljava/util/LinkedHashMap;-><init>(IFZ)V</span>
+<span class="">	iput-object v2, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	iput-wide v0, p0, Lokhttp3/internal/cache/DiskLruCache;->nextSequenceNumber:J</span>
+<span class="">	new-instance v0, Lokhttp3/internal/cache/DiskLruCache$1;</span>
+<span class="">	invoke-direct {v0, p0}, Lokhttp3/internal/cache/DiskLruCache$1;-><init>(Lokhttp3/internal/cache/DiskLruCache;)V</span>
+<span class="">	iput-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->cleanupRunnable:Ljava/lang/Runnable;</span>
+<span class="">	iput-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	iput-object p2, p0, Lokhttp3/internal/cache/DiskLruCache;->directory:Ljava/io/File;</span>
+<span class="">	iput p3, p0, Lokhttp3/internal/cache/DiskLruCache;->appVersion:I</span>
+<span class="">	new-instance p1, Ljava/io/File;</span>
+<span class="">	const-string p3, "journal"</span>
+<span class="">	invoke-direct {p1, p2, p3}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V</span>
+<span class="">	iput-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFile:Ljava/io/File;</span>
+<span class="">	new-instance p1, Ljava/io/File;</span>
+<span class="">	const-string p3, "journal.tmp"</span>
+<span class="">	invoke-direct {p1, p2, p3}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V</span>
+<span class="">	iput-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFileTmp:Ljava/io/File;</span>
+<span class="">	new-instance p1, Ljava/io/File;</span>
+<span class="">	const-string p3, "journal.bkp"</span>
+<span class="">	invoke-direct {p1, p2, p3}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V</span>
+<span class="">	iput-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFileBackup:Ljava/io/File;</span>
+<span class="">	iput p4, p0, Lokhttp3/internal/cache/DiskLruCache;->valueCount:I</span>
+<span class="">	iput-wide p5, p0, Lokhttp3/internal/cache/DiskLruCache;->maxSize:J</span>
+<span class="">	iput-object p7, p0, Lokhttp3/internal/cache/DiskLruCache;->executor:Ljava/util/concurrent/Executor;</span>
+.end method
+
+.method private declared-synchronized checkNotClosed()V
+<span class="">	.locals 2</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/internal/cache/DiskLruCache;->isClosed()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	new-instance v0, Ljava/lang/IllegalStateException;</span>
+<span class="">	const-string v1, "cache is closed"</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw v0</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	:cond_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	move-exception v0</span>
+<span class="">	:catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw v0</span>
+.end method
+
+.method public static create(Lokhttp3/internal/io/FileSystem;Ljava/io/File;IIJ)Lokhttp3/internal/cache/DiskLruCache;
+<span class="">	.locals 10</span>
+
+<span class="">	const-wide/16 v0, 0x0</span>
+<span class="">	cmp-long v2, p4, v0</span>
+<span class="">	if-gtz v2, :cond_0</span>
+<span class="">	new-instance p0, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	const-string p1, "maxSize <= 0"</span>
+<span class="">	invoke-direct {p0, p1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p0</span>
+<span class="">	:cond_0</span>
+<span class="">	if-gtz p3, :cond_1</span>
+<span class="">	new-instance p0, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	const-string p1, "valueCount <= 0"</span>
+<span class="">	invoke-direct {p0, p1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p0</span>
+<span class="">	:cond_1</span>
+<span class="">	new-instance v8, Ljava/util/concurrent/ThreadPoolExecutor;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	const-wide/16 v3, 0x3c</span>
+<span class="">	sget-object v5, Ljava/util/concurrent/TimeUnit;->SECONDS:Ljava/util/concurrent/TimeUnit;</span>
+<span class="">	new-instance v6, Ljava/util/concurrent/LinkedBlockingQueue;</span>
+<span class="">	invoke-direct {v6}, Ljava/util/concurrent/LinkedBlockingQueue;-><init>()V</span>
+<span class="">	const-string v0, "OkHttp DiskLruCache"</span>
+<span class="">	const/4 v7, 0x1</span>
+<span class="">	invoke-static {v0, v7}, Lokhttp3/internal/Util;->threadFactory(Ljava/lang/String;Z)Ljava/util/concurrent/ThreadFactory;</span>
+<span class="">	move-result-object v7</span>
+<span class="">	move-object v0, v8</span>
+<span class="">	invoke-direct/range {v0 .. v7}, Ljava/util/concurrent/ThreadPoolExecutor;-><init>(IIJLjava/util/concurrent/TimeUnit;Ljava/util/concurrent/BlockingQueue;Ljava/util/concurrent/ThreadFactory;)V</span>
+<span class="">	new-instance v9, Lokhttp3/internal/cache/DiskLruCache;</span>
+<span class="">	move-object v0, v9</span>
+<span class="">	move-object v1, p0</span>
+<span class="">	move-object v2, p1</span>
+<span class="">	move v3, p2</span>
+<span class="">	move v4, p3</span>
+<span class="">	move-wide v5, p4</span>
+<span class="">	move-object v7, v8</span>
+<span class="">	invoke-direct/range {v0 .. v7}, Lokhttp3/internal/cache/DiskLruCache;-><init>(Lokhttp3/internal/io/FileSystem;Ljava/io/File;IIJLjava/util/concurrent/Executor;)V</span>
+.end method
+
+.method private newJournalWriter()Lokio/BufferedSink;
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/FileNotFoundException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFile:Ljava/io/File;</span>
+<span class="">	invoke-interface {v0, v1}, Lokhttp3/internal/io/FileSystem;->appendingSink(Ljava/io/File;)Lokio/Sink;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	new-instance v1, Lokhttp3/internal/cache/DiskLruCache$2;</span>
+<span class="">	invoke-direct {v1, p0, v0}, Lokhttp3/internal/cache/DiskLruCache$2;-><init>(Lokhttp3/internal/cache/DiskLruCache;Lokio/Sink;)V</span>
+<span class="">	invoke-static {v1}, Lokio/Okio;->buffer(Lokio/Sink;)Lokio/BufferedSink;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method private processJournal()V
+<span class="">	.locals 10</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFileTmp:Ljava/io/File;</span>
+<span class="">	invoke-interface {v0, v1}, Lokhttp3/internal/io/FileSystem;->delete(Ljava/io/File;)V</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/LinkedHashMap;->values()Ljava/util/Collection;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Collection;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_3</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Lokhttp3/internal/cache/DiskLruCache$Entry;</span>
+<span class="">	iget-object v2, v1, Lokhttp3/internal/cache/DiskLruCache$Entry;->currentEditor:Lokhttp3/internal/cache/DiskLruCache$Editor;</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	if-nez v2, :cond_1</span>
+<span class="">	:goto_1</span>
+<span class="">	iget v2, p0, Lokhttp3/internal/cache/DiskLruCache;->valueCount:I</span>
+<span class="">	if-ge v3, v2, :cond_0</span>
+<span class="">	iget-wide v4, p0, Lokhttp3/internal/cache/DiskLruCache;->size:J</span>
+<span class="">	iget-object v2, v1, Lokhttp3/internal/cache/DiskLruCache$Entry;->lengths:[J</span>
+<span class="">	aget-wide v6, v2, v3</span>
+<span class="">	add-long v8, v4, v6</span>
+<span class="">	iput-wide v8, p0, Lokhttp3/internal/cache/DiskLruCache;->size:J</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	iput-object v2, v1, Lokhttp3/internal/cache/DiskLruCache$Entry;->currentEditor:Lokhttp3/internal/cache/DiskLruCache$Editor;</span>
+<span class="">	:goto_2</span>
+<span class="">	iget v2, p0, Lokhttp3/internal/cache/DiskLruCache;->valueCount:I</span>
+<span class="">	if-ge v3, v2, :cond_2</span>
+<span class="">	iget-object v2, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	iget-object v4, v1, Lokhttp3/internal/cache/DiskLruCache$Entry;->cleanFiles:[Ljava/io/File;</span>
+<span class="">	aget-object v4, v4, v3</span>
+<span class="">	invoke-interface {v2, v4}, Lokhttp3/internal/io/FileSystem;->delete(Ljava/io/File;)V</span>
+<span class="">	iget-object v2, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	iget-object v4, v1, Lokhttp3/internal/cache/DiskLruCache$Entry;->dirtyFiles:[Ljava/io/File;</span>
+<span class="">	aget-object v4, v4, v3</span>
+<span class="">	invoke-interface {v2, v4}, Lokhttp3/internal/io/FileSystem;->delete(Ljava/io/File;)V</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->remove()V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method private readJournal()V
+<span class="">	.locals 8</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFile:Ljava/io/File;</span>
+<span class="">	invoke-interface {v0, v1}, Lokhttp3/internal/io/FileSystem;->source(Ljava/io/File;)Lokio/Source;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Lokio/Okio;->buffer(Lokio/Source;)Lokio/BufferedSource;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-interface {v0}, Lokio/BufferedSource;->readUtf8LineStrict()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-interface {v0}, Lokio/BufferedSource;->readUtf8LineStrict()Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-interface {v0}, Lokio/BufferedSource;->readUtf8LineStrict()Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-interface {v0}, Lokio/BufferedSource;->readUtf8LineStrict()Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-interface {v0}, Lokio/BufferedSource;->readUtf8LineStrict()Ljava/lang/String;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	const-string v6, "libcore.io.DiskLruCache"</span>
+<span class="">	invoke-virtual {v6, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v6</span>
+<span class="">	if-eqz v6, :cond_2</span>
+<span class="">	const-string v6, "1"</span>
+<span class="">	invoke-virtual {v6, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v6</span>
+<span class="">	if-eqz v6, :cond_2</span>
+<span class="">	iget v6, p0, Lokhttp3/internal/cache/DiskLruCache;->appVersion:I</span>
+<span class="">	invoke-static {v6}, Ljava/lang/Integer;->toString(I)Ljava/lang/String;</span>
+<span class="">	move-result-object v6</span>
+<span class="">	invoke-virtual {v6, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_2</span>
+<span class="">	iget v3, p0, Lokhttp3/internal/cache/DiskLruCache;->valueCount:I</span>
+<span class="">	invoke-static {v3}, Ljava/lang/Integer;->toString(I)Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {v3, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_2</span>
+<span class="">	const-string v3, ""</span>
+<span class="">	invoke-virtual {v3, v5}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	if-nez v3, :cond_0</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	:try_start_1</span>
+<span class="">	invoke-interface {v0}, Lokio/BufferedSource;->readUtf8LineStrict()Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-direct {p0, v2}, Lokhttp3/internal/cache/DiskLruCache;->readJournalLine(Ljava/lang/String;)V</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catch Ljava/io/EOFException; {:try_start_1 .. :try_end_1} :catch_0</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_0</span>
+<span class="">	add-int/lit8 v1, v1, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:try_start_2</span>
+<span class="">	:catch_0</span>
+<span class="">	iget-object v2, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	invoke-virtual {v2}, Ljava/util/LinkedHashMap;->size()I</span>
+<span class="">	move-result v2</span>
+<span class="">	sub-int/2addr v1, v2</span>
+<span class="">	iput v1, p0, Lokhttp3/internal/cache/DiskLruCache;->redundantOpCount:I</span>
+<span class="">	invoke-interface {v0}, Lokio/BufferedSource;->exhausted()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-nez v1, :cond_1</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/internal/cache/DiskLruCache;->rebuildJournal()V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-direct {p0}, Lokhttp3/internal/cache/DiskLruCache;->newJournalWriter()Lokio/BufferedSink;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iput-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	:goto_1</span>
+<span class="">	:try_end_2</span>
+<span class="">	.catchall {:try_start_2 .. :try_end_2} :catchall_0</span>
+<span class="">	invoke-static {v0}, Lokhttp3/internal/Util;->closeQuietly(Ljava/io/Closeable;)V</span>
+<span class="">	new-instance v3, Ljava/io/IOException;</span>
+<span class="">	:goto_2</span>
+<span class="">	:try_start_3</span>
+<span class="">	:cond_2</span>
+<span class="">	new-instance v6, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v7, "unexpected journal header: ["</span>
+<span class="">	invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v6, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, ", "</span>
+<span class="">	invoke-virtual {v6, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v6, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, ", "</span>
+<span class="">	invoke-virtual {v6, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v6, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, ", "</span>
+<span class="">	invoke-virtual {v6, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v6, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "]"</span>
+<span class="">	invoke-virtual {v6, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-direct {v3, v1}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw v3</span>
+<span class="">	move-exception v1</span>
+<span class="">	:try_end_3</span>
+<span class="">	.catchall {:try_start_3 .. :try_end_3} :catchall_0</span>
+<span class="">	:catchall_0</span>
+<span class="">	invoke-static {v0}, Lokhttp3/internal/Util;->closeQuietly(Ljava/io/Closeable;)V</span>
+<span class="">	throw v1</span>
+.end method
+
+.method private readJournalLine(Ljava/lang/String;)V
+<span class="">	.locals 6</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/16 v0, 0x20</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/String;->indexOf(I)I</span>
+<span class="">	move-result v1</span>
+<span class="">	const/4 v2, -0x1</span>
+<span class="">	if-ne v1, v2, :cond_0</span>
+<span class="">	new-instance v0, Ljava/io/IOException;</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v2, "unexpected journal line: "</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {v0, p1}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw v0</span>
+<span class="">	:cond_0</span>
+<span class="">	add-int/lit8 v3, v1, 0x1</span>
+<span class="">	invoke-virtual {p1, v0, v3}, Ljava/lang/String;->indexOf(II)I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-ne v0, v2, :cond_1</span>
+<span class="">	invoke-virtual {p1, v3}, Ljava/lang/String;->substring(I)Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	const-string v4, "REMOVE"</span>
+<span class="">	invoke-virtual {v4}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v4</span>
+<span class="">	if-ne v1, v4, :cond_2</span>
+<span class="">	const-string v4, "REMOVE"</span>
+<span class="">	invoke-virtual {p1, v4}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result v4</span>
+<span class="">	if-eqz v4, :cond_2</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	invoke-virtual {p1, v3}, Ljava/util/LinkedHashMap;->remove(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {p1, v3, v0}, Ljava/lang/String;->substring(II)Ljava/lang/String;</span>
+<span class="">	:cond_1</span>
+<span class="">	move-result-object v3</span>
+<span class="">	iget-object v4, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-virtual {v4, v3}, Ljava/util/LinkedHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	check-cast v4, Lokhttp3/internal/cache/DiskLruCache$Entry;</span>
+<span class="">	if-nez v4, :cond_3</span>
+<span class="">	new-instance v4, Lokhttp3/internal/cache/DiskLruCache$Entry;</span>
+<span class="">	invoke-direct {v4, p0, v3}, Lokhttp3/internal/cache/DiskLruCache$Entry;-><init>(Lokhttp3/internal/cache/DiskLruCache;Ljava/lang/String;)V</span>
+<span class="">	iget-object v5, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	invoke-virtual {v5, v3, v4}, Ljava/util/LinkedHashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	if-eq v0, v2, :cond_4</span>
+<span class="">	:cond_3</span>
+<span class="">	const-string v3, "CLEAN"</span>
+<span class="">	invoke-virtual {v3}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v3</span>
+<span class="">	if-ne v1, v3, :cond_4</span>
+<span class="">	const-string v3, "CLEAN"</span>
+<span class="">	invoke-virtual {p1, v3}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_4</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	add-int/2addr v0, v1</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/String;->substring(I)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string v0, " "</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iput-boolean v1, v4, Lokhttp3/internal/cache/DiskLruCache$Entry;->readable:Z</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-object v0, v4, Lokhttp3/internal/cache/DiskLruCache$Entry;->currentEditor:Lokhttp3/internal/cache/DiskLruCache$Editor;</span>
+<span class="">	invoke-virtual {v4, p1}, Lokhttp3/internal/cache/DiskLruCache$Entry;->setLengths([Ljava/lang/String;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	if-ne v0, v2, :cond_5</span>
+<span class="">	:cond_4</span>
+<span class="">	const-string v3, "DIRTY"</span>
+<span class="">	invoke-virtual {v3}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v3</span>
+<span class="">	if-ne v1, v3, :cond_5</span>
+<span class="">	const-string v3, "DIRTY"</span>
+<span class="">	invoke-virtual {p1, v3}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_5</span>
+<span class="">	new-instance p1, Lokhttp3/internal/cache/DiskLruCache$Editor;</span>
+<span class="">	invoke-direct {p1, p0, v4}, Lokhttp3/internal/cache/DiskLruCache$Editor;-><init>(Lokhttp3/internal/cache/DiskLruCache;Lokhttp3/internal/cache/DiskLruCache$Entry;)V</span>
+<span class="">	iput-object p1, v4, Lokhttp3/internal/cache/DiskLruCache$Entry;->currentEditor:Lokhttp3/internal/cache/DiskLruCache$Editor;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	if-ne v0, v2, :cond_6</span>
+<span class="">	:cond_5</span>
+<span class="">	const-string v0, "READ"</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-ne v1, v0, :cond_6</span>
+<span class="">	const-string v0, "READ"</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_6</span>
+<span class="">	new-instance v0, Ljava/io/IOException;</span>
+<span class="">	:goto_0</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_6</span>
+<span class="">	invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v2, "unexpected journal line: "</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {v0, p1}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw v0</span>
+.end method
+
+.method private validateKey(Ljava/lang/String;)V
+<span class="">	.locals 3</span>
+
+<span class="">	sget-object v0, Lokhttp3/internal/cache/DiskLruCache;->LEGAL_KEY_PATTERN:Ljava/util/regex/Pattern;</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/util/regex/Pattern;->matcher(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/regex/Matcher;->matches()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	new-instance v0, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v2, "keys must match regex [a-z0-9_-]{1,120}: \""</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p1, "\""</span>
+<span class="">	invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {v0, p1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw v0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public declared-synchronized close()V
+<span class="">	.locals 6</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	iget-boolean v0, p0, Lokhttp3/internal/cache/DiskLruCache;->initialized:Z</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	iget-boolean v0, p0, Lokhttp3/internal/cache/DiskLruCache;->closed:Z</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/LinkedHashMap;->values()Ljava/util/Collection;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v2, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	invoke-virtual {v2}, Ljava/util/LinkedHashMap;->size()I</span>
+<span class="">	move-result v2</span>
+<span class="">	new-array v2, v2, [Lokhttp3/internal/cache/DiskLruCache$Entry;</span>
+<span class="">	invoke-interface {v0, v2}, Ljava/util/Collection;->toArray([Ljava/lang/Object;)[Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, [Lokhttp3/internal/cache/DiskLruCache$Entry;</span>
+<span class="">	array-length v2, v0</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v3, v2, :cond_2</span>
+<span class="">	aget-object v4, v0, v3</span>
+<span class="">	iget-object v5, v4, Lokhttp3/internal/cache/DiskLruCache$Entry;->currentEditor:Lokhttp3/internal/cache/DiskLruCache$Editor;</span>
+<span class="">	if-eqz v5, :cond_1</span>
+<span class="">	iget-object v4, v4, Lokhttp3/internal/cache/DiskLruCache$Entry;->currentEditor:Lokhttp3/internal/cache/DiskLruCache$Editor;</span>
+<span class="">	invoke-virtual {v4}, Lokhttp3/internal/cache/DiskLruCache$Editor;->abort()V</span>
+<span class="">	:cond_1</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/internal/cache/DiskLruCache;->trimToSize()V</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	invoke-interface {v0}, Lokio/BufferedSink;->close()V</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	iput-boolean v1, p0, Lokhttp3/internal/cache/DiskLruCache;->closed:Z</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	iput-boolean v1, p0, Lokhttp3/internal/cache/DiskLruCache;->closed:Z</span>
+<span class="">	:goto_1</span>
+<span class="">	:try_start_1</span>
+<span class="">	:cond_3</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_0</span>
+<span class="">	move-exception v0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	:catchall_0</span>
+<span class="">	throw v0</span>
+.end method
+
+.method declared-synchronized completeEdit(Lokhttp3/internal/cache/DiskLruCache$Editor;Z)V
+<span class="">	.locals 11</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	iget-object v0, p1, Lokhttp3/internal/cache/DiskLruCache$Editor;->entry:Lokhttp3/internal/cache/DiskLruCache$Entry;</span>
+<span class="">	iget-object v1, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->currentEditor:Lokhttp3/internal/cache/DiskLruCache$Editor;</span>
+<span class="">	if-eq v1, p1, :cond_0</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalStateException;</span>
+<span class="">	invoke-direct {p1}, Ljava/lang/IllegalStateException;-><init>()V</span>
+<span class="">	throw p1</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-eqz p2, :cond_3</span>
+<span class="">	iget-boolean v2, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->readable:Z</span>
+<span class="">	if-nez v2, :cond_3</span>
+<span class="">	move v2, v1</span>
+<span class="">	:goto_0</span>
+<span class="">	iget v3, p0, Lokhttp3/internal/cache/DiskLruCache;->valueCount:I</span>
+<span class="">	if-ge v2, v3, :cond_3</span>
+<span class="">	iget-object v3, p1, Lokhttp3/internal/cache/DiskLruCache$Editor;->written:[Z</span>
+<span class="">	aget-boolean v3, v3, v2</span>
+<span class="">	if-nez v3, :cond_1</span>
+<span class="">	invoke-virtual {p1}, Lokhttp3/internal/cache/DiskLruCache$Editor;->abort()V</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalStateException;</span>
+<span class="">	new-instance p2, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v0, "Newly created entry didn\'t create value for index "</span>
+<span class="">	invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {p2, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-direct {p1, p2}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v3, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	iget-object v4, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->dirtyFiles:[Ljava/io/File;</span>
+<span class="">	aget-object v4, v4, v2</span>
+<span class="">	invoke-interface {v3, v4}, Lokhttp3/internal/io/FileSystem;->exists(Ljava/io/File;)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-nez v3, :cond_2</span>
+<span class="">	invoke-virtual {p1}, Lokhttp3/internal/cache/DiskLruCache$Editor;->abort()V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	:cond_2</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget p1, p0, Lokhttp3/internal/cache/DiskLruCache;->valueCount:I</span>
+<span class="">	:goto_1</span>
+<span class="">	:try_start_1</span>
+<span class="">	:cond_3</span>
+<span class="">	if-ge v1, p1, :cond_6</span>
+<span class="">	iget-object p1, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->dirtyFiles:[Ljava/io/File;</span>
+<span class="">	aget-object p1, p1, v1</span>
+<span class="">	if-eqz p2, :cond_4</span>
+<span class="">	iget-object v2, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	invoke-interface {v2, p1}, Lokhttp3/internal/io/FileSystem;->exists(Ljava/io/File;)Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_5</span>
+<span class="">	iget-object v2, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->cleanFiles:[Ljava/io/File;</span>
+<span class="">	aget-object v2, v2, v1</span>
+<span class="">	iget-object v3, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	invoke-interface {v3, p1, v2}, Lokhttp3/internal/io/FileSystem;->rename(Ljava/io/File;Ljava/io/File;)V</span>
+<span class="">	iget-object p1, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->lengths:[J</span>
+<span class="">	aget-wide v3, p1, v1</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	invoke-interface {p1, v2}, Lokhttp3/internal/io/FileSystem;->size(Ljava/io/File;)J</span>
+<span class="">	move-result-wide v5</span>
+<span class="">	iget-object p1, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->lengths:[J</span>
+<span class="">	aput-wide v5, p1, v1</span>
+<span class="">	iget-wide v7, p0, Lokhttp3/internal/cache/DiskLruCache;->size:J</span>
+<span class="">	sub-long v9, v7, v3</span>
+<span class="">	add-long v2, v9, v5</span>
+<span class="">	iput-wide v2, p0, Lokhttp3/internal/cache/DiskLruCache;->size:J</span>
+<span class="">	goto :goto_2</span>
+<span class="">	iget-object v2, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	:cond_4</span>
+<span class="">	invoke-interface {v2, p1}, Lokhttp3/internal/io/FileSystem;->delete(Ljava/io/File;)V</span>
+<span class="">	add-int/lit8 v1, v1, 0x1</span>
+<span class="">	:goto_2</span>
+<span class="">	:cond_5</span>
+<span class="">	goto :goto_1</span>
+<span class="">	iget p1, p0, Lokhttp3/internal/cache/DiskLruCache;->redundantOpCount:I</span>
+<span class="">	:cond_6</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	add-int/2addr p1, v1</span>
+<span class="">	iput p1, p0, Lokhttp3/internal/cache/DiskLruCache;->redundantOpCount:I</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	iput-object p1, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->currentEditor:Lokhttp3/internal/cache/DiskLruCache$Editor;</span>
+<span class="">	iget-boolean p1, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->readable:Z</span>
+<span class="">	or-int/2addr p1, p2</span>
+<span class="">	const/16 v2, 0xa</span>
+<span class="">	const/16 v3, 0x20</span>
+<span class="">	if-eqz p1, :cond_7</span>
+<span class="">	iput-boolean v1, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->readable:Z</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	const-string v1, "CLEAN"</span>
+<span class="">	invoke-interface {p1, v1}, Lokio/BufferedSink;->writeUtf8(Ljava/lang/String;)Lokio/BufferedSink;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-interface {p1, v3}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	iget-object v1, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->key:Ljava/lang/String;</span>
+<span class="">	invoke-interface {p1, v1}, Lokio/BufferedSink;->writeUtf8(Ljava/lang/String;)Lokio/BufferedSink;</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	invoke-virtual {v0, p1}, Lokhttp3/internal/cache/DiskLruCache$Entry;->writeLengths(Lokio/BufferedSink;)V</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	invoke-interface {p1, v2}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	if-eqz p2, :cond_8</span>
+<span class="">	iget-wide p1, p0, Lokhttp3/internal/cache/DiskLruCache;->nextSequenceNumber:J</span>
+<span class="">	const-wide/16 v1, 0x1</span>
+<span class="">	add-long v3, p1, v1</span>
+<span class="">	iput-wide v3, p0, Lokhttp3/internal/cache/DiskLruCache;->nextSequenceNumber:J</span>
+<span class="">	iput-wide p1, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->sequenceNumber:J</span>
+<span class="">	goto :goto_3</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	:cond_7</span>
+<span class="">	iget-object p2, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->key:Ljava/lang/String;</span>
+<span class="">	invoke-virtual {p1, p2}, Ljava/util/LinkedHashMap;->remove(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	const-string p2, "REMOVE"</span>
+<span class="">	invoke-interface {p1, p2}, Lokio/BufferedSink;->writeUtf8(Ljava/lang/String;)Lokio/BufferedSink;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-interface {p1, v3}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	iget-object p2, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->key:Ljava/lang/String;</span>
+<span class="">	invoke-interface {p1, p2}, Lokio/BufferedSink;->writeUtf8(Ljava/lang/String;)Lokio/BufferedSink;</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	invoke-interface {p1, v2}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	:goto_3</span>
+<span class="">	:cond_8</span>
+<span class="">	invoke-interface {p1}, Lokio/BufferedSink;->flush()V</span>
+<span class="">	iget-wide p1, p0, Lokhttp3/internal/cache/DiskLruCache;->size:J</span>
+<span class="">	iget-wide v0, p0, Lokhttp3/internal/cache/DiskLruCache;->maxSize:J</span>
+<span class="">	cmp-long v2, p1, v0</span>
+<span class="">	if-gtz v2, :cond_9</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/internal/cache/DiskLruCache;->journalRebuildRequired()Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_a</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->executor:Ljava/util/concurrent/Executor;</span>
+<span class="">	:cond_9</span>
+<span class="">	iget-object p2, p0, Lokhttp3/internal/cache/DiskLruCache;->cleanupRunnable:Ljava/lang/Runnable;</span>
+<span class="">	invoke-interface {p1, p2}, Ljava/util/concurrent/Executor;->execute(Ljava/lang/Runnable;)V</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_0</span>
+<span class="">	:cond_a</span>
+<span class="">	move-exception p1</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	:catchall_0</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public delete()V
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Lokhttp3/internal/cache/DiskLruCache;->close()V</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->directory:Ljava/io/File;</span>
+<span class="">	invoke-interface {v0, v1}, Lokhttp3/internal/io/FileSystem;->deleteContents(Ljava/io/File;)V</span>
+.end method
+
+.method public edit(Ljava/lang/String;)Lokhttp3/internal/cache/DiskLruCache$Editor;
+<span class="">	.locals 2</span>
+<span class="">	.annotation runtime Ljavax/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const-wide/16 v0, -0x1</span>
+<span class="">	invoke-virtual {p0, p1, v0, v1}, Lokhttp3/internal/cache/DiskLruCache;->edit(Ljava/lang/String;J)Lokhttp3/internal/cache/DiskLruCache$Editor;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method declared-synchronized edit(Ljava/lang/String;J)Lokhttp3/internal/cache/DiskLruCache$Editor;
+<span class="">	.locals 5</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/internal/cache/DiskLruCache;->initialize()V</span>
+<span class="">	invoke-direct {p0}, Lokhttp3/internal/cache/DiskLruCache;->checkNotClosed()V</span>
+<span class="">	invoke-direct {p0, p1}, Lokhttp3/internal/cache/DiskLruCache;->validateKey(Ljava/lang/String;)V</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/util/LinkedHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Lokhttp3/internal/cache/DiskLruCache$Entry;</span>
+<span class="">	const-wide/16 v1, -0x1</span>
+<span class="">	cmp-long v3, p2, v1</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-eqz v3, :cond_1</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-wide v2, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->sequenceNumber:J</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	cmp-long v4, v2, p2</span>
+<span class="">	if-eqz v4, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object p2, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->currentEditor:Lokhttp3/internal/cache/DiskLruCache$Editor;</span>
+<span class="">	:try_start_1</span>
+<span class="">	if-eqz p2, :cond_2</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	iget-boolean p2, p0, Lokhttp3/internal/cache/DiskLruCache;->mostRecentTrimFailed:Z</span>
+<span class="">	if-nez p2, :cond_6</span>
+<span class="">	:try_start_2</span>
+<span class="">	:cond_2</span>
+<span class="">	iget-boolean p2, p0, Lokhttp3/internal/cache/DiskLruCache;->mostRecentRebuildFailed:Z</span>
+<span class="">	if-eqz p2, :cond_3</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object p2, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	const-string p3, "DIRTY"</span>
+<span class="">	:cond_3</span>
+<span class="">	invoke-interface {p2, p3}, Lokio/BufferedSink;->writeUtf8(Ljava/lang/String;)Lokio/BufferedSink;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	const/16 p3, 0x20</span>
+<span class="">	invoke-interface {p2, p3}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-interface {p2, p1}, Lokio/BufferedSink;->writeUtf8(Ljava/lang/String;)Lokio/BufferedSink;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	const/16 p3, 0xa</span>
+<span class="">	invoke-interface {p2, p3}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	iget-object p2, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	invoke-interface {p2}, Lokio/BufferedSink;->flush()V</span>
+<span class="">	iget-boolean p2, p0, Lokhttp3/internal/cache/DiskLruCache;->hasJournalErrors:Z</span>
+<span class="">	if-eqz p2, :cond_4</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	:try_end_2</span>
+<span class="">	.catchall {:try_start_2 .. :try_end_2} :catchall_0</span>
+<span class="">	if-nez v0, :cond_5</span>
+<span class="">	new-instance v0, Lokhttp3/internal/cache/DiskLruCache$Entry;</span>
+<span class="">	invoke-direct {v0, p0, p1}, Lokhttp3/internal/cache/DiskLruCache$Entry;-><init>(Lokhttp3/internal/cache/DiskLruCache;Ljava/lang/String;)V</span>
+<span class="">	:cond_4</span>
+<span class="">	iget-object p2, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	:try_start_3</span>
+<span class="">	invoke-virtual {p2, p1, v0}, Ljava/util/LinkedHashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	new-instance p1, Lokhttp3/internal/cache/DiskLruCache$Editor;</span>
+<span class="">	invoke-direct {p1, p0, v0}, Lokhttp3/internal/cache/DiskLruCache$Editor;-><init>(Lokhttp3/internal/cache/DiskLruCache;Lokhttp3/internal/cache/DiskLruCache$Entry;)V</span>
+<span class="">	iput-object p1, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->currentEditor:Lokhttp3/internal/cache/DiskLruCache$Editor;</span>
+<span class="">	:cond_5</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->executor:Ljava/util/concurrent/Executor;</span>
+<span class="">	iget-object p2, p0, Lokhttp3/internal/cache/DiskLruCache;->cleanupRunnable:Ljava/lang/Runnable;</span>
+<span class="">	:try_end_3</span>
+<span class="">	.catchall {:try_start_3 .. :try_end_3} :catchall_0</span>
+<span class="">	invoke-interface {p1, p2}, Ljava/util/concurrent/Executor;->execute(Ljava/lang/Runnable;)V</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	:try_start_4</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_6</span>
+<span class="">	move-exception p1</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw p1</span>
+<span class="">	:try_end_4</span>
+<span class="">	.catchall {:try_start_4 .. :try_end_4} :catchall_0</span>
+<span class="">	:catchall_0</span>
+.end method
+
+.method public declared-synchronized evictAll()V
+<span class="">	.locals 5</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/internal/cache/DiskLruCache;->initialize()V</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/LinkedHashMap;->values()Ljava/util/Collection;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	invoke-virtual {v1}, Ljava/util/LinkedHashMap;->size()I</span>
+<span class="">	move-result v1</span>
+<span class="">	new-array v1, v1, [Lokhttp3/internal/cache/DiskLruCache$Entry;</span>
+<span class="">	invoke-interface {v0, v1}, Ljava/util/Collection;->toArray([Ljava/lang/Object;)[Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, [Lokhttp3/internal/cache/DiskLruCache$Entry;</span>
+<span class="">	array-length v1, v0</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	move v3, v2</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v3, v1, :cond_0</span>
+<span class="">	aget-object v4, v0, v3</span>
+<span class="">	invoke-virtual {p0, v4}, Lokhttp3/internal/cache/DiskLruCache;->removeEntry(Lokhttp3/internal/cache/DiskLruCache$Entry;)Z</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	iput-boolean v2, p0, Lokhttp3/internal/cache/DiskLruCache;->mostRecentTrimFailed:Z</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	move-exception v0</span>
+<span class="">	:catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw v0</span>
+.end method
+
+.method public declared-synchronized flush()V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	iget-boolean v0, p0, Lokhttp3/internal/cache/DiskLruCache;->initialized:Z</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	invoke-direct {p0}, Lokhttp3/internal/cache/DiskLruCache;->checkNotClosed()V</span>
+<span class="">	:try_start_1</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/internal/cache/DiskLruCache;->trimToSize()V</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	invoke-interface {v0}, Lokio/BufferedSink;->flush()V</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_0</span>
+<span class="">	move-exception v0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	:catchall_0</span>
+<span class="">	throw v0</span>
+.end method
+
+.method public declared-synchronized get(Ljava/lang/String;)Lokhttp3/internal/cache/DiskLruCache$Snapshot;
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/internal/cache/DiskLruCache;->initialize()V</span>
+<span class="">	invoke-direct {p0}, Lokhttp3/internal/cache/DiskLruCache;->checkNotClosed()V</span>
+<span class="">	invoke-direct {p0, p1}, Lokhttp3/internal/cache/DiskLruCache;->validateKey(Ljava/lang/String;)V</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/util/LinkedHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Lokhttp3/internal/cache/DiskLruCache$Entry;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	iget-boolean v2, v0, Lokhttp3/internal/cache/DiskLruCache$Entry;->readable:Z</span>
+<span class="">	if-nez v2, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {v0}, Lokhttp3/internal/cache/DiskLruCache$Entry;->snapshot()Lokhttp3/internal/cache/DiskLruCache$Snapshot;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	iget v1, p0, Lokhttp3/internal/cache/DiskLruCache;->redundantOpCount:I</span>
+<span class="">	:try_start_1</span>
+<span class="">	:cond_1</span>
+<span class="">	add-int/lit8 v1, v1, 0x1</span>
+<span class="">	iput v1, p0, Lokhttp3/internal/cache/DiskLruCache;->redundantOpCount:I</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	const-string v2, "READ"</span>
+<span class="">	invoke-interface {v1, v2}, Lokio/BufferedSink;->writeUtf8(Ljava/lang/String;)Lokio/BufferedSink;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	const/16 v2, 0x20</span>
+<span class="">	invoke-interface {v1, v2}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-interface {v1, p1}, Lokio/BufferedSink;->writeUtf8(Ljava/lang/String;)Lokio/BufferedSink;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const/16 v1, 0xa</span>
+<span class="">	invoke-interface {p1, v1}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/internal/cache/DiskLruCache;->journalRebuildRequired()Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_2</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->executor:Ljava/util/concurrent/Executor;</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->cleanupRunnable:Ljava/lang/Runnable;</span>
+<span class="">	invoke-interface {p1, v1}, Ljava/util/concurrent/Executor;->execute(Ljava/lang/Runnable;)V</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_0</span>
+<span class="">	:cond_2</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_3</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw p1</span>
+<span class="">	:catchall_0</span>
+.end method
+
+.method public getDirectory()Ljava/io/File;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->directory:Ljava/io/File;</span>
+.end method
+
+.method public declared-synchronized getMaxSize()J
+<span class="">	.locals 2</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	iget-wide v0, p0, Lokhttp3/internal/cache/DiskLruCache;->maxSize:J</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	move-exception v0</span>
+<span class="">	:catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw v0</span>
+.end method
+
+.method public declared-synchronized initialize()V
+<span class="">	.locals 6</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	iget-boolean v0, p0, Lokhttp3/internal/cache/DiskLruCache;->initialized:Z</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_1</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	:try_start_1</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFileBackup:Ljava/io/File;</span>
+<span class="">	invoke-interface {v0, v1}, Lokhttp3/internal/io/FileSystem;->exists(Ljava/io/File;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFile:Ljava/io/File;</span>
+<span class="">	invoke-interface {v0, v1}, Lokhttp3/internal/io/FileSystem;->exists(Ljava/io/File;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFileBackup:Ljava/io/File;</span>
+<span class="">	invoke-interface {v0, v1}, Lokhttp3/internal/io/FileSystem;->delete(Ljava/io/File;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFileBackup:Ljava/io/File;</span>
+<span class="">	iget-object v2, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFile:Ljava/io/File;</span>
+<span class="">	invoke-interface {v0, v1, v2}, Lokhttp3/internal/io/FileSystem;->rename(Ljava/io/File;Ljava/io/File;)V</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_2</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFile:Ljava/io/File;</span>
+<span class="">	invoke-interface {v0, v1}, Lokhttp3/internal/io/FileSystem;->exists(Ljava/io/File;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_1</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	invoke-direct {p0}, Lokhttp3/internal/cache/DiskLruCache;->readJournal()V</span>
+<span class="">	:try_start_2</span>
+<span class="">	invoke-direct {p0}, Lokhttp3/internal/cache/DiskLruCache;->processJournal()V</span>
+<span class="">	iput-boolean v1, p0, Lokhttp3/internal/cache/DiskLruCache;->initialized:Z</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	:try_end_2</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_2 .. :try_end_2} :catch_0</span>
+<span class="">	.catchall {:try_start_2 .. :try_end_2} :catchall_1</span>
+<span class="">	move-exception v0</span>
+<span class="">	invoke-static {}, Lokhttp3/internal/platform/Platform;->get()Lokhttp3/internal/platform/Platform;</span>
+<span class="">	:catch_0</span>
+<span class="">	move-result-object v2</span>
+<span class="">	:try_start_3</span>
+<span class="">	const/4 v3, 0x5</span>
+<span class="">	new-instance v4, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v5, "DiskLruCache "</span>
+<span class="">	invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	iget-object v5, p0, Lokhttp3/internal/cache/DiskLruCache;->directory:Ljava/io/File;</span>
+<span class="">	invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v5, " is corrupt: "</span>
+<span class="">	invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0}, Ljava/io/IOException;->getMessage()Ljava/lang/String;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v5, ", removing"</span>
+<span class="">	invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v2, v3, v4, v0}, Lokhttp3/internal/platform/Platform;->log(ILjava/lang/String;Ljava/lang/Throwable;)V</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/internal/cache/DiskLruCache;->delete()V</span>
+<span class="">	:try_end_3</span>
+<span class="">	.catchall {:try_start_3 .. :try_end_3} :catchall_1</span>
+<span class="">	iput-boolean v0, p0, Lokhttp3/internal/cache/DiskLruCache;->closed:Z</span>
+<span class="">	:try_start_4</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:try_start_5</span>
+<span class="">	:try_end_4</span>
+<span class="">	.catchall {:try_start_4 .. :try_end_4} :catchall_0</span>
+<span class="">	move-exception v1</span>
+<span class="">	iput-boolean v0, p0, Lokhttp3/internal/cache/DiskLruCache;->closed:Z</span>
+<span class="">	:catchall_0</span>
+<span class="">	throw v1</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/internal/cache/DiskLruCache;->rebuildJournal()V</span>
+<span class="">	iput-boolean v1, p0, Lokhttp3/internal/cache/DiskLruCache;->initialized:Z</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_3</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	move-exception v0</span>
+<span class="">	:try_end_5</span>
+<span class="">	.catchall {:try_start_5 .. :try_end_5} :catchall_1</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw v0</span>
+<span class="">	:catchall_1</span>
+.end method
+
+.method public declared-synchronized isClosed()Z
+<span class="">	.locals 1</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	iget-boolean v0, p0, Lokhttp3/internal/cache/DiskLruCache;->closed:Z</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	move-exception v0</span>
+<span class="">	:catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw v0</span>
+.end method
+
+.method  journalRebuildRequired()Z
+<span class="">	.locals 2</span>
+
+<span class="">	iget v0, p0, Lokhttp3/internal/cache/DiskLruCache;->redundantOpCount:I</span>
+<span class="">	const/16 v1, 0x7d0</span>
+<span class="">	if-lt v0, v1, :cond_0</span>
+<span class="">	iget v0, p0, Lokhttp3/internal/cache/DiskLruCache;->redundantOpCount:I</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	invoke-virtual {v1}, Ljava/util/LinkedHashMap;->size()I</span>
+<span class="">	move-result v1</span>
+<span class="">	if-lt v0, v1, :cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method declared-synchronized rebuildJournal()V
+<span class="">	.locals 6</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	invoke-interface {v0}, Lokio/BufferedSink;->close()V</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFileTmp:Ljava/io/File;</span>
+<span class="">	invoke-interface {v0, v1}, Lokhttp3/internal/io/FileSystem;->sink(Ljava/io/File;)Lokio/Sink;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Lokio/Okio;->buffer(Lokio/Sink;)Lokio/BufferedSink;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:try_start_1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_1</span>
+<span class="">	const-string v1, "libcore.io.DiskLruCache"</span>
+<span class="">	invoke-interface {v0, v1}, Lokio/BufferedSink;->writeUtf8(Ljava/lang/String;)Lokio/BufferedSink;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	const/16 v2, 0xa</span>
+<span class="">	invoke-interface {v1, v2}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	const-string v1, "1"</span>
+<span class="">	invoke-interface {v0, v1}, Lokio/BufferedSink;->writeUtf8(Ljava/lang/String;)Lokio/BufferedSink;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-interface {v1, v2}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	iget v1, p0, Lokhttp3/internal/cache/DiskLruCache;->appVersion:I</span>
+<span class="">	int-to-long v3, v1</span>
+<span class="">	invoke-interface {v0, v3, v4}, Lokio/BufferedSink;->writeDecimalLong(J)Lokio/BufferedSink;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-interface {v1, v2}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	iget v1, p0, Lokhttp3/internal/cache/DiskLruCache;->valueCount:I</span>
+<span class="">	int-to-long v3, v1</span>
+<span class="">	invoke-interface {v0, v3, v4}, Lokio/BufferedSink;->writeDecimalLong(J)Lokio/BufferedSink;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-interface {v1, v2}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	invoke-interface {v0, v2}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	invoke-virtual {v1}, Ljava/util/LinkedHashMap;->values()Ljava/util/Collection;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Collection;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_2</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	check-cast v3, Lokhttp3/internal/cache/DiskLruCache$Entry;</span>
+<span class="">	iget-object v4, v3, Lokhttp3/internal/cache/DiskLruCache$Entry;->currentEditor:Lokhttp3/internal/cache/DiskLruCache$Editor;</span>
+<span class="">	const/16 v5, 0x20</span>
+<span class="">	if-eqz v4, :cond_1</span>
+<span class="">	const-string v4, "DIRTY"</span>
+<span class="">	invoke-interface {v0, v4}, Lokio/BufferedSink;->writeUtf8(Ljava/lang/String;)Lokio/BufferedSink;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-interface {v4, v5}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	iget-object v3, v3, Lokhttp3/internal/cache/DiskLruCache$Entry;->key:Ljava/lang/String;</span>
+<span class="">	invoke-interface {v0, v3}, Lokio/BufferedSink;->writeUtf8(Ljava/lang/String;)Lokio/BufferedSink;</span>
+<span class="">	invoke-interface {v0, v2}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	const-string v4, "CLEAN"</span>
+<span class="">	invoke-interface {v0, v4}, Lokio/BufferedSink;->writeUtf8(Ljava/lang/String;)Lokio/BufferedSink;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-interface {v4, v5}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	iget-object v4, v3, Lokhttp3/internal/cache/DiskLruCache$Entry;->key:Ljava/lang/String;</span>
+<span class="">	invoke-interface {v0, v4}, Lokio/BufferedSink;->writeUtf8(Ljava/lang/String;)Lokio/BufferedSink;</span>
+<span class="">	invoke-virtual {v3, v0}, Lokhttp3/internal/cache/DiskLruCache$Entry;->writeLengths(Lokio/BufferedSink;)V</span>
+<span class="">	invoke-interface {v0, v2}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:try_start_2</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-interface {v0}, Lokio/BufferedSink;->close()V</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFile:Ljava/io/File;</span>
+<span class="">	invoke-interface {v0, v1}, Lokhttp3/internal/io/FileSystem;->exists(Ljava/io/File;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFile:Ljava/io/File;</span>
+<span class="">	iget-object v2, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFileBackup:Ljava/io/File;</span>
+<span class="">	invoke-interface {v0, v1, v2}, Lokhttp3/internal/io/FileSystem;->rename(Ljava/io/File;Ljava/io/File;)V</span>
+<span class="">	:cond_3</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFileTmp:Ljava/io/File;</span>
+<span class="">	iget-object v2, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFile:Ljava/io/File;</span>
+<span class="">	invoke-interface {v0, v1, v2}, Lokhttp3/internal/io/FileSystem;->rename(Ljava/io/File;Ljava/io/File;)V</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->journalFileBackup:Ljava/io/File;</span>
+<span class="">	invoke-interface {v0, v1}, Lokhttp3/internal/io/FileSystem;->delete(Ljava/io/File;)V</span>
+<span class="">	invoke-direct {p0}, Lokhttp3/internal/cache/DiskLruCache;->newJournalWriter()Lokio/BufferedSink;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-boolean v0, p0, Lokhttp3/internal/cache/DiskLruCache;->hasJournalErrors:Z</span>
+<span class="">	iput-boolean v0, p0, Lokhttp3/internal/cache/DiskLruCache;->mostRecentRebuildFailed:Z</span>
+<span class="">	:try_end_2</span>
+<span class="">	.catchall {:try_start_2 .. :try_end_2} :catchall_1</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	move-exception v1</span>
+<span class="">	:catchall_0</span>
+<span class="">	invoke-interface {v0}, Lokio/BufferedSink;->close()V</span>
+<span class="">	:try_start_3</span>
+<span class="">	throw v1</span>
+<span class="">	move-exception v0</span>
+<span class="">	:try_end_3</span>
+<span class="">	.catchall {:try_start_3 .. :try_end_3} :catchall_1</span>
+<span class="">	:catchall_1</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw v0</span>
+.end method
+
+.method public declared-synchronized remove(Ljava/lang/String;)Z
+<span class="">	.locals 6</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/internal/cache/DiskLruCache;->initialize()V</span>
+<span class="">	invoke-direct {p0}, Lokhttp3/internal/cache/DiskLruCache;->checkNotClosed()V</span>
+<span class="">	invoke-direct {p0, p1}, Lokhttp3/internal/cache/DiskLruCache;->validateKey(Ljava/lang/String;)V</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/util/LinkedHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Lokhttp3/internal/cache/DiskLruCache$Entry;</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	invoke-virtual {p0, p1}, Lokhttp3/internal/cache/DiskLruCache;->removeEntry(Lokhttp3/internal/cache/DiskLruCache$Entry;)Z</span>
+<span class="">	:try_start_1</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	iget-wide v1, p0, Lokhttp3/internal/cache/DiskLruCache;->size:J</span>
+<span class="">	iget-wide v3, p0, Lokhttp3/internal/cache/DiskLruCache;->maxSize:J</span>
+<span class="">	cmp-long v5, v1, v3</span>
+<span class="">	if-gtz v5, :cond_1</span>
+<span class="">	iput-boolean v0, p0, Lokhttp3/internal/cache/DiskLruCache;->mostRecentTrimFailed:Z</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_0</span>
+<span class="">	:cond_1</span>
+<span class="">	move-exception p1</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	:catchall_0</span>
+<span class="">	throw p1</span>
+.end method
+
+.method  removeEntry(Lokhttp3/internal/cache/DiskLruCache$Entry;)Z
+<span class="">	.locals 8</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p1, Lokhttp3/internal/cache/DiskLruCache$Entry;->currentEditor:Lokhttp3/internal/cache/DiskLruCache$Editor;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p1, Lokhttp3/internal/cache/DiskLruCache$Entry;->currentEditor:Lokhttp3/internal/cache/DiskLruCache$Editor;</span>
+<span class="">	invoke-virtual {v0}, Lokhttp3/internal/cache/DiskLruCache$Editor;->detach()V</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	iget v1, p0, Lokhttp3/internal/cache/DiskLruCache;->valueCount:I</span>
+<span class="">	if-ge v0, v1, :cond_1</span>
+<span class="">	iget-object v1, p0, Lokhttp3/internal/cache/DiskLruCache;->fileSystem:Lokhttp3/internal/io/FileSystem;</span>
+<span class="">	iget-object v2, p1, Lokhttp3/internal/cache/DiskLruCache$Entry;->cleanFiles:[Ljava/io/File;</span>
+<span class="">	aget-object v2, v2, v0</span>
+<span class="">	invoke-interface {v1, v2}, Lokhttp3/internal/io/FileSystem;->delete(Ljava/io/File;)V</span>
+<span class="">	iget-wide v1, p0, Lokhttp3/internal/cache/DiskLruCache;->size:J</span>
+<span class="">	iget-object v3, p1, Lokhttp3/internal/cache/DiskLruCache$Entry;->lengths:[J</span>
+<span class="">	aget-wide v4, v3, v0</span>
+<span class="">	sub-long v6, v1, v4</span>
+<span class="">	iput-wide v6, p0, Lokhttp3/internal/cache/DiskLruCache;->size:J</span>
+<span class="">	iget-object v1, p1, Lokhttp3/internal/cache/DiskLruCache$Entry;->lengths:[J</span>
+<span class="">	const-wide/16 v2, 0x0</span>
+<span class="">	aput-wide v2, v1, v0</span>
+<span class="">	add-int/lit8 v0, v0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	iget v0, p0, Lokhttp3/internal/cache/DiskLruCache;->redundantOpCount:I</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	add-int/2addr v0, v1</span>
+<span class="">	iput v0, p0, Lokhttp3/internal/cache/DiskLruCache;->redundantOpCount:I</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->journalWriter:Lokio/BufferedSink;</span>
+<span class="">	const-string v2, "REMOVE"</span>
+<span class="">	invoke-interface {v0, v2}, Lokio/BufferedSink;->writeUtf8(Ljava/lang/String;)Lokio/BufferedSink;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const/16 v2, 0x20</span>
+<span class="">	invoke-interface {v0, v2}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v2, p1, Lokhttp3/internal/cache/DiskLruCache$Entry;->key:Ljava/lang/String;</span>
+<span class="">	invoke-interface {v0, v2}, Lokio/BufferedSink;->writeUtf8(Ljava/lang/String;)Lokio/BufferedSink;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const/16 v2, 0xa</span>
+<span class="">	invoke-interface {v0, v2}, Lokio/BufferedSink;->writeByte(I)Lokio/BufferedSink;</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	iget-object p1, p1, Lokhttp3/internal/cache/DiskLruCache$Entry;->key:Ljava/lang/String;</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/util/LinkedHashMap;->remove(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/internal/cache/DiskLruCache;->journalRebuildRequired()Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_2</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->executor:Ljava/util/concurrent/Executor;</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->cleanupRunnable:Ljava/lang/Runnable;</span>
+<span class="">	invoke-interface {p1, v0}, Ljava/util/concurrent/Executor;->execute(Ljava/lang/Runnable;)V</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method public declared-synchronized setMaxSize(J)V
+<span class="">	.locals 0</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	iput-wide p1, p0, Lokhttp3/internal/cache/DiskLruCache;->maxSize:J</span>
+<span class="">	iget-boolean p1, p0, Lokhttp3/internal/cache/DiskLruCache;->initialized:Z</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	iget-object p1, p0, Lokhttp3/internal/cache/DiskLruCache;->executor:Ljava/util/concurrent/Executor;</span>
+<span class="">	iget-object p2, p0, Lokhttp3/internal/cache/DiskLruCache;->cleanupRunnable:Ljava/lang/Runnable;</span>
+<span class="">	invoke-interface {p1, p2}, Ljava/util/concurrent/Executor;->execute(Ljava/lang/Runnable;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	:cond_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public declared-synchronized size()J
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/internal/cache/DiskLruCache;->initialize()V</span>
+<span class="">	iget-wide v0, p0, Lokhttp3/internal/cache/DiskLruCache;->size:J</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	move-exception v0</span>
+<span class="">	:catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw v0</span>
+.end method
+
+.method public declared-synchronized snapshots()Ljava/util/Iterator;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"()",</span>
+<span class="">	"Ljava/util/Iterator<",</span>
+<span class="">	"Lokhttp3/internal/cache/DiskLruCache$Snapshot;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p0}, Lokhttp3/internal/cache/DiskLruCache;->initialize()V</span>
+<span class="">	new-instance v0, Lokhttp3/internal/cache/DiskLruCache$3;</span>
+<span class="">	invoke-direct {v0, p0}, Lokhttp3/internal/cache/DiskLruCache$3;-><init>(Lokhttp3/internal/cache/DiskLruCache;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	move-exception v0</span>
+<span class="">	:catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw v0</span>
+.end method
+
+.method  trimToSize()V
+<span class="">	.locals 5</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	:goto_0</span>
+<span class="">	iget-wide v0, p0, Lokhttp3/internal/cache/DiskLruCache;->size:J</span>
+<span class="">	iget-wide v2, p0, Lokhttp3/internal/cache/DiskLruCache;->maxSize:J</span>
+<span class="">	cmp-long v4, v0, v2</span>
+<span class="">	if-lez v4, :cond_0</span>
+<span class="">	iget-object v0, p0, Lokhttp3/internal/cache/DiskLruCache;->lruEntries:Ljava/util/LinkedHashMap;</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/LinkedHashMap;->values()Ljava/util/Collection;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Collection;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Lokhttp3/internal/cache/DiskLruCache$Entry;</span>
+<span class="">	invoke-virtual {p0, v0}, Lokhttp3/internal/cache/DiskLruCache;->removeEntry(Lokhttp3/internal/cache/DiskLruCache$Entry;)Z</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-boolean v0, p0, Lokhttp3/internal/cache/DiskLruCache;->mostRecentTrimFailed:Z</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

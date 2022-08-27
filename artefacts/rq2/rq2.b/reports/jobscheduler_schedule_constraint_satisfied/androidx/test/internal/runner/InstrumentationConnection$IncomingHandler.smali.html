@@ -1,0 +1,916 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../index.html">lu.uni.trux.jobscheduler_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.test.internal.runner</a></li>
+        <li><i class="ico ico-class"></i> InstrumentationConnection$IncomingHandler.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class  Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;
+.super Landroid/os/Handler;
+.source "InstrumentationConnection.java"
+
+.annotation system Ldalvik/annotation/EnclosingClass;
+value = Landroidx/test/internal/runner/InstrumentationConnection;
+.end annotation
+.annotation system Ldalvik/annotation/InnerClass;
+accessFlags = 0x8
+name = "IncomingHandler"
+.end annotation
+
+.field private final latches:Ljava/util/Map;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/Map<",
+"Ljava/util/UUID;",
+"Ljava/util/concurrent/CountDownLatch;",
+">;"
+}
+.end annotation
+.end field
+.field  messengerHandler:Landroid/os/Messenger;
+.field  otherInstrumentations:Ljava/util/Set;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/Set<",
+"Landroid/os/Messenger;",
+">;"
+}
+.end annotation
+.end field
+.field  typedClients:Ljava/util/Map;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/Map<",
+"Ljava/lang/String;",
+"Ljava/util/Set<",
+"Landroid/os/Messenger;",
+">;>;"
+}
+.end annotation
+.end field
+
+
+.method public constructor <init>(Landroid/os/Looper;)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"looper"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-direct {p0, p1}, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V</span>
+<span class="">	new-instance v0, Landroid/os/Messenger;</span>
+<span class="">	invoke-direct {v0, p0}, Landroid/os/Messenger;-><init>(Landroid/os/Handler;)V</span>
+<span class="">	iput-object v0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->messengerHandler:Landroid/os/Messenger;</span>
+<span class="">	new-instance v0, Ljava/util/HashSet;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/HashSet;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->otherInstrumentations:Ljava/util/Set;</span>
+<span class="">	new-instance v0, Ljava/util/HashMap;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/HashMap;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->typedClients:Ljava/util/Map;</span>
+<span class="">	new-instance v0, Ljava/util/HashMap;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/HashMap;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->latches:Ljava/util/Map;</span>
+<span class="">	invoke-static {}, Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eq v0, p1, :cond_0</span>
+<span class="">	invoke-static {}, Landroid/os/Looper;->myLooper()Landroid/os/Looper;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eq v0, p1, :cond_0</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalStateException;</span>
+<span class="">	:cond_0</span>
+<span class="">	const-string v0, "This handler should not be using the main thread looper nor the instrumentation thread looper."</span>
+<span class="">	invoke-direct {p1, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method static synthetic access$000(Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->doDie()V</span>
+.end method
+
+.method static synthetic access$100(Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;Ljava/util/concurrent/Callable;)Ljava/lang/Object;
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0, p1}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->runSyncTask(Ljava/util/concurrent/Callable;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method static synthetic access$200(Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;Ljava/util/UUID;Ljava/util/concurrent/CountDownLatch;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0, p1, p2}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->associateLatch(Ljava/util/UUID;Ljava/util/concurrent/CountDownLatch;)V</span>
+.end method
+
+.method static synthetic access$300(Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;Ljava/util/UUID;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0, p1}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->disassociateLatch(Ljava/util/UUID;)V</span>
+.end method
+
+.method static synthetic access$400(Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;Ljava/lang/String;)Ljava/util/Set;
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0, p1}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->getClientsForType(Ljava/lang/String;)Ljava/util/Set;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method static synthetic access$700(Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;)Ljava/util/Map;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->latches:Ljava/util/Map;</span>
+.end method
+
+.method private associateLatch(Ljava/util/UUID;Ljava/util/concurrent/CountDownLatch;)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x10,</span>
+<span class="">	0x10</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"latchId",</span>
+<span class="">	"latch"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler$1;</span>
+<span class="">	invoke-direct {v0, p0, p1, p2}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler$1;-><init>(Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;Ljava/util/UUID;Ljava/util/concurrent/CountDownLatch;)V</span>
+<span class="">	invoke-direct {p0, v0}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->runSyncTask(Ljava/util/concurrent/Callable;)Ljava/lang/Object;</span>
+.end method
+
+.method private clientsRegistrationFromBundle(Landroid/os/Bundle;Z)V
+<span class="">	.locals 7</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"clientsBundle",</span>
+<span class="">	"shouldRegister"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	new-array v1, v0, [Ljava/lang/Object;</span>
+<span class="">	const-string v2, "InstrConnection"</span>
+<span class="">	const-string v3, "clientsRegistrationFromBundle called"</span>
+<span class="">	invoke-static {v2, v3, v1}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	const-string p1, "The client bundle is null, ignoring..."</span>
+<span class="">	invoke-static {v2, p1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	const-string v1, "instr_clients"</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p1, v1}, Landroid/os/Bundle;->getStringArrayList(Ljava/lang/String;)Ljava/util/ArrayList;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	if-nez v1, :cond_1</span>
+<span class="">	const-string p1, "No clients found in the given bundle"</span>
+<span class="">	invoke-static {v2, p1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	invoke-virtual {v1}, Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v2</span>
+<span class="">	:cond_2</span>
+<span class="">	if-eqz v2, :cond_4</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Ljava/lang/String;</span>
+<span class="">	invoke-static {v2}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {p1, v3}, Landroid/os/Bundle;->getParcelableArray(Ljava/lang/String;)[Landroid/os/Parcelable;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	if-eqz v3, :cond_2</span>
+<span class="">	array-length v4, v3</span>
+<span class="">	move v5, v0</span>
+<span class="">	if-ge v5, v4, :cond_2</span>
+<span class="">	aget-object v6, v3, v5</span>
+<span class="">	:goto_0</span>
+<span class="">	if-eqz p2, :cond_3</span>
+<span class="">	check-cast v6, Landroid/os/Messenger;</span>
+<span class="">	invoke-direct {p0, v2, v6}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->registerClient(Ljava/lang/String;Landroid/os/Messenger;)V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	check-cast v6, Landroid/os/Messenger;</span>
+<span class="">	invoke-direct {p0, v2, v6}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->unregisterClient(Ljava/lang/String;Landroid/os/Messenger;)V</span>
+<span class="">	:cond_3</span>
+<span class="">	add-int/lit8 v5, v5, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_4</span>
+.end method
+
+.method private disassociateLatch(Ljava/util/UUID;)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x10</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"latchId"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler$2;</span>
+<span class="">	invoke-direct {v0, p0, p1}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler$2;-><init>(Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;Ljava/util/UUID;)V</span>
+<span class="">	invoke-direct {p0, v0}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->runSyncTask(Ljava/util/concurrent/Callable;)Ljava/lang/Object;</span>
+.end method
+
+.method private doDie()V
+<span class="">	.locals 5</span>
+
+<span class="">	const-string v0, "InstrConnection"</span>
+<span class="">	const-string v1, "terminating process"</span>
+<span class="">	invoke-static {v0, v1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	const/4 v1, 0x5</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-direct {p0, v1, v2}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->sendMessageToOtherInstr(ILandroid/os/Bundle;)V</span>
+<span class="">	iget-object v1, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->otherInstrumentations:Ljava/util/Set;</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Set;->clear()V</span>
+<span class="">	iget-object v1, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->typedClients:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Map;->clear()V</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	new-array v3, v1, [Ljava/lang/Object;</span>
+<span class="">	const-string v4, "quitting looper..."</span>
+<span class="">	invoke-static {v0, v4, v3}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->getLooper()Landroid/os/Looper;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {v3}, Landroid/os/Looper;->quit()V</span>
+<span class="">	new-array v3, v1, [Ljava/lang/Object;</span>
+<span class="">	const-string v4, "finishing instrumentation..."</span>
+<span class="">	invoke-static {v0, v4, v3}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-static {}, Landroidx/test/internal/runner/InstrumentationConnection;->access$600()Landroid/app/Instrumentation;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Landroid/app/Instrumentation;->finish(ILandroid/os/Bundle;)V</span>
+<span class="">	invoke-static {v2}, Landroidx/test/internal/runner/InstrumentationConnection;->access$602(Landroid/app/Instrumentation;)Landroid/app/Instrumentation;</span>
+<span class="">	invoke-static {v2}, Landroidx/test/internal/runner/InstrumentationConnection;->access$502(Landroidx/test/runner/MonitoringInstrumentation$ActivityFinisher;)Landroidx/test/runner/MonitoringInstrumentation$ActivityFinisher;</span>
+.end method
+
+.method private getClientsForType(Ljava/lang/String;)Ljava/util/Set;
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	")",</span>
+<span class="">	"Ljava/util/Set<",</span>
+<span class="">	"Landroid/os/Messenger;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x10</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"type"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/util/concurrent/FutureTask;</span>
+<span class="">	new-instance v1, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler$3;</span>
+<span class="">	invoke-direct {v1, p0, p1}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler$3;-><init>(Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;Ljava/lang/String;)V</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/util/concurrent/FutureTask;-><init>(Ljava/util/concurrent/Callable;)V</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->post(Ljava/lang/Runnable;)Z</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/concurrent/FutureTask;->get()Ljava/lang/Object;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Ljava/util/Set;</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/InterruptedException; {:try_start_0 .. :try_end_0} :catch_1</span>
+<span class="">	.catch Ljava/util/concurrent/ExecutionException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catch_0</span>
+<span class="">	new-instance v0, Ljava/lang/IllegalStateException;</span>
+<span class="">	invoke-virtual {p1}, Ljava/util/concurrent/ExecutionException;->getCause()Ljava/lang/Throwable;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {v0, p1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/Throwable;)V</span>
+<span class="">	throw v0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catch_1</span>
+<span class="">	new-instance v0, Ljava/lang/IllegalStateException;</span>
+<span class="">	invoke-direct {v0, p1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/Throwable;)V</span>
+<span class="">	throw v0</span>
+.end method
+
+.method private instrBinderDied(Landroid/os/Messenger;)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"instrMessenger"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x5</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->obtainMessage(I)Landroid/os/Message;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object p1, v0, Landroid/os/Message;->replyTo:Landroid/os/Messenger;</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->sendMessage(Landroid/os/Message;)Z</span>
+.end method
+
+.method private notifyLatch(Ljava/util/UUID;)V
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"uuid"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->latches:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->latches:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Ljava/util/concurrent/CountDownLatch;</span>
+<span class="">	invoke-virtual {p1}, Ljava/util/concurrent/CountDownLatch;->countDown()V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-static {p1}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-static {p1}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	add-int/lit8 v0, v0, 0x10</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v1, v0}, Ljava/lang/StringBuilder;-><init>(I)V</span>
+<span class="">	const-string v0, "Latch not found "</span>
+<span class="">	invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string v0, "InstrConnection"</span>
+<span class="">	invoke-static {v0, p1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method private registerClient(Ljava/lang/String;Landroid/os/Messenger;)V
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"type",</span>
+<span class="">	"client"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x2</span>
+<span class="">	new-array v0, v0, [Ljava/lang/Object;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	aput-object p1, v0, v1</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	aput-object p2, v0, v1</span>
+<span class="">	const-string v1, "InstrConnection"</span>
+<span class="">	const-string v2, "registerClient called with type = [%s] client = [%s]"</span>
+<span class="">	invoke-static {v1, v2, v0}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	const-string v0, "type cannot be null!"</span>
+<span class="">	invoke-static {p1, v0}, Landroidx/test/internal/util/Checks;->checkNotNull(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	const-string v0, "client cannot be null!"</span>
+<span class="">	invoke-static {p2, v0}, Landroidx/test/internal/util/Checks;->checkNotNull(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	iget-object v0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->typedClients:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/util/Set;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	new-instance v0, Ljava/util/HashSet;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/HashSet;-><init>()V</span>
+<span class="">	invoke-interface {v0, p2}, Ljava/util/Set;->add(Ljava/lang/Object;)Z</span>
+<span class="">	iget-object p2, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->typedClients:Ljava/util/Map;</span>
+<span class="">	invoke-interface {p2, p1, v0}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	invoke-interface {v0, p2}, Ljava/util/Set;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private runSyncTask(Ljava/util/concurrent/Callable;)Ljava/lang/Object;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"<T:",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	">(",</span>
+<span class="">	"Ljava/util/concurrent/Callable<",</span>
+<span class="">	"TT;>;)TT;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"task"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/util/concurrent/FutureTask;</span>
+<span class="">	invoke-direct {v0, p1}, Ljava/util/concurrent/FutureTask;-><init>(Ljava/util/concurrent/Callable;)V</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->post(Ljava/lang/Runnable;)Z</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/concurrent/FutureTask;->get()Ljava/lang/Object;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/InterruptedException; {:try_start_0 .. :try_end_0} :catch_1</span>
+<span class="">	.catch Ljava/util/concurrent/ExecutionException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catch_0</span>
+<span class="">	new-instance v0, Ljava/lang/IllegalStateException;</span>
+<span class="">	invoke-virtual {p1}, Ljava/util/concurrent/ExecutionException;->getCause()Ljava/lang/Throwable;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {v0, p1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/Throwable;)V</span>
+<span class="">	throw v0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catch_1</span>
+<span class="">	new-instance v0, Ljava/lang/IllegalStateException;</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/InterruptedException;->getCause()Ljava/lang/Throwable;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {v0, p1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/Throwable;)V</span>
+<span class="">	throw v0</span>
+.end method
+
+.method private sendMessageToOtherInstr(ILandroid/os/Bundle;)V
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"what",</span>
+<span class="">	"data"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x2</span>
+<span class="">	new-array v0, v0, [Ljava/lang/Object;</span>
+<span class="">	invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	aput-object v1, v0, v2</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	aput-object p2, v0, v1</span>
+<span class="">	const-string v1, "InstrConnection"</span>
+<span class="">	const-string v2, "sendMessageToOtherInstr() called with: what = [%s], data = [%s]"</span>
+<span class="">	invoke-static {v1, v2, v0}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->otherInstrumentations:Ljava/util/Set;</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Set;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Landroid/os/Messenger;</span>
+<span class="">	invoke-direct {p0, v1, p1, p2}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->sendMessageWithReply(Landroid/os/Messenger;ILandroid/os/Bundle;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private sendMessageWithReply(Landroid/os/Messenger;ILandroid/os/Bundle;)V
+<span class="">	.locals 5</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"toMessenger",</span>
+<span class="">	"what",</span>
+<span class="">	"data"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	const/16 v1, 0x2d</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/lang/StringBuilder;-><init>(I)V</span>
+<span class="">	const-string v1, "sendMessageWithReply type: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v1, " called"</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	new-array v1, v1, [Ljava/lang/Object;</span>
+<span class="">	const-string v2, "InstrConnection"</span>
+<span class="">	invoke-static {v2, v0, v1}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-virtual {p0, p2}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->obtainMessage(I)Landroid/os/Message;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	iget-object v0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->messengerHandler:Landroid/os/Messenger;</span>
+<span class="">	iput-object v0, p2, Landroid/os/Message;->replyTo:Landroid/os/Messenger;</span>
+<span class="">	if-eqz p3, :cond_0</span>
+<span class="">	invoke-virtual {p2, p3}, Landroid/os/Message;->setData(Landroid/os/Bundle;)V</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object p3, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->typedClients:Ljava/util/Map;</span>
+<span class="">	invoke-interface {p3}, Ljava/util/Map;->isEmpty()Z</span>
+<span class="">	move-result p3</span>
+<span class="">	if-nez p3, :cond_2</span>
+<span class="">	invoke-virtual {p2}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object p3</span>
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	iget-object v1, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->typedClients:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Map;->keySet()Ljava/util/Set;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V</span>
+<span class="">	const-string v1, "instr_clients"</span>
+<span class="">	invoke-virtual {p3, v1, v0}, Landroid/os/Bundle;->putStringArrayList(Ljava/lang/String;Ljava/util/ArrayList;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->typedClients:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Map;->entrySet()Ljava/util/Set;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Set;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljava/util/Map$Entry;</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-static {v3}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	check-cast v4, Ljava/util/Set;</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljava/util/Set;</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Set;->size()I</span>
+<span class="">	move-result v1</span>
+<span class="">	new-array v1, v1, [Landroid/os/Messenger;</span>
+<span class="">	invoke-interface {v4, v1}, Ljava/util/Set;->toArray([Ljava/lang/Object;)[Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, [Landroid/os/Messenger;</span>
+<span class="">	invoke-virtual {p3, v3, v1}, Landroid/os/Bundle;->putParcelableArray(Ljava/lang/String;[Landroid/os/Parcelable;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {p2, p3}, Landroid/os/Message;->setData(Landroid/os/Bundle;)V</span>
+<span class="">	:try_start_0</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/os/Messenger;->send(Landroid/os/Message;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:catch_0</span>
+<span class="">	move-exception p2</span>
+<span class="">	const-string p3, "The remote process is terminated unexpectedly"</span>
+<span class="">	invoke-static {v2, p3, p2}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I</span>
+<span class="">	invoke-direct {p0, p1}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->instrBinderDied(Landroid/os/Messenger;)V</span>
+<span class="">	:goto_1</span>
+.end method
+
+.method private unregisterClient(Ljava/lang/String;Landroid/os/Messenger;)V
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"type",</span>
+<span class="">	"client"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x2</span>
+<span class="">	new-array v0, v0, [Ljava/lang/Object;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	aput-object p1, v0, v1</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	aput-object p2, v0, v1</span>
+<span class="">	const-string v1, "InstrConnection"</span>
+<span class="">	const-string v2, "unregisterClient called with type = [%s] client = [%s]"</span>
+<span class="">	invoke-static {v1, v2, v0}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	const-string v0, "type cannot be null!"</span>
+<span class="">	invoke-static {p1, v0}, Landroidx/test/internal/util/Checks;->checkNotNull(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	const-string v0, "client cannot be null!"</span>
+<span class="">	invoke-static {p2, v0}, Landroidx/test/internal/util/Checks;->checkNotNull(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	iget-object v0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->typedClients:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	const-string p2, "There are no registered clients for type: "</span>
+<span class="">	invoke-static {p1}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {p2, p1}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	new-instance p1, Ljava/lang/String;</span>
+<span class="">	invoke-direct {p1, p2}, Ljava/lang/String;-><init>(Ljava/lang/String;)V</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-static {v1, p1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	iget-object v0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->typedClients:Ljava/util/Map;</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/util/Set;</span>
+<span class="">	invoke-interface {v0, p2}, Ljava/util/Set;->contains(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-nez v2, :cond_2</span>
+<span class="">	invoke-static {p1}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-virtual {p2}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result p2</span>
+<span class="">	add-int/lit8 p2, p2, 0x4e</span>
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0, p2}, Ljava/lang/StringBuilder;-><init>(I)V</span>
+<span class="">	const-string p2, "Could not unregister client for type "</span>
+<span class="">	invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-virtual {p2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string p2, " because it doesn\'t seem to be registered"</span>
+<span class="">	invoke-virtual {p1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-static {v1, p1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	invoke-interface {v0, p2}, Ljava/util/Set;->remove(Ljava/lang/Object;)Z</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Set;->isEmpty()Z</span>
+<span class="">	:cond_2</span>
+<span class="">	move-result p2</span>
+<span class="">	if-eqz p2, :cond_3</span>
+<span class="">	iget-object p2, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->typedClients:Ljava/util/Map;</span>
+<span class="">	invoke-interface {p2, p1}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method public handleMessage(Landroid/os/Message;)V
+<span class="">	.locals 8</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"msg"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget v0, p1, Landroid/os/Message;->what:I</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	const/16 v2, 0xc</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	const-string v4, "instr_client_msgr"</span>
+<span class="">	const-string v5, "instr_client_type"</span>
+<span class="">	const/4 v6, 0x0</span>
+<span class="">	const-string v7, "InstrConnection"</span>
+<span class="">	packed-switch v0, :pswitch_data_0</span>
+<span class="">	iget v0, p1, Landroid/os/Message;->what:I</span>
+<span class="">	const/16 v1, 0x2a</span>
+<span class="">	new-instance v2, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v2, v1}, Ljava/lang/StringBuilder;-><init>(I)V</span>
+<span class="">	const-string v1, "Unknown message code received: "</span>
+<span class="">	invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v7, v0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	invoke-super {p0, p1}, Landroid/os/Handler;->handleMessage(Landroid/os/Message;)V</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	:pswitch_0</span>
+<span class="">	new-array v0, v6, [Ljava/lang/Object;</span>
+<span class="">	const-string v1, "handleMessage(MSG_PERFORM_CLEANUP_FINISHED)"</span>
+<span class="">	invoke-static {v7, v1, v0}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-virtual {p1}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string v0, "instr_uuid"</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/os/Bundle;->getSerializable(Ljava/lang/String;)Ljava/io/Serializable;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Ljava/util/UUID;</span>
+<span class="">	invoke-direct {p0, p1}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->notifyLatch(Ljava/util/UUID;)V</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	:pswitch_1</span>
+<span class="">	new-array v0, v6, [Ljava/lang/Object;</span>
+<span class="">	const-string v1, "handleMessage(MSG_PERFORM_CLEANUP)"</span>
+<span class="">	invoke-static {v7, v1, v0}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-static {}, Landroidx/test/internal/runner/InstrumentationConnection;->access$600()Landroid/app/Instrumentation;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {}, Landroidx/test/internal/runner/InstrumentationConnection;->access$500()Landroidx/test/runner/MonitoringInstrumentation$ActivityFinisher;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/app/Instrumentation;->runOnMainSync(Ljava/lang/Runnable;)V</span>
+<span class="">	iget-object v0, p1, Landroid/os/Message;->replyTo:Landroid/os/Messenger;</span>
+<span class="">	invoke-virtual {p1}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {p0, v0, v2, p1}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->sendMessageWithReply(Landroid/os/Messenger;ILandroid/os/Bundle;)V</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	:pswitch_2</span>
+<span class="">	new-array v0, v6, [Ljava/lang/Object;</span>
+<span class="">	const-string v1, "handleMessage(MSG_REMOTE_CLEANUP_REQUEST)"</span>
+<span class="">	invoke-static {v7, v1, v0}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->otherInstrumentations:Ljava/util/Set;</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Set;->isEmpty()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {p0, v2}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->obtainMessage(I)Landroid/os/Message;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p1}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/os/Message;->setData(Landroid/os/Bundle;)V</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->sendMessage(Landroid/os/Message;)Z</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/16 v0, 0xb</span>
+<span class="">	invoke-virtual {p1}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {p0, v0, p1}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->sendMessageToOtherInstr(ILandroid/os/Bundle;)V</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	:pswitch_3</span>
+<span class="">	new-array v0, v6, [Ljava/lang/Object;</span>
+<span class="">	const-string v1, "handleMessage(MSG_UN_REG_CLIENT)"</span>
+<span class="">	invoke-static {v7, v1, v0}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-virtual {p1}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, v5}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p1}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1, v4}, Landroid/os/Bundle;->getParcelable(Ljava/lang/String;)Landroid/os/Parcelable;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Landroid/os/Messenger;</span>
+<span class="">	invoke-direct {p0, v0, v1}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->unregisterClient(Ljava/lang/String;Landroid/os/Messenger;)V</span>
+<span class="">	invoke-virtual {p1}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {p0, v3, p1}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->sendMessageToOtherInstr(ILandroid/os/Bundle;)V</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	:pswitch_4</span>
+<span class="">	new-array v0, v6, [Ljava/lang/Object;</span>
+<span class="">	const-string v1, "handleMessage(MSG_REG_CLIENT)"</span>
+<span class="">	invoke-static {v7, v1, v0}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-virtual {p1}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, v5}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p1}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1, v4}, Landroid/os/Bundle;->getParcelable(Ljava/lang/String;)Landroid/os/Parcelable;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Landroid/os/Messenger;</span>
+<span class="">	invoke-direct {p0, v0, v1}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->registerClient(Ljava/lang/String;Landroid/os/Messenger;)V</span>
+<span class="">	invoke-virtual {p1}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {p0, v6, p1}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->sendMessageToOtherInstr(ILandroid/os/Bundle;)V</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	:pswitch_5</span>
+<span class="">	new-array v0, v6, [Ljava/lang/Object;</span>
+<span class="">	const-string v1, "handleMessage(MSG_REMOVE_CLIENTS_IN_BUNDLE)"</span>
+<span class="">	invoke-static {v7, v1, v0}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-virtual {p1}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {p0, p1, v6}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->clientsRegistrationFromBundle(Landroid/os/Bundle;Z)V</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	:pswitch_6</span>
+<span class="">	new-array v0, v6, [Ljava/lang/Object;</span>
+<span class="">	const-string v1, "handleMessage(MSG_ADD_CLIENTS_IN_BUNDLE)"</span>
+<span class="">	invoke-static {v7, v1, v0}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-virtual {p1}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {p0, p1, v3}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->clientsRegistrationFromBundle(Landroid/os/Bundle;Z)V</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	:pswitch_7</span>
+<span class="">	new-array v0, v6, [Ljava/lang/Object;</span>
+<span class="">	const-string v1, "handleMessage(MSG_REMOVE_INSTRUMENTATION)"</span>
+<span class="">	invoke-static {v7, v1, v0}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->otherInstrumentations:Ljava/util/Set;</span>
+<span class="">	iget-object p1, p1, Landroid/os/Message;->replyTo:Landroid/os/Messenger;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Set;->remove(Ljava/lang/Object;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-nez p1, :cond_4</span>
+<span class="">	const-string p1, "Attempting to remove a non-existent binder!"</span>
+<span class="">	invoke-static {v7, p1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	:pswitch_8</span>
+<span class="">	new-array v0, v6, [Ljava/lang/Object;</span>
+<span class="">	const-string v2, "handleMessage(MSG_ADD_INSTRUMENTATION)"</span>
+<span class="">	invoke-static {v7, v2, v0}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->otherInstrumentations:Ljava/util/Set;</span>
+<span class="">	iget-object v2, p1, Landroid/os/Message;->replyTo:Landroid/os/Messenger;</span>
+<span class="">	invoke-interface {v0, v2}, Ljava/util/Set;->add(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iget-object v0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->typedClients:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Map;->isEmpty()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	iget-object v0, p1, Landroid/os/Message;->replyTo:Landroid/os/Messenger;</span>
+<span class="">	const/4 v2, 0x6</span>
+<span class="">	invoke-direct {p0, v0, v2, v1}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->sendMessageWithReply(Landroid/os/Messenger;ILandroid/os/Bundle;)V</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {p1}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {p0, p1, v3}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->clientsRegistrationFromBundle(Landroid/os/Bundle;Z)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_2</span>
+<span class="">	const-string p1, "Message with existing binder was received, ignoring it.."</span>
+<span class="">	invoke-static {v7, p1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:pswitch_9</span>
+<span class="">	new-array v0, v6, [Ljava/lang/Object;</span>
+<span class="">	const-string v2, "handleMessage(MSG_HANDLE_INSTRUMENTATION_FROM_BROADCAST)"</span>
+<span class="">	invoke-static {v7, v2, v0}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->otherInstrumentations:Ljava/util/Set;</span>
+<span class="">	iget-object v2, p1, Landroid/os/Message;->replyTo:Landroid/os/Messenger;</span>
+<span class="">	invoke-interface {v0, v2}, Ljava/util/Set;->add(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	iget-object p1, p1, Landroid/os/Message;->replyTo:Landroid/os/Messenger;</span>
+<span class="">	const/4 v0, 0x4</span>
+<span class="">	invoke-direct {p0, p1, v0, v1}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->sendMessageWithReply(Landroid/os/Messenger;ILandroid/os/Bundle;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_3</span>
+<span class="">	const-string p1, "Broadcast with existing binder was received, ignoring it.."</span>
+<span class="">	invoke-static {v7, p1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:pswitch_a</span>
+<span class="">	new-array p1, v6, [Ljava/lang/Object;</span>
+<span class="">	const-string v0, "handleMessage(MSG_TERMINATE)"</span>
+<span class="">	invoke-static {v7, v0, p1}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-direct {p0}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->doDie()V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:pswitch_b</span>
+<span class="">	new-array v0, v6, [Ljava/lang/Object;</span>
+<span class="">	const-string v1, "handleMessage(MSG_REMOTE_REMOVE_CLIENT)"</span>
+<span class="">	invoke-static {v7, v1, v0}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-virtual {p1}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, v5}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object p1, p1, Landroid/os/Message;->replyTo:Landroid/os/Messenger;</span>
+<span class="">	invoke-direct {p0, v0, p1}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->unregisterClient(Ljava/lang/String;Landroid/os/Messenger;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:pswitch_c</span>
+<span class="">	new-array v0, v6, [Ljava/lang/Object;</span>
+<span class="">	const-string v1, "handleMessage(MSG_REMOTE_ADD_CLIENT)"</span>
+<span class="">	invoke-static {v7, v1, v0}, Landroidx/test/internal/util/LogUtil;->logDebugWithProcess(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-virtual {p1}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, v5}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p1}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1, v4}, Landroid/os/Bundle;->getParcelable(Ljava/lang/String;)Landroid/os/Parcelable;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Landroid/os/Messenger;</span>
+<span class="">	invoke-direct {p0, v0, p1}, Landroidx/test/internal/runner/InstrumentationConnection$IncomingHandler;->registerClient(Ljava/lang/String;Landroid/os/Messenger;)V</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_4</span>
+<span class="">	:pswitch_data_0</span>
+<span class="">	.packed-switch 0x0</span>
+<span class="">	:pswitch_c</span>
+<span class="">	:pswitch_b</span>
+<span class="">	:pswitch_a</span>
+<span class="">	:pswitch_9</span>
+<span class="">	:pswitch_8</span>
+<span class="">	:pswitch_7</span>
+<span class="">	:pswitch_6</span>
+<span class="">	:pswitch_5</span>
+<span class="">	:pswitch_4</span>
+<span class="">	:pswitch_3</span>
+<span class="">	:pswitch_2</span>
+<span class="">	:pswitch_1</span>
+<span class="">	:pswitch_0</span>
+<span class="">	.end packed-switch</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../.resources/report.js"></script>
+</body>
+</html>

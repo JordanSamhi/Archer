@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">android.support.v7.app</a></li>
+        <li><i class="ico ico-class"></i> AppCompatActivity.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Landroid/support/v7/app/AppCompatActivity;
+.super Landroid/support/v4/app/FragmentActivity;
+.source "AppCompatActivity.java"
+.implements Landroid/support/v7/app/AppCompatCallback;
+.implements Landroid/support/v4/app/TaskStackBuilder$SupportParentable;
+.implements Landroid/support/v7/app/ActionBarDrawerToggle$DelegateProvider;
+
+
+.field private mDelegate:Landroid/support/v7/app/AppCompatDelegate;
+.field private mResources:Landroid/content/res/Resources;
+.field private mThemeId:I
+
+
+<span class="cov">.method public constructor &lt;init&gt;()V</span>
+<span class="">	.locals 1</span>
+
+<span class="cov">	invoke-direct {p0}, Landroid/support/v4/app/FragmentActivity;-><init>()V</span>
+<span class="cov">	const/4 v0, 0x0</span>
+<span class="cov">	iput v0, p0, Landroid/support/v7/app/AppCompatActivity;->mThemeId:I</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method private performMenuItemShortcut(ILandroid/view/KeyEvent;)Z</span>
+<span class="">	.locals 1</span>
+
+<span class="cov">	sget p1, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="cov">	const/16 v0, 0x1a</span>
+<span class="">	if-ge p1, v0, :cond_0</span>
+<span class="">	invoke-virtual {p2}, Landroid/view/KeyEvent;->isCtrlPressed()Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	invoke-virtual {p2}, Landroid/view/KeyEvent;->getMetaState()I</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-static {p1}, Landroid/view/KeyEvent;->metaStateHasNoModifiers(I)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	invoke-virtual {p2}, Landroid/view/KeyEvent;->getRepeatCount()I</span>
+<span class="">	move-result p1</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	invoke-virtual {p2}, Landroid/view/KeyEvent;->getKeyCode()I</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-static {p1}, Landroid/view/KeyEvent;->isModifierKey(I)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getWindow()Landroid/view/Window;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/Window;->getDecorView()Landroid/view/View;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/Window;->getDecorView()Landroid/view/View;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/view/View;->dispatchKeyShortcutEvent(Landroid/view/KeyEvent;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="cov">	const/4 p1, 0x0</span>
+<span class="cov">	:cond_0</span>
+<span class="exec">	return p1</span>
+.end method
+
+.method public addContentView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroid/support/v7/app/AppCompatDelegate;->addContentView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V</span>
+.end method
+
+.method public closeOptionsMenu()V
+<span class="">	.locals 3</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getSupportActionBar()Landroid/support/v7/app/ActionBar;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getWindow()Landroid/view/Window;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/view/Window;->hasFeature(I)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Landroid/support/v7/app/ActionBar;->closeOptionsMenu()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-super {p0}, Landroid/support/v4/app/FragmentActivity;->closeOptionsMenu()V</span>
+<span class="">	:cond_1</span>
+.end method
+
+<span class="cov">.method public dispatchKeyEvent(Landroid/view/KeyEvent;)Z</span>
+<span class="">	.locals 3</span>
+
+<span class="exec">	invoke-virtual {p1}, Landroid/view/KeyEvent;->getKeyCode()I</span>
+<span class="cov">	move-result v0</span>
+<span class="exec">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getSupportActionBar()Landroid/support/v7/app/ActionBar;</span>
+<span class="cov">	move-result-object v1</span>
+<span class="cov">	const/16 v2, 0x52</span>
+<span class="">	if-ne v0, v2, :cond_0</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	invoke-virtual {v1, p1}, Landroid/support/v7/app/ActionBar;->onMenuKeyEvent(Landroid/view/KeyEvent;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="exec">	invoke-super {p0, p1}, Landroid/support/v4/app/FragmentActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z</span>
+<span class="cov">	:cond_0</span>
+<span class="cov">	move-result p1</span>
+<span class="exec">	return p1</span>
+.end method
+
+<span class="cov">.method public findViewById(I)Landroid/view/View;</span>
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # I</span>
+<span class="">	.annotation build Landroid/support/annotation/IdRes;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"<T:",</span>
+<span class="">	"Landroid/view/View;",</span>
+<span class="">	">(I)TT;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="exec">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="exec">	invoke-virtual {v0, p1}, Landroid/support/v7/app/AppCompatDelegate;->findViewById(I)Landroid/view/View;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="exec">	return-object p1</span>
+.end method
+
+<span class="cov">.method public getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="">	.locals 1</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+
+<span class="cov">	iget-object v0, p0, Landroid/support/v7/app/AppCompatActivity;->mDelegate:Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="cov">	if-nez v0, :cond_0</span>
+<span class="exec">	invoke-static {p0, p0}, Landroid/support/v7/app/AppCompatDelegate;->create(Landroid/app/Activity;Landroid/support/v7/app/AppCompatCallback;)Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	iput-object v0, p0, Landroid/support/v7/app/AppCompatActivity;->mDelegate:Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="cov">	:cond_0</span>
+<span class="cov">	iget-object v0, p0, Landroid/support/v7/app/AppCompatActivity;->mDelegate:Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="exec">	return-object v0</span>
+.end method
+
+.method public getDrawerToggleDelegate()Landroid/support/v7/app/ActionBarDrawerToggle$Delegate;
+<span class="">	.locals 1</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Landroid/support/v7/app/AppCompatDelegate;->getDrawerToggleDelegate()Landroid/support/v7/app/ActionBarDrawerToggle$Delegate;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+<span class="cov">.method public getMenuInflater()Landroid/view/MenuInflater;</span>
+<span class="">	.locals 1</span>
+
+<span class="exec">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="exec">	invoke-virtual {v0}, Landroid/support/v7/app/AppCompatDelegate;->getMenuInflater()Landroid/view/MenuInflater;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="exec">	return-object v0</span>
+.end method
+
+<span class="cov">.method public getResources()Landroid/content/res/Resources;</span>
+<span class="">	.locals 2</span>
+
+<span class="cov">	iget-object v0, p0, Landroid/support/v7/app/AppCompatActivity;->mResources:Landroid/content/res/Resources;</span>
+<span class="cov">	if-nez v0, :cond_0</span>
+<span class="exec">	invoke-static {}, Landroid/support/v7/widget/VectorEnabledTintResources;->shouldBeUsed()Z</span>
+<span class="cov">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	new-instance v0, Landroid/support/v7/widget/VectorEnabledTintResources;</span>
+<span class="">	invoke-super {p0}, Landroid/support/v4/app/FragmentActivity;->getResources()Landroid/content/res/Resources;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-direct {v0, p0, v1}, Landroid/support/v7/widget/VectorEnabledTintResources;-><init>(Landroid/content/Context;Landroid/content/res/Resources;)V</span>
+<span class="">	iput-object v0, p0, Landroid/support/v7/app/AppCompatActivity;->mResources:Landroid/content/res/Resources;</span>
+<span class="cov">	:cond_0</span>
+<span class="cov">	iget-object v0, p0, Landroid/support/v7/app/AppCompatActivity;->mResources:Landroid/content/res/Resources;</span>
+<span class="cov">	if-nez v0, :cond_1</span>
+<span class="exec">	invoke-super {p0}, Landroid/support/v4/app/FragmentActivity;->getResources()Landroid/content/res/Resources;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v0, p0, Landroid/support/v7/app/AppCompatActivity;->mResources:Landroid/content/res/Resources;</span>
+<span class="cov">	:goto_0</span>
+<span class="exec">	return-object v0</span>
+.end method
+
+<span class="cov">.method public getSupportActionBar()Landroid/support/v7/app/ActionBar;</span>
+<span class="">	.locals 1</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+
+<span class="exec">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="exec">	invoke-virtual {v0}, Landroid/support/v7/app/AppCompatDelegate;->getSupportActionBar()Landroid/support/v7/app/ActionBar;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="exec">	return-object v0</span>
+.end method
+
+.method public getSupportParentActivityIntent()Landroid/content/Intent;
+<span class="">	.locals 1</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {p0}, Landroid/support/v4/app/NavUtils;->getParentActivityIntent(Landroid/app/Activity;)Landroid/content/Intent;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public invalidateOptionsMenu()V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Landroid/support/v7/app/AppCompatDelegate;->invalidateOptionsMenu()V</span>
+.end method
+
+.method public onConfigurationChanged(Landroid/content/res/Configuration;)V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-super {p0, p1}, Landroid/support/v4/app/FragmentActivity;->onConfigurationChanged(Landroid/content/res/Configuration;)V</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/v7/app/AppCompatDelegate;->onConfigurationChanged(Landroid/content/res/Configuration;)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/v7/app/AppCompatActivity;->mResources:Landroid/content/res/Resources;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-super {p0}, Landroid/support/v4/app/FragmentActivity;->getResources()Landroid/content/res/Resources;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/res/Resources;->getDisplayMetrics()Landroid/util/DisplayMetrics;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Landroid/support/v7/app/AppCompatActivity;->mResources:Landroid/content/res/Resources;</span>
+<span class="">	invoke-virtual {v1, p1, v0}, Landroid/content/res/Resources;->updateConfiguration(Landroid/content/res/Configuration;Landroid/util/DisplayMetrics;)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+<span class="cov">.method public onContentChanged()V</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->onSupportContentChanged()V</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method protected onCreate(Landroid/os/Bundle;)V</span>
+<span class="">	.locals 3</span>
+<span class="">	.param p1    # Landroid/os/Bundle;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="exec">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	invoke-virtual {v0}, Landroid/support/v7/app/AppCompatDelegate;->installViewFactory()V</span>
+<span class="cov">	invoke-virtual {v0, p1}, Landroid/support/v7/app/AppCompatDelegate;->onCreate(Landroid/os/Bundle;)V</span>
+<span class="exec">	invoke-virtual {v0}, Landroid/support/v7/app/AppCompatDelegate;->applyDayNight()Z</span>
+<span class="cov">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget v0, p0, Landroid/support/v7/app/AppCompatActivity;->mThemeId:I</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v1, 0x17</span>
+<span class="">	if-lt v0, v1, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getTheme()Landroid/content/res/Resources$Theme;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget v1, p0, Landroid/support/v7/app/AppCompatActivity;->mThemeId:I</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-virtual {p0, v0, v1, v2}, Landroid/support/v7/app/AppCompatActivity;->onApplyThemeResource(Landroid/content/res/Resources$Theme;IZ)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	iget v0, p0, Landroid/support/v7/app/AppCompatActivity;->mThemeId:I</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/support/v7/app/AppCompatActivity;->setTheme(I)V</span>
+<span class="cov">	:cond_1</span>
+<span class="cov">	:goto_0</span>
+<span class="cov">	invoke-super {p0, p1}, Landroid/support/v4/app/FragmentActivity;->onCreate(Landroid/os/Bundle;)V</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method public onCreateSupportNavigateUpTaskStack(Landroid/support/v4/app/TaskStackBuilder;)V
+<span class="">	.locals 0</span>
+<span class="">	.param p1    # Landroid/support/v4/app/TaskStackBuilder;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	invoke-virtual {p1, p0}, Landroid/support/v4/app/TaskStackBuilder;->addParentStack(Landroid/app/Activity;)Landroid/support/v4/app/TaskStackBuilder;</span>
+.end method
+
+<span class="cov">.method protected onDestroy()V</span>
+<span class="">	.locals 1</span>
+
+<span class="cov">	invoke-super {p0}, Landroid/support/v4/app/FragmentActivity;->onDestroy()V</span>
+<span class="exec">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	invoke-virtual {v0}, Landroid/support/v7/app/AppCompatDelegate;->onDestroy()V</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method public onKeyDown(ILandroid/view/KeyEvent;)Z</span>
+<span class="">	.locals 1</span>
+
+<span class="exec">	invoke-direct {p0, p1, p2}, Landroid/support/v7/app/AppCompatActivity;->performMenuItemShortcut(ILandroid/view/KeyEvent;)Z</span>
+<span class="cov">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="exec">	invoke-super {p0, p1, p2}, Landroid/support/v4/app/FragmentActivity;->onKeyDown(ILandroid/view/KeyEvent;)Z</span>
+<span class="cov">	:cond_0</span>
+<span class="cov">	move-result p1</span>
+<span class="exec">	return p1</span>
+.end method
+
+.method public final onMenuItemSelected(ILandroid/view/MenuItem;)Z
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0, p1, p2}, Landroid/support/v4/app/FragmentActivity;->onMenuItemSelected(ILandroid/view/MenuItem;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getSupportActionBar()Landroid/support/v7/app/ActionBar;</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-interface {p2}, Landroid/view/MenuItem;->getItemId()I</span>
+<span class="">	move-result p2</span>
+<span class="">	const v0, 0x102002c</span>
+<span class="">	if-ne p2, v0, :cond_1</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	invoke-virtual {p1}, Landroid/support/v7/app/ActionBar;->getDisplayOptions()I</span>
+<span class="">	move-result p1</span>
+<span class="">	and-int/lit8 p1, p1, 0x4</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->onSupportNavigateUp()Z</span>
+<span class="">	move-result p1</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public onMenuOpened(ILandroid/view/Menu;)Z
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1, p2}, Landroid/support/v4/app/FragmentActivity;->onMenuOpened(ILandroid/view/Menu;)Z</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public onPanelClosed(ILandroid/view/Menu;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1, p2}, Landroid/support/v4/app/FragmentActivity;->onPanelClosed(ILandroid/view/Menu;)V</span>
+.end method
+
+<span class="cov">.method protected onPostCreate(Landroid/os/Bundle;)V</span>
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # Landroid/os/Bundle;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="cov">	invoke-super {p0, p1}, Landroid/support/v4/app/FragmentActivity;->onPostCreate(Landroid/os/Bundle;)V</span>
+<span class="exec">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	invoke-virtual {v0, p1}, Landroid/support/v7/app/AppCompatDelegate;->onPostCreate(Landroid/os/Bundle;)V</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method protected onPostResume()V</span>
+<span class="">	.locals 1</span>
+
+<span class="cov">	invoke-super {p0}, Landroid/support/v4/app/FragmentActivity;->onPostResume()V</span>
+<span class="exec">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	invoke-virtual {v0}, Landroid/support/v7/app/AppCompatDelegate;->onPostResume()V</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method public onPrepareSupportNavigateUpTaskStack(Landroid/support/v4/app/TaskStackBuilder;)V
+<span class="">	.locals 0</span>
+<span class="">	.param p1    # Landroid/support/v4/app/TaskStackBuilder;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+.end method
+
+.method protected onSaveInstanceState(Landroid/os/Bundle;)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0, p1}, Landroid/support/v4/app/FragmentActivity;->onSaveInstanceState(Landroid/os/Bundle;)V</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/v7/app/AppCompatDelegate;->onSaveInstanceState(Landroid/os/Bundle;)V</span>
+.end method
+
+<span class="cov">.method protected onStart()V</span>
+<span class="">	.locals 1</span>
+
+<span class="cov">	invoke-super {p0}, Landroid/support/v4/app/FragmentActivity;->onStart()V</span>
+<span class="exec">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	invoke-virtual {v0}, Landroid/support/v7/app/AppCompatDelegate;->onStart()V</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method protected onStop()V</span>
+<span class="">	.locals 1</span>
+
+<span class="cov">	invoke-super {p0}, Landroid/support/v4/app/FragmentActivity;->onStop()V</span>
+<span class="exec">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	invoke-virtual {v0}, Landroid/support/v7/app/AppCompatDelegate;->onStop()V</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method public onSupportActionModeFinished(Landroid/support/v7/view/ActionMode;)V
+<span class="">	.locals 0</span>
+<span class="">	.param p1    # Landroid/support/v7/view/ActionMode;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.annotation build Landroid/support/annotation/CallSuper;</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public onSupportActionModeStarted(Landroid/support/v7/view/ActionMode;)V
+<span class="">	.locals 0</span>
+<span class="">	.param p1    # Landroid/support/v7/view/ActionMode;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.annotation build Landroid/support/annotation/CallSuper;</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+<span class="cov">.method public onSupportContentChanged()V</span>
+<span class="">	.locals 0</span>
+<span class="">	.annotation runtime Ljava/lang/Deprecated;</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public onSupportNavigateUp()Z
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getSupportParentActivityIntent()Landroid/content/Intent;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/support/v7/app/AppCompatActivity;->supportShouldUpRecreateTask(Landroid/content/Intent;)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	invoke-static {p0}, Landroid/support/v4/app/TaskStackBuilder;->create(Landroid/content/Context;)Landroid/support/v4/app/TaskStackBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/support/v7/app/AppCompatActivity;->onCreateSupportNavigateUpTaskStack(Landroid/support/v4/app/TaskStackBuilder;)V</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/support/v7/app/AppCompatActivity;->onPrepareSupportNavigateUpTaskStack(Landroid/support/v4/app/TaskStackBuilder;)V</span>
+<span class="">	invoke-virtual {v0}, Landroid/support/v4/app/TaskStackBuilder;->startActivities()V</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-static {p0}, Landroid/support/v4/app/ActivityCompat;->finishAffinity(Landroid/app/Activity;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/IllegalStateException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catch_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->finish()V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/support/v7/app/AppCompatActivity;->supportNavigateUpTo(Landroid/content/Intent;)V</span>
+<span class="">	:goto_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:cond_1</span>
+.end method
+
+<span class="cov">.method protected onTitleChanged(Ljava/lang/CharSequence;I)V</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	invoke-super {p0, p1, p2}, Landroid/support/v4/app/FragmentActivity;->onTitleChanged(Ljava/lang/CharSequence;I)V</span>
+<span class="exec">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="cov">	move-result-object p2</span>
+<span class="cov">	invoke-virtual {p2, p1}, Landroid/support/v7/app/AppCompatDelegate;->setTitle(Ljava/lang/CharSequence;)V</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method public onWindowStartingSupportActionMode(Landroid/support/v7/view/ActionMode$Callback;)Landroid/support/v7/view/ActionMode;
+<span class="">	.locals 0</span>
+<span class="">	.param p1    # Landroid/support/v7/view/ActionMode$Callback;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 p1, 0x0</span>
+.end method
+
+.method public openOptionsMenu()V
+<span class="">	.locals 3</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getSupportActionBar()Landroid/support/v7/app/ActionBar;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getWindow()Landroid/view/Window;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/view/Window;->hasFeature(I)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Landroid/support/v7/app/ActionBar;->openOptionsMenu()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-super {p0}, Landroid/support/v4/app/FragmentActivity;->openOptionsMenu()V</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public setContentView(I)V
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # I</span>
+<span class="">	.annotation build Landroid/support/annotation/LayoutRes;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/v7/app/AppCompatDelegate;->setContentView(I)V</span>
+.end method
+
+<span class="cov">.method public setContentView(Landroid/view/View;)V</span>
+<span class="">	.locals 1</span>
+
+<span class="exec">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	invoke-virtual {v0, p1}, Landroid/support/v7/app/AppCompatDelegate;->setContentView(Landroid/view/View;)V</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method public setContentView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroid/support/v7/app/AppCompatDelegate;->setContentView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V</span>
+.end method
+
+<span class="cov">.method public setSupportActionBar(Landroid/support/v7/widget/Toolbar;)V</span>
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # Landroid/support/v7/widget/Toolbar;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="exec">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	invoke-virtual {v0, p1}, Landroid/support/v7/app/AppCompatDelegate;->setSupportActionBar(Landroid/support/v7/widget/Toolbar;)V</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method public setSupportProgress(I)V
+<span class="">	.locals 0</span>
+<span class="">	.annotation runtime Ljava/lang/Deprecated;</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public setSupportProgressBarIndeterminate(Z)V
+<span class="">	.locals 0</span>
+<span class="">	.annotation runtime Ljava/lang/Deprecated;</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public setSupportProgressBarIndeterminateVisibility(Z)V
+<span class="">	.locals 0</span>
+<span class="">	.annotation runtime Ljava/lang/Deprecated;</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public setSupportProgressBarVisibility(Z)V
+<span class="">	.locals 0</span>
+<span class="">	.annotation runtime Ljava/lang/Deprecated;</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+<span class="cov">.method public setTheme(I)V</span>
+<span class="">	.locals 0</span>
+<span class="">	.param p1    # I</span>
+<span class="">	.annotation build Landroid/support/annotation/StyleRes;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="cov">	invoke-super {p0, p1}, Landroid/support/v4/app/FragmentActivity;->setTheme(I)V</span>
+<span class="cov">	iput p1, p0, Landroid/support/v7/app/AppCompatActivity;->mThemeId:I</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method public startSupportActionMode(Landroid/support/v7/view/ActionMode$Callback;)Landroid/support/v7/view/ActionMode;
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # Landroid/support/v7/view/ActionMode$Callback;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/v7/app/AppCompatDelegate;->startSupportActionMode(Landroid/support/v7/view/ActionMode$Callback;)Landroid/support/v7/view/ActionMode;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public supportInvalidateOptionsMenu()V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Landroid/support/v7/app/AppCompatDelegate;->invalidateOptionsMenu()V</span>
+.end method
+
+.method public supportNavigateUpTo(Landroid/content/Intent;)V
+<span class="">	.locals 0</span>
+<span class="">	.param p1    # Landroid/content/Intent;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	invoke-static {p0, p1}, Landroid/support/v4/app/NavUtils;->navigateUpTo(Landroid/app/Activity;Landroid/content/Intent;)V</span>
+.end method
+
+.method public supportRequestWindowFeature(I)Z
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/support/v7/app/AppCompatActivity;->getDelegate()Landroid/support/v7/app/AppCompatDelegate;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/v7/app/AppCompatDelegate;->requestWindowFeature(I)Z</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public supportShouldUpRecreateTask(Landroid/content/Intent;)Z
+<span class="">	.locals 0</span>
+<span class="">	.param p1    # Landroid/content/Intent;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	invoke-static {p0, p1}, Landroid/support/v4/app/NavUtils;->shouldUpRecreateTask(Landroid/app/Activity;Landroid/content/Intent;)Z</span>
+<span class="">	move-result p1</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../.resources/report.js"></script>
+</body>
+</html>

@@ -1,0 +1,889 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../index.html">lu.uni.trux.workmanager_enqueue</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.material.textfield</a></li>
+        <li><i class="ico ico-class"></i> IndicatorViewController.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class final Lcom/google/android/material/textfield/IndicatorViewController;
+.super Ljava/lang/Object;
+.source "IndicatorViewController.java"
+
+
+.field private static final CAPTION_OPACITY_FADE_ANIMATION_DURATION:I = 0xa7
+.field private static final CAPTION_STATE_ERROR:I = 0x1
+.field private static final CAPTION_STATE_HELPER_TEXT:I = 0x2
+.field private static final CAPTION_STATE_NONE:I = 0x0
+.field private static final CAPTION_TRANSLATE_Y_ANIMATION_DURATION:I = 0xd9
+.field static final COUNTER_INDEX:I = 0x2
+.field static final ERROR_INDEX:I = 0x0
+.field static final HELPER_INDEX:I = 0x1
+.field private captionAnimator:Landroid/animation/Animator;
+.field private captionArea:Landroid/widget/FrameLayout;
+.field private captionDisplayed:I
+.field private captionToShow:I
+.field private final captionTranslationYPx:F
+.field private final context:Landroid/content/Context;
+.field private errorEnabled:Z
+.field private errorText:Ljava/lang/CharSequence;
+.field private errorTextAppearance:I
+.field private errorView:Landroid/widget/TextView;
+.field private errorViewContentDescription:Ljava/lang/CharSequence;
+.field private errorViewTextColor:Landroid/content/res/ColorStateList;
+.field private helperText:Ljava/lang/CharSequence;
+.field private helperTextEnabled:Z
+.field private helperTextTextAppearance:I
+.field private helperTextView:Landroid/widget/TextView;
+.field private helperTextViewTextColor:Landroid/content/res/ColorStateList;
+.field private indicatorArea:Landroid/widget/LinearLayout;
+.field private indicatorsAdded:I
+.field private final textInputView:Lcom/google/android/material/textfield/TextInputLayout;
+.field private typeface:Landroid/graphics/Typeface;
+
+
+.method public constructor <init>(Lcom/google/android/material/textfield/TextInputLayout;)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	invoke-virtual {p1}, Lcom/google/android/material/textfield/TextInputLayout;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->context:Landroid/content/Context;</span>
+<span class="">	iput-object p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->textInputView:Lcom/google/android/material/textfield/TextInputLayout;</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	sget v0, Lcom/google/android/material/R$dimen;->design_textinput_caption_translate_y:I</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/content/res/Resources;->getDimensionPixelSize(I)I</span>
+<span class="">	move-result p1</span>
+<span class="">	int-to-float p1, p1</span>
+<span class="">	iput p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionTranslationYPx:F</span>
+.end method
+
+.method static synthetic access$002(Lcom/google/android/material/textfield/IndicatorViewController;I)I
+<span class="">	.locals 0</span>
+
+<span class="">	iput p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionDisplayed:I</span>
+.end method
+
+.method static synthetic access$102(Lcom/google/android/material/textfield/IndicatorViewController;Landroid/animation/Animator;)Landroid/animation/Animator;
+<span class="">	.locals 0</span>
+
+<span class="">	iput-object p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionAnimator:Landroid/animation/Animator;</span>
+.end method
+
+.method static synthetic access$200(Lcom/google/android/material/textfield/IndicatorViewController;)Landroid/widget/TextView;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+.end method
+
+.method private canAdjustIndicatorPadding()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->indicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->textInputView:Lcom/google/android/material/textfield/TextInputLayout;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/textfield/TextInputLayout;->getEditText()Landroid/widget/EditText;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method private createCaptionAnimators(Ljava/util/List;ZLandroid/widget/TextView;III)V
+<span class="">	.locals 0</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Landroid/animation/Animator;",</span>
+<span class="">	">;Z",</span>
+<span class="">	"Landroid/widget/TextView;",</span>
+<span class="">	"III)V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	if-eqz p3, :cond_3</span>
+<span class="">	if-nez p2, :cond_0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	if-eq p4, p6, :cond_1</span>
+<span class="">	if-ne p4, p5, :cond_3</span>
+<span class="">	:cond_1</span>
+<span class="">	if-ne p6, p4, :cond_2</span>
+<span class="">	const/4 p2, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_2</span>
+<span class="">	const/4 p2, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-direct {p0, p3, p2}, Lcom/google/android/material/textfield/IndicatorViewController;->createCaptionOpacityAnimator(Landroid/widget/TextView;Z)Landroid/animation/ObjectAnimator;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-interface {p1, p2}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	if-ne p6, p4, :cond_3</span>
+<span class="">	invoke-direct {p0, p3}, Lcom/google/android/material/textfield/IndicatorViewController;->createCaptionTranslationYAnimator(Landroid/widget/TextView;)Landroid/animation/ObjectAnimator;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-interface {p1, p2}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method private createCaptionOpacityAnimator(Landroid/widget/TextView;Z)Landroid/animation/ObjectAnimator;
+<span class="">	.locals 3</span>
+
+<span class="">	if-eqz p2, :cond_0</span>
+<span class="">	const/high16 p2, 0x3f800000    # 1.0f</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p2, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	sget-object v0, Landroid/view/View;->ALPHA:Landroid/util/Property;</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	new-array v1, v1, [F</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	aput p2, v1, v2</span>
+<span class="">	invoke-static {p1, v0, v1}, Landroid/animation/ObjectAnimator;->ofFloat(Ljava/lang/Object;Landroid/util/Property;[F)Landroid/animation/ObjectAnimator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-wide/16 v0, 0xa7</span>
+<span class="">	invoke-virtual {p1, v0, v1}, Landroid/animation/ObjectAnimator;->setDuration(J)Landroid/animation/ObjectAnimator;</span>
+<span class="">	sget-object p2, Lcom/google/android/material/animation/AnimationUtils;->LINEAR_INTERPOLATOR:Landroid/animation/TimeInterpolator;</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/animation/ObjectAnimator;->setInterpolator(Landroid/animation/TimeInterpolator;)V</span>
+.end method
+
+.method private createCaptionTranslationYAnimator(Landroid/widget/TextView;)Landroid/animation/ObjectAnimator;
+<span class="">	.locals 4</span>
+
+<span class="">	sget-object v0, Landroid/view/View;->TRANSLATION_Y:Landroid/util/Property;</span>
+<span class="">	const/4 v1, 0x2</span>
+<span class="">	new-array v1, v1, [F</span>
+<span class="">	iget v2, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionTranslationYPx:F</span>
+<span class="">	neg-float v2, v2</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	aput v2, v1, v3</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	aput v3, v1, v2</span>
+<span class="">	invoke-static {p1, v0, v1}, Landroid/animation/ObjectAnimator;->ofFloat(Ljava/lang/Object;Landroid/util/Property;[F)Landroid/animation/ObjectAnimator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-wide/16 v0, 0xd9</span>
+<span class="">	invoke-virtual {p1, v0, v1}, Landroid/animation/ObjectAnimator;->setDuration(J)Landroid/animation/ObjectAnimator;</span>
+<span class="">	sget-object v0, Lcom/google/android/material/animation/AnimationUtils;->LINEAR_OUT_SLOW_IN_INTERPOLATOR:Landroid/animation/TimeInterpolator;</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/animation/ObjectAnimator;->setInterpolator(Landroid/animation/TimeInterpolator;)V</span>
+.end method
+
+.method private getCaptionViewFromDisplayState(I)Landroid/widget/TextView;
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	if-eq p1, v0, :cond_1</span>
+<span class="">	const/4 v0, 0x2</span>
+<span class="">	if-eq p1, v0, :cond_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	iget-object p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method private getIndicatorPadding(ZII)I
+<span class="">	.locals 0</span>
+
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	iget-object p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->context:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/content/res/Resources;->getDimensionPixelSize(I)I</span>
+<span class="">	move-result p3</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private isCaptionStateError(I)Z
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	if-ne p1, v0, :cond_0</span>
+<span class="">	iget-object p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	iget-object p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorText:Ljava/lang/CharSequence;</span>
+<span class="">	invoke-static {p1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method private isCaptionStateHelperText(I)Z
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x2</span>
+<span class="">	if-ne p1, v0, :cond_0</span>
+<span class="">	iget-object p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	iget-object p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperText:Ljava/lang/CharSequence;</span>
+<span class="">	invoke-static {p1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method private setCaptionViewVisibilities(II)V
+<span class="">	.locals 2</span>
+
+<span class="">	if-ne p1, p2, :cond_0</span>
+<span class="">	if-eqz p2, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-direct {p0, p2}, Lcom/google/android/material/textfield/IndicatorViewController;->getCaptionViewFromDisplayState(I)Landroid/widget/TextView;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setVisibility(I)V</span>
+<span class="">	const/high16 v1, 0x3f800000    # 1.0f</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setAlpha(F)V</span>
+<span class="">	if-eqz p1, :cond_2</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/material/textfield/IndicatorViewController;->getCaptionViewFromDisplayState(I)Landroid/widget/TextView;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	const/4 v1, 0x4</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setVisibility(I)V</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	if-ne p1, v1, :cond_2</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="">	iput p2, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionDisplayed:I</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method private setTextViewTypeface(Landroid/widget/TextView;Landroid/graphics/Typeface;)V
+<span class="">	.locals 0</span>
+
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private setViewGroupGoneIfEmpty(Landroid/view/ViewGroup;I)V
+<span class="">	.locals 0</span>
+
+<span class="">	if-nez p2, :cond_0</span>
+<span class="">	const/16 p2, 0x8</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/view/ViewGroup;->setVisibility(I)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private shouldAnimateCaptionView(Landroid/widget/TextView;Ljava/lang/CharSequence;)Z
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->textInputView:Lcom/google/android/material/textfield/TextInputLayout;</span>
+<span class="">	invoke-static {v0}, Landroidx/core/view/ViewCompat;->isLaidOut(Landroid/view/View;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->textInputView:Lcom/google/android/material/textfield/TextInputLayout;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/textfield/TextInputLayout;->isEnabled()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionToShow:I</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionDisplayed:I</span>
+<span class="">	if-ne v0, v1, :cond_0</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	invoke-virtual {p1}, Landroid/widget/TextView;->getText()Ljava/lang/CharSequence;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-static {p1, p2}, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-nez p1, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method private updateCaptionViewsVisibility(IIZ)V
+<span class="">	.locals 13</span>
+
+<span class="">	move-object v7, p0</span>
+<span class="">	move v8, p2</span>
+<span class="">	move v9, p1</span>
+<span class="">	move/from16 v10, p3</span>
+<span class="">	if-ne v9, v8, :cond_0</span>
+<span class="">	if-eqz v10, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	new-instance v11, Landroid/animation/AnimatorSet;</span>
+<span class="">	invoke-direct {v11}, Landroid/animation/AnimatorSet;-><init>()V</span>
+<span class="">	iput-object v11, v7, Lcom/google/android/material/textfield/IndicatorViewController;->captionAnimator:Landroid/animation/Animator;</span>
+<span class="">	new-instance v12, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v12}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	iget-boolean v2, v7, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextEnabled:Z</span>
+<span class="">	iget-object v3, v7, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	const/4 v4, 0x2</span>
+<span class="">	move-object v0, p0</span>
+<span class="">	move-object v1, v12</span>
+<span class="">	move v5, p1</span>
+<span class="">	move v6, p2</span>
+<span class="">	invoke-direct/range {v0 .. v6}, Lcom/google/android/material/textfield/IndicatorViewController;->createCaptionAnimators(Ljava/util/List;ZLandroid/widget/TextView;III)V</span>
+<span class="">	iget-boolean v2, v7, Lcom/google/android/material/textfield/IndicatorViewController;->errorEnabled:Z</span>
+<span class="">	iget-object v3, v7, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	const/4 v4, 0x1</span>
+<span class="">	invoke-direct/range {v0 .. v6}, Lcom/google/android/material/textfield/IndicatorViewController;->createCaptionAnimators(Ljava/util/List;ZLandroid/widget/TextView;III)V</span>
+<span class="">	invoke-static {v11, v12}, Lcom/google/android/material/animation/AnimatorSetCompat;->playTogether(Landroid/animation/AnimatorSet;Ljava/util/List;)V</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/material/textfield/IndicatorViewController;->getCaptionViewFromDisplayState(I)Landroid/widget/TextView;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-direct {p0, p2}, Lcom/google/android/material/textfield/IndicatorViewController;->getCaptionViewFromDisplayState(I)Landroid/widget/TextView;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	new-instance v6, Lcom/google/android/material/textfield/IndicatorViewController$1;</span>
+<span class="">	move-object v0, v6</span>
+<span class="">	move-object v1, p0</span>
+<span class="">	move v2, p2</span>
+<span class="">	move v4, p1</span>
+<span class="">	invoke-direct/range {v0 .. v5}, Lcom/google/android/material/textfield/IndicatorViewController$1;-><init>(Lcom/google/android/material/textfield/IndicatorViewController;ILandroid/widget/TextView;ILandroid/widget/TextView;)V</span>
+<span class="">	invoke-virtual {v11, v6}, Landroid/animation/AnimatorSet;->addListener(Landroid/animation/Animator$AnimatorListener;)V</span>
+<span class="">	invoke-virtual {v11}, Landroid/animation/AnimatorSet;->start()V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	invoke-direct {p0, p1, p2}, Lcom/google/android/material/textfield/IndicatorViewController;->setCaptionViewVisibilities(II)V</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v0, v7, Lcom/google/android/material/textfield/IndicatorViewController;->textInputView:Lcom/google/android/material/textfield/TextInputLayout;</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/textfield/TextInputLayout;->updateEditTextBackground()V</span>
+<span class="">	iget-object v0, v7, Lcom/google/android/material/textfield/IndicatorViewController;->textInputView:Lcom/google/android/material/textfield/TextInputLayout;</span>
+<span class="">	invoke-virtual {v0, v10}, Lcom/google/android/material/textfield/TextInputLayout;->updateLabelState(Z)V</span>
+<span class="">	iget-object v0, v7, Lcom/google/android/material/textfield/IndicatorViewController;->textInputView:Lcom/google/android/material/textfield/TextInputLayout;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/textfield/TextInputLayout;->updateTextInputBoxState()V</span>
+.end method
+
+.method  addIndicator(Landroid/widget/TextView;I)V
+<span class="">	.locals 5</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->indicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	const/4 v2, -0x2</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionArea:Landroid/widget/FrameLayout;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	new-instance v0, Landroid/widget/LinearLayout;</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/textfield/IndicatorViewController;->context:Landroid/content/Context;</span>
+<span class="">	invoke-direct {v0, v3}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->indicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/LinearLayout;->setOrientation(I)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->textInputView:Lcom/google/android/material/textfield/TextInputLayout;</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/textfield/IndicatorViewController;->indicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	const/4 v4, -0x1</span>
+<span class="">	invoke-virtual {v0, v3, v4, v2}, Lcom/google/android/material/textfield/TextInputLayout;->addView(Landroid/view/View;II)V</span>
+<span class="">	new-instance v0, Landroid/widget/FrameLayout;</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/textfield/IndicatorViewController;->context:Landroid/content/Context;</span>
+<span class="">	invoke-direct {v0, v3}, Landroid/widget/FrameLayout;-><init>(Landroid/content/Context;)V</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionArea:Landroid/widget/FrameLayout;</span>
+<span class="">	new-instance v0, Landroid/widget/LinearLayout$LayoutParams;</span>
+<span class="">	const/high16 v3, 0x3f800000    # 1.0f</span>
+<span class="">	invoke-direct {v0, v1, v2, v3}, Landroid/widget/LinearLayout$LayoutParams;-><init>(IIF)V</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/textfield/IndicatorViewController;->indicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	iget-object v4, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionArea:Landroid/widget/FrameLayout;</span>
+<span class="">	invoke-virtual {v3, v4, v0}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->textInputView:Lcom/google/android/material/textfield/TextInputLayout;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/textfield/TextInputLayout;->getEditText()Landroid/widget/EditText;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/textfield/IndicatorViewController;->adjustIndicatorPadding()V</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0, p2}, Lcom/google/android/material/textfield/IndicatorViewController;->isCaptionView(I)Z</span>
+<span class="">	move-result p2</span>
+<span class="">	if-eqz p2, :cond_1</span>
+<span class="">	iget-object p2, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionArea:Landroid/widget/FrameLayout;</span>
+<span class="">	invoke-virtual {p2, v1}, Landroid/widget/FrameLayout;->setVisibility(I)V</span>
+<span class="">	iget-object p2, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionArea:Landroid/widget/FrameLayout;</span>
+<span class="">	invoke-virtual {p2, p1}, Landroid/widget/FrameLayout;->addView(Landroid/view/View;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	new-instance p2, Landroid/widget/LinearLayout$LayoutParams;</span>
+<span class="">	invoke-direct {p2, v2, v2}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->indicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V</span>
+<span class="">	:goto_0</span>
+<span class="">	iget-object p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->indicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	invoke-virtual {p1, v1}, Landroid/widget/LinearLayout;->setVisibility(I)V</span>
+<span class="">	iget p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->indicatorsAdded:I</span>
+<span class="">	add-int/lit8 p1, p1, 0x1</span>
+<span class="">	iput p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->indicatorsAdded:I</span>
+.end method
+
+.method  adjustIndicatorPadding()V
+<span class="">	.locals 7</span>
+
+<span class="">	invoke-direct {p0}, Lcom/google/android/material/textfield/IndicatorViewController;->canAdjustIndicatorPadding()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->textInputView:Lcom/google/android/material/textfield/TextInputLayout;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/textfield/TextInputLayout;->getEditText()Landroid/widget/EditText;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->context:Landroid/content/Context;</span>
+<span class="">	invoke-static {v1}, Lcom/google/android/material/resources/MaterialResources;->isFontScaleAtLeast1_3(Landroid/content/Context;)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/textfield/IndicatorViewController;->indicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	sget v3, Lcom/google/android/material/R$dimen;->material_helper_text_font_1_3_padding_horizontal:I</span>
+<span class="">	invoke-static {v0}, Landroidx/core/view/ViewCompat;->getPaddingStart(Landroid/view/View;)I</span>
+<span class="">	move-result v4</span>
+<span class="">	invoke-direct {p0, v1, v3, v4}, Lcom/google/android/material/textfield/IndicatorViewController;->getIndicatorPadding(ZII)I</span>
+<span class="">	move-result v3</span>
+<span class="">	sget v4, Lcom/google/android/material/R$dimen;->material_helper_text_font_1_3_padding_top:I</span>
+<span class="">	iget-object v5, p0, Lcom/google/android/material/textfield/IndicatorViewController;->context:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v5}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	sget v6, Lcom/google/android/material/R$dimen;->material_helper_text_default_padding_top:I</span>
+<span class="">	invoke-virtual {v5, v6}, Landroid/content/res/Resources;->getDimensionPixelSize(I)I</span>
+<span class="">	move-result v5</span>
+<span class="">	invoke-direct {p0, v1, v4, v5}, Lcom/google/android/material/textfield/IndicatorViewController;->getIndicatorPadding(ZII)I</span>
+<span class="">	move-result v4</span>
+<span class="">	sget v5, Lcom/google/android/material/R$dimen;->material_helper_text_font_1_3_padding_horizontal:I</span>
+<span class="">	invoke-static {v0}, Landroidx/core/view/ViewCompat;->getPaddingEnd(Landroid/view/View;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-direct {p0, v1, v5, v0}, Lcom/google/android/material/textfield/IndicatorViewController;->getIndicatorPadding(ZII)I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-static {v2, v3, v4, v0, v1}, Landroidx/core/view/ViewCompat;->setPaddingRelative(Landroid/view/View;IIII)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method  cancelCaptionAnimator()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionAnimator:Landroid/animation/Animator;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Landroid/animation/Animator;->cancel()V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method  errorIsDisplayed()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionDisplayed:I</span>
+<span class="">	invoke-direct {p0, v0}, Lcom/google/android/material/textfield/IndicatorViewController;->isCaptionStateError(I)Z</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method  errorShouldBeShown()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionToShow:I</span>
+<span class="">	invoke-direct {p0, v0}, Lcom/google/android/material/textfield/IndicatorViewController;->isCaptionStateError(I)Z</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method  getErrorContentDescription()Ljava/lang/CharSequence;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorViewContentDescription:Ljava/lang/CharSequence;</span>
+.end method
+
+.method  getErrorText()Ljava/lang/CharSequence;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorText:Ljava/lang/CharSequence;</span>
+.end method
+
+.method  getErrorViewCurrentTextColor()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/TextView;->getCurrentTextColor()I</span>
+<span class="">	move-result v0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, -0x1</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method  getErrorViewTextColors()Landroid/content/res/ColorStateList;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/TextView;->getTextColors()Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method  getHelperText()Ljava/lang/CharSequence;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperText:Ljava/lang/CharSequence;</span>
+.end method
+
+.method  getHelperTextViewColors()Landroid/content/res/ColorStateList;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/TextView;->getTextColors()Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method  getHelperTextViewCurrentTextColor()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/TextView;->getCurrentTextColor()I</span>
+<span class="">	move-result v0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, -0x1</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method  helperTextIsDisplayed()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionDisplayed:I</span>
+<span class="">	invoke-direct {p0, v0}, Lcom/google/android/material/textfield/IndicatorViewController;->isCaptionStateHelperText(I)Z</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method  helperTextShouldBeShown()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionToShow:I</span>
+<span class="">	invoke-direct {p0, v0}, Lcom/google/android/material/textfield/IndicatorViewController;->isCaptionStateHelperText(I)Z</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method  hideError()V
+<span class="">	.locals 4</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorText:Ljava/lang/CharSequence;</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/textfield/IndicatorViewController;->cancelCaptionAnimator()V</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionDisplayed:I</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	if-ne v1, v2, :cond_1</span>
+<span class="">	iget-boolean v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextEnabled:Z</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperText:Ljava/lang/CharSequence;</span>
+<span class="">	invoke-static {v1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-nez v1, :cond_0</span>
+<span class="">	const/4 v1, 0x2</span>
+<span class="">	iput v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionToShow:I</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	iput v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionToShow:I</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionDisplayed:I</span>
+<span class="">	iget v2, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionToShow:I</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-direct {p0, v3, v0}, Lcom/google/android/material/textfield/IndicatorViewController;->shouldAnimateCaptionView(Landroid/widget/TextView;Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-direct {p0, v1, v2, v0}, Lcom/google/android/material/textfield/IndicatorViewController;->updateCaptionViewsVisibility(IIZ)V</span>
+.end method
+
+.method  hideHelperText()V
+<span class="">	.locals 4</span>
+
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/textfield/IndicatorViewController;->cancelCaptionAnimator()V</span>
+<span class="">	iget v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionDisplayed:I</span>
+<span class="">	const/4 v1, 0x2</span>
+<span class="">	if-ne v0, v1, :cond_0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	iput v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionToShow:I</span>
+<span class="">	:cond_0</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionToShow:I</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	invoke-direct {p0, v2, v3}, Lcom/google/android/material/textfield/IndicatorViewController;->shouldAnimateCaptionView(Landroid/widget/TextView;Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-direct {p0, v0, v1, v2}, Lcom/google/android/material/textfield/IndicatorViewController;->updateCaptionViewsVisibility(IIZ)V</span>
+.end method
+
+.method  isCaptionView(I)Z
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	if-ne p1, v0, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method  isErrorEnabled()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorEnabled:Z</span>
+.end method
+
+.method  isHelperTextEnabled()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextEnabled:Z</span>
+.end method
+
+.method  removeIndicator(Landroid/widget/TextView;I)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->indicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	invoke-virtual {p0, p2}, Lcom/google/android/material/textfield/IndicatorViewController;->isCaptionView(I)Z</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result p2</span>
+<span class="">	if-eqz p2, :cond_1</span>
+<span class="">	iget-object p2, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionArea:Landroid/widget/FrameLayout;</span>
+<span class="">	if-eqz p2, :cond_1</span>
+<span class="">	invoke-virtual {p2, p1}, Landroid/widget/FrameLayout;->removeView(Landroid/view/View;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object p2, p0, Lcom/google/android/material/textfield/IndicatorViewController;->indicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {p2, p1}, Landroid/widget/LinearLayout;->removeView(Landroid/view/View;)V</span>
+<span class="">	iget p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->indicatorsAdded:I</span>
+<span class="">	:goto_0</span>
+<span class="">	add-int/lit8 p1, p1, -0x1</span>
+<span class="">	iput p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->indicatorsAdded:I</span>
+<span class="">	iget-object p2, p0, Lcom/google/android/material/textfield/IndicatorViewController;->indicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	invoke-direct {p0, p2, p1}, Lcom/google/android/material/textfield/IndicatorViewController;->setViewGroupGoneIfEmpty(Landroid/view/ViewGroup;I)V</span>
+.end method
+
+.method  setErrorContentDescription(Ljava/lang/CharSequence;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iput-object p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorViewContentDescription:Ljava/lang/CharSequence;</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/widget/TextView;->setContentDescription(Ljava/lang/CharSequence;)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method  setErrorEnabled(Z)V
+<span class="">	.locals 3</span>
+
+<span class="">	iget-boolean v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorEnabled:Z</span>
+<span class="">	if-ne v0, p1, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/textfield/IndicatorViewController;->cancelCaptionAnimator()V</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	if-eqz p1, :cond_3</span>
+<span class="">	new-instance v1, Landroidx/appcompat/widget/AppCompatTextView;</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/textfield/IndicatorViewController;->context:Landroid/content/Context;</span>
+<span class="">	invoke-direct {v1, v2}, Landroidx/appcompat/widget/AppCompatTextView;-><init>(Landroid/content/Context;)V</span>
+<span class="">	iput-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	sget v2, Lcom/google/android/material/R$id;->textinput_error:I</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/widget/TextView;->setId(I)V</span>
+<span class="">	sget v1, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v2, 0x11</span>
+<span class="">	if-lt v1, v2, :cond_1</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	const/4 v2, 0x5</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/widget/TextView;->setTextAlignment(I)V</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->typeface:Landroid/graphics/Typeface;</span>
+<span class="">	:cond_1</span>
+<span class="">	if-eqz v1, :cond_2</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v2, v1}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;)V</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorTextAppearance:I</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-virtual {p0, v1}, Lcom/google/android/material/textfield/IndicatorViewController;->setErrorTextAppearance(I)V</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorViewTextColor:Landroid/content/res/ColorStateList;</span>
+<span class="">	invoke-virtual {p0, v1}, Lcom/google/android/material/textfield/IndicatorViewController;->setErrorViewTextColor(Landroid/content/res/ColorStateList;)V</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorViewContentDescription:Ljava/lang/CharSequence;</span>
+<span class="">	invoke-virtual {p0, v1}, Lcom/google/android/material/textfield/IndicatorViewController;->setErrorContentDescription(Ljava/lang/CharSequence;)V</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	const/4 v2, 0x4</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/widget/TextView;->setVisibility(I)V</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	invoke-static {v1, v2}, Landroidx/core/view/ViewCompat;->setAccessibilityLiveRegion(Landroid/view/View;I)V</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {p0, v1, v0}, Lcom/google/android/material/textfield/IndicatorViewController;->addIndicator(Landroid/widget/TextView;I)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/textfield/IndicatorViewController;->hideError()V</span>
+<span class="">	:cond_3</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {p0, v1, v0}, Lcom/google/android/material/textfield/IndicatorViewController;->removeIndicator(Landroid/widget/TextView;I)V</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->textInputView:Lcom/google/android/material/textfield/TextInputLayout;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/textfield/TextInputLayout;->updateEditTextBackground()V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->textInputView:Lcom/google/android/material/textfield/TextInputLayout;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/textfield/TextInputLayout;->updateTextInputBoxState()V</span>
+<span class="">	iput-boolean p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorEnabled:Z</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method  setErrorTextAppearance(I)V
+<span class="">	.locals 2</span>
+
+<span class="">	iput p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorTextAppearance:I</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->textInputView:Lcom/google/android/material/textfield/TextInputLayout;</span>
+<span class="">	invoke-virtual {v1, v0, p1}, Lcom/google/android/material/textfield/TextInputLayout;->setTextAppearanceCompatWithErrorFallback(Landroid/widget/TextView;I)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method  setErrorViewTextColor(Landroid/content/res/ColorStateList;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iput-object p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorViewTextColor:Landroid/content/res/ColorStateList;</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/widget/TextView;->setTextColor(Landroid/content/res/ColorStateList;)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method  setHelperTextAppearance(I)V
+<span class="">	.locals 1</span>
+
+<span class="">	iput p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextTextAppearance:I</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-static {v0, p1}, Landroidx/core/widget/TextViewCompat;->setTextAppearance(Landroid/widget/TextView;I)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method  setHelperTextEnabled(Z)V
+<span class="">	.locals 3</span>
+
+<span class="">	iget-boolean v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextEnabled:Z</span>
+<span class="">	if-ne v0, p1, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/textfield/IndicatorViewController;->cancelCaptionAnimator()V</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	if-eqz p1, :cond_3</span>
+<span class="">	new-instance v1, Landroidx/appcompat/widget/AppCompatTextView;</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/textfield/IndicatorViewController;->context:Landroid/content/Context;</span>
+<span class="">	invoke-direct {v1, v2}, Landroidx/appcompat/widget/AppCompatTextView;-><init>(Landroid/content/Context;)V</span>
+<span class="">	iput-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	sget v2, Lcom/google/android/material/R$id;->textinput_helper_text:I</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/widget/TextView;->setId(I)V</span>
+<span class="">	sget v1, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v2, 0x11</span>
+<span class="">	if-lt v1, v2, :cond_1</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	const/4 v2, 0x5</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/widget/TextView;->setTextAlignment(I)V</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->typeface:Landroid/graphics/Typeface;</span>
+<span class="">	:cond_1</span>
+<span class="">	if-eqz v1, :cond_2</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v2, v1}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;)V</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	:cond_2</span>
+<span class="">	const/4 v2, 0x4</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/widget/TextView;->setVisibility(I)V</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	invoke-static {v1, v0}, Landroidx/core/view/ViewCompat;->setAccessibilityLiveRegion(Landroid/view/View;I)V</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextTextAppearance:I</span>
+<span class="">	invoke-virtual {p0, v1}, Lcom/google/android/material/textfield/IndicatorViewController;->setHelperTextAppearance(I)V</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextViewTextColor:Landroid/content/res/ColorStateList;</span>
+<span class="">	invoke-virtual {p0, v1}, Lcom/google/android/material/textfield/IndicatorViewController;->setHelperTextViewTextColor(Landroid/content/res/ColorStateList;)V</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {p0, v1, v0}, Lcom/google/android/material/textfield/IndicatorViewController;->addIndicator(Landroid/widget/TextView;I)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/textfield/IndicatorViewController;->hideHelperText()V</span>
+<span class="">	:cond_3</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {p0, v1, v0}, Lcom/google/android/material/textfield/IndicatorViewController;->removeIndicator(Landroid/widget/TextView;I)V</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->textInputView:Lcom/google/android/material/textfield/TextInputLayout;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/textfield/TextInputLayout;->updateEditTextBackground()V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->textInputView:Lcom/google/android/material/textfield/TextInputLayout;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/textfield/TextInputLayout;->updateTextInputBoxState()V</span>
+<span class="">	iput-boolean p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextEnabled:Z</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method  setHelperTextViewTextColor(Landroid/content/res/ColorStateList;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iput-object p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextViewTextColor:Landroid/content/res/ColorStateList;</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/widget/TextView;->setTextColor(Landroid/content/res/ColorStateList;)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method  setTypefaces(Landroid/graphics/Typeface;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->typeface:Landroid/graphics/Typeface;</span>
+<span class="">	if-eq p1, v0, :cond_0</span>
+<span class="">	iput-object p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->typeface:Landroid/graphics/Typeface;</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-direct {p0, v0, p1}, Lcom/google/android/material/textfield/IndicatorViewController;->setTextViewTypeface(Landroid/widget/TextView;Landroid/graphics/Typeface;)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	invoke-direct {p0, v0, p1}, Lcom/google/android/material/textfield/IndicatorViewController;->setTextViewTypeface(Landroid/widget/TextView;Landroid/graphics/Typeface;)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method  showError(Ljava/lang/CharSequence;)V
+<span class="">	.locals 3</span>
+
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/textfield/IndicatorViewController;->cancelCaptionAnimator()V</span>
+<span class="">	iput-object p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorText:Ljava/lang/CharSequence;</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="">	iget v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionDisplayed:I</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	if-eq v0, v1, :cond_0</span>
+<span class="">	iput v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionToShow:I</span>
+<span class="">	:cond_0</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionToShow:I</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/textfield/IndicatorViewController;->errorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-direct {p0, v2, p1}, Lcom/google/android/material/textfield/IndicatorViewController;->shouldAnimateCaptionView(Landroid/widget/TextView;Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-direct {p0, v0, v1, p1}, Lcom/google/android/material/textfield/IndicatorViewController;->updateCaptionViewsVisibility(IIZ)V</span>
+.end method
+
+.method  showHelper(Ljava/lang/CharSequence;)V
+<span class="">	.locals 3</span>
+
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/textfield/IndicatorViewController;->cancelCaptionAnimator()V</span>
+<span class="">	iput-object p1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperText:Ljava/lang/CharSequence;</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="">	iget v0, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionDisplayed:I</span>
+<span class="">	const/4 v1, 0x2</span>
+<span class="">	if-eq v0, v1, :cond_0</span>
+<span class="">	iput v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionToShow:I</span>
+<span class="">	:cond_0</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/textfield/IndicatorViewController;->captionToShow:I</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/textfield/IndicatorViewController;->helperTextView:Landroid/widget/TextView;</span>
+<span class="">	invoke-direct {p0, v2, p1}, Lcom/google/android/material/textfield/IndicatorViewController;->shouldAnimateCaptionView(Landroid/widget/TextView;Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-direct {p0, v0, v1, p1}, Lcom/google/android/material/textfield/IndicatorViewController;->updateCaptionViewsVisibility(IIZ)V</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../.resources/report.js"></script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.gms.internal.ads</a></li>
+        <li><i class="ico ico-class"></i> zzayr.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public final Lcom/google/android/gms/internal/ads/zzayr;
+.super Ljava/lang/Object;
+
+
+.field private zzdnj:Ljava/security/interfaces/ECPublicKey;
+
+
+.method public constructor <init>(Ljava/security/interfaces/ECPublicKey;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	iput-object p1, p0, Lcom/google/android/gms/internal/ads/zzayr;->zzdnj:Ljava/security/interfaces/ECPublicKey;</span>
+.end method
+
+.method public final zza(Ljava/lang/String;[B[BILcom/google/android/gms/internal/ads/zzayw;)Lcom/google/android/gms/internal/ads/zzays;
+<span class="">	.locals 9</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/security/GeneralSecurityException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/internal/ads/zzayr;->zzdnj:Ljava/security/interfaces/ECPublicKey;</span>
+<span class="">	invoke-interface {v0}, Ljava/security/interfaces/ECPublicKey;->getParams()Ljava/security/spec/ECParameterSpec;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Lcom/google/android/gms/internal/ads/zzayt;->zza(Ljava/security/spec/ECParameterSpec;)Ljava/security/KeyPair;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/security/KeyPair;->getPublic()Ljava/security/PublicKey;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljava/security/interfaces/ECPublicKey;</span>
+<span class="">	invoke-virtual {v0}, Ljava/security/KeyPair;->getPrivate()Ljava/security/PrivateKey;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/security/interfaces/ECPrivateKey;</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/gms/internal/ads/zzayr;->zzdnj:Ljava/security/interfaces/ECPublicKey;</span>
+<span class="">	invoke-interface {v2}, Ljava/security/interfaces/ECPublicKey;->getParams()Ljava/security/spec/ECParameterSpec;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-interface {v0}, Ljava/security/interfaces/ECPrivateKey;->getParams()Ljava/security/spec/ECParameterSpec;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v3}, Ljava/security/spec/ECParameterSpec;->getCurve()Ljava/security/spec/EllipticCurve;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {v4}, Ljava/security/spec/ECParameterSpec;->getCurve()Ljava/security/spec/EllipticCurve;</span>
+<span class="">	move-result-object v6</span>
+<span class="">	invoke-virtual {v5, v6}, Ljava/security/spec/EllipticCurve;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v5</span>
+<span class="">	if-eqz v5, :cond_6</span>
+<span class="">	invoke-virtual {v3}, Ljava/security/spec/ECParameterSpec;->getGenerator()Ljava/security/spec/ECPoint;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {v4}, Ljava/security/spec/ECParameterSpec;->getGenerator()Ljava/security/spec/ECPoint;</span>
+<span class="">	move-result-object v6</span>
+<span class="">	invoke-virtual {v5, v6}, Ljava/security/spec/ECPoint;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v5</span>
+<span class="">	if-eqz v5, :cond_6</span>
+<span class="">	invoke-virtual {v3}, Ljava/security/spec/ECParameterSpec;->getOrder()Ljava/math/BigInteger;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {v4}, Ljava/security/spec/ECParameterSpec;->getOrder()Ljava/math/BigInteger;</span>
+<span class="">	move-result-object v6</span>
+<span class="">	invoke-virtual {v5, v6}, Ljava/math/BigInteger;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v5</span>
+<span class="">	if-eqz v5, :cond_6</span>
+<span class="">	invoke-virtual {v3}, Ljava/security/spec/ECParameterSpec;->getCofactor()I</span>
+<span class="">	move-result v3</span>
+<span class="">	invoke-virtual {v4}, Ljava/security/spec/ECParameterSpec;->getCofactor()I</span>
+<span class="">	move-result v4</span>
+<span class="">	if-eq v3, v4, :cond_0</span>
+<span class="">	goto/16 :goto_5</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {v2}, Ljava/security/interfaces/ECPublicKey;->getW()Ljava/security/spec/ECPoint;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-static {v0, v2}, Lcom/google/android/gms/internal/ads/zzayt;->zza(Ljava/security/interfaces/ECPrivateKey;Ljava/security/spec/ECPoint;)[B</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v1}, Ljava/security/interfaces/ECPublicKey;->getParams()Ljava/security/spec/ECParameterSpec;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v2}, Ljava/security/spec/ECParameterSpec;->getCurve()Ljava/security/spec/EllipticCurve;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-interface {v1}, Ljava/security/interfaces/ECPublicKey;->getW()Ljava/security/spec/ECPoint;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-static {v1, v2}, Lcom/google/android/gms/internal/ads/zzayt;->zza(Ljava/security/spec/ECPoint;Ljava/security/spec/EllipticCurve;)V</span>
+<span class="">	invoke-static {v2}, Lcom/google/android/gms/internal/ads/zzayt;->zzb(Ljava/security/spec/EllipticCurve;)I</span>
+<span class="">	move-result v2</span>
+<span class="">	sget-object v3, Lcom/google/android/gms/internal/ads/zzayu;->zzdnm:[I</span>
+<span class="">	invoke-virtual {p5}, Lcom/google/android/gms/internal/ads/zzayw;->ordinal()I</span>
+<span class="">	move-result v4</span>
+<span class="">	aget v3, v3, v4</span>
+<span class="">	const/4 v4, 0x2</span>
+<span class="">	const/4 v5, 0x1</span>
+<span class="">	const/4 v6, 0x0</span>
+<span class="">	packed-switch v3, :pswitch_data_0</span>
+<span class="">	new-instance p1, Ljava/security/GeneralSecurityException;</span>
+<span class="">	invoke-static {p5}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	const/16 p3, 0xf</span>
+<span class="">	invoke-static {p2}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p4</span>
+<span class="">	invoke-virtual {p4}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result p4</span>
+<span class="">	add-int/2addr p3, p4</span>
+<span class="">	new-instance p4, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {p4, p3}, Ljava/lang/StringBuilder;-><init>(I)V</span>
+<span class="">	const-string p3, "invalid format:"</span>
+<span class="">	invoke-virtual {p4, p3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {p4, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {p4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-direct {p1, p2}, Ljava/security/GeneralSecurityException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	:pswitch_0</span>
+<span class="">	add-int/2addr v2, v5</span>
+<span class="">	new-array p5, v2, [B</span>
+<span class="">	invoke-virtual {v1}, Ljava/security/spec/ECPoint;->getAffineX()Ljava/math/BigInteger;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {v3}, Ljava/math/BigInteger;->toByteArray()[B</span>
+<span class="">	move-result-object v3</span>
+<span class="">	array-length v7, v3</span>
+<span class="">	sub-int/2addr v2, v7</span>
+<span class="">	array-length v7, v3</span>
+<span class="">	invoke-static {v3, v6, p5, v2, v7}, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V</span>
+<span class="">	invoke-virtual {v1}, Ljava/security/spec/ECPoint;->getAffineY()Ljava/math/BigInteger;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1, v6}, Ljava/math/BigInteger;->testBit(I)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	const/4 v1, 0x3</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	move v1, v4</span>
+<span class="">	:goto_0</span>
+<span class="">	int-to-byte v1, v1</span>
+<span class="">	aput-byte v1, p5, v6</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:pswitch_1</span>
+<span class="">	mul-int p5, v4, v2</span>
+<span class="">	add-int/2addr p5, v5</span>
+<span class="">	new-array v3, p5, [B</span>
+<span class="">	invoke-virtual {v1}, Ljava/security/spec/ECPoint;->getAffineX()Ljava/math/BigInteger;</span>
+<span class="">	move-result-object v7</span>
+<span class="">	invoke-virtual {v7}, Ljava/math/BigInteger;->toByteArray()[B</span>
+<span class="">	move-result-object v7</span>
+<span class="">	invoke-virtual {v1}, Ljava/security/spec/ECPoint;->getAffineY()Ljava/math/BigInteger;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/math/BigInteger;->toByteArray()[B</span>
+<span class="">	move-result-object v1</span>
+<span class="">	array-length v8, v1</span>
+<span class="">	sub-int/2addr p5, v8</span>
+<span class="">	array-length v8, v1</span>
+<span class="">	invoke-static {v1, v6, v3, p5, v8}, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V</span>
+<span class="">	add-int/2addr v2, v5</span>
+<span class="">	array-length p5, v7</span>
+<span class="">	sub-int/2addr v2, p5</span>
+<span class="">	array-length p5, v7</span>
+<span class="">	invoke-static {v7, v6, v3, v2, p5}, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V</span>
+<span class="">	const/4 p5, 0x4</span>
+<span class="">	aput-byte p5, v3, v6</span>
+<span class="">	move-object p5, v3</span>
+<span class="">	:goto_1</span>
+<span class="">	new-array v1, v4, [[B</span>
+<span class="">	aput-object p5, v1, v6</span>
+<span class="">	aput-object v0, v1, v5</span>
+<span class="">	invoke-static {v1}, Lcom/google/android/gms/internal/ads/zzayk;->zza([[B)[B</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sget-object v1, Lcom/google/android/gms/internal/ads/zzayy;->zzdoa:Lcom/google/android/gms/internal/ads/zzayy;</span>
+<span class="">	invoke-virtual {v1, p1}, Lcom/google/android/gms/internal/ads/zzayy;->zzek(Ljava/lang/String;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljavax/crypto/Mac;</span>
+<span class="">	const/16 v2, 0xff</span>
+<span class="">	invoke-virtual {v1}, Ljavax/crypto/Mac;->getMacLength()I</span>
+<span class="">	move-result v3</span>
+<span class="">	mul-int/2addr v2, v3</span>
+<span class="">	if-le p4, v2, :cond_2</span>
+<span class="">	new-instance p1, Ljava/security/GeneralSecurityException;</span>
+<span class="">	const-string p2, "size too large"</span>
+<span class="">	invoke-direct {p1, p2}, Ljava/security/GeneralSecurityException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	:cond_2</span>
+<span class="">	if-eqz p2, :cond_4</span>
+<span class="">	array-length v2, p2</span>
+<span class="">	if-nez v2, :cond_3</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_3</span>
+<span class="">	new-instance v2, Ljavax/crypto/spec/SecretKeySpec;</span>
+<span class="">	invoke-direct {v2, p2, p1}, Ljavax/crypto/spec/SecretKeySpec;-><init>([BLjava/lang/String;)V</span>
+<span class="">	invoke-virtual {v1, v2}, Ljavax/crypto/Mac;->init(Ljava/security/Key;)V</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:goto_2</span>
+<span class="">	:cond_4</span>
+<span class="">	new-instance p2, Ljavax/crypto/spec/SecretKeySpec;</span>
+<span class="">	invoke-virtual {v1}, Ljavax/crypto/Mac;->getMacLength()I</span>
+<span class="">	move-result v2</span>
+<span class="">	new-array v2, v2, [B</span>
+<span class="">	invoke-direct {p2, v2, p1}, Ljavax/crypto/spec/SecretKeySpec;-><init>([BLjava/lang/String;)V</span>
+<span class="">	invoke-virtual {v1, p2}, Ljavax/crypto/Mac;->init(Ljava/security/Key;)V</span>
+<span class="">	:goto_3</span>
+<span class="">	invoke-virtual {v1, v0}, Ljavax/crypto/Mac;->doFinal([B)[B</span>
+<span class="">	move-result-object p2</span>
+<span class="">	new-array v0, p4, [B</span>
+<span class="">	new-instance v2, Ljavax/crypto/spec/SecretKeySpec;</span>
+<span class="">	invoke-direct {v2, p2, p1}, Ljavax/crypto/spec/SecretKeySpec;-><init>([BLjava/lang/String;)V</span>
+<span class="">	invoke-virtual {v1, v2}, Ljavax/crypto/Mac;->init(Ljava/security/Key;)V</span>
+<span class="">	new-array p1, v6, [B</span>
+<span class="">	move p2, v6</span>
+<span class="">	:goto_4</span>
+<span class="">	invoke-virtual {v1, p1}, Ljavax/crypto/Mac;->update([B)V</span>
+<span class="">	invoke-virtual {v1, p3}, Ljavax/crypto/Mac;->update([B)V</span>
+<span class="">	int-to-byte p1, v5</span>
+<span class="">	invoke-virtual {v1, p1}, Ljavax/crypto/Mac;->update(B)V</span>
+<span class="">	invoke-virtual {v1}, Ljavax/crypto/Mac;->doFinal()[B</span>
+<span class="">	move-result-object p1</span>
+<span class="">	array-length v2, p1</span>
+<span class="">	add-int/2addr v2, p2</span>
+<span class="">	if-ge v2, p4, :cond_5</span>
+<span class="">	array-length v2, p1</span>
+<span class="">	invoke-static {p1, v6, v0, p2, v2}, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V</span>
+<span class="">	array-length v2, p1</span>
+<span class="">	add-int/2addr p2, v2</span>
+<span class="">	add-int/lit8 v5, v5, 0x1</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:cond_5</span>
+<span class="">	sub-int/2addr p4, p2</span>
+<span class="">	invoke-static {p1, v6, v0, p2, p4}, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V</span>
+<span class="">	new-instance p1, Lcom/google/android/gms/internal/ads/zzays;</span>
+<span class="">	invoke-direct {p1, p5, v0}, Lcom/google/android/gms/internal/ads/zzays;-><init>([B[B)V</span>
+<span class="">	new-instance p1, Ljava/security/GeneralSecurityException;</span>
+<span class="">	:goto_5</span>
+<span class="">	:cond_6</span>
+<span class="">	const-string p2, "invalid public key spec"</span>
+<span class="">	invoke-direct {p1, p2}, Ljava/security/GeneralSecurityException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	nop</span>
+<span class="">	:pswitch_data_0</span>
+<span class="">	.packed-switch 0x1</span>
+<span class="">	:pswitch_1</span>
+<span class="">	:pswitch_0</span>
+<span class="">	.end packed-switch</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../../.resources/report.js"></script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">lu.uni.trux.workmanager_enqueue1</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.recyclerview.widget</a></li>
+        <li><i class="ico ico-class"></i> GridLayoutManager$SpanSizeLookup.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public abstract Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;
+.super Ljava/lang/Object;
+.source "GridLayoutManager.java"
+
+.annotation system Ldalvik/annotation/EnclosingClass;
+value = Landroidx/recyclerview/widget/GridLayoutManager;
+.end annotation
+.annotation system Ldalvik/annotation/InnerClass;
+accessFlags = 0x409
+name = "SpanSizeLookup"
+.end annotation
+
+.field private mCacheSpanGroupIndices:Z
+.field private mCacheSpanIndices:Z
+.field final mSpanGroupIndexCache:Landroid/util/SparseIntArray;
+.field final mSpanIndexCache:Landroid/util/SparseIntArray;
+
+
+.method public constructor <init>()V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	new-instance v0, Landroid/util/SparseIntArray;</span>
+<span class="">	invoke-direct {v0}, Landroid/util/SparseIntArray;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mSpanIndexCache:Landroid/util/SparseIntArray;</span>
+<span class="">	new-instance v0, Landroid/util/SparseIntArray;</span>
+<span class="">	invoke-direct {v0}, Landroid/util/SparseIntArray;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mSpanGroupIndexCache:Landroid/util/SparseIntArray;</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-boolean v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mCacheSpanIndices:Z</span>
+<span class="">	iput-boolean v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mCacheSpanGroupIndices:Z</span>
+.end method
+
+.method static findFirstKeyLessThan(Landroid/util/SparseIntArray;I)I
+<span class="">	.locals 4</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/util/SparseIntArray;->size()I</span>
+<span class="">	move-result v0</span>
+<span class="">	add-int/lit8 v0, v0, -0x1</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	if-gt v1, v0, :cond_1</span>
+<span class="">	add-int v2, v1, v0</span>
+<span class="">	ushr-int/lit8 v2, v2, 0x1</span>
+<span class="">	invoke-virtual {p0, v2}, Landroid/util/SparseIntArray;->keyAt(I)I</span>
+<span class="">	move-result v3</span>
+<span class="">	if-ge v3, p1, :cond_0</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	move v1, v2</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	add-int/lit8 v2, v2, -0x1</span>
+<span class="">	move v0, v2</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	add-int/lit8 v1, v1, -0x1</span>
+<span class="">	if-ltz v1, :cond_2</span>
+<span class="">	invoke-virtual {p0}, Landroid/util/SparseIntArray;->size()I</span>
+<span class="">	move-result p1</span>
+<span class="">	if-ge v1, p1, :cond_2</span>
+<span class="">	invoke-virtual {p0, v1}, Landroid/util/SparseIntArray;->keyAt(I)I</span>
+<span class="">	move-result p0</span>
+<span class="">	const/4 p0, -0x1</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method  getCachedSpanGroupIndex(II)I
+<span class="">	.locals 2</span>
+
+<span class="">	iget-boolean v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mCacheSpanGroupIndices:Z</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	invoke-virtual {p0, p1, p2}, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->getSpanGroupIndex(II)I</span>
+<span class="">	move-result p1</span>
+<span class="">	iget-object v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mSpanGroupIndexCache:Landroid/util/SparseIntArray;</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v1, -0x1</span>
+<span class="">	invoke-virtual {v0, p1, v1}, Landroid/util/SparseIntArray;->get(II)I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eq v0, v1, :cond_1</span>
+<span class="">	invoke-virtual {p0, p1, p2}, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->getSpanGroupIndex(II)I</span>
+<span class="">	move-result p2</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mSpanGroupIndexCache:Landroid/util/SparseIntArray;</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroid/util/SparseIntArray;->put(II)V</span>
+.end method
+
+.method  getCachedSpanIndex(II)I
+<span class="">	.locals 2</span>
+
+<span class="">	iget-boolean v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mCacheSpanIndices:Z</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	invoke-virtual {p0, p1, p2}, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->getSpanIndex(II)I</span>
+<span class="">	move-result p1</span>
+<span class="">	iget-object v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mSpanIndexCache:Landroid/util/SparseIntArray;</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v1, -0x1</span>
+<span class="">	invoke-virtual {v0, p1, v1}, Landroid/util/SparseIntArray;->get(II)I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eq v0, v1, :cond_1</span>
+<span class="">	invoke-virtual {p0, p1, p2}, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->getSpanIndex(II)I</span>
+<span class="">	move-result p2</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mSpanIndexCache:Landroid/util/SparseIntArray;</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroid/util/SparseIntArray;->put(II)V</span>
+.end method
+
+.method public getSpanGroupIndex(II)I
+<span class="">	.locals 6</span>
+
+<span class="">	iget-boolean v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mCacheSpanGroupIndices:Z</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mSpanGroupIndexCache:Landroid/util/SparseIntArray;</span>
+<span class="">	invoke-static {v0, p1}, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->findFirstKeyLessThan(Landroid/util/SparseIntArray;I)I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v2, -0x1</span>
+<span class="">	if-eq v0, v2, :cond_0</span>
+<span class="">	iget-object v2, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mSpanGroupIndexCache:Landroid/util/SparseIntArray;</span>
+<span class="">	invoke-virtual {v2, v0}, Landroid/util/SparseIntArray;->get(I)I</span>
+<span class="">	move-result v2</span>
+<span class="">	add-int/lit8 v3, v0, 0x1</span>
+<span class="">	invoke-virtual {p0, v0, p2}, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->getCachedSpanIndex(II)I</span>
+<span class="">	move-result v4</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->getSpanSize(I)I</span>
+<span class="">	move-result v0</span>
+<span class="">	add-int/2addr v4, v0</span>
+<span class="">	if-ne v4, p2, :cond_1</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	move v4, v1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	move v2, v1</span>
+<span class="">	move v3, v2</span>
+<span class="">	move v4, v3</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {p0, p1}, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->getSpanSize(I)I</span>
+<span class="">	move-result v0</span>
+<span class="">	:goto_1</span>
+<span class="">	if-ge v3, p1, :cond_4</span>
+<span class="">	invoke-virtual {p0, v3}, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->getSpanSize(I)I</span>
+<span class="">	move-result v5</span>
+<span class="">	add-int/2addr v4, v5</span>
+<span class="">	if-ne v4, p2, :cond_2</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	move v4, v1</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_2</span>
+<span class="">	if-le v4, p2, :cond_3</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	move v4, v5</span>
+<span class="">	:goto_2</span>
+<span class="">	:cond_3</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_4</span>
+<span class="">	add-int/2addr v4, v0</span>
+<span class="">	if-le v4, p2, :cond_5</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	:cond_5</span>
+.end method
+
+.method public getSpanIndex(II)I
+<span class="">	.locals 5</span>
+
+<span class="">	invoke-virtual {p0, p1}, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->getSpanSize(I)I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-ne v0, p2, :cond_0</span>
+<span class="">	iget-boolean v2, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mCacheSpanIndices:Z</span>
+<span class="">	:cond_0</span>
+<span class="">	if-eqz v2, :cond_1</span>
+<span class="">	iget-object v2, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mSpanIndexCache:Landroid/util/SparseIntArray;</span>
+<span class="">	invoke-static {v2, p1}, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->findFirstKeyLessThan(Landroid/util/SparseIntArray;I)I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-ltz v2, :cond_1</span>
+<span class="">	iget-object v3, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mSpanIndexCache:Landroid/util/SparseIntArray;</span>
+<span class="">	invoke-virtual {v3, v2}, Landroid/util/SparseIntArray;->get(I)I</span>
+<span class="">	move-result v3</span>
+<span class="">	invoke-virtual {p0, v2}, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->getSpanSize(I)I</span>
+<span class="">	move-result v4</span>
+<span class="">	add-int/2addr v3, v4</span>
+<span class="">	goto :goto_1</span>
+<span class="">	move v2, v1</span>
+<span class="">	:cond_1</span>
+<span class="">	move v3, v2</span>
+<span class="">	if-ge v2, p1, :cond_4</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {p0, v2}, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->getSpanSize(I)I</span>
+<span class="">	move-result v4</span>
+<span class="">	add-int/2addr v3, v4</span>
+<span class="">	if-ne v3, p2, :cond_2</span>
+<span class="">	move v3, v1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	if-le v3, p2, :cond_3</span>
+<span class="">	:cond_2</span>
+<span class="">	move v3, v4</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_3</span>
+<span class="">	goto :goto_0</span>
+<span class="">	add-int/2addr v0, v3</span>
+<span class="">	:cond_4</span>
+<span class="">	if-gt v0, p2, :cond_5</span>
+<span class="">	:cond_5</span>
+.end method
+
+.method public abstract getSpanSize(I)I
+<span class="">	</span>
+
+.end method
+
+.method public invalidateSpanGroupIndexCache()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mSpanGroupIndexCache:Landroid/util/SparseIntArray;</span>
+<span class="">	invoke-virtual {v0}, Landroid/util/SparseIntArray;->clear()V</span>
+.end method
+
+.method public invalidateSpanIndexCache()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mSpanIndexCache:Landroid/util/SparseIntArray;</span>
+<span class="">	invoke-virtual {v0}, Landroid/util/SparseIntArray;->clear()V</span>
+.end method
+
+.method public isSpanGroupIndexCacheEnabled()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mCacheSpanGroupIndices:Z</span>
+.end method
+
+.method public isSpanIndexCacheEnabled()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mCacheSpanIndices:Z</span>
+.end method
+
+.method public setSpanGroupIndexCacheEnabled(Z)V
+<span class="">	.locals 1</span>
+
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mSpanGroupIndexCache:Landroid/util/SparseIntArray;</span>
+<span class="">	invoke-virtual {v0}, Landroid/util/SparseIntArray;->clear()V</span>
+<span class="">	:cond_0</span>
+<span class="">	iput-boolean p1, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mCacheSpanGroupIndices:Z</span>
+.end method
+
+.method public setSpanIndexCacheEnabled(Z)V
+<span class="">	.locals 1</span>
+
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mSpanGroupIndexCache:Landroid/util/SparseIntArray;</span>
+<span class="">	invoke-virtual {v0}, Landroid/util/SparseIntArray;->clear()V</span>
+<span class="">	:cond_0</span>
+<span class="">	iput-boolean p1, p0, Landroidx/recyclerview/widget/GridLayoutManager$SpanSizeLookup;->mCacheSpanIndices:Z</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

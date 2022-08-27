@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.gms.internal.ads</a></li>
+        <li><i class="ico ico-class"></i> zzjq.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public final Lcom/google/android/gms/internal/ads/zzjq;
+.super Ljava/lang/Object;
+
+.annotation runtime Lcom/google/android/gms/internal/ads/zzadh;
+.end annotation
+
+.field private final zzarh:[Lcom/google/android/gms/ads/AdSize;
+.field private final zzye:Ljava/lang/String;
+
+
+.method public constructor <init>(Landroid/content/Context;Landroid/util/AttributeSet;)V
+<span class="">	.locals 3</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	sget-object v0, Lcom/google/android/gms/ads/R$styleable;->AdsAttrs:[I</span>
+<span class="">	invoke-virtual {p1, p2, v0}, Landroid/content/res/Resources;->obtainAttributes(Landroid/util/AttributeSet;[I)Landroid/content/res/TypedArray;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	sget p2, Lcom/google/android/gms/ads/R$styleable;->AdsAttrs_adSize:I</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/content/res/TypedArray;->getString(I)Ljava/lang/String;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	sget v0, Lcom/google/android/gms/ads/R$styleable;->AdsAttrs_adSizes:I</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/content/res/TypedArray;->getString(I)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {p2}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	xor-int/lit8 v1, v1, 0x1</span>
+<span class="">	invoke-static {v0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v2</span>
+<span class="">	xor-int/lit8 v2, v2, 0x1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	if-nez v2, :cond_0</span>
+<span class="">	invoke-static {p2}, Lcom/google/android/gms/internal/ads/zzjq;->zzab(Ljava/lang/String;)[Lcom/google/android/gms/ads/AdSize;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	:goto_0</span>
+<span class="">	iput-object p2, p0, Lcom/google/android/gms/internal/ads/zzjq;->zzarh:[Lcom/google/android/gms/ads/AdSize;</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	if-nez v1, :cond_2</span>
+<span class="">	if-eqz v2, :cond_2</span>
+<span class="">	invoke-static {v0}, Lcom/google/android/gms/internal/ads/zzjq;->zzab(Ljava/lang/String;)[Lcom/google/android/gms/ads/AdSize;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:goto_1</span>
+<span class="">	sget p2, Lcom/google/android/gms/ads/R$styleable;->AdsAttrs_adUnitId:I</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/content/res/TypedArray;->getString(I)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iput-object p1, p0, Lcom/google/android/gms/internal/ads/zzjq;->zzye:Ljava/lang/String;</span>
+<span class="">	iget-object p1, p0, Lcom/google/android/gms/internal/ads/zzjq;->zzye:Ljava/lang/String;</span>
+<span class="">	invoke-static {p1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	const-string p2, "Required XML attribute \"adUnitId\" was missing."</span>
+<span class="">	invoke-direct {p1, p2}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	:cond_1</span>
+<span class="">	if-eqz v1, :cond_3</span>
+<span class="">	:cond_2</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	const-string p2, "Either XML attribute \"adSize\" or XML attribute \"supportedAdSizes\" should be specified, but not both."</span>
+<span class="">	invoke-direct {p1, p2}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	:cond_3</span>
+<span class="">	const-string p2, "Required XML attribute \"adSize\" was missing."</span>
+<span class="">	invoke-direct {p1, p2}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method private static zzab(Ljava/lang/String;)[Lcom/google/android/gms/ads/AdSize;
+<span class="">	.locals 10</span>
+
+<span class="">	const-string v0, "\\s*,\\s*"</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	array-length v2, v0</span>
+<span class="">	new-array v2, v2, [Lcom/google/android/gms/ads/AdSize;</span>
+<span class="">	move v3, v1</span>
+<span class="">	:goto_0</span>
+<span class="">	array-length v4, v0</span>
+<span class="">	if-ge v3, v4, :cond_e</span>
+<span class="">	aget-object v4, v0, v3</span>
+<span class="">	invoke-virtual {v4}, Ljava/lang/String;->trim()Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	const-string v5, "^(\\d+|FULL_WIDTH)\\s*[xX]\\s*(\\d+|AUTO_HEIGHT)$"</span>
+<span class="">	invoke-virtual {v4, v5}, Ljava/lang/String;->matches(Ljava/lang/String;)Z</span>
+<span class="">	move-result v5</span>
+<span class="">	if-eqz v5, :cond_3</span>
+<span class="">	const-string v5, "[xX]"</span>
+<span class="">	invoke-virtual {v4, v5}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	aget-object v6, v5, v1</span>
+<span class="">	invoke-virtual {v6}, Ljava/lang/String;->trim()Ljava/lang/String;</span>
+<span class="">	move-result-object v6</span>
+<span class="">	aput-object v6, v5, v1</span>
+<span class="">	const/4 v6, 0x1</span>
+<span class="">	aget-object v7, v5, v6</span>
+<span class="">	invoke-virtual {v7}, Ljava/lang/String;->trim()Ljava/lang/String;</span>
+<span class="">	move-result-object v7</span>
+<span class="">	aput-object v7, v5, v6</span>
+<span class="">	:try_start_0</span>
+<span class="">	const-string v7, "FULL_WIDTH"</span>
+<span class="">	aget-object v8, v5, v1</span>
+<span class="">	invoke-virtual {v7, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v7</span>
+<span class="">	if-eqz v7, :cond_0</span>
+<span class="">	const/4 v7, -0x1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	aget-object v7, v5, v1</span>
+<span class="">	invoke-static {v7}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I</span>
+<span class="">	move-result v7</span>
+<span class="">	:goto_1</span>
+<span class="">	const-string v8, "AUTO_HEIGHT"</span>
+<span class="">	aget-object v9, v5, v6</span>
+<span class="">	invoke-virtual {v8, v9}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v8</span>
+<span class="">	if-eqz v8, :cond_1</span>
+<span class="">	const/4 v4, -0x2</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_1</span>
+<span class="">	aget-object v5, v5, v6</span>
+<span class="">	invoke-static {v5}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I</span>
+<span class="">	move-result v5</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/NumberFormatException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	move v4, v5</span>
+<span class="">	:goto_2</span>
+<span class="">	new-instance v5, Lcom/google/android/gms/ads/AdSize;</span>
+<span class="">	invoke-direct {v5, v7, v4}, Lcom/google/android/gms/ads/AdSize;-><init>(II)V</span>
+<span class="">	aput-object v5, v2, v3</span>
+<span class="">	goto/16 :goto_4</span>
+<span class="">	:catch_0</span>
+<span class="">	new-instance p0, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	const-string v0, "Could not parse XML attribute \"adSize\": "</span>
+<span class="">	invoke-static {v4}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_2</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:cond_2</span>
+<span class="">	new-instance v1, Ljava/lang/String;</span>
+<span class="">	invoke-direct {v1, v0}, Ljava/lang/String;-><init>(Ljava/lang/String;)V</span>
+<span class="">	move-object v0, v1</span>
+<span class="">	:goto_3</span>
+<span class="">	invoke-direct {p0, v0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p0</span>
+<span class="">	:cond_3</span>
+<span class="">	const-string v5, "BANNER"</span>
+<span class="">	invoke-virtual {v5, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v5</span>
+<span class="">	if-eqz v5, :cond_4</span>
+<span class="">	sget-object v4, Lcom/google/android/gms/ads/AdSize;->BANNER:Lcom/google/android/gms/ads/AdSize;</span>
+<span class="">	aput-object v4, v2, v3</span>
+<span class="">	goto/16 :goto_4</span>
+<span class="">	:cond_4</span>
+<span class="">	const-string v5, "LARGE_BANNER"</span>
+<span class="">	invoke-virtual {v5, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v5</span>
+<span class="">	if-eqz v5, :cond_5</span>
+<span class="">	sget-object v4, Lcom/google/android/gms/ads/AdSize;->LARGE_BANNER:Lcom/google/android/gms/ads/AdSize;</span>
+<span class="">	aput-object v4, v2, v3</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:cond_5</span>
+<span class="">	const-string v5, "FULL_BANNER"</span>
+<span class="">	invoke-virtual {v5, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v5</span>
+<span class="">	if-eqz v5, :cond_6</span>
+<span class="">	sget-object v4, Lcom/google/android/gms/ads/AdSize;->FULL_BANNER:Lcom/google/android/gms/ads/AdSize;</span>
+<span class="">	aput-object v4, v2, v3</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:cond_6</span>
+<span class="">	const-string v5, "LEADERBOARD"</span>
+<span class="">	invoke-virtual {v5, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v5</span>
+<span class="">	if-eqz v5, :cond_7</span>
+<span class="">	sget-object v4, Lcom/google/android/gms/ads/AdSize;->LEADERBOARD:Lcom/google/android/gms/ads/AdSize;</span>
+<span class="">	aput-object v4, v2, v3</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:cond_7</span>
+<span class="">	const-string v5, "MEDIUM_RECTANGLE"</span>
+<span class="">	invoke-virtual {v5, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v5</span>
+<span class="">	if-eqz v5, :cond_8</span>
+<span class="">	sget-object v4, Lcom/google/android/gms/ads/AdSize;->MEDIUM_RECTANGLE:Lcom/google/android/gms/ads/AdSize;</span>
+<span class="">	aput-object v4, v2, v3</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:cond_8</span>
+<span class="">	const-string v5, "SMART_BANNER"</span>
+<span class="">	invoke-virtual {v5, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v5</span>
+<span class="">	if-eqz v5, :cond_9</span>
+<span class="">	sget-object v4, Lcom/google/android/gms/ads/AdSize;->SMART_BANNER:Lcom/google/android/gms/ads/AdSize;</span>
+<span class="">	aput-object v4, v2, v3</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:cond_9</span>
+<span class="">	const-string v5, "WIDE_SKYSCRAPER"</span>
+<span class="">	invoke-virtual {v5, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v5</span>
+<span class="">	if-eqz v5, :cond_a</span>
+<span class="">	sget-object v4, Lcom/google/android/gms/ads/AdSize;->WIDE_SKYSCRAPER:Lcom/google/android/gms/ads/AdSize;</span>
+<span class="">	aput-object v4, v2, v3</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:cond_a</span>
+<span class="">	const-string v5, "FLUID"</span>
+<span class="">	invoke-virtual {v5, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v5</span>
+<span class="">	if-eqz v5, :cond_b</span>
+<span class="">	sget-object v4, Lcom/google/android/gms/ads/AdSize;->FLUID:Lcom/google/android/gms/ads/AdSize;</span>
+<span class="">	aput-object v4, v2, v3</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:cond_b</span>
+<span class="">	const-string v5, "ICON"</span>
+<span class="">	invoke-virtual {v5, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v5</span>
+<span class="">	if-eqz v5, :cond_c</span>
+<span class="">	sget-object v4, Lcom/google/android/gms/ads/AdSize;->zzup:Lcom/google/android/gms/ads/AdSize;</span>
+<span class="">	aput-object v4, v2, v3</span>
+<span class="">	:goto_4</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	:cond_c</span>
+<span class="">	new-instance p0, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	const-string v0, "Could not parse XML attribute \"adSize\": "</span>
+<span class="">	invoke-static {v4}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_d</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	goto :goto_5</span>
+<span class="">	:cond_d</span>
+<span class="">	new-instance v1, Ljava/lang/String;</span>
+<span class="">	invoke-direct {v1, v0}, Ljava/lang/String;-><init>(Ljava/lang/String;)V</span>
+<span class="">	move-object v0, v1</span>
+<span class="">	:goto_5</span>
+<span class="">	invoke-direct {p0, v0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p0</span>
+<span class="">	:cond_e</span>
+<span class="">	array-length v0, v2</span>
+<span class="">	if-nez v0, :cond_10</span>
+<span class="">	new-instance v0, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	const-string v1, "Could not parse XML attribute \"adSize\": "</span>
+<span class="">	invoke-static {p0}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_f</span>
+<span class="">	invoke-virtual {v1, p0}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	goto :goto_6</span>
+<span class="">	:cond_f</span>
+<span class="">	new-instance p0, Ljava/lang/String;</span>
+<span class="">	invoke-direct {p0, v1}, Ljava/lang/String;-><init>(Ljava/lang/String;)V</span>
+<span class="">	:goto_6</span>
+<span class="">	invoke-direct {v0, p0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw v0</span>
+<span class="">	:cond_10</span>
+.end method
+
+.method public final getAdUnitId()Ljava/lang/String;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/internal/ads/zzjq;->zzye:Ljava/lang/String;</span>
+.end method
+
+.method public final zzi(Z)[Lcom/google/android/gms/ads/AdSize;
+<span class="">	.locals 1</span>
+
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	iget-object p1, p0, Lcom/google/android/gms/internal/ads/zzjq;->zzarh:[Lcom/google/android/gms/ads/AdSize;</span>
+<span class="">	array-length p1, p1</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	if-eq p1, v0, :cond_0</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	const-string v0, "The adSizes XML attribute is only allowed on PublisherAdViews."</span>
+<span class="">	invoke-direct {p1, v0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object p1, p0, Lcom/google/android/gms/internal/ads/zzjq;->zzarh:[Lcom/google/android/gms/ads/AdSize;</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../../.resources/report.js"></script>
+</body>
+</html>

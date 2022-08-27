@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../index.html">lu.uni.trux.timertask_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.material.slider</a></li>
+        <li><i class="ico ico-class"></i> RangeSlider.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Lcom/google/android/material/slider/RangeSlider;
+.super Lcom/google/android/material/slider/BaseSlider;
+.source "RangeSlider.java"
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Lcom/google/android/material/slider/RangeSlider$RangeSliderState;,
+Lcom/google/android/material/slider/RangeSlider$OnSliderTouchListener;,
+Lcom/google/android/material/slider/RangeSlider$OnChangeListener;
+}
+.end annotation
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Lcom/google/android/material/slider/BaseSlider<",
+"Lcom/google/android/material/slider/RangeSlider;",
+"Lcom/google/android/material/slider/RangeSlider$OnChangeListener;",
+"Lcom/google/android/material/slider/RangeSlider$OnSliderTouchListener;",
+">;"
+}
+.end annotation
+
+.field private minSeparation:F
+.field private separationUnit:I
+
+
+.method public constructor <init>(Landroid/content/Context;)V
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-direct {p0, p1, v0}, Lcom/google/android/material/slider/RangeSlider;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V</span>
+.end method
+
+.method public constructor <init>(Landroid/content/Context;Landroid/util/AttributeSet;)V
+<span class="">	.locals 1</span>
+
+<span class="">	sget v0, Lcom/google/android/material/R$attr;->sliderStyle:I</span>
+<span class="">	invoke-direct {p0, p1, p2, v0}, Lcom/google/android/material/slider/RangeSlider;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V</span>
+.end method
+
+.method public constructor <init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V
+<span class="">	.locals 7</span>
+
+<span class="">	invoke-direct {p0, p1, p2, p3}, Lcom/google/android/material/slider/BaseSlider;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V</span>
+<span class="">	sget-object v2, Lcom/google/android/material/R$styleable;->RangeSlider:[I</span>
+<span class="">	sget v4, Lcom/google/android/material/slider/RangeSlider;->DEF_STYLE_RES:I</span>
+<span class="">	const/4 v6, 0x0</span>
+<span class="">	new-array v5, v6, [I</span>
+<span class="">	move-object v0, p1</span>
+<span class="">	move-object v1, p2</span>
+<span class="">	move v3, p3</span>
+<span class="">	invoke-static/range {v0 .. v5}, Lcom/google/android/material/internal/ThemeEnforcement;->obtainStyledAttributes(Landroid/content/Context;Landroid/util/AttributeSet;[III[I)Landroid/content/res/TypedArray;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	sget p2, Lcom/google/android/material/R$styleable;->RangeSlider_values:I</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/content/res/TypedArray;->hasValue(I)Z</span>
+<span class="">	move-result p2</span>
+<span class="">	if-eqz p2, :cond_0</span>
+<span class="">	sget p2, Lcom/google/android/material/R$styleable;->RangeSlider_values:I</span>
+<span class="">	invoke-virtual {p1, p2, v6}, Landroid/content/res/TypedArray;->getResourceId(II)I</span>
+<span class="">	move-result p2</span>
+<span class="">	invoke-virtual {p1}, Landroid/content/res/TypedArray;->getResources()Landroid/content/res/Resources;</span>
+<span class="">	move-result-object p3</span>
+<span class="">	invoke-virtual {p3, p2}, Landroid/content/res/Resources;->obtainTypedArray(I)Landroid/content/res/TypedArray;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-static {p2}, Lcom/google/android/material/slider/RangeSlider;->convertToFloat(Landroid/content/res/TypedArray;)Ljava/util/List;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-virtual {p0, p2}, Lcom/google/android/material/slider/RangeSlider;->setValues(Ljava/util/List;)V</span>
+<span class="">	:cond_0</span>
+<span class="">	sget p2, Lcom/google/android/material/R$styleable;->RangeSlider_minSeparation:I</span>
+<span class="">	const/4 p3, 0x0</span>
+<span class="">	invoke-virtual {p1, p2, p3}, Landroid/content/res/TypedArray;->getDimension(IF)F</span>
+<span class="">	move-result p2</span>
+<span class="">	iput p2, p0, Lcom/google/android/material/slider/RangeSlider;->minSeparation:F</span>
+<span class="">	invoke-virtual {p1}, Landroid/content/res/TypedArray;->recycle()V</span>
+.end method
+
+.method private static convertToFloat(Landroid/content/res/TypedArray;)Ljava/util/List;
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Landroid/content/res/TypedArray;",</span>
+<span class="">	")",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Ljava/lang/Float;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/content/res/TypedArray;->length()I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-ge v1, v2, :cond_0</span>
+<span class="">	const/high16 v2, -0x40800000    # -1.0f</span>
+<span class="">	invoke-virtual {p0, v1, v2}, Landroid/content/res/TypedArray;->getFloat(IF)F</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-static {v2}, Ljava/lang/Float;->valueOf(F)Ljava/lang/Float;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-interface {v0, v2}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	add-int/lit8 v1, v1, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public bridge synthetic clearOnChangeListeners()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->clearOnChangeListeners()V</span>
+.end method
+
+.method public bridge synthetic clearOnSliderTouchListeners()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->clearOnSliderTouchListeners()V</span>
+.end method
+
+.method public bridge synthetic dispatchHoverEvent(Landroid/view/MotionEvent;)Z
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->dispatchHoverEvent(Landroid/view/MotionEvent;)Z</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public bridge synthetic dispatchKeyEvent(Landroid/view/KeyEvent;)Z
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public bridge synthetic getAccessibilityClassName()Ljava/lang/CharSequence;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getAccessibilityClassName()Ljava/lang/CharSequence;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public bridge synthetic getActiveThumbIndex()I
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getActiveThumbIndex()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public bridge synthetic getFocusedThumbIndex()I
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getFocusedThumbIndex()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public bridge synthetic getHaloRadius()I
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getHaloRadius()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public bridge synthetic getHaloTintList()Landroid/content/res/ColorStateList;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getHaloTintList()Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public bridge synthetic getLabelBehavior()I
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getLabelBehavior()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public getMinSeparation()F
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/google/android/material/slider/RangeSlider;->minSeparation:F</span>
+.end method
+
+.method public bridge synthetic getStepSize()F
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getStepSize()F</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public bridge synthetic getThumbElevation()F
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getThumbElevation()F</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public bridge synthetic getThumbRadius()I
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getThumbRadius()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public bridge synthetic getThumbStrokeColor()Landroid/content/res/ColorStateList;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getThumbStrokeColor()Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public bridge synthetic getThumbStrokeWidth()F
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getThumbStrokeWidth()F</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public bridge synthetic getThumbTintList()Landroid/content/res/ColorStateList;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getThumbTintList()Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public bridge synthetic getTickActiveTintList()Landroid/content/res/ColorStateList;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getTickActiveTintList()Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public bridge synthetic getTickInactiveTintList()Landroid/content/res/ColorStateList;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getTickInactiveTintList()Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public bridge synthetic getTickTintList()Landroid/content/res/ColorStateList;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getTickTintList()Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public bridge synthetic getTrackActiveTintList()Landroid/content/res/ColorStateList;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getTrackActiveTintList()Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public bridge synthetic getTrackHeight()I
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getTrackHeight()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public bridge synthetic getTrackInactiveTintList()Landroid/content/res/ColorStateList;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getTrackInactiveTintList()Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public bridge synthetic getTrackSidePadding()I
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getTrackSidePadding()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public bridge synthetic getTrackTintList()Landroid/content/res/ColorStateList;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getTrackTintList()Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public bridge synthetic getTrackWidth()I
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getTrackWidth()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public bridge synthetic getValueFrom()F
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getValueFrom()F</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public bridge synthetic getValueTo()F
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getValueTo()F</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public getValues()Ljava/util/List;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"()",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Ljava/lang/Float;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->getValues()Ljava/util/List;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public bridge synthetic hasLabelFormatter()Z
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->hasLabelFormatter()Z</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public bridge synthetic isTickVisible()Z
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->isTickVisible()Z</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public bridge synthetic onKeyDown(ILandroid/view/KeyEvent;)Z
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1, p2}, Lcom/google/android/material/slider/BaseSlider;->onKeyDown(ILandroid/view/KeyEvent;)Z</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public bridge synthetic onKeyUp(ILandroid/view/KeyEvent;)Z
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1, p2}, Lcom/google/android/material/slider/BaseSlider;->onKeyUp(ILandroid/view/KeyEvent;)Z</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method protected onRestoreInstanceState(Landroid/os/Parcelable;)V
+<span class="">	.locals 1</span>
+
+<span class="">	check-cast p1, Lcom/google/android/material/slider/RangeSlider$RangeSliderState;</span>
+<span class="">	invoke-virtual {p1}, Lcom/google/android/material/slider/RangeSlider$RangeSliderState;->getSuperState()Landroid/os/Parcelable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-super {p0, v0}, Lcom/google/android/material/slider/BaseSlider;->onRestoreInstanceState(Landroid/os/Parcelable;)V</span>
+<span class="">	invoke-static {p1}, Lcom/google/android/material/slider/RangeSlider$RangeSliderState;->access$000(Lcom/google/android/material/slider/RangeSlider$RangeSliderState;)F</span>
+<span class="">	move-result v0</span>
+<span class="">	iput v0, p0, Lcom/google/android/material/slider/RangeSlider;->minSeparation:F</span>
+<span class="">	invoke-static {p1}, Lcom/google/android/material/slider/RangeSlider$RangeSliderState;->access$100(Lcom/google/android/material/slider/RangeSlider$RangeSliderState;)I</span>
+<span class="">	move-result p1</span>
+<span class="">	iput p1, p0, Lcom/google/android/material/slider/RangeSlider;->separationUnit:I</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/google/android/material/slider/RangeSlider;->setSeparationUnit(I)V</span>
+.end method
+
+.method public onSaveInstanceState()Landroid/os/Parcelable;
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/slider/BaseSlider;->onSaveInstanceState()Landroid/os/Parcelable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	new-instance v1, Lcom/google/android/material/slider/RangeSlider$RangeSliderState;</span>
+<span class="">	invoke-direct {v1, v0}, Lcom/google/android/material/slider/RangeSlider$RangeSliderState;-><init>(Landroid/os/Parcelable;)V</span>
+<span class="">	iget v0, p0, Lcom/google/android/material/slider/RangeSlider;->minSeparation:F</span>
+<span class="">	invoke-static {v1, v0}, Lcom/google/android/material/slider/RangeSlider$RangeSliderState;->access$002(Lcom/google/android/material/slider/RangeSlider$RangeSliderState;F)F</span>
+<span class="">	iget v0, p0, Lcom/google/android/material/slider/RangeSlider;->separationUnit:I</span>
+<span class="">	invoke-static {v1, v0}, Lcom/google/android/material/slider/RangeSlider$RangeSliderState;->access$102(Lcom/google/android/material/slider/RangeSlider$RangeSliderState;I)I</span>
+.end method
+
+.method public bridge synthetic onTouchEvent(Landroid/view/MotionEvent;)Z
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->onTouchEvent(Landroid/view/MotionEvent;)Z</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public bridge synthetic setEnabled(Z)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setEnabled(Z)V</span>
+.end method
+
+.method public bridge synthetic setFocusedThumbIndex(I)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setFocusedThumbIndex(I)V</span>
+.end method
+
+.method public bridge synthetic setHaloRadius(I)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setHaloRadius(I)V</span>
+.end method
+
+.method public bridge synthetic setHaloRadiusResource(I)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setHaloRadiusResource(I)V</span>
+.end method
+
+.method public bridge synthetic setHaloTintList(Landroid/content/res/ColorStateList;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setHaloTintList(Landroid/content/res/ColorStateList;)V</span>
+.end method
+
+.method public bridge synthetic setLabelBehavior(I)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setLabelBehavior(I)V</span>
+.end method
+
+.method public bridge synthetic setLabelFormatter(Lcom/google/android/material/slider/LabelFormatter;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setLabelFormatter(Lcom/google/android/material/slider/LabelFormatter;)V</span>
+.end method
+
+.method public setMinSeparation(F)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput p1, p0, Lcom/google/android/material/slider/RangeSlider;->minSeparation:F</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	iput p1, p0, Lcom/google/android/material/slider/RangeSlider;->separationUnit:I</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/google/android/material/slider/RangeSlider;->setSeparationUnit(I)V</span>
+.end method
+
+.method public setMinSeparationValue(F)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput p1, p0, Lcom/google/android/material/slider/RangeSlider;->minSeparation:F</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	iput p1, p0, Lcom/google/android/material/slider/RangeSlider;->separationUnit:I</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/google/android/material/slider/RangeSlider;->setSeparationUnit(I)V</span>
+.end method
+
+.method public bridge synthetic setStepSize(F)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setStepSize(F)V</span>
+.end method
+
+.method public bridge synthetic setThumbElevation(F)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setThumbElevation(F)V</span>
+.end method
+
+.method public bridge synthetic setThumbElevationResource(I)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setThumbElevationResource(I)V</span>
+.end method
+
+.method public bridge synthetic setThumbRadius(I)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setThumbRadius(I)V</span>
+.end method
+
+.method public bridge synthetic setThumbRadiusResource(I)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setThumbRadiusResource(I)V</span>
+.end method
+
+.method public bridge synthetic setThumbStrokeColor(Landroid/content/res/ColorStateList;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setThumbStrokeColor(Landroid/content/res/ColorStateList;)V</span>
+.end method
+
+.method public bridge synthetic setThumbStrokeColorResource(I)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setThumbStrokeColorResource(I)V</span>
+.end method
+
+.method public bridge synthetic setThumbStrokeWidth(F)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setThumbStrokeWidth(F)V</span>
+.end method
+
+.method public bridge synthetic setThumbStrokeWidthResource(I)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setThumbStrokeWidthResource(I)V</span>
+.end method
+
+.method public bridge synthetic setThumbTintList(Landroid/content/res/ColorStateList;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setThumbTintList(Landroid/content/res/ColorStateList;)V</span>
+.end method
+
+.method public bridge synthetic setTickActiveTintList(Landroid/content/res/ColorStateList;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setTickActiveTintList(Landroid/content/res/ColorStateList;)V</span>
+.end method
+
+.method public bridge synthetic setTickInactiveTintList(Landroid/content/res/ColorStateList;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setTickInactiveTintList(Landroid/content/res/ColorStateList;)V</span>
+.end method
+
+.method public bridge synthetic setTickTintList(Landroid/content/res/ColorStateList;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setTickTintList(Landroid/content/res/ColorStateList;)V</span>
+.end method
+
+.method public bridge synthetic setTickVisible(Z)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setTickVisible(Z)V</span>
+.end method
+
+.method public bridge synthetic setTrackActiveTintList(Landroid/content/res/ColorStateList;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setTrackActiveTintList(Landroid/content/res/ColorStateList;)V</span>
+.end method
+
+.method public bridge synthetic setTrackHeight(I)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setTrackHeight(I)V</span>
+.end method
+
+.method public bridge synthetic setTrackInactiveTintList(Landroid/content/res/ColorStateList;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setTrackInactiveTintList(Landroid/content/res/ColorStateList;)V</span>
+.end method
+
+.method public bridge synthetic setTrackTintList(Landroid/content/res/ColorStateList;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setTrackTintList(Landroid/content/res/ColorStateList;)V</span>
+.end method
+
+.method public bridge synthetic setValueFrom(F)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setValueFrom(F)V</span>
+.end method
+
+.method public bridge synthetic setValueTo(F)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setValueTo(F)V</span>
+.end method
+
+.method public setValues(Ljava/util/List;)V
+<span class="">	.locals 0</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Ljava/lang/Float;",</span>
+<span class="">	">;)V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setValues(Ljava/util/List;)V</span>
+.end method
+
+.method public varargs setValues([Ljava/lang/Float;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/slider/BaseSlider;->setValues([Ljava/lang/Float;)V</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../.resources/report.js"></script>
+</body>
+</html>

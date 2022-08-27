@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">android.support.v4.media.session</a></li>
+        <li><i class="ico ico-class"></i> MediaControllerCompat$Callback$MessageHandler.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class  Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;
+.super Landroid/os/Handler;
+.source "MediaControllerCompat.java"
+
+.annotation system Ldalvik/annotation/EnclosingClass;
+value = Landroid/support/v4/media/session/MediaControllerCompat$Callback;
+.end annotation
+.annotation system Ldalvik/annotation/InnerClass;
+accessFlags = 0x2
+name = "MessageHandler"
+.end annotation
+
+.field private static final MSG_DESTROYED:I = 0x8
+.field private static final MSG_EVENT:I = 0x1
+.field private static final MSG_SESSION_READY:I = 0xd
+.field private static final MSG_UPDATE_CAPTIONING_ENABLED:I = 0xb
+.field private static final MSG_UPDATE_EXTRAS:I = 0x7
+.field private static final MSG_UPDATE_METADATA:I = 0x3
+.field private static final MSG_UPDATE_PLAYBACK_STATE:I = 0x2
+.field private static final MSG_UPDATE_QUEUE:I = 0x5
+.field private static final MSG_UPDATE_QUEUE_TITLE:I = 0x6
+.field private static final MSG_UPDATE_REPEAT_MODE:I = 0x9
+.field private static final MSG_UPDATE_SHUFFLE_MODE:I = 0xc
+.field private static final MSG_UPDATE_VOLUME:I = 0x4
+.field  mRegistered:Z
+.field final synthetic this$0:Landroid/support/v4/media/session/MediaControllerCompat$Callback;
+
+
+.method constructor <init>(Landroid/support/v4/media/session/MediaControllerCompat$Callback;Landroid/os/Looper;)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput-object p1, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->this$0:Landroid/support/v4/media/session/MediaControllerCompat$Callback;</span>
+<span class="">	invoke-direct {p0, p2}, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	iput-boolean p1, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->mRegistered:Z</span>
+.end method
+
+.method public handleMessage(Landroid/os/Message;)V
+<span class="">	.locals 2</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->mRegistered:Z</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	iget v0, p1, Landroid/os/Message;->what:I</span>
+<span class="">	:cond_0</span>
+<span class="">	packed-switch v0, :pswitch_data_0</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	:pswitch_0</span>
+<span class="">	iget-object p1, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->this$0:Landroid/support/v4/media/session/MediaControllerCompat$Callback;</span>
+<span class="">	:pswitch_1</span>
+<span class="">	invoke-virtual {p1}, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->onSessionReady()V</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->this$0:Landroid/support/v4/media/session/MediaControllerCompat$Callback;</span>
+<span class="">	:pswitch_2</span>
+<span class="">	iget-object p1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;</span>
+<span class="">	check-cast p1, Ljava/lang/Integer;</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/Integer;->intValue()I</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->onShuffleModeChanged(I)V</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->this$0:Landroid/support/v4/media/session/MediaControllerCompat$Callback;</span>
+<span class="">	:pswitch_3</span>
+<span class="">	iget-object p1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;</span>
+<span class="">	check-cast p1, Ljava/lang/Boolean;</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/Boolean;->booleanValue()Z</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->onCaptioningEnabledChanged(Z)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->this$0:Landroid/support/v4/media/session/MediaControllerCompat$Callback;</span>
+<span class="">	:pswitch_4</span>
+<span class="">	iget-object p1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;</span>
+<span class="">	check-cast p1, Ljava/lang/Integer;</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/Integer;->intValue()I</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->onRepeatModeChanged(I)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object p1, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->this$0:Landroid/support/v4/media/session/MediaControllerCompat$Callback;</span>
+<span class="">	:pswitch_5</span>
+<span class="">	invoke-virtual {p1}, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->onSessionDestroyed()V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->this$0:Landroid/support/v4/media/session/MediaControllerCompat$Callback;</span>
+<span class="">	:pswitch_6</span>
+<span class="">	iget-object p1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;</span>
+<span class="">	check-cast p1, Landroid/os/Bundle;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->onExtrasChanged(Landroid/os/Bundle;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->this$0:Landroid/support/v4/media/session/MediaControllerCompat$Callback;</span>
+<span class="">	:pswitch_7</span>
+<span class="">	iget-object p1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;</span>
+<span class="">	check-cast p1, Ljava/lang/CharSequence;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->onQueueTitleChanged(Ljava/lang/CharSequence;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->this$0:Landroid/support/v4/media/session/MediaControllerCompat$Callback;</span>
+<span class="">	:pswitch_8</span>
+<span class="">	iget-object p1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;</span>
+<span class="">	check-cast p1, Ljava/util/List;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->onQueueChanged(Ljava/util/List;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->this$0:Landroid/support/v4/media/session/MediaControllerCompat$Callback;</span>
+<span class="">	:pswitch_9</span>
+<span class="">	iget-object p1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;</span>
+<span class="">	check-cast p1, Landroid/support/v4/media/session/MediaControllerCompat$PlaybackInfo;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->onAudioInfoChanged(Landroid/support/v4/media/session/MediaControllerCompat$PlaybackInfo;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->this$0:Landroid/support/v4/media/session/MediaControllerCompat$Callback;</span>
+<span class="">	:pswitch_a</span>
+<span class="">	iget-object p1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;</span>
+<span class="">	check-cast p1, Landroid/support/v4/media/MediaMetadataCompat;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->onMetadataChanged(Landroid/support/v4/media/MediaMetadataCompat;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->this$0:Landroid/support/v4/media/session/MediaControllerCompat$Callback;</span>
+<span class="">	:pswitch_b</span>
+<span class="">	iget-object p1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;</span>
+<span class="">	check-cast p1, Landroid/support/v4/media/session/PlaybackStateCompat;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->onPlaybackStateChanged(Landroid/support/v4/media/session/PlaybackStateCompat;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/v4/media/session/MediaControllerCompat$Callback$MessageHandler;->this$0:Landroid/support/v4/media/session/MediaControllerCompat$Callback;</span>
+<span class="">	:pswitch_c</span>
+<span class="">	iget-object v1, p1, Landroid/os/Message;->obj:Ljava/lang/Object;</span>
+<span class="">	check-cast v1, Ljava/lang/String;</span>
+<span class="">	invoke-virtual {p1}, Landroid/os/Message;->getData()Landroid/os/Bundle;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {v0, v1, p1}, Landroid/support/v4/media/session/MediaControllerCompat$Callback;->onSessionEvent(Ljava/lang/String;Landroid/os/Bundle;)V</span>
+<span class="">	:goto_0</span>
+<span class="">	:pswitch_data_0</span>
+<span class="">	.packed-switch 0x1</span>
+<span class="">	:pswitch_c</span>
+<span class="">	:pswitch_b</span>
+<span class="">	:pswitch_a</span>
+<span class="">	:pswitch_9</span>
+<span class="">	:pswitch_8</span>
+<span class="">	:pswitch_7</span>
+<span class="">	:pswitch_6</span>
+<span class="">	:pswitch_5</span>
+<span class="">	:pswitch_4</span>
+<span class="">	:pswitch_0</span>
+<span class="">	:pswitch_3</span>
+<span class="">	:pswitch_2</span>
+<span class="">	:pswitch_1</span>
+<span class="">	.end packed-switch</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../.resources/report.js"></script>
+</body>
+</html>

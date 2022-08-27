@@ -1,0 +1,1248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">lu.uni.trux.workmanager_enqueueuniquework</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.appcompat.widget</a></li>
+        <li><i class="ico ico-class"></i> AppCompatTextHelper.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class  Landroidx/appcompat/widget/AppCompatTextHelper;
+.super Ljava/lang/Object;
+.source "AppCompatTextHelper.java"
+
+
+.field private static final MONOSPACE:I = 0x3
+.field private static final SANS:I = 0x1
+.field private static final SERIF:I = 0x2
+.field private static final TEXT_FONT_WEIGHT_UNSPECIFIED:I = -0x1
+.field private mAsyncFontPending:Z
+.field private final mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+.field private mDrawableBottomTint:Landroidx/appcompat/widget/TintInfo;
+.field private mDrawableEndTint:Landroidx/appcompat/widget/TintInfo;
+.field private mDrawableLeftTint:Landroidx/appcompat/widget/TintInfo;
+.field private mDrawableRightTint:Landroidx/appcompat/widget/TintInfo;
+.field private mDrawableStartTint:Landroidx/appcompat/widget/TintInfo;
+.field private mDrawableTint:Landroidx/appcompat/widget/TintInfo;
+.field private mDrawableTopTint:Landroidx/appcompat/widget/TintInfo;
+.field private mFontTypeface:Landroid/graphics/Typeface;
+.field private mFontWeight:I
+.field private mStyle:I
+.field private final mView:Landroid/widget/TextView;
+
+
+<span class="cov">.method constructor &lt;init&gt;(Landroid/widget/TextView;)V</span>
+<span class="">	.locals 1</span>
+
+<span class="cov">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="cov">	const/4 v0, 0x0</span>
+<span class="cov">	iput v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mStyle:I</span>
+<span class="cov">	const/4 v0, -0x1</span>
+<span class="cov">	iput v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontWeight:I</span>
+<span class="cov">	iput-object p1, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="cov">	new-instance v0, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="cov">	invoke-direct {v0, p1}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;-><init>(Landroid/widget/TextView;)V</span>
+<span class="cov">	iput-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method private applyCompoundDrawableTint(Landroid/graphics/drawable/Drawable;Landroidx/appcompat/widget/TintInfo;)V
+<span class="">	.locals 1</span>
+
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	if-eqz p2, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/TextView;->getDrawableState()[I</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {p1, p2, v0}, Landroidx/appcompat/widget/AppCompatDrawableManager;->tintDrawable(Landroid/graphics/drawable/Drawable;Landroidx/appcompat/widget/TintInfo;[I)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private static createTintInfo(Landroid/content/Context;Landroidx/appcompat/widget/AppCompatDrawableManager;I)Landroidx/appcompat/widget/TintInfo;
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-virtual {p1, p0, p2}, Landroidx/appcompat/widget/AppCompatDrawableManager;->getTintList(Landroid/content/Context;I)Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	new-instance p1, Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	invoke-direct {p1}, Landroidx/appcompat/widget/TintInfo;-><init>()V</span>
+<span class="">	const/4 p2, 0x1</span>
+<span class="">	iput-boolean p2, p1, Landroidx/appcompat/widget/TintInfo;->mHasTintList:Z</span>
+<span class="">	iput-object p0, p1, Landroidx/appcompat/widget/TintInfo;->mTintList:Landroid/content/res/ColorStateList;</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	:cond_0</span>
+.end method
+
+<span class="cov">.method private setCompoundDrawables(Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;)V</span>
+<span class="">	.locals 6</span>
+
+<span class="cov">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="cov">	const/16 v1, 0x11</span>
+<span class="cov">	const/4 v2, 0x3</span>
+<span class="cov">	const/4 v3, 0x1</span>
+<span class="cov">	const/4 v4, 0x2</span>
+<span class="cov">	const/4 v5, 0x0</span>
+<span class="cov">	if-lt v0, v1, :cond_5</span>
+<span class="cov">	if-nez p5, :cond_0</span>
+<span class="">	if-eqz p6, :cond_5</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object p1, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {p1}, Landroid/widget/TextView;->getCompoundDrawablesRelative()[Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iget-object p3, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz p5, :cond_1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	aget-object p5, p1, v5</span>
+<span class="">	:goto_0</span>
+<span class="">	if-eqz p2, :cond_2</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_2</span>
+<span class="">	aget-object p2, p1, v3</span>
+<span class="">	:goto_1</span>
+<span class="">	if-eqz p6, :cond_3</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_3</span>
+<span class="">	aget-object p6, p1, v4</span>
+<span class="">	:goto_2</span>
+<span class="">	if-eqz p4, :cond_4</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:cond_4</span>
+<span class="">	aget-object p4, p1, v2</span>
+<span class="">	:goto_3</span>
+<span class="">	invoke-virtual {p3, p5, p2, p6, p4}, Landroid/widget/TextView;->setCompoundDrawablesRelativeWithIntrinsicBounds(Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;)V</span>
+<span class="">	goto :goto_a</span>
+<span class="cov">	:cond_5</span>
+<span class="cov">	if-nez p1, :cond_6</span>
+<span class="cov">	if-nez p2, :cond_6</span>
+<span class="cov">	if-nez p3, :cond_6</span>
+<span class="">	if-eqz p4, :cond_f</span>
+<span class="">	:cond_6</span>
+<span class="">	sget p5, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	if-lt p5, v1, :cond_a</span>
+<span class="">	iget-object p5, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {p5}, Landroid/widget/TextView;->getCompoundDrawablesRelative()[Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object p5</span>
+<span class="">	aget-object p6, p5, v5</span>
+<span class="">	if-nez p6, :cond_7</span>
+<span class="">	aget-object p6, p5, v4</span>
+<span class="">	if-eqz p6, :cond_a</span>
+<span class="">	:cond_7</span>
+<span class="">	iget-object p1, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	aget-object p3, p5, v5</span>
+<span class="">	if-eqz p2, :cond_8</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:cond_8</span>
+<span class="">	aget-object p2, p5, v3</span>
+<span class="">	:goto_4</span>
+<span class="">	aget-object p6, p5, v4</span>
+<span class="">	if-eqz p4, :cond_9</span>
+<span class="">	goto :goto_5</span>
+<span class="">	:cond_9</span>
+<span class="">	aget-object p4, p5, v2</span>
+<span class="">	:goto_5</span>
+<span class="">	invoke-virtual {p1, p3, p2, p6, p4}, Landroid/widget/TextView;->setCompoundDrawablesRelativeWithIntrinsicBounds(Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;)V</span>
+<span class="">	iget-object p5, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	:cond_a</span>
+<span class="">	invoke-virtual {p5}, Landroid/widget/TextView;->getCompoundDrawables()[Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object p5</span>
+<span class="">	iget-object p6, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz p1, :cond_b</span>
+<span class="">	goto :goto_6</span>
+<span class="">	aget-object p1, p5, v5</span>
+<span class="">	:cond_b</span>
+<span class="">	if-eqz p2, :cond_c</span>
+<span class="">	:goto_6</span>
+<span class="">	goto :goto_7</span>
+<span class="">	aget-object p2, p5, v3</span>
+<span class="">	:cond_c</span>
+<span class="">	if-eqz p3, :cond_d</span>
+<span class="">	:goto_7</span>
+<span class="">	goto :goto_8</span>
+<span class="">	aget-object p3, p5, v4</span>
+<span class="">	:cond_d</span>
+<span class="">	if-eqz p4, :cond_e</span>
+<span class="">	:goto_8</span>
+<span class="">	goto :goto_9</span>
+<span class="">	aget-object p4, p5, v2</span>
+<span class="">	:cond_e</span>
+<span class="">	invoke-virtual {p6, p1, p2, p3, p4}, Landroid/widget/TextView;->setCompoundDrawablesWithIntrinsicBounds(Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;)V</span>
+<span class="">	:goto_9</span>
+<span class="exec">	return-void</span>
+<span class="cov">	:cond_f</span>
+<span class="cov">	:goto_a</span>
+.end method
+
+.method private setCompoundTints()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	iput-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableLeftTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	iput-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableTopTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	iput-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableRightTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	iput-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableBottomTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	iput-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableStartTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	iput-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableEndTint:Landroidx/appcompat/widget/TintInfo;</span>
+.end method
+
+.method private setTextSizeInternal(IF)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;->setTextSizeInternal(IF)V</span>
+.end method
+
+<span class="cov">.method private updateTypefaceAndStyle(Landroid/content/Context;Landroidx/appcompat/widget/TintTypedArray;)V</span>
+<span class="">	.locals 9</span>
+
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->TextAppearance_android_textStyle:I</span>
+<span class="cov">	iget v1, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mStyle:I</span>
+<span class="exec">	invoke-virtual {p2, v0, v1}, Landroidx/appcompat/widget/TintTypedArray;->getInt(II)I</span>
+<span class="cov">	move-result v0</span>
+<span class="cov">	iput v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mStyle:I</span>
+<span class="cov">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="cov">	const/16 v1, 0x1c</span>
+<span class="cov">	const/4 v2, 0x2</span>
+<span class="cov">	const/4 v3, -0x1</span>
+<span class="cov">	const/4 v4, 0x0</span>
+<span class="cov">	if-lt v0, v1, :cond_0</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->TextAppearance_android_textFontWeight:I</span>
+<span class="exec">	invoke-virtual {p2, v0, v3}, Landroidx/appcompat/widget/TintTypedArray;->getInt(II)I</span>
+<span class="cov">	move-result v0</span>
+<span class="cov">	iput v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontWeight:I</span>
+<span class="">	if-eq v0, v3, :cond_0</span>
+<span class="">	iget v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mStyle:I</span>
+<span class="">	and-int/2addr v0, v2</span>
+<span class="">	or-int/2addr v0, v4</span>
+<span class="">	iput v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mStyle:I</span>
+<span class="cov">	:cond_0</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->TextAppearance_android_fontFamily:I</span>
+<span class="exec">	invoke-virtual {p2, v0}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v0</span>
+<span class="cov">	const/4 v5, 0x1</span>
+<span class="cov">	if-nez v0, :cond_6</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->TextAppearance_fontFamily:I</span>
+<span class="exec">	invoke-virtual {p2, v0}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	goto :goto_1</span>
+<span class="cov">	:cond_1</span>
+<span class="cov">	sget p1, Landroidx/appcompat/R$styleable;->TextAppearance_android_typeface:I</span>
+<span class="exec">	invoke-virtual {p2, p1}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_5</span>
+<span class="">	iput-boolean v4, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mAsyncFontPending:Z</span>
+<span class="">	sget p1, Landroidx/appcompat/R$styleable;->TextAppearance_android_typeface:I</span>
+<span class="">	invoke-virtual {p2, p1, v5}, Landroidx/appcompat/widget/TintTypedArray;->getInt(II)I</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eq p1, v5, :cond_4</span>
+<span class="">	if-eq p1, v2, :cond_3</span>
+<span class="">	const/4 p2, 0x3</span>
+<span class="">	if-eq p1, p2, :cond_2</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_2</span>
+<span class="">	sget-object p1, Landroid/graphics/Typeface;->MONOSPACE:Landroid/graphics/Typeface;</span>
+<span class="">	iput-object p1, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontTypeface:Landroid/graphics/Typeface;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_3</span>
+<span class="">	sget-object p1, Landroid/graphics/Typeface;->SERIF:Landroid/graphics/Typeface;</span>
+<span class="">	iput-object p1, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontTypeface:Landroid/graphics/Typeface;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_4</span>
+<span class="">	sget-object p1, Landroid/graphics/Typeface;->SANS_SERIF:Landroid/graphics/Typeface;</span>
+<span class="">	iput-object p1, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontTypeface:Landroid/graphics/Typeface;</span>
+<span class="cov">	:goto_0</span>
+<span class="cov">	:cond_5</span>
+<span class="exec">	return-void</span>
+<span class="cov">	:goto_1</span>
+<span class="cov">	:cond_6</span>
+<span class="cov">	const/4 v0, 0x0</span>
+<span class="cov">	iput-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontTypeface:Landroid/graphics/Typeface;</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->TextAppearance_fontFamily:I</span>
+<span class="exec">	invoke-virtual {p2, v0}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v0</span>
+<span class="cov">	if-eqz v0, :cond_7</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->TextAppearance_fontFamily:I</span>
+<span class="">	goto :goto_2</span>
+<span class="cov">	:cond_7</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->TextAppearance_android_fontFamily:I</span>
+<span class="cov">	:goto_2</span>
+<span class="cov">	iget v6, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontWeight:I</span>
+<span class="cov">	iget v7, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mStyle:I</span>
+<span class="exec">	invoke-virtual {p1}, Landroid/content/Context;->isRestricted()Z</span>
+<span class="cov">	move-result p1</span>
+<span class="cov">	if-nez p1, :cond_c</span>
+<span class="cov">	new-instance p1, Ljava/lang/ref/WeakReference;</span>
+<span class="cov">	iget-object v8, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="cov">	invoke-direct {p1, v8}, Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V</span>
+<span class="cov">	new-instance v8, Landroidx/appcompat/widget/AppCompatTextHelper$1;</span>
+<span class="cov">	invoke-direct {v8, p0, v6, v7, p1}, Landroidx/appcompat/widget/AppCompatTextHelper$1;-><init>(Landroidx/appcompat/widget/AppCompatTextHelper;IILjava/lang/ref/WeakReference;)V</span>
+<span class="cov">	:try_start_0</span>
+<span class="cov">	iget p1, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mStyle:I</span>
+<span class="exec">	invoke-virtual {p2, v0, p1, v8}, Landroidx/appcompat/widget/TintTypedArray;->getFont(IILandroidx/core/content/res/ResourcesCompat$FontCallback;)Landroid/graphics/Typeface;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="">	if-eqz p1, :cond_a</span>
+<span class="">	sget v6, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	if-lt v6, v1, :cond_9</span>
+<span class="">	iget v6, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontWeight:I</span>
+<span class="">	if-eq v6, v3, :cond_9</span>
+<span class="">	invoke-static {p1, v4}, Landroid/graphics/Typeface;->create(Landroid/graphics/Typeface;I)Landroid/graphics/Typeface;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iget v6, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontWeight:I</span>
+<span class="">	iget v7, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mStyle:I</span>
+<span class="">	and-int/2addr v7, v2</span>
+<span class="">	if-eqz v7, :cond_8</span>
+<span class="">	move v7, v5</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:cond_8</span>
+<span class="">	move v7, v4</span>
+<span class="">	:goto_3</span>
+<span class="">	invoke-static {p1, v6, v7}, Landroid/graphics/Typeface;->create(Landroid/graphics/Typeface;IZ)Landroid/graphics/Typeface;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iput-object p1, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontTypeface:Landroid/graphics/Typeface;</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:cond_9</span>
+<span class="">	iput-object p1, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontTypeface:Landroid/graphics/Typeface;</span>
+<span class="cov">	:goto_4</span>
+<span class="cov">	:cond_a</span>
+<span class="cov">	iget-object p1, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontTypeface:Landroid/graphics/Typeface;</span>
+<span class="cov">	if-nez p1, :cond_b</span>
+<span class="cov">	move p1, v5</span>
+<span class="">	goto :goto_5</span>
+<span class="">	:cond_b</span>
+<span class="">	move p1, v4</span>
+<span class="cov">	:goto_5</span>
+<span class="cov">	iput-boolean p1, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mAsyncFontPending:Z</span>
+<span class="cov">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/UnsupportedOperationException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	.catch Landroid/content/res/Resources$NotFoundException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="cov">	:catch_0</span>
+<span class="cov">	:cond_c</span>
+<span class="cov">	iget-object p1, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontTypeface:Landroid/graphics/Typeface;</span>
+<span class="cov">	if-nez p1, :cond_f</span>
+<span class="exec">	invoke-virtual {p2, v0}, Landroidx/appcompat/widget/TintTypedArray;->getString(I)Ljava/lang/String;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	if-eqz p1, :cond_f</span>
+<span class="cov">	sget p2, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="cov">	if-lt p2, v1, :cond_e</span>
+<span class="cov">	iget p2, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontWeight:I</span>
+<span class="">	if-eq p2, v3, :cond_e</span>
+<span class="">	invoke-static {p1, v4}, Landroid/graphics/Typeface;->create(Ljava/lang/String;I)Landroid/graphics/Typeface;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iget p2, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontWeight:I</span>
+<span class="">	iget v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mStyle:I</span>
+<span class="">	and-int/2addr v0, v2</span>
+<span class="">	if-eqz v0, :cond_d</span>
+<span class="">	move v4, v5</span>
+<span class="">	:cond_d</span>
+<span class="">	invoke-static {p1, p2, v4}, Landroid/graphics/Typeface;->create(Landroid/graphics/Typeface;IZ)Landroid/graphics/Typeface;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iput-object p1, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontTypeface:Landroid/graphics/Typeface;</span>
+<span class="">	goto :goto_6</span>
+<span class="cov">	:cond_e</span>
+<span class="cov">	iget p2, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mStyle:I</span>
+<span class="exec">	invoke-static {p1, p2}, Landroid/graphics/Typeface;->create(Ljava/lang/String;I)Landroid/graphics/Typeface;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	iput-object p1, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontTypeface:Landroid/graphics/Typeface;</span>
+<span class="cov">	:goto_6</span>
+<span class="cov">	:cond_f</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method  applyCompoundDrawablesTints()V</span>
+<span class="">	.locals 5</span>
+
+<span class="cov">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableLeftTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="cov">	const/4 v1, 0x2</span>
+<span class="cov">	const/4 v2, 0x0</span>
+<span class="cov">	if-nez v0, :cond_0</span>
+<span class="cov">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableTopTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="cov">	if-nez v0, :cond_0</span>
+<span class="cov">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableRightTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="cov">	if-nez v0, :cond_0</span>
+<span class="cov">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableBottomTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/TextView;->getCompoundDrawables()[Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	aget-object v3, v0, v2</span>
+<span class="">	iget-object v4, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableLeftTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	invoke-direct {p0, v3, v4}, Landroidx/appcompat/widget/AppCompatTextHelper;->applyCompoundDrawableTint(Landroid/graphics/drawable/Drawable;Landroidx/appcompat/widget/TintInfo;)V</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	aget-object v3, v0, v3</span>
+<span class="">	iget-object v4, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableTopTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	invoke-direct {p0, v3, v4}, Landroidx/appcompat/widget/AppCompatTextHelper;->applyCompoundDrawableTint(Landroid/graphics/drawable/Drawable;Landroidx/appcompat/widget/TintInfo;)V</span>
+<span class="">	aget-object v3, v0, v1</span>
+<span class="">	iget-object v4, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableRightTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	invoke-direct {p0, v3, v4}, Landroidx/appcompat/widget/AppCompatTextHelper;->applyCompoundDrawableTint(Landroid/graphics/drawable/Drawable;Landroidx/appcompat/widget/TintInfo;)V</span>
+<span class="">	const/4 v3, 0x3</span>
+<span class="">	aget-object v0, v0, v3</span>
+<span class="">	iget-object v3, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableBottomTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	invoke-direct {p0, v0, v3}, Landroidx/appcompat/widget/AppCompatTextHelper;->applyCompoundDrawableTint(Landroid/graphics/drawable/Drawable;Landroidx/appcompat/widget/TintInfo;)V</span>
+<span class="cov">	:cond_1</span>
+<span class="cov">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="cov">	const/16 v3, 0x11</span>
+<span class="cov">	if-lt v0, v3, :cond_3</span>
+<span class="cov">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableStartTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="cov">	if-nez v0, :cond_2</span>
+<span class="cov">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableEndTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	:cond_2</span>
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/TextView;->getCompoundDrawablesRelative()[Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	aget-object v2, v0, v2</span>
+<span class="">	iget-object v3, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableStartTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	invoke-direct {p0, v2, v3}, Landroidx/appcompat/widget/AppCompatTextHelper;->applyCompoundDrawableTint(Landroid/graphics/drawable/Drawable;Landroidx/appcompat/widget/TintInfo;)V</span>
+<span class="">	aget-object v0, v0, v1</span>
+<span class="">	iget-object v1, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableEndTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	invoke-direct {p0, v0, v1}, Landroidx/appcompat/widget/AppCompatTextHelper;->applyCompoundDrawableTint(Landroid/graphics/drawable/Drawable;Landroidx/appcompat/widget/TintInfo;)V</span>
+<span class="cov">	:cond_3</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method  autoSizeText()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="">	invoke-virtual {v0}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;->autoSizeText()V</span>
+.end method
+
+.method  getAutoSizeMaxTextSize()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="">	invoke-virtual {v0}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;->getAutoSizeMaxTextSize()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method  getAutoSizeMinTextSize()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="">	invoke-virtual {v0}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;->getAutoSizeMinTextSize()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method  getAutoSizeStepGranularity()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="">	invoke-virtual {v0}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;->getAutoSizeStepGranularity()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method  getAutoSizeTextAvailableSizes()[I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="">	invoke-virtual {v0}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;->getAutoSizeTextAvailableSizes()[I</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method  getAutoSizeTextType()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="">	invoke-virtual {v0}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;->getAutoSizeTextType()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method  getCompoundDrawableTintList()Landroid/content/res/ColorStateList;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, v0, Landroidx/appcompat/widget/TintInfo;->mTintList:Landroid/content/res/ColorStateList;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method  getCompoundDrawableTintMode()Landroid/graphics/PorterDuff$Mode;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, v0, Landroidx/appcompat/widget/TintInfo;->mTintMode:Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method  isAutoSizeEnabled()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="">	invoke-virtual {v0}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;->isAutoSizeEnabled()Z</span>
+<span class="">	move-result v0</span>
+.end method
+
+<span class="cov">.method  loadFromAttributes(Landroid/util/AttributeSet;I)V</span>
+<span class="">	.locals 17</span>
+
+<span class="cov">	move-object/from16 v7, p0</span>
+<span class="cov">	move-object/from16 v8, p1</span>
+<span class="cov">	move/from16 v9, p2</span>
+<span class="cov">	iget-object v0, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="exec">	invoke-virtual {v0}, Landroid/widget/TextView;->getContext()Landroid/content/Context;</span>
+<span class="cov">	move-result-object v10</span>
+<span class="exec">	invoke-static {}, Landroidx/appcompat/widget/AppCompatDrawableManager;->get()Landroidx/appcompat/widget/AppCompatDrawableManager;</span>
+<span class="cov">	move-result-object v11</span>
+<span class="cov">	sget-object v0, Landroidx/appcompat/R$styleable;->AppCompatTextHelper:[I</span>
+<span class="cov">	const/4 v12, 0x0</span>
+<span class="exec">	invoke-static {v10, v8, v0, v9, v12}, Landroidx/appcompat/widget/TintTypedArray;->obtainStyledAttributes(Landroid/content/Context;Landroid/util/AttributeSet;[III)Landroidx/appcompat/widget/TintTypedArray;</span>
+<span class="cov">	move-result-object v13</span>
+<span class="cov">	iget-object v0, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="exec">	invoke-virtual {v0}, Landroid/widget/TextView;->getContext()Landroid/content/Context;</span>
+<span class="cov">	move-result-object v1</span>
+<span class="cov">	sget-object v2, Landroidx/appcompat/R$styleable;->AppCompatTextHelper:[I</span>
+<span class="exec">	invoke-virtual {v13}, Landroidx/appcompat/widget/TintTypedArray;->getWrappedTypeArray()Landroid/content/res/TypedArray;</span>
+<span class="cov">	move-result-object v4</span>
+<span class="cov">	const/4 v6, 0x0</span>
+<span class="cov">	move-object/from16 v3, p1</span>
+<span class="cov">	move/from16 v5, p2</span>
+<span class="cov">	invoke-static/range {v0 .. v6}, Landroidx/core/view/ViewCompat;->saveAttributeDataForStyleable(Landroid/view/View;Landroid/content/Context;[ILandroid/util/AttributeSet;Landroid/content/res/TypedArray;II)V</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->AppCompatTextHelper_android_textAppearance:I</span>
+<span class="cov">	const/4 v14, -0x1</span>
+<span class="exec">	invoke-virtual {v13, v0, v14}, Landroidx/appcompat/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="cov">	move-result v0</span>
+<span class="cov">	sget v1, Landroidx/appcompat/R$styleable;->AppCompatTextHelper_android_drawableLeft:I</span>
+<span class="exec">	invoke-virtual {v13, v1}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	sget v1, Landroidx/appcompat/R$styleable;->AppCompatTextHelper_android_drawableLeft:I</span>
+<span class="">	invoke-virtual {v13, v1, v12}, Landroidx/appcompat/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {v10, v11, v1}, Landroidx/appcompat/widget/AppCompatTextHelper;->createTintInfo(Landroid/content/Context;Landroidx/appcompat/widget/AppCompatDrawableManager;I)Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iput-object v1, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableLeftTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="cov">	:cond_0</span>
+<span class="cov">	sget v1, Landroidx/appcompat/R$styleable;->AppCompatTextHelper_android_drawableTop:I</span>
+<span class="exec">	invoke-virtual {v13, v1}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	sget v1, Landroidx/appcompat/R$styleable;->AppCompatTextHelper_android_drawableTop:I</span>
+<span class="">	invoke-virtual {v13, v1, v12}, Landroidx/appcompat/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {v10, v11, v1}, Landroidx/appcompat/widget/AppCompatTextHelper;->createTintInfo(Landroid/content/Context;Landroidx/appcompat/widget/AppCompatDrawableManager;I)Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iput-object v1, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableTopTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="cov">	:cond_1</span>
+<span class="cov">	sget v1, Landroidx/appcompat/R$styleable;->AppCompatTextHelper_android_drawableRight:I</span>
+<span class="exec">	invoke-virtual {v13, v1}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_2</span>
+<span class="">	sget v1, Landroidx/appcompat/R$styleable;->AppCompatTextHelper_android_drawableRight:I</span>
+<span class="">	invoke-virtual {v13, v1, v12}, Landroidx/appcompat/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {v10, v11, v1}, Landroidx/appcompat/widget/AppCompatTextHelper;->createTintInfo(Landroid/content/Context;Landroidx/appcompat/widget/AppCompatDrawableManager;I)Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iput-object v1, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableRightTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="cov">	:cond_2</span>
+<span class="cov">	sget v1, Landroidx/appcompat/R$styleable;->AppCompatTextHelper_android_drawableBottom:I</span>
+<span class="exec">	invoke-virtual {v13, v1}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_3</span>
+<span class="">	sget v1, Landroidx/appcompat/R$styleable;->AppCompatTextHelper_android_drawableBottom:I</span>
+<span class="">	invoke-virtual {v13, v1, v12}, Landroidx/appcompat/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {v10, v11, v1}, Landroidx/appcompat/widget/AppCompatTextHelper;->createTintInfo(Landroid/content/Context;Landroidx/appcompat/widget/AppCompatDrawableManager;I)Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iput-object v1, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableBottomTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="cov">	:cond_3</span>
+<span class="cov">	sget v1, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="cov">	const/16 v2, 0x11</span>
+<span class="cov">	if-lt v1, v2, :cond_5</span>
+<span class="cov">	sget v1, Landroidx/appcompat/R$styleable;->AppCompatTextHelper_android_drawableStart:I</span>
+<span class="exec">	invoke-virtual {v13, v1}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_4</span>
+<span class="">	sget v1, Landroidx/appcompat/R$styleable;->AppCompatTextHelper_android_drawableStart:I</span>
+<span class="">	invoke-virtual {v13, v1, v12}, Landroidx/appcompat/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {v10, v11, v1}, Landroidx/appcompat/widget/AppCompatTextHelper;->createTintInfo(Landroid/content/Context;Landroidx/appcompat/widget/AppCompatDrawableManager;I)Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iput-object v1, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableStartTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="cov">	:cond_4</span>
+<span class="cov">	sget v1, Landroidx/appcompat/R$styleable;->AppCompatTextHelper_android_drawableEnd:I</span>
+<span class="exec">	invoke-virtual {v13, v1}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_5</span>
+<span class="">	sget v1, Landroidx/appcompat/R$styleable;->AppCompatTextHelper_android_drawableEnd:I</span>
+<span class="">	invoke-virtual {v13, v1, v12}, Landroidx/appcompat/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {v10, v11, v1}, Landroidx/appcompat/widget/AppCompatTextHelper;->createTintInfo(Landroid/content/Context;Landroidx/appcompat/widget/AppCompatDrawableManager;I)Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iput-object v1, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableEndTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="cov">	:cond_5</span>
+<span class="cov">	invoke-virtual {v13}, Landroidx/appcompat/widget/TintTypedArray;->recycle()V</span>
+<span class="cov">	iget-object v1, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="exec">	invoke-virtual {v1}, Landroid/widget/TextView;->getTransformationMethod()Landroid/text/method/TransformationMethod;</span>
+<span class="cov">	move-result-object v1</span>
+<span class="cov">	instance-of v1, v1, Landroid/text/method/PasswordTransformationMethod;</span>
+<span class="cov">	const/16 v2, 0x1a</span>
+<span class="cov">	const/16 v4, 0x17</span>
+<span class="cov">	if-eq v0, v14, :cond_d</span>
+<span class="cov">	sget-object v5, Landroidx/appcompat/R$styleable;->TextAppearance:[I</span>
+<span class="exec">	invoke-static {v10, v0, v5}, Landroidx/appcompat/widget/TintTypedArray;->obtainStyledAttributes(Landroid/content/Context;I[I)Landroidx/appcompat/widget/TintTypedArray;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	if-nez v1, :cond_6</span>
+<span class="cov">	sget v5, Landroidx/appcompat/R$styleable;->TextAppearance_textAllCaps:I</span>
+<span class="exec">	invoke-virtual {v0, v5}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v5</span>
+<span class="">	if-eqz v5, :cond_6</span>
+<span class="">	sget v5, Landroidx/appcompat/R$styleable;->TextAppearance_textAllCaps:I</span>
+<span class="">	invoke-virtual {v0, v5, v12}, Landroidx/appcompat/widget/TintTypedArray;->getBoolean(IZ)Z</span>
+<span class="">	move-result v5</span>
+<span class="">	const/4 v6, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="cov">	:cond_6</span>
+<span class="cov">	move v5, v12</span>
+<span class="cov">	move v6, v5</span>
+<span class="cov">	:goto_0</span>
+<span class="cov">	invoke-direct {v7, v10, v0}, Landroidx/appcompat/widget/AppCompatTextHelper;->updateTypefaceAndStyle(Landroid/content/Context;Landroidx/appcompat/widget/TintTypedArray;)V</span>
+<span class="cov">	sget v15, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	if-ge v15, v4, :cond_a</span>
+<span class="">	sget v15, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColor:I</span>
+<span class="">	invoke-virtual {v0, v15}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="">	move-result v15</span>
+<span class="">	if-eqz v15, :cond_7</span>
+<span class="">	sget v15, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColor:I</span>
+<span class="">	invoke-virtual {v0, v15}, Landroidx/appcompat/widget/TintTypedArray;->getColorStateList(I)Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v15</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_7</span>
+<span class="">	const/4 v15, 0x0</span>
+<span class="">	:goto_1</span>
+<span class="">	sget v3, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColorHint:I</span>
+<span class="">	invoke-virtual {v0, v3}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_8</span>
+<span class="">	sget v3, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColorHint:I</span>
+<span class="">	invoke-virtual {v0, v3}, Landroidx/appcompat/widget/TintTypedArray;->getColorStateList(I)Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_8</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	:goto_2</span>
+<span class="">	sget v13, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColorLink:I</span>
+<span class="">	invoke-virtual {v0, v13}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="">	move-result v13</span>
+<span class="">	if-eqz v13, :cond_9</span>
+<span class="">	sget v13, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColorLink:I</span>
+<span class="">	invoke-virtual {v0, v13}, Landroidx/appcompat/widget/TintTypedArray;->getColorStateList(I)Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v13</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:cond_9</span>
+<span class="">	const/4 v13, 0x0</span>
+<span class="">	goto :goto_3</span>
+<span class="cov">	:cond_a</span>
+<span class="cov">	const/4 v3, 0x0</span>
+<span class="cov">	const/4 v13, 0x0</span>
+<span class="cov">	const/4 v15, 0x0</span>
+<span class="cov">	:goto_3</span>
+<span class="cov">	sget v14, Landroidx/appcompat/R$styleable;->TextAppearance_textLocale:I</span>
+<span class="exec">	invoke-virtual {v0, v14}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v14</span>
+<span class="">	if-eqz v14, :cond_b</span>
+<span class="">	sget v14, Landroidx/appcompat/R$styleable;->TextAppearance_textLocale:I</span>
+<span class="">	invoke-virtual {v0, v14}, Landroidx/appcompat/widget/TintTypedArray;->getString(I)Ljava/lang/String;</span>
+<span class="">	move-result-object v14</span>
+<span class="">	goto :goto_4</span>
+<span class="cov">	:cond_b</span>
+<span class="cov">	const/4 v14, 0x0</span>
+<span class="cov">	:goto_4</span>
+<span class="cov">	sget v4, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="cov">	if-lt v4, v2, :cond_c</span>
+<span class="cov">	sget v4, Landroidx/appcompat/R$styleable;->TextAppearance_fontVariationSettings:I</span>
+<span class="exec">	invoke-virtual {v0, v4}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v4</span>
+<span class="">	if-eqz v4, :cond_c</span>
+<span class="">	sget v4, Landroidx/appcompat/R$styleable;->TextAppearance_fontVariationSettings:I</span>
+<span class="">	invoke-virtual {v0, v4}, Landroidx/appcompat/widget/TintTypedArray;->getString(I)Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	goto :goto_5</span>
+<span class="cov">	:cond_c</span>
+<span class="cov">	const/4 v4, 0x0</span>
+<span class="cov">	:goto_5</span>
+<span class="cov">	invoke-virtual {v0}, Landroidx/appcompat/widget/TintTypedArray;->recycle()V</span>
+<span class="">	goto :goto_6</span>
+<span class="">	:cond_d</span>
+<span class="">	move v5, v12</span>
+<span class="">	move v6, v5</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	const/4 v4, 0x0</span>
+<span class="">	const/4 v13, 0x0</span>
+<span class="">	const/4 v14, 0x0</span>
+<span class="">	const/4 v15, 0x0</span>
+<span class="cov">	:goto_6</span>
+<span class="cov">	sget-object v0, Landroidx/appcompat/R$styleable;->TextAppearance:[I</span>
+<span class="exec">	invoke-static {v10, v8, v0, v9, v12}, Landroidx/appcompat/widget/TintTypedArray;->obtainStyledAttributes(Landroid/content/Context;Landroid/util/AttributeSet;[III)Landroidx/appcompat/widget/TintTypedArray;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	if-nez v1, :cond_e</span>
+<span class="cov">	sget v2, Landroidx/appcompat/R$styleable;->TextAppearance_textAllCaps:I</span>
+<span class="exec">	invoke-virtual {v0, v2}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_e</span>
+<span class="">	sget v2, Landroidx/appcompat/R$styleable;->TextAppearance_textAllCaps:I</span>
+<span class="">	invoke-virtual {v0, v2, v12}, Landroidx/appcompat/widget/TintTypedArray;->getBoolean(IZ)Z</span>
+<span class="">	move-result v5</span>
+<span class="">	const/16 v16, 0x1</span>
+<span class="">	goto :goto_7</span>
+<span class="cov">	:cond_e</span>
+<span class="cov">	move/from16 v16, v6</span>
+<span class="cov">	:goto_7</span>
+<span class="cov">	sget v2, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="cov">	const/16 v6, 0x17</span>
+<span class="">	if-ge v2, v6, :cond_11</span>
+<span class="">	sget v2, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColor:I</span>
+<span class="">	invoke-virtual {v0, v2}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_f</span>
+<span class="">	sget v2, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColor:I</span>
+<span class="">	invoke-virtual {v0, v2}, Landroidx/appcompat/widget/TintTypedArray;->getColorStateList(I)Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v15</span>
+<span class="">	:cond_f</span>
+<span class="">	sget v2, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColorHint:I</span>
+<span class="">	invoke-virtual {v0, v2}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_10</span>
+<span class="">	sget v2, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColorHint:I</span>
+<span class="">	invoke-virtual {v0, v2}, Landroidx/appcompat/widget/TintTypedArray;->getColorStateList(I)Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	:cond_10</span>
+<span class="">	sget v2, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColorLink:I</span>
+<span class="">	invoke-virtual {v0, v2}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_11</span>
+<span class="">	sget v2, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColorLink:I</span>
+<span class="">	invoke-virtual {v0, v2}, Landroidx/appcompat/widget/TintTypedArray;->getColorStateList(I)Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v13</span>
+<span class="cov">	:cond_11</span>
+<span class="cov">	sget v2, Landroidx/appcompat/R$styleable;->TextAppearance_textLocale:I</span>
+<span class="exec">	invoke-virtual {v0, v2}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_12</span>
+<span class="">	sget v2, Landroidx/appcompat/R$styleable;->TextAppearance_textLocale:I</span>
+<span class="">	invoke-virtual {v0, v2}, Landroidx/appcompat/widget/TintTypedArray;->getString(I)Ljava/lang/String;</span>
+<span class="">	move-result-object v14</span>
+<span class="cov">	:cond_12</span>
+<span class="cov">	sget v2, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="cov">	const/16 v6, 0x1a</span>
+<span class="cov">	if-lt v2, v6, :cond_13</span>
+<span class="cov">	sget v2, Landroidx/appcompat/R$styleable;->TextAppearance_fontVariationSettings:I</span>
+<span class="exec">	invoke-virtual {v0, v2}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_13</span>
+<span class="">	sget v2, Landroidx/appcompat/R$styleable;->TextAppearance_fontVariationSettings:I</span>
+<span class="">	invoke-virtual {v0, v2}, Landroidx/appcompat/widget/TintTypedArray;->getString(I)Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="cov">	:cond_13</span>
+<span class="cov">	sget v2, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="cov">	const/16 v6, 0x1c</span>
+<span class="cov">	if-lt v2, v6, :cond_14</span>
+<span class="cov">	sget v2, Landroidx/appcompat/R$styleable;->TextAppearance_android_textSize:I</span>
+<span class="exec">	invoke-virtual {v0, v2}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_14</span>
+<span class="">	sget v2, Landroidx/appcompat/R$styleable;->TextAppearance_android_textSize:I</span>
+<span class="">	const/4 v6, -0x1</span>
+<span class="">	invoke-virtual {v0, v2, v6}, Landroidx/appcompat/widget/TintTypedArray;->getDimensionPixelSize(II)I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-nez v2, :cond_14</span>
+<span class="">	iget-object v2, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	const/4 v6, 0x0</span>
+<span class="">	invoke-virtual {v2, v12, v6}, Landroid/widget/TextView;->setTextSize(IF)V</span>
+<span class="cov">	:cond_14</span>
+<span class="cov">	invoke-direct {v7, v10, v0}, Landroidx/appcompat/widget/AppCompatTextHelper;->updateTypefaceAndStyle(Landroid/content/Context;Landroidx/appcompat/widget/TintTypedArray;)V</span>
+<span class="cov">	invoke-virtual {v0}, Landroidx/appcompat/widget/TintTypedArray;->recycle()V</span>
+<span class="">	if-eqz v15, :cond_15</span>
+<span class="">	iget-object v0, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0, v15}, Landroid/widget/TextView;->setTextColor(Landroid/content/res/ColorStateList;)V</span>
+<span class="cov">	:cond_15</span>
+<span class="">	if-eqz v3, :cond_16</span>
+<span class="">	iget-object v0, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0, v3}, Landroid/widget/TextView;->setHintTextColor(Landroid/content/res/ColorStateList;)V</span>
+<span class="cov">	:cond_16</span>
+<span class="">	if-eqz v13, :cond_17</span>
+<span class="">	iget-object v0, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0, v13}, Landroid/widget/TextView;->setLinkTextColor(Landroid/content/res/ColorStateList;)V</span>
+<span class="cov">	:cond_17</span>
+<span class="cov">	if-nez v1, :cond_18</span>
+<span class="">	if-eqz v16, :cond_18</span>
+<span class="">	invoke-virtual {v7, v5}, Landroidx/appcompat/widget/AppCompatTextHelper;->setAllCaps(Z)V</span>
+<span class="cov">	:cond_18</span>
+<span class="cov">	iget-object v0, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontTypeface:Landroid/graphics/Typeface;</span>
+<span class="cov">	if-eqz v0, :cond_1a</span>
+<span class="cov">	iget v1, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontWeight:I</span>
+<span class="cov">	const/4 v2, -0x1</span>
+<span class="cov">	if-ne v1, v2, :cond_19</span>
+<span class="cov">	iget-object v1, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="cov">	iget v2, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mStyle:I</span>
+<span class="cov">	invoke-virtual {v1, v0, v2}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;I)V</span>
+<span class="">	goto :goto_8</span>
+<span class="">	:cond_19</span>
+<span class="">	iget-object v1, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v1, v0}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;)V</span>
+<span class="cov">	:goto_8</span>
+<span class="cov">	:cond_1a</span>
+<span class="">	if-eqz v4, :cond_1b</span>
+<span class="">	iget-object v0, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0, v4}, Landroid/widget/TextView;->setFontVariationSettings(Ljava/lang/String;)Z</span>
+<span class="cov">	:cond_1b</span>
+<span class="">	if-eqz v14, :cond_1d</span>
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v1, 0x18</span>
+<span class="">	if-lt v0, v1, :cond_1c</span>
+<span class="">	iget-object v0, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-static {v14}, Landroid/os/LocaleList;->forLanguageTags(Ljava/lang/String;)Landroid/os/LocaleList;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setTextLocales(Landroid/os/LocaleList;)V</span>
+<span class="">	goto :goto_9</span>
+<span class="">	:cond_1c</span>
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v1, 0x15</span>
+<span class="">	if-lt v0, v1, :cond_1d</span>
+<span class="">	const/16 v0, 0x2c</span>
+<span class="">	invoke-virtual {v14, v0}, Ljava/lang/String;->indexOf(I)I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-virtual {v14, v12, v0}, Ljava/lang/String;->substring(II)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-static {v0}, Ljava/util/Locale;->forLanguageTag(Ljava/lang/String;)Ljava/util/Locale;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v1, v0}, Landroid/widget/TextView;->setTextLocale(Ljava/util/Locale;)V</span>
+<span class="cov">	:goto_9</span>
+<span class="cov">	:cond_1d</span>
+<span class="cov">	iget-object v0, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="cov">	invoke-virtual {v0, v8, v9}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;->loadFromAttributes(Landroid/util/AttributeSet;I)V</span>
+<span class="cov">	sget-boolean v0, Landroidx/core/widget/AutoSizeableTextView;->PLATFORM_SUPPORTS_AUTOSIZE:Z</span>
+<span class="cov">	if-eqz v0, :cond_1f</span>
+<span class="cov">	iget-object v0, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="exec">	invoke-virtual {v0}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;->getAutoSizeTextType()I</span>
+<span class="cov">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1f</span>
+<span class="">	iget-object v0, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="">	invoke-virtual {v0}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;->getAutoSizeTextAvailableSizes()[I</span>
+<span class="">	move-result-object v0</span>
+<span class="">	array-length v1, v0</span>
+<span class="">	if-lez v1, :cond_1f</span>
+<span class="">	iget-object v1, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v1}, Landroid/widget/TextView;->getAutoSizeStepGranularity()I</span>
+<span class="">	move-result v1</span>
+<span class="">	int-to-float v1, v1</span>
+<span class="">	const/high16 v2, -0x40800000    # -1.0f</span>
+<span class="">	cmpl-float v1, v1, v2</span>
+<span class="">	if-eqz v1, :cond_1e</span>
+<span class="">	iget-object v0, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	iget-object v1, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="">	invoke-virtual {v1}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;->getAutoSizeMinTextSize()I</span>
+<span class="">	move-result v1</span>
+<span class="">	iget-object v2, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="">	invoke-virtual {v2}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;->getAutoSizeMaxTextSize()I</span>
+<span class="">	move-result v2</span>
+<span class="">	iget-object v3, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="">	invoke-virtual {v3}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;->getAutoSizeStepGranularity()I</span>
+<span class="">	move-result v3</span>
+<span class="">	invoke-virtual {v0, v1, v2, v3, v12}, Landroid/widget/TextView;->setAutoSizeTextTypeUniformWithConfiguration(IIII)V</span>
+<span class="">	goto :goto_a</span>
+<span class="">	:cond_1e</span>
+<span class="">	iget-object v1, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v1, v0, v12}, Landroid/widget/TextView;->setAutoSizeTextTypeUniformWithPresetSizes([II)V</span>
+<span class="cov">	:cond_1f</span>
+<span class="cov">	:goto_a</span>
+<span class="cov">	sget-object v0, Landroidx/appcompat/R$styleable;->AppCompatTextView:[I</span>
+<span class="exec">	invoke-static {v10, v8, v0}, Landroidx/appcompat/widget/TintTypedArray;->obtainStyledAttributes(Landroid/content/Context;Landroid/util/AttributeSet;[I)Landroidx/appcompat/widget/TintTypedArray;</span>
+<span class="cov">	move-result-object v8</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->AppCompatTextView_drawableLeftCompat:I</span>
+<span class="cov">	const/4 v1, -0x1</span>
+<span class="exec">	invoke-virtual {v8, v0, v1}, Landroidx/appcompat/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="cov">	move-result v0</span>
+<span class="">	if-eq v0, v1, :cond_20</span>
+<span class="">	invoke-virtual {v11, v10, v0}, Landroidx/appcompat/widget/AppCompatDrawableManager;->getDrawable(Landroid/content/Context;I)Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	move-object v2, v0</span>
+<span class="">	goto :goto_b</span>
+<span class="cov">	:cond_20</span>
+<span class="cov">	const/4 v2, 0x0</span>
+<span class="cov">	:goto_b</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->AppCompatTextView_drawableTopCompat:I</span>
+<span class="exec">	invoke-virtual {v8, v0, v1}, Landroidx/appcompat/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="cov">	move-result v0</span>
+<span class="">	if-eq v0, v1, :cond_21</span>
+<span class="">	invoke-virtual {v11, v10, v0}, Landroidx/appcompat/widget/AppCompatDrawableManager;->getDrawable(Landroid/content/Context;I)Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	move-object v3, v0</span>
+<span class="">	goto :goto_c</span>
+<span class="cov">	:cond_21</span>
+<span class="cov">	const/4 v3, 0x0</span>
+<span class="cov">	:goto_c</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->AppCompatTextView_drawableRightCompat:I</span>
+<span class="exec">	invoke-virtual {v8, v0, v1}, Landroidx/appcompat/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="cov">	move-result v0</span>
+<span class="">	if-eq v0, v1, :cond_22</span>
+<span class="">	invoke-virtual {v11, v10, v0}, Landroidx/appcompat/widget/AppCompatDrawableManager;->getDrawable(Landroid/content/Context;I)Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	move-object v4, v0</span>
+<span class="">	goto :goto_d</span>
+<span class="cov">	:cond_22</span>
+<span class="cov">	const/4 v4, 0x0</span>
+<span class="cov">	:goto_d</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->AppCompatTextView_drawableBottomCompat:I</span>
+<span class="exec">	invoke-virtual {v8, v0, v1}, Landroidx/appcompat/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="cov">	move-result v0</span>
+<span class="">	if-eq v0, v1, :cond_23</span>
+<span class="">	invoke-virtual {v11, v10, v0}, Landroidx/appcompat/widget/AppCompatDrawableManager;->getDrawable(Landroid/content/Context;I)Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	move-object v5, v0</span>
+<span class="">	goto :goto_e</span>
+<span class="cov">	:cond_23</span>
+<span class="cov">	const/4 v5, 0x0</span>
+<span class="cov">	:goto_e</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->AppCompatTextView_drawableStartCompat:I</span>
+<span class="exec">	invoke-virtual {v8, v0, v1}, Landroidx/appcompat/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="cov">	move-result v0</span>
+<span class="">	if-eq v0, v1, :cond_24</span>
+<span class="">	invoke-virtual {v11, v10, v0}, Landroidx/appcompat/widget/AppCompatDrawableManager;->getDrawable(Landroid/content/Context;I)Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	move-object v6, v0</span>
+<span class="">	goto :goto_f</span>
+<span class="cov">	:cond_24</span>
+<span class="cov">	const/4 v6, 0x0</span>
+<span class="cov">	:goto_f</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->AppCompatTextView_drawableEndCompat:I</span>
+<span class="exec">	invoke-virtual {v8, v0, v1}, Landroidx/appcompat/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="cov">	move-result v0</span>
+<span class="">	if-eq v0, v1, :cond_25</span>
+<span class="">	invoke-virtual {v11, v10, v0}, Landroidx/appcompat/widget/AppCompatDrawableManager;->getDrawable(Landroid/content/Context;I)Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	move-object v9, v0</span>
+<span class="">	goto :goto_10</span>
+<span class="cov">	:cond_25</span>
+<span class="cov">	const/4 v9, 0x0</span>
+<span class="cov">	:goto_10</span>
+<span class="cov">	move-object/from16 v0, p0</span>
+<span class="cov">	move-object v1, v2</span>
+<span class="cov">	move-object v2, v3</span>
+<span class="cov">	move-object v3, v4</span>
+<span class="cov">	move-object v4, v5</span>
+<span class="cov">	move-object v5, v6</span>
+<span class="cov">	move-object v6, v9</span>
+<span class="cov">	invoke-direct/range {v0 .. v6}, Landroidx/appcompat/widget/AppCompatTextHelper;->setCompoundDrawables(Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;)V</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->AppCompatTextView_drawableTint:I</span>
+<span class="exec">	invoke-virtual {v8, v0}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_26</span>
+<span class="">	sget v0, Landroidx/appcompat/R$styleable;->AppCompatTextView_drawableTint:I</span>
+<span class="">	invoke-virtual {v8, v0}, Landroidx/appcompat/widget/TintTypedArray;->getColorStateList(I)Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-static {v1, v0}, Landroidx/core/widget/TextViewCompat;->setCompoundDrawableTintList(Landroid/widget/TextView;Landroid/content/res/ColorStateList;)V</span>
+<span class="cov">	:cond_26</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->AppCompatTextView_drawableTintMode:I</span>
+<span class="exec">	invoke-virtual {v8, v0}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_27</span>
+<span class="">	sget v0, Landroidx/appcompat/R$styleable;->AppCompatTextView_drawableTintMode:I</span>
+<span class="">	const/4 v1, -0x1</span>
+<span class="">	invoke-virtual {v8, v0, v1}, Landroidx/appcompat/widget/TintTypedArray;->getInt(II)I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-static {v0, v2}, Landroidx/appcompat/widget/DrawableUtils;->parseTintMode(ILandroid/graphics/PorterDuff$Mode;)Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v2, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-static {v2, v0}, Landroidx/core/widget/TextViewCompat;->setCompoundDrawableTintMode(Landroid/widget/TextView;Landroid/graphics/PorterDuff$Mode;)V</span>
+<span class="">	goto :goto_11</span>
+<span class="cov">	:cond_27</span>
+<span class="cov">	const/4 v1, -0x1</span>
+<span class="cov">	:goto_11</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->AppCompatTextView_firstBaselineToTopHeight:I</span>
+<span class="exec">	invoke-virtual {v8, v0, v1}, Landroidx/appcompat/widget/TintTypedArray;->getDimensionPixelSize(II)I</span>
+<span class="cov">	move-result v0</span>
+<span class="cov">	sget v2, Landroidx/appcompat/R$styleable;->AppCompatTextView_lastBaselineToBottomHeight:I</span>
+<span class="exec">	invoke-virtual {v8, v2, v1}, Landroidx/appcompat/widget/TintTypedArray;->getDimensionPixelSize(II)I</span>
+<span class="cov">	move-result v2</span>
+<span class="cov">	sget v3, Landroidx/appcompat/R$styleable;->AppCompatTextView_lineHeight:I</span>
+<span class="exec">	invoke-virtual {v8, v3, v1}, Landroidx/appcompat/widget/TintTypedArray;->getDimensionPixelSize(II)I</span>
+<span class="cov">	move-result v3</span>
+<span class="cov">	invoke-virtual {v8}, Landroidx/appcompat/widget/TintTypedArray;->recycle()V</span>
+<span class="">	if-eq v0, v1, :cond_28</span>
+<span class="">	iget-object v4, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-static {v4, v0}, Landroidx/core/widget/TextViewCompat;->setFirstBaselineToTopHeight(Landroid/widget/TextView;I)V</span>
+<span class="cov">	:cond_28</span>
+<span class="">	if-eq v2, v1, :cond_29</span>
+<span class="">	iget-object v0, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-static {v0, v2}, Landroidx/core/widget/TextViewCompat;->setLastBaselineToBottomHeight(Landroid/widget/TextView;I)V</span>
+<span class="cov">	:cond_29</span>
+<span class="">	if-eq v3, v1, :cond_2a</span>
+<span class="">	iget-object v0, v7, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-static {v0, v3}, Landroidx/core/widget/TextViewCompat;->setLineHeight(Landroid/widget/TextView;I)V</span>
+<span class="cov">	:cond_2a</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method  onAsyncTypefaceReceived(Ljava/lang/ref/WeakReference;Landroid/graphics/Typeface;)V
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/ref/WeakReference<",</span>
+<span class="">	"Landroid/widget/TextView;",</span>
+<span class="">	">;",</span>
+<span class="">	"Landroid/graphics/Typeface;",</span>
+<span class="">	")V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-boolean v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mAsyncFontPending:Z</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iput-object p2, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontTypeface:Landroid/graphics/Typeface;</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Landroid/widget/TextView;</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	invoke-static {p1}, Landroidx/core/view/ViewCompat;->isAttachedToWindow(Landroid/view/View;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mStyle:I</span>
+<span class="">	new-instance v1, Landroidx/appcompat/widget/AppCompatTextHelper$2;</span>
+<span class="">	invoke-direct {v1, p0, p1, p2, v0}, Landroidx/appcompat/widget/AppCompatTextHelper$2;-><init>(Landroidx/appcompat/widget/AppCompatTextHelper;Landroid/widget/TextView;Landroid/graphics/Typeface;I)V</span>
+<span class="">	invoke-virtual {p1, v1}, Landroid/widget/TextView;->post(Ljava/lang/Runnable;)Z</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	iget v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mStyle:I</span>
+<span class="">	invoke-virtual {p1, p2, v0}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;I)V</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+.end method
+
+<span class="cov">.method  onLayout(ZIIII)V</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	sget-boolean p1, Landroidx/core/widget/AutoSizeableTextView;->PLATFORM_SUPPORTS_AUTOSIZE:Z</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Landroidx/appcompat/widget/AppCompatTextHelper;->autoSizeText()V</span>
+<span class="cov">	:cond_0</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method  onSetCompoundDrawables()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/appcompat/widget/AppCompatTextHelper;->applyCompoundDrawablesTints()V</span>
+.end method
+
+<span class="cov">.method  onSetTextAppearance(Landroid/content/Context;I)V</span>
+<span class="">	.locals 3</span>
+
+<span class="cov">	sget-object v0, Landroidx/appcompat/R$styleable;->TextAppearance:[I</span>
+<span class="exec">	invoke-static {p1, p2, v0}, Landroidx/appcompat/widget/TintTypedArray;->obtainStyledAttributes(Landroid/content/Context;I[I)Landroidx/appcompat/widget/TintTypedArray;</span>
+<span class="cov">	move-result-object p2</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->TextAppearance_textAllCaps:I</span>
+<span class="exec">	invoke-virtual {p2, v0}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v0</span>
+<span class="cov">	const/4 v1, 0x0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	sget v0, Landroidx/appcompat/R$styleable;->TextAppearance_textAllCaps:I</span>
+<span class="">	invoke-virtual {p2, v0, v1}, Landroidx/appcompat/widget/TintTypedArray;->getBoolean(IZ)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/appcompat/widget/AppCompatTextHelper;->setAllCaps(Z)V</span>
+<span class="cov">	:cond_0</span>
+<span class="cov">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="cov">	const/16 v2, 0x17</span>
+<span class="">	if-ge v0, v2, :cond_3</span>
+<span class="">	sget v0, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColor:I</span>
+<span class="">	invoke-virtual {p2, v0}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	sget v0, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColor:I</span>
+<span class="">	invoke-virtual {p2, v0}, Landroidx/appcompat/widget/TintTypedArray;->getColorStateList(I)Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget-object v2, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v2, v0}, Landroid/widget/TextView;->setTextColor(Landroid/content/res/ColorStateList;)V</span>
+<span class="">	:cond_1</span>
+<span class="">	sget v0, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColorLink:I</span>
+<span class="">	invoke-virtual {p2, v0}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	sget v0, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColorLink:I</span>
+<span class="">	invoke-virtual {p2, v0}, Landroidx/appcompat/widget/TintTypedArray;->getColorStateList(I)Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iget-object v2, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v2, v0}, Landroid/widget/TextView;->setLinkTextColor(Landroid/content/res/ColorStateList;)V</span>
+<span class="">	:cond_2</span>
+<span class="">	sget v0, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColorHint:I</span>
+<span class="">	invoke-virtual {p2, v0}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	sget v0, Landroidx/appcompat/R$styleable;->TextAppearance_android_textColorHint:I</span>
+<span class="">	invoke-virtual {p2, v0}, Landroidx/appcompat/widget/TintTypedArray;->getColorStateList(I)Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	iget-object v2, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v2, v0}, Landroid/widget/TextView;->setHintTextColor(Landroid/content/res/ColorStateList;)V</span>
+<span class="cov">	:cond_3</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->TextAppearance_android_textSize:I</span>
+<span class="exec">	invoke-virtual {p2, v0}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result v0</span>
+<span class="cov">	if-eqz v0, :cond_4</span>
+<span class="cov">	sget v0, Landroidx/appcompat/R$styleable;->TextAppearance_android_textSize:I</span>
+<span class="cov">	const/4 v2, -0x1</span>
+<span class="exec">	invoke-virtual {p2, v0, v2}, Landroidx/appcompat/widget/TintTypedArray;->getDimensionPixelSize(II)I</span>
+<span class="cov">	move-result v0</span>
+<span class="">	if-nez v0, :cond_4</span>
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Landroid/widget/TextView;->setTextSize(IF)V</span>
+<span class="cov">	:cond_4</span>
+<span class="cov">	invoke-direct {p0, p1, p2}, Landroidx/appcompat/widget/AppCompatTextHelper;->updateTypefaceAndStyle(Landroid/content/Context;Landroidx/appcompat/widget/TintTypedArray;)V</span>
+<span class="cov">	sget p1, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="cov">	const/16 v0, 0x1a</span>
+<span class="cov">	if-lt p1, v0, :cond_5</span>
+<span class="cov">	sget p1, Landroidx/appcompat/R$styleable;->TextAppearance_fontVariationSettings:I</span>
+<span class="exec">	invoke-virtual {p2, p1}, Landroidx/appcompat/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_5</span>
+<span class="">	sget p1, Landroidx/appcompat/R$styleable;->TextAppearance_fontVariationSettings:I</span>
+<span class="">	invoke-virtual {p2, p1}, Landroidx/appcompat/widget/TintTypedArray;->getString(I)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	if-eqz p1, :cond_5</span>
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/widget/TextView;->setFontVariationSettings(Ljava/lang/String;)Z</span>
+<span class="cov">	:cond_5</span>
+<span class="cov">	invoke-virtual {p2}, Landroidx/appcompat/widget/TintTypedArray;->recycle()V</span>
+<span class="cov">	iget-object p1, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mFontTypeface:Landroid/graphics/Typeface;</span>
+<span class="cov">	if-eqz p1, :cond_6</span>
+<span class="cov">	iget-object p2, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="cov">	iget v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mStyle:I</span>
+<span class="cov">	invoke-virtual {p2, p1, v0}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;I)V</span>
+<span class="cov">	:cond_6</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method  populateSurroundingTextIfNeeded(Landroid/widget/TextView;Landroid/view/inputmethod/InputConnection;Landroid/view/inputmethod/EditorInfo;)V
+<span class="">	.locals 2</span>
+
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v1, 0x1e</span>
+<span class="">	if-ge v0, v1, :cond_0</span>
+<span class="">	if-eqz p2, :cond_0</span>
+<span class="">	invoke-virtual {p1}, Landroid/widget/TextView;->getText()Ljava/lang/CharSequence;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-static {p3, p1}, Landroidx/core/view/inputmethod/EditorInfoCompat;->setInitialSurroundingText(Landroid/view/inputmethod/EditorInfo;Ljava/lang/CharSequence;)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method  setAllCaps(Z)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/widget/TextView;->setAllCaps(Z)V</span>
+.end method
+
+.method  setAutoSizeTextTypeUniformWithConfiguration(IIII)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/lang/IllegalArgumentException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="">	invoke-virtual {v0, p1, p2, p3, p4}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;->setAutoSizeTextTypeUniformWithConfiguration(IIII)V</span>
+.end method
+
+.method  setAutoSizeTextTypeUniformWithPresetSizes([II)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/lang/IllegalArgumentException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;->setAutoSizeTextTypeUniformWithPresetSizes([II)V</span>
+.end method
+
+.method  setAutoSizeTextTypeWithDefaults(I)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mAutoSizeTextHelper:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;->setAutoSizeTextTypeWithDefaults(I)V</span>
+.end method
+
+.method  setCompoundDrawableTintList(Landroid/content/res/ColorStateList;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	new-instance v0, Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	invoke-direct {v0}, Landroidx/appcompat/widget/TintInfo;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	iput-object p1, v0, Landroidx/appcompat/widget/TintInfo;->mTintList:Landroid/content/res/ColorStateList;</span>
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	iput-boolean p1, v0, Landroidx/appcompat/widget/TintInfo;->mHasTintList:Z</span>
+<span class="">	invoke-direct {p0}, Landroidx/appcompat/widget/AppCompatTextHelper;->setCompoundTints()V</span>
+.end method
+
+.method  setCompoundDrawableTintMode(Landroid/graphics/PorterDuff$Mode;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	new-instance v0, Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	invoke-direct {v0}, Landroidx/appcompat/widget/TintInfo;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	iput-object p1, v0, Landroidx/appcompat/widget/TintInfo;->mTintMode:Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	iget-object v0, p0, Landroidx/appcompat/widget/AppCompatTextHelper;->mDrawableTint:Landroidx/appcompat/widget/TintInfo;</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	iput-boolean p1, v0, Landroidx/appcompat/widget/TintInfo;->mHasTintMode:Z</span>
+<span class="">	invoke-direct {p0}, Landroidx/appcompat/widget/AppCompatTextHelper;->setCompoundTints()V</span>
+.end method
+
+.method  setTextSize(IF)V
+<span class="">	.locals 1</span>
+
+<span class="">	sget-boolean v0, Landroidx/core/widget/AutoSizeableTextView;->PLATFORM_SUPPORTS_AUTOSIZE:Z</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Landroidx/appcompat/widget/AppCompatTextHelper;->isAutoSizeEnabled()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	invoke-direct {p0, p1, p2}, Landroidx/appcompat/widget/AppCompatTextHelper;->setTextSizeInternal(IF)V</span>
+<span class="">	:cond_0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

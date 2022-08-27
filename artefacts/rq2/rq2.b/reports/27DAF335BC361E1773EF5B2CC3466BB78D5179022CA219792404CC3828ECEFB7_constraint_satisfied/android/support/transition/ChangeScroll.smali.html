@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">android.support.transition</a></li>
+        <li><i class="ico ico-class"></i> ChangeScroll.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Landroid/support/transition/ChangeScroll;
+.super Landroid/support/transition/Transition;
+.source "ChangeScroll.java"
+
+
+.field private static final PROPERTIES:[Ljava/lang/String;
+.field private static final PROPNAME_SCROLL_X:Ljava/lang/String; = "android:changeScroll:x"
+.field private static final PROPNAME_SCROLL_Y:Ljava/lang/String; = "android:changeScroll:y"
+
+
+.method static constructor <clinit>()V
+<span class="">	.locals 3</span>
+
+<span class="">	const/4 v0, 0x2</span>
+<span class="">	new-array v0, v0, [Ljava/lang/String;</span>
+<span class="">	const-string v1, "android:changeScroll:x"</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	aput-object v1, v0, v2</span>
+<span class="">	const-string v1, "android:changeScroll:y"</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	aput-object v1, v0, v2</span>
+<span class="">	sput-object v0, Landroid/support/transition/ChangeScroll;->PROPERTIES:[Ljava/lang/String;</span>
+.end method
+
+.method public constructor <init>()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Landroid/support/transition/Transition;-><init>()V</span>
+.end method
+
+.method public constructor <init>(Landroid/content/Context;Landroid/util/AttributeSet;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0, p1, p2}, Landroid/support/transition/Transition;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V</span>
+.end method
+
+.method private captureValues(Landroid/support/transition/TransitionValues;)V
+<span class="">	.locals 3</span>
+
+<span class="">	iget-object v0, p1, Landroid/support/transition/TransitionValues;->values:Ljava/util/Map;</span>
+<span class="">	const-string v1, "android:changeScroll:x"</span>
+<span class="">	iget-object v2, p1, Landroid/support/transition/TransitionValues;->view:Landroid/view/View;</span>
+<span class="">	invoke-virtual {v2}, Landroid/view/View;->getScrollX()I</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-interface {v0, v1, v2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	iget-object v0, p1, Landroid/support/transition/TransitionValues;->values:Ljava/util/Map;</span>
+<span class="">	const-string v1, "android:changeScroll:y"</span>
+<span class="">	iget-object p1, p1, Landroid/support/transition/TransitionValues;->view:Landroid/view/View;</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/View;->getScrollY()I</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-interface {v0, v1, p1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+.end method
+
+.method public captureEndValues(Landroid/support/transition/TransitionValues;)V
+<span class="">	.locals 0</span>
+<span class="">	.param p1    # Landroid/support/transition/TransitionValues;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	invoke-direct {p0, p1}, Landroid/support/transition/ChangeScroll;->captureValues(Landroid/support/transition/TransitionValues;)V</span>
+.end method
+
+.method public captureStartValues(Landroid/support/transition/TransitionValues;)V
+<span class="">	.locals 0</span>
+<span class="">	.param p1    # Landroid/support/transition/TransitionValues;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	invoke-direct {p0, p1}, Landroid/support/transition/ChangeScroll;->captureValues(Landroid/support/transition/TransitionValues;)V</span>
+.end method
+
+.method public createAnimator(Landroid/view/ViewGroup;Landroid/support/transition/TransitionValues;Landroid/support/transition/TransitionValues;)Landroid/animation/Animator;
+<span class="">	.locals 8</span>
+<span class="">	.param p1    # Landroid/view/ViewGroup;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.param p2    # Landroid/support/transition/TransitionValues;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.param p3    # Landroid/support/transition/TransitionValues;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	if-eqz p2, :cond_3</span>
+<span class="">	if-nez p3, :cond_0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p3, Landroid/support/transition/TransitionValues;->view:Landroid/view/View;</span>
+<span class="">	iget-object v1, p2, Landroid/support/transition/TransitionValues;->values:Ljava/util/Map;</span>
+<span class="">	const-string v2, "android:changeScroll:x"</span>
+<span class="">	invoke-interface {v1, v2}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljava/lang/Integer;</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/Integer;->intValue()I</span>
+<span class="">	move-result v1</span>
+<span class="">	iget-object v2, p3, Landroid/support/transition/TransitionValues;->values:Ljava/util/Map;</span>
+<span class="">	const-string v3, "android:changeScroll:x"</span>
+<span class="">	invoke-interface {v2, v3}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Ljava/lang/Integer;</span>
+<span class="">	invoke-virtual {v2}, Ljava/lang/Integer;->intValue()I</span>
+<span class="">	move-result v2</span>
+<span class="">	iget-object p2, p2, Landroid/support/transition/TransitionValues;->values:Ljava/util/Map;</span>
+<span class="">	const-string v3, "android:changeScroll:y"</span>
+<span class="">	invoke-interface {p2, v3}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	check-cast p2, Ljava/lang/Integer;</span>
+<span class="">	invoke-virtual {p2}, Ljava/lang/Integer;->intValue()I</span>
+<span class="">	move-result p2</span>
+<span class="">	iget-object p3, p3, Landroid/support/transition/TransitionValues;->values:Ljava/util/Map;</span>
+<span class="">	const-string v3, "android:changeScroll:y"</span>
+<span class="">	invoke-interface {p3, v3}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p3</span>
+<span class="">	check-cast p3, Ljava/lang/Integer;</span>
+<span class="">	invoke-virtual {p3}, Ljava/lang/Integer;->intValue()I</span>
+<span class="">	move-result p3</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	const/4 v4, 0x0</span>
+<span class="">	const/4 v5, 0x2</span>
+<span class="">	if-eq v1, v2, :cond_1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/view/View;->setScrollX(I)V</span>
+<span class="">	const-string v6, "scrollX"</span>
+<span class="">	new-array v7, v5, [I</span>
+<span class="">	aput v1, v7, v4</span>
+<span class="">	aput v2, v7, v3</span>
+<span class="">	invoke-static {v0, v6, v7}, Landroid/animation/ObjectAnimator;->ofInt(Ljava/lang/Object;Ljava/lang/String;[I)Landroid/animation/ObjectAnimator;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	move-object v1, p1</span>
+<span class="">	:goto_0</span>
+<span class="">	if-eq p2, p3, :cond_2</span>
+<span class="">	invoke-virtual {v0, p2}, Landroid/view/View;->setScrollY(I)V</span>
+<span class="">	const-string p1, "scrollY"</span>
+<span class="">	new-array v2, v5, [I</span>
+<span class="">	aput p2, v2, v4</span>
+<span class="">	aput p3, v2, v3</span>
+<span class="">	invoke-static {v0, p1, v2}, Landroid/animation/ObjectAnimator;->ofInt(Ljava/lang/Object;Ljava/lang/String;[I)Landroid/animation/ObjectAnimator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-static {v1, p1}, Landroid/support/transition/TransitionUtils;->mergeAnimators(Landroid/animation/Animator;Landroid/animation/Animator;)Landroid/animation/Animator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method public getTransitionProperties()[Ljava/lang/String;
+<span class="">	.locals 1</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	sget-object v0, Landroid/support/transition/ChangeScroll;->PROPERTIES:[Ljava/lang/String;</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

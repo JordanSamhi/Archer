@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.dinuscxj.progressbar</a></li>
+        <li><i class="ico ico-class"></i> CircleProgressBar.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Lcom/dinuscxj/progressbar/CircleProgressBar;
+.super Landroid/widget/ProgressBar;
+.source "CircleProgressBar.java"
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Lcom/dinuscxj/progressbar/CircleProgressBar$ShaderMode;,
+Lcom/dinuscxj/progressbar/CircleProgressBar$Style;
+}
+.end annotation
+
+.field private static final COLOR_FFD3D3D5:Ljava/lang/String; = "#ffe3e3e5"
+.field private static final COLOR_FFF2A670:Ljava/lang/String; = "#fff2a670"
+.field private static final DEFAULT_LINE_COUNT:I = 0x2d
+.field private static final DEFAULT_LINE_WIDTH:F = 4.0f
+.field private static final DEFAULT_PATTERN:Ljava/lang/String; = "%d%%"
+.field private static final DEFAULT_PROGRESS_STROKE_WIDTH:F = 1.0f
+.field private static final DEFAULT_PROGRESS_TEXT_SIZE:F = 11.0f
+.field private static final DEFAULT_START_DEGREE:F = -90.0f
+.field private static final LINE:I = 0x0
+.field private static final LINEAR:I = 0x0
+.field private static final RADIAL:I = 0x1
+.field private static final SOLID:I = 0x1
+.field private static final SOLID_LINE:I = 0x2
+.field private static final SWEEP:I = 0x2
+.field private mBackgroundColor:I
+.field private final mBackgroundPaint:Landroid/graphics/Paint;
+.field private mCap:Landroid/graphics/Paint$Cap;
+.field private mCenterX:F
+.field private mCenterY:F
+.field private mDrawProgressText:Z
+.field private mLineCount:I
+.field private mLineWidth:F
+.field private mProgressBackgroundColor:I
+.field private final mProgressBackgroundPaint:Landroid/graphics/Paint;
+.field private mProgressEndColor:I
+.field private final mProgressPaint:Landroid/graphics/Paint;
+.field private final mProgressRectF:Landroid/graphics/RectF;
+.field private mProgressStartColor:I
+.field private mProgressStrokeWidth:F
+.field private mProgressTextColor:I
+.field private mProgressTextFormatPattern:Ljava/lang/String;
+.field private final mProgressTextPaint:Landroid/graphics/Paint;
+.field private final mProgressTextRect:Landroid/graphics/Rect;
+.field private mProgressTextSize:F
+.field private mRadius:F
+.field private mShader:I
+.field private mStyle:I
+
+
+.method public constructor <init>(Landroid/content/Context;)V
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-direct {p0, p1, v0}, Lcom/dinuscxj/progressbar/CircleProgressBar;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V</span>
+.end method
+
+<span class="cov">.method public constructor &lt;init&gt;(Landroid/content/Context;Landroid/util/AttributeSet;)V</span>
+<span class="">	.locals 2</span>
+
+<span class="cov">	invoke-direct {p0, p1, p2}, Landroid/widget/ProgressBar;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V</span>
+<span class="cov">	new-instance v0, Landroid/graphics/RectF;</span>
+<span class="cov">	invoke-direct {v0}, Landroid/graphics/RectF;-><init>()V</span>
+<span class="cov">	iput-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressRectF:Landroid/graphics/RectF;</span>
+<span class="cov">	new-instance v0, Landroid/graphics/Rect;</span>
+<span class="cov">	invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V</span>
+<span class="cov">	iput-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextRect:Landroid/graphics/Rect;</span>
+<span class="cov">	new-instance v0, Landroid/graphics/Paint;</span>
+<span class="cov">	const/4 v1, 0x1</span>
+<span class="cov">	invoke-direct {v0, v1}, Landroid/graphics/Paint;-><init>(I)V</span>
+<span class="cov">	iput-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	new-instance v0, Landroid/graphics/Paint;</span>
+<span class="cov">	invoke-direct {v0, v1}, Landroid/graphics/Paint;-><init>(I)V</span>
+<span class="cov">	iput-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressBackgroundPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	new-instance v0, Landroid/graphics/Paint;</span>
+<span class="cov">	invoke-direct {v0, v1}, Landroid/graphics/Paint;-><init>(I)V</span>
+<span class="cov">	iput-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mBackgroundPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	new-instance v0, Landroid/graphics/Paint;</span>
+<span class="cov">	invoke-direct {v0, v1}, Landroid/graphics/Paint;-><init>(I)V</span>
+<span class="cov">	iput-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	invoke-direct {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->adjustIndeterminate()V</span>
+<span class="cov">	invoke-direct {p0, p1, p2}, Lcom/dinuscxj/progressbar/CircleProgressBar;->initFromAttributes(Landroid/content/Context;Landroid/util/AttributeSet;)V</span>
+<span class="cov">	invoke-direct {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->initPaint()V</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method private adjustIndeterminate()V</span>
+<span class="">	.locals 4</span>
+
+<span class="cov">	:try_start_0</span>
+<span class="cov">	const-class v0, Landroid/widget/ProgressBar;</span>
+<span class="cov">	const-string v1, "mOnlyIndeterminate"</span>
+<span class="exec">	invoke-virtual {v0, v1}, Ljava/lang/Class;->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	const/4 v1, 0x1</span>
+<span class="cov">	invoke-virtual {v0, v1}, Ljava/lang/reflect/Field;->setAccessible(Z)V</span>
+<span class="cov">	const/4 v2, 0x0</span>
+<span class="exec">	invoke-static {v2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;</span>
+<span class="cov">	move-result-object v3</span>
+<span class="cov">	invoke-virtual {v0, p0, v3}, Ljava/lang/reflect/Field;->set(Ljava/lang/Object;Ljava/lang/Object;)V</span>
+<span class="cov">	const-class v0, Landroid/widget/ProgressBar;</span>
+<span class="cov">	const-string v3, "mIndeterminate"</span>
+<span class="exec">	invoke-virtual {v0, v3}, Ljava/lang/Class;->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	invoke-virtual {v0, v1}, Ljava/lang/reflect/Field;->setAccessible(Z)V</span>
+<span class="exec">	invoke-static {v2}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;</span>
+<span class="cov">	move-result-object v2</span>
+<span class="cov">	invoke-virtual {v0, p0, v2}, Ljava/lang/reflect/Field;->set(Ljava/lang/Object;Ljava/lang/Object;)V</span>
+<span class="cov">	const-class v0, Landroid/widget/ProgressBar;</span>
+<span class="cov">	const-string v2, "mCurrentDrawable"</span>
+<span class="exec">	invoke-virtual {v0, v2}, Ljava/lang/Class;->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	invoke-virtual {v0, v1}, Ljava/lang/reflect/Field;->setAccessible(Z)V</span>
+<span class="cov">	const/4 v1, 0x0</span>
+<span class="cov">	invoke-virtual {v0, p0, v1}, Ljava/lang/reflect/Field;->set(Ljava/lang/Object;Ljava/lang/Object;)V</span>
+<span class="cov">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/NoSuchFieldException; {:try_start_0 .. :try_end_0} :catch_1</span>
+<span class="">	.catch Ljava/lang/IllegalAccessException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catch_0</span>
+<span class="">	move-exception v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/IllegalAccessException;->printStackTrace()V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catch_1</span>
+<span class="">	move-exception v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/NoSuchFieldException;->printStackTrace()V</span>
+<span class="cov">	:goto_0</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method private drawBackground(Landroid/graphics/Canvas;)V</span>
+<span class="">	.locals 4</span>
+
+<span class="cov">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mBackgroundColor:I</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterX:F</span>
+<span class="">	iget v1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterX:F</span>
+<span class="">	iget v2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mRadius:F</span>
+<span class="">	iget-object v3, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mBackgroundPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p1, v0, v1, v2, v3}, Landroid/graphics/Canvas;->drawCircle(FFFLandroid/graphics/Paint;)V</span>
+<span class="cov">	:cond_0</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method private drawLineProgress(Landroid/graphics/Canvas;)V
+<span class="">	.locals 16</span>
+
+<span class="">	move-object/from16 v0, p0</span>
+<span class="">	iget v1, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mLineCount:I</span>
+<span class="">	int-to-double v1, v1</span>
+<span class="">	const-wide v3, 0x401921fb54442d18L    # 6.283185307179586</span>
+<span class="">	div-double/2addr v3, v1</span>
+<span class="">	double-to-float v1, v3</span>
+<span class="">	iget v2, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mRadius:F</span>
+<span class="">	iget v3, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mRadius:F</span>
+<span class="">	iget v4, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mLineWidth:F</span>
+<span class="">	sub-float/2addr v3, v4</span>
+<span class="">	invoke-virtual/range {p0 .. p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->getProgress()I</span>
+<span class="">	move-result v4</span>
+<span class="">	int-to-float v4, v4</span>
+<span class="">	invoke-virtual/range {p0 .. p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->getMax()I</span>
+<span class="">	move-result v5</span>
+<span class="">	int-to-float v5, v5</span>
+<span class="">	div-float/2addr v4, v5</span>
+<span class="">	iget v5, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mLineCount:I</span>
+<span class="">	int-to-float v5, v5</span>
+<span class="">	mul-float/2addr v4, v5</span>
+<span class="">	float-to-int v4, v4</span>
+<span class="">	const/4 v5, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	iget v6, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mLineCount:I</span>
+<span class="">	if-ge v5, v6, :cond_1</span>
+<span class="">	int-to-float v6, v5</span>
+<span class="">	mul-float/2addr v6, v1</span>
+<span class="">	iget v7, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterX:F</span>
+<span class="">	float-to-double v8, v6</span>
+<span class="">	invoke-static {v8, v9}, Ljava/lang/Math;->sin(D)D</span>
+<span class="">	move-result-wide v10</span>
+<span class="">	double-to-float v6, v10</span>
+<span class="">	mul-float/2addr v6, v3</span>
+<span class="">	add-float v11, v7, v6</span>
+<span class="">	iget v6, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterX:F</span>
+<span class="">	invoke-static {v8, v9}, Ljava/lang/Math;->cos(D)D</span>
+<span class="">	move-result-wide v12</span>
+<span class="">	double-to-float v7, v12</span>
+<span class="">	mul-float/2addr v7, v3</span>
+<span class="">	sub-float v12, v6, v7</span>
+<span class="">	iget v6, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterX:F</span>
+<span class="">	invoke-static {v8, v9}, Ljava/lang/Math;->sin(D)D</span>
+<span class="">	move-result-wide v13</span>
+<span class="">	double-to-float v7, v13</span>
+<span class="">	mul-float/2addr v7, v2</span>
+<span class="">	add-float v13, v6, v7</span>
+<span class="">	iget v6, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterX:F</span>
+<span class="">	invoke-static {v8, v9}, Ljava/lang/Math;->cos(D)D</span>
+<span class="">	move-result-wide v7</span>
+<span class="">	double-to-float v7, v7</span>
+<span class="">	mul-float/2addr v7, v2</span>
+<span class="">	sub-float v14, v6, v7</span>
+<span class="">	if-ge v5, v4, :cond_0</span>
+<span class="">	iget-object v15, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressPaint:Landroid/graphics/Paint;</span>
+<span class="">	move-object/from16 v10, p1</span>
+<span class="">	invoke-virtual/range {v10 .. v15}, Landroid/graphics/Canvas;->drawLine(FFFFLandroid/graphics/Paint;)V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v15, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressBackgroundPaint:Landroid/graphics/Paint;</span>
+<span class="">	move-object/from16 v10, p1</span>
+<span class="">	invoke-virtual/range {v10 .. v15}, Landroid/graphics/Canvas;->drawLine(FFFFLandroid/graphics/Paint;)V</span>
+<span class="">	:goto_1</span>
+<span class="">	add-int/lit8 v5, v5, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+.end method
+
+<span class="cov">.method private drawProgress(Landroid/graphics/Canvas;)V</span>
+<span class="">	.locals 1</span>
+
+<span class="cov">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mStyle:I</span>
+<span class="">	packed-switch v0, :pswitch_data_0</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/dinuscxj/progressbar/CircleProgressBar;->drawLineProgress(Landroid/graphics/Canvas;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="cov">	:pswitch_0</span>
+<span class="cov">	invoke-direct {p0, p1}, Lcom/dinuscxj/progressbar/CircleProgressBar;->drawSolidLineProgress(Landroid/graphics/Canvas;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:pswitch_1</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/dinuscxj/progressbar/CircleProgressBar;->drawSolidProgress(Landroid/graphics/Canvas;)V</span>
+<span class="cov">	:goto_0</span>
+<span class="exec">	return-void</span>
+<span class="">	nop</span>
+<span class="">	:pswitch_data_0</span>
+<span class="">	.packed-switch 0x1</span>
+<span class="">	:pswitch_1</span>
+<span class="">	:pswitch_0</span>
+<span class="">	.end packed-switch</span>
+.end method
+
+<span class="cov">.method private drawProgressText(Landroid/graphics/Canvas;)V</span>
+<span class="">	.locals 5</span>
+
+<span class="cov">	iget-boolean v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mDrawProgressText:Z</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="cov">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextFormatPattern:Ljava/lang/String;</span>
+<span class="cov">	:cond_0</span>
+<span class="cov">	const/4 v1, 0x1</span>
+<span class="cov">	new-array v1, v1, [Ljava/lang/Object;</span>
+<span class="exec">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->getProgress()I</span>
+<span class="cov">	move-result v2</span>
+<span class="exec">	invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="cov">	move-result-object v2</span>
+<span class="cov">	const/4 v3, 0x0</span>
+<span class="cov">	aput-object v2, v1, v3</span>
+<span class="exec">	invoke-static {v0, v1}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	iget-object v1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	iget v2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextSize:F</span>
+<span class="cov">	invoke-virtual {v1, v2}, Landroid/graphics/Paint;->setTextSize(F)V</span>
+<span class="cov">	iget-object v1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	iget v2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextColor:I</span>
+<span class="cov">	invoke-virtual {v1, v2}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="cov">	iget-object v1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextPaint:Landroid/graphics/Paint;</span>
+<span class="exec">	invoke-virtual {v0}, Ljava/lang/String;->length()I</span>
+<span class="cov">	move-result v2</span>
+<span class="cov">	iget-object v4, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextRect:Landroid/graphics/Rect;</span>
+<span class="cov">	invoke-virtual {v1, v0, v3, v2, v4}, Landroid/graphics/Paint;->getTextBounds(Ljava/lang/String;IILandroid/graphics/Rect;)V</span>
+<span class="cov">	iget v1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterX:F</span>
+<span class="cov">	iget v2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterY:F</span>
+<span class="cov">	iget-object v3, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextRect:Landroid/graphics/Rect;</span>
+<span class="exec">	invoke-virtual {v3}, Landroid/graphics/Rect;->height()I</span>
+<span class="cov">	move-result v3</span>
+<span class="cov">	div-int/lit8 v3, v3, 0x2</span>
+<span class="cov">	int-to-float v3, v3</span>
+<span class="cov">	add-float/2addr v2, v3</span>
+<span class="cov">	iget-object v3, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	invoke-virtual {p1, v0, v1, v2, v3}, Landroid/graphics/Canvas;->drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method private drawSolidLineProgress(Landroid/graphics/Canvas;)V</span>
+<span class="">	.locals 12</span>
+
+<span class="cov">	iget-object v1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressRectF:Landroid/graphics/RectF;</span>
+<span class="cov">	iget-object v5, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressBackgroundPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	const/high16 v2, -0x3d4c0000    # -90.0f</span>
+<span class="cov">	const/high16 v3, 0x43b40000    # 360.0f</span>
+<span class="cov">	const/4 v4, 0x0</span>
+<span class="cov">	move-object v0, p1</span>
+<span class="cov">	invoke-virtual/range {v0 .. v5}, Landroid/graphics/Canvas;->drawArc(Landroid/graphics/RectF;FFZLandroid/graphics/Paint;)V</span>
+<span class="cov">	iget-object v7, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressRectF:Landroid/graphics/RectF;</span>
+<span class="exec">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->getProgress()I</span>
+<span class="cov">	move-result v0</span>
+<span class="cov">	int-to-float v0, v0</span>
+<span class="cov">	const/high16 v1, 0x43b40000    # 360.0f</span>
+<span class="cov">	mul-float/2addr v1, v0</span>
+<span class="exec">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->getMax()I</span>
+<span class="cov">	move-result v0</span>
+<span class="cov">	int-to-float v0, v0</span>
+<span class="cov">	div-float v9, v1, v0</span>
+<span class="cov">	iget-object v11, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	const/high16 v8, -0x3d4c0000    # -90.0f</span>
+<span class="cov">	const/4 v10, 0x0</span>
+<span class="cov">	move-object v6, p1</span>
+<span class="cov">	invoke-virtual/range {v6 .. v11}, Landroid/graphics/Canvas;->drawArc(Landroid/graphics/RectF;FFZLandroid/graphics/Paint;)V</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method private drawSolidProgress(Landroid/graphics/Canvas;)V
+<span class="">	.locals 12</span>
+
+<span class="">	iget-object v1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressRectF:Landroid/graphics/RectF;</span>
+<span class="">	iget-object v5, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressBackgroundPaint:Landroid/graphics/Paint;</span>
+<span class="">	const/high16 v2, -0x3d4c0000    # -90.0f</span>
+<span class="">	const/high16 v3, 0x43b40000    # 360.0f</span>
+<span class="">	const/4 v4, 0x0</span>
+<span class="">	move-object v0, p1</span>
+<span class="">	invoke-virtual/range {v0 .. v5}, Landroid/graphics/Canvas;->drawArc(Landroid/graphics/RectF;FFZLandroid/graphics/Paint;)V</span>
+<span class="">	iget-object v7, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressRectF:Landroid/graphics/RectF;</span>
+<span class="">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->getProgress()I</span>
+<span class="">	move-result v0</span>
+<span class="">	int-to-float v0, v0</span>
+<span class="">	const/high16 v1, 0x43b40000    # 360.0f</span>
+<span class="">	mul-float/2addr v1, v0</span>
+<span class="">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->getMax()I</span>
+<span class="">	move-result v0</span>
+<span class="">	int-to-float v0, v0</span>
+<span class="">	div-float v9, v1, v0</span>
+<span class="">	iget-object v11, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressPaint:Landroid/graphics/Paint;</span>
+<span class="">	const/high16 v8, -0x3d4c0000    # -90.0f</span>
+<span class="">	const/4 v10, 0x1</span>
+<span class="">	move-object v6, p1</span>
+<span class="">	invoke-virtual/range {v6 .. v11}, Landroid/graphics/Canvas;->drawArc(Landroid/graphics/RectF;FFZLandroid/graphics/Paint;)V</span>
+.end method
+
+<span class="cov">.method private initFromAttributes(Landroid/content/Context;Landroid/util/AttributeSet;)V</span>
+<span class="">	.locals 2</span>
+
+<span class="cov">	sget-object v0, Lcom/dinuscxj/progressbar/R$styleable;->CircleProgressBar:[I</span>
+<span class="exec">	invoke-virtual {p1, p2, v0}, Landroid/content/Context;->obtainStyledAttributes(Landroid/util/AttributeSet;[I)Landroid/content/res/TypedArray;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	sget p2, Lcom/dinuscxj/progressbar/R$styleable;->CircleProgressBar_background_color:I</span>
+<span class="cov">	const/4 v0, 0x0</span>
+<span class="exec">	invoke-virtual {p1, p2, v0}, Landroid/content/res/TypedArray;->getColor(II)I</span>
+<span class="cov">	move-result p2</span>
+<span class="cov">	iput p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mBackgroundColor:I</span>
+<span class="cov">	sget p2, Lcom/dinuscxj/progressbar/R$styleable;->CircleProgressBar_draw_progress_text:I</span>
+<span class="cov">	const/4 v1, 0x1</span>
+<span class="exec">	invoke-virtual {p1, p2, v1}, Landroid/content/res/TypedArray;->getBoolean(IZ)Z</span>
+<span class="cov">	move-result p2</span>
+<span class="cov">	iput-boolean p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mDrawProgressText:Z</span>
+<span class="cov">	sget p2, Lcom/dinuscxj/progressbar/R$styleable;->CircleProgressBar_line_count:I</span>
+<span class="cov">	const/16 v1, 0x2d</span>
+<span class="exec">	invoke-virtual {p1, p2, v1}, Landroid/content/res/TypedArray;->getInt(II)I</span>
+<span class="cov">	move-result p2</span>
+<span class="cov">	iput p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mLineCount:I</span>
+<span class="cov">	sget p2, Lcom/dinuscxj/progressbar/R$styleable;->CircleProgressBar_progress_text_format_pattern:I</span>
+<span class="exec">	invoke-virtual {p1, p2}, Landroid/content/res/TypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result p2</span>
+<span class="">	if-eqz p2, :cond_0</span>
+<span class="">	sget p2, Lcom/dinuscxj/progressbar/R$styleable;->CircleProgressBar_progress_text_format_pattern:I</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/content/res/TypedArray;->getString(I)Ljava/lang/String;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	goto :goto_0</span>
+<span class="cov">	:cond_0</span>
+<span class="cov">	const-string p2, "%d%%"</span>
+<span class="cov">	:goto_0</span>
+<span class="cov">	iput-object p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextFormatPattern:Ljava/lang/String;</span>
+<span class="cov">	sget p2, Lcom/dinuscxj/progressbar/R$styleable;->CircleProgressBar_style:I</span>
+<span class="exec">	invoke-virtual {p1, p2, v0}, Landroid/content/res/TypedArray;->getInt(II)I</span>
+<span class="cov">	move-result p2</span>
+<span class="cov">	iput p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mStyle:I</span>
+<span class="cov">	sget p2, Lcom/dinuscxj/progressbar/R$styleable;->CircleProgressBar_progress_shader:I</span>
+<span class="exec">	invoke-virtual {p1, p2, v0}, Landroid/content/res/TypedArray;->getInt(II)I</span>
+<span class="cov">	move-result p2</span>
+<span class="cov">	iput p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mShader:I</span>
+<span class="cov">	sget p2, Lcom/dinuscxj/progressbar/R$styleable;->CircleProgressBar_progress_stroke_cap:I</span>
+<span class="exec">	invoke-virtual {p1, p2}, Landroid/content/res/TypedArray;->hasValue(I)Z</span>
+<span class="cov">	move-result p2</span>
+<span class="cov">	if-eqz p2, :cond_1</span>
+<span class="exec">	invoke-static {}, Landroid/graphics/Paint$Cap;->values()[Landroid/graphics/Paint$Cap;</span>
+<span class="cov">	move-result-object p2</span>
+<span class="cov">	sget v1, Lcom/dinuscxj/progressbar/R$styleable;->CircleProgressBar_progress_stroke_cap:I</span>
+<span class="exec">	invoke-virtual {p1, v1, v0}, Landroid/content/res/TypedArray;->getInt(II)I</span>
+<span class="cov">	move-result v0</span>
+<span class="cov">	aget-object p2, p2, v0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	sget-object p2, Landroid/graphics/Paint$Cap;->BUTT:Landroid/graphics/Paint$Cap;</span>
+<span class="cov">	:goto_1</span>
+<span class="cov">	iput-object p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCap:Landroid/graphics/Paint$Cap;</span>
+<span class="cov">	sget p2, Lcom/dinuscxj/progressbar/R$styleable;->CircleProgressBar_line_width:I</span>
+<span class="exec">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->getContext()Landroid/content/Context;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	const/high16 v1, 0x40800000    # 4.0f</span>
+<span class="exec">	invoke-static {v0, v1}, Lcom/dinuscxj/progressbar/UnitUtils;->dip2px(Landroid/content/Context;F)I</span>
+<span class="cov">	move-result v0</span>
+<span class="exec">	invoke-virtual {p1, p2, v0}, Landroid/content/res/TypedArray;->getDimensionPixelSize(II)I</span>
+<span class="cov">	move-result p2</span>
+<span class="cov">	int-to-float p2, p2</span>
+<span class="cov">	iput p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mLineWidth:F</span>
+<span class="cov">	sget p2, Lcom/dinuscxj/progressbar/R$styleable;->CircleProgressBar_progress_text_size:I</span>
+<span class="exec">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->getContext()Landroid/content/Context;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	const/high16 v1, 0x41300000    # 11.0f</span>
+<span class="exec">	invoke-static {v0, v1}, Lcom/dinuscxj/progressbar/UnitUtils;->dip2px(Landroid/content/Context;F)I</span>
+<span class="cov">	move-result v0</span>
+<span class="exec">	invoke-virtual {p1, p2, v0}, Landroid/content/res/TypedArray;->getDimensionPixelSize(II)I</span>
+<span class="cov">	move-result p2</span>
+<span class="cov">	int-to-float p2, p2</span>
+<span class="cov">	iput p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextSize:F</span>
+<span class="cov">	sget p2, Lcom/dinuscxj/progressbar/R$styleable;->CircleProgressBar_progress_stroke_width:I</span>
+<span class="exec">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->getContext()Landroid/content/Context;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	const/high16 v1, 0x3f800000    # 1.0f</span>
+<span class="exec">	invoke-static {v0, v1}, Lcom/dinuscxj/progressbar/UnitUtils;->dip2px(Landroid/content/Context;F)I</span>
+<span class="cov">	move-result v0</span>
+<span class="exec">	invoke-virtual {p1, p2, v0}, Landroid/content/res/TypedArray;->getDimensionPixelSize(II)I</span>
+<span class="cov">	move-result p2</span>
+<span class="cov">	int-to-float p2, p2</span>
+<span class="cov">	iput p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStrokeWidth:F</span>
+<span class="cov">	sget p2, Lcom/dinuscxj/progressbar/R$styleable;->CircleProgressBar_progress_start_color:I</span>
+<span class="cov">	const-string v0, "#fff2a670"</span>
+<span class="exec">	invoke-static {v0}, Landroid/graphics/Color;->parseColor(Ljava/lang/String;)I</span>
+<span class="cov">	move-result v0</span>
+<span class="exec">	invoke-virtual {p1, p2, v0}, Landroid/content/res/TypedArray;->getColor(II)I</span>
+<span class="cov">	move-result p2</span>
+<span class="cov">	iput p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStartColor:I</span>
+<span class="cov">	sget p2, Lcom/dinuscxj/progressbar/R$styleable;->CircleProgressBar_progress_end_color:I</span>
+<span class="cov">	const-string v0, "#fff2a670"</span>
+<span class="exec">	invoke-static {v0}, Landroid/graphics/Color;->parseColor(Ljava/lang/String;)I</span>
+<span class="cov">	move-result v0</span>
+<span class="exec">	invoke-virtual {p1, p2, v0}, Landroid/content/res/TypedArray;->getColor(II)I</span>
+<span class="cov">	move-result p2</span>
+<span class="cov">	iput p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressEndColor:I</span>
+<span class="cov">	sget p2, Lcom/dinuscxj/progressbar/R$styleable;->CircleProgressBar_progress_text_color:I</span>
+<span class="cov">	const-string v0, "#fff2a670"</span>
+<span class="exec">	invoke-static {v0}, Landroid/graphics/Color;->parseColor(Ljava/lang/String;)I</span>
+<span class="cov">	move-result v0</span>
+<span class="exec">	invoke-virtual {p1, p2, v0}, Landroid/content/res/TypedArray;->getColor(II)I</span>
+<span class="cov">	move-result p2</span>
+<span class="cov">	iput p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextColor:I</span>
+<span class="cov">	sget p2, Lcom/dinuscxj/progressbar/R$styleable;->CircleProgressBar_progress_background_color:I</span>
+<span class="cov">	const-string v0, "#ffe3e3e5"</span>
+<span class="exec">	invoke-static {v0}, Landroid/graphics/Color;->parseColor(Ljava/lang/String;)I</span>
+<span class="cov">	move-result v0</span>
+<span class="exec">	invoke-virtual {p1, p2, v0}, Landroid/content/res/TypedArray;->getColor(II)I</span>
+<span class="cov">	move-result p2</span>
+<span class="cov">	iput p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressBackgroundColor:I</span>
+<span class="cov">	invoke-virtual {p1}, Landroid/content/res/TypedArray;->recycle()V</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method private initPaint()V</span>
+<span class="">	.locals 3</span>
+
+<span class="cov">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	sget-object v1, Landroid/graphics/Paint$Align;->CENTER:Landroid/graphics/Paint$Align;</span>
+<span class="cov">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setTextAlign(Landroid/graphics/Paint$Align;)V</span>
+<span class="cov">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	iget v1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextSize:F</span>
+<span class="cov">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setTextSize(F)V</span>
+<span class="cov">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	iget v1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mStyle:I</span>
+<span class="cov">	const/4 v2, 0x1</span>
+<span class="">	if-ne v1, v2, :cond_0</span>
+<span class="">	sget-object v1, Landroid/graphics/Paint$Style;->FILL:Landroid/graphics/Paint$Style;</span>
+<span class="">	goto :goto_0</span>
+<span class="cov">	:cond_0</span>
+<span class="cov">	sget-object v1, Landroid/graphics/Paint$Style;->STROKE:Landroid/graphics/Paint$Style;</span>
+<span class="cov">	:goto_0</span>
+<span class="cov">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V</span>
+<span class="cov">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	iget v1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStrokeWidth:F</span>
+<span class="cov">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setStrokeWidth(F)V</span>
+<span class="cov">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	iget v1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStartColor:I</span>
+<span class="cov">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="cov">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	iget-object v1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCap:Landroid/graphics/Paint$Cap;</span>
+<span class="cov">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setStrokeCap(Landroid/graphics/Paint$Cap;)V</span>
+<span class="cov">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressBackgroundPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	iget v1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mStyle:I</span>
+<span class="">	if-ne v1, v2, :cond_1</span>
+<span class="">	sget-object v1, Landroid/graphics/Paint$Style;->FILL:Landroid/graphics/Paint$Style;</span>
+<span class="">	goto :goto_1</span>
+<span class="cov">	:cond_1</span>
+<span class="cov">	sget-object v1, Landroid/graphics/Paint$Style;->STROKE:Landroid/graphics/Paint$Style;</span>
+<span class="cov">	:goto_1</span>
+<span class="cov">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V</span>
+<span class="cov">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressBackgroundPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	iget v1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStrokeWidth:F</span>
+<span class="cov">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setStrokeWidth(F)V</span>
+<span class="cov">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressBackgroundPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	iget v1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressBackgroundColor:I</span>
+<span class="cov">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="cov">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressBackgroundPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	iget-object v1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCap:Landroid/graphics/Paint$Cap;</span>
+<span class="cov">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setStrokeCap(Landroid/graphics/Paint$Cap;)V</span>
+<span class="cov">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mBackgroundPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	sget-object v1, Landroid/graphics/Paint$Style;->FILL:Landroid/graphics/Paint$Style;</span>
+<span class="cov">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V</span>
+<span class="cov">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mBackgroundPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	iget v1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mBackgroundColor:I</span>
+<span class="cov">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method private updateProgressShader()V</span>
+<span class="">	.locals 21</span>
+
+<span class="cov">	move-object/from16 v0, p0</span>
+<span class="cov">	iget v1, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStartColor:I</span>
+<span class="cov">	iget v2, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressEndColor:I</span>
+<span class="cov">	const/4 v3, 0x0</span>
+<span class="cov">	if-eq v1, v2, :cond_1</span>
+<span class="cov">	iget v1, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mShader:I</span>
+<span class="">	packed-switch v1, :pswitch_data_0</span>
+<span class="cov">	:goto_0</span>
+<span class="cov">	move-object v1, v3</span>
+<span class="">	goto/16 :goto_2</span>
+<span class="cov">	:pswitch_0</span>
+<span class="cov">	iget v1, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStrokeWidth:F</span>
+<span class="cov">	float-to-double v1, v1</span>
+<span class="cov">	const-wide v3, 0x400921fb54442d18L    # Math.PI</span>
+<span class="cov">	div-double/2addr v1, v3</span>
+<span class="cov">	const-wide/high16 v3, 0x4000000000000000L    # 2.0</span>
+<span class="cov">	mul-double/2addr v1, v3</span>
+<span class="cov">	iget v3, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mRadius:F</span>
+<span class="cov">	float-to-double v3, v3</span>
+<span class="cov">	div-double/2addr v1, v3</span>
+<span class="cov">	double-to-float v1, v1</span>
+<span class="cov">	const-wide v2, -0x3fa9800000000000L    # -90.0</span>
+<span class="cov">	iget-object v4, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCap:Landroid/graphics/Paint$Cap;</span>
+<span class="cov">	sget-object v5, Landroid/graphics/Paint$Cap;->BUTT:Landroid/graphics/Paint$Cap;</span>
+<span class="cov">	const/4 v6, 0x2</span>
+<span class="">	if-ne v4, v5, :cond_0</span>
+<span class="">	iget v4, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mStyle:I</span>
+<span class="">	if-ne v4, v6, :cond_0</span>
+<span class="">	const-wide/16 v4, 0x0</span>
+<span class="">	goto :goto_1</span>
+<span class="cov">	:cond_0</span>
+<span class="cov">	float-to-double v4, v1</span>
+<span class="exec">	invoke-static {v4, v5}, Ljava/lang/Math;->toDegrees(D)D</span>
+<span class="cov">	move-result-wide v4</span>
+<span class="cov">	:goto_1</span>
+<span class="cov">	sub-double/2addr v2, v4</span>
+<span class="cov">	double-to-float v1, v2</span>
+<span class="cov">	new-instance v3, Landroid/graphics/SweepGradient;</span>
+<span class="cov">	iget v2, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterX:F</span>
+<span class="cov">	iget v4, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterY:F</span>
+<span class="cov">	new-array v5, v6, [I</span>
+<span class="cov">	const/4 v7, 0x0</span>
+<span class="cov">	iget v8, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStartColor:I</span>
+<span class="cov">	aput v8, v5, v7</span>
+<span class="cov">	const/4 v7, 0x1</span>
+<span class="cov">	iget v8, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressEndColor:I</span>
+<span class="cov">	aput v8, v5, v7</span>
+<span class="cov">	new-array v6, v6, [F</span>
+<span class="cov">	fill-array-data v6, :array_0</span>
+<span class="cov">	invoke-direct {v3, v2, v4, v5, v6}, Landroid/graphics/SweepGradient;-><init>(FF[I[F)V</span>
+<span class="cov">	new-instance v2, Landroid/graphics/Matrix;</span>
+<span class="cov">	invoke-direct {v2}, Landroid/graphics/Matrix;-><init>()V</span>
+<span class="cov">	iget v4, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterX:F</span>
+<span class="cov">	iget v5, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterY:F</span>
+<span class="cov">	invoke-virtual {v2, v1, v4, v5}, Landroid/graphics/Matrix;->postRotate(FFF)Z</span>
+<span class="cov">	invoke-virtual {v3, v2}, Landroid/graphics/Shader;->setLocalMatrix(Landroid/graphics/Matrix;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:pswitch_1</span>
+<span class="">	new-instance v1, Landroid/graphics/RadialGradient;</span>
+<span class="">	iget v7, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterX:F</span>
+<span class="">	iget v8, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterY:F</span>
+<span class="">	iget v9, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mRadius:F</span>
+<span class="">	iget v10, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStartColor:I</span>
+<span class="">	iget v11, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressEndColor:I</span>
+<span class="">	sget-object v12, Landroid/graphics/Shader$TileMode;->CLAMP:Landroid/graphics/Shader$TileMode;</span>
+<span class="">	move-object v6, v1</span>
+<span class="">	invoke-direct/range {v6 .. v12}, Landroid/graphics/RadialGradient;-><init>(FFFIILandroid/graphics/Shader$TileMode;)V</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:pswitch_2</span>
+<span class="">	new-instance v1, Landroid/graphics/LinearGradient;</span>
+<span class="">	iget-object v2, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressRectF:Landroid/graphics/RectF;</span>
+<span class="">	iget v14, v2, Landroid/graphics/RectF;->left:F</span>
+<span class="">	iget-object v2, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressRectF:Landroid/graphics/RectF;</span>
+<span class="">	iget v15, v2, Landroid/graphics/RectF;->top:F</span>
+<span class="">	iget-object v2, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressRectF:Landroid/graphics/RectF;</span>
+<span class="">	iget v2, v2, Landroid/graphics/RectF;->left:F</span>
+<span class="">	iget-object v3, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressRectF:Landroid/graphics/RectF;</span>
+<span class="">	iget v3, v3, Landroid/graphics/RectF;->bottom:F</span>
+<span class="">	iget v4, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStartColor:I</span>
+<span class="">	iget v5, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressEndColor:I</span>
+<span class="">	sget-object v20, Landroid/graphics/Shader$TileMode;->CLAMP:Landroid/graphics/Shader$TileMode;</span>
+<span class="">	move-object v13, v1</span>
+<span class="">	move/from16 v16, v2</span>
+<span class="">	move/from16 v17, v3</span>
+<span class="">	move/from16 v18, v4</span>
+<span class="">	move/from16 v19, v5</span>
+<span class="">	invoke-direct/range {v13 .. v20}, Landroid/graphics/LinearGradient;-><init>(FFFFIILandroid/graphics/Shader$TileMode;)V</span>
+<span class="cov">	:goto_2</span>
+<span class="cov">	iget-object v2, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressPaint:Landroid/graphics/Paint;</span>
+<span class="cov">	invoke-virtual {v2, v1}, Landroid/graphics/Paint;->setShader(Landroid/graphics/Shader;)Landroid/graphics/Shader;</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v1, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v1, v3}, Landroid/graphics/Paint;->setShader(Landroid/graphics/Shader;)Landroid/graphics/Shader;</span>
+<span class="">	iget-object v1, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressPaint:Landroid/graphics/Paint;</span>
+<span class="">	iget v2, v0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStartColor:I</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="cov">	:goto_3</span>
+<span class="exec">	return-void</span>
+<span class="">	:array_0</span>
+<span class="">	.array-data 4</span>
+<span class="">	0x0</span>
+<span class="">	0x3f800000    # 1.0f</span>
+<span class="">	.end array-data</span>
+<span class="">	:pswitch_data_0</span>
+<span class="">	.packed-switch 0x0</span>
+<span class="">	:pswitch_2</span>
+<span class="">	:pswitch_1</span>
+<span class="">	:pswitch_0</span>
+<span class="">	.end packed-switch</span>
+.end method
+
+.method public getBackgroundColor()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mBackgroundColor:I</span>
+.end method
+
+.method public getCap()Landroid/graphics/Paint$Cap;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCap:Landroid/graphics/Paint$Cap;</span>
+.end method
+
+.method public getLineCount()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mLineCount:I</span>
+.end method
+
+.method public getLineWidth()F
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mLineWidth:F</span>
+.end method
+
+.method public getProgressBackgroundColor()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressBackgroundColor:I</span>
+.end method
+
+.method public getProgressEndColor()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressEndColor:I</span>
+.end method
+
+.method public getProgressStartColor()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStartColor:I</span>
+.end method
+
+.method public getProgressStrokeWidth()F
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStrokeWidth:F</span>
+.end method
+
+.method public getProgressTextColor()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextColor:I</span>
+.end method
+
+.method public getProgressTextFormatPattern()Ljava/lang/String;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextFormatPattern:Ljava/lang/String;</span>
+.end method
+
+.method public getProgressTextSize()F
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextSize:F</span>
+.end method
+
+.method public getShader()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mShader:I</span>
+.end method
+
+.method public getStyle()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mStyle:I</span>
+.end method
+
+<span class="cov">.method protected declared-synchronized onDraw(Landroid/graphics/Canvas;)V</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	monitor-enter p0</span>
+<span class="cov">	:try_start_0</span>
+<span class="cov">	invoke-direct {p0, p1}, Lcom/dinuscxj/progressbar/CircleProgressBar;->drawBackground(Landroid/graphics/Canvas;)V</span>
+<span class="cov">	invoke-direct {p0, p1}, Lcom/dinuscxj/progressbar/CircleProgressBar;->drawProgress(Landroid/graphics/Canvas;)V</span>
+<span class="cov">	invoke-direct {p0, p1}, Lcom/dinuscxj/progressbar/CircleProgressBar;->drawProgressText(Landroid/graphics/Canvas;)V</span>
+<span class="cov">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="cov">	monitor-exit p0</span>
+<span class="exec">	return-void</span>
+<span class="">	:catchall_0</span>
+<span class="">	move-exception p1</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw p1</span>
+.end method
+
+<span class="cov">.method protected onSizeChanged(IIII)V</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	invoke-super {p0, p1, p2, p3, p4}, Landroid/widget/ProgressBar;->onSizeChanged(IIII)V</span>
+<span class="cov">	div-int/lit8 p1, p1, 0x2</span>
+<span class="cov">	int-to-float p1, p1</span>
+<span class="cov">	iput p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterX:F</span>
+<span class="cov">	div-int/lit8 p2, p2, 0x2</span>
+<span class="cov">	int-to-float p1, p2</span>
+<span class="cov">	iput p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterY:F</span>
+<span class="cov">	iget p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterX:F</span>
+<span class="cov">	iget p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterY:F</span>
+<span class="exec">	invoke-static {p1, p2}, Ljava/lang/Math;->min(FF)F</span>
+<span class="cov">	move-result p1</span>
+<span class="cov">	iput p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mRadius:F</span>
+<span class="cov">	iget-object p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressRectF:Landroid/graphics/RectF;</span>
+<span class="cov">	iget p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterY:F</span>
+<span class="cov">	iget p3, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mRadius:F</span>
+<span class="cov">	sub-float/2addr p2, p3</span>
+<span class="cov">	iput p2, p1, Landroid/graphics/RectF;->top:F</span>
+<span class="cov">	iget-object p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressRectF:Landroid/graphics/RectF;</span>
+<span class="cov">	iget p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterY:F</span>
+<span class="cov">	iget p3, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mRadius:F</span>
+<span class="cov">	add-float/2addr p2, p3</span>
+<span class="cov">	iput p2, p1, Landroid/graphics/RectF;->bottom:F</span>
+<span class="cov">	iget-object p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressRectF:Landroid/graphics/RectF;</span>
+<span class="cov">	iget p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterX:F</span>
+<span class="cov">	iget p3, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mRadius:F</span>
+<span class="cov">	sub-float/2addr p2, p3</span>
+<span class="cov">	iput p2, p1, Landroid/graphics/RectF;->left:F</span>
+<span class="cov">	iget-object p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressRectF:Landroid/graphics/RectF;</span>
+<span class="cov">	iget p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCenterX:F</span>
+<span class="cov">	iget p3, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mRadius:F</span>
+<span class="cov">	add-float/2addr p2, p3</span>
+<span class="cov">	iput p2, p1, Landroid/graphics/RectF;->right:F</span>
+<span class="cov">	invoke-direct {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->updateProgressShader()V</span>
+<span class="cov">	iget-object p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressRectF:Landroid/graphics/RectF;</span>
+<span class="cov">	iget p2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStrokeWidth:F</span>
+<span class="cov">	const/high16 p3, 0x40000000    # 2.0f</span>
+<span class="cov">	div-float/2addr p2, p3</span>
+<span class="cov">	iget p4, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStrokeWidth:F</span>
+<span class="cov">	div-float/2addr p4, p3</span>
+<span class="cov">	invoke-virtual {p1, p2, p4}, Landroid/graphics/RectF;->inset(FF)V</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method public setBackgroundColor(I)V
+<span class="">	.locals 1</span>
+
+<span class="">	iput p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mBackgroundColor:I</span>
+<span class="">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mBackgroundPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->invalidate()V</span>
+.end method
+
+.method public setCap(Landroid/graphics/Paint$Cap;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iput-object p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mCap:Landroid/graphics/Paint$Cap;</span>
+<span class="">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/Paint;->setStrokeCap(Landroid/graphics/Paint$Cap;)V</span>
+<span class="">	iget-object v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressBackgroundPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/Paint;->setStrokeCap(Landroid/graphics/Paint$Cap;)V</span>
+<span class="">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->invalidate()V</span>
+.end method
+
+.method public setLineCount(I)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mLineCount:I</span>
+<span class="">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->invalidate()V</span>
+.end method
+
+.method public setLineWidth(F)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mLineWidth:F</span>
+<span class="">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->invalidate()V</span>
+.end method
+
+.method public setProgressBackgroundColor(I)V
+<span class="">	.locals 1</span>
+
+<span class="">	iput p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressBackgroundColor:I</span>
+<span class="">	iget-object p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressBackgroundPaint:Landroid/graphics/Paint;</span>
+<span class="">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressBackgroundColor:I</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->invalidate()V</span>
+.end method
+
+.method public setProgressEndColor(I)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressEndColor:I</span>
+<span class="">	invoke-direct {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->updateProgressShader()V</span>
+<span class="">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->invalidate()V</span>
+.end method
+
+.method public setProgressStartColor(I)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStartColor:I</span>
+<span class="">	invoke-direct {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->updateProgressShader()V</span>
+<span class="">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->invalidate()V</span>
+.end method
+
+.method public setProgressStrokeWidth(F)V
+<span class="">	.locals 3</span>
+
+<span class="">	iput p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStrokeWidth:F</span>
+<span class="">	iget-object p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressRectF:Landroid/graphics/RectF;</span>
+<span class="">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStrokeWidth:F</span>
+<span class="">	const/high16 v1, 0x40000000    # 2.0f</span>
+<span class="">	div-float/2addr v0, v1</span>
+<span class="">	iget v2, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressStrokeWidth:F</span>
+<span class="">	div-float/2addr v2, v1</span>
+<span class="">	invoke-virtual {p1, v0, v2}, Landroid/graphics/RectF;->inset(FF)V</span>
+<span class="">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->invalidate()V</span>
+.end method
+
+.method public setProgressTextColor(I)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextColor:I</span>
+<span class="">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->invalidate()V</span>
+.end method
+
+.method public setProgressTextFormatPattern(Ljava/lang/String;)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput-object p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextFormatPattern:Ljava/lang/String;</span>
+<span class="">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->invalidate()V</span>
+.end method
+
+.method public setProgressTextSize(F)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressTextSize:F</span>
+<span class="">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->invalidate()V</span>
+.end method
+
+.method public setShader(I)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mShader:I</span>
+<span class="">	invoke-direct {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->updateProgressShader()V</span>
+<span class="">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->invalidate()V</span>
+.end method
+
+.method public setStyle(I)V
+<span class="">	.locals 2</span>
+
+<span class="">	iput p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mStyle:I</span>
+<span class="">	iget-object p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressPaint:Landroid/graphics/Paint;</span>
+<span class="">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mStyle:I</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	if-ne v0, v1, :cond_0</span>
+<span class="">	sget-object v0, Landroid/graphics/Paint$Style;->FILL:Landroid/graphics/Paint$Style;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	sget-object v0, Landroid/graphics/Paint$Style;->STROKE:Landroid/graphics/Paint$Style;</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V</span>
+<span class="">	iget-object p1, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mProgressBackgroundPaint:Landroid/graphics/Paint;</span>
+<span class="">	iget v0, p0, Lcom/dinuscxj/progressbar/CircleProgressBar;->mStyle:I</span>
+<span class="">	if-ne v0, v1, :cond_1</span>
+<span class="">	sget-object v0, Landroid/graphics/Paint$Style;->FILL:Landroid/graphics/Paint$Style;</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	sget-object v0, Landroid/graphics/Paint$Style;->STROKE:Landroid/graphics/Paint$Style;</span>
+<span class="">	:goto_1</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V</span>
+<span class="">	invoke-virtual {p0}, Lcom/dinuscxj/progressbar/CircleProgressBar;->invalidate()V</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

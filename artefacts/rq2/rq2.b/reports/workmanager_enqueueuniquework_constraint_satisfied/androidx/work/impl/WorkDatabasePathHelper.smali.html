@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">lu.uni.trux.workmanager_enqueueuniquework</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.work.impl</a></li>
+        <li><i class="ico ico-class"></i> WorkDatabasePathHelper.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Landroidx/work/impl/WorkDatabasePathHelper;
+.super Ljava/lang/Object;
+.source "WorkDatabasePathHelper.java"
+
+
+.field private static final DATABASE_EXTRA_FILES:[Ljava/lang/String;
+.field private static final TAG:Ljava/lang/String;
+.field private static final WORK_DATABASE_NAME:Ljava/lang/String; = "androidx.work.workdb"
+
+
+<span class="cov">.method static constructor &lt;clinit&gt;()V</span>
+<span class="">	.locals 3</span>
+
+<span class="cov">	const-string v0, "WrkDbPathHelper"</span>
+<span class="exec">	invoke-static {v0}, Landroidx/work/Logger;->tagWithPrefix(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	sput-object v0, Landroidx/work/impl/WorkDatabasePathHelper;->TAG:Ljava/lang/String;</span>
+<span class="cov">	const-string v0, "-journal"</span>
+<span class="cov">	const-string v1, "-shm"</span>
+<span class="cov">	const-string v2, "-wal"</span>
+<span class="exec">	filled-new-array {v0, v1, v2}, [Ljava/lang/String;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	sput-object v0, Landroidx/work/impl/WorkDatabasePathHelper;->DATABASE_EXTRA_FILES:[Ljava/lang/String;</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method private constructor <init>()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+.end method
+
+.method public static getDatabasePath(Landroid/content/Context;)Ljava/io/File;
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"context"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v1, 0x17</span>
+<span class="">	if-ge v0, v1, :cond_0</span>
+<span class="">	invoke-static {p0}, Landroidx/work/impl/WorkDatabasePathHelper;->getDefaultDatabasePath(Landroid/content/Context;)Ljava/io/File;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const-string v0, "androidx.work.workdb"</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-static {p0, v0}, Landroidx/work/impl/WorkDatabasePathHelper;->getNoBackupPath(Landroid/content/Context;Ljava/lang/String;)Ljava/io/File;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+<span class="cov">.method public static getDefaultDatabasePath(Landroid/content/Context;)Ljava/io/File;</span>
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"context"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="cov">	const-string v0, "androidx.work.workdb"</span>
+<span class="exec">	invoke-virtual {p0, v0}, Landroid/content/Context;->getDatabasePath(Ljava/lang/String;)Ljava/io/File;</span>
+<span class="cov">	move-result-object p0</span>
+<span class="exec">	return-object p0</span>
+.end method
+
+.method private static getNoBackupPath(Landroid/content/Context;Ljava/lang/String;)Ljava/io/File;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"context",</span>
+<span class="">	"filePath"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/io/File;</span>
+<span class="">	invoke-virtual {p0}, Landroid/content/Context;->getNoBackupFilesDir()Ljava/io/File;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-direct {v0, p0, p1}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V</span>
+.end method
+
+<span class="cov">.method public static getWorkDatabaseName()Ljava/lang/String;</span>
+<span class="">	.locals 1</span>
+
+<span class="cov">	const-string v0, "androidx.work.workdb"</span>
+<span class="exec">	return-object v0</span>
+.end method
+
+<span class="cov">.method public static migrateDatabase(Landroid/content/Context;)V</span>
+<span class="">	.locals 9</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"context"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="exec">	invoke-static {p0}, Landroidx/work/impl/WorkDatabasePathHelper;->getDefaultDatabasePath(Landroid/content/Context;)Ljava/io/File;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	sget v1, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="cov">	const/16 v2, 0x17</span>
+<span class="cov">	if-lt v1, v2, :cond_3</span>
+<span class="exec">	invoke-virtual {v0}, Ljava/io/File;->exists()Z</span>
+<span class="cov">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	invoke-static {}, Landroidx/work/Logger;->get()Landroidx/work/Logger;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sget-object v1, Landroidx/work/impl/WorkDatabasePathHelper;->TAG:Ljava/lang/String;</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	new-array v3, v2, [Ljava/lang/Throwable;</span>
+<span class="">	const-string v4, "Migrating WorkDatabase to the no-backup directory"</span>
+<span class="">	invoke-virtual {v0, v1, v4, v3}, Landroidx/work/Logger;->debug(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Throwable;)V</span>
+<span class="">	invoke-static {p0}, Landroidx/work/impl/WorkDatabasePathHelper;->migrationPaths(Landroid/content/Context;)Ljava/util/Map;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Map;->keySet()Ljava/util/Set;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Set;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_3</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljava/io/File;</span>
+<span class="">	invoke-interface {p0, v1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	check-cast v3, Ljava/io/File;</span>
+<span class="">	invoke-virtual {v1}, Ljava/io/File;->exists()Z</span>
+<span class="">	move-result v4</span>
+<span class="">	if-eqz v4, :cond_0</span>
+<span class="">	if-eqz v3, :cond_0</span>
+<span class="">	invoke-virtual {v3}, Ljava/io/File;->exists()Z</span>
+<span class="">	move-result v4</span>
+<span class="">	const/4 v5, 0x1</span>
+<span class="">	if-eqz v4, :cond_1</span>
+<span class="">	new-array v4, v5, [Ljava/lang/Object;</span>
+<span class="">	aput-object v3, v4, v2</span>
+<span class="">	const-string v6, "Over-writing contents of %s"</span>
+<span class="">	invoke-static {v6, v4}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-static {}, Landroidx/work/Logger;->get()Landroidx/work/Logger;</span>
+<span class="">	move-result-object v6</span>
+<span class="">	sget-object v7, Landroidx/work/impl/WorkDatabasePathHelper;->TAG:Ljava/lang/String;</span>
+<span class="">	new-array v8, v2, [Ljava/lang/Throwable;</span>
+<span class="">	invoke-virtual {v6, v7, v4, v8}, Landroidx/work/Logger;->warning(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Throwable;)V</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {v1, v3}, Ljava/io/File;->renameTo(Ljava/io/File;)Z</span>
+<span class="">	move-result v4</span>
+<span class="">	const/4 v6, 0x2</span>
+<span class="">	if-eqz v4, :cond_2</span>
+<span class="">	new-array v4, v6, [Ljava/lang/Object;</span>
+<span class="">	aput-object v1, v4, v2</span>
+<span class="">	aput-object v3, v4, v5</span>
+<span class="">	const-string v1, "Migrated %s to %s"</span>
+<span class="">	invoke-static {v1, v4}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_2</span>
+<span class="">	new-array v4, v6, [Ljava/lang/Object;</span>
+<span class="">	aput-object v1, v4, v2</span>
+<span class="">	aput-object v3, v4, v5</span>
+<span class="">	const-string v1, "Renaming %s to %s failed"</span>
+<span class="">	invoke-static {v1, v4}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	:goto_1</span>
+<span class="">	invoke-static {}, Landroidx/work/Logger;->get()Landroidx/work/Logger;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	sget-object v4, Landroidx/work/impl/WorkDatabasePathHelper;->TAG:Ljava/lang/String;</span>
+<span class="">	new-array v5, v2, [Ljava/lang/Throwable;</span>
+<span class="">	invoke-virtual {v3, v4, v1, v5}, Landroidx/work/Logger;->debug(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Throwable;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="cov">	:cond_3</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method public static migrationPaths(Landroid/content/Context;)Ljava/util/Map;
+<span class="">	.locals 10</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Landroid/content/Context;",</span>
+<span class="">	")",</span>
+<span class="">	"Ljava/util/Map<",</span>
+<span class="">	"Ljava/io/File;",</span>
+<span class="">	"Ljava/io/File;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"context"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/util/HashMap;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/HashMap;-><init>()V</span>
+<span class="">	sget v1, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v2, 0x17</span>
+<span class="">	if-lt v1, v2, :cond_0</span>
+<span class="">	invoke-static {p0}, Landroidx/work/impl/WorkDatabasePathHelper;->getDefaultDatabasePath(Landroid/content/Context;)Ljava/io/File;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-static {p0}, Landroidx/work/impl/WorkDatabasePathHelper;->getDatabasePath(Landroid/content/Context;)Ljava/io/File;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-interface {v0, v1, p0}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	sget-object v2, Landroidx/work/impl/WorkDatabasePathHelper;->DATABASE_EXTRA_FILES:[Ljava/lang/String;</span>
+<span class="">	array-length v3, v2</span>
+<span class="">	const/4 v4, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v4, v3, :cond_0</span>
+<span class="">	aget-object v5, v2, v4</span>
+<span class="">	new-instance v6, Ljava/io/File;</span>
+<span class="">	new-instance v7, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {v1}, Ljava/io/File;->getPath()Ljava/lang/String;</span>
+<span class="">	move-result-object v8</span>
+<span class="">	invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v7</span>
+<span class="">	invoke-virtual {v7, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v7</span>
+<span class="">	invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v7</span>
+<span class="">	invoke-direct {v6, v7}, Ljava/io/File;-><init>(Ljava/lang/String;)V</span>
+<span class="">	new-instance v7, Ljava/io/File;</span>
+<span class="">	new-instance v8, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {p0}, Ljava/io/File;->getPath()Ljava/lang/String;</span>
+<span class="">	move-result-object v9</span>
+<span class="">	invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v8</span>
+<span class="">	invoke-virtual {v8, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-direct {v7, v5}, Ljava/io/File;-><init>(Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {v0, v6, v7}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	add-int/lit8 v4, v4, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

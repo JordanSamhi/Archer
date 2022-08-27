@@ -1,0 +1,894 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">net.jsoup.helper</a></li>
+        <li><i class="ico ico-class"></i> HttpConnection$Response.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Lnet/jsoup/helper/HttpConnection$Response;
+.super Lnet/jsoup/helper/HttpConnection$Base;
+.source "HttpConnection.java"
+.implements Lnet/jsoup/Connection$Response;
+
+.annotation system Ldalvik/annotation/EnclosingClass;
+value = Lnet/jsoup/helper/HttpConnection;
+.end annotation
+.annotation system Ldalvik/annotation/InnerClass;
+accessFlags = 0x9
+name = "Response"
+.end annotation
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Lnet/jsoup/helper/HttpConnection$Base<",
+"Lnet/jsoup/Connection$Response;",
+">;",
+"Lnet/jsoup/Connection$Response;"
+}
+.end annotation
+
+.field private static final MAX_REDIRECTS:I = 0x14
+.field private byteData:Ljava/nio/ByteBuffer;
+.field private charset:Ljava/lang/String;
+.field private contentType:Ljava/lang/String;
+.field private executed:Z
+.field private numRedirects:I
+.field private req:Lnet/jsoup/Connection$Request;
+.field private statusCode:I
+.field private statusMessage:Ljava/lang/String;
+
+
+.method constructor <init>()V
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-direct {p0, v0}, Lnet/jsoup/helper/HttpConnection$Base;-><init>(Lnet/jsoup/helper/HttpConnection$1;)V</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-boolean v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->executed:Z</span>
+<span class="">	iput v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->numRedirects:I</span>
+.end method
+
+.method private constructor <init>(Lnet/jsoup/helper/HttpConnection$Response;)V
+<span class="">	.locals 4</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-direct {p0, v0}, Lnet/jsoup/helper/HttpConnection$Base;-><init>(Lnet/jsoup/helper/HttpConnection$1;)V</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-boolean v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->executed:Z</span>
+<span class="">	iput v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->numRedirects:I</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	iget v1, p1, Lnet/jsoup/helper/HttpConnection$Response;->numRedirects:I</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	add-int/2addr v1, v2</span>
+<span class="">	iput v1, p0, Lnet/jsoup/helper/HttpConnection$Response;->numRedirects:I</span>
+<span class="">	iget v1, p0, Lnet/jsoup/helper/HttpConnection$Response;->numRedirects:I</span>
+<span class="">	const/16 v3, 0x14</span>
+<span class="">	if-lt v1, v3, :cond_0</span>
+<span class="">	new-instance v1, Ljava/io/IOException;</span>
+<span class="">	const-string v3, "Too many redirects occurred trying to load URL %s"</span>
+<span class="">	new-array v2, v2, [Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {p1}, Lnet/jsoup/helper/HttpConnection$Response;->url()Ljava/net/URL;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	aput-object p1, v2, v0</span>
+<span class="">	invoke-static {v3, v2}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {v1, p1}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw v1</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private static createConnection(Lnet/jsoup/Connection$Request;)Ljava/net/HttpURLConnection;
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->url()Ljava/net/URL;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/net/URL;->openConnection()Ljava/net/URLConnection;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/net/HttpURLConnection;</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->method()Lnet/jsoup/Connection$Method;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Lnet/jsoup/Connection$Method;->name()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/net/HttpURLConnection;->setRequestMethod(Ljava/lang/String;)V</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/net/HttpURLConnection;->setInstanceFollowRedirects(Z)V</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->timeout()I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/net/HttpURLConnection;->setConnectTimeout(I)V</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->timeout()I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/net/HttpURLConnection;->setReadTimeout(I)V</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->method()Lnet/jsoup/Connection$Method;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	sget-object v2, Lnet/jsoup/Connection$Method;->POST:Lnet/jsoup/Connection$Method;</span>
+<span class="">	if-ne v1, v2, :cond_0</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/net/HttpURLConnection;->setDoOutput(Z)V</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->cookies()Ljava/util/Map;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Map;->size()I</span>
+<span class="">	move-result v1</span>
+<span class="">	if-lez v1, :cond_1</span>
+<span class="">	const-string v1, "Cookie"</span>
+<span class="">	invoke-static {p0}, Lnet/jsoup/helper/HttpConnection$Response;->getRequestCookieString(Lnet/jsoup/Connection$Request;)Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/net/HttpURLConnection;->addRequestProperty(Ljava/lang/String;Ljava/lang/String;)V</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->headers()Ljava/util/Map;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Map;->entrySet()Ljava/util/Set;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Set;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_2</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljava/util/Map$Entry;</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Ljava/lang/String;</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljava/lang/String;</span>
+<span class="">	invoke-virtual {v0, v2, v1}, Ljava/net/HttpURLConnection;->addRequestProperty(Ljava/lang/String;Ljava/lang/String;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method static execute(Lnet/jsoup/Connection$Request;)Lnet/jsoup/helper/HttpConnection$Response;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-static {p0, v0}, Lnet/jsoup/helper/HttpConnection$Response;->execute(Lnet/jsoup/Connection$Request;Lnet/jsoup/helper/HttpConnection$Response;)Lnet/jsoup/helper/HttpConnection$Response;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method static execute(Lnet/jsoup/Connection$Request;Lnet/jsoup/helper/HttpConnection$Response;)Lnet/jsoup/helper/HttpConnection$Response;
+<span class="">	.locals 5</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const-string v0, "Request must not be null"</span>
+<span class="">	invoke-static {p0, v0}, Lnet/jsoup/helper/Validate;->notNull(Ljava/lang/Object;Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->url()Ljava/net/URL;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/net/URL;->getProtocol()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v1, "http"</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	if-nez v1, :cond_1</span>
+<span class="">	const-string v1, "https"</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	move v0, v2</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	move v0, v3</span>
+<span class="">	:goto_1</span>
+<span class="">	const-string v1, "Only http & https protocols supported"</span>
+<span class="">	invoke-static {v0, v1}, Lnet/jsoup/helper/Validate;->isTrue(ZLjava/lang/String;)V</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->method()Lnet/jsoup/Connection$Method;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sget-object v1, Lnet/jsoup/Connection$Method;->GET:Lnet/jsoup/Connection$Method;</span>
+<span class="">	if-ne v0, v1, :cond_2</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->data()Ljava/util/Collection;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Collection;->size()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-lez v0, :cond_2</span>
+<span class="">	invoke-static {p0}, Lnet/jsoup/helper/HttpConnection$Response;->serialiseRequestUrl(Lnet/jsoup/Connection$Request;)V</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-static {p0}, Lnet/jsoup/helper/HttpConnection$Response;->createConnection(Lnet/jsoup/Connection$Request;)Ljava/net/HttpURLConnection;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/net/HttpURLConnection;->connect()V</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->method()Lnet/jsoup/Connection$Method;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	sget-object v4, Lnet/jsoup/Connection$Method;->POST:Lnet/jsoup/Connection$Method;</span>
+<span class="">	if-ne v1, v4, :cond_3</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->data()Ljava/util/Collection;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0}, Ljava/net/HttpURLConnection;->getOutputStream()Ljava/io/OutputStream;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-static {v1, v4}, Lnet/jsoup/helper/HttpConnection$Response;->writePost(Ljava/util/Collection;Ljava/io/OutputStream;)V</span>
+<span class="">	:cond_3</span>
+<span class="">	invoke-virtual {v0}, Ljava/net/HttpURLConnection;->getResponseCode()I</span>
+<span class="">	move-result v1</span>
+<span class="">	const/16 v4, 0xc8</span>
+<span class="">	if-eq v1, v4, :cond_6</span>
+<span class="">	const/16 v4, 0x12e</span>
+<span class="">	if-eq v1, v4, :cond_5</span>
+<span class="">	const/16 v4, 0x12d</span>
+<span class="">	if-eq v1, v4, :cond_5</span>
+<span class="">	const/16 v4, 0x12f</span>
+<span class="">	if-ne v1, v4, :cond_4</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_4</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->ignoreHttpErrors()Z</span>
+<span class="">	move-result v4</span>
+<span class="">	if-nez v4, :cond_6</span>
+<span class="">	new-instance p1, Ljava/io/IOException;</span>
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, " error loading URL "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->url()Ljava/net/URL;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0}, Ljava/net/URL;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-direct {p1, p0}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	:goto_2</span>
+<span class="">	:cond_5</span>
+<span class="">	move v2, v3</span>
+<span class="">	:cond_6</span>
+<span class="">	new-instance v1, Lnet/jsoup/helper/HttpConnection$Response;</span>
+<span class="">	invoke-direct {v1, p1}, Lnet/jsoup/helper/HttpConnection$Response;-><init>(Lnet/jsoup/helper/HttpConnection$Response;)V</span>
+<span class="">	invoke-direct {v1, v0, p1}, Lnet/jsoup/helper/HttpConnection$Response;->setupFromConnection(Ljava/net/HttpURLConnection;Lnet/jsoup/Connection$Response;)V</span>
+<span class="">	if-eqz v2, :cond_8</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->followRedirects()Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_8</span>
+<span class="">	new-instance p1, Ljava/net/URL;</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->url()Ljava/net/URL;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v2, "Location"</span>
+<span class="">	invoke-virtual {v1, v2}, Lnet/jsoup/helper/HttpConnection$Response;->header(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-direct {p1, v0, v2}, Ljava/net/URL;-><init>(Ljava/net/URL;Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {p0, p1}, Lnet/jsoup/Connection$Request;->url(Ljava/net/URL;)Lnet/jsoup/Connection$Base;</span>
+<span class="">	iget-object p1, v1, Lnet/jsoup/helper/HttpConnection$Response;->cookies:Ljava/util/Map;</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Map;->entrySet()Ljava/util/Set;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Set;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:goto_3</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_7</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/util/Map$Entry;</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Ljava/lang/String;</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/lang/String;</span>
+<span class="">	invoke-interface {p0, v2, v0}, Lnet/jsoup/Connection$Request;->cookie(Ljava/lang/String;Ljava/lang/String;)Lnet/jsoup/Connection$Base;</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:cond_7</span>
+<span class="">	invoke-static {p0, v1}, Lnet/jsoup/helper/HttpConnection$Response;->execute(Lnet/jsoup/Connection$Request;Lnet/jsoup/helper/HttpConnection$Response;)Lnet/jsoup/helper/HttpConnection$Response;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	iput-object p0, v1, Lnet/jsoup/helper/HttpConnection$Response;->req:Lnet/jsoup/Connection$Request;</span>
+<span class="">	:cond_8</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	invoke-virtual {v0}, Ljava/net/HttpURLConnection;->getErrorStream()Ljava/io/InputStream;</span>
+<span class="">	:try_start_0</span>
+<span class="">	move-result-object p1</span>
+<span class="">	if-eqz p1, :cond_9</span>
+<span class="">	invoke-virtual {v0}, Ljava/net/HttpURLConnection;->getErrorStream()Ljava/io/InputStream;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	goto :goto_4</span>
+<span class="">	invoke-virtual {v0}, Ljava/net/HttpURLConnection;->getInputStream()Ljava/io/InputStream;</span>
+<span class="">	:cond_9</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string v0, "Content-Encoding"</span>
+<span class="">	:try_start_1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_1</span>
+<span class="">	:goto_4</span>
+<span class="">	invoke-virtual {v1, v0}, Lnet/jsoup/helper/HttpConnection$Response;->hasHeader(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_a</span>
+<span class="">	const-string v0, "Content-Encoding"</span>
+<span class="">	invoke-virtual {v1, v0}, Lnet/jsoup/helper/HttpConnection$Response;->header(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v2, "gzip"</span>
+<span class="">	invoke-virtual {v0, v2}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_a</span>
+<span class="">	new-instance v0, Ljava/io/BufferedInputStream;</span>
+<span class="">	new-instance v2, Ljava/util/zip/GZIPInputStream;</span>
+<span class="">	invoke-direct {v2, p1}, Ljava/util/zip/GZIPInputStream;-><init>(Ljava/io/InputStream;)V</span>
+<span class="">	invoke-direct {v0, v2}, Ljava/io/BufferedInputStream;-><init>(Ljava/io/InputStream;)V</span>
+<span class="">	goto :goto_5</span>
+<span class="">	new-instance v0, Ljava/io/BufferedInputStream;</span>
+<span class="">	:cond_a</span>
+<span class="">	invoke-direct {v0, p1}, Ljava/io/BufferedInputStream;-><init>(Ljava/io/InputStream;)V</span>
+<span class="">	move-object p0, v0</span>
+<span class="">	:goto_5</span>
+<span class="">	invoke-static {p0}, Lnet/jsoup/helper/DataUtil;->readToByteBuffer(Ljava/io/InputStream;)Ljava/nio/ByteBuffer;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, v1, Lnet/jsoup/helper/HttpConnection$Response;->byteData:Ljava/nio/ByteBuffer;</span>
+<span class="">	iget-object v0, v1, Lnet/jsoup/helper/HttpConnection$Response;->contentType:Ljava/lang/String;</span>
+<span class="">	invoke-static {v0}, Lnet/jsoup/helper/DataUtil;->getCharsetFromContentType(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, v1, Lnet/jsoup/helper/HttpConnection$Response;->charset:Ljava/lang/String;</span>
+<span class="">	if-eqz p0, :cond_b</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_0</span>
+<span class="">	invoke-virtual {p0}, Ljava/io/InputStream;->close()V</span>
+<span class="">	if-eqz p1, :cond_c</span>
+<span class="">	:cond_b</span>
+<span class="">	invoke-virtual {p1}, Ljava/io/InputStream;->close()V</span>
+<span class="">	iput-boolean v3, v1, Lnet/jsoup/helper/HttpConnection$Response;->executed:Z</span>
+<span class="">	:cond_c</span>
+<span class="">	move-exception v0</span>
+<span class="">	goto :goto_6</span>
+<span class="">	:catchall_0</span>
+<span class="">	move-exception p1</span>
+<span class="">	move-object v0, p1</span>
+<span class="">	:catchall_1</span>
+<span class="">	move-object p1, p0</span>
+<span class="">	if-eqz p0, :cond_d</span>
+<span class="">	invoke-virtual {p0}, Ljava/io/InputStream;->close()V</span>
+<span class="">	:goto_6</span>
+<span class="">	if-eqz p1, :cond_e</span>
+<span class="">	invoke-virtual {p1}, Ljava/io/InputStream;->close()V</span>
+<span class="">	:cond_d</span>
+<span class="">	throw v0</span>
+<span class="">	:cond_e</span>
+.end method
+
+.method private static getRequestCookieString(Lnet/jsoup/Connection$Request;)Ljava/lang/String;
+<span class="">	.locals 4</span>
+
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->cookies()Ljava/util/Map;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Map;->entrySet()Ljava/util/Set;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Set;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_1</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Ljava/util/Map$Entry;</span>
+<span class="">	if-nez v1, :cond_0</span>
+<span class="">	const-string v3, "; "</span>
+<span class="">	invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	:goto_1</span>
+<span class="">	invoke-interface {v2}, Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	check-cast v3, Ljava/lang/String;</span>
+<span class="">	invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const/16 v3, 0x3d</span>
+<span class="">	invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-interface {v2}, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Ljava/lang/String;</span>
+<span class="">	invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method private static serialiseRequestUrl(Lnet/jsoup/Connection$Request;)V
+<span class="">	.locals 7</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->url()Ljava/net/URL;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {v0}, Ljava/net/URL;->getProtocol()Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v2, "://"</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0}, Ljava/net/URL;->getAuthority()Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0}, Ljava/net/URL;->getPath()Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v2, "?"</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0}, Ljava/net/URL;->getQuery()Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	if-eqz v2, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Ljava/net/URL;->getQuery()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move v0, v3</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->data()Ljava/util/Collection;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-interface {v2}, Ljava/util/Collection;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	:goto_1</span>
+<span class="">	invoke-interface {v2}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v4</span>
+<span class="">	if-eqz v4, :cond_2</span>
+<span class="">	invoke-interface {v2}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	check-cast v4, Lnet/jsoup/Connection$KeyVal;</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	const/16 v5, 0x26</span>
+<span class="">	invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_1</span>
+<span class="">	move v0, v3</span>
+<span class="">	:goto_2</span>
+<span class="">	invoke-interface {v4}, Lnet/jsoup/Connection$KeyVal;->key()Ljava/lang/String;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	const-string v6, "UTF-8"</span>
+<span class="">	invoke-static {v5, v6}, Ljava/net/URLEncoder;->encode(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const/16 v5, 0x3d</span>
+<span class="">	invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-interface {v4}, Lnet/jsoup/Connection$KeyVal;->value()Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	const-string v5, "UTF-8"</span>
+<span class="">	invoke-static {v4, v5}, Ljava/net/URLEncoder;->encode(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_2</span>
+<span class="">	new-instance v0, Ljava/net/URL;</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/net/URL;-><init>(Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {p0, v0}, Lnet/jsoup/Connection$Request;->url(Ljava/net/URL;)Lnet/jsoup/Connection$Base;</span>
+<span class="">	invoke-interface {p0}, Lnet/jsoup/Connection$Request;->data()Ljava/util/Collection;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Collection;->clear()V</span>
+.end method
+
+.method private setupFromConnection(Ljava/net/HttpURLConnection;Lnet/jsoup/Connection$Response;)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p1}, Ljava/net/HttpURLConnection;->getRequestMethod()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Lnet/jsoup/Connection$Method;->valueOf(Ljava/lang/String;)Lnet/jsoup/Connection$Method;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->method:Lnet/jsoup/Connection$Method;</span>
+<span class="">	invoke-virtual {p1}, Ljava/net/HttpURLConnection;->getURL()Ljava/net/URL;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->url:Ljava/net/URL;</span>
+<span class="">	invoke-virtual {p1}, Ljava/net/HttpURLConnection;->getResponseCode()I</span>
+<span class="">	move-result v0</span>
+<span class="">	iput v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->statusCode:I</span>
+<span class="">	invoke-virtual {p1}, Ljava/net/HttpURLConnection;->getResponseMessage()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->statusMessage:Ljava/lang/String;</span>
+<span class="">	invoke-virtual {p1}, Ljava/net/HttpURLConnection;->getContentType()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->contentType:Ljava/lang/String;</span>
+<span class="">	invoke-virtual {p1}, Ljava/net/HttpURLConnection;->getHeaderFields()Ljava/util/Map;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p0, p1}, Lnet/jsoup/helper/HttpConnection$Response;->processResponseHeaders(Ljava/util/Map;)V</span>
+<span class="">	if-eqz p2, :cond_1</span>
+<span class="">	invoke-interface {p2}, Lnet/jsoup/Connection$Response;->cookies()Ljava/util/Map;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Map;->entrySet()Ljava/util/Set;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Set;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result p2</span>
+<span class="">	if-eqz p2, :cond_1</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	check-cast p2, Ljava/util/Map$Entry;</span>
+<span class="">	invoke-interface {p2}, Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/lang/String;</span>
+<span class="">	invoke-virtual {p0, v0}, Lnet/jsoup/helper/HttpConnection$Response;->hasCookie(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	invoke-interface {p2}, Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/lang/String;</span>
+<span class="">	invoke-interface {p2}, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	check-cast p2, Ljava/lang/String;</span>
+<span class="">	invoke-virtual {p0, v0, p2}, Lnet/jsoup/helper/HttpConnection$Response;->cookie(Ljava/lang/String;Ljava/lang/String;)Lnet/jsoup/Connection$Base;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method private static writePost(Ljava/util/Collection;Ljava/io/OutputStream;)V
+<span class="">	.locals 4</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/Collection<",</span>
+<span class="">	"Lnet/jsoup/Connection$KeyVal;",</span>
+<span class="">	">;",</span>
+<span class="">	"Ljava/io/OutputStream;",</span>
+<span class="">	")V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/io/OutputStreamWriter;</span>
+<span class="">	const-string v1, "UTF-8"</span>
+<span class="">	invoke-direct {v0, p1, v1}, Ljava/io/OutputStreamWriter;-><init>(Ljava/io/OutputStream;Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Collection;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Lnet/jsoup/Connection$KeyVal;</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	const/16 v2, 0x26</span>
+<span class="">	invoke-virtual {v0, v2}, Ljava/io/OutputStreamWriter;->append(C)Ljava/io/Writer;</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:goto_1</span>
+<span class="">	invoke-interface {v1}, Lnet/jsoup/Connection$KeyVal;->key()Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	const-string v3, "UTF-8"</span>
+<span class="">	invoke-static {v2, v3}, Ljava/net/URLEncoder;->encode(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v0, v2}, Ljava/io/OutputStreamWriter;->write(Ljava/lang/String;)V</span>
+<span class="">	const/16 v2, 0x3d</span>
+<span class="">	invoke-virtual {v0, v2}, Ljava/io/OutputStreamWriter;->write(I)V</span>
+<span class="">	invoke-interface {v1}, Lnet/jsoup/Connection$KeyVal;->value()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	const-string v2, "UTF-8"</span>
+<span class="">	invoke-static {v1, v2}, Ljava/net/URLEncoder;->encode(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/io/OutputStreamWriter;->write(Ljava/lang/String;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {v0}, Ljava/io/OutputStreamWriter;->close()V</span>
+.end method
+
+.method public body()Ljava/lang/String;
+<span class="">	.locals 2</span>
+
+<span class="">	iget-boolean v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->executed:Z</span>
+<span class="">	const-string v1, "Request must be executed (with .execute(), .get(), or .post() before getting response body"</span>
+<span class="">	invoke-static {v0, v1}, Lnet/jsoup/helper/Validate;->isTrue(ZLjava/lang/String;)V</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->charset:Ljava/lang/String;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	const-string v0, "UTF-8"</span>
+<span class="">	invoke-static {v0}, Ljava/nio/charset/Charset;->forName(Ljava/lang/String;)Ljava/nio/charset/Charset;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Lnet/jsoup/helper/HttpConnection$Response;->byteData:Ljava/nio/ByteBuffer;</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/nio/charset/Charset;->decode(Ljava/nio/ByteBuffer;)Ljava/nio/CharBuffer;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/nio/CharBuffer;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->charset:Ljava/lang/String;</span>
+<span class="">	invoke-static {v0}, Ljava/nio/charset/Charset;->forName(Ljava/lang/String;)Ljava/nio/charset/Charset;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Lnet/jsoup/helper/HttpConnection$Response;->byteData:Ljava/nio/ByteBuffer;</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/nio/charset/Charset;->decode(Ljava/nio/ByteBuffer;)Ljava/nio/CharBuffer;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/nio/CharBuffer;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:goto_0</span>
+<span class="">	iget-object v1, p0, Lnet/jsoup/helper/HttpConnection$Response;->byteData:Ljava/nio/ByteBuffer;</span>
+<span class="">	invoke-virtual {v1}, Ljava/nio/ByteBuffer;->rewind()Ljava/nio/Buffer;</span>
+.end method
+
+.method public bodyAsBytes()[B
+<span class="">	.locals 2</span>
+
+<span class="">	iget-boolean v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->executed:Z</span>
+<span class="">	const-string v1, "Request must be executed (with .execute(), .get(), or .post() before getting response body"</span>
+<span class="">	invoke-static {v0, v1}, Lnet/jsoup/helper/Validate;->isTrue(ZLjava/lang/String;)V</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->byteData:Ljava/nio/ByteBuffer;</span>
+<span class="">	invoke-virtual {v0}, Ljava/nio/ByteBuffer;->array()[B</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public charset()Ljava/lang/String;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->charset:Ljava/lang/String;</span>
+.end method
+
+.method public contentType()Ljava/lang/String;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->contentType:Ljava/lang/String;</span>
+.end method
+
+.method public bridge synthetic cookie(Ljava/lang/String;)Ljava/lang/String;
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lnet/jsoup/helper/HttpConnection$Base;->cookie(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public bridge synthetic cookies()Ljava/util/Map;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lnet/jsoup/helper/HttpConnection$Base;->cookies()Ljava/util/Map;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public bridge synthetic hasCookie(Ljava/lang/String;)Z
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lnet/jsoup/helper/HttpConnection$Base;->hasCookie(Ljava/lang/String;)Z</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public bridge synthetic hasHeader(Ljava/lang/String;)Z
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lnet/jsoup/helper/HttpConnection$Base;->hasHeader(Ljava/lang/String;)Z</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public bridge synthetic header(Ljava/lang/String;)Ljava/lang/String;
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lnet/jsoup/helper/HttpConnection$Base;->header(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public bridge synthetic headers()Ljava/util/Map;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lnet/jsoup/helper/HttpConnection$Base;->headers()Ljava/util/Map;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public bridge synthetic method()Lnet/jsoup/Connection$Method;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lnet/jsoup/helper/HttpConnection$Base;->method()Lnet/jsoup/Connection$Method;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public parse()Lnet/jsoup/nodes/Document;
+<span class="">	.locals 5</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-boolean v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->executed:Z</span>
+<span class="">	const-string v1, "Request must be executed (with .execute(), .get(), or .post() before parsing response"</span>
+<span class="">	invoke-static {v0, v1}, Lnet/jsoup/helper/Validate;->isTrue(ZLjava/lang/String;)V</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->req:Lnet/jsoup/Connection$Request;</span>
+<span class="">	invoke-interface {v0}, Lnet/jsoup/Connection$Request;->ignoreContentType()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->contentType:Ljava/lang/String;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->contentType:Ljava/lang/String;</span>
+<span class="">	const-string v1, "text/"</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->contentType:Ljava/lang/String;</span>
+<span class="">	const-string v1, "application/xml"</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->contentType:Ljava/lang/String;</span>
+<span class="">	const-string v1, "application/xhtml+xml"</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	new-instance v0, Ljava/io/IOException;</span>
+<span class="">	const-string v1, "Unhandled content type \"%s\" on URL %s. Must be text/*, application/xml, or application/xhtml+xml"</span>
+<span class="">	const/4 v2, 0x2</span>
+<span class="">	new-array v2, v2, [Ljava/lang/Object;</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	iget-object v4, p0, Lnet/jsoup/helper/HttpConnection$Response;->contentType:Ljava/lang/String;</span>
+<span class="">	aput-object v4, v2, v3</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	iget-object v4, p0, Lnet/jsoup/helper/HttpConnection$Response;->url:Ljava/net/URL;</span>
+<span class="">	invoke-virtual {v4}, Ljava/net/URL;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	aput-object v4, v2, v3</span>
+<span class="">	invoke-static {v1, v2}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw v0</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->byteData:Ljava/nio/ByteBuffer;</span>
+<span class="">	iget-object v1, p0, Lnet/jsoup/helper/HttpConnection$Response;->charset:Ljava/lang/String;</span>
+<span class="">	iget-object v2, p0, Lnet/jsoup/helper/HttpConnection$Response;->url:Ljava/net/URL;</span>
+<span class="">	invoke-virtual {v2}, Ljava/net/URL;->toExternalForm()Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-static {v0, v1, v2}, Lnet/jsoup/helper/DataUtil;->parseByteData(Ljava/nio/ByteBuffer;Ljava/lang/String;Ljava/lang/String;)Lnet/jsoup/nodes/Document;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Lnet/jsoup/helper/HttpConnection$Response;->byteData:Ljava/nio/ByteBuffer;</span>
+<span class="">	invoke-virtual {v1}, Ljava/nio/ByteBuffer;->rewind()Ljava/nio/Buffer;</span>
+<span class="">	invoke-virtual {v0}, Lnet/jsoup/nodes/Document;->outputSettings()Lnet/jsoup/nodes/Document$OutputSettings;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Lnet/jsoup/nodes/Document$OutputSettings;->charset()Ljava/nio/charset/Charset;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/nio/charset/Charset;->name()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iput-object v1, p0, Lnet/jsoup/helper/HttpConnection$Response;->charset:Ljava/lang/String;</span>
+.end method
+
+.method  processResponseHeaders(Ljava/util/Map;)V
+<span class="">	.locals 4</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/Map<",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	">;>;)V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-interface {p1}, Ljava/util/Map;->entrySet()Ljava/util/Set;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Set;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_6</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/util/Map$Entry;</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljava/lang/String;</span>
+<span class="">	if-nez v1, :cond_1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/util/List;</span>
+<span class="">	const-string v2, "Set-Cookie"</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_5</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljava/lang/String;</span>
+<span class="">	if-nez v1, :cond_3</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_3</span>
+<span class="">	new-instance v2, Lnet/jsoup/parser/TokenQueue;</span>
+<span class="">	invoke-direct {v2, v1}, Lnet/jsoup/parser/TokenQueue;-><init>(Ljava/lang/String;)V</span>
+<span class="">	const-string v1, "="</span>
+<span class="">	invoke-virtual {v2, v1}, Lnet/jsoup/parser/TokenQueue;->chompTo(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/String;->trim()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	const-string v3, ";"</span>
+<span class="">	invoke-virtual {v2, v3}, Lnet/jsoup/parser/TokenQueue;->consumeTo(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v2}, Ljava/lang/String;->trim()Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	if-nez v2, :cond_4</span>
+<span class="">	const-string v2, ""</span>
+<span class="">	:cond_4</span>
+<span class="">	if-eqz v1, :cond_2</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v3</span>
+<span class="">	if-lez v3, :cond_2</span>
+<span class="">	invoke-virtual {p0, v1, v2}, Lnet/jsoup/helper/HttpConnection$Response;->cookie(Ljava/lang/String;Ljava/lang/String;)Lnet/jsoup/Connection$Base;</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_5</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->isEmpty()Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-nez v2, :cond_0</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-interface {v0, v2}, Ljava/util/List;->get(I)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/lang/String;</span>
+<span class="">	invoke-virtual {p0, v1, v0}, Lnet/jsoup/helper/HttpConnection$Response;->header(Ljava/lang/String;Ljava/lang/String;)Lnet/jsoup/Connection$Base;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_6</span>
+.end method
+
+.method public statusCode()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->statusCode:I</span>
+.end method
+
+.method public statusMessage()Ljava/lang/String;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lnet/jsoup/helper/HttpConnection$Response;->statusMessage:Ljava/lang/String;</span>
+.end method
+
+.method public bridge synthetic url()Ljava/net/URL;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lnet/jsoup/helper/HttpConnection$Base;->url()Ljava/net/URL;</span>
+<span class="">	move-result-object v0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

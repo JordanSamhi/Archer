@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.ads.mediation</a></li>
+        <li><i class="ico ico-class"></i> AbstractAdViewAdapter.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public abstract Lcom/google/ads/mediation/AbstractAdViewAdapter;
+.super Ljava/lang/Object;
+.implements Lcom/google/android/gms/ads/mediation/MediationBannerAdapter;
+.implements Lcom/google/android/gms/ads/mediation/MediationNativeAdapter;
+.implements Lcom/google/android/gms/ads/mediation/OnImmersiveModeUpdatedListener;
+.implements Lcom/google/android/gms/ads/mediation/zza;
+.implements Lcom/google/android/gms/ads/reward/mediation/MediationRewardedVideoAdAdapter;
+.implements Lcom/google/android/gms/internal/ads/zzatm;
+
+.annotation runtime Lcom/google/android/gms/internal/ads/zzadh;
+.end annotation
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Lcom/google/ads/mediation/AbstractAdViewAdapter$zzb;,
+Lcom/google/ads/mediation/AbstractAdViewAdapter$zzc;,
+Lcom/google/ads/mediation/AbstractAdViewAdapter$zza;,
+Lcom/google/ads/mediation/AbstractAdViewAdapter$zzf;,
+Lcom/google/ads/mediation/AbstractAdViewAdapter$zze;,
+Lcom/google/ads/mediation/AbstractAdViewAdapter$zzd;
+}
+.end annotation
+
+.field public static final AD_UNIT_ID_PARAMETER:Ljava/lang/String; = "pubid"
+.field private zzgw:Lcom/google/android/gms/ads/AdView;
+.field private zzgx:Lcom/google/android/gms/ads/InterstitialAd;
+.field private zzgy:Lcom/google/android/gms/ads/AdLoader;
+.field private zzgz:Landroid/content/Context;
+.field private zzha:Lcom/google/android/gms/ads/InterstitialAd;
+.field private zzhb:Lcom/google/android/gms/ads/reward/mediation/MediationRewardedVideoAdListener;
+.field private final zzhc:Lcom/google/android/gms/ads/reward/RewardedVideoAdListener;
+.annotation build Lcom/google/android/gms/common/util/VisibleForTesting;
+.end annotation
+.end field
+
+
+.method public constructor <init>()V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	new-instance v0, Lcom/google/ads/mediation/zza;</span>
+<span class="">	invoke-direct {v0, p0}, Lcom/google/ads/mediation/zza;-><init>(Lcom/google/ads/mediation/AbstractAdViewAdapter;)V</span>
+<span class="">	iput-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzhc:Lcom/google/android/gms/ads/reward/RewardedVideoAdListener;</span>
+.end method
+
+.method private final zza(Landroid/content/Context;Lcom/google/android/gms/ads/mediation/MediationAdRequest;Landroid/os/Bundle;Landroid/os/Bundle;)Lcom/google/android/gms/ads/AdRequest;
+<span class="">	.locals 3</span>
+
+<span class="">	new-instance v0, Lcom/google/android/gms/ads/AdRequest$Builder;</span>
+<span class="">	invoke-direct {v0}, Lcom/google/android/gms/ads/AdRequest$Builder;-><init>()V</span>
+<span class="">	invoke-interface {p2}, Lcom/google/android/gms/ads/mediation/MediationAdRequest;->getBirthday()Ljava/util/Date;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/gms/ads/AdRequest$Builder;->setBirthday(Ljava/util/Date;)Lcom/google/android/gms/ads/AdRequest$Builder;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {p2}, Lcom/google/android/gms/ads/mediation/MediationAdRequest;->getGender()I</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/gms/ads/AdRequest$Builder;->setGender(I)Lcom/google/android/gms/ads/AdRequest$Builder;</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-interface {p2}, Lcom/google/android/gms/ads/mediation/MediationAdRequest;->getKeywords()Ljava/util/Set;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	if-eqz v1, :cond_2</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Set;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_2</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Ljava/lang/String;</span>
+<span class="">	invoke-virtual {v0, v2}, Lcom/google/android/gms/ads/AdRequest$Builder;->addKeyword(Ljava/lang/String;)Lcom/google/android/gms/ads/AdRequest$Builder;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-interface {p2}, Lcom/google/android/gms/ads/mediation/MediationAdRequest;->getLocation()Landroid/location/Location;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	if-eqz v1, :cond_3</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/gms/ads/AdRequest$Builder;->setLocation(Landroid/location/Location;)Lcom/google/android/gms/ads/AdRequest$Builder;</span>
+<span class="">	:cond_3</span>
+<span class="">	invoke-interface {p2}, Lcom/google/android/gms/ads/mediation/MediationAdRequest;->isTesting()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_4</span>
+<span class="">	invoke-static {}, Lcom/google/android/gms/internal/ads/zzkb;->zzif()Lcom/google/android/gms/internal/ads/zzamu;</span>
+<span class="">	invoke-static {p1}, Lcom/google/android/gms/internal/ads/zzamu;->zzbc(Landroid/content/Context;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {v0, p1}, Lcom/google/android/gms/ads/AdRequest$Builder;->addTestDevice(Ljava/lang/String;)Lcom/google/android/gms/ads/AdRequest$Builder;</span>
+<span class="">	:cond_4</span>
+<span class="">	invoke-interface {p2}, Lcom/google/android/gms/ads/mediation/MediationAdRequest;->taggedForChildDirectedTreatment()I</span>
+<span class="">	move-result p1</span>
+<span class="">	const/4 v1, -0x1</span>
+<span class="">	if-eq p1, v1, :cond_6</span>
+<span class="">	invoke-interface {p2}, Lcom/google/android/gms/ads/mediation/MediationAdRequest;->taggedForChildDirectedTreatment()I</span>
+<span class="">	move-result p1</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	if-ne p1, v1, :cond_5</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_5</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	:goto_1</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/gms/ads/AdRequest$Builder;->tagForChildDirectedTreatment(Z)Lcom/google/android/gms/ads/AdRequest$Builder;</span>
+<span class="">	:cond_6</span>
+<span class="">	invoke-interface {p2}, Lcom/google/android/gms/ads/mediation/MediationAdRequest;->isDesignedForFamilies()Z</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-virtual {v0, p1}, Lcom/google/android/gms/ads/AdRequest$Builder;->setIsDesignedForFamilies(Z)Lcom/google/android/gms/ads/AdRequest$Builder;</span>
+<span class="">	invoke-virtual {p0, p3, p4}, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zza(Landroid/os/Bundle;Landroid/os/Bundle;)Landroid/os/Bundle;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-class p2, Lcom/google/ads/mediation/admob/AdMobAdapter;</span>
+<span class="">	invoke-virtual {v0, p2, p1}, Lcom/google/android/gms/ads/AdRequest$Builder;->addNetworkExtrasBundle(Ljava/lang/Class;Landroid/os/Bundle;)Lcom/google/android/gms/ads/AdRequest$Builder;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/gms/ads/AdRequest$Builder;->build()Lcom/google/android/gms/ads/AdRequest;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method static synthetic zza(Lcom/google/ads/mediation/AbstractAdViewAdapter;Lcom/google/android/gms/ads/InterstitialAd;)Lcom/google/android/gms/ads/InterstitialAd;
+<span class="">	.locals 0</span>
+
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	iput-object p1, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzha:Lcom/google/android/gms/ads/InterstitialAd;</span>
+.end method
+
+.method static synthetic zza(Lcom/google/ads/mediation/AbstractAdViewAdapter;)Lcom/google/android/gms/ads/reward/mediation/MediationRewardedVideoAdListener;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzhb:Lcom/google/android/gms/ads/reward/mediation/MediationRewardedVideoAdListener;</span>
+.end method
+
+.method static synthetic zzb(Lcom/google/ads/mediation/AbstractAdViewAdapter;)Lcom/google/android/gms/ads/InterstitialAd;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzha:Lcom/google/android/gms/ads/InterstitialAd;</span>
+.end method
+
+.method public getAdUnitId(Landroid/os/Bundle;)Ljava/lang/String;
+<span class="">	.locals 1</span>
+
+<span class="">	const-string v0, "pubid"</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public getBannerView()Landroid/view/View;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgw:Lcom/google/android/gms/ads/AdView;</span>
+.end method
+
+.method public getInterstitialAdapterInfo()Landroid/os/Bundle;
+<span class="">	.locals 2</span>
+
+<span class="">	new-instance v0, Lcom/google/android/gms/ads/mediation/MediationAdapter$zza;</span>
+<span class="">	invoke-direct {v0}, Lcom/google/android/gms/ads/mediation/MediationAdapter$zza;-><init>()V</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/gms/ads/mediation/MediationAdapter$zza;->zzaj(I)Lcom/google/android/gms/ads/mediation/MediationAdapter$zza;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/gms/ads/mediation/MediationAdapter$zza;->zzvx()Landroid/os/Bundle;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public getVideoController()Lcom/google/android/gms/internal/ads/zzlo;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgw:Lcom/google/android/gms/ads/AdView;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgw:Lcom/google/android/gms/ads/AdView;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/gms/ads/AdView;->getVideoController()Lcom/google/android/gms/ads/VideoController;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/gms/ads/VideoController;->zzbc()Lcom/google/android/gms/internal/ads/zzlo;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public initialize(Landroid/content/Context;Lcom/google/android/gms/ads/mediation/MediationAdRequest;Ljava/lang/String;Lcom/google/android/gms/ads/reward/mediation/MediationRewardedVideoAdListener;Landroid/os/Bundle;Landroid/os/Bundle;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-virtual {p1}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iput-object p1, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgz:Landroid/content/Context;</span>
+<span class="">	iput-object p4, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzhb:Lcom/google/android/gms/ads/reward/mediation/MediationRewardedVideoAdListener;</span>
+<span class="">	iget-object p1, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzhb:Lcom/google/android/gms/ads/reward/mediation/MediationRewardedVideoAdListener;</span>
+<span class="">	invoke-interface {p1, p0}, Lcom/google/android/gms/ads/reward/mediation/MediationRewardedVideoAdListener;->onInitializationSucceeded(Lcom/google/android/gms/ads/reward/mediation/MediationRewardedVideoAdAdapter;)V</span>
+.end method
+
+.method public isInitialized()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzhb:Lcom/google/android/gms/ads/reward/mediation/MediationRewardedVideoAdListener;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public loadAd(Lcom/google/android/gms/ads/mediation/MediationAdRequest;Landroid/os/Bundle;Landroid/os/Bundle;)V
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgz:Landroid/content/Context;</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzhb:Lcom/google/android/gms/ads/reward/mediation/MediationRewardedVideoAdListener;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	new-instance v0, Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	iget-object v1, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgz:Landroid/content/Context;</span>
+<span class="">	invoke-direct {v0, v1}, Lcom/google/android/gms/ads/InterstitialAd;-><init>(Landroid/content/Context;)V</span>
+<span class="">	iput-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzha:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzha:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/gms/ads/InterstitialAd;->zza(Z)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzha:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	invoke-virtual {p0, p2}, Lcom/google/ads/mediation/AbstractAdViewAdapter;->getAdUnitId(Landroid/os/Bundle;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/gms/ads/InterstitialAd;->setAdUnitId(Ljava/lang/String;)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzha:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	iget-object v1, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzhc:Lcom/google/android/gms/ads/reward/RewardedVideoAdListener;</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/gms/ads/InterstitialAd;->setRewardedVideoAdListener(Lcom/google/android/gms/ads/reward/RewardedVideoAdListener;)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzha:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	new-instance v1, Lcom/google/ads/mediation/zzb;</span>
+<span class="">	invoke-direct {v1, p0}, Lcom/google/ads/mediation/zzb;-><init>(Lcom/google/ads/mediation/AbstractAdViewAdapter;)V</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/gms/ads/InterstitialAd;->zza(Lcom/google/android/gms/ads/reward/zza;)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzha:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	iget-object v1, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgz:Landroid/content/Context;</span>
+<span class="">	invoke-direct {p0, v1, p1, p3, p2}, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zza(Landroid/content/Context;Lcom/google/android/gms/ads/mediation/MediationAdRequest;Landroid/os/Bundle;Landroid/os/Bundle;)Lcom/google/android/gms/ads/AdRequest;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {v0, p1}, Lcom/google/android/gms/ads/InterstitialAd;->loadAd(Lcom/google/android/gms/ads/AdRequest;)V</span>
+<span class="">	const-string p1, "AdMobAdapter.loadAd called before initialize."</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-static {p1}, Lcom/google/android/gms/internal/ads/zzane;->e(Ljava/lang/String;)V</span>
+.end method
+
+.method public onDestroy()V
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgw:Lcom/google/android/gms/ads/AdView;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgw:Lcom/google/android/gms/ads/AdView;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/gms/ads/AdView;->destroy()V</span>
+<span class="">	iput-object v1, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgw:Lcom/google/android/gms/ads/AdView;</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgx:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iput-object v1, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgx:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgy:Lcom/google/android/gms/ads/AdLoader;</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iput-object v1, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgy:Lcom/google/android/gms/ads/AdLoader;</span>
+<span class="">	:cond_2</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzha:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	iput-object v1, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzha:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method public onImmersiveModeUpdated(Z)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgx:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgx:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	invoke-virtual {v0, p1}, Lcom/google/android/gms/ads/InterstitialAd;->setImmersiveMode(Z)V</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzha:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzha:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	invoke-virtual {v0, p1}, Lcom/google/android/gms/ads/InterstitialAd;->setImmersiveMode(Z)V</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public onPause()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgw:Lcom/google/android/gms/ads/AdView;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgw:Lcom/google/android/gms/ads/AdView;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/gms/ads/AdView;->pause()V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public onResume()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgw:Lcom/google/android/gms/ads/AdView;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgw:Lcom/google/android/gms/ads/AdView;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/gms/ads/AdView;->resume()V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public requestBannerAd(Landroid/content/Context;Lcom/google/android/gms/ads/mediation/MediationBannerListener;Landroid/os/Bundle;Lcom/google/android/gms/ads/AdSize;Lcom/google/android/gms/ads/mediation/MediationAdRequest;Landroid/os/Bundle;)V
+<span class="">	.locals 3</span>
+
+<span class="">	new-instance v0, Lcom/google/android/gms/ads/AdView;</span>
+<span class="">	invoke-direct {v0, p1}, Lcom/google/android/gms/ads/AdView;-><init>(Landroid/content/Context;)V</span>
+<span class="">	iput-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgw:Lcom/google/android/gms/ads/AdView;</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgw:Lcom/google/android/gms/ads/AdView;</span>
+<span class="">	new-instance v1, Lcom/google/android/gms/ads/AdSize;</span>
+<span class="">	invoke-virtual {p4}, Lcom/google/android/gms/ads/AdSize;->getWidth()I</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-virtual {p4}, Lcom/google/android/gms/ads/AdSize;->getHeight()I</span>
+<span class="">	move-result p4</span>
+<span class="">	invoke-direct {v1, v2, p4}, Lcom/google/android/gms/ads/AdSize;-><init>(II)V</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/gms/ads/AdView;->setAdSize(Lcom/google/android/gms/ads/AdSize;)V</span>
+<span class="">	iget-object p4, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgw:Lcom/google/android/gms/ads/AdView;</span>
+<span class="">	invoke-virtual {p0, p3}, Lcom/google/ads/mediation/AbstractAdViewAdapter;->getAdUnitId(Landroid/os/Bundle;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p4, v0}, Lcom/google/android/gms/ads/AdView;->setAdUnitId(Ljava/lang/String;)V</span>
+<span class="">	iget-object p4, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgw:Lcom/google/android/gms/ads/AdView;</span>
+<span class="">	new-instance v0, Lcom/google/ads/mediation/AbstractAdViewAdapter$zzd;</span>
+<span class="">	invoke-direct {v0, p0, p2}, Lcom/google/ads/mediation/AbstractAdViewAdapter$zzd;-><init>(Lcom/google/ads/mediation/AbstractAdViewAdapter;Lcom/google/android/gms/ads/mediation/MediationBannerListener;)V</span>
+<span class="">	invoke-virtual {p4, v0}, Lcom/google/android/gms/ads/AdView;->setAdListener(Lcom/google/android/gms/ads/AdListener;)V</span>
+<span class="">	iget-object p2, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgw:Lcom/google/android/gms/ads/AdView;</span>
+<span class="">	invoke-direct {p0, p1, p5, p6, p3}, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zza(Landroid/content/Context;Lcom/google/android/gms/ads/mediation/MediationAdRequest;Landroid/os/Bundle;Landroid/os/Bundle;)Lcom/google/android/gms/ads/AdRequest;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p2, p1}, Lcom/google/android/gms/ads/AdView;->loadAd(Lcom/google/android/gms/ads/AdRequest;)V</span>
+.end method
+
+.method public requestInterstitialAd(Landroid/content/Context;Lcom/google/android/gms/ads/mediation/MediationInterstitialListener;Landroid/os/Bundle;Lcom/google/android/gms/ads/mediation/MediationAdRequest;Landroid/os/Bundle;)V
+<span class="">	.locals 2</span>
+
+<span class="">	new-instance v0, Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	invoke-direct {v0, p1}, Lcom/google/android/gms/ads/InterstitialAd;-><init>(Landroid/content/Context;)V</span>
+<span class="">	iput-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgx:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgx:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	invoke-virtual {p0, p3}, Lcom/google/ads/mediation/AbstractAdViewAdapter;->getAdUnitId(Landroid/os/Bundle;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/gms/ads/InterstitialAd;->setAdUnitId(Ljava/lang/String;)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgx:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	new-instance v1, Lcom/google/ads/mediation/AbstractAdViewAdapter$zze;</span>
+<span class="">	invoke-direct {v1, p0, p2}, Lcom/google/ads/mediation/AbstractAdViewAdapter$zze;-><init>(Lcom/google/ads/mediation/AbstractAdViewAdapter;Lcom/google/android/gms/ads/mediation/MediationInterstitialListener;)V</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/gms/ads/InterstitialAd;->setAdListener(Lcom/google/android/gms/ads/AdListener;)V</span>
+<span class="">	iget-object p2, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgx:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	invoke-direct {p0, p1, p4, p5, p3}, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zza(Landroid/content/Context;Lcom/google/android/gms/ads/mediation/MediationAdRequest;Landroid/os/Bundle;Landroid/os/Bundle;)Lcom/google/android/gms/ads/AdRequest;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p2, p1}, Lcom/google/android/gms/ads/InterstitialAd;->loadAd(Lcom/google/android/gms/ads/AdRequest;)V</span>
+.end method
+
+.method public requestNativeAd(Landroid/content/Context;Lcom/google/android/gms/ads/mediation/MediationNativeListener;Landroid/os/Bundle;Lcom/google/android/gms/ads/mediation/NativeMediationAdRequest;Landroid/os/Bundle;)V
+<span class="">	.locals 4</span>
+
+<span class="">	new-instance v0, Lcom/google/ads/mediation/AbstractAdViewAdapter$zzf;</span>
+<span class="">	invoke-direct {v0, p0, p2}, Lcom/google/ads/mediation/AbstractAdViewAdapter$zzf;-><init>(Lcom/google/ads/mediation/AbstractAdViewAdapter;Lcom/google/android/gms/ads/mediation/MediationNativeListener;)V</span>
+<span class="">	const-string p2, "pubid"</span>
+<span class="">	invoke-virtual {p3, p2}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	new-instance v1, Lcom/google/android/gms/ads/AdLoader$Builder;</span>
+<span class="">	invoke-direct {v1, p1, p2}, Lcom/google/android/gms/ads/AdLoader$Builder;-><init>(Landroid/content/Context;Ljava/lang/String;)V</span>
+<span class="">	invoke-virtual {v1, v0}, Lcom/google/android/gms/ads/AdLoader$Builder;->withAdListener(Lcom/google/android/gms/ads/AdListener;)Lcom/google/android/gms/ads/AdLoader$Builder;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-interface {p4}, Lcom/google/android/gms/ads/mediation/NativeMediationAdRequest;->getNativeAdOptions()Lcom/google/android/gms/ads/formats/NativeAdOptions;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	invoke-virtual {p2, v1}, Lcom/google/android/gms/ads/AdLoader$Builder;->withNativeAdOptions(Lcom/google/android/gms/ads/formats/NativeAdOptions;)Lcom/google/android/gms/ads/AdLoader$Builder;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {p4}, Lcom/google/android/gms/ads/mediation/NativeMediationAdRequest;->isUnifiedNativeAdRequested()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	invoke-virtual {p2, v0}, Lcom/google/android/gms/ads/AdLoader$Builder;->forUnifiedNativeAd(Lcom/google/android/gms/ads/formats/UnifiedNativeAd$OnUnifiedNativeAdLoadedListener;)Lcom/google/android/gms/ads/AdLoader$Builder;</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-interface {p4}, Lcom/google/android/gms/ads/mediation/NativeMediationAdRequest;->isAppInstallAdRequested()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_2</span>
+<span class="">	invoke-virtual {p2, v0}, Lcom/google/android/gms/ads/AdLoader$Builder;->forAppInstallAd(Lcom/google/android/gms/ads/formats/NativeAppInstallAd$OnAppInstallAdLoadedListener;)Lcom/google/android/gms/ads/AdLoader$Builder;</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-interface {p4}, Lcom/google/android/gms/ads/mediation/NativeMediationAdRequest;->isContentAdRequested()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_3</span>
+<span class="">	invoke-virtual {p2, v0}, Lcom/google/android/gms/ads/AdLoader$Builder;->forContentAd(Lcom/google/android/gms/ads/formats/NativeContentAd$OnContentAdLoadedListener;)Lcom/google/android/gms/ads/AdLoader$Builder;</span>
+<span class="">	:cond_3</span>
+<span class="">	invoke-interface {p4}, Lcom/google/android/gms/ads/mediation/NativeMediationAdRequest;->zzna()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_5</span>
+<span class="">	invoke-interface {p4}, Lcom/google/android/gms/ads/mediation/NativeMediationAdRequest;->zznb()Ljava/util/Map;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Map;->keySet()Ljava/util/Set;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Set;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_5</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Ljava/lang/String;</span>
+<span class="">	invoke-interface {p4}, Lcom/google/android/gms/ads/mediation/NativeMediationAdRequest;->zznb()Ljava/util/Map;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-interface {v3, v2}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	check-cast v3, Ljava/lang/Boolean;</span>
+<span class="">	invoke-virtual {v3}, Ljava/lang/Boolean;->booleanValue()Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_4</span>
+<span class="">	move-object v3, v0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_4</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	:goto_1</span>
+<span class="">	invoke-virtual {p2, v2, v0, v3}, Lcom/google/android/gms/ads/AdLoader$Builder;->forCustomTemplateAd(Ljava/lang/String;Lcom/google/android/gms/ads/formats/NativeCustomTemplateAd$OnCustomTemplateAdLoadedListener;Lcom/google/android/gms/ads/formats/NativeCustomTemplateAd$OnCustomClickListener;)Lcom/google/android/gms/ads/AdLoader$Builder;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_5</span>
+<span class="">	invoke-virtual {p2}, Lcom/google/android/gms/ads/AdLoader$Builder;->build()Lcom/google/android/gms/ads/AdLoader;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	iput-object p2, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgy:Lcom/google/android/gms/ads/AdLoader;</span>
+<span class="">	iget-object p2, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgy:Lcom/google/android/gms/ads/AdLoader;</span>
+<span class="">	invoke-direct {p0, p1, p4, p5, p3}, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zza(Landroid/content/Context;Lcom/google/android/gms/ads/mediation/MediationAdRequest;Landroid/os/Bundle;Landroid/os/Bundle;)Lcom/google/android/gms/ads/AdRequest;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p2, p1}, Lcom/google/android/gms/ads/AdLoader;->loadAd(Lcom/google/android/gms/ads/AdRequest;)V</span>
+.end method
+
+.method public showInterstitial()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzgx:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/gms/ads/InterstitialAd;->show()V</span>
+.end method
+
+.method public showVideo()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/ads/mediation/AbstractAdViewAdapter;->zzha:Lcom/google/android/gms/ads/InterstitialAd;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/gms/ads/InterstitialAd;->show()V</span>
+.end method
+
+.method protected abstract zza(Landroid/os/Bundle;Landroid/os/Bundle;)Landroid/os/Bundle;
+<span class="">	</span>
+
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../.resources/report.js"></script>
+</body>
+</html>

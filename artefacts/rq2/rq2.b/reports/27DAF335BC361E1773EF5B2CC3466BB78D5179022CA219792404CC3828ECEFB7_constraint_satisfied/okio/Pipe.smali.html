@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">okio</a></li>
+        <li><i class="ico ico-class"></i> Pipe.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public final Lokio/Pipe;
+.super Ljava/lang/Object;
+.source "Pipe.java"
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Lokio/Pipe$PipeSource;,
+Lokio/Pipe$PipeSink;
+}
+.end annotation
+
+.field final buffer:Lokio/Buffer;
+.field final maxBufferSize:J
+.field private final sink:Lokio/Sink;
+.field  sinkClosed:Z
+.field private final source:Lokio/Source;
+.field  sourceClosed:Z
+
+
+.method public constructor <init>(J)V
+<span class="">	.locals 3</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	new-instance v0, Lokio/Buffer;</span>
+<span class="">	invoke-direct {v0}, Lokio/Buffer;-><init>()V</span>
+<span class="">	iput-object v0, p0, Lokio/Pipe;->buffer:Lokio/Buffer;</span>
+<span class="">	new-instance v0, Lokio/Pipe$PipeSink;</span>
+<span class="">	invoke-direct {v0, p0}, Lokio/Pipe$PipeSink;-><init>(Lokio/Pipe;)V</span>
+<span class="">	iput-object v0, p0, Lokio/Pipe;->sink:Lokio/Sink;</span>
+<span class="">	new-instance v0, Lokio/Pipe$PipeSource;</span>
+<span class="">	invoke-direct {v0, p0}, Lokio/Pipe$PipeSource;-><init>(Lokio/Pipe;)V</span>
+<span class="">	iput-object v0, p0, Lokio/Pipe;->source:Lokio/Source;</span>
+<span class="">	const-wide/16 v0, 0x1</span>
+<span class="">	cmp-long v2, p1, v0</span>
+<span class="">	if-gez v2, :cond_0</span>
+<span class="">	new-instance v0, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v2, "maxBufferSize < 1: "</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v1, p1, p2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {v0, p1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw v0</span>
+<span class="">	:cond_0</span>
+<span class="">	iput-wide p1, p0, Lokio/Pipe;->maxBufferSize:J</span>
+.end method
+
+.method public sink()Lokio/Sink;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lokio/Pipe;->sink:Lokio/Sink;</span>
+.end method
+
+.method public source()Lokio/Source;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lokio/Pipe;->source:Lokio/Source;</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../.resources/report.js"></script>
+</body>
+</html>

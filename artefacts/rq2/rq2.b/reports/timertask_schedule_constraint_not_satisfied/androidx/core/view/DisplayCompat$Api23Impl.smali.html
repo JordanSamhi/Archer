@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">lu.uni.trux.timertask_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.core.view</a></li>
+        <li><i class="ico ico-class"></i> DisplayCompat$Api23Impl.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class  Landroidx/core/view/DisplayCompat$Api23Impl;
+.super Ljava/lang/Object;
+.source "DisplayCompat.java"
+
+.annotation system Ldalvik/annotation/EnclosingClass;
+value = Landroidx/core/view/DisplayCompat;
+.end annotation
+.annotation system Ldalvik/annotation/InnerClass;
+accessFlags = 0x8
+name = "Api23Impl"
+.end annotation
+
+
+
+.method private constructor <init>()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+.end method
+
+.method static getMode(Landroid/content/Context;Landroid/view/Display;)Landroidx/core/view/DisplayCompat$ModeCompat;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p1}, Landroid/view/Display;->getMode()Landroid/view/Display$Mode;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {p0, p1}, Landroidx/core/view/DisplayCompat;->getCurrentDisplaySizeFromWorkarounds(Landroid/content/Context;Landroid/view/Display;)Landroid/graphics/Point;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	if-eqz p0, :cond_1</span>
+<span class="">	invoke-static {v0, p0}, Landroidx/core/view/DisplayCompat$Api23Impl;->physicalSizeEquals(Landroid/view/Display$Mode;Landroid/graphics/Point;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	new-instance p1, Landroidx/core/view/DisplayCompat$ModeCompat;</span>
+<span class="">	invoke-direct {p1, v0, p0}, Landroidx/core/view/DisplayCompat$ModeCompat;-><init>(Landroid/view/Display$Mode;Landroid/graphics/Point;)V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+<span class="">	new-instance p1, Landroidx/core/view/DisplayCompat$ModeCompat;</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	invoke-direct {p1, v0, p0}, Landroidx/core/view/DisplayCompat$ModeCompat;-><init>(Landroid/view/Display$Mode;Z)V</span>
+<span class="">	:goto_1</span>
+.end method
+
+.method public static getSupportedModes(Landroid/content/Context;Landroid/view/Display;)[Landroidx/core/view/DisplayCompat$ModeCompat;
+<span class="">	.locals 6</span>
+
+<span class="">	invoke-virtual {p1}, Landroid/view/Display;->getSupportedModes()[Landroid/view/Display$Mode;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	array-length v1, v0</span>
+<span class="">	new-array v1, v1, [Landroidx/core/view/DisplayCompat$ModeCompat;</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/Display;->getMode()Landroid/view/Display$Mode;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-static {p0, p1}, Landroidx/core/view/DisplayCompat;->getCurrentDisplaySizeFromWorkarounds(Landroid/content/Context;Landroid/view/Display;)Landroid/graphics/Point;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	if-eqz p0, :cond_2</span>
+<span class="">	invoke-static {v2, p0}, Landroidx/core/view/DisplayCompat$Api23Impl;->physicalSizeEquals(Landroid/view/Display$Mode;Landroid/graphics/Point;)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_0</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_0</span>
+<span class="">	move v3, p1</span>
+<span class="">	:goto_0</span>
+<span class="">	array-length v4, v0</span>
+<span class="">	if-ge v3, v4, :cond_3</span>
+<span class="">	aget-object v4, v0, v3</span>
+<span class="">	invoke-static {v4, v2}, Landroidx/core/view/DisplayCompat$Api23Impl;->physicalSizeEquals(Landroid/view/Display$Mode;Landroid/view/Display$Mode;)Z</span>
+<span class="">	move-result v4</span>
+<span class="">	if-eqz v4, :cond_1</span>
+<span class="">	new-instance v4, Landroidx/core/view/DisplayCompat$ModeCompat;</span>
+<span class="">	aget-object v5, v0, v3</span>
+<span class="">	invoke-direct {v4, v5, p0}, Landroidx/core/view/DisplayCompat$ModeCompat;-><init>(Landroid/view/Display$Mode;Landroid/graphics/Point;)V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	new-instance v4, Landroidx/core/view/DisplayCompat$ModeCompat;</span>
+<span class="">	aget-object v5, v0, v3</span>
+<span class="">	invoke-direct {v4, v5, p1}, Landroidx/core/view/DisplayCompat$ModeCompat;-><init>(Landroid/view/Display$Mode;Z)V</span>
+<span class="">	:goto_1</span>
+<span class="">	aput-object v4, v1, v3</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:goto_2</span>
+<span class="">	:cond_2</span>
+<span class="">	array-length p0, v0</span>
+<span class="">	if-ge p1, p0, :cond_3</span>
+<span class="">	aget-object p0, v0, p1</span>
+<span class="">	invoke-static {p0, v2}, Landroidx/core/view/DisplayCompat$Api23Impl;->physicalSizeEquals(Landroid/view/Display$Mode;Landroid/view/Display$Mode;)Z</span>
+<span class="">	move-result p0</span>
+<span class="">	new-instance v3, Landroidx/core/view/DisplayCompat$ModeCompat;</span>
+<span class="">	aget-object v4, v0, p1</span>
+<span class="">	invoke-direct {v3, v4, p0}, Landroidx/core/view/DisplayCompat$ModeCompat;-><init>(Landroid/view/Display$Mode;Z)V</span>
+<span class="">	aput-object v3, v1, p1</span>
+<span class="">	add-int/lit8 p1, p1, 0x1</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method static isCurrentModeTheLargestMode(Landroid/view/Display;)Z
+<span class="">	.locals 5</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/view/Display;->getMode()Landroid/view/Display$Mode;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p0}, Landroid/view/Display;->getSupportedModes()[Landroid/view/Display$Mode;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	move v2, v1</span>
+<span class="">	:goto_0</span>
+<span class="">	array-length v3, p0</span>
+<span class="">	if-ge v2, v3, :cond_2</span>
+<span class="">	invoke-virtual {v0}, Landroid/view/Display$Mode;->getPhysicalHeight()I</span>
+<span class="">	move-result v3</span>
+<span class="">	aget-object v4, p0, v2</span>
+<span class="">	invoke-virtual {v4}, Landroid/view/Display$Mode;->getPhysicalHeight()I</span>
+<span class="">	move-result v4</span>
+<span class="">	if-lt v3, v4, :cond_1</span>
+<span class="">	invoke-virtual {v0}, Landroid/view/Display$Mode;->getPhysicalWidth()I</span>
+<span class="">	move-result v3</span>
+<span class="">	aget-object v4, p0, v2</span>
+<span class="">	invoke-virtual {v4}, Landroid/view/Display$Mode;->getPhysicalWidth()I</span>
+<span class="">	move-result v4</span>
+<span class="">	if-ge v3, v4, :cond_0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_1</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method static physicalSizeEquals(Landroid/view/Display$Mode;Landroid/graphics/Point;)Z
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/view/Display$Mode;->getPhysicalWidth()I</span>
+<span class="">	move-result v0</span>
+<span class="">	iget v1, p1, Landroid/graphics/Point;->x:I</span>
+<span class="">	if-ne v0, v1, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/view/Display$Mode;->getPhysicalHeight()I</span>
+<span class="">	move-result v0</span>
+<span class="">	iget v1, p1, Landroid/graphics/Point;->y:I</span>
+<span class="">	if-eq v0, v1, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/view/Display$Mode;->getPhysicalWidth()I</span>
+<span class="">	move-result v0</span>
+<span class="">	iget v1, p1, Landroid/graphics/Point;->y:I</span>
+<span class="">	if-ne v0, v1, :cond_2</span>
+<span class="">	invoke-virtual {p0}, Landroid/view/Display$Mode;->getPhysicalHeight()I</span>
+<span class="">	move-result p0</span>
+<span class="">	iget p1, p1, Landroid/graphics/Point;->x:I</span>
+<span class="">	if-ne p0, p1, :cond_2</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_2</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method static physicalSizeEquals(Landroid/view/Display$Mode;Landroid/view/Display$Mode;)Z
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/view/Display$Mode;->getPhysicalWidth()I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/Display$Mode;->getPhysicalWidth()I</span>
+<span class="">	move-result v1</span>
+<span class="">	if-ne v0, v1, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/view/Display$Mode;->getPhysicalHeight()I</span>
+<span class="">	move-result p0</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/Display$Mode;->getPhysicalHeight()I</span>
+<span class="">	move-result p1</span>
+<span class="">	if-ne p0, p1, :cond_0</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

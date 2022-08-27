@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">org.wifi.analyzer.network.boost.db</a></li>
+        <li><i class="ico ico-class"></i> DatabaseHandler.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Lorg/wifi/analyzer/network/boost/db/DatabaseHandler;
+.super Landroid/database/sqlite/SQLiteOpenHelper;
+.source "DatabaseHandler.java"
+
+
+.field private static final DATABASE_NAME:Ljava/lang/String; = "DeviceManager"
+.field private static final DATABASE_VERSION:I = 0x2
+.field private static final KEY_ID:Ljava/lang/String; = "id"
+.field private static final KEY_MAC:Ljava/lang/String; = "macid"
+.field private static final KEY_NAME:Ljava/lang/String; = "device_name"
+.field private static final TABLE_NAME:Ljava/lang/String; = "RouterAdminDeviceId"
+
+
+<span class="cov">.method public constructor &lt;init&gt;(Landroid/content/Context;)V</span>
+<span class="">	.locals 3</span>
+
+<span class="cov">	const-string v0, "DeviceManager"</span>
+<span class="cov">	const/4 v1, 0x0</span>
+<span class="cov">	const/4 v2, 0x2</span>
+<span class="cov">	invoke-direct {p0, p1, v0, v1, v2}, Landroid/database/sqlite/SQLiteOpenHelper;-><init>(Landroid/content/Context;Ljava/lang/String;Landroid/database/sqlite/SQLiteDatabase$CursorFactory;I)V</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method public addMACId(Ljava/lang/String;)V
+<span class="">	.locals 3</span>
+
+<span class="">	invoke-virtual {p0}, Lorg/wifi/analyzer/network/boost/db/DatabaseHandler;->getWritableDatabase()Landroid/database/sqlite/SQLiteDatabase;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	new-instance v1, Landroid/content/ContentValues;</span>
+<span class="">	invoke-direct {v1}, Landroid/content/ContentValues;-><init>()V</span>
+<span class="">	const-string v2, "macid"</span>
+<span class="">	invoke-virtual {v1, v2, p1}, Landroid/content/ContentValues;->put(Ljava/lang/String;Ljava/lang/String;)V</span>
+<span class="">	const-string p1, "RouterAdminDeviceId"</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-virtual {v0, p1, v2, v1}, Landroid/database/sqlite/SQLiteDatabase;->insert(Ljava/lang/String;Ljava/lang/String;Landroid/content/ContentValues;)J</span>
+<span class="">	invoke-virtual {v0}, Landroid/database/sqlite/SQLiteDatabase;->close()V</span>
+.end method
+
+.method public checkDevice(Ljava/lang/String;)Z
+<span class="">	.locals 7</span>
+
+<span class="">	invoke-virtual {p0}, Lorg/wifi/analyzer/network/boost/db/DatabaseHandler;->getReadableDatabase()Landroid/database/sqlite/SQLiteDatabase;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	:try_start_0</span>
+<span class="">	const-string v3, "SELECT * FROM RouterAdminDeviceId WHERE device_name=?"</span>
+<span class="">	const/4 v4, 0x1</span>
+<span class="">	new-array v5, v4, [Ljava/lang/String;</span>
+<span class="">	new-instance v6, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {v6, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p1, ""</span>
+<span class="">	invoke-virtual {v6, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	aput-object p1, v5, v1</span>
+<span class="">	invoke-virtual {v0, v3, v5}, Landroid/database/sqlite/SQLiteDatabase;->rawQuery(Ljava/lang/String;[Ljava/lang/String;)Landroid/database/Cursor;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:try_start_1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_1</span>
+<span class="">	invoke-interface {p1}, Landroid/database/Cursor;->getCount()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-lez v0, :cond_0</span>
+<span class="">	invoke-interface {p1}, Landroid/database/Cursor;->moveToFirst()Z</span>
+<span class="">	const-string v0, "macid"</span>
+<span class="">	invoke-interface {p1, v0}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-interface {p1, v0}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_0</span>
+<span class="">	move-exception v0</span>
+<span class="">	:cond_0</span>
+<span class="">	move-object v2, p1</span>
+<span class="">	:catch_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	move-exception v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Exception;->printStackTrace()V</span>
+<span class="">	:catch_1</span>
+<span class="">	invoke-interface {v2}, Landroid/database/Cursor;->close()V</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public checkMacId(Ljava/lang/String;)Z
+<span class="">	.locals 7</span>
+
+<span class="">	invoke-virtual {p0}, Lorg/wifi/analyzer/network/boost/db/DatabaseHandler;->getReadableDatabase()Landroid/database/sqlite/SQLiteDatabase;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	:try_start_0</span>
+<span class="">	const-string v3, "SELECT * FROM RouterAdminDeviceId WHERE macid=?"</span>
+<span class="">	const/4 v4, 0x1</span>
+<span class="">	new-array v5, v4, [Ljava/lang/String;</span>
+<span class="">	new-instance v6, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {v6, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p1, ""</span>
+<span class="">	invoke-virtual {v6, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	aput-object p1, v5, v1</span>
+<span class="">	invoke-virtual {v0, v3, v5}, Landroid/database/sqlite/SQLiteDatabase;->rawQuery(Ljava/lang/String;[Ljava/lang/String;)Landroid/database/Cursor;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:goto_0</span>
+<span class="">	:try_start_1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_1</span>
+<span class="">	invoke-interface {p1}, Landroid/database/Cursor;->moveToNext()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const-string v0, "macid"</span>
+<span class="">	invoke-interface {p1, v0}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-interface {p1, v0}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {p1}, Landroid/database/Cursor;->getCount()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-lez v0, :cond_1</span>
+<span class="">	invoke-interface {p1}, Landroid/database/Cursor;->moveToFirst()Z</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_0</span>
+<span class="">	move-exception v0</span>
+<span class="">	:cond_1</span>
+<span class="">	move-object v2, p1</span>
+<span class="">	:catch_0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	move-exception v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Exception;->printStackTrace()V</span>
+<span class="">	:catch_1</span>
+<span class="">	invoke-interface {v2}, Landroid/database/Cursor;->close()V</span>
+<span class="">	:goto_1</span>
+.end method
+
+.method public deleteMACId(Ljava/lang/String;)V
+<span class="">	.locals 5</span>
+
+<span class="">	invoke-virtual {p0}, Lorg/wifi/analyzer/network/boost/db/DatabaseHandler;->getWritableDatabase()Landroid/database/sqlite/SQLiteDatabase;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v1, "RouterAdminDeviceId"</span>
+<span class="">	const-string v2, "macid = ?"</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	new-array v3, v3, [Ljava/lang/String;</span>
+<span class="">	invoke-static {p1}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const/4 v4, 0x0</span>
+<span class="">	aput-object p1, v3, v4</span>
+<span class="">	invoke-virtual {v0, v1, v2, v3}, Landroid/database/sqlite/SQLiteDatabase;->delete(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)I</span>
+<span class="">	invoke-virtual {v0}, Landroid/database/sqlite/SQLiteDatabase;->close()V</span>
+.end method
+
+.method public deleteTable()V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-virtual {p0}, Lorg/wifi/analyzer/network/boost/db/DatabaseHandler;->getWritableDatabase()Landroid/database/sqlite/SQLiteDatabase;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Landroid/database/sqlite/SQLiteDatabase;->isOpen()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-nez v1, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0}, Lorg/wifi/analyzer/network/boost/db/DatabaseHandler;->getWritableDatabase()Landroid/database/sqlite/SQLiteDatabase;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:cond_1</span>
+<span class="">	const-string v1, "delete from RouterAdminDeviceId"</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/database/sqlite/SQLiteDatabase;->execSQL(Ljava/lang/String;)V</span>
+.end method
+
+.method public onCreate(Landroid/database/sqlite/SQLiteDatabase;)V
+<span class="">	.locals 1</span>
+
+<span class="">	const-string v0, "CREATE TABLE IF NOT EXISTS RouterAdminDeviceId(id INTEGER PRIMARY KEY AUTOINCREMENT,macid TEXT,device_name TEXT)"</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/database/sqlite/SQLiteDatabase;->execSQL(Ljava/lang/String;)V</span>
+.end method
+
+.method public onUpgrade(Landroid/database/sqlite/SQLiteDatabase;II)V
+<span class="">	.locals 0</span>
+
+<span class="">	if-le p3, p2, :cond_0</span>
+<span class="">	const-string p2, "DROP TABLE IF EXISTS RouterAdminDeviceId"</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/database/sqlite/SQLiteDatabase;->execSQL(Ljava/lang/String;)V</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0, p1}, Lorg/wifi/analyzer/network/boost/db/DatabaseHandler;->onCreate(Landroid/database/sqlite/SQLiteDatabase;)V</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../../.resources/report.js"></script>
+</body>
+</html>

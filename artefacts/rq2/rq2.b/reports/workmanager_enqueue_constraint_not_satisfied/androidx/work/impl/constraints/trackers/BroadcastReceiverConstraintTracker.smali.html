@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../index.html">lu.uni.trux.workmanager_enqueue</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.work.impl.constraints.trackers</a></li>
+        <li><i class="ico ico-class"></i> BroadcastReceiverConstraintTracker.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public abstract Landroidx/work/impl/constraints/trackers/BroadcastReceiverConstraintTracker;
+.super Landroidx/work/impl/constraints/trackers/ConstraintTracker;
+.source "BroadcastReceiverConstraintTracker.java"
+
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"<T:",
+"Ljava/lang/Object;",
+">",
+"Landroidx/work/impl/constraints/trackers/ConstraintTracker<",
+"TT;>;"
+}
+.end annotation
+
+.field private static final TAG:Ljava/lang/String;
+.field private final mBroadcastReceiver:Landroid/content/BroadcastReceiver;
+
+
+<span class="cov">.method static constructor &lt;clinit&gt;()V</span>
+<span class="">	.locals 1</span>
+
+<span class="cov">	const-string v0, "BrdcstRcvrCnstrntTrckr"</span>
+<span class="exec">	invoke-static {v0}, Landroidx/work/Logger;->tagWithPrefix(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	sput-object v0, Landroidx/work/impl/constraints/trackers/BroadcastReceiverConstraintTracker;->TAG:Ljava/lang/String;</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method public constructor &lt;init&gt;(Landroid/content/Context;Landroidx/work/impl/utils/taskexecutor/TaskExecutor;)V</span>
+<span class="">	.locals 0</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"context",</span>
+<span class="">	"taskExecutor"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="cov">	invoke-direct {p0, p1, p2}, Landroidx/work/impl/constraints/trackers/ConstraintTracker;-><init>(Landroid/content/Context;Landroidx/work/impl/utils/taskexecutor/TaskExecutor;)V</span>
+<span class="cov">	new-instance p1, Landroidx/work/impl/constraints/trackers/BroadcastReceiverConstraintTracker$1;</span>
+<span class="cov">	invoke-direct {p1, p0}, Landroidx/work/impl/constraints/trackers/BroadcastReceiverConstraintTracker$1;-><init>(Landroidx/work/impl/constraints/trackers/BroadcastReceiverConstraintTracker;)V</span>
+<span class="cov">	iput-object p1, p0, Landroidx/work/impl/constraints/trackers/BroadcastReceiverConstraintTracker;->mBroadcastReceiver:Landroid/content/BroadcastReceiver;</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method public abstract getIntentFilter()Landroid/content/IntentFilter;
+<span class="">	</span>
+
+.end method
+
+.method public abstract onBroadcastReceive(Landroid/content/Context;Landroid/content/Intent;)V
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"context",</span>
+<span class="">	"intent"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+<span class="cov">.method public startTracking()V</span>
+<span class="">	.locals 5</span>
+
+<span class="exec">	invoke-static {}, Landroidx/work/Logger;->get()Landroidx/work/Logger;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	sget-object v1, Landroidx/work/impl/constraints/trackers/BroadcastReceiverConstraintTracker;->TAG:Ljava/lang/String;</span>
+<span class="cov">	const/4 v2, 0x1</span>
+<span class="cov">	new-array v2, v2, [Ljava/lang/Object;</span>
+<span class="exec">	invoke-virtual {p0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;</span>
+<span class="cov">	move-result-object v3</span>
+<span class="exec">	invoke-virtual {v3}, Ljava/lang/Class;->getSimpleName()Ljava/lang/String;</span>
+<span class="cov">	move-result-object v3</span>
+<span class="cov">	const/4 v4, 0x0</span>
+<span class="cov">	aput-object v3, v2, v4</span>
+<span class="cov">	const-string v3, "%s: registering receiver"</span>
+<span class="exec">	invoke-static {v3, v2}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="cov">	move-result-object v2</span>
+<span class="cov">	new-array v3, v4, [Ljava/lang/Throwable;</span>
+<span class="cov">	invoke-virtual {v0, v1, v2, v3}, Landroidx/work/Logger;->debug(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Throwable;)V</span>
+<span class="cov">	iget-object v0, p0, Landroidx/work/impl/constraints/trackers/BroadcastReceiverConstraintTracker;->mAppContext:Landroid/content/Context;</span>
+<span class="cov">	iget-object v1, p0, Landroidx/work/impl/constraints/trackers/BroadcastReceiverConstraintTracker;->mBroadcastReceiver:Landroid/content/BroadcastReceiver;</span>
+<span class="exec">	invoke-virtual {p0}, Landroidx/work/impl/constraints/trackers/BroadcastReceiverConstraintTracker;->getIntentFilter()Landroid/content/IntentFilter;</span>
+<span class="cov">	move-result-object v2</span>
+<span class="cov">	invoke-virtual {v0, v1, v2}, Landroid/content/Context;->registerReceiver(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;)Landroid/content/Intent;</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method public stopTracking()V
+<span class="">	.locals 5</span>
+
+<span class="">	invoke-static {}, Landroidx/work/Logger;->get()Landroidx/work/Logger;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sget-object v1, Landroidx/work/impl/constraints/trackers/BroadcastReceiverConstraintTracker;->TAG:Ljava/lang/String;</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	new-array v2, v2, [Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {v3}, Ljava/lang/Class;->getSimpleName()Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	const/4 v4, 0x0</span>
+<span class="">	aput-object v3, v2, v4</span>
+<span class="">	const-string v3, "%s: unregistering receiver"</span>
+<span class="">	invoke-static {v3, v2}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	new-array v3, v4, [Ljava/lang/Throwable;</span>
+<span class="">	invoke-virtual {v0, v1, v2, v3}, Landroidx/work/Logger;->debug(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Throwable;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/work/impl/constraints/trackers/BroadcastReceiverConstraintTracker;->mAppContext:Landroid/content/Context;</span>
+<span class="">	iget-object v1, p0, Landroidx/work/impl/constraints/trackers/BroadcastReceiverConstraintTracker;->mBroadcastReceiver:Landroid/content/BroadcastReceiver;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/content/Context;->unregisterReceiver(Landroid/content/BroadcastReceiver;)V</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../.resources/report.js"></script>
+</body>
+</html>

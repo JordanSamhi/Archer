@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../index.html">lu.uni.trux.scheduledthreadpoolexecutor_scheduledatfixedrate</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.constraintlayout.core.widgets</a></li>
+        <li><i class="ico ico-class"></i> ChainHead.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Landroidx/constraintlayout/core/widgets/ChainHead;
+.super Ljava/lang/Object;
+.source "ChainHead.java"
+
+
+.field private mDefined:Z
+.field protected mFirst:Landroidx/constraintlayout/core/widgets/ConstraintWidget;
+.field protected mFirstMatchConstraintWidget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;
+.field protected mFirstVisibleWidget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;
+.field protected mHasComplexMatchWeights:Z
+.field protected mHasDefinedWeights:Z
+.field protected mHasRatio:Z
+.field protected mHasUndefinedWeights:Z
+.field protected mHead:Landroidx/constraintlayout/core/widgets/ConstraintWidget;
+.field private mIsRtl:Z
+.field protected mLast:Landroidx/constraintlayout/core/widgets/ConstraintWidget;
+.field protected mLastMatchConstraintWidget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;
+.field protected mLastVisibleWidget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;
+.field  mOptimizable:Z
+.field private mOrientation:I
+.field  mTotalMargins:I
+.field  mTotalSize:I
+.field protected mTotalWeight:F
+.field  mVisibleWidgets:I
+.field protected mWeightedMatchConstraintsWidgets:Ljava/util/ArrayList;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/ArrayList<",
+"Landroidx/constraintlayout/core/widgets/ConstraintWidget;",
+">;"
+}
+.end annotation
+.end field
+.field protected mWidgetsCount:I
+.field protected mWidgetsMatchCount:I
+
+
+.method public constructor <init>(Landroidx/constraintlayout/core/widgets/ConstraintWidget;IZ)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mTotalWeight:F</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-boolean v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mIsRtl:Z</span>
+<span class="">	iput-object p1, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mFirst:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	iput p2, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOrientation:I</span>
+<span class="">	iput-boolean p3, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mIsRtl:Z</span>
+.end method
+
+.method private defineChainProperties()V
+<span class="">	.locals 13</span>
+
+<span class="">	iget v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOrientation:I</span>
+<span class="">	const/4 v1, 0x2</span>
+<span class="">	mul-int/2addr v0, v1</span>
+<span class="">	iget-object v2, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mFirst:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	iput-boolean v3, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOptimizable:Z</span>
+<span class="">	const/4 v4, 0x0</span>
+<span class="">	move-object v5, v2</span>
+<span class="">	move v6, v4</span>
+<span class="">	:goto_0</span>
+<span class="">	if-nez v6, :cond_15</span>
+<span class="">	iget v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mWidgetsCount:I</span>
+<span class="">	add-int/2addr v7, v3</span>
+<span class="">	iput v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mWidgetsCount:I</span>
+<span class="">	iget-object v7, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mNextChainWidget:[Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	iget v8, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOrientation:I</span>
+<span class="">	const/4 v9, 0x0</span>
+<span class="">	aput-object v9, v7, v8</span>
+<span class="">	iget-object v7, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mListNextMatchConstraintsWidget:[Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	iget v8, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOrientation:I</span>
+<span class="">	aput-object v9, v7, v8</span>
+<span class="">	invoke-virtual {v2}, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->getVisibility()I</span>
+<span class="">	move-result v7</span>
+<span class="">	const/16 v8, 0x8</span>
+<span class="">	if-eq v7, v8, :cond_10</span>
+<span class="">	iget v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mVisibleWidgets:I</span>
+<span class="">	add-int/2addr v7, v3</span>
+<span class="">	iput v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mVisibleWidgets:I</span>
+<span class="">	iget v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOrientation:I</span>
+<span class="">	invoke-virtual {v2, v7}, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->getDimensionBehaviour(I)Landroidx/constraintlayout/core/widgets/ConstraintWidget$DimensionBehaviour;</span>
+<span class="">	move-result-object v7</span>
+<span class="">	sget-object v8, Landroidx/constraintlayout/core/widgets/ConstraintWidget$DimensionBehaviour;->MATCH_CONSTRAINT:Landroidx/constraintlayout/core/widgets/ConstraintWidget$DimensionBehaviour;</span>
+<span class="">	if-eq v7, v8, :cond_0</span>
+<span class="">	iget v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mTotalSize:I</span>
+<span class="">	iget v8, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOrientation:I</span>
+<span class="">	invoke-virtual {v2, v8}, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->getLength(I)I</span>
+<span class="">	move-result v8</span>
+<span class="">	add-int/2addr v7, v8</span>
+<span class="">	iput v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mTotalSize:I</span>
+<span class="">	:cond_0</span>
+<span class="">	iget v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mTotalSize:I</span>
+<span class="">	iget-object v8, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mListAnchors:[Landroidx/constraintlayout/core/widgets/ConstraintAnchor;</span>
+<span class="">	aget-object v8, v8, v0</span>
+<span class="">	invoke-virtual {v8}, Landroidx/constraintlayout/core/widgets/ConstraintAnchor;->getMargin()I</span>
+<span class="">	move-result v8</span>
+<span class="">	add-int/2addr v7, v8</span>
+<span class="">	iput v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mTotalSize:I</span>
+<span class="">	iget-object v8, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mListAnchors:[Landroidx/constraintlayout/core/widgets/ConstraintAnchor;</span>
+<span class="">	add-int/lit8 v10, v0, 0x1</span>
+<span class="">	aget-object v8, v8, v10</span>
+<span class="">	invoke-virtual {v8}, Landroidx/constraintlayout/core/widgets/ConstraintAnchor;->getMargin()I</span>
+<span class="">	move-result v8</span>
+<span class="">	add-int/2addr v7, v8</span>
+<span class="">	iput v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mTotalSize:I</span>
+<span class="">	iget v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mTotalMargins:I</span>
+<span class="">	iget-object v8, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mListAnchors:[Landroidx/constraintlayout/core/widgets/ConstraintAnchor;</span>
+<span class="">	aget-object v8, v8, v0</span>
+<span class="">	invoke-virtual {v8}, Landroidx/constraintlayout/core/widgets/ConstraintAnchor;->getMargin()I</span>
+<span class="">	move-result v8</span>
+<span class="">	add-int/2addr v7, v8</span>
+<span class="">	iput v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mTotalMargins:I</span>
+<span class="">	iget-object v8, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mListAnchors:[Landroidx/constraintlayout/core/widgets/ConstraintAnchor;</span>
+<span class="">	aget-object v8, v8, v10</span>
+<span class="">	invoke-virtual {v8}, Landroidx/constraintlayout/core/widgets/ConstraintAnchor;->getMargin()I</span>
+<span class="">	move-result v8</span>
+<span class="">	add-int/2addr v7, v8</span>
+<span class="">	iput v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mTotalMargins:I</span>
+<span class="">	iget-object v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mFirstVisibleWidget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	if-nez v7, :cond_1</span>
+<span class="">	iput-object v2, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mFirstVisibleWidget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	:cond_1</span>
+<span class="">	iput-object v2, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mLastVisibleWidget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	iget-object v7, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mListDimensionBehaviors:[Landroidx/constraintlayout/core/widgets/ConstraintWidget$DimensionBehaviour;</span>
+<span class="">	iget v8, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOrientation:I</span>
+<span class="">	aget-object v7, v7, v8</span>
+<span class="">	sget-object v8, Landroidx/constraintlayout/core/widgets/ConstraintWidget$DimensionBehaviour;->MATCH_CONSTRAINT:Landroidx/constraintlayout/core/widgets/ConstraintWidget$DimensionBehaviour;</span>
+<span class="">	if-ne v7, v8, :cond_10</span>
+<span class="">	iget-object v7, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mResolvedMatchConstraintDefault:[I</span>
+<span class="">	iget v8, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOrientation:I</span>
+<span class="">	aget v7, v7, v8</span>
+<span class="">	const/4 v8, 0x0</span>
+<span class="">	if-eqz v7, :cond_2</span>
+<span class="">	iget-object v7, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mResolvedMatchConstraintDefault:[I</span>
+<span class="">	iget v10, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOrientation:I</span>
+<span class="">	aget v7, v7, v10</span>
+<span class="">	const/4 v10, 0x3</span>
+<span class="">	if-eq v7, v10, :cond_2</span>
+<span class="">	iget-object v7, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mResolvedMatchConstraintDefault:[I</span>
+<span class="">	iget v10, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOrientation:I</span>
+<span class="">	aget v7, v7, v10</span>
+<span class="">	if-ne v7, v1, :cond_9</span>
+<span class="">	:cond_2</span>
+<span class="">	iget v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mWidgetsMatchCount:I</span>
+<span class="">	add-int/2addr v7, v3</span>
+<span class="">	iput v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mWidgetsMatchCount:I</span>
+<span class="">	iget-object v7, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mWeight:[F</span>
+<span class="">	iget v10, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOrientation:I</span>
+<span class="">	aget v7, v7, v10</span>
+<span class="">	cmpl-float v10, v7, v8</span>
+<span class="">	if-lez v10, :cond_3</span>
+<span class="">	iget v10, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mTotalWeight:F</span>
+<span class="">	iget-object v11, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mWeight:[F</span>
+<span class="">	iget v12, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOrientation:I</span>
+<span class="">	aget v11, v11, v12</span>
+<span class="">	add-float/2addr v10, v11</span>
+<span class="">	iput v10, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mTotalWeight:F</span>
+<span class="">	:cond_3</span>
+<span class="">	iget v10, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOrientation:I</span>
+<span class="">	invoke-static {v2, v10}, Landroidx/constraintlayout/core/widgets/ChainHead;->isMatchConstraintEqualityCandidate(Landroidx/constraintlayout/core/widgets/ConstraintWidget;I)Z</span>
+<span class="">	move-result v10</span>
+<span class="">	if-eqz v10, :cond_6</span>
+<span class="">	cmpg-float v7, v7, v8</span>
+<span class="">	if-gez v7, :cond_4</span>
+<span class="">	iput-boolean v3, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mHasUndefinedWeights:Z</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_4</span>
+<span class="">	iput-boolean v3, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mHasDefinedWeights:Z</span>
+<span class="">	:goto_1</span>
+<span class="">	iget-object v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mWeightedMatchConstraintsWidgets:Ljava/util/ArrayList;</span>
+<span class="">	if-nez v7, :cond_5</span>
+<span class="">	new-instance v7, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v7}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	iput-object v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mWeightedMatchConstraintsWidgets:Ljava/util/ArrayList;</span>
+<span class="">	:cond_5</span>
+<span class="">	iget-object v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mWeightedMatchConstraintsWidgets:Ljava/util/ArrayList;</span>
+<span class="">	invoke-virtual {v7, v2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:cond_6</span>
+<span class="">	iget-object v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mFirstMatchConstraintWidget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	if-nez v7, :cond_7</span>
+<span class="">	iput-object v2, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mFirstMatchConstraintWidget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	:cond_7</span>
+<span class="">	iget-object v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mLastMatchConstraintWidget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	if-eqz v7, :cond_8</span>
+<span class="">	iget-object v7, v7, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mListNextMatchConstraintsWidget:[Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	iget v10, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOrientation:I</span>
+<span class="">	aput-object v2, v7, v10</span>
+<span class="">	:cond_8</span>
+<span class="">	iput-object v2, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mLastMatchConstraintWidget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	:cond_9</span>
+<span class="">	iget v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOrientation:I</span>
+<span class="">	if-nez v7, :cond_c</span>
+<span class="">	iget v7, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mMatchConstraintDefaultWidth:I</span>
+<span class="">	if-eqz v7, :cond_a</span>
+<span class="">	iput-boolean v4, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOptimizable:Z</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_a</span>
+<span class="">	iget v7, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mMatchConstraintMinWidth:I</span>
+<span class="">	if-nez v7, :cond_b</span>
+<span class="">	iget v7, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mMatchConstraintMaxWidth:I</span>
+<span class="">	if-eqz v7, :cond_f</span>
+<span class="">	:cond_b</span>
+<span class="">	iput-boolean v4, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOptimizable:Z</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_c</span>
+<span class="">	iget v7, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mMatchConstraintDefaultHeight:I</span>
+<span class="">	if-eqz v7, :cond_d</span>
+<span class="">	iput-boolean v4, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOptimizable:Z</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_d</span>
+<span class="">	iget v7, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mMatchConstraintMinHeight:I</span>
+<span class="">	if-nez v7, :cond_e</span>
+<span class="">	iget v7, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mMatchConstraintMaxHeight:I</span>
+<span class="">	if-eqz v7, :cond_f</span>
+<span class="">	:cond_e</span>
+<span class="">	iput-boolean v4, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOptimizable:Z</span>
+<span class="">	:goto_2</span>
+<span class="">	:cond_f</span>
+<span class="">	iget v7, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mDimensionRatio:F</span>
+<span class="">	cmpl-float v7, v7, v8</span>
+<span class="">	if-eqz v7, :cond_10</span>
+<span class="">	iput-boolean v4, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOptimizable:Z</span>
+<span class="">	iput-boolean v3, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mHasRatio:Z</span>
+<span class="">	:cond_10</span>
+<span class="">	if-eq v5, v2, :cond_11</span>
+<span class="">	iget-object v5, v5, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mNextChainWidget:[Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	iget v7, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOrientation:I</span>
+<span class="">	aput-object v2, v5, v7</span>
+<span class="">	:cond_11</span>
+<span class="">	iget-object v5, v2, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mListAnchors:[Landroidx/constraintlayout/core/widgets/ConstraintAnchor;</span>
+<span class="">	add-int/lit8 v7, v0, 0x1</span>
+<span class="">	aget-object v5, v5, v7</span>
+<span class="">	iget-object v5, v5, Landroidx/constraintlayout/core/widgets/ConstraintAnchor;->mTarget:Landroidx/constraintlayout/core/widgets/ConstraintAnchor;</span>
+<span class="">	if-eqz v5, :cond_13</span>
+<span class="">	iget-object v5, v5, Landroidx/constraintlayout/core/widgets/ConstraintAnchor;->mOwner:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	iget-object v7, v5, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mListAnchors:[Landroidx/constraintlayout/core/widgets/ConstraintAnchor;</span>
+<span class="">	aget-object v7, v7, v0</span>
+<span class="">	iget-object v7, v7, Landroidx/constraintlayout/core/widgets/ConstraintAnchor;->mTarget:Landroidx/constraintlayout/core/widgets/ConstraintAnchor;</span>
+<span class="">	if-eqz v7, :cond_13</span>
+<span class="">	iget-object v7, v5, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mListAnchors:[Landroidx/constraintlayout/core/widgets/ConstraintAnchor;</span>
+<span class="">	aget-object v7, v7, v0</span>
+<span class="">	iget-object v7, v7, Landroidx/constraintlayout/core/widgets/ConstraintAnchor;->mTarget:Landroidx/constraintlayout/core/widgets/ConstraintAnchor;</span>
+<span class="">	iget-object v7, v7, Landroidx/constraintlayout/core/widgets/ConstraintAnchor;->mOwner:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	if-eq v7, v2, :cond_12</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:cond_12</span>
+<span class="">	move-object v9, v5</span>
+<span class="">	:cond_13</span>
+<span class="">	:goto_3</span>
+<span class="">	if-eqz v9, :cond_14</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:cond_14</span>
+<span class="">	move-object v9, v2</span>
+<span class="">	move v6, v3</span>
+<span class="">	:goto_4</span>
+<span class="">	move-object v5, v2</span>
+<span class="">	move-object v2, v9</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	:cond_15</span>
+<span class="">	iget-object v1, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mFirstVisibleWidget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	if-eqz v1, :cond_16</span>
+<span class="">	iget v5, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mTotalSize:I</span>
+<span class="">	iget-object v1, v1, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mListAnchors:[Landroidx/constraintlayout/core/widgets/ConstraintAnchor;</span>
+<span class="">	aget-object v1, v1, v0</span>
+<span class="">	invoke-virtual {v1}, Landroidx/constraintlayout/core/widgets/ConstraintAnchor;->getMargin()I</span>
+<span class="">	move-result v1</span>
+<span class="">	sub-int/2addr v5, v1</span>
+<span class="">	iput v5, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mTotalSize:I</span>
+<span class="">	:cond_16</span>
+<span class="">	iget-object v1, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mLastVisibleWidget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	if-eqz v1, :cond_17</span>
+<span class="">	iget v5, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mTotalSize:I</span>
+<span class="">	iget-object v1, v1, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mListAnchors:[Landroidx/constraintlayout/core/widgets/ConstraintAnchor;</span>
+<span class="">	add-int/2addr v0, v3</span>
+<span class="">	aget-object v0, v1, v0</span>
+<span class="">	invoke-virtual {v0}, Landroidx/constraintlayout/core/widgets/ConstraintAnchor;->getMargin()I</span>
+<span class="">	move-result v0</span>
+<span class="">	sub-int/2addr v5, v0</span>
+<span class="">	iput v5, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mTotalSize:I</span>
+<span class="">	:cond_17</span>
+<span class="">	iput-object v2, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mLast:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	iget v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mOrientation:I</span>
+<span class="">	if-nez v0, :cond_18</span>
+<span class="">	iget-boolean v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mIsRtl:Z</span>
+<span class="">	if-eqz v0, :cond_18</span>
+<span class="">	iput-object v2, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mHead:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	goto :goto_5</span>
+<span class="">	:cond_18</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mFirst:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	iput-object v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mHead:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	:goto_5</span>
+<span class="">	iget-boolean v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mHasDefinedWeights:Z</span>
+<span class="">	if-eqz v0, :cond_19</span>
+<span class="">	iget-boolean v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mHasUndefinedWeights:Z</span>
+<span class="">	if-eqz v0, :cond_19</span>
+<span class="">	goto :goto_6</span>
+<span class="">	:cond_19</span>
+<span class="">	move v3, v4</span>
+<span class="">	:goto_6</span>
+<span class="">	iput-boolean v3, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mHasComplexMatchWeights:Z</span>
+.end method
+
+.method private static isMatchConstraintEqualityCandidate(Landroidx/constraintlayout/core/widgets/ConstraintWidget;I)Z
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->getVisibility()I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/16 v1, 0x8</span>
+<span class="">	if-eq v0, v1, :cond_1</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mListDimensionBehaviors:[Landroidx/constraintlayout/core/widgets/ConstraintWidget$DimensionBehaviour;</span>
+<span class="">	aget-object v0, v0, p1</span>
+<span class="">	sget-object v1, Landroidx/constraintlayout/core/widgets/ConstraintWidget$DimensionBehaviour;->MATCH_CONSTRAINT:Landroidx/constraintlayout/core/widgets/ConstraintWidget$DimensionBehaviour;</span>
+<span class="">	if-ne v0, v1, :cond_1</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mResolvedMatchConstraintDefault:[I</span>
+<span class="">	aget v0, v0, p1</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object p0, p0, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->mResolvedMatchConstraintDefault:[I</span>
+<span class="">	aget p0, p0, p1</span>
+<span class="">	const/4 p1, 0x3</span>
+<span class="">	if-ne p0, p1, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public define()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mDefined:Z</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	invoke-direct {p0}, Landroidx/constraintlayout/core/widgets/ChainHead;->defineChainProperties()V</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	iput-boolean v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mDefined:Z</span>
+.end method
+
+.method public getFirst()Landroidx/constraintlayout/core/widgets/ConstraintWidget;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mFirst:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+.end method
+
+.method public getFirstMatchConstraintWidget()Landroidx/constraintlayout/core/widgets/ConstraintWidget;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mFirstMatchConstraintWidget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+.end method
+
+.method public getFirstVisibleWidget()Landroidx/constraintlayout/core/widgets/ConstraintWidget;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mFirstVisibleWidget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+.end method
+
+.method public getHead()Landroidx/constraintlayout/core/widgets/ConstraintWidget;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mHead:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+.end method
+
+.method public getLast()Landroidx/constraintlayout/core/widgets/ConstraintWidget;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mLast:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+.end method
+
+.method public getLastMatchConstraintWidget()Landroidx/constraintlayout/core/widgets/ConstraintWidget;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mLastMatchConstraintWidget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+.end method
+
+.method public getLastVisibleWidget()Landroidx/constraintlayout/core/widgets/ConstraintWidget;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mLastVisibleWidget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+.end method
+
+.method public getTotalWeight()F
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Landroidx/constraintlayout/core/widgets/ChainHead;->mTotalWeight:F</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../.resources/report.js"></script>
+</body>
+</html>

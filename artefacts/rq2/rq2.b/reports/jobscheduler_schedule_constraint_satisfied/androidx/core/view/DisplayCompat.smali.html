@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">lu.uni.trux.jobscheduler_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.core.view</a></li>
+        <li><i class="ico ico-class"></i> DisplayCompat.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public final Landroidx/core/view/DisplayCompat;
+.super Ljava/lang/Object;
+.source "DisplayCompat.java"
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Landroidx/core/view/DisplayCompat$ModeCompat;,
+Landroidx/core/view/DisplayCompat$Api17Impl;,
+Landroidx/core/view/DisplayCompat$Api23Impl;
+}
+.end annotation
+
+.field private static final DISPLAY_SIZE_4K_HEIGHT:I = 0x870
+.field private static final DISPLAY_SIZE_4K_WIDTH:I = 0xf00
+
+
+.method private constructor <init>()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+.end method
+
+.method static getCurrentDisplaySizeFromWorkarounds(Landroid/content/Context;Landroid/view/Display;)Landroid/graphics/Point;
+<span class="">	.locals 2</span>
+
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v1, 0x1c</span>
+<span class="">	if-ge v0, v1, :cond_0</span>
+<span class="">	const-string v0, "sys.display-size"</span>
+<span class="">	invoke-static {v0, p1}, Landroidx/core/view/DisplayCompat;->parsePhysicalDisplaySizeFromSystemProperties(Ljava/lang/String;Landroid/view/Display;)Landroid/graphics/Point;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const-string v0, "vendor.display-size"</span>
+<span class="">	invoke-static {v0, p1}, Landroidx/core/view/DisplayCompat;->parsePhysicalDisplaySizeFromSystemProperties(Ljava/lang/String;Landroid/view/Display;)Landroid/graphics/Point;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:goto_0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	invoke-static {p0}, Landroidx/core/view/DisplayCompat;->isSonyBravia4kTv(Landroid/content/Context;)Z</span>
+<span class="">	:cond_1</span>
+<span class="">	move-result p0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	if-eqz p0, :cond_2</span>
+<span class="">	invoke-static {p1}, Landroidx/core/view/DisplayCompat;->isCurrentModeTheLargestMode(Landroid/view/Display;)Z</span>
+<span class="">	move-result p0</span>
+<span class="">	if-eqz p0, :cond_2</span>
+<span class="">	new-instance v0, Landroid/graphics/Point;</span>
+<span class="">	const/16 p0, 0xf00</span>
+<span class="">	const/16 p1, 0x870</span>
+<span class="">	invoke-direct {v0, p0, p1}, Landroid/graphics/Point;-><init>(II)V</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method private static getDisplaySize(Landroid/content/Context;Landroid/view/Display;)Landroid/graphics/Point;
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-static {p0, p1}, Landroidx/core/view/DisplayCompat;->getCurrentDisplaySizeFromWorkarounds(Landroid/content/Context;Landroid/view/Display;)Landroid/graphics/Point;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	new-instance p0, Landroid/graphics/Point;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-direct {p0}, Landroid/graphics/Point;-><init>()V</span>
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v1, 0x11</span>
+<span class="">	if-lt v0, v1, :cond_1</span>
+<span class="">	invoke-static {p1, p0}, Landroidx/core/view/DisplayCompat$Api17Impl;->getRealSize(Landroid/view/Display;Landroid/graphics/Point;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	invoke-virtual {p1, p0}, Landroid/view/Display;->getSize(Landroid/graphics/Point;)V</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public static getMode(Landroid/content/Context;Landroid/view/Display;)Landroidx/core/view/DisplayCompat$ModeCompat;
+<span class="">	.locals 2</span>
+
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v1, 0x17</span>
+<span class="">	if-lt v0, v1, :cond_0</span>
+<span class="">	invoke-static {p0, p1}, Landroidx/core/view/DisplayCompat$Api23Impl;->getMode(Landroid/content/Context;Landroid/view/Display;)Landroidx/core/view/DisplayCompat$ModeCompat;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	new-instance v0, Landroidx/core/view/DisplayCompat$ModeCompat;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-static {p0, p1}, Landroidx/core/view/DisplayCompat;->getDisplaySize(Landroid/content/Context;Landroid/view/Display;)Landroid/graphics/Point;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-direct {v0, p0}, Landroidx/core/view/DisplayCompat$ModeCompat;-><init>(Landroid/graphics/Point;)V</span>
+.end method
+
+.method public static getSupportedModes(Landroid/content/Context;Landroid/view/Display;)[Landroidx/core/view/DisplayCompat$ModeCompat;
+<span class="">	.locals 2</span>
+
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v1, 0x17</span>
+<span class="">	if-lt v0, v1, :cond_0</span>
+<span class="">	invoke-static {p0, p1}, Landroidx/core/view/DisplayCompat$Api23Impl;->getSupportedModes(Landroid/content/Context;Landroid/view/Display;)[Landroidx/core/view/DisplayCompat$ModeCompat;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	:cond_0</span>
+<span class="">	new-array v0, v0, [Landroidx/core/view/DisplayCompat$ModeCompat;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-static {p0, p1}, Landroidx/core/view/DisplayCompat;->getMode(Landroid/content/Context;Landroid/view/Display;)Landroidx/core/view/DisplayCompat$ModeCompat;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	aput-object p0, v0, v1</span>
+.end method
+
+.method private static getSystemProperty(Ljava/lang/String;)Ljava/lang/String;
+<span class="">	.locals 6</span>
+
+<span class="">	:try_start_0</span>
+<span class="">	const-string v0, "android.os.SystemProperties"</span>
+<span class="">	invoke-static {v0}, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v1, "get"</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	new-array v3, v2, [Ljava/lang/Class;</span>
+<span class="">	const-class v4, Ljava/lang/String;</span>
+<span class="">	const/4 v5, 0x0</span>
+<span class="">	aput-object v4, v3, v5</span>
+<span class="">	invoke-virtual {v0, v1, v3}, Ljava/lang/Class;->getMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	new-array v2, v2, [Ljava/lang/Object;</span>
+<span class="">	aput-object p0, v2, v5</span>
+<span class="">	invoke-virtual {v1, v0, v2}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	check-cast p0, Ljava/lang/String;</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	:catch_0</span>
+.end method
+
+.method static isCurrentModeTheLargestMode(Landroid/view/Display;)Z
+<span class="">	.locals 2</span>
+
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v1, 0x17</span>
+<span class="">	if-lt v0, v1, :cond_0</span>
+<span class="">	invoke-static {p0}, Landroidx/core/view/DisplayCompat$Api23Impl;->isCurrentModeTheLargestMode(Landroid/view/Display;)Z</span>
+<span class="">	move-result p0</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private static isSonyBravia4kTv(Landroid/content/Context;)Z
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-static {p0}, Landroidx/core/view/DisplayCompat;->isTv(Landroid/content/Context;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	sget-object v0, Landroid/os/Build;->MANUFACTURER:Ljava/lang/String;</span>
+<span class="">	const-string v1, "Sony"</span>
+<span class="">	invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	sget-object v0, Landroid/os/Build;->MODEL:Ljava/lang/String;</span>
+<span class="">	const-string v1, "BRAVIA"</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const-string v0, "com.sony.dtv.hardware.panel.qfhd"</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/content/pm/PackageManager;->hasSystemFeature(Ljava/lang/String;)Z</span>
+<span class="">	move-result p0</span>
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method private static isTv(Landroid/content/Context;)Z
+<span class="">	.locals 1</span>
+
+<span class="">	const-string v0, "uimode"</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	check-cast p0, Landroid/app/UiModeManager;</span>
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/app/UiModeManager;->getCurrentModeType()I</span>
+<span class="">	move-result p0</span>
+<span class="">	const/4 v0, 0x4</span>
+<span class="">	if-ne p0, v0, :cond_0</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method private static parseDisplaySize(Ljava/lang/String;)Landroid/graphics/Point;
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/lang/NumberFormatException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Ljava/lang/String;->trim()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const-string v0, "x"</span>
+<span class="">	const/4 v1, -0x1</span>
+<span class="">	invoke-virtual {p0, v0, v1}, Ljava/lang/String;->split(Ljava/lang/String;I)[Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	array-length v0, p0</span>
+<span class="">	const/4 v1, 0x2</span>
+<span class="">	if-ne v0, v1, :cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	aget-object v0, p0, v0</span>
+<span class="">	invoke-static {v0}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	aget-object p0, p0, v1</span>
+<span class="">	invoke-static {p0}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I</span>
+<span class="">	move-result p0</span>
+<span class="">	if-lez v0, :cond_0</span>
+<span class="">	if-lez p0, :cond_0</span>
+<span class="">	new-instance v1, Landroid/graphics/Point;</span>
+<span class="">	invoke-direct {v1, v0, p0}, Landroid/graphics/Point;-><init>(II)V</span>
+<span class="">	new-instance p0, Ljava/lang/NumberFormatException;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-direct {p0}, Ljava/lang/NumberFormatException;-><init>()V</span>
+<span class="">	throw p0</span>
+.end method
+
+.method private static parsePhysicalDisplaySizeFromSystemProperties(Ljava/lang/String;Landroid/view/Display;)Landroid/graphics/Point;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p1}, Landroid/view/Display;->getDisplayId()I</span>
+<span class="">	move-result p1</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	invoke-static {p0}, Landroidx/core/view/DisplayCompat;->getSystemProperty(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-static {p0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	invoke-static {p0}, Landroidx/core/view/DisplayCompat;->parseDisplaySize(Ljava/lang/String;)Landroid/graphics/Point;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	:cond_1</span>
+<span class="">	:try_start_0</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/NumberFormatException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	:catch_0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

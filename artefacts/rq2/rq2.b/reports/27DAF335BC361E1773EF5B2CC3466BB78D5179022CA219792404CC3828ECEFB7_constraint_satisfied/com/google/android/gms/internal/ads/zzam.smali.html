@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.gms.internal.ads</a></li>
+        <li><i class="ico ico-class"></i> zzam.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public final Lcom/google/android/gms/internal/ads/zzam;
+.super Ljava/lang/Object;
+.implements Lcom/google/android/gms/internal/ads/zzb;
+
+
+.field private final zzbw:Ljava/util/Map;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/Map<",
+"Ljava/lang/String;",
+"Lcom/google/android/gms/internal/ads/zzan;",
+">;"
+}
+.end annotation
+.end field
+.field private zzbx:J
+.field private final zzby:Ljava/io/File;
+.field private final zzbz:I
+
+
+.method public constructor <init>(Ljava/io/File;)V
+<span class="">	.locals 1</span>
+
+<span class="">	const/high16 v0, 0x500000</span>
+<span class="">	invoke-direct {p0, p1, v0}, Lcom/google/android/gms/internal/ads/zzam;-><init>(Ljava/io/File;I)V</span>
+.end method
+
+.method private constructor <init>(Ljava/io/File;I)V
+<span class="">	.locals 3</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	new-instance p2, Ljava/util/LinkedHashMap;</span>
+<span class="">	const/16 v0, 0x10</span>
+<span class="">	const/high16 v1, 0x3f400000    # 0.75f</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	invoke-direct {p2, v0, v1, v2}, Ljava/util/LinkedHashMap;-><init>(IFZ)V</span>
+<span class="">	iput-object p2, p0, Lcom/google/android/gms/internal/ads/zzam;->zzbw:Ljava/util/Map;</span>
+<span class="">	const-wide/16 v0, 0x0</span>
+<span class="">	iput-wide v0, p0, Lcom/google/android/gms/internal/ads/zzam;->zzbx:J</span>
+<span class="">	iput-object p1, p0, Lcom/google/android/gms/internal/ads/zzam;->zzby:Ljava/io/File;</span>
+<span class="">	const/high16 p1, 0x500000</span>
+<span class="">	iput p1, p0, Lcom/google/android/gms/internal/ads/zzam;->zzbz:I</span>
+.end method
+
+.method private final declared-synchronized remove(Ljava/lang/String;)V
+<span class="">	.locals 3</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/gms/internal/ads/zzam;->zze(Ljava/lang/String;)Ljava/io/File;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/io/File;->delete()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/gms/internal/ads/zzam;->removeEntry(Ljava/lang/String;)V</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	const-string v0, "Could not delete cache entry for key=%s, filename=%s"</span>
+<span class="">	const/4 v1, 0x2</span>
+<span class="">	new-array v1, v1, [Ljava/lang/Object;</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	aput-object p1, v1, v2</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	invoke-static {p1}, Lcom/google/android/gms/internal/ads/zzam;->zzd(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	aput-object p1, v1, v2</span>
+<span class="">	invoke-static {v0, v1}, Lcom/google/android/gms/internal/ads/zzaf;->d(Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	:cond_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw p1</span>
+.end method
+
+.method private final removeEntry(Ljava/lang/String;)V
+<span class="">	.locals 6</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/internal/ads/zzam;->zzbw:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Lcom/google/android/gms/internal/ads/zzan;</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	iget-wide v0, p0, Lcom/google/android/gms/internal/ads/zzam;->zzbx:J</span>
+<span class="">	iget-wide v2, p1, Lcom/google/android/gms/internal/ads/zzan;->zzca:J</span>
+<span class="">	sub-long v4, v0, v2</span>
+<span class="">	iput-wide v4, p0, Lcom/google/android/gms/internal/ads/zzam;->zzbx:J</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private static zza(Ljava/io/InputStream;)I
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Ljava/io/InputStream;->read()I</span>
+<span class="">	move-result p0</span>
+<span class="">	const/4 v0, -0x1</span>
+<span class="">	if-ne p0, v0, :cond_0</span>
+<span class="">	new-instance p0, Ljava/io/EOFException;</span>
+<span class="">	invoke-direct {p0}, Ljava/io/EOFException;-><init>()V</span>
+<span class="">	throw p0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private static zza(Ljava/io/File;)Ljava/io/InputStream;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/FileNotFoundException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/io/FileInputStream;</span>
+<span class="">	invoke-direct {v0, p0}, Ljava/io/FileInputStream;-><init>(Ljava/io/File;)V</span>
+.end method
+
+.method static zza(Lcom/google/android/gms/internal/ads/zzao;)Ljava/lang/String;
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/internal/ads/zzam;->zzc(Ljava/io/InputStream;)J</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	invoke-static {p0, v0, v1}, Lcom/google/android/gms/internal/ads/zzam;->zza(Lcom/google/android/gms/internal/ads/zzao;J)[B</span>
+<span class="">	move-result-object p0</span>
+<span class="">	new-instance v0, Ljava/lang/String;</span>
+<span class="">	const-string v1, "UTF-8"</span>
+<span class="">	invoke-direct {v0, p0, v1}, Ljava/lang/String;-><init>([BLjava/lang/String;)V</span>
+.end method
+
+.method static zza(Ljava/io/OutputStream;I)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	and-int/lit16 v0, p1, 0xff</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/io/OutputStream;->write(I)V</span>
+<span class="">	shr-int/lit8 v0, p1, 0x8</span>
+<span class="">	and-int/lit16 v0, v0, 0xff</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/io/OutputStream;->write(I)V</span>
+<span class="">	shr-int/lit8 v0, p1, 0x10</span>
+<span class="">	and-int/lit16 v0, v0, 0xff</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/io/OutputStream;->write(I)V</span>
+<span class="">	ushr-int/lit8 p1, p1, 0x18</span>
+<span class="">	invoke-virtual {p0, p1}, Ljava/io/OutputStream;->write(I)V</span>
+.end method
+
+.method static zza(Ljava/io/OutputStream;J)V
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	long-to-int v0, p1</span>
+<span class="">	int-to-byte v0, v0</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/io/OutputStream;->write(I)V</span>
+<span class="">	const/16 v0, 0x8</span>
+<span class="">	ushr-long v0, p1, v0</span>
+<span class="">	long-to-int v0, v0</span>
+<span class="">	int-to-byte v0, v0</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/io/OutputStream;->write(I)V</span>
+<span class="">	const/16 v0, 0x10</span>
+<span class="">	ushr-long v0, p1, v0</span>
+<span class="">	long-to-int v0, v0</span>
+<span class="">	int-to-byte v0, v0</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/io/OutputStream;->write(I)V</span>
+<span class="">	const/16 v0, 0x18</span>
+<span class="">	ushr-long v0, p1, v0</span>
+<span class="">	long-to-int v0, v0</span>
+<span class="">	int-to-byte v0, v0</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/io/OutputStream;->write(I)V</span>
+<span class="">	const/16 v0, 0x20</span>
+<span class="">	ushr-long v0, p1, v0</span>
+<span class="">	long-to-int v0, v0</span>
+<span class="">	int-to-byte v0, v0</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/io/OutputStream;->write(I)V</span>
+<span class="">	const/16 v0, 0x28</span>
+<span class="">	ushr-long v0, p1, v0</span>
+<span class="">	long-to-int v0, v0</span>
+<span class="">	int-to-byte v0, v0</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/io/OutputStream;->write(I)V</span>
+<span class="">	const/16 v0, 0x30</span>
+<span class="">	ushr-long v0, p1, v0</span>
+<span class="">	long-to-int v0, v0</span>
+<span class="">	int-to-byte v0, v0</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/io/OutputStream;->write(I)V</span>
+<span class="">	const/16 v0, 0x38</span>
+<span class="">	ushr-long/2addr p1, v0</span>
+<span class="">	long-to-int p1, p1</span>
+<span class="">	int-to-byte p1, p1</span>
+<span class="">	invoke-virtual {p0, p1}, Ljava/io/OutputStream;->write(I)V</span>
+.end method
+
+.method static zza(Ljava/io/OutputStream;Ljava/lang/String;)V
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const-string v0, "UTF-8"</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/String;->getBytes(Ljava/lang/String;)[B</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	array-length v1, p1</span>
+<span class="">	int-to-long v1, v1</span>
+<span class="">	invoke-static {p0, v1, v2}, Lcom/google/android/gms/internal/ads/zzam;->zza(Ljava/io/OutputStream;J)V</span>
+<span class="">	array-length v1, p1</span>
+<span class="">	invoke-virtual {p0, p1, v0, v1}, Ljava/io/OutputStream;->write([BII)V</span>
+.end method
+
+.method private final zza(Ljava/lang/String;Lcom/google/android/gms/internal/ads/zzan;)V
+<span class="">	.locals 9</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/internal/ads/zzam;->zzbw:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	iget-wide v0, p0, Lcom/google/android/gms/internal/ads/zzam;->zzbx:J</span>
+<span class="">	iget-wide v2, p2, Lcom/google/android/gms/internal/ads/zzan;->zzca:J</span>
+<span class="">	add-long v4, v0, v2</span>
+<span class="">	iput-wide v4, p0, Lcom/google/android/gms/internal/ads/zzam;->zzbx:J</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/internal/ads/zzam;->zzbw:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Lcom/google/android/gms/internal/ads/zzan;</span>
+<span class="">	iget-wide v1, p0, Lcom/google/android/gms/internal/ads/zzam;->zzbx:J</span>
+<span class="">	iget-wide v3, p2, Lcom/google/android/gms/internal/ads/zzan;->zzca:J</span>
+<span class="">	iget-wide v5, v0, Lcom/google/android/gms/internal/ads/zzan;->zzca:J</span>
+<span class="">	sub-long v7, v3, v5</span>
+<span class="">	add-long v3, v1, v7</span>
+<span class="">	iput-wide v3, p0, Lcom/google/android/gms/internal/ads/zzam;->zzbx:J</span>
+<span class="">	:goto_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/internal/ads/zzam;->zzbw:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1, p2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+.end method
+
+.method private static zza(Lcom/google/android/gms/internal/ads/zzao;J)[B
+<span class="">	.locals 6</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Lcom/google/android/gms/internal/ads/zzao;->zzo()J</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	const-wide/16 v2, 0x0</span>
+<span class="">	cmp-long v4, p1, v2</span>
+<span class="">	if-ltz v4, :cond_1</span>
+<span class="">	cmp-long v2, p1, v0</span>
+<span class="">	if-gtz v2, :cond_1</span>
+<span class="">	long-to-int v2, p1</span>
+<span class="">	int-to-long v3, v2</span>
+<span class="">	cmp-long v5, v3, p1</span>
+<span class="">	if-eqz v5, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	new-array p1, v2, [B</span>
+<span class="">	new-instance p2, Ljava/io/DataInputStream;</span>
+<span class="">	invoke-direct {p2, p0}, Ljava/io/DataInputStream;-><init>(Ljava/io/InputStream;)V</span>
+<span class="">	invoke-virtual {p2, p1}, Ljava/io/DataInputStream;->readFully([B)V</span>
+<span class="">	new-instance p0, Ljava/io/IOException;</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+<span class="">	const/16 v2, 0x49</span>
+<span class="">	new-instance v3, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v3, v2}, Ljava/lang/StringBuilder;-><init>(I)V</span>
+<span class="">	const-string v2, "streamToBytes length="</span>
+<span class="">	invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v3, p1, p2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p1, ", maxLength="</span>
+<span class="">	invoke-virtual {v3, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v3, v0, v1}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {p0, p1}, Ljava/io/IOException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p0</span>
+.end method
+
+.method static zzb(Ljava/io/InputStream;)I
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/internal/ads/zzam;->zza(Ljava/io/InputStream;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	or-int/2addr v0, v1</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/internal/ads/zzam;->zza(Ljava/io/InputStream;)I</span>
+<span class="">	move-result v1</span>
+<span class="">	shl-int/lit8 v1, v1, 0x8</span>
+<span class="">	or-int/2addr v0, v1</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/internal/ads/zzam;->zza(Ljava/io/InputStream;)I</span>
+<span class="">	move-result v1</span>
+<span class="">	shl-int/lit8 v1, v1, 0x10</span>
+<span class="">	or-int/2addr v0, v1</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/internal/ads/zzam;->zza(Ljava/io/InputStream;)I</span>
+<span class="">	move-result p0</span>
+<span class="">	shl-int/lit8 p0, p0, 0x18</span>
+<span class="">	or-int/2addr p0, v0</span>
+.end method
+
+.method static zzb(Lcom/google/android/gms/internal/ads/zzao;)Ljava/util/List;
+<span class="">	.locals 6</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Lcom/google/android/gms/internal/ads/zzao;",</span>
+<span class="">	")",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Lcom/google/android/gms/internal/ads/zzl;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/internal/ads/zzam;->zzb(Ljava/io/InputStream;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	invoke-static {}, Ljava/util/Collections;->emptyList()Ljava/util/List;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	new-instance v1, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v1, v0}, Ljava/util/ArrayList;-><init>(I)V</span>
+<span class="">	:goto_0</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	:goto_1</span>
+<span class="">	if-ge v2, v0, :cond_1</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/internal/ads/zzam;->zza(Lcom/google/android/gms/internal/ads/zzao;)Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {v3}, Ljava/lang/String;->intern()Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/internal/ads/zzam;->zza(Lcom/google/android/gms/internal/ads/zzao;)Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v4}, Ljava/lang/String;->intern()Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	new-instance v5, Lcom/google/android/gms/internal/ads/zzl;</span>
+<span class="">	invoke-direct {v5, v3, v4}, Lcom/google/android/gms/internal/ads/zzl;-><init>(Ljava/lang/String;Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {v1, v5}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method static zzc(Ljava/io/InputStream;)J
+<span class="">	.locals 8</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/internal/ads/zzam;->zza(Ljava/io/InputStream;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	int-to-long v0, v0</span>
+<span class="">	const-wide/16 v2, 0xff</span>
+<span class="">	and-long v4, v0, v2</span>
+<span class="">	const-wide/16 v0, 0x0</span>
+<span class="">	or-long v6, v0, v4</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/internal/ads/zzam;->zza(Ljava/io/InputStream;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	int-to-long v0, v0</span>
+<span class="">	and-long v4, v0, v2</span>
+<span class="">	const/16 v0, 0x8</span>
+<span class="">	shl-long v0, v4, v0</span>
+<span class="">	or-long v4, v6, v0</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/internal/ads/zzam;->zza(Ljava/io/InputStream;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	int-to-long v0, v0</span>
+<span class="">	and-long v6, v0, v2</span>
+<span class="">	const/16 v0, 0x10</span>
+<span class="">	shl-long v0, v6, v0</span>
+<span class="">	or-long v6, v4, v0</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/internal/ads/zzam;->zza(Ljava/io/InputStream;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	int-to-long v0, v0</span>
+<span class="">	and-long v4, v0, v2</span>
+<span class="">	const/16 v0, 0x18</span>
+<span class="">	shl-long v0, v4, v0</span>
+<span class="">	or-long v4, v6, v0</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/internal/ads/zzam;->zza(Ljava/io/InputStream;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	int-to-long v0, v0</span>
+<span class="">	and-long v6, v0, v2</span>
+<span class="">	const/16 v0, 0x20</span>
+<span class="">	shl-long v0, v6, v0</span>
+<span class="">	or-long v6, v4, v0</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/internal/ads/zzam;->zza(Ljava/io/InputStream;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	int-to-long v0, v0</span>
+<span class="">	and-long v4, v0, v2</span>
+<span class="">	const/16 v0, 0x28</span>
+<span class="">	shl-long v0, v4, v0</span>
+<span class="">	or-long v4, v6, v0</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/internal/ads/zzam;->zza(Ljava/io/InputStream;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	int-to-long v0, v0</span>
+<span class="">	and-long v6, v0, v2</span>
+<span class="">	const/16 v0, 0x30</span>
+<span class="">	shl-long v0, v6, v0</span>
+<span class="">	or-long v6, v4, v0</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/internal/ads/zzam;->zza(Ljava/io/InputStream;)I</span>
+<span class="">	move-result p0</span>
+<span class="">	int-to-long v0, p0</span>
+<span class="">	and-long v4, v0, v2</span>
+<span class="">	const/16 p0, 0x38</span>
+<span class="">	shl-long v0, v4, p0</span>
+<span class="">	or-long v2, v6, v0</span>
+.end method
+
+.method private static zzd(Ljava/lang/String;)Ljava/lang/String;
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-virtual {p0}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	div-int/lit8 v0, v0, 0x2</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-virtual {p0, v1, v0}, Ljava/lang/String;->substring(II)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/String;->hashCode()I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {v1}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-static {v1}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/lang/String;->substring(I)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/String;->hashCode()I</span>
+<span class="">	move-result p0</span>
+<span class="">	invoke-static {p0}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-static {p0}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v1, p0}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	new-instance p0, Ljava/lang/String;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-direct {p0, v1}, Ljava/lang/String;-><init>(Ljava/lang/String;)V</span>
+.end method
+
+.method private final zze(Ljava/lang/String;)Ljava/io/File;
+<span class="">	.locals 2</span>
+
+<span class="">	new-instance v0, Ljava/io/File;</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/gms/internal/ads/zzam;->zzby:Ljava/io/File;</span>
+<span class="">	invoke-static {p1}, Lcom/google/android/gms/internal/ads/zzam;->zzd(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {v0, v1, p1}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V</span>
+.end method
+
+.method public final declared-synchronized zza(Ljava/lang/String;)Lcom/google/android/gms/internal/ads/zzc;
+<span class="">	.locals 12</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/internal/ads/zzam;->zzbw:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Lcom/google/android/gms/internal/ads/zzan;</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_1</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/gms/internal/ads/zzam;->zze(Ljava/lang/String;)Ljava/io/File;</span>
+<span class="">	:try_start_1</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object v2</span>
+<span class="">	const/4 v3, 0x2</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_1</span>
+<span class="">	const/4 v4, 0x1</span>
+<span class="">	const/4 v5, 0x0</span>
+<span class="">	new-instance v6, Lcom/google/android/gms/internal/ads/zzao;</span>
+<span class="">	:try_start_2</span>
+<span class="">	new-instance v7, Ljava/io/BufferedInputStream;</span>
+<span class="">	invoke-static {v2}, Lcom/google/android/gms/internal/ads/zzam;->zza(Ljava/io/File;)Ljava/io/InputStream;</span>
+<span class="">	move-result-object v8</span>
+<span class="">	invoke-direct {v7, v8}, Ljava/io/BufferedInputStream;-><init>(Ljava/io/InputStream;)V</span>
+<span class="">	invoke-virtual {v2}, Ljava/io/File;->length()J</span>
+<span class="">	move-result-wide v8</span>
+<span class="">	invoke-direct {v6, v7, v8, v9}, Lcom/google/android/gms/internal/ads/zzao;-><init>(Ljava/io/InputStream;J)V</span>
+<span class="">	invoke-static {v6}, Lcom/google/android/gms/internal/ads/zzan;->zzc(Lcom/google/android/gms/internal/ads/zzao;)Lcom/google/android/gms/internal/ads/zzan;</span>
+<span class="">	:try_start_3</span>
+<span class="">	:try_end_2</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_2 .. :try_end_2} :catch_0</span>
+<span class="">	.catchall {:try_start_2 .. :try_end_2} :catchall_1</span>
+<span class="">	move-result-object v7</span>
+<span class="">	iget-object v8, v7, Lcom/google/android/gms/internal/ads/zzan;->zzcb:Ljava/lang/String;</span>
+<span class="">	invoke-static {p1, v8}, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v8</span>
+<span class="">	if-nez v8, :cond_1</span>
+<span class="">	const-string v0, "%s: key=%s, found=%s"</span>
+<span class="">	const/4 v8, 0x3</span>
+<span class="">	new-array v8, v8, [Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {v2}, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;</span>
+<span class="">	move-result-object v9</span>
+<span class="">	aput-object v9, v8, v5</span>
+<span class="">	aput-object p1, v8, v4</span>
+<span class="">	iget-object v7, v7, Lcom/google/android/gms/internal/ads/zzan;->zzcb:Ljava/lang/String;</span>
+<span class="">	aput-object v7, v8, v3</span>
+<span class="">	invoke-static {v0, v8}, Lcom/google/android/gms/internal/ads/zzaf;->d(Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/gms/internal/ads/zzam;->removeEntry(Ljava/lang/String;)V</span>
+<span class="">	invoke-virtual {v6}, Lcom/google/android/gms/internal/ads/zzao;->close()V</span>
+<span class="">	:try_start_4</span>
+<span class="">	:try_end_3</span>
+<span class="">	.catchall {:try_start_3 .. :try_end_3} :catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	:try_end_4</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_4 .. :try_end_4} :catch_0</span>
+<span class="">	.catchall {:try_start_4 .. :try_end_4} :catchall_1</span>
+<span class="">	invoke-virtual {v6}, Lcom/google/android/gms/internal/ads/zzao;->zzo()J</span>
+<span class="">	move-result-wide v7</span>
+<span class="">	:try_start_5</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-static {v6, v7, v8}, Lcom/google/android/gms/internal/ads/zzam;->zza(Lcom/google/android/gms/internal/ads/zzao;J)[B</span>
+<span class="">	move-result-object v7</span>
+<span class="">	new-instance v8, Lcom/google/android/gms/internal/ads/zzc;</span>
+<span class="">	invoke-direct {v8}, Lcom/google/android/gms/internal/ads/zzc;-><init>()V</span>
+<span class="">	iput-object v7, v8, Lcom/google/android/gms/internal/ads/zzc;->data:[B</span>
+<span class="">	iget-object v7, v0, Lcom/google/android/gms/internal/ads/zzan;->zza:Ljava/lang/String;</span>
+<span class="">	iput-object v7, v8, Lcom/google/android/gms/internal/ads/zzc;->zza:Ljava/lang/String;</span>
+<span class="">	iget-wide v9, v0, Lcom/google/android/gms/internal/ads/zzan;->zzb:J</span>
+<span class="">	iput-wide v9, v8, Lcom/google/android/gms/internal/ads/zzc;->zzb:J</span>
+<span class="">	iget-wide v9, v0, Lcom/google/android/gms/internal/ads/zzan;->zzc:J</span>
+<span class="">	iput-wide v9, v8, Lcom/google/android/gms/internal/ads/zzc;->zzc:J</span>
+<span class="">	iget-wide v9, v0, Lcom/google/android/gms/internal/ads/zzan;->zzd:J</span>
+<span class="">	iput-wide v9, v8, Lcom/google/android/gms/internal/ads/zzc;->zzd:J</span>
+<span class="">	iget-wide v9, v0, Lcom/google/android/gms/internal/ads/zzan;->zze:J</span>
+<span class="">	iput-wide v9, v8, Lcom/google/android/gms/internal/ads/zzc;->zze:J</span>
+<span class="">	iget-object v7, v0, Lcom/google/android/gms/internal/ads/zzan;->zzg:Ljava/util/List;</span>
+<span class="">	new-instance v9, Ljava/util/TreeMap;</span>
+<span class="">	sget-object v10, Ljava/lang/String;->CASE_INSENSITIVE_ORDER:Ljava/util/Comparator;</span>
+<span class="">	invoke-direct {v9, v10}, Ljava/util/TreeMap;-><init>(Ljava/util/Comparator;)V</span>
+<span class="">	invoke-interface {v7}, Ljava/util/List;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v7</span>
+<span class="">	invoke-interface {v7}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v10</span>
+<span class="">	:goto_0</span>
+<span class="">	if-eqz v10, :cond_2</span>
+<span class="">	invoke-interface {v7}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v10</span>
+<span class="">	check-cast v10, Lcom/google/android/gms/internal/ads/zzl;</span>
+<span class="">	invoke-virtual {v10}, Lcom/google/android/gms/internal/ads/zzl;->getName()Ljava/lang/String;</span>
+<span class="">	move-result-object v11</span>
+<span class="">	invoke-virtual {v10}, Lcom/google/android/gms/internal/ads/zzl;->getValue()Ljava/lang/String;</span>
+<span class="">	move-result-object v10</span>
+<span class="">	invoke-interface {v9, v11, v10}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iput-object v9, v8, Lcom/google/android/gms/internal/ads/zzc;->zzf:Ljava/util/Map;</span>
+<span class="">	iget-object v0, v0, Lcom/google/android/gms/internal/ads/zzan;->zzg:Ljava/util/List;</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-static {v0}, Ljava/util/Collections;->unmodifiableList(Ljava/util/List;)Ljava/util/List;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, v8, Lcom/google/android/gms/internal/ads/zzc;->zzg:Ljava/util/List;</span>
+<span class="">	invoke-virtual {v6}, Lcom/google/android/gms/internal/ads/zzao;->close()V</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	:try_start_6</span>
+<span class="">	:try_end_5</span>
+<span class="">	.catchall {:try_start_5 .. :try_end_5} :catchall_0</span>
+<span class="">	move-exception v0</span>
+<span class="">	:try_end_6</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_6 .. :try_end_6} :catch_0</span>
+<span class="">	.catchall {:try_start_6 .. :try_end_6} :catchall_1</span>
+<span class="">	invoke-virtual {v6}, Lcom/google/android/gms/internal/ads/zzao;->close()V</span>
+<span class="">	throw v0</span>
+<span class="">	:catchall_0</span>
+<span class="">	move-exception v0</span>
+<span class="">	:try_start_7</span>
+<span class="">	const-string v6, "%s: %s"</span>
+<span class="">	new-array v3, v3, [Ljava/lang/Object;</span>
+<span class="">	:try_end_7</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_7 .. :try_end_7} :catch_0</span>
+<span class="">	.catchall {:try_start_7 .. :try_end_7} :catchall_1</span>
+<span class="">	:catch_0</span>
+<span class="">	invoke-virtual {v2}, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;</span>
+<span class="">	:try_start_8</span>
+<span class="">	move-result-object v2</span>
+<span class="">	aput-object v2, v3, v5</span>
+<span class="">	invoke-virtual {v0}, Ljava/io/IOException;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	aput-object v0, v3, v4</span>
+<span class="">	invoke-static {v6, v3}, Lcom/google/android/gms/internal/ads/zzaf;->d(Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/gms/internal/ads/zzam;->remove(Ljava/lang/String;)V</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	move-exception p1</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	:try_end_8</span>
+<span class="">	.catchall {:try_start_8 .. :try_end_8} :catchall_1</span>
+<span class="">	throw p1</span>
+<span class="">	:catchall_1</span>
+.end method
+
+.method public final declared-synchronized zza()V
+<span class="">	.locals 9</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/internal/ads/zzam;->zzby:Ljava/io/File;</span>
+<span class="">	invoke-virtual {v0}, Ljava/io/File;->exists()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/internal/ads/zzam;->zzby:Ljava/io/File;</span>
+<span class="">	invoke-virtual {v0}, Ljava/io/File;->mkdirs()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	const-string v0, "Unable to create cache dir %s"</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	new-array v2, v2, [Ljava/lang/Object;</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/gms/internal/ads/zzam;->zzby:Ljava/io/File;</span>
+<span class="">	invoke-virtual {v3}, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	aput-object v3, v2, v1</span>
+<span class="">	invoke-static {v0, v2}, Lcom/google/android/gms/internal/ads/zzaf;->e(Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_1</span>
+<span class="">	:cond_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/internal/ads/zzam;->zzby:Ljava/io/File;</span>
+<span class="">	:try_start_1</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {v0}, Ljava/io/File;->listFiles()[Ljava/io/File;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-nez v0, :cond_2</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_1</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	array-length v2, v0</span>
+<span class="">	if-ge v1, v2, :cond_3</span>
+<span class="">	:try_start_2</span>
+<span class="">	:cond_2</span>
+<span class="">	aget-object v3, v0, v1</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {v3}, Ljava/io/File;->length()J</span>
+<span class="">	move-result-wide v4</span>
+<span class="">	:try_start_3</span>
+<span class="">	:try_end_2</span>
+<span class="">	.catchall {:try_start_2 .. :try_end_2} :catchall_1</span>
+<span class="">	new-instance v6, Lcom/google/android/gms/internal/ads/zzao;</span>
+<span class="">	new-instance v7, Ljava/io/BufferedInputStream;</span>
+<span class="">	invoke-static {v3}, Lcom/google/android/gms/internal/ads/zzam;->zza(Ljava/io/File;)Ljava/io/InputStream;</span>
+<span class="">	move-result-object v8</span>
+<span class="">	invoke-direct {v7, v8}, Ljava/io/BufferedInputStream;-><init>(Ljava/io/InputStream;)V</span>
+<span class="">	invoke-direct {v6, v7, v4, v5}, Lcom/google/android/gms/internal/ads/zzao;-><init>(Ljava/io/InputStream;J)V</span>
+<span class="">	invoke-static {v6}, Lcom/google/android/gms/internal/ads/zzan;->zzc(Lcom/google/android/gms/internal/ads/zzao;)Lcom/google/android/gms/internal/ads/zzan;</span>
+<span class="">	move-result-object v7</span>
+<span class="">	:try_start_4</span>
+<span class="">	:try_end_3</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_3 .. :try_end_3} :catch_0</span>
+<span class="">	.catchall {:try_start_3 .. :try_end_3} :catchall_1</span>
+<span class="">	iput-wide v4, v7, Lcom/google/android/gms/internal/ads/zzan;->zzca:J</span>
+<span class="">	iget-object v4, v7, Lcom/google/android/gms/internal/ads/zzan;->zzcb:Ljava/lang/String;</span>
+<span class="">	invoke-direct {p0, v4, v7}, Lcom/google/android/gms/internal/ads/zzam;->zza(Ljava/lang/String;Lcom/google/android/gms/internal/ads/zzan;)V</span>
+<span class="">	invoke-virtual {v6}, Lcom/google/android/gms/internal/ads/zzao;->close()V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:try_start_5</span>
+<span class="">	:try_end_4</span>
+<span class="">	.catchall {:try_start_4 .. :try_end_4} :catchall_0</span>
+<span class="">	move-exception v4</span>
+<span class="">	invoke-virtual {v6}, Lcom/google/android/gms/internal/ads/zzao;->close()V</span>
+<span class="">	:catchall_0</span>
+<span class="">	throw v4</span>
+<span class="">	invoke-virtual {v3}, Ljava/io/File;->delete()Z</span>
+<span class="">	add-int/lit8 v1, v1, 0x1</span>
+<span class="">	:try_start_6</span>
+<span class="">	:try_end_5</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_5 .. :try_end_5} :catch_0</span>
+<span class="">	.catchall {:try_start_5 .. :try_end_5} :catchall_1</span>
+<span class="">	:catch_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:try_end_6</span>
+<span class="">	.catchall {:try_start_6 .. :try_end_6} :catchall_1</span>
+<span class="">	:goto_1</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	move-exception v0</span>
+<span class="">	:cond_3</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw v0</span>
+<span class="">	:catchall_1</span>
+.end method
+
+.method public final declared-synchronized zza(Ljava/lang/String;Lcom/google/android/gms/internal/ads/zzc;)V
+<span class="">	.locals 19</span>
+
+<span class="">	move-object/from16 v1, p0</span>
+<span class="">	move-object/from16 v2, p1</span>
+<span class="">	move-object/from16 v3, p2</span>
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	iget-object v4, v3, Lcom/google/android/gms/internal/ads/zzc;->data:[B</span>
+<span class="">	array-length v4, v4</span>
+<span class="">	iget-wide v5, v1, Lcom/google/android/gms/internal/ads/zzam;->zzbx:J</span>
+<span class="">	int-to-long v7, v4</span>
+<span class="">	add-long v9, v5, v7</span>
+<span class="">	iget v4, v1, Lcom/google/android/gms/internal/ads/zzam;->zzbz:I</span>
+<span class="">	int-to-long v4, v4</span>
+<span class="">	cmp-long v6, v9, v4</span>
+<span class="">	const/4 v5, 0x0</span>
+<span class="">	if-ltz v6, :cond_4</span>
+<span class="">	sget-boolean v6, Lcom/google/android/gms/internal/ads/zzaf;->DEBUG:Z</span>
+<span class="">	if-eqz v6, :cond_0</span>
+<span class="">	const-string v6, "Pruning old cache entries."</span>
+<span class="">	new-array v9, v5, [Ljava/lang/Object;</span>
+<span class="">	invoke-static {v6, v9}, Lcom/google/android/gms/internal/ads/zzaf;->v(Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-wide v9, v1, Lcom/google/android/gms/internal/ads/zzam;->zzbx:J</span>
+<span class="">	invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J</span>
+<span class="">	move-result-wide v11</span>
+<span class="">	iget-object v6, v1, Lcom/google/android/gms/internal/ads/zzam;->zzbw:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v6}, Ljava/util/Map;->entrySet()Ljava/util/Set;</span>
+<span class="">	move-result-object v6</span>
+<span class="">	invoke-interface {v6}, Ljava/util/Set;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v6</span>
+<span class="">	move v13, v5</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {v6}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v14</span>
+<span class="">	const/4 v15, 0x2</span>
+<span class="">	if-eqz v14, :cond_3</span>
+<span class="">	invoke-interface {v6}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v14</span>
+<span class="">	check-cast v14, Ljava/util/Map$Entry;</span>
+<span class="">	invoke-interface {v14}, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;</span>
+<span class="">	move-result-object v14</span>
+<span class="">	check-cast v14, Lcom/google/android/gms/internal/ads/zzan;</span>
+<span class="">	iget-object v4, v14, Lcom/google/android/gms/internal/ads/zzan;->zzcb:Ljava/lang/String;</span>
+<span class="">	invoke-direct {v1, v4}, Lcom/google/android/gms/internal/ads/zzam;->zze(Ljava/lang/String;)Ljava/io/File;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v4}, Ljava/io/File;->delete()Z</span>
+<span class="">	move-result v4</span>
+<span class="">	if-eqz v4, :cond_1</span>
+<span class="">	move-object/from16 v16, v6</span>
+<span class="">	iget-wide v5, v1, Lcom/google/android/gms/internal/ads/zzam;->zzbx:J</span>
+<span class="">	iget-wide v3, v14, Lcom/google/android/gms/internal/ads/zzan;->zzca:J</span>
+<span class="">	move-wide/from16 v17, v11</span>
+<span class="">	sub-long v11, v5, v3</span>
+<span class="">	iput-wide v11, v1, Lcom/google/android/gms/internal/ads/zzam;->zzbx:J</span>
+<span class="">	:goto_1</span>
+<span class="">	move-object/from16 v3, v16</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_1</span>
+<span class="">	move-object/from16 v16, v6</span>
+<span class="">	move-wide/from16 v17, v11</span>
+<span class="">	const-string v3, "Could not delete cache entry for key=%s, filename=%s"</span>
+<span class="">	new-array v4, v15, [Ljava/lang/Object;</span>
+<span class="">	iget-object v5, v14, Lcom/google/android/gms/internal/ads/zzan;->zzcb:Ljava/lang/String;</span>
+<span class="">	const/4 v6, 0x0</span>
+<span class="">	aput-object v5, v4, v6</span>
+<span class="">	iget-object v5, v14, Lcom/google/android/gms/internal/ads/zzan;->zzcb:Ljava/lang/String;</span>
+<span class="">	invoke-static {v5}, Lcom/google/android/gms/internal/ads/zzam;->zzd(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	const/4 v6, 0x1</span>
+<span class="">	aput-object v5, v4, v6</span>
+<span class="">	invoke-static {v3, v4}, Lcom/google/android/gms/internal/ads/zzaf;->d(Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:goto_2</span>
+<span class="">	invoke-interface {v3}, Ljava/util/Iterator;->remove()V</span>
+<span class="">	add-int/lit8 v13, v13, 0x1</span>
+<span class="">	iget-wide v4, v1, Lcom/google/android/gms/internal/ads/zzam;->zzbx:J</span>
+<span class="">	add-long v11, v4, v7</span>
+<span class="">	long-to-float v4, v11</span>
+<span class="">	iget v5, v1, Lcom/google/android/gms/internal/ads/zzam;->zzbz:I</span>
+<span class="">	int-to-float v5, v5</span>
+<span class="">	const v6, 0x3f666666    # 0.9f</span>
+<span class="">	mul-float/2addr v5, v6</span>
+<span class="">	cmpg-float v4, v4, v5</span>
+<span class="">	if-gez v4, :cond_2</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:cond_2</span>
+<span class="">	move-object v6, v3</span>
+<span class="">	move-wide/from16 v11, v17</span>
+<span class="">	move-object/from16 v3, p2</span>
+<span class="">	const/4 v5, 0x0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_3</span>
+<span class="">	move-wide/from16 v17, v11</span>
+<span class="">	:goto_3</span>
+<span class="">	sget-boolean v3, Lcom/google/android/gms/internal/ads/zzaf;->DEBUG:Z</span>
+<span class="">	if-eqz v3, :cond_4</span>
+<span class="">	const-string v3, "pruned %d files, %d bytes, %d ms"</span>
+<span class="">	const/4 v4, 0x3</span>
+<span class="">	new-array v4, v4, [Ljava/lang/Object;</span>
+<span class="">	invoke-static {v13}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	const/4 v6, 0x0</span>
+<span class="">	aput-object v5, v4, v6</span>
+<span class="">	iget-wide v5, v1, Lcom/google/android/gms/internal/ads/zzam;->zzbx:J</span>
+<span class="">	sub-long v7, v5, v9</span>
+<span class="">	invoke-static {v7, v8}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	const/4 v6, 0x1</span>
+<span class="">	aput-object v5, v4, v6</span>
+<span class="">	invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J</span>
+<span class="">	move-result-wide v5</span>
+<span class="">	sub-long v7, v5, v17</span>
+<span class="">	invoke-static {v7, v8}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	aput-object v5, v4, v15</span>
+<span class="">	invoke-static {v3, v4}, Lcom/google/android/gms/internal/ads/zzaf;->v(Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	:cond_4</span>
+<span class="">	invoke-direct/range {p0 .. p1}, Lcom/google/android/gms/internal/ads/zzam;->zze(Ljava/lang/String;)Ljava/io/File;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	:try_start_1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	new-instance v4, Ljava/io/BufferedOutputStream;</span>
+<span class="">	new-instance v5, Ljava/io/FileOutputStream;</span>
+<span class="">	invoke-direct {v5, v3}, Ljava/io/FileOutputStream;-><init>(Ljava/io/File;)V</span>
+<span class="">	invoke-direct {v4, v5}, Ljava/io/BufferedOutputStream;-><init>(Ljava/io/OutputStream;)V</span>
+<span class="">	new-instance v5, Lcom/google/android/gms/internal/ads/zzan;</span>
+<span class="">	move-object/from16 v6, p2</span>
+<span class="">	invoke-direct {v5, v2, v6}, Lcom/google/android/gms/internal/ads/zzan;-><init>(Ljava/lang/String;Lcom/google/android/gms/internal/ads/zzc;)V</span>
+<span class="">	invoke-virtual {v5, v4}, Lcom/google/android/gms/internal/ads/zzan;->zza(Ljava/io/OutputStream;)Z</span>
+<span class="">	move-result v7</span>
+<span class="">	if-nez v7, :cond_5</span>
+<span class="">	invoke-virtual {v4}, Ljava/io/BufferedOutputStream;->close()V</span>
+<span class="">	const-string v2, "Failed to write header for %s"</span>
+<span class="">	const/4 v4, 0x1</span>
+<span class="">	new-array v5, v4, [Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {v3}, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	const/4 v6, 0x0</span>
+<span class="">	aput-object v4, v5, v6</span>
+<span class="">	invoke-static {v2, v5}, Lcom/google/android/gms/internal/ads/zzaf;->d(Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	new-instance v2, Ljava/io/IOException;</span>
+<span class="">	invoke-direct {v2}, Ljava/io/IOException;-><init>()V</span>
+<span class="">	throw v2</span>
+<span class="">	:cond_5</span>
+<span class="">	iget-object v6, v6, Lcom/google/android/gms/internal/ads/zzc;->data:[B</span>
+<span class="">	invoke-virtual {v4, v6}, Ljava/io/BufferedOutputStream;->write([B)V</span>
+<span class="">	invoke-virtual {v4}, Ljava/io/BufferedOutputStream;->close()V</span>
+<span class="">	invoke-direct {v1, v2, v5}, Lcom/google/android/gms/internal/ads/zzam;->zza(Ljava/lang/String;Lcom/google/android/gms/internal/ads/zzan;)V</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_1 .. :try_end_1} :catch_0</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	invoke-virtual {v3}, Ljava/io/File;->delete()Z</span>
+<span class="">	:try_start_2</span>
+<span class="">	:catch_0</span>
+<span class="">	move-result v2</span>
+<span class="">	if-nez v2, :cond_6</span>
+<span class="">	const-string v2, "Could not clean up file %s"</span>
+<span class="">	const/4 v4, 0x1</span>
+<span class="">	new-array v4, v4, [Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {v3}, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	const/4 v5, 0x0</span>
+<span class="">	aput-object v3, v4, v5</span>
+<span class="">	invoke-static {v2, v4}, Lcom/google/android/gms/internal/ads/zzaf;->d(Ljava/lang/String;[Ljava/lang/Object;)V</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	:try_end_2</span>
+<span class="">	.catchall {:try_start_2 .. :try_end_2} :catchall_0</span>
+<span class="">	:cond_6</span>
+<span class="">	move-exception v0</span>
+<span class="">	move-object v2, v0</span>
+<span class="">	:catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw v2</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../../.resources/report.js"></script>
+</body>
+</html>

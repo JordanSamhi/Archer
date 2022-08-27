@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.gms.common.util</a></li>
+        <li><i class="ico ico-class"></i> CrashUtils.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public final Lcom/google/android/gms/common/util/CrashUtils;
+.super Ljava/lang/Object;
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Lcom/google/android/gms/common/util/CrashUtils$ErrorDialogData;
+}
+.end annotation
+
+.field private static final zzzc:[Ljava/lang/String;
+.field private static zzzd:Landroid/os/DropBoxManager; = null
+.field private static zzze:Z = false
+.field private static zzzf:Z = false
+.field private static zzzg:Z = false
+.field private static zzzh:I = -0x1
+.field private static zzzi:I
+.annotation build Ljavax/annotation/concurrent/GuardedBy;
+value = "CrashUtils.class"
+.end annotation
+.end field
+.field private static zzzj:I
+.annotation build Ljavax/annotation/concurrent/GuardedBy;
+value = "CrashUtils.class"
+.end annotation
+.end field
+
+
+.method static constructor <clinit>()V
+<span class="">	.locals 3</span>
+
+<span class="">	const/4 v0, 0x5</span>
+<span class="">	new-array v0, v0, [Ljava/lang/String;</span>
+<span class="">	const-string v1, "android."</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	aput-object v1, v0, v2</span>
+<span class="">	const-string v1, "com.android."</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	aput-object v1, v0, v2</span>
+<span class="">	const-string v1, "dalvik."</span>
+<span class="">	const/4 v2, 0x2</span>
+<span class="">	aput-object v1, v0, v2</span>
+<span class="">	const-string v1, "java."</span>
+<span class="">	const/4 v2, 0x3</span>
+<span class="">	aput-object v1, v0, v2</span>
+<span class="">	const-string v1, "javax."</span>
+<span class="">	const/4 v2, 0x4</span>
+<span class="">	aput-object v1, v0, v2</span>
+<span class="">	sput-object v0, Lcom/google/android/gms/common/util/CrashUtils;->zzzc:[Ljava/lang/String;</span>
+.end method
+
+.method public constructor <init>()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+.end method
+
+.method public static addDynamiteErrorToDropBox(Landroid/content/Context;Ljava/lang/Throwable;)Z
+<span class="">	.locals 1</span>
+
+<span class="">	const/high16 v0, 0x20000000</span>
+<span class="">	invoke-static {p0, p1, v0}, Lcom/google/android/gms/common/util/CrashUtils;->addErrorToDropBoxInternal(Landroid/content/Context;Ljava/lang/Throwable;I)Z</span>
+<span class="">	move-result p0</span>
+.end method
+
+.method public static addErrorToDropBox(Landroid/content/Context;Ljava/lang/Throwable;)Z
+<span class="">	.locals 0</span>
+<span class="">	.annotation runtime Ljava/lang/Deprecated;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {p0, p1}, Lcom/google/android/gms/common/util/CrashUtils;->addDynamiteErrorToDropBox(Landroid/content/Context;Ljava/lang/Throwable;)Z</span>
+<span class="">	move-result p0</span>
+.end method
+
+.method public static addErrorToDropBoxInternal(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;I)Z
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-static {p0, p1, p2, p3, v0}, Lcom/google/android/gms/common/util/CrashUtils;->zza(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Throwable;)Z</span>
+<span class="">	move-result p0</span>
+.end method
+
+.method public static addErrorToDropBoxInternal(Landroid/content/Context;Ljava/lang/Throwable;I)Z
+<span class="">	.locals 3</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	invoke-static {p1}, Lcom/google/android/gms/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	invoke-static {}, Lcom/google/android/gms/common/util/CrashUtils;->isPackageSide()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-nez v1, :cond_0</span>
+<span class="">	invoke-static {}, Lcom/google/android/gms/common/util/CrashUtils;->zzdb()Z</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result v1</span>
+<span class="">	if-nez v1, :cond_1</span>
+<span class="">	invoke-static {p1}, Lcom/google/android/gms/common/util/CrashUtils;->zza(Ljava/lang/Throwable;)Ljava/lang/Throwable;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	if-nez p1, :cond_1</span>
+<span class="">	invoke-static {p1}, Landroid/util/Log;->getStackTraceString(Ljava/lang/Throwable;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-static {}, Lcom/google/android/gms/common/util/ProcessUtils;->getMyProcessName()Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-static {p0, v1, v2, p2, p1}, Lcom/google/android/gms/common/util/CrashUtils;->zza(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Throwable;)Z</span>
+<span class="">	move-result p0</span>
+<span class="">	move-exception p0</span>
+<span class="">	invoke-static {}, Lcom/google/android/gms/common/util/CrashUtils;->zzdb()Z</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	move-result p1</span>
+<span class="">	:catch_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:try_start_1</span>
+<span class="">	move-exception p1</span>
+<span class="">	const-string p2, "CrashUtils"</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_1</span>
+<span class="">	const-string v1, "Error determining which process we\'re running in!"</span>
+<span class="">	:catch_1</span>
+<span class="">	invoke-static {p2, v1, p1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I</span>
+<span class="">	move p1, v0</span>
+<span class="">	if-eqz p1, :cond_2</span>
+<span class="">	throw p0</span>
+<span class="">	const-string p1, "CrashUtils"</span>
+<span class="">	:goto_0</span>
+<span class="">	const-string p2, "Error adding exception to DropBox!"</span>
+<span class="">	invoke-static {p1, p2, p0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method private static isPackageSide()Z
+<span class="">	.locals 1</span>
+
+<span class="">	sget-boolean v0, Lcom/google/android/gms/common/util/CrashUtils;->zzze:Z</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	sget-boolean v0, Lcom/google/android/gms/common/util/CrashUtils;->zzzf:Z</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public static isSystemClassPrefixInternal(Ljava/lang/String;)Z
+<span class="">	.locals 5</span>
+
+<span class="">	invoke-static {p0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	sget-object v0, Lcom/google/android/gms/common/util/CrashUtils;->zzzc:[Ljava/lang/String;</span>
+<span class="">	:cond_0</span>
+<span class="">	array-length v2, v0</span>
+<span class="">	move v3, v1</span>
+<span class="">	if-ge v3, v2, :cond_2</span>
+<span class="">	:goto_0</span>
+<span class="">	aget-object v4, v0, v3</span>
+<span class="">	invoke-virtual {p0, v4}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result v4</span>
+<span class="">	if-eqz v4, :cond_1</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method public static declared-synchronized setTestVariables(Landroid/os/DropBoxManager;ZZI)V
+<span class="">	.locals 2</span>
+<span class="">	.annotation build Lcom/google/android/gms/common/util/VisibleForTesting;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const-class v0, Lcom/google/android/gms/common/util/CrashUtils;</span>
+<span class="">	monitor-enter v0</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	:try_start_0</span>
+<span class="">	sput-boolean v1, Lcom/google/android/gms/common/util/CrashUtils;->zzze:Z</span>
+<span class="">	sput-object p0, Lcom/google/android/gms/common/util/CrashUtils;->zzzd:Landroid/os/DropBoxManager;</span>
+<span class="">	sput-boolean p1, Lcom/google/android/gms/common/util/CrashUtils;->zzzg:Z</span>
+<span class="">	sput-boolean p2, Lcom/google/android/gms/common/util/CrashUtils;->zzzf:Z</span>
+<span class="">	sput p3, Lcom/google/android/gms/common/util/CrashUtils;->zzzh:I</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	sput p0, Lcom/google/android/gms/common/util/CrashUtils;->zzzi:I</span>
+<span class="">	sput p0, Lcom/google/android/gms/common/util/CrashUtils;->zzzj:I</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	monitor-exit v0</span>
+<span class="">	move-exception p0</span>
+<span class="">	:catchall_0</span>
+<span class="">	monitor-exit v0</span>
+<span class="">	throw p0</span>
+.end method
+
+.method private static declared-synchronized zza(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;I)Ljava/lang/String;
+<span class="">	.locals 7</span>
+<span class="">	.annotation build Lcom/google/android/gms/common/util/VisibleForTesting;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const-class v0, Lcom/google/android/gms/common/util/CrashUtils;</span>
+<span class="">	monitor-enter v0</span>
+<span class="">	:try_start_0</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	const/16 v2, 0x400</span>
+<span class="">	invoke-direct {v1, v2}, Ljava/lang/StringBuilder;-><init>(I)V</span>
+<span class="">	const-string v2, "Process: "</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-static {p2}, Lcom/google/android/gms/common/util/Strings;->nullToEmpty(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p2, "\n"</span>
+<span class="">	invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p2, "Package: com.google.android.gms"</span>
+<span class="">	invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const p2, 0xbdfcc1</span>
+<span class="">	const-string v2, "12.4.51 (020308-{{cl}})"</span>
+<span class="">	invoke-static {}, Lcom/google/android/gms/common/util/CrashUtils;->zzdb()Z</span>
+<span class="">	move-result v3</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_2</span>
+<span class="">	const/4 v4, 0x0</span>
+<span class="">	if-eqz v3, :cond_1</span>
+<span class="">	:try_start_1</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/common/wrappers/Wrappers;->packageManager(Landroid/content/Context;)Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {p0}, Landroid/content/Context;->getPackageName()Ljava/lang/String;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {v3, v5, v4}, Lcom/google/android/gms/common/wrappers/PackageManagerWrapper;->getPackageInfo(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	iget v5, v3, Landroid/content/pm/PackageInfo;->versionCode:I</span>
+<span class="">	:try_start_2</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_1</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_2</span>
+<span class="">	iget-object p2, v3, Landroid/content/pm/PackageInfo;->versionName:Ljava/lang/String;</span>
+<span class="">	if-eqz p2, :cond_0</span>
+<span class="">	iget-object p2, v3, Landroid/content/pm/PackageInfo;->versionName:Ljava/lang/String;</span>
+<span class="">	:try_end_2</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_2 .. :try_end_2} :catch_0</span>
+<span class="">	.catchall {:try_start_2 .. :try_end_2} :catchall_2</span>
+<span class="">	move-object v2, p2</span>
+<span class="">	:cond_0</span>
+<span class="">	move p2, v5</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:catch_0</span>
+<span class="">	move-exception p2</span>
+<span class="">	move-object v3, p2</span>
+<span class="">	move p2, v5</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catch_1</span>
+<span class="">	move-exception v3</span>
+<span class="">	:try_start_3</span>
+<span class="">	:goto_0</span>
+<span class="">	const-string v5, "CrashUtils"</span>
+<span class="">	const-string v6, "Error while trying to get the package information! Using static version."</span>
+<span class="">	invoke-static {v5, v6, v3}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	const-string v3, " v"</span>
+<span class="">	invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-static {v2}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result p2</span>
+<span class="">	if-nez p2, :cond_4</span>
+<span class="">	const-string p2, "("</span>
+<span class="">	invoke-virtual {v2, p2}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result p2</span>
+<span class="">	if-eqz p2, :cond_3</span>
+<span class="">	const-string p2, ")"</span>
+<span class="">	invoke-virtual {v2, p2}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result p2</span>
+<span class="">	if-nez p2, :cond_3</span>
+<span class="">	const-string p2, "-"</span>
+<span class="">	invoke-virtual {v2, p2}, Ljava/lang/String;->endsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result p2</span>
+<span class="">	if-eqz p2, :cond_2</span>
+<span class="">	invoke-static {v2}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	const-string v2, "111111111"</span>
+<span class="">	invoke-virtual {p2, v2}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-static {v2}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	const-string v2, ")"</span>
+<span class="">	invoke-virtual {p2, v2}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	:cond_3</span>
+<span class="">	const-string p2, " ("</span>
+<span class="">	invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p2, ")"</span>
+<span class="">	invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_4</span>
+<span class="">	const-string p2, "\n"</span>
+<span class="">	invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p2, "Build: "</span>
+<span class="">	invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	sget-object p2, Landroid/os/Build;->FINGERPRINT:Ljava/lang/String;</span>
+<span class="">	invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p2, "\n"</span>
+<span class="">	invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-static {}, Landroid/os/Debug;->isDebuggerConnected()Z</span>
+<span class="">	move-result p2</span>
+<span class="">	if-eqz p2, :cond_5</span>
+<span class="">	const-string p2, "Debugger: Connected\n"</span>
+<span class="">	invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_5</span>
+<span class="">	if-eqz p3, :cond_6</span>
+<span class="">	const-string p2, "DD-EDD: "</span>
+<span class="">	invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v1, p3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p2, "\n"</span>
+<span class="">	invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_6</span>
+<span class="">	const-string p2, "\n"</span>
+<span class="">	invoke-virtual {v1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-static {p1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result p2</span>
+<span class="">	if-nez p2, :cond_7</span>
+<span class="">	invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_7</span>
+<span class="">	invoke-static {}, Lcom/google/android/gms/common/util/CrashUtils;->zzdb()Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_9</span>
+<span class="">	const-string p1, "logcat_for_system_app_crash"</span>
+<span class="">	sget p2, Lcom/google/android/gms/common/util/CrashUtils;->zzzh:I</span>
+<span class="">	if-ltz p2, :cond_8</span>
+<span class="">	sget p0, Lcom/google/android/gms/common/util/CrashUtils;->zzzh:I</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_8</span>
+<span class="">	invoke-virtual {p0}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-static {p0, p1, v4}, Landroid/provider/Settings$Secure;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I</span>
+<span class="">	move-result p0</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_9</span>
+<span class="">	move p0, v4</span>
+<span class="">	:goto_2</span>
+<span class="">	if-lez p0, :cond_c</span>
+<span class="">	const-string p1, "\n"</span>
+<span class="">	invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:try_end_3</span>
+<span class="">	.catchall {:try_start_3 .. :try_end_3} :catchall_2</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:try_start_4</span>
+<span class="">	new-instance p2, Ljava/lang/ProcessBuilder;</span>
+<span class="">	const/16 p3, 0xd</span>
+<span class="">	new-array p3, p3, [Ljava/lang/String;</span>
+<span class="">	const-string v2, "/system/bin/logcat"</span>
+<span class="">	aput-object v2, p3, v4</span>
+<span class="">	const-string v2, "-v"</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	aput-object v2, p3, v3</span>
+<span class="">	const/4 v2, 0x2</span>
+<span class="">	const-string v5, "time"</span>
+<span class="">	aput-object v5, p3, v2</span>
+<span class="">	const/4 v2, 0x3</span>
+<span class="">	const-string v5, "-b"</span>
+<span class="">	aput-object v5, p3, v2</span>
+<span class="">	const/4 v2, 0x4</span>
+<span class="">	const-string v5, "events"</span>
+<span class="">	aput-object v5, p3, v2</span>
+<span class="">	const/4 v2, 0x5</span>
+<span class="">	const-string v5, "-b"</span>
+<span class="">	aput-object v5, p3, v2</span>
+<span class="">	const/4 v2, 0x6</span>
+<span class="">	const-string v5, "system"</span>
+<span class="">	aput-object v5, p3, v2</span>
+<span class="">	const/4 v2, 0x7</span>
+<span class="">	const-string v5, "-b"</span>
+<span class="">	aput-object v5, p3, v2</span>
+<span class="">	const/16 v2, 0x8</span>
+<span class="">	const-string v5, "main"</span>
+<span class="">	aput-object v5, p3, v2</span>
+<span class="">	const/16 v2, 0x9</span>
+<span class="">	const-string v5, "-b"</span>
+<span class="">	aput-object v5, p3, v2</span>
+<span class="">	const/16 v2, 0xa</span>
+<span class="">	const-string v5, "crash"</span>
+<span class="">	aput-object v5, p3, v2</span>
+<span class="">	const/16 v2, 0xb</span>
+<span class="">	const-string v5, "-t"</span>
+<span class="">	aput-object v5, p3, v2</span>
+<span class="">	const/16 v2, 0xc</span>
+<span class="">	invoke-static {p0}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	aput-object p0, p3, v2</span>
+<span class="">	invoke-direct {p2, p3}, Ljava/lang/ProcessBuilder;-><init>([Ljava/lang/String;)V</span>
+<span class="">	invoke-virtual {p2, v3}, Ljava/lang/ProcessBuilder;->redirectErrorStream(Z)Ljava/lang/ProcessBuilder;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/ProcessBuilder;->start()Ljava/lang/Process;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	:try_start_5</span>
+<span class="">	:try_end_4</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_4 .. :try_end_4} :catch_5</span>
+<span class="">	.catchall {:try_start_4 .. :try_end_4} :catchall_1</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/Process;->getOutputStream()Ljava/io/OutputStream;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-virtual {p2}, Ljava/io/OutputStream;->close()V</span>
+<span class="">	:try_start_6</span>
+<span class="">	:try_end_5</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_5 .. :try_end_5} :catch_2</span>
+<span class="">	.catchall {:try_start_5 .. :try_end_5} :catchall_1</span>
+<span class="">	:catch_2</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/Process;->getErrorStream()Ljava/io/InputStream;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-virtual {p2}, Ljava/io/InputStream;->close()V</span>
+<span class="">	:try_start_7</span>
+<span class="">	:try_end_6</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_6 .. :try_end_6} :catch_3</span>
+<span class="">	.catchall {:try_start_6 .. :try_end_6} :catchall_1</span>
+<span class="">	:catch_3</span>
+<span class="">	new-instance p2, Ljava/io/InputStreamReader;</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/Process;->getInputStream()Ljava/io/InputStream;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-direct {p2, p0}, Ljava/io/InputStreamReader;-><init>(Ljava/io/InputStream;)V</span>
+<span class="">	:try_end_7</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_7 .. :try_end_7} :catch_5</span>
+<span class="">	.catchall {:try_start_7 .. :try_end_7} :catchall_1</span>
+<span class="">	const/16 p0, 0x2000</span>
+<span class="">	:try_start_8</span>
+<span class="">	new-array p0, p0, [C</span>
+<span class="">	:goto_3</span>
+<span class="">	invoke-virtual {p2, p0}, Ljava/io/InputStreamReader;->read([C)I</span>
+<span class="">	move-result p1</span>
+<span class="">	if-lez p1, :cond_a</span>
+<span class="">	invoke-virtual {v1, p0, v4, p1}, Ljava/lang/StringBuilder;->append([CII)Ljava/lang/StringBuilder;</span>
+<span class="">	:try_end_8</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_8 .. :try_end_8} :catch_4</span>
+<span class="">	.catchall {:try_start_8 .. :try_end_8} :catchall_0</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:try_start_9</span>
+<span class="">	:cond_a</span>
+<span class="">	invoke-virtual {p2}, Ljava/io/InputStreamReader;->close()V</span>
+<span class="">	:try_end_9</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_9 .. :try_end_9} :catch_7</span>
+<span class="">	.catchall {:try_start_9 .. :try_end_9} :catchall_2</span>
+<span class="">	goto :goto_6</span>
+<span class="">	:catchall_0</span>
+<span class="">	move-exception p0</span>
+<span class="">	move-object p1, p2</span>
+<span class="">	goto :goto_5</span>
+<span class="">	:catch_4</span>
+<span class="">	move-exception p0</span>
+<span class="">	move-object p1, p2</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:catchall_1</span>
+<span class="">	move-exception p0</span>
+<span class="">	goto :goto_5</span>
+<span class="">	:catch_5</span>
+<span class="">	move-exception p0</span>
+<span class="">	:goto_4</span>
+<span class="">	:try_start_a</span>
+<span class="">	const-string p2, "CrashUtils"</span>
+<span class="">	const-string p3, "Error running logcat"</span>
+<span class="">	invoke-static {p2, p3, p0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I</span>
+<span class="">	:try_end_a</span>
+<span class="">	.catchall {:try_start_a .. :try_end_a} :catchall_1</span>
+<span class="">	if-eqz p1, :cond_c</span>
+<span class="">	:try_start_b</span>
+<span class="">	invoke-virtual {p1}, Ljava/io/InputStreamReader;->close()V</span>
+<span class="">	:try_end_b</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_b .. :try_end_b} :catch_7</span>
+<span class="">	.catchall {:try_start_b .. :try_end_b} :catchall_2</span>
+<span class="">	goto :goto_6</span>
+<span class="">	:goto_5</span>
+<span class="">	if-eqz p1, :cond_b</span>
+<span class="">	:try_start_c</span>
+<span class="">	invoke-virtual {p1}, Ljava/io/InputStreamReader;->close()V</span>
+<span class="">	:catch_6</span>
+<span class="">	:try_start_d</span>
+<span class="">	:try_end_c</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_c .. :try_end_c} :catch_6</span>
+<span class="">	.catchall {:try_start_c .. :try_end_c} :catchall_2</span>
+<span class="">	:cond_b</span>
+<span class="">	throw p0</span>
+<span class="">	:goto_6</span>
+<span class="">	:catch_7</span>
+<span class="">	:cond_c</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	:try_end_d</span>
+<span class="">	.catchall {:try_start_d .. :try_end_d} :catchall_2</span>
+<span class="">	monitor-exit v0</span>
+<span class="">	move-exception p0</span>
+<span class="">	:catchall_2</span>
+<span class="">	monitor-exit v0</span>
+<span class="">	throw p0</span>
+.end method
+
+.method private static declared-synchronized zza(Ljava/lang/Throwable;)Ljava/lang/Throwable;
+<span class="">	.locals 14</span>
+<span class="">	.annotation build Lcom/google/android/gms/common/util/VisibleForTesting;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const-class v0, Lcom/google/android/gms/common/util/CrashUtils;</span>
+<span class="">	monitor-enter v0</span>
+<span class="">	:try_start_0</span>
+<span class="">	new-instance v1, Ljava/util/LinkedList;</span>
+<span class="">	invoke-direct {v1}, Ljava/util/LinkedList;-><init>()V</span>
+<span class="">	:goto_0</span>
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	invoke-virtual {v1, p0}, Ljava/util/LinkedList;->push(Ljava/lang/Object;)V</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/Throwable;->getCause()Ljava/lang/Throwable;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	move-object v4, p0</span>
+<span class="">	move v3, v2</span>
+<span class="">	:goto_1</span>
+<span class="">	invoke-virtual {v1}, Ljava/util/LinkedList;->isEmpty()Z</span>
+<span class="">	move-result v5</span>
+<span class="">	if-nez v5, :cond_5</span>
+<span class="">	invoke-virtual {v1}, Ljava/util/LinkedList;->pop()Ljava/lang/Object;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	check-cast v5, Ljava/lang/Throwable;</span>
+<span class="">	invoke-virtual {v5}, Ljava/lang/Throwable;->getStackTrace()[Ljava/lang/StackTraceElement;</span>
+<span class="">	move-result-object v6</span>
+<span class="">	new-instance v7, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v7}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	new-instance v8, Ljava/lang/StackTraceElement;</span>
+<span class="">	invoke-virtual {v5}, Ljava/lang/Object;->getClass()Ljava/lang/Class;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {v5}, Ljava/lang/Class;->getName()Ljava/lang/String;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	const-string v9, "<filtered>"</span>
+<span class="">	const-string v10, "<filtered>"</span>
+<span class="">	const/4 v11, 0x1</span>
+<span class="">	invoke-direct {v8, v5, v9, v10, v11}, Ljava/lang/StackTraceElement;-><init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)V</span>
+<span class="">	invoke-virtual {v7, v8}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z</span>
+<span class="">	array-length v5, v6</span>
+<span class="">	move v8, v3</span>
+<span class="">	move v3, v2</span>
+<span class="">	:goto_2</span>
+<span class="">	if-ge v3, v5, :cond_3</span>
+<span class="">	aget-object v9, v6, v3</span>
+<span class="">	invoke-virtual {v9}, Ljava/lang/StackTraceElement;->getClassName()Ljava/lang/String;</span>
+<span class="">	move-result-object v10</span>
+<span class="">	invoke-virtual {v9}, Ljava/lang/StackTraceElement;->getFileName()Ljava/lang/String;</span>
+<span class="">	move-result-object v12</span>
+<span class="">	invoke-static {v12}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v13</span>
+<span class="">	if-nez v13, :cond_1</span>
+<span class="">	const-string v13, ":com.google.android.gms"</span>
+<span class="">	invoke-virtual {v12, v13}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result v12</span>
+<span class="">	if-eqz v12, :cond_1</span>
+<span class="">	move v12, v11</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:cond_1</span>
+<span class="">	move v12, v2</span>
+<span class="">	:goto_3</span>
+<span class="">	or-int/2addr v8, v12</span>
+<span class="">	if-nez v12, :cond_2</span>
+<span class="">	invoke-static {v10}, Lcom/google/android/gms/common/util/CrashUtils;->isSystemClassPrefixInternal(Ljava/lang/String;)Z</span>
+<span class="">	move-result v10</span>
+<span class="">	if-nez v10, :cond_2</span>
+<span class="">	new-instance v9, Ljava/lang/StackTraceElement;</span>
+<span class="">	const-string v10, "<filtered>"</span>
+<span class="">	const-string v12, "<filtered>"</span>
+<span class="">	const-string v13, "<filtered>"</span>
+<span class="">	invoke-direct {v9, v10, v12, v13, v11}, Ljava/lang/StackTraceElement;-><init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)V</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-virtual {v7, v9}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_3</span>
+<span class="">	if-nez v4, :cond_4</span>
+<span class="">	new-instance v3, Ljava/lang/Throwable;</span>
+<span class="">	const-string v4, "<filtered>"</span>
+<span class="">	invoke-direct {v3, v4}, Ljava/lang/Throwable;-><init>(Ljava/lang/String;)V</span>
+<span class="">	:goto_4</span>
+<span class="">	move-object v4, v3</span>
+<span class="">	goto :goto_5</span>
+<span class="">	:cond_4</span>
+<span class="">	new-instance v3, Ljava/lang/Throwable;</span>
+<span class="">	const-string v5, "<filtered>"</span>
+<span class="">	invoke-direct {v3, v5, v4}, Ljava/lang/Throwable;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:goto_5</span>
+<span class="">	new-array v3, v2, [Ljava/lang/StackTraceElement;</span>
+<span class="">	invoke-virtual {v7, v3}, Ljava/util/ArrayList;->toArray([Ljava/lang/Object;)[Ljava/lang/Object;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	check-cast v3, [Ljava/lang/StackTraceElement;</span>
+<span class="">	invoke-virtual {v4, v3}, Ljava/lang/Throwable;->setStackTrace([Ljava/lang/StackTraceElement;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	move v3, v8</span>
+<span class="">	goto/16 :goto_1</span>
+<span class="">	:cond_5</span>
+<span class="">	if-nez v3, :cond_6</span>
+<span class="">	monitor-exit v0</span>
+<span class="">	monitor-exit v0</span>
+<span class="">	:cond_6</span>
+<span class="">	move-exception p0</span>
+<span class="">	monitor-exit v0</span>
+<span class="">	:catchall_0</span>
+<span class="">	throw p0</span>
+.end method
+
+.method private static declared-synchronized zza(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Throwable;)Z
+<span class="">	.locals 4</span>
+
+<span class="">	const-class v0, Lcom/google/android/gms/common/util/CrashUtils;</span>
+<span class="">	monitor-enter v0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	invoke-static {}, Lcom/google/android/gms/common/util/CrashUtils;->isPackageSide()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	if-eqz v1, :cond_6</span>
+<span class="">	invoke-static {p1}, Lcom/google/android/gms/common/util/Strings;->isEmptyOrWhitespace(Ljava/lang/String;)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/String;->hashCode()I</span>
+<span class="">	move-result v1</span>
+<span class="">	if-nez p4, :cond_1</span>
+<span class="">	sget p4, Lcom/google/android/gms/common/util/CrashUtils;->zzzj:I</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {p4}, Ljava/lang/Object;->hashCode()I</span>
+<span class="">	move-result p4</span>
+<span class="">	:goto_0</span>
+<span class="">	sget v3, Lcom/google/android/gms/common/util/CrashUtils;->zzzi:I</span>
+<span class="">	if-ne v3, v1, :cond_2</span>
+<span class="">	sget v3, Lcom/google/android/gms/common/util/CrashUtils;->zzzj:I</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	if-ne v3, p4, :cond_2</span>
+<span class="">	monitor-exit v0</span>
+<span class="">	sput v1, Lcom/google/android/gms/common/util/CrashUtils;->zzzi:I</span>
+<span class="">	:try_start_1</span>
+<span class="">	:cond_2</span>
+<span class="">	sput p4, Lcom/google/android/gms/common/util/CrashUtils;->zzzj:I</span>
+<span class="">	sget-object p4, Lcom/google/android/gms/common/util/CrashUtils;->zzzd:Landroid/os/DropBoxManager;</span>
+<span class="">	if-eqz p4, :cond_3</span>
+<span class="">	sget-object p4, Lcom/google/android/gms/common/util/CrashUtils;->zzzd:Landroid/os/DropBoxManager;</span>
+<span class="">	goto :goto_1</span>
+<span class="">	const-string p4, "dropbox"</span>
+<span class="">	:cond_3</span>
+<span class="">	invoke-virtual {p0, p4}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p4</span>
+<span class="">	check-cast p4, Landroid/os/DropBoxManager;</span>
+<span class="">	if-eqz p4, :cond_5</span>
+<span class="">	:goto_1</span>
+<span class="">	const-string v1, "system_app_crash"</span>
+<span class="">	invoke-virtual {p4, v1}, Landroid/os/DropBoxManager;->isTagEnabled(Ljava/lang/String;)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-nez v1, :cond_4</span>
+<span class="">	goto :goto_2</span>
+<span class="">	invoke-static {p0, p1, p2, p3}, Lcom/google/android/gms/common/util/CrashUtils;->zza(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;I)Ljava/lang/String;</span>
+<span class="">	:cond_4</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const-string p1, "system_app_crash"</span>
+<span class="">	invoke-virtual {p4, p1, p0}, Landroid/os/DropBoxManager;->addText(Ljava/lang/String;Ljava/lang/String;)V</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_0</span>
+<span class="">	monitor-exit v0</span>
+<span class="">	monitor-exit v0</span>
+<span class="">	monitor-exit v0</span>
+<span class="">	:goto_2</span>
+<span class="">	:cond_5</span>
+<span class="">	move-exception p0</span>
+<span class="">	monitor-exit v0</span>
+<span class="">	:goto_3</span>
+<span class="">	:cond_6</span>
+<span class="">	throw p0</span>
+<span class="">	:catchall_0</span>
+.end method
+
+.method private static zzdb()Z
+<span class="">	.locals 1</span>
+
+<span class="">	sget-boolean v0, Lcom/google/android/gms/common/util/CrashUtils;->zzze:Z</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	sget-boolean v0, Lcom/google/android/gms/common/util/CrashUtils;->zzzg:Z</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:cond_0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../../.resources/report.js"></script>
+</body>
+</html>

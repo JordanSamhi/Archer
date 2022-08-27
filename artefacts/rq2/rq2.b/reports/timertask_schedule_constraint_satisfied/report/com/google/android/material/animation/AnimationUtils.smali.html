@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../index.html">lu.uni.trux.timertask_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.material.animation</a></li>
+        <li><i class="ico ico-class"></i> AnimationUtils.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Lcom/google/android/material/animation/AnimationUtils;
+.super Ljava/lang/Object;
+.source "AnimationUtils.java"
+
+
+.field public static final DECELERATE_INTERPOLATOR:Landroid/animation/TimeInterpolator;
+.field public static final FAST_OUT_LINEAR_IN_INTERPOLATOR:Landroid/animation/TimeInterpolator;
+.field public static final FAST_OUT_SLOW_IN_INTERPOLATOR:Landroid/animation/TimeInterpolator;
+.field public static final LINEAR_INTERPOLATOR:Landroid/animation/TimeInterpolator;
+.field public static final LINEAR_OUT_SLOW_IN_INTERPOLATOR:Landroid/animation/TimeInterpolator;
+
+
+.method static constructor <clinit>()V
+<span class="">	.locals 1</span>
+
+<span class="">	new-instance v0, Landroid/view/animation/LinearInterpolator;</span>
+<span class="">	invoke-direct {v0}, Landroid/view/animation/LinearInterpolator;-><init>()V</span>
+<span class="">	sput-object v0, Lcom/google/android/material/animation/AnimationUtils;->LINEAR_INTERPOLATOR:Landroid/animation/TimeInterpolator;</span>
+<span class="">	new-instance v0, Landroidx/interpolator/view/animation/FastOutSlowInInterpolator;</span>
+<span class="">	invoke-direct {v0}, Landroidx/interpolator/view/animation/FastOutSlowInInterpolator;-><init>()V</span>
+<span class="">	sput-object v0, Lcom/google/android/material/animation/AnimationUtils;->FAST_OUT_SLOW_IN_INTERPOLATOR:Landroid/animation/TimeInterpolator;</span>
+<span class="">	new-instance v0, Landroidx/interpolator/view/animation/FastOutLinearInInterpolator;</span>
+<span class="">	invoke-direct {v0}, Landroidx/interpolator/view/animation/FastOutLinearInInterpolator;-><init>()V</span>
+<span class="">	sput-object v0, Lcom/google/android/material/animation/AnimationUtils;->FAST_OUT_LINEAR_IN_INTERPOLATOR:Landroid/animation/TimeInterpolator;</span>
+<span class="">	new-instance v0, Landroidx/interpolator/view/animation/LinearOutSlowInInterpolator;</span>
+<span class="">	invoke-direct {v0}, Landroidx/interpolator/view/animation/LinearOutSlowInInterpolator;-><init>()V</span>
+<span class="">	sput-object v0, Lcom/google/android/material/animation/AnimationUtils;->LINEAR_OUT_SLOW_IN_INTERPOLATOR:Landroid/animation/TimeInterpolator;</span>
+<span class="">	new-instance v0, Landroid/view/animation/DecelerateInterpolator;</span>
+<span class="">	invoke-direct {v0}, Landroid/view/animation/DecelerateInterpolator;-><init>()V</span>
+<span class="">	sput-object v0, Lcom/google/android/material/animation/AnimationUtils;->DECELERATE_INTERPOLATOR:Landroid/animation/TimeInterpolator;</span>
+.end method
+
+.method public constructor <init>()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+.end method
+
+.method public static lerp(FFF)F
+<span class="">	.locals 0</span>
+
+<span class="">	sub-float/2addr p1, p0</span>
+<span class="">	mul-float/2addr p2, p1</span>
+<span class="">	add-float/2addr p0, p2</span>
+.end method
+
+.method public static lerp(FFFFF)F
+<span class="">	.locals 1</span>
+
+<span class="">	cmpg-float v0, p4, p2</span>
+<span class="">	if-gez v0, :cond_0</span>
+<span class="">	cmpl-float v0, p4, p3</span>
+<span class="">	:cond_0</span>
+<span class="">	if-lez v0, :cond_1</span>
+<span class="">	sub-float/2addr p4, p2</span>
+<span class="">	sub-float/2addr p3, p2</span>
+<span class="">	:cond_1</span>
+<span class="">	div-float/2addr p4, p3</span>
+<span class="">	invoke-static {p0, p1, p4}, Lcom/google/android/material/animation/AnimationUtils;->lerp(FFF)F</span>
+<span class="">	move-result p0</span>
+.end method
+
+.method public static lerp(IIF)I
+<span class="">	.locals 0</span>
+
+<span class="">	sub-int/2addr p1, p0</span>
+<span class="">	int-to-float p1, p1</span>
+<span class="">	mul-float/2addr p2, p1</span>
+<span class="">	invoke-static {p2}, Ljava/lang/Math;->round(F)I</span>
+<span class="">	move-result p1</span>
+<span class="">	add-int/2addr p0, p1</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../.resources/report.js"></script>
+</body>
+</html>

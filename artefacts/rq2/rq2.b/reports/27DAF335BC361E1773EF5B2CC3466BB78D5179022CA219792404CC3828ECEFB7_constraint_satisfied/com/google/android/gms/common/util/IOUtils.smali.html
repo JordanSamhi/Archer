@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.gms.common.util</a></li>
+        <li><i class="ico ico-class"></i> IOUtils.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public final Lcom/google/android/gms/common/util/IOUtils;
+.super Ljava/lang/Object;
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Lcom/google/android/gms/common/util/IOUtils$zza;,
+Lcom/google/android/gms/common/util/IOUtils$zzb;
+}
+.end annotation
+
+
+
+.method private constructor <init>()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+.end method
+
+.method public static close(Ljava/io/Closeable;Ljava/lang/String;Ljava/lang/String;)V
+<span class="">	.locals 0</span>
+<span class="">	.param p0    # Ljava/io/Closeable;</span>
+<span class="">	.annotation runtime Ljavax/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-interface {p0}, Ljava/io/Closeable;->close()V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	move-exception p0</span>
+<span class="">	:catch_0</span>
+<span class="">	invoke-static {p1, p2, p0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public static closeQuietly(Landroid/os/ParcelFileDescriptor;)V
+<span class="">	.locals 0</span>
+<span class="">	.param p0    # Landroid/os/ParcelFileDescriptor;</span>
+<span class="">	.annotation runtime Ljavax/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/os/ParcelFileDescriptor;->close()V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	:cond_0</span>
+<span class="">	:catch_0</span>
+.end method
+
+.method public static closeQuietly(Ljava/io/Closeable;)V
+<span class="">	.locals 0</span>
+<span class="">	.param p0    # Ljava/io/Closeable;</span>
+<span class="">	.annotation runtime Ljavax/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-interface {p0}, Ljava/io/Closeable;->close()V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	:cond_0</span>
+<span class="">	:catch_0</span>
+.end method
+
+.method public static closeQuietly(Ljava/net/ServerSocket;)V
+<span class="">	.locals 0</span>
+<span class="">	.param p0    # Ljava/net/ServerSocket;</span>
+<span class="">	.annotation runtime Ljavax/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p0}, Ljava/net/ServerSocket;->close()V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	:cond_0</span>
+<span class="">	:catch_0</span>
+.end method
+
+.method public static closeQuietly(Ljava/net/Socket;)V
+<span class="">	.locals 0</span>
+<span class="">	.param p0    # Ljava/net/Socket;</span>
+<span class="">	.annotation runtime Ljavax/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p0}, Ljava/net/Socket;->close()V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	:cond_0</span>
+<span class="">	:catch_0</span>
+.end method
+
+.method public static copyStream(Ljava/io/InputStream;Ljava/io/OutputStream;)J
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-static {p0, p1, v0}, Lcom/google/android/gms/common/util/IOUtils;->copyStream(Ljava/io/InputStream;Ljava/io/OutputStream;Z)J</span>
+<span class="">	move-result-wide p0</span>
+.end method
+
+.method public static copyStream(Ljava/io/InputStream;Ljava/io/OutputStream;Z)J
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/16 v0, 0x400</span>
+<span class="">	invoke-static {p0, p1, p2, v0}, Lcom/google/android/gms/common/util/IOUtils;->copyStream(Ljava/io/InputStream;Ljava/io/OutputStream;ZI)J</span>
+<span class="">	move-result-wide p0</span>
+.end method
+
+.method public static copyStream(Ljava/io/InputStream;Ljava/io/OutputStream;ZI)J
+<span class="">	.locals 9</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-array v0, p3, [B</span>
+<span class="">	const-wide/16 v1, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p0, v0, v3, p3}, Ljava/io/InputStream;->read([BII)I</span>
+<span class="">	move-result v4</span>
+<span class="">	const/4 v5, -0x1</span>
+<span class="">	if-eq v4, v5, :cond_0</span>
+<span class="">	int-to-long v5, v4</span>
+<span class="">	add-long v7, v1, v5</span>
+<span class="">	invoke-virtual {p1, v0, v3, v4}, Ljava/io/OutputStream;->write([BII)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	move-wide v1, v7</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	if-eqz p2, :cond_1</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/common/util/IOUtils;->closeQuietly(Ljava/io/Closeable;)V</span>
+<span class="">	invoke-static {p1}, Lcom/google/android/gms/common/util/IOUtils;->closeQuietly(Ljava/io/Closeable;)V</span>
+<span class="">	:cond_1</span>
+<span class="">	move-exception p3</span>
+<span class="">	:catchall_0</span>
+<span class="">	if-eqz p2, :cond_2</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/common/util/IOUtils;->closeQuietly(Ljava/io/Closeable;)V</span>
+<span class="">	invoke-static {p1}, Lcom/google/android/gms/common/util/IOUtils;->closeQuietly(Ljava/io/Closeable;)V</span>
+<span class="">	throw p3</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method public static isGzipByteBuffer([B)Z
+<span class="">	.locals 3</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	array-length v2, p0</span>
+<span class="">	if-le v2, v1, :cond_0</span>
+<span class="">	aget-byte v2, p0, v0</span>
+<span class="">	and-int/lit16 v2, v2, 0xff</span>
+<span class="">	aget-byte p0, p0, v1</span>
+<span class="">	and-int/lit16 p0, p0, 0xff</span>
+<span class="">	shl-int/lit8 p0, p0, 0x8</span>
+<span class="">	or-int/2addr p0, v2</span>
+<span class="">	const v2, 0x8b1f</span>
+<span class="">	if-ne p0, v2, :cond_0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public static lockAndTruncateFile(Ljava/io/File;)V
+<span class="">	.locals 5</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;,</span>
+<span class="">	Ljava/nio/channels/OverlappingFileLockException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation build Landroid/support/annotation/WorkerThread;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Ljava/io/File;->exists()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	new-instance p0, Ljava/io/FileNotFoundException;</span>
+<span class="">	invoke-direct {p0}, Ljava/io/FileNotFoundException;-><init>()V</span>
+<span class="">	throw p0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:try_start_0</span>
+<span class="">	new-instance v1, Ljava/io/RandomAccessFile;</span>
+<span class="">	const-string v2, "rw"</span>
+<span class="">	invoke-direct {v1, p0, v2}, Ljava/io/RandomAccessFile;-><init>(Ljava/io/File;Ljava/lang/String;)V</span>
+<span class="">	:try_start_1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_2</span>
+<span class="">	invoke-virtual {v1}, Ljava/io/RandomAccessFile;->getChannel()Ljava/nio/channels/FileChannel;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0}, Ljava/nio/channels/FileChannel;->lock()Ljava/nio/channels/FileLock;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_1</span>
+<span class="">	const-wide/16 v3, 0x0</span>
+<span class="">	:try_start_2</span>
+<span class="">	invoke-virtual {p0, v3, v4}, Ljava/nio/channels/FileChannel;->truncate(J)Ljava/nio/channels/FileChannel;</span>
+<span class="">	:try_end_2</span>
+<span class="">	.catchall {:try_start_2 .. :try_end_2} :catchall_0</span>
+<span class="">	if-eqz v2, :cond_1</span>
+<span class="">	invoke-virtual {v2}, Ljava/nio/channels/FileLock;->isValid()Z</span>
+<span class="">	move-result p0</span>
+<span class="">	if-eqz p0, :cond_1</span>
+<span class="">	:try_start_3</span>
+<span class="">	invoke-virtual {v2}, Ljava/nio/channels/FileLock;->release()V</span>
+<span class="">	:try_end_3</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_3 .. :try_end_3} :catch_0</span>
+<span class="">	:catch_0</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-static {v1}, Lcom/google/android/gms/common/util/IOUtils;->closeQuietly(Ljava/io/Closeable;)V</span>
+<span class="">	move-exception p0</span>
+<span class="">	:catchall_0</span>
+<span class="">	move-object v0, v2</span>
+<span class="">	goto :goto_0</span>
+<span class="">	move-exception p0</span>
+<span class="">	:catchall_1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	move-exception p0</span>
+<span class="">	:catchall_2</span>
+<span class="">	move-object v1, v0</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {v0}, Ljava/nio/channels/FileLock;->isValid()Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_2</span>
+<span class="">	invoke-virtual {v0}, Ljava/nio/channels/FileLock;->release()V</span>
+<span class="">	:try_start_4</span>
+<span class="">	if-eqz v1, :cond_3</span>
+<span class="">	:try_end_4</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_4 .. :try_end_4} :catch_1</span>
+<span class="">	:catch_1</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-static {v1}, Lcom/google/android/gms/common/util/IOUtils;->closeQuietly(Ljava/io/Closeable;)V</span>
+<span class="">	throw p0</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method public static readInputStreamFully(Ljava/io/InputStream;)[B
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	invoke-static {p0, v0}, Lcom/google/android/gms/common/util/IOUtils;->readInputStreamFully(Ljava/io/InputStream;Z)[B</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method public static readInputStreamFully(Ljava/io/InputStream;Z)[B
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/io/ByteArrayOutputStream;</span>
+<span class="">	invoke-direct {v0}, Ljava/io/ByteArrayOutputStream;-><init>()V</span>
+<span class="">	invoke-static {p0, v0, p1}, Lcom/google/android/gms/common/util/IOUtils;->copyStream(Ljava/io/InputStream;Ljava/io/OutputStream;Z)J</span>
+<span class="">	invoke-virtual {v0}, Ljava/io/ByteArrayOutputStream;->toByteArray()[B</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method public static toByteArray(Ljava/io/File;)[B
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Lcom/google/android/gms/common/util/IOUtils$zzb;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-direct {v0, p0, v1}, Lcom/google/android/gms/common/util/IOUtils$zzb;-><init>(Ljava/io/File;Lcom/google/android/gms/common/util/zzb;)V</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/gms/common/util/IOUtils$zzb;->zzdd()[B</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method public static toByteArray(Ljava/io/InputStream;)[B
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/io/ByteArrayOutputStream;</span>
+<span class="">	invoke-direct {v0}, Ljava/io/ByteArrayOutputStream;-><init>()V</span>
+<span class="">	invoke-static {p0, v0}, Lcom/google/android/gms/common/util/IOUtils;->zza(Ljava/io/InputStream;Ljava/io/OutputStream;)J</span>
+<span class="">	invoke-virtual {v0}, Ljava/io/ByteArrayOutputStream;->toByteArray()[B</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method private static zza(Ljava/io/InputStream;Ljava/io/OutputStream;)J
+<span class="">	.locals 7</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	invoke-static {p1}, Lcom/google/android/gms/common/internal/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	const/16 v0, 0x1000</span>
+<span class="">	new-array v0, v0, [B</span>
+<span class="">	const-wide/16 v1, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/io/InputStream;->read([B)I</span>
+<span class="">	move-result v3</span>
+<span class="">	const/4 v4, -0x1</span>
+<span class="">	if-eq v3, v4, :cond_0</span>
+<span class="">	const/4 v4, 0x0</span>
+<span class="">	invoke-virtual {p1, v0, v4, v3}, Ljava/io/OutputStream;->write([BII)V</span>
+<span class="">	int-to-long v3, v3</span>
+<span class="">	add-long v5, v1, v3</span>
+<span class="">	move-wide v1, v5</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private static zza(Ljava/io/InputStream;J)[B
+<span class="">	.locals 4</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const-wide/32 v0, 0x7fffffff</span>
+<span class="">	cmp-long v2, p1, v0</span>
+<span class="">	if-lez v2, :cond_0</span>
+<span class="">	new-instance p0, Ljava/lang/OutOfMemoryError;</span>
+<span class="">	const/16 v0, 0x44</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v1, v0}, Ljava/lang/StringBuilder;-><init>(I)V</span>
+<span class="">	const-string v0, "file is too large to fit in a byte array: "</span>
+<span class="">	invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v1, p1, p2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p1, " bytes"</span>
+<span class="">	invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {p0, p1}, Ljava/lang/OutOfMemoryError;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p0</span>
+<span class="">	:cond_0</span>
+<span class="">	const-wide/16 v0, 0x0</span>
+<span class="">	cmp-long v2, p1, v0</span>
+<span class="">	if-nez v2, :cond_1</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/common/util/IOUtils;->toByteArray(Ljava/io/InputStream;)[B</span>
+<span class="">	move-result-object p0</span>
+<span class="">	long-to-int p1, p1</span>
+<span class="">	:cond_1</span>
+<span class="">	new-array p2, p1, [B</span>
+<span class="">	move v0, p1</span>
+<span class="">	const/4 v1, -0x1</span>
+<span class="">	:goto_0</span>
+<span class="">	if-lez v0, :cond_3</span>
+<span class="">	sub-int v2, p1, v0</span>
+<span class="">	invoke-virtual {p0, p2, v2, v0}, Ljava/io/InputStream;->read([BII)I</span>
+<span class="">	move-result v3</span>
+<span class="">	if-ne v3, v1, :cond_2</span>
+<span class="">	invoke-static {p2, v2}, Ljava/util/Arrays;->copyOf([BI)[B</span>
+<span class="">	move-result-object p0</span>
+<span class="">	sub-int/2addr v0, v3</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-virtual {p0}, Ljava/io/InputStream;->read()I</span>
+<span class="">	move-result p1</span>
+<span class="">	:cond_3</span>
+<span class="">	if-ne p1, v1, :cond_4</span>
+<span class="">	new-instance v0, Lcom/google/android/gms/common/util/IOUtils$zza;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-direct {v0, v1}, Lcom/google/android/gms/common/util/IOUtils$zza;-><init>(Lcom/google/android/gms/common/util/zzb;)V</span>
+<span class="">	:cond_4</span>
+<span class="">	invoke-virtual {v0, p1}, Lcom/google/android/gms/common/util/IOUtils$zza;->write(I)V</span>
+<span class="">	invoke-static {p0, v0}, Lcom/google/android/gms/common/util/IOUtils;->zza(Ljava/io/InputStream;Ljava/io/OutputStream;)J</span>
+<span class="">	array-length p0, p2</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/gms/common/util/IOUtils$zza;->size()I</span>
+<span class="">	move-result p1</span>
+<span class="">	add-int/2addr p0, p1</span>
+<span class="">	invoke-static {p2, p0}, Ljava/util/Arrays;->copyOf([BI)[B</span>
+<span class="">	move-result-object p0</span>
+<span class="">	array-length p1, p2</span>
+<span class="">	invoke-virtual {v0, p0, p1}, Lcom/google/android/gms/common/util/IOUtils$zza;->zza([BI)V</span>
+.end method
+
+.method static synthetic zzb(Ljava/io/InputStream;J)[B
+<span class="">	.locals 0</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {p0, p1, p2}, Lcom/google/android/gms/common/util/IOUtils;->zza(Ljava/io/InputStream;J)[B</span>
+<span class="">	move-result-object p0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../../.resources/report.js"></script>
+</body>
+</html>

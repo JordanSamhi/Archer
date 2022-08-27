@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../index.html">lu.uni.trux.timertask_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.material.floatingactionbutton</a></li>
+        <li><i class="ico ico-class"></i> BorderDrawable.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class  Lcom/google/android/material/floatingactionbutton/BorderDrawable;
+.super Landroid/graphics/drawable/Drawable;
+.source "BorderDrawable.java"
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Lcom/google/android/material/floatingactionbutton/BorderDrawable$BorderState;
+}
+.end annotation
+
+.field private static final DRAW_STROKE_WIDTH_MULTIPLE:F = 1.3333f
+.field private borderTint:Landroid/content/res/ColorStateList;
+.field  borderWidth:F
+.field private bottomInnerStrokeColor:I
+.field private bottomOuterStrokeColor:I
+.field private final boundsRectF:Landroid/graphics/RectF;
+.field private currentBorderTintColor:I
+.field private invalidateShader:Z
+.field private final paint:Landroid/graphics/Paint;
+.field private final pathProvider:Lcom/google/android/material/shape/ShapeAppearancePathProvider;
+.field private final rect:Landroid/graphics/Rect;
+.field private final rectF:Landroid/graphics/RectF;
+.field private shapeAppearanceModel:Lcom/google/android/material/shape/ShapeAppearanceModel;
+.field private final shapePath:Landroid/graphics/Path;
+.field private final state:Lcom/google/android/material/floatingactionbutton/BorderDrawable$BorderState;
+.field private topInnerStrokeColor:I
+.field private topOuterStrokeColor:I
+
+
+.method constructor <init>(Lcom/google/android/material/shape/ShapeAppearanceModel;)V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-direct {p0}, Landroid/graphics/drawable/Drawable;-><init>()V</span>
+<span class="">	invoke-static {}, Lcom/google/android/material/shape/ShapeAppearancePathProvider;->getInstance()Lcom/google/android/material/shape/ShapeAppearancePathProvider;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->pathProvider:Lcom/google/android/material/shape/ShapeAppearancePathProvider;</span>
+<span class="">	new-instance v0, Landroid/graphics/Path;</span>
+<span class="">	invoke-direct {v0}, Landroid/graphics/Path;-><init>()V</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->shapePath:Landroid/graphics/Path;</span>
+<span class="">	new-instance v0, Landroid/graphics/Rect;</span>
+<span class="">	invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->rect:Landroid/graphics/Rect;</span>
+<span class="">	new-instance v0, Landroid/graphics/RectF;</span>
+<span class="">	invoke-direct {v0}, Landroid/graphics/RectF;-><init>()V</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->rectF:Landroid/graphics/RectF;</span>
+<span class="">	new-instance v0, Landroid/graphics/RectF;</span>
+<span class="">	invoke-direct {v0}, Landroid/graphics/RectF;-><init>()V</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->boundsRectF:Landroid/graphics/RectF;</span>
+<span class="">	new-instance v0, Lcom/google/android/material/floatingactionbutton/BorderDrawable$BorderState;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-direct {v0, p0, v1}, Lcom/google/android/material/floatingactionbutton/BorderDrawable$BorderState;-><init>(Lcom/google/android/material/floatingactionbutton/BorderDrawable;Lcom/google/android/material/floatingactionbutton/BorderDrawable$1;)V</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->state:Lcom/google/android/material/floatingactionbutton/BorderDrawable$BorderState;</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	iput-boolean v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->invalidateShader:Z</span>
+<span class="">	iput-object p1, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->shapeAppearanceModel:Lcom/google/android/material/shape/ShapeAppearanceModel;</span>
+<span class="">	new-instance p1, Landroid/graphics/Paint;</span>
+<span class="">	invoke-direct {p1, v0}, Landroid/graphics/Paint;-><init>(I)V</span>
+<span class="">	iput-object p1, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->paint:Landroid/graphics/Paint;</span>
+<span class="">	sget-object v0, Landroid/graphics/Paint$Style;->STROKE:Landroid/graphics/Paint$Style;</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V</span>
+.end method
+
+.method private createGradientShader()Landroid/graphics/Shader;
+<span class="">	.locals 11</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->rect:Landroid/graphics/Rect;</span>
+<span class="">	invoke-virtual {p0, v0}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->copyBounds(Landroid/graphics/Rect;)V</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->borderWidth:F</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/Rect;->height()I</span>
+<span class="">	move-result v2</span>
+<span class="">	int-to-float v2, v2</span>
+<span class="">	div-float/2addr v1, v2</span>
+<span class="">	const/4 v2, 0x6</span>
+<span class="">	new-array v8, v2, [I</span>
+<span class="">	iget v3, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->topOuterStrokeColor:I</span>
+<span class="">	iget v4, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->currentBorderTintColor:I</span>
+<span class="">	invoke-static {v3, v4}, Landroidx/core/graphics/ColorUtils;->compositeColors(II)I</span>
+<span class="">	move-result v3</span>
+<span class="">	const/4 v4, 0x0</span>
+<span class="">	aput v3, v8, v4</span>
+<span class="">	iget v3, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->topInnerStrokeColor:I</span>
+<span class="">	iget v5, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->currentBorderTintColor:I</span>
+<span class="">	invoke-static {v3, v5}, Landroidx/core/graphics/ColorUtils;->compositeColors(II)I</span>
+<span class="">	move-result v3</span>
+<span class="">	const/4 v5, 0x1</span>
+<span class="">	aput v3, v8, v5</span>
+<span class="">	iget v3, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->topInnerStrokeColor:I</span>
+<span class="">	invoke-static {v3, v4}, Landroidx/core/graphics/ColorUtils;->setAlphaComponent(II)I</span>
+<span class="">	move-result v3</span>
+<span class="">	iget v6, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->currentBorderTintColor:I</span>
+<span class="">	invoke-static {v3, v6}, Landroidx/core/graphics/ColorUtils;->compositeColors(II)I</span>
+<span class="">	move-result v3</span>
+<span class="">	const/4 v6, 0x2</span>
+<span class="">	aput v3, v8, v6</span>
+<span class="">	iget v3, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->bottomInnerStrokeColor:I</span>
+<span class="">	invoke-static {v3, v4}, Landroidx/core/graphics/ColorUtils;->setAlphaComponent(II)I</span>
+<span class="">	move-result v3</span>
+<span class="">	iget v7, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->currentBorderTintColor:I</span>
+<span class="">	invoke-static {v3, v7}, Landroidx/core/graphics/ColorUtils;->compositeColors(II)I</span>
+<span class="">	move-result v3</span>
+<span class="">	const/4 v7, 0x3</span>
+<span class="">	aput v3, v8, v7</span>
+<span class="">	iget v3, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->bottomInnerStrokeColor:I</span>
+<span class="">	iget v9, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->currentBorderTintColor:I</span>
+<span class="">	invoke-static {v3, v9}, Landroidx/core/graphics/ColorUtils;->compositeColors(II)I</span>
+<span class="">	move-result v3</span>
+<span class="">	const/4 v9, 0x4</span>
+<span class="">	aput v3, v8, v9</span>
+<span class="">	iget v3, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->bottomOuterStrokeColor:I</span>
+<span class="">	iget v10, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->currentBorderTintColor:I</span>
+<span class="">	invoke-static {v3, v10}, Landroidx/core/graphics/ColorUtils;->compositeColors(II)I</span>
+<span class="">	move-result v3</span>
+<span class="">	const/4 v10, 0x5</span>
+<span class="">	aput v3, v8, v10</span>
+<span class="">	new-array v2, v2, [F</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	aput v3, v2, v4</span>
+<span class="">	aput v1, v2, v5</span>
+<span class="">	const/high16 v3, 0x3f000000    # 0.5f</span>
+<span class="">	aput v3, v2, v6</span>
+<span class="">	aput v3, v2, v7</span>
+<span class="">	const/high16 v3, 0x3f800000    # 1.0f</span>
+<span class="">	sub-float v1, v3, v1</span>
+<span class="">	aput v1, v2, v9</span>
+<span class="">	aput v3, v2, v10</span>
+<span class="">	new-instance v1, Landroid/graphics/LinearGradient;</span>
+<span class="">	iget v3, v0, Landroid/graphics/Rect;->top:I</span>
+<span class="">	int-to-float v5, v3</span>
+<span class="">	iget v0, v0, Landroid/graphics/Rect;->bottom:I</span>
+<span class="">	int-to-float v7, v0</span>
+<span class="">	sget-object v10, Landroid/graphics/Shader$TileMode;->CLAMP:Landroid/graphics/Shader$TileMode;</span>
+<span class="">	const/4 v4, 0x0</span>
+<span class="">	const/4 v6, 0x0</span>
+<span class="">	move-object v3, v1</span>
+<span class="">	move-object v9, v2</span>
+<span class="">	invoke-direct/range {v3 .. v10}, Landroid/graphics/LinearGradient;-><init>(FFFF[I[FLandroid/graphics/Shader$TileMode;)V</span>
+.end method
+
+.method public draw(Landroid/graphics/Canvas;)V
+<span class="">	.locals 4</span>
+
+<span class="">	iget-boolean v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->invalidateShader:Z</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->paint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-direct {p0}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->createGradientShader()Landroid/graphics/Shader;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setShader(Landroid/graphics/Shader;)Landroid/graphics/Shader;</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-boolean v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->invalidateShader:Z</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->paint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/Paint;->getStrokeWidth()F</span>
+<span class="">	move-result v0</span>
+<span class="">	const/high16 v1, 0x40000000    # 2.0f</span>
+<span class="">	div-float/2addr v0, v1</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->rect:Landroid/graphics/Rect;</span>
+<span class="">	invoke-virtual {p0, v2}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->copyBounds(Landroid/graphics/Rect;)V</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->rectF:Landroid/graphics/RectF;</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->rect:Landroid/graphics/Rect;</span>
+<span class="">	invoke-virtual {v2, v3}, Landroid/graphics/RectF;->set(Landroid/graphics/Rect;)V</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->shapeAppearanceModel:Lcom/google/android/material/shape/ShapeAppearanceModel;</span>
+<span class="">	invoke-virtual {v2}, Lcom/google/android/material/shape/ShapeAppearanceModel;->getTopLeftCornerSize()Lcom/google/android/material/shape/CornerSize;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->getBoundsAsRectF()Landroid/graphics/RectF;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-interface {v2, v3}, Lcom/google/android/material/shape/CornerSize;->getCornerSize(Landroid/graphics/RectF;)F</span>
+<span class="">	move-result v2</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->rectF:Landroid/graphics/RectF;</span>
+<span class="">	invoke-virtual {v3}, Landroid/graphics/RectF;->width()F</span>
+<span class="">	move-result v3</span>
+<span class="">	div-float/2addr v3, v1</span>
+<span class="">	invoke-static {v2, v3}, Ljava/lang/Math;->min(FF)F</span>
+<span class="">	move-result v1</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->shapeAppearanceModel:Lcom/google/android/material/shape/ShapeAppearanceModel;</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->getBoundsAsRectF()Landroid/graphics/RectF;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {v2, v3}, Lcom/google/android/material/shape/ShapeAppearanceModel;->isRoundRect(Landroid/graphics/RectF;)Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_1</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->rectF:Landroid/graphics/RectF;</span>
+<span class="">	invoke-virtual {v2, v0, v0}, Landroid/graphics/RectF;->inset(FF)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->rectF:Landroid/graphics/RectF;</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->paint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p1, v0, v1, v1, v2}, Landroid/graphics/Canvas;->drawRoundRect(Landroid/graphics/RectF;FFLandroid/graphics/Paint;)V</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method protected getBoundsAsRectF()Landroid/graphics/RectF;
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->boundsRectF:Landroid/graphics/RectF;</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->getBounds()Landroid/graphics/Rect;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/graphics/RectF;->set(Landroid/graphics/Rect;)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->boundsRectF:Landroid/graphics/RectF;</span>
+.end method
+
+.method public getConstantState()Landroid/graphics/drawable/Drawable$ConstantState;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->state:Lcom/google/android/material/floatingactionbutton/BorderDrawable$BorderState;</span>
+.end method
+
+.method public getOpacity()I
+<span class="">	.locals 2</span>
+
+<span class="">	iget v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->borderWidth:F</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	cmpl-float v0, v0, v1</span>
+<span class="">	if-lez v0, :cond_0</span>
+<span class="">	const/4 v0, -0x3</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, -0x2</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public getOutline(Landroid/graphics/Outline;)V
+<span class="">	.locals 5</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->shapeAppearanceModel:Lcom/google/android/material/shape/ShapeAppearanceModel;</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->getBoundsAsRectF()Landroid/graphics/RectF;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/material/shape/ShapeAppearanceModel;->isRoundRect(Landroid/graphics/RectF;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->shapeAppearanceModel:Lcom/google/android/material/shape/ShapeAppearanceModel;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/shape/ShapeAppearanceModel;->getTopLeftCornerSize()Lcom/google/android/material/shape/CornerSize;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->getBoundsAsRectF()Landroid/graphics/RectF;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-interface {v0, v1}, Lcom/google/android/material/shape/CornerSize;->getCornerSize(Landroid/graphics/RectF;)F</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->getBounds()Landroid/graphics/Rect;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {p1, v1, v0}, Landroid/graphics/Outline;->setRoundRect(Landroid/graphics/Rect;F)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->rect:Landroid/graphics/Rect;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0, v0}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->copyBounds(Landroid/graphics/Rect;)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->rectF:Landroid/graphics/RectF;</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->rect:Landroid/graphics/Rect;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/graphics/RectF;->set(Landroid/graphics/Rect;)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->pathProvider:Lcom/google/android/material/shape/ShapeAppearancePathProvider;</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->shapeAppearanceModel:Lcom/google/android/material/shape/ShapeAppearanceModel;</span>
+<span class="">	const/high16 v2, 0x3f800000    # 1.0f</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->rectF:Landroid/graphics/RectF;</span>
+<span class="">	iget-object v4, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->shapePath:Landroid/graphics/Path;</span>
+<span class="">	invoke-virtual {v0, v1, v2, v3, v4}, Lcom/google/android/material/shape/ShapeAppearancePathProvider;->calculatePath(Lcom/google/android/material/shape/ShapeAppearanceModel;FLandroid/graphics/RectF;Landroid/graphics/Path;)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->shapePath:Landroid/graphics/Path;</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/Path;->isConvex()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->shapePath:Landroid/graphics/Path;</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/graphics/Outline;->setConvexPath(Landroid/graphics/Path;)V</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public getPadding(Landroid/graphics/Rect;)Z
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->shapeAppearanceModel:Lcom/google/android/material/shape/ShapeAppearanceModel;</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->getBoundsAsRectF()Landroid/graphics/RectF;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/material/shape/ShapeAppearanceModel;->isRoundRect(Landroid/graphics/RectF;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->borderWidth:F</span>
+<span class="">	invoke-static {v0}, Ljava/lang/Math;->round(F)I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-virtual {p1, v0, v0, v0, v0}, Landroid/graphics/Rect;->set(IIII)V</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p1, 0x1</span>
+.end method
+
+.method public getShapeAppearanceModel()Lcom/google/android/material/shape/ShapeAppearanceModel;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->shapeAppearanceModel:Lcom/google/android/material/shape/ShapeAppearanceModel;</span>
+.end method
+
+.method public isStateful()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->borderTint:Landroid/content/res/ColorStateList;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/res/ColorStateList;->isStateful()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-super {p0}, Landroid/graphics/drawable/Drawable;->isStateful()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_2</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method protected onBoundsChange(Landroid/graphics/Rect;)V
+<span class="">	.locals 0</span>
+
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	iput-boolean p1, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->invalidateShader:Z</span>
+.end method
+
+.method protected onStateChange([I)Z
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->borderTint:Landroid/content/res/ColorStateList;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->currentBorderTintColor:I</span>
+<span class="">	invoke-virtual {v0, p1, v1}, Landroid/content/res/ColorStateList;->getColorForState([II)I</span>
+<span class="">	move-result p1</span>
+<span class="">	iget v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->currentBorderTintColor:I</span>
+<span class="">	if-eq p1, v0, :cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	iput-boolean v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->invalidateShader:Z</span>
+<span class="">	iput p1, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->currentBorderTintColor:I</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-boolean p1, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->invalidateShader:Z</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->invalidateSelf()V</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-boolean p1, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->invalidateShader:Z</span>
+.end method
+
+.method public setAlpha(I)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->paint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/Paint;->setAlpha(I)V</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->invalidateSelf()V</span>
+.end method
+
+.method  setBorderTint(Landroid/content/res/ColorStateList;)V
+<span class="">	.locals 2</span>
+
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->getState()[I</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->currentBorderTintColor:I</span>
+<span class="">	invoke-virtual {p1, v0, v1}, Landroid/content/res/ColorStateList;->getColorForState([II)I</span>
+<span class="">	move-result v0</span>
+<span class="">	iput v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->currentBorderTintColor:I</span>
+<span class="">	:cond_0</span>
+<span class="">	iput-object p1, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->borderTint:Landroid/content/res/ColorStateList;</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	iput-boolean p1, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->invalidateShader:Z</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->invalidateSelf()V</span>
+.end method
+
+.method public setBorderWidth(F)V
+<span class="">	.locals 2</span>
+
+<span class="">	iget v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->borderWidth:F</span>
+<span class="">	cmpl-float v0, v0, p1</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iput p1, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->borderWidth:F</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->paint:Landroid/graphics/Paint;</span>
+<span class="">	const v1, 0x3faaa993    # 1.3333f</span>
+<span class="">	mul-float/2addr p1, v1</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/Paint;->setStrokeWidth(F)V</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	iput-boolean p1, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->invalidateShader:Z</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->invalidateSelf()V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public setColorFilter(Landroid/graphics/ColorFilter;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->paint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/Paint;->setColorFilter(Landroid/graphics/ColorFilter;)Landroid/graphics/ColorFilter;</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->invalidateSelf()V</span>
+.end method
+
+.method  setGradientColors(IIII)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput p1, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->topOuterStrokeColor:I</span>
+<span class="">	iput p2, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->topInnerStrokeColor:I</span>
+<span class="">	iput p3, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->bottomOuterStrokeColor:I</span>
+<span class="">	iput p4, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->bottomInnerStrokeColor:I</span>
+.end method
+
+.method public setShapeAppearanceModel(Lcom/google/android/material/shape/ShapeAppearanceModel;)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput-object p1, p0, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->shapeAppearanceModel:Lcom/google/android/material/shape/ShapeAppearanceModel;</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/floatingactionbutton/BorderDrawable;->invalidateSelf()V</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../.resources/report.js"></script>
+</body>
+</html>

@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../index.html">lu.uni.trux.timertask_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.material.color</a></li>
+        <li><i class="ico ico-class"></i> ColorUtils.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class final Lcom/google/android/material/color/ColorUtils;
+.super Ljava/lang/Object;
+.source "ColorUtils.java"
+
+
+.field private static final WHITE_POINT_D65:[F
+
+
+.method static constructor <clinit>()V
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x3</span>
+<span class="">	new-array v0, v0, [F</span>
+<span class="">	fill-array-data v0, :array_0</span>
+<span class="">	sput-object v0, Lcom/google/android/material/color/ColorUtils;->WHITE_POINT_D65:[F</span>
+<span class="">	nop</span>
+<span class="">	:array_0</span>
+<span class="">	.array-data 4</span>
+<span class="">	0x42be1810</span>
+<span class="">	0x42c80000    # 100.0f</span>
+<span class="">	0x42d9c419</span>
+<span class="">	.end array-data</span>
+.end method
+
+.method private constructor <init>()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+.end method
+
+.method public static blueFromInt(I)I
+<span class="">	.locals 0</span>
+
+<span class="">	and-int/lit16 p0, p0, 0xff</span>
+.end method
+
+.method public static delinearized(F)F
+<span class="">	.locals 5</span>
+
+<span class="">	const v0, 0x3b4d2e1c    # 0.0031308f</span>
+<span class="">	cmpg-float v0, p0, v0</span>
+<span class="">	if-gtz v0, :cond_0</span>
+<span class="">	const v0, 0x414eb852    # 12.92f</span>
+<span class="">	mul-float/2addr p0, v0</span>
+<span class="">	const v0, 0x3f870a3d    # 1.055f</span>
+<span class="">	:cond_0</span>
+<span class="">	float-to-double v1, p0</span>
+<span class="">	const-wide v3, 0x3fdaaaaaa0000000L    # 0.4166666567325592</span>
+<span class="">	invoke-static {v1, v2, v3, v4}, Ljava/lang/Math;->pow(DD)D</span>
+<span class="">	move-result-wide v1</span>
+<span class="">	double-to-float p0, v1</span>
+<span class="">	mul-float/2addr p0, v0</span>
+<span class="">	const v0, 0x3d6147ae    # 0.055f</span>
+<span class="">	sub-float/2addr p0, v0</span>
+.end method
+
+.method public static greenFromInt(I)I
+<span class="">	.locals 1</span>
+
+<span class="">	const v0, 0xff00</span>
+<span class="">	and-int/2addr p0, v0</span>
+<span class="">	shr-int/lit8 p0, p0, 0x8</span>
+.end method
+
+.method public static hexFromInt(I)Ljava/lang/String;
+<span class="">	.locals 4</span>
+
+<span class="">	invoke-static {p0}, Lcom/google/android/material/color/ColorUtils;->redFromInt(I)I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/material/color/ColorUtils;->blueFromInt(I)I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/material/color/ColorUtils;->greenFromInt(I)I</span>
+<span class="">	move-result p0</span>
+<span class="">	const/4 v2, 0x3</span>
+<span class="">	new-array v2, v2, [Ljava/lang/Object;</span>
+<span class="">	invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	aput-object v0, v2, v3</span>
+<span class="">	invoke-static {p0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	aput-object p0, v2, v0</span>
+<span class="">	invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const/4 v0, 0x2</span>
+<span class="">	aput-object p0, v2, v0</span>
+<span class="">	const-string p0, "#%02x%02x%02x"</span>
+<span class="">	invoke-static {p0, v2}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method public static intFromLab(DDD)I
+<span class="">	.locals 17</span>
+
+<span class="">	const-wide/high16 v0, 0x4030000000000000L    # 16.0</span>
+<span class="">	add-double v2, p0, v0</span>
+<span class="">	const-wide/high16 v4, 0x405d000000000000L    # 116.0</span>
+<span class="">	div-double/2addr v2, v4</span>
+<span class="">	const-wide v6, 0x407f400000000000L    # 500.0</span>
+<span class="">	div-double v6, p2, v6</span>
+<span class="">	add-double/2addr v6, v2</span>
+<span class="">	const-wide/high16 v8, 0x4069000000000000L    # 200.0</span>
+<span class="">	div-double v8, p4, v8</span>
+<span class="">	sub-double v8, v2, v8</span>
+<span class="">	mul-double v10, v6, v6</span>
+<span class="">	mul-double/2addr v10, v6</span>
+<span class="">	const-wide v12, 0x3f822354d28f7cd6L    # 0.008856451679035631</span>
+<span class="">	cmpl-double v14, v10, v12</span>
+<span class="">	const-wide v15, 0x408c3a5ed097b426L    # 903.2962962962963</span>
+<span class="">	if-lez v14, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	mul-double/2addr v6, v4</span>
+<span class="">	sub-double/2addr v6, v0</span>
+<span class="">	div-double v10, v6, v15</span>
+<span class="">	:goto_0</span>
+<span class="">	const-wide/high16 v6, 0x4020000000000000L    # 8.0</span>
+<span class="">	cmpl-double v6, p0, v6</span>
+<span class="">	if-lez v6, :cond_1</span>
+<span class="">	mul-double v6, v2, v2</span>
+<span class="">	mul-double/2addr v6, v2</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	div-double v6, p0, v15</span>
+<span class="">	:goto_1</span>
+<span class="">	mul-double v2, v8, v8</span>
+<span class="">	mul-double/2addr v2, v8</span>
+<span class="">	cmpl-double v12, v2, v12</span>
+<span class="">	if-lez v12, :cond_2</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_2</span>
+<span class="">	mul-double/2addr v8, v4</span>
+<span class="">	sub-double/2addr v8, v0</span>
+<span class="">	div-double v2, v8, v15</span>
+<span class="">	:goto_2</span>
+<span class="">	sget-object v0, Lcom/google/android/material/color/ColorUtils;->WHITE_POINT_D65:[F</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	aget v1, v0, v1</span>
+<span class="">	float-to-double v4, v1</span>
+<span class="">	mul-double/2addr v10, v4</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	aget v1, v0, v1</span>
+<span class="">	float-to-double v4, v1</span>
+<span class="">	mul-double/2addr v6, v4</span>
+<span class="">	const/4 v1, 0x2</span>
+<span class="">	aget v0, v0, v1</span>
+<span class="">	float-to-double v0, v0</span>
+<span class="">	mul-double/2addr v2, v0</span>
+<span class="">	double-to-float v0, v10</span>
+<span class="">	double-to-float v1, v6</span>
+<span class="">	double-to-float v2, v2</span>
+<span class="">	invoke-static {v0, v1, v2}, Lcom/google/android/material/color/ColorUtils;->intFromXyzComponents(FFF)I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public static intFromLstar(F)I
+<span class="">	.locals 9</span>
+
+<span class="">	const/high16 v0, 0x41800000    # 16.0f</span>
+<span class="">	add-float v1, p0, v0</span>
+<span class="">	const/high16 v2, 0x42e80000    # 116.0f</span>
+<span class="">	div-float/2addr v1, v2</span>
+<span class="">	mul-float v3, v1, v1</span>
+<span class="">	mul-float/2addr v3, v1</span>
+<span class="">	const v4, 0x3c111aa7</span>
+<span class="">	cmpl-float v4, v3, v4</span>
+<span class="">	const/4 v5, 0x1</span>
+<span class="">	const/4 v6, 0x0</span>
+<span class="">	if-lez v4, :cond_0</span>
+<span class="">	move v4, v5</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	move v4, v6</span>
+<span class="">	:goto_0</span>
+<span class="">	const/high16 v7, 0x41000000    # 8.0f</span>
+<span class="">	cmpl-float v7, p0, v7</span>
+<span class="">	if-lez v7, :cond_1</span>
+<span class="">	move v7, v5</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	move v7, v6</span>
+<span class="">	:goto_1</span>
+<span class="">	const v8, 0x4461d2f7</span>
+<span class="">	if-eqz v7, :cond_2</span>
+<span class="">	move p0, v3</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_2</span>
+<span class="">	div-float/2addr p0, v8</span>
+<span class="">	:goto_2</span>
+<span class="">	if-eqz v4, :cond_3</span>
+<span class="">	move v7, v3</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:cond_3</span>
+<span class="">	mul-float v7, v1, v2</span>
+<span class="">	sub-float/2addr v7, v0</span>
+<span class="">	div-float/2addr v7, v8</span>
+<span class="">	:goto_3</span>
+<span class="">	if-eqz v4, :cond_4</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:cond_4</span>
+<span class="">	mul-float/2addr v1, v2</span>
+<span class="">	sub-float/2addr v1, v0</span>
+<span class="">	div-float v3, v1, v8</span>
+<span class="">	:goto_4</span>
+<span class="">	const/4 v0, 0x3</span>
+<span class="">	new-array v0, v0, [F</span>
+<span class="">	sget-object v1, Lcom/google/android/material/color/ColorUtils;->WHITE_POINT_D65:[F</span>
+<span class="">	aget v2, v1, v6</span>
+<span class="">	mul-float/2addr v7, v2</span>
+<span class="">	aput v7, v0, v6</span>
+<span class="">	aget v2, v1, v5</span>
+<span class="">	mul-float/2addr p0, v2</span>
+<span class="">	aput p0, v0, v5</span>
+<span class="">	const/4 p0, 0x2</span>
+<span class="">	aget v1, v1, p0</span>
+<span class="">	mul-float/2addr v3, v1</span>
+<span class="">	aput v3, v0, p0</span>
+<span class="">	invoke-static {v0}, Lcom/google/android/material/color/ColorUtils;->intFromXyz([F)I</span>
+<span class="">	move-result p0</span>
+.end method
+
+.method public static intFromRgb(III)I
+<span class="">	.locals 1</span>
+
+<span class="">	and-int/lit16 p0, p0, 0xff</span>
+<span class="">	shl-int/lit8 p0, p0, 0x10</span>
+<span class="">	const/high16 v0, -0x1000000</span>
+<span class="">	or-int/2addr p0, v0</span>
+<span class="">	and-int/lit16 p1, p1, 0xff</span>
+<span class="">	shl-int/lit8 p1, p1, 0x8</span>
+<span class="">	or-int/2addr p0, p1</span>
+<span class="">	and-int/lit16 p1, p2, 0xff</span>
+<span class="">	or-int/2addr p0, p1</span>
+<span class="">	ushr-int/lit8 p0, p0, 0x0</span>
+.end method
+
+.method public static intFromXyz([F)I
+<span class="">	.locals 3</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	aget v0, p0, v0</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	aget v1, p0, v1</span>
+<span class="">	const/4 v2, 0x2</span>
+<span class="">	aget p0, p0, v2</span>
+<span class="">	invoke-static {v0, v1, p0}, Lcom/google/android/material/color/ColorUtils;->intFromXyzComponents(FFF)I</span>
+<span class="">	move-result p0</span>
+.end method
+
+.method public static intFromXyzComponents(FFF)I
+<span class="">	.locals 3</span>
+
+<span class="">	const/high16 v0, 0x42c80000    # 100.0f</span>
+<span class="">	div-float/2addr p0, v0</span>
+<span class="">	div-float/2addr p1, v0</span>
+<span class="">	div-float/2addr p2, v0</span>
+<span class="">	const v0, 0x404f65fe</span>
+<span class="">	mul-float/2addr v0, p0</span>
+<span class="">	const v1, -0x403b3d08    # -1.5372f</span>
+<span class="">	mul-float/2addr v1, p1</span>
+<span class="">	add-float/2addr v0, v1</span>
+<span class="">	const v1, -0x4100b780    # -0.4986f</span>
+<span class="">	mul-float/2addr v1, p2</span>
+<span class="">	add-float/2addr v0, v1</span>
+<span class="">	const v1, -0x4087f62b    # -0.9689f</span>
+<span class="">	mul-float/2addr v1, p0</span>
+<span class="">	const v2, 0x3ff01a37    # 1.8758f</span>
+<span class="">	mul-float/2addr v2, p1</span>
+<span class="">	add-float/2addr v1, v2</span>
+<span class="">	const v2, 0x3d29fbe7    # 0.0415f</span>
+<span class="">	mul-float/2addr v2, p2</span>
+<span class="">	add-float/2addr v1, v2</span>
+<span class="">	const v2, 0x3d6425af    # 0.0557f</span>
+<span class="">	mul-float/2addr p0, v2</span>
+<span class="">	const v2, -0x41af1aa0    # -0.204f</span>
+<span class="">	mul-float/2addr p1, v2</span>
+<span class="">	add-float/2addr p0, p1</span>
+<span class="">	const p1, 0x3f874bc7    # 1.057f</span>
+<span class="">	mul-float/2addr p2, p1</span>
+<span class="">	add-float/2addr p0, p2</span>
+<span class="">	invoke-static {v0}, Lcom/google/android/material/color/ColorUtils;->delinearized(F)F</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-static {v1}, Lcom/google/android/material/color/ColorUtils;->delinearized(F)F</span>
+<span class="">	move-result p2</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/material/color/ColorUtils;->delinearized(F)F</span>
+<span class="">	move-result p0</span>
+<span class="">	const/high16 v0, 0x437f0000    # 255.0f</span>
+<span class="">	mul-float/2addr p1, v0</span>
+<span class="">	invoke-static {p1}, Ljava/lang/Math;->round(F)I</span>
+<span class="">	move-result p1</span>
+<span class="">	const/16 v1, 0xff</span>
+<span class="">	invoke-static {v1, p1}, Ljava/lang/Math;->min(II)I</span>
+<span class="">	move-result p1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-static {p1, v2}, Ljava/lang/Math;->max(II)I</span>
+<span class="">	move-result p1</span>
+<span class="">	mul-float/2addr p2, v0</span>
+<span class="">	invoke-static {p2}, Ljava/lang/Math;->round(F)I</span>
+<span class="">	move-result p2</span>
+<span class="">	invoke-static {v1, p2}, Ljava/lang/Math;->min(II)I</span>
+<span class="">	move-result p2</span>
+<span class="">	invoke-static {p2, v2}, Ljava/lang/Math;->max(II)I</span>
+<span class="">	move-result p2</span>
+<span class="">	mul-float/2addr p0, v0</span>
+<span class="">	invoke-static {p0}, Ljava/lang/Math;->round(F)I</span>
+<span class="">	move-result p0</span>
+<span class="">	invoke-static {v1, p0}, Ljava/lang/Math;->min(II)I</span>
+<span class="">	move-result p0</span>
+<span class="">	invoke-static {p0, v2}, Ljava/lang/Math;->max(II)I</span>
+<span class="">	move-result p0</span>
+<span class="">	invoke-static {p1, p2, p0}, Lcom/google/android/material/color/ColorUtils;->intFromRgb(III)I</span>
+<span class="">	move-result p0</span>
+.end method
+
+.method public static labFromInt(I)[D
+<span class="">	.locals 17</span>
+
+<span class="">	invoke-static/range {p0 .. p0}, Lcom/google/android/material/color/ColorUtils;->xyzFromInt(I)[F</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	aget v2, v0, v1</span>
+<span class="">	sget-object v3, Lcom/google/android/material/color/ColorUtils;->WHITE_POINT_D65:[F</span>
+<span class="">	aget v4, v3, v1</span>
+<span class="">	div-float/2addr v2, v4</span>
+<span class="">	float-to-double v4, v2</span>
+<span class="">	const-wide v6, 0x3f822354d28f7cd6L    # 0.008856451679035631</span>
+<span class="">	cmpl-double v2, v4, v6</span>
+<span class="">	const-wide v8, 0x408c3a5ed097b426L    # 903.2962962962963</span>
+<span class="">	const-wide/high16 v10, 0x405d000000000000L    # 116.0</span>
+<span class="">	const-wide/high16 v12, 0x4030000000000000L    # 16.0</span>
+<span class="">	if-lez v2, :cond_0</span>
+<span class="">	invoke-static {v4, v5}, Ljava/lang/Math;->cbrt(D)D</span>
+<span class="">	move-result-wide v4</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	mul-double/2addr v4, v8</span>
+<span class="">	add-double/2addr v4, v12</span>
+<span class="">	div-double/2addr v4, v10</span>
+<span class="">	:goto_0</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	aget v14, v0, v2</span>
+<span class="">	aget v15, v3, v2</span>
+<span class="">	div-float/2addr v14, v15</span>
+<span class="">	float-to-double v14, v14</span>
+<span class="">	cmpl-double v16, v14, v6</span>
+<span class="">	if-lez v16, :cond_1</span>
+<span class="">	invoke-static {v14, v15}, Ljava/lang/Math;->cbrt(D)D</span>
+<span class="">	move-result-wide v14</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	mul-double/2addr v14, v8</span>
+<span class="">	add-double/2addr v14, v12</span>
+<span class="">	div-double/2addr v14, v10</span>
+<span class="">	:goto_1</span>
+<span class="">	const/16 v16, 0x2</span>
+<span class="">	aget v0, v0, v16</span>
+<span class="">	aget v3, v3, v16</span>
+<span class="">	div-float/2addr v0, v3</span>
+<span class="">	float-to-double v1, v0</span>
+<span class="">	cmpl-double v0, v1, v6</span>
+<span class="">	if-lez v0, :cond_2</span>
+<span class="">	invoke-static {v1, v2}, Ljava/lang/Math;->cbrt(D)D</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_2</span>
+<span class="">	mul-double/2addr v1, v8</span>
+<span class="">	add-double/2addr v1, v12</span>
+<span class="">	div-double v0, v1, v10</span>
+<span class="">	:goto_2</span>
+<span class="">	mul-double/2addr v10, v4</span>
+<span class="">	sub-double/2addr v10, v12</span>
+<span class="">	const-wide v6, 0x407f400000000000L    # 500.0</span>
+<span class="">	sub-double/2addr v14, v4</span>
+<span class="">	mul-double/2addr v14, v6</span>
+<span class="">	const-wide/high16 v6, 0x4069000000000000L    # 200.0</span>
+<span class="">	sub-double/2addr v4, v0</span>
+<span class="">	mul-double/2addr v4, v6</span>
+<span class="">	const/4 v0, 0x3</span>
+<span class="">	new-array v0, v0, [D</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	aput-wide v10, v0, v1</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	aput-wide v14, v0, v1</span>
+<span class="">	aput-wide v4, v0, v16</span>
+.end method
+
+.method public static linearized(F)F
+<span class="">	.locals 4</span>
+
+<span class="">	const v0, 0x3d25aee6    # 0.04045f</span>
+<span class="">	cmpg-float v0, p0, v0</span>
+<span class="">	if-gtz v0, :cond_0</span>
+<span class="">	const v0, 0x414eb852    # 12.92f</span>
+<span class="">	div-float/2addr p0, v0</span>
+<span class="">	const v0, 0x3d6147ae    # 0.055f</span>
+<span class="">	:cond_0</span>
+<span class="">	add-float/2addr p0, v0</span>
+<span class="">	const v0, 0x3f870a3d    # 1.055f</span>
+<span class="">	div-float/2addr p0, v0</span>
+<span class="">	float-to-double v0, p0</span>
+<span class="">	const-wide v2, 0x4003333340000000L    # 2.4000000953674316</span>
+<span class="">	invoke-static {v0, v1, v2, v3}, Ljava/lang/Math;->pow(DD)D</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	double-to-float p0, v0</span>
+.end method
+
+.method public static lstarFromInt(I)F
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-static {p0}, Lcom/google/android/material/color/ColorUtils;->labFromInt(I)[D</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	aget-wide v0, p0, v0</span>
+<span class="">	double-to-float p0, v0</span>
+.end method
+
+.method public static redFromInt(I)I
+<span class="">	.locals 1</span>
+
+<span class="">	const/high16 v0, 0xff0000</span>
+<span class="">	and-int/2addr p0, v0</span>
+<span class="">	shr-int/lit8 p0, p0, 0x10</span>
+.end method
+
+.method public static final whitePointD65()[F
+<span class="">	.locals 2</span>
+
+<span class="">	sget-object v0, Lcom/google/android/material/color/ColorUtils;->WHITE_POINT_D65:[F</span>
+<span class="">	const/4 v1, 0x3</span>
+<span class="">	invoke-static {v0, v1}, Ljava/util/Arrays;->copyOf([FI)[F</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public static xyzFromInt(I)[F
+<span class="">	.locals 5</span>
+
+<span class="">	invoke-static {p0}, Lcom/google/android/material/color/ColorUtils;->redFromInt(I)I</span>
+<span class="">	move-result v0</span>
+<span class="">	int-to-float v0, v0</span>
+<span class="">	const/high16 v1, 0x437f0000    # 255.0f</span>
+<span class="">	div-float/2addr v0, v1</span>
+<span class="">	invoke-static {v0}, Lcom/google/android/material/color/ColorUtils;->linearized(F)F</span>
+<span class="">	move-result v0</span>
+<span class="">	const/high16 v2, 0x42c80000    # 100.0f</span>
+<span class="">	mul-float/2addr v0, v2</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/material/color/ColorUtils;->greenFromInt(I)I</span>
+<span class="">	move-result v3</span>
+<span class="">	int-to-float v3, v3</span>
+<span class="">	div-float/2addr v3, v1</span>
+<span class="">	invoke-static {v3}, Lcom/google/android/material/color/ColorUtils;->linearized(F)F</span>
+<span class="">	move-result v3</span>
+<span class="">	mul-float/2addr v3, v2</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/material/color/ColorUtils;->blueFromInt(I)I</span>
+<span class="">	move-result p0</span>
+<span class="">	int-to-float p0, p0</span>
+<span class="">	div-float/2addr p0, v1</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/material/color/ColorUtils;->linearized(F)F</span>
+<span class="">	move-result p0</span>
+<span class="">	mul-float/2addr p0, v2</span>
+<span class="">	const v1, 0x3ed31e17</span>
+<span class="">	mul-float/2addr v1, v0</span>
+<span class="">	const v2, 0x3eb71a0d</span>
+<span class="">	mul-float/2addr v2, v3</span>
+<span class="">	add-float/2addr v1, v2</span>
+<span class="">	const v2, 0x3e38d7b9</span>
+<span class="">	mul-float/2addr v2, p0</span>
+<span class="">	add-float/2addr v1, v2</span>
+<span class="">	const v2, 0x3e59b3d0    # 0.2126f</span>
+<span class="">	mul-float/2addr v2, v0</span>
+<span class="">	const v4, 0x3f371759    # 0.7152f</span>
+<span class="">	mul-float/2addr v4, v3</span>
+<span class="">	add-float/2addr v2, v4</span>
+<span class="">	const v4, 0x3d93dd98    # 0.0722f</span>
+<span class="">	mul-float/2addr v4, p0</span>
+<span class="">	add-float/2addr v2, v4</span>
+<span class="">	const v4, 0x3c9e47ef</span>
+<span class="">	mul-float/2addr v0, v4</span>
+<span class="">	const v4, 0x3df40c29</span>
+<span class="">	mul-float/2addr v3, v4</span>
+<span class="">	add-float/2addr v0, v3</span>
+<span class="">	const v3, 0x3f7349cc</span>
+<span class="">	mul-float/2addr p0, v3</span>
+<span class="">	add-float/2addr v0, p0</span>
+<span class="">	const/4 p0, 0x3</span>
+<span class="">	new-array p0, p0, [F</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	aput v1, p0, v3</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	aput v2, p0, v1</span>
+<span class="">	const/4 v1, 0x2</span>
+<span class="">	aput v0, p0, v1</span>
+.end method
+
+.method public static yFromLstar(F)F
+<span class="">	.locals 6</span>
+
+<span class="">	const/high16 v0, 0x41000000    # 8.0f</span>
+<span class="">	cmpl-float v0, p0, v0</span>
+<span class="">	const/high16 v1, 0x42c80000    # 100.0f</span>
+<span class="">	if-lez v0, :cond_0</span>
+<span class="">	float-to-double v2, p0</span>
+<span class="">	const-wide/high16 v4, 0x4030000000000000L    # 16.0</span>
+<span class="">	add-double/2addr v2, v4</span>
+<span class="">	const-wide/high16 v4, 0x405d000000000000L    # 116.0</span>
+<span class="">	div-double/2addr v2, v4</span>
+<span class="">	const-wide/high16 v4, 0x4008000000000000L    # 3.0</span>
+<span class="">	invoke-static {v2, v3, v4, v5}, Ljava/lang/Math;->pow(DD)D</span>
+<span class="">	move-result-wide v2</span>
+<span class="">	double-to-float p0, v2</span>
+<span class="">	:goto_0</span>
+<span class="">	mul-float/2addr p0, v1</span>
+<span class="">	const v0, 0x4461d2f7</span>
+<span class="">	:cond_0</span>
+<span class="">	div-float/2addr p0, v0</span>
+<span class="">	goto :goto_0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../.resources/report.js"></script>
+</body>
+</html>

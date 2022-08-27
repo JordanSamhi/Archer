@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">lu.uni.trux.workmanager_enqueue1</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.core.view</a></li>
+        <li><i class="ico ico-class"></i> WindowInsetsAnimationCompat$Impl30.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class  Landroidx/core/view/WindowInsetsAnimationCompat$Impl30;
+.super Landroidx/core/view/WindowInsetsAnimationCompat$Impl;
+.source "WindowInsetsAnimationCompat.java"
+
+.annotation system Ldalvik/annotation/EnclosingClass;
+value = Landroidx/core/view/WindowInsetsAnimationCompat;
+.end annotation
+.annotation system Ldalvik/annotation/InnerClass;
+accessFlags = 0xa
+name = "Impl30"
+.end annotation
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Landroidx/core/view/WindowInsetsAnimationCompat$Impl30$ProxyCallback;
+}
+.end annotation
+
+.field private final mWrapped:Landroid/view/WindowInsetsAnimation;
+
+
+.method constructor <init>(ILandroid/view/animation/Interpolator;J)V
+<span class="">	.locals 1</span>
+
+<span class="">	new-instance v0, Landroid/view/WindowInsetsAnimation;</span>
+<span class="">	invoke-direct {v0, p1, p2, p3, p4}, Landroid/view/WindowInsetsAnimation;-><init>(ILandroid/view/animation/Interpolator;J)V</span>
+<span class="">	invoke-direct {p0, v0}, Landroidx/core/view/WindowInsetsAnimationCompat$Impl30;-><init>(Landroid/view/WindowInsetsAnimation;)V</span>
+.end method
+
+.method constructor <init>(Landroid/view/WindowInsetsAnimation;)V
+<span class="">	.locals 4</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	const-wide/16 v2, 0x0</span>
+<span class="">	invoke-direct {p0, v0, v1, v2, v3}, Landroidx/core/view/WindowInsetsAnimationCompat$Impl;-><init>(ILandroid/view/animation/Interpolator;J)V</span>
+<span class="">	iput-object p1, p0, Landroidx/core/view/WindowInsetsAnimationCompat$Impl30;->mWrapped:Landroid/view/WindowInsetsAnimation;</span>
+.end method
+
+.method public static createPlatformBounds(Landroidx/core/view/WindowInsetsAnimationCompat$BoundsCompat;)Landroid/view/WindowInsetsAnimation$Bounds;
+<span class="">	.locals 2</span>
+
+<span class="">	new-instance v0, Landroid/view/WindowInsetsAnimation$Bounds;</span>
+<span class="">	invoke-virtual {p0}, Landroidx/core/view/WindowInsetsAnimationCompat$BoundsCompat;->getLowerBound()Landroidx/core/graphics/Insets;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Landroidx/core/graphics/Insets;->toPlatformInsets()Landroid/graphics/Insets;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {p0}, Landroidx/core/view/WindowInsetsAnimationCompat$BoundsCompat;->getUpperBound()Landroidx/core/graphics/Insets;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0}, Landroidx/core/graphics/Insets;->toPlatformInsets()Landroid/graphics/Insets;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-direct {v0, v1, p0}, Landroid/view/WindowInsetsAnimation$Bounds;-><init>(Landroid/graphics/Insets;Landroid/graphics/Insets;)V</span>
+.end method
+
+.method public static getHigherBounds(Landroid/view/WindowInsetsAnimation$Bounds;)Landroidx/core/graphics/Insets;
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/view/WindowInsetsAnimation$Bounds;->getUpperBound()Landroid/graphics/Insets;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-static {p0}, Landroidx/core/graphics/Insets;->toCompatInsets(Landroid/graphics/Insets;)Landroidx/core/graphics/Insets;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method public static getLowerBounds(Landroid/view/WindowInsetsAnimation$Bounds;)Landroidx/core/graphics/Insets;
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/view/WindowInsetsAnimation$Bounds;->getLowerBound()Landroid/graphics/Insets;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-static {p0}, Landroidx/core/graphics/Insets;->toCompatInsets(Landroid/graphics/Insets;)Landroidx/core/graphics/Insets;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method public static setCallback(Landroid/view/View;Landroidx/core/view/WindowInsetsAnimationCompat$Callback;)V
+<span class="">	.locals 1</span>
+
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	new-instance v0, Landroidx/core/view/WindowInsetsAnimationCompat$Impl30$ProxyCallback;</span>
+<span class="">	invoke-direct {v0, p1}, Landroidx/core/view/WindowInsetsAnimationCompat$Impl30$ProxyCallback;-><init>(Landroidx/core/view/WindowInsetsAnimationCompat$Callback;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/view/View;->setWindowInsetsAnimationCallback(Landroid/view/WindowInsetsAnimation$Callback;)V</span>
+.end method
+
+.method public getDurationMillis()J
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/view/WindowInsetsAnimationCompat$Impl30;->mWrapped:Landroid/view/WindowInsetsAnimation;</span>
+<span class="">	invoke-virtual {v0}, Landroid/view/WindowInsetsAnimation;->getDurationMillis()J</span>
+<span class="">	move-result-wide v0</span>
+.end method
+
+.method public getFraction()F
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/view/WindowInsetsAnimationCompat$Impl30;->mWrapped:Landroid/view/WindowInsetsAnimation;</span>
+<span class="">	invoke-virtual {v0}, Landroid/view/WindowInsetsAnimation;->getFraction()F</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public getInterpolatedFraction()F
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/view/WindowInsetsAnimationCompat$Impl30;->mWrapped:Landroid/view/WindowInsetsAnimation;</span>
+<span class="">	invoke-virtual {v0}, Landroid/view/WindowInsetsAnimation;->getInterpolatedFraction()F</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public getInterpolator()Landroid/view/animation/Interpolator;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/view/WindowInsetsAnimationCompat$Impl30;->mWrapped:Landroid/view/WindowInsetsAnimation;</span>
+<span class="">	invoke-virtual {v0}, Landroid/view/WindowInsetsAnimation;->getInterpolator()Landroid/view/animation/Interpolator;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public getTypeMask()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/view/WindowInsetsAnimationCompat$Impl30;->mWrapped:Landroid/view/WindowInsetsAnimation;</span>
+<span class="">	invoke-virtual {v0}, Landroid/view/WindowInsetsAnimation;->getTypeMask()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public setFraction(F)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/view/WindowInsetsAnimationCompat$Impl30;->mWrapped:Landroid/view/WindowInsetsAnimation;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/view/WindowInsetsAnimation;->setFraction(F)V</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

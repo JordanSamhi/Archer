@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">okhttp3</a></li>
+        <li><i class="ico ico-class"></i> Headers$Builder.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public final Lokhttp3/Headers$Builder;
+.super Ljava/lang/Object;
+.source "Headers.java"
+
+.annotation system Ldalvik/annotation/EnclosingClass;
+value = Lokhttp3/Headers;
+.end annotation
+.annotation system Ldalvik/annotation/InnerClass;
+accessFlags = 0x19
+name = "Builder"
+.end annotation
+
+.field final namesAndValues:Ljava/util/List;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/List<",
+"Ljava/lang/String;",
+">;"
+}
+.end annotation
+.end field
+
+
+.method public constructor <init>()V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	const/16 v1, 0x14</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(I)V</span>
+<span class="">	iput-object v0, p0, Lokhttp3/Headers$Builder;->namesAndValues:Ljava/util/List;</span>
+.end method
+
+.method private checkNameAndValue(Ljava/lang/String;Ljava/lang/String;)V
+<span class="">	.locals 9</span>
+
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	new-instance p1, Ljava/lang/NullPointerException;</span>
+<span class="">	const-string p2, "name == null"</span>
+<span class="">	invoke-direct {p1, p2}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/String;->isEmpty()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	const-string p2, "name is empty"</span>
+<span class="">	invoke-direct {p1, p2}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	move v2, v1</span>
+<span class="">	:goto_0</span>
+<span class="">	const/4 v3, 0x2</span>
+<span class="">	const/4 v4, 0x3</span>
+<span class="">	const/16 v5, 0x7f</span>
+<span class="">	const/4 v6, 0x1</span>
+<span class="">	if-ge v2, v0, :cond_4</span>
+<span class="">	invoke-virtual {p1, v2}, Ljava/lang/String;->charAt(I)C</span>
+<span class="">	move-result v7</span>
+<span class="">	const/16 v8, 0x20</span>
+<span class="">	if-le v7, v8, :cond_3</span>
+<span class="">	if-lt v7, v5, :cond_2</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_2</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_3</span>
+<span class="">	new-instance p2, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	const-string v0, "Unexpected char %#04x at %d in header name: %s"</span>
+<span class="">	new-array v4, v4, [Ljava/lang/Object;</span>
+<span class="">	invoke-static {v7}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	aput-object v5, v4, v1</span>
+<span class="">	invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	aput-object v1, v4, v6</span>
+<span class="">	aput-object p1, v4, v3</span>
+<span class="">	invoke-static {v0, v4}, Lokhttp3/internal/Util;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {p2, p1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p2</span>
+<span class="">	:cond_4</span>
+<span class="">	if-nez p2, :cond_5</span>
+<span class="">	new-instance p2, Ljava/lang/NullPointerException;</span>
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v1, "value for name "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p1, " == null"</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {p2, p1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p2</span>
+<span class="">	:cond_5</span>
+<span class="">	invoke-virtual {p2}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	move v2, v1</span>
+<span class="">	:goto_2</span>
+<span class="">	if-ge v2, v0, :cond_9</span>
+<span class="">	invoke-virtual {p2, v2}, Ljava/lang/String;->charAt(I)C</span>
+<span class="">	move-result v7</span>
+<span class="">	const/16 v8, 0x1f</span>
+<span class="">	if-gt v7, v8, :cond_6</span>
+<span class="">	const/16 v8, 0x9</span>
+<span class="">	if-ne v7, v8, :cond_7</span>
+<span class="">	:cond_6</span>
+<span class="">	if-lt v7, v5, :cond_8</span>
+<span class="">	:cond_7</span>
+<span class="">	new-instance v0, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	const-string v5, "Unexpected char %#04x at %d in %s value: %s"</span>
+<span class="">	const/4 v8, 0x4</span>
+<span class="">	new-array v8, v8, [Ljava/lang/Object;</span>
+<span class="">	invoke-static {v7}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object v7</span>
+<span class="">	aput-object v7, v8, v1</span>
+<span class="">	invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	aput-object v1, v8, v6</span>
+<span class="">	aput-object p1, v8, v3</span>
+<span class="">	aput-object p2, v8, v4</span>
+<span class="">	invoke-static {v5, v8}, Lokhttp3/internal/Util;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {v0, p1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw v0</span>
+<span class="">	:cond_8</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_9</span>
+.end method
+
+.method public add(Ljava/lang/String;)Lokhttp3/Headers$Builder;
+<span class="">	.locals 3</span>
+
+<span class="">	const-string v0, ":"</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/String;->indexOf(Ljava/lang/String;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, -0x1</span>
+<span class="">	if-ne v0, v1, :cond_0</span>
+<span class="">	new-instance v0, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v2, "Unexpected header: "</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {v0, p1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw v0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-virtual {p1, v1, v0}, Ljava/lang/String;->substring(II)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/String;->trim()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	add-int/lit8 v0, v0, 0x1</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/String;->substring(I)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p0, v1, p1}, Lokhttp3/Headers$Builder;->add(Ljava/lang/String;Ljava/lang/String;)Lokhttp3/Headers$Builder;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public add(Ljava/lang/String;Ljava/lang/String;)Lokhttp3/Headers$Builder;
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0, p1, p2}, Lokhttp3/Headers$Builder;->checkNameAndValue(Ljava/lang/String;Ljava/lang/String;)V</span>
+<span class="">	invoke-virtual {p0, p1, p2}, Lokhttp3/Headers$Builder;->addLenient(Ljava/lang/String;Ljava/lang/String;)Lokhttp3/Headers$Builder;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method  addLenient(Ljava/lang/String;)Lokhttp3/Headers$Builder;
+<span class="">	.locals 3</span>
+
+<span class="">	const-string v0, ":"</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	invoke-virtual {p1, v0, v1}, Ljava/lang/String;->indexOf(Ljava/lang/String;I)I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v2, -0x1</span>
+<span class="">	if-eq v0, v2, :cond_0</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-virtual {p1, v2, v0}, Ljava/lang/String;->substring(II)Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	add-int/2addr v0, v1</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/String;->substring(I)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p0, v2, p1}, Lokhttp3/Headers$Builder;->addLenient(Ljava/lang/String;Ljava/lang/String;)Lokhttp3/Headers$Builder;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string v0, ":"</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	const-string v0, ""</span>
+<span class="">	invoke-virtual {p1, v1}, Ljava/lang/String;->substring(I)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p0, v0, p1}, Lokhttp3/Headers$Builder;->addLenient(Ljava/lang/String;Ljava/lang/String;)Lokhttp3/Headers$Builder;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string v0, ""</span>
+<span class="">	invoke-virtual {p0, v0, p1}, Lokhttp3/Headers$Builder;->addLenient(Ljava/lang/String;Ljava/lang/String;)Lokhttp3/Headers$Builder;</span>
+<span class="">	:cond_1</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method  addLenient(Ljava/lang/String;Ljava/lang/String;)Lokhttp3/Headers$Builder;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lokhttp3/Headers$Builder;->namesAndValues:Ljava/util/List;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	iget-object p1, p0, Lokhttp3/Headers$Builder;->namesAndValues:Ljava/util/List;</span>
+<span class="">	invoke-virtual {p2}, Ljava/lang/String;->trim()Ljava/lang/String;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-interface {p1, p2}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+.end method
+
+.method public build()Lokhttp3/Headers;
+<span class="">	.locals 1</span>
+
+<span class="">	new-instance v0, Lokhttp3/Headers;</span>
+<span class="">	invoke-direct {v0, p0}, Lokhttp3/Headers;-><init>(Lokhttp3/Headers$Builder;)V</span>
+.end method
+
+.method public get(Ljava/lang/String;)Ljava/lang/String;
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lokhttp3/Headers$Builder;->namesAndValues:Ljava/util/List;</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->size()I</span>
+<span class="">	move-result v0</span>
+<span class="">	add-int/lit8 v0, v0, -0x2</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ltz v0, :cond_1</span>
+<span class="">	iget-object v1, p0, Lokhttp3/Headers$Builder;->namesAndValues:Ljava/util/List;</span>
+<span class="">	invoke-interface {v1, v0}, Ljava/util/List;->get(I)Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljava/lang/String;</span>
+<span class="">	invoke-virtual {p1, v1}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	iget-object p1, p0, Lokhttp3/Headers$Builder;->namesAndValues:Ljava/util/List;</span>
+<span class="">	add-int/lit8 v0, v0, 0x1</span>
+<span class="">	invoke-interface {p1, v0}, Ljava/util/List;->get(I)Ljava/lang/Object;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Ljava/lang/String;</span>
+<span class="">	add-int/lit8 v0, v0, -0x2</span>
+<span class="">	:cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public removeAll(Ljava/lang/String;)Lokhttp3/Headers$Builder;
+<span class="">	.locals 2</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	iget-object v1, p0, Lokhttp3/Headers$Builder;->namesAndValues:Ljava/util/List;</span>
+<span class="">	invoke-interface {v1}, Ljava/util/List;->size()I</span>
+<span class="">	move-result v1</span>
+<span class="">	if-ge v0, v1, :cond_1</span>
+<span class="">	iget-object v1, p0, Lokhttp3/Headers$Builder;->namesAndValues:Ljava/util/List;</span>
+<span class="">	invoke-interface {v1, v0}, Ljava/util/List;->get(I)Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljava/lang/String;</span>
+<span class="">	invoke-virtual {p1, v1}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	iget-object v1, p0, Lokhttp3/Headers$Builder;->namesAndValues:Ljava/util/List;</span>
+<span class="">	invoke-interface {v1, v0}, Ljava/util/List;->remove(I)Ljava/lang/Object;</span>
+<span class="">	iget-object v1, p0, Lokhttp3/Headers$Builder;->namesAndValues:Ljava/util/List;</span>
+<span class="">	invoke-interface {v1, v0}, Ljava/util/List;->remove(I)Ljava/lang/Object;</span>
+<span class="">	add-int/lit8 v0, v0, -0x2</span>
+<span class="">	:cond_0</span>
+<span class="">	add-int/lit8 v0, v0, 0x2</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public set(Ljava/lang/String;Ljava/lang/String;)Lokhttp3/Headers$Builder;
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0, p1, p2}, Lokhttp3/Headers$Builder;->checkNameAndValue(Ljava/lang/String;Ljava/lang/String;)V</span>
+<span class="">	invoke-virtual {p0, p1}, Lokhttp3/Headers$Builder;->removeAll(Ljava/lang/String;)Lokhttp3/Headers$Builder;</span>
+<span class="">	invoke-virtual {p0, p1, p2}, Lokhttp3/Headers$Builder;->addLenient(Ljava/lang/String;Ljava/lang/String;)Lokhttp3/Headers$Builder;</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../.resources/report.js"></script>
+</body>
+</html>

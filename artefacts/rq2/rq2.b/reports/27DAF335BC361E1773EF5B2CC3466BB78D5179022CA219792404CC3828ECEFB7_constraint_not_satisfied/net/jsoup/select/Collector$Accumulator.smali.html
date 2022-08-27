@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">net.jsoup.select</a></li>
+        <li><i class="ico ico-class"></i> Collector$Accumulator.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class  Lnet/jsoup/select/Collector$Accumulator;
+.super Ljava/lang/Object;
+.source "Collector.java"
+.implements Lnet/jsoup/select/NodeVisitor;
+
+.annotation system Ldalvik/annotation/EnclosingClass;
+value = Lnet/jsoup/select/Collector;
+.end annotation
+.annotation system Ldalvik/annotation/InnerClass;
+accessFlags = 0xa
+name = "Accumulator"
+.end annotation
+
+.field private final elements:Lnet/jsoup/select/Elements;
+.field private final eval:Lnet/jsoup/select/Evaluator;
+.field private final root:Lnet/jsoup/nodes/Element;
+
+
+.method constructor <init>(Lnet/jsoup/nodes/Element;Lnet/jsoup/select/Elements;Lnet/jsoup/select/Evaluator;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	iput-object p1, p0, Lnet/jsoup/select/Collector$Accumulator;->root:Lnet/jsoup/nodes/Element;</span>
+<span class="">	iput-object p2, p0, Lnet/jsoup/select/Collector$Accumulator;->elements:Lnet/jsoup/select/Elements;</span>
+<span class="">	iput-object p3, p0, Lnet/jsoup/select/Collector$Accumulator;->eval:Lnet/jsoup/select/Evaluator;</span>
+.end method
+
+.method public head(Lnet/jsoup/nodes/Node;I)V
+<span class="">	.locals 1</span>
+
+<span class="">	instance-of p2, p1, Lnet/jsoup/nodes/Element;</span>
+<span class="">	if-eqz p2, :cond_0</span>
+<span class="">	check-cast p1, Lnet/jsoup/nodes/Element;</span>
+<span class="">	iget-object p2, p0, Lnet/jsoup/select/Collector$Accumulator;->eval:Lnet/jsoup/select/Evaluator;</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/select/Collector$Accumulator;->root:Lnet/jsoup/nodes/Element;</span>
+<span class="">	invoke-virtual {p2, v0, p1}, Lnet/jsoup/select/Evaluator;->matches(Lnet/jsoup/nodes/Element;Lnet/jsoup/nodes/Element;)Z</span>
+<span class="">	move-result p2</span>
+<span class="">	if-eqz p2, :cond_0</span>
+<span class="">	iget-object p2, p0, Lnet/jsoup/select/Collector$Accumulator;->elements:Lnet/jsoup/select/Elements;</span>
+<span class="">	invoke-virtual {p2, p1}, Lnet/jsoup/select/Elements;->add(Lnet/jsoup/nodes/Element;)Z</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public tail(Lnet/jsoup/nodes/Node;I)V
+<span class="">	.locals 0</span>
+
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

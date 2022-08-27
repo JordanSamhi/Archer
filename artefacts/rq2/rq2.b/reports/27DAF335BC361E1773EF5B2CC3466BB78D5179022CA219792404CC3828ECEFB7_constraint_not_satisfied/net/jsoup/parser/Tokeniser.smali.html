@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">net.jsoup.parser</a></li>
+        <li><i class="ico ico-class"></i> Tokeniser.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class  Lnet/jsoup/parser/Tokeniser;
+.super Ljava/lang/Object;
+.source "Tokeniser.java"
+
+
+.field static final replacementChar:C = '\ufffd'
+.field private charBuffer:Ljava/lang/StringBuilder;
+.field  commentPending:Lnet/jsoup/parser/Token$Comment;
+.field  dataBuffer:Ljava/lang/StringBuilder;
+.field  doctypePending:Lnet/jsoup/parser/Token$Doctype;
+.field private emitPending:Lnet/jsoup/parser/Token;
+.field private errors:Ljava/util/List;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/List<",
+"Lnet/jsoup/parser/ParseError;",
+">;"
+}
+.end annotation
+.end field
+.field private isEmitPending:Z
+.field private lastStartTag:Lnet/jsoup/parser/Token$StartTag;
+.field private reader:Lnet/jsoup/parser/CharacterReader;
+.field private selfClosingFlagAcknowledged:Z
+.field private state:Lnet/jsoup/parser/TokeniserState;
+.field  tagPending:Lnet/jsoup/parser/Token$Tag;
+.field private trackErrors:Z
+
+
+.method constructor <init>(Lnet/jsoup/parser/CharacterReader;)V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	iput-boolean v0, p0, Lnet/jsoup/parser/Tokeniser;->trackErrors:Z</span>
+<span class="">	new-instance v1, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	iput-object v1, p0, Lnet/jsoup/parser/Tokeniser;->errors:Ljava/util/List;</span>
+<span class="">	sget-object v1, Lnet/jsoup/parser/TokeniserState;->Data:Lnet/jsoup/parser/TokeniserState;</span>
+<span class="">	iput-object v1, p0, Lnet/jsoup/parser/Tokeniser;->state:Lnet/jsoup/parser/TokeniserState;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	iput-boolean v1, p0, Lnet/jsoup/parser/Tokeniser;->isEmitPending:Z</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	iput-object v1, p0, Lnet/jsoup/parser/Tokeniser;->charBuffer:Ljava/lang/StringBuilder;</span>
+<span class="">	iput-boolean v0, p0, Lnet/jsoup/parser/Tokeniser;->selfClosingFlagAcknowledged:Z</span>
+<span class="">	iput-object p1, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+.end method
+
+.method private characterReferenceError()V
+<span class="">	.locals 4</span>
+
+<span class="">	iget-boolean v0, p0, Lnet/jsoup/parser/Tokeniser;->trackErrors:Z</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->errors:Ljava/util/List;</span>
+<span class="">	new-instance v1, Lnet/jsoup/parser/ParseError;</span>
+<span class="">	const-string v2, "Invalid character reference"</span>
+<span class="">	iget-object v3, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	invoke-virtual {v3}, Lnet/jsoup/parser/CharacterReader;->pos()I</span>
+<span class="">	move-result v3</span>
+<span class="">	invoke-direct {v1, v2, v3}, Lnet/jsoup/parser/ParseError;-><init>(Ljava/lang/String;I)V</span>
+<span class="">	invoke-interface {v0, v1}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private error(Ljava/lang/String;)V
+<span class="">	.locals 3</span>
+
+<span class="">	iget-boolean v0, p0, Lnet/jsoup/parser/Tokeniser;->trackErrors:Z</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->errors:Ljava/util/List;</span>
+<span class="">	new-instance v1, Lnet/jsoup/parser/ParseError;</span>
+<span class="">	iget-object v2, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	invoke-virtual {v2}, Lnet/jsoup/parser/CharacterReader;->pos()I</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-direct {v1, p1, v2}, Lnet/jsoup/parser/ParseError;-><init>(Ljava/lang/String;I)V</span>
+<span class="">	invoke-interface {v0, v1}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method  acknowledgeSelfClosingFlag()V
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	iput-boolean v0, p0, Lnet/jsoup/parser/Tokeniser;->selfClosingFlagAcknowledged:Z</span>
+.end method
+
+.method  advanceTransition(Lnet/jsoup/parser/TokeniserState;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	invoke-virtual {v0}, Lnet/jsoup/parser/CharacterReader;->advance()V</span>
+<span class="">	iput-object p1, p0, Lnet/jsoup/parser/Tokeniser;->state:Lnet/jsoup/parser/TokeniserState;</span>
+.end method
+
+.method  appropriateEndTagName()Ljava/lang/String;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->lastStartTag:Lnet/jsoup/parser/Token$StartTag;</span>
+<span class="">	iget-object v0, v0, Lnet/jsoup/parser/Token$StartTag;->tagName:Ljava/lang/String;</span>
+.end method
+
+.method  consumeCharacterReference(Ljava/lang/Character;Z)Ljava/lang/Character;
+<span class="">	.locals 6</span>
+
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	invoke-virtual {v0}, Lnet/jsoup/parser/CharacterReader;->isEmpty()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/Character;->charValue()C</span>
+<span class="">	move-result p1</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	invoke-virtual {v0}, Lnet/jsoup/parser/CharacterReader;->current()C</span>
+<span class="">	move-result v0</span>
+<span class="">	if-ne p1, v0, :cond_1</span>
+<span class="">	iget-object p1, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	const/4 v0, 0x5</span>
+<span class="">	:cond_1</span>
+<span class="">	new-array v0, v0, [C</span>
+<span class="">	fill-array-data v0, :array_0</span>
+<span class="">	invoke-virtual {p1, v0}, Lnet/jsoup/parser/CharacterReader;->matchesAny([C)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_2</span>
+<span class="">	iget-object p1, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	invoke-virtual {p1}, Lnet/jsoup/parser/CharacterReader;->mark()V</span>
+<span class="">	iget-object p1, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	:cond_2</span>
+<span class="">	const-string v0, "#"</span>
+<span class="">	invoke-virtual {p1, v0}, Lnet/jsoup/parser/CharacterReader;->matchConsume(Ljava/lang/String;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_a</span>
+<span class="">	iget-object p1, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	const-string p2, "X"</span>
+<span class="">	invoke-virtual {p1, p2}, Lnet/jsoup/parser/CharacterReader;->matchConsumeIgnoreCase(Ljava/lang/String;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_3</span>
+<span class="">	iget-object p2, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	invoke-virtual {p2}, Lnet/jsoup/parser/CharacterReader;->consumeHexSequence()Ljava/lang/String;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object p2, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	invoke-virtual {p2}, Lnet/jsoup/parser/CharacterReader;->consumeDigitSequence()Ljava/lang/String;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	:cond_3</span>
+<span class="">	invoke-virtual {p2}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_4</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-direct {p0}, Lnet/jsoup/parser/Tokeniser;->characterReferenceError()V</span>
+<span class="">	iget-object p1, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	invoke-virtual {p1}, Lnet/jsoup/parser/CharacterReader;->rewindToMark()V</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	const-string v1, ";"</span>
+<span class="">	invoke-virtual {v0, v1}, Lnet/jsoup/parser/CharacterReader;->matchConsume(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	:cond_4</span>
+<span class="">	if-nez v0, :cond_5</span>
+<span class="">	invoke-direct {p0}, Lnet/jsoup/parser/Tokeniser;->characterReferenceError()V</span>
+<span class="">	if-eqz p1, :cond_6</span>
+<span class="">	const/16 p1, 0x10</span>
+<span class="">	goto :goto_1</span>
+<span class="">	const/16 p1, 0xa</span>
+<span class="">	:cond_5</span>
+<span class="">	const/4 v0, -0x1</span>
+<span class="">	invoke-static {p2, p1}, Ljava/lang/Integer;->valueOf(Ljava/lang/String;I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:cond_6</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/Integer;->intValue()I</span>
+<span class="">	:goto_1</span>
+<span class="">	move-result p1</span>
+<span class="">	:try_start_0</span>
+<span class="">	goto :goto_2</span>
+<span class="">	move p1, v0</span>
+<span class="">	if-eq p1, v0, :cond_9</span>
+<span class="">	const p2, 0xd800</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/NumberFormatException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	if-lt p1, p2, :cond_7</span>
+<span class="">	:catch_0</span>
+<span class="">	const p2, 0xdfff</span>
+<span class="">	:goto_2</span>
+<span class="">	if-le p1, p2, :cond_9</span>
+<span class="">	const p2, 0x10ffff</span>
+<span class="">	if-le p1, p2, :cond_8</span>
+<span class="">	goto :goto_3</span>
+<span class="">	int-to-char p1, p1</span>
+<span class="">	:cond_7</span>
+<span class="">	invoke-static {p1}, Ljava/lang/Character;->valueOf(C)Ljava/lang/Character;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {p0}, Lnet/jsoup/parser/Tokeniser;->characterReferenceError()V</span>
+<span class="">	:cond_8</span>
+<span class="">	const p1, 0xfffd</span>
+<span class="">	invoke-static {p1}, Ljava/lang/Character;->valueOf(C)Ljava/lang/Character;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iget-object p1, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	:goto_3</span>
+<span class="">	:cond_9</span>
+<span class="">	invoke-virtual {p1}, Lnet/jsoup/parser/CharacterReader;->consumeLetterSequence()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	const/16 v2, 0x3b</span>
+<span class="">	invoke-virtual {v0, v2}, Lnet/jsoup/parser/CharacterReader;->matches(C)Z</span>
+<span class="">	:cond_a</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	move v4, v3</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v5</span>
+<span class="">	if-lez v5, :cond_c</span>
+<span class="">	if-nez v4, :cond_c</span>
+<span class="">	invoke-static {p1}, Lnet/jsoup/nodes/Entities;->isNamedEntity(Ljava/lang/String;)Z</span>
+<span class="">	move-result v5</span>
+<span class="">	:goto_4</span>
+<span class="">	if-eqz v5, :cond_b</span>
+<span class="">	move v4, v2</span>
+<span class="">	goto :goto_4</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v5</span>
+<span class="">	sub-int/2addr v5, v2</span>
+<span class="">	invoke-virtual {p1, v3, v5}, Ljava/lang/String;->substring(II)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iget-object v5, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	:cond_b</span>
+<span class="">	invoke-virtual {v5}, Lnet/jsoup/parser/CharacterReader;->unconsume()V</span>
+<span class="">	goto :goto_4</span>
+<span class="">	if-nez v4, :cond_e</span>
+<span class="">	if-eqz v0, :cond_d</span>
+<span class="">	invoke-direct {p0}, Lnet/jsoup/parser/Tokeniser;->characterReferenceError()V</span>
+<span class="">	iget-object p1, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	invoke-virtual {p1}, Lnet/jsoup/parser/CharacterReader;->rewindToMark()V</span>
+<span class="">	if-eqz p2, :cond_10</span>
+<span class="">	:cond_c</span>
+<span class="">	iget-object p2, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	invoke-virtual {p2}, Lnet/jsoup/parser/CharacterReader;->matchesLetter()Z</span>
+<span class="">	move-result p2</span>
+<span class="">	:cond_d</span>
+<span class="">	if-nez p2, :cond_f</span>
+<span class="">	iget-object p2, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	invoke-virtual {p2}, Lnet/jsoup/parser/CharacterReader;->matchesDigit()Z</span>
+<span class="">	:cond_e</span>
+<span class="">	move-result p2</span>
+<span class="">	if-nez p2, :cond_f</span>
+<span class="">	iget-object p2, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	const/16 v0, 0x3d</span>
+<span class="">	invoke-virtual {p2, v0}, Lnet/jsoup/parser/CharacterReader;->matches(C)Z</span>
+<span class="">	move-result p2</span>
+<span class="">	if-eqz p2, :cond_10</span>
+<span class="">	iget-object p1, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	invoke-virtual {p1}, Lnet/jsoup/parser/CharacterReader;->rewindToMark()V</span>
+<span class="">	iget-object p2, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	const-string v0, ";"</span>
+<span class="">	invoke-virtual {p2, v0}, Lnet/jsoup/parser/CharacterReader;->matchConsume(Ljava/lang/String;)Z</span>
+<span class="">	move-result p2</span>
+<span class="">	if-nez p2, :cond_11</span>
+<span class="">	:cond_f</span>
+<span class="">	invoke-direct {p0}, Lnet/jsoup/parser/Tokeniser;->characterReferenceError()V</span>
+<span class="">	invoke-static {p1}, Lnet/jsoup/nodes/Entities;->getCharacterByName(Ljava/lang/String;)Ljava/lang/Character;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:cond_10</span>
+<span class="">	:cond_11</span>
+<span class="">	:array_0</span>
+<span class="">	.array-data 2</span>
+<span class="">	0x9s</span>
+<span class="">	0xas</span>
+<span class="">	0xcs</span>
+<span class="">	0x3cs</span>
+<span class="">	0x26s</span>
+<span class="">	.end array-data</span>
+.end method
+
+.method  createCommentPending()V
+<span class="">	.locals 1</span>
+
+<span class="">	new-instance v0, Lnet/jsoup/parser/Token$Comment;</span>
+<span class="">	invoke-direct {v0}, Lnet/jsoup/parser/Token$Comment;-><init>()V</span>
+<span class="">	iput-object v0, p0, Lnet/jsoup/parser/Tokeniser;->commentPending:Lnet/jsoup/parser/Token$Comment;</span>
+.end method
+
+.method  createDoctypePending()V
+<span class="">	.locals 1</span>
+
+<span class="">	new-instance v0, Lnet/jsoup/parser/Token$Doctype;</span>
+<span class="">	invoke-direct {v0}, Lnet/jsoup/parser/Token$Doctype;-><init>()V</span>
+<span class="">	iput-object v0, p0, Lnet/jsoup/parser/Tokeniser;->doctypePending:Lnet/jsoup/parser/Token$Doctype;</span>
+.end method
+
+.method  createTagPending(Z)Lnet/jsoup/parser/Token$Tag;
+<span class="">	.locals 0</span>
+
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	new-instance p1, Lnet/jsoup/parser/Token$StartTag;</span>
+<span class="">	invoke-direct {p1}, Lnet/jsoup/parser/Token$StartTag;-><init>()V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	new-instance p1, Lnet/jsoup/parser/Token$EndTag;</span>
+<span class="">	invoke-direct {p1}, Lnet/jsoup/parser/Token$EndTag;-><init>()V</span>
+<span class="">	:goto_0</span>
+<span class="">	iput-object p1, p0, Lnet/jsoup/parser/Tokeniser;->tagPending:Lnet/jsoup/parser/Token$Tag;</span>
+<span class="">	iget-object p1, p0, Lnet/jsoup/parser/Tokeniser;->tagPending:Lnet/jsoup/parser/Token$Tag;</span>
+.end method
+
+.method  createTempBuffer()V
+<span class="">	.locals 1</span>
+
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	iput-object v0, p0, Lnet/jsoup/parser/Tokeniser;->dataBuffer:Ljava/lang/StringBuilder;</span>
+.end method
+
+.method  currentNodeInHtmlNS()Z
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x1</span>
+.end method
+
+.method  emit(C)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->charBuffer:Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;</span>
+.end method
+
+.method  emit(Ljava/lang/String;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->charBuffer:Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+.end method
+
+.method  emit(Lnet/jsoup/parser/Token;)V
+<span class="">	.locals 2</span>
+
+<span class="">	iget-boolean v0, p0, Lnet/jsoup/parser/Tokeniser;->isEmitPending:Z</span>
+<span class="">	const-string v1, "There is an unread token pending!"</span>
+<span class="">	invoke-static {v0, v1}, Lnet/jsoup/helper/Validate;->isFalse(ZLjava/lang/String;)V</span>
+<span class="">	iput-object p1, p0, Lnet/jsoup/parser/Tokeniser;->emitPending:Lnet/jsoup/parser/Token;</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	iput-boolean v0, p0, Lnet/jsoup/parser/Tokeniser;->isEmitPending:Z</span>
+<span class="">	iget-object v0, p1, Lnet/jsoup/parser/Token;->type:Lnet/jsoup/parser/Token$TokenType;</span>
+<span class="">	sget-object v1, Lnet/jsoup/parser/Token$TokenType;->StartTag:Lnet/jsoup/parser/Token$TokenType;</span>
+<span class="">	if-ne v0, v1, :cond_0</span>
+<span class="">	check-cast p1, Lnet/jsoup/parser/Token$StartTag;</span>
+<span class="">	iput-object p1, p0, Lnet/jsoup/parser/Tokeniser;->lastStartTag:Lnet/jsoup/parser/Token$StartTag;</span>
+<span class="">	iget-boolean p1, p1, Lnet/jsoup/parser/Token$StartTag;->selfClosing:Z</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	iput-boolean p1, p0, Lnet/jsoup/parser/Tokeniser;->selfClosingFlagAcknowledged:Z</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p1, Lnet/jsoup/parser/Token;->type:Lnet/jsoup/parser/Token$TokenType;</span>
+<span class="">	sget-object v1, Lnet/jsoup/parser/Token$TokenType;->EndTag:Lnet/jsoup/parser/Token$TokenType;</span>
+<span class="">	if-ne v0, v1, :cond_1</span>
+<span class="">	check-cast p1, Lnet/jsoup/parser/Token$EndTag;</span>
+<span class="">	iget-object p1, p1, Lnet/jsoup/parser/Token$EndTag;->attributes:Lnet/jsoup/nodes/Attributes;</span>
+<span class="">	invoke-virtual {p1}, Lnet/jsoup/nodes/Attributes;->size()I</span>
+<span class="">	move-result p1</span>
+<span class="">	if-lez p1, :cond_1</span>
+<span class="">	const-string p1, "Attributes incorrectly present on end tag"</span>
+<span class="">	invoke-direct {p0, p1}, Lnet/jsoup/parser/Tokeniser;->error(Ljava/lang/String;)V</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method  emitCommentPending()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->commentPending:Lnet/jsoup/parser/Token$Comment;</span>
+<span class="">	invoke-virtual {p0, v0}, Lnet/jsoup/parser/Tokeniser;->emit(Lnet/jsoup/parser/Token;)V</span>
+.end method
+
+.method  emitDoctypePending()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->doctypePending:Lnet/jsoup/parser/Token$Doctype;</span>
+<span class="">	invoke-virtual {p0, v0}, Lnet/jsoup/parser/Tokeniser;->emit(Lnet/jsoup/parser/Token;)V</span>
+.end method
+
+.method  emitTagPending()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->tagPending:Lnet/jsoup/parser/Token$Tag;</span>
+<span class="">	invoke-virtual {v0}, Lnet/jsoup/parser/Token$Tag;->finaliseTag()V</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->tagPending:Lnet/jsoup/parser/Token$Tag;</span>
+<span class="">	invoke-virtual {p0, v0}, Lnet/jsoup/parser/Tokeniser;->emit(Lnet/jsoup/parser/Token;)V</span>
+.end method
+
+.method  eofError(Lnet/jsoup/parser/TokeniserState;)V
+<span class="">	.locals 4</span>
+
+<span class="">	iget-boolean v0, p0, Lnet/jsoup/parser/Tokeniser;->trackErrors:Z</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->errors:Ljava/util/List;</span>
+<span class="">	new-instance v1, Lnet/jsoup/parser/ParseError;</span>
+<span class="">	const-string v2, "Unexpectedly reached end of file (EOF)"</span>
+<span class="">	iget-object v3, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	invoke-virtual {v3}, Lnet/jsoup/parser/CharacterReader;->pos()I</span>
+<span class="">	move-result v3</span>
+<span class="">	invoke-direct {v1, v2, p1, v3}, Lnet/jsoup/parser/ParseError;-><init>(Ljava/lang/String;Lnet/jsoup/parser/TokeniserState;I)V</span>
+<span class="">	invoke-interface {v0, v1}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method  error(Lnet/jsoup/parser/TokeniserState;)V
+<span class="">	.locals 5</span>
+
+<span class="">	iget-boolean v0, p0, Lnet/jsoup/parser/Tokeniser;->trackErrors:Z</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->errors:Ljava/util/List;</span>
+<span class="">	new-instance v1, Lnet/jsoup/parser/ParseError;</span>
+<span class="">	const-string v2, "Unexpected character in input"</span>
+<span class="">	iget-object v3, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	invoke-virtual {v3}, Lnet/jsoup/parser/CharacterReader;->current()C</span>
+<span class="">	move-result v3</span>
+<span class="">	iget-object v4, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	invoke-virtual {v4}, Lnet/jsoup/parser/CharacterReader;->pos()I</span>
+<span class="">	move-result v4</span>
+<span class="">	invoke-direct {v1, v2, v3, p1, v4}, Lnet/jsoup/parser/ParseError;-><init>(Ljava/lang/String;CLnet/jsoup/parser/TokeniserState;I)V</span>
+<span class="">	invoke-interface {v0, v1}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method  getState()Lnet/jsoup/parser/TokeniserState;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->state:Lnet/jsoup/parser/TokeniserState;</span>
+.end method
+
+.method  isAppropriateEndTagToken()Z
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->tagPending:Lnet/jsoup/parser/Token$Tag;</span>
+<span class="">	iget-object v0, v0, Lnet/jsoup/parser/Token$Tag;->tagName:Ljava/lang/String;</span>
+<span class="">	iget-object v1, p0, Lnet/jsoup/parser/Tokeniser;->lastStartTag:Lnet/jsoup/parser/Token$StartTag;</span>
+<span class="">	iget-object v1, v1, Lnet/jsoup/parser/Token$StartTag;->tagName:Ljava/lang/String;</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method  isTrackErrors()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Lnet/jsoup/parser/Tokeniser;->trackErrors:Z</span>
+.end method
+
+.method  read()Lnet/jsoup/parser/Token;
+<span class="">	.locals 4</span>
+
+<span class="">	iget-boolean v0, p0, Lnet/jsoup/parser/Tokeniser;->selfClosingFlagAcknowledged:Z</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	const-string v0, "Self closing flag not acknowledged"</span>
+<span class="">	invoke-direct {p0, v0}, Lnet/jsoup/parser/Tokeniser;->error(Ljava/lang/String;)V</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	iput-boolean v0, p0, Lnet/jsoup/parser/Tokeniser;->selfClosingFlagAcknowledged:Z</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-boolean v0, p0, Lnet/jsoup/parser/Tokeniser;->isEmitPending:Z</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->state:Lnet/jsoup/parser/TokeniserState;</span>
+<span class="">	iget-object v1, p0, Lnet/jsoup/parser/Tokeniser;->reader:Lnet/jsoup/parser/CharacterReader;</span>
+<span class="">	invoke-virtual {v0, p0, v1}, Lnet/jsoup/parser/TokeniserState;->read(Lnet/jsoup/parser/Tokeniser;Lnet/jsoup/parser/CharacterReader;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->charBuffer:Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-lez v0, :cond_2</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->charBuffer:Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v2, p0, Lnet/jsoup/parser/Tokeniser;->charBuffer:Ljava/lang/StringBuilder;</span>
+<span class="">	iget-object v3, p0, Lnet/jsoup/parser/Tokeniser;->charBuffer:Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v3}, Ljava/lang/StringBuilder;->length()I</span>
+<span class="">	move-result v3</span>
+<span class="">	invoke-virtual {v2, v1, v3}, Ljava/lang/StringBuilder;->delete(II)Ljava/lang/StringBuilder;</span>
+<span class="">	new-instance v1, Lnet/jsoup/parser/Token$Character;</span>
+<span class="">	invoke-direct {v1, v0}, Lnet/jsoup/parser/Token$Character;-><init>(Ljava/lang/String;)V</span>
+<span class="">	iput-boolean v1, p0, Lnet/jsoup/parser/Tokeniser;->isEmitPending:Z</span>
+<span class="">	:cond_2</span>
+<span class="">	iget-object v0, p0, Lnet/jsoup/parser/Tokeniser;->emitPending:Lnet/jsoup/parser/Token;</span>
+.end method
+
+.method  setTrackErrors(Z)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput-boolean p1, p0, Lnet/jsoup/parser/Tokeniser;->trackErrors:Z</span>
+.end method
+
+.method  transition(Lnet/jsoup/parser/TokeniserState;)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput-object p1, p0, Lnet/jsoup/parser/Tokeniser;->state:Lnet/jsoup/parser/TokeniserState;</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

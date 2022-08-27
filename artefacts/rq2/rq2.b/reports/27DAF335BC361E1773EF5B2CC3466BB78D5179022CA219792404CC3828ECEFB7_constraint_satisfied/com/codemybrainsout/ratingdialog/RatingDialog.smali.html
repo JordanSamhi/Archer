@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.codemybrainsout.ratingdialog</a></li>
+        <li><i class="ico ico-class"></i> RatingDialog.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Lcom/codemybrainsout/ratingdialog/RatingDialog;
+.super Landroid/support/v7/app/AppCompatDialog;
+.source "RatingDialog.java"
+.implements Landroid/widget/RatingBar$OnRatingBarChangeListener;
+.implements Landroid/view/View$OnClickListener;
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;
+}
+.end annotation
+
+.field private static final SESSION_COUNT:Ljava/lang/String; = "session_count"
+.field private static final SHOW_NEVER:Ljava/lang/String; = "show_never"
+.field private MyPrefs:Ljava/lang/String;
+.field private builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;
+.field private context:Landroid/content/Context;
+.field private etFeedback:Landroid/widget/EditText;
+.field private feedbackButtons:Landroid/widget/LinearLayout;
+.field private ivIcon:Landroid/widget/ImageView;
+.field private ratingBar:Landroid/widget/RatingBar;
+.field private ratingButtons:Landroid/widget/LinearLayout;
+.field private session:I
+.field private sharedpreferences:Landroid/content/SharedPreferences;
+.field private threshold:F
+.field private thresholdPassed:Z
+.field private tvCancel:Landroid/widget/TextView;
+.field private tvFeedback:Landroid/widget/TextView;
+.field private tvNegative:Landroid/widget/TextView;
+.field private tvPositive:Landroid/widget/TextView;
+.field private tvSubmit:Landroid/widget/TextView;
+.field private tvTitle:Landroid/widget/TextView;
+
+
+.method public constructor <init>(Landroid/content/Context;Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0, p1}, Landroid/support/v7/app/AppCompatDialog;-><init>(Landroid/content/Context;)V</span>
+<span class="">	const-string v0, "RatingDialog"</span>
+<span class="">	iput-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->MyPrefs:Ljava/lang/String;</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	iput-boolean v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->thresholdPassed:Z</span>
+<span class="">	iput-object p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	iput-object p2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {p2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$000(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result p1</span>
+<span class="">	iput p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->session:I</span>
+<span class="">	invoke-static {p2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$100(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)F</span>
+<span class="">	move-result p1</span>
+<span class="">	iput p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->threshold:F</span>
+.end method
+
+.method static synthetic access$2200(Lcom/codemybrainsout/ratingdialog/RatingDialog;)Landroid/content/Context;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+.end method
+
+.method static synthetic access$2300(Lcom/codemybrainsout/ratingdialog/RatingDialog;Landroid/content/Context;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0, p1}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->openPlaystore(Landroid/content/Context;)V</span>
+.end method
+
+.method static synthetic access$2400(Lcom/codemybrainsout/ratingdialog/RatingDialog;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->openForm()V</span>
+.end method
+
+.method private checkIfSessionMatches(I)Z
+<span class="">	.locals 4</span>
+
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	if-ne p1, v0, :cond_0</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->MyPrefs:Ljava/lang/String;</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	invoke-virtual {v1, v2, v3}, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iput-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->sharedpreferences:Landroid/content/SharedPreferences;</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->sharedpreferences:Landroid/content/SharedPreferences;</span>
+<span class="">	const-string v2, "show_never"</span>
+<span class="">	invoke-interface {v1, v2, v3}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->sharedpreferences:Landroid/content/SharedPreferences;</span>
+<span class="">	const-string v2, "session_count"</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-interface {v1, v2, v0}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I</span>
+<span class="">	move-result v1</span>
+<span class="">	if-ne p1, v1, :cond_2</span>
+<span class="">	iget-object p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->sharedpreferences:Landroid/content/SharedPreferences;</span>
+<span class="">	invoke-interface {p1}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string v1, "session_count"</span>
+<span class="">	invoke-interface {p1, v1, v0}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;</span>
+<span class="">	invoke-interface {p1}, Landroid/content/SharedPreferences$Editor;->commit()Z</span>
+<span class="">	if-le p1, v1, :cond_3</span>
+<span class="">	add-int/2addr v1, v0</span>
+<span class="">	iget-object p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->sharedpreferences:Landroid/content/SharedPreferences;</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-interface {p1}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string v0, "session_count"</span>
+<span class="">	invoke-interface {p1, v0, v1}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;</span>
+<span class="">	invoke-interface {p1}, Landroid/content/SharedPreferences$Editor;->commit()Z</span>
+<span class="">	iget-object p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->sharedpreferences:Landroid/content/SharedPreferences;</span>
+<span class="">	invoke-interface {p1}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string v0, "session_count"</span>
+<span class="">	:cond_3</span>
+<span class="">	const/4 v1, 0x2</span>
+<span class="">	invoke-interface {p1, v0, v1}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;</span>
+<span class="">	invoke-interface {p1}, Landroid/content/SharedPreferences$Editor;->commit()Z</span>
+.end method
+
+.method private init()V
+<span class="">	.locals 5</span>
+
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvTitle:Landroid/widget/TextView;</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v1}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$200(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvPositive:Landroid/widget/TextView;</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v1}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$300(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvNegative:Landroid/widget/TextView;</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v1}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$400(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvFeedback:Landroid/widget/TextView;</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v1}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$500(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvSubmit:Landroid/widget/TextView;</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v1}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$600(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvCancel:Landroid/widget/TextView;</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v1}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$700(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->etFeedback:Landroid/widget/EditText;</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v1}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$800(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/EditText;->setHint(Ljava/lang/CharSequence;)V</span>
+<span class="">	new-instance v0, Landroid/util/TypedValue;</span>
+<span class="">	invoke-direct {v0}, Landroid/util/TypedValue;-><init>()V</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v1}, Landroid/content/Context;->getTheme()Landroid/content/res/Resources$Theme;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	sget v2, Lcom/codemybrainsout/ratingdialog/R$attr;->colorAccent:I</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	invoke-virtual {v1, v2, v0, v3}, Landroid/content/res/Resources$Theme;->resolveAttribute(ILandroid/util/TypedValue;Z)Z</span>
+<span class="">	iget v0, v0, Landroid/util/TypedValue;->data:I</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvTitle:Landroid/widget/TextView;</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$900(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_0</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	iget-object v4, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v4}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$900(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v4</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-static {v2, v4}, Landroid/support/v4/content/ContextCompat;->getColor(Landroid/content/Context;I)I</span>
+<span class="">	move-result v2</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	sget v4, Lcom/codemybrainsout/ratingdialog/R$color;->black:I</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:goto_1</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/widget/TextView;->setTextColor(I)V</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvPositive:Landroid/widget/TextView;</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1000(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_1</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	iget-object v4, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v4}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1000(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v4</span>
+<span class="">	invoke-static {v2, v4}, Landroid/support/v4/content/ContextCompat;->getColor(Landroid/content/Context;I)I</span>
+<span class="">	move-result v2</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_1</span>
+<span class="">	move v2, v0</span>
+<span class="">	:goto_2</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/widget/TextView;->setTextColor(I)V</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvNegative:Landroid/widget/TextView;</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1100(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_2</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	iget-object v4, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v4}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1100(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v4</span>
+<span class="">	:goto_3</span>
+<span class="">	invoke-static {v2, v4}, Landroid/support/v4/content/ContextCompat;->getColor(Landroid/content/Context;I)I</span>
+<span class="">	move-result v2</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:cond_2</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	sget v4, Lcom/codemybrainsout/ratingdialog/R$color;->grey_500:I</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:goto_4</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/widget/TextView;->setTextColor(I)V</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvFeedback:Landroid/widget/TextView;</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$900(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_3</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	iget-object v4, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v4}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$900(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v4</span>
+<span class="">	:goto_5</span>
+<span class="">	invoke-static {v2, v4}, Landroid/support/v4/content/ContextCompat;->getColor(Landroid/content/Context;I)I</span>
+<span class="">	move-result v2</span>
+<span class="">	goto :goto_6</span>
+<span class="">	:cond_3</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	sget v4, Lcom/codemybrainsout/ratingdialog/R$color;->black:I</span>
+<span class="">	goto :goto_5</span>
+<span class="">	:goto_6</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/widget/TextView;->setTextColor(I)V</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvSubmit:Landroid/widget/TextView;</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1000(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_4</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1000(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-static {v0, v2}, Landroid/support/v4/content/ContextCompat;->getColor(Landroid/content/Context;I)I</span>
+<span class="">	move-result v0</span>
+<span class="">	:cond_4</span>
+<span class="">	invoke-virtual {v1, v0}, Landroid/widget/TextView;->setTextColor(I)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvCancel:Landroid/widget/TextView;</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v1}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1100(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_5</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1100(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v2</span>
+<span class="">	:goto_7</span>
+<span class="">	invoke-static {v1, v2}, Landroid/support/v4/content/ContextCompat;->getColor(Landroid/content/Context;I)I</span>
+<span class="">	move-result v1</span>
+<span class="">	goto :goto_8</span>
+<span class="">	:cond_5</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	sget v2, Lcom/codemybrainsout/ratingdialog/R$color;->grey_500:I</span>
+<span class="">	goto :goto_7</span>
+<span class="">	:goto_8</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setTextColor(I)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v0}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1200(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_6</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->etFeedback:Landroid/widget/EditText;</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1200(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-static {v1, v2}, Landroid/support/v4/content/ContextCompat;->getColor(Landroid/content/Context;I)I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/EditText;->setTextColor(I)V</span>
+<span class="">	:cond_6</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v0}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1300(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_7</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvPositive:Landroid/widget/TextView;</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v1}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1300(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setBackgroundResource(I)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvSubmit:Landroid/widget/TextView;</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v1}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1300(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setBackgroundResource(I)V</span>
+<span class="">	:cond_7</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v0}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1400(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_8</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvNegative:Landroid/widget/TextView;</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v1}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1400(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setBackgroundResource(I)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvCancel:Landroid/widget/TextView;</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v1}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1400(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setBackgroundResource(I)V</span>
+<span class="">	:cond_8</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v0}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1500(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_b</span>
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v1, 0x13</span>
+<span class="">	if-le v0, v1, :cond_a</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->ratingBar:Landroid/widget/RatingBar;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/RatingBar;->getProgressDrawable()Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroid/graphics/drawable/LayerDrawable;</span>
+<span class="">	const/4 v1, 0x2</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/graphics/drawable/LayerDrawable;->getDrawable(I)Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	iget-object v4, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v4}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1500(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v4</span>
+<span class="">	invoke-static {v2, v4}, Landroid/support/v4/content/ContextCompat;->getColor(Landroid/content/Context;I)I</span>
+<span class="">	move-result v2</span>
+<span class="">	sget-object v4, Landroid/graphics/PorterDuff$Mode;->SRC_ATOP:Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	invoke-virtual {v1, v2, v4}, Landroid/graphics/drawable/Drawable;->setColorFilter(ILandroid/graphics/PorterDuff$Mode;)V</span>
+<span class="">	invoke-virtual {v0, v3}, Landroid/graphics/drawable/LayerDrawable;->getDrawable(I)Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	iget-object v4, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v4}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1500(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v4</span>
+<span class="">	invoke-static {v2, v4}, Landroid/support/v4/content/ContextCompat;->getColor(Landroid/content/Context;I)I</span>
+<span class="">	move-result v2</span>
+<span class="">	sget-object v4, Landroid/graphics/PorterDuff$Mode;->SRC_ATOP:Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	invoke-virtual {v1, v2, v4}, Landroid/graphics/drawable/Drawable;->setColorFilter(ILandroid/graphics/PorterDuff$Mode;)V</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v1}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1600(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_9</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v1}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1600(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v1</span>
+<span class="">	goto :goto_9</span>
+<span class="">	:cond_9</span>
+<span class="">	sget v1, Lcom/codemybrainsout/ratingdialog/R$color;->grey_200:I</span>
+<span class="">	:goto_9</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-virtual {v0, v2}, Landroid/graphics/drawable/LayerDrawable;->getDrawable(I)Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	invoke-static {v2, v1}, Landroid/support/v4/content/ContextCompat;->getColor(Landroid/content/Context;I)I</span>
+<span class="">	move-result v1</span>
+<span class="">	sget-object v2, Landroid/graphics/PorterDuff$Mode;->SRC_ATOP:Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Landroid/graphics/drawable/Drawable;->setColorFilter(ILandroid/graphics/PorterDuff$Mode;)V</span>
+<span class="">	goto :goto_a</span>
+<span class="">	:cond_a</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->ratingBar:Landroid/widget/RatingBar;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/RatingBar;->getProgressDrawable()Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1500(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)I</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-static {v1, v2}, Landroid/support/v4/content/ContextCompat;->getColor(Landroid/content/Context;I)I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {v0, v1}, Landroid/support/v4/graphics/drawable/DrawableCompat;->setTint(Landroid/graphics/drawable/Drawable;I)V</span>
+<span class="">	:cond_b</span>
+<span class="">	:goto_a</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	invoke-virtual {v1}, Landroid/content/Context;->getApplicationInfo()Landroid/content/pm/ApplicationInfo;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/content/pm/PackageManager;->getApplicationIcon(Landroid/content/pm/ApplicationInfo;)Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->ivIcon:Landroid/widget/ImageView;</span>
+<span class="">	iget-object v2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1700(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	if-eqz v2, :cond_c</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v0}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1700(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:cond_c</span>
+<span class="">	invoke-virtual {v1, v0}, Landroid/widget/ImageView;->setImageDrawable(Landroid/graphics/drawable/Drawable;)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->ratingBar:Landroid/widget/RatingBar;</span>
+<span class="">	invoke-virtual {v0, p0}, Landroid/widget/RatingBar;->setOnRatingBarChangeListener(Landroid/widget/RatingBar$OnRatingBarChangeListener;)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvPositive:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0, p0}, Landroid/widget/TextView;->setOnClickListener(Landroid/view/View$OnClickListener;)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvNegative:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0, p0}, Landroid/widget/TextView;->setOnClickListener(Landroid/view/View$OnClickListener;)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvSubmit:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0, p0}, Landroid/widget/TextView;->setOnClickListener(Landroid/view/View$OnClickListener;)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvCancel:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0, p0}, Landroid/widget/TextView;->setOnClickListener(Landroid/view/View$OnClickListener;)V</span>
+<span class="">	iget v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->session:I</span>
+<span class="">	if-ne v0, v3, :cond_d</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvNegative:Landroid/widget/TextView;</span>
+<span class="">	const/16 v1, 0x8</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setVisibility(I)V</span>
+<span class="">	:cond_d</span>
+.end method
+
+.method private openForm()V
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvFeedback:Landroid/widget/TextView;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setVisibility(I)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->etFeedback:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/EditText;->setVisibility(I)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->feedbackButtons:Landroid/widget/LinearLayout;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/LinearLayout;->setVisibility(I)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->ratingButtons:Landroid/widget/LinearLayout;</span>
+<span class="">	const/16 v1, 0x8</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/LinearLayout;->setVisibility(I)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->ivIcon:Landroid/widget/ImageView;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/ImageView;->setVisibility(I)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvTitle:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setVisibility(I)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->ratingBar:Landroid/widget/RatingBar;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/RatingBar;->setVisibility(I)V</span>
+.end method
+
+.method private openPlaystore(Landroid/content/Context;)V
+<span class="">	.locals 3</span>
+
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v0}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$2500(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:try_start_0</span>
+<span class="">	new-instance v1, Landroid/content/Intent;</span>
+<span class="">	const-string v2, "android.intent.action.VIEW"</span>
+<span class="">	invoke-direct {v1, v2, v0}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V</span>
+<span class="">	invoke-virtual {p1, v1}, Landroid/content/Context;->startActivity(Landroid/content/Intent;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Landroid/content/ActivityNotFoundException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catch_0</span>
+<span class="">	const-string v0, "Couldn\'t find PlayStore on this device"</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-static {p1, v0, v1}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Landroid/widget/Toast;->show()V</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method private setRatingThresholdClearedListener()V
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	new-instance v1, Lcom/codemybrainsout/ratingdialog/RatingDialog$1;</span>
+<span class="">	invoke-direct {v1, p0}, Lcom/codemybrainsout/ratingdialog/RatingDialog$1;-><init>(Lcom/codemybrainsout/ratingdialog/RatingDialog;)V</span>
+<span class="">	invoke-static {v0, v1}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1902(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder$RatingThresholdClearedListener;)Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder$RatingThresholdClearedListener;</span>
+.end method
+
+.method private setRatingThresholdFailedListener()V
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	new-instance v1, Lcom/codemybrainsout/ratingdialog/RatingDialog$2;</span>
+<span class="">	invoke-direct {v1, p0}, Lcom/codemybrainsout/ratingdialog/RatingDialog$2;-><init>(Lcom/codemybrainsout/ratingdialog/RatingDialog;)V</span>
+<span class="">	invoke-static {v0, v1}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$2002(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder$RatingThresholdFailedListener;)Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder$RatingThresholdFailedListener;</span>
+.end method
+
+.method private showNever()V
+<span class="">	.locals 3</span>
+
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	iget-object v1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->MyPrefs:Ljava/lang/String;</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->sharedpreferences:Landroid/content/SharedPreferences;</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->sharedpreferences:Landroid/content/SharedPreferences;</span>
+<span class="">	invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v1, "show_never"</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;</span>
+<span class="">	invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->commit()Z</span>
+.end method
+
+.method public getFormCancelTextView()Landroid/widget/TextView;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvCancel:Landroid/widget/TextView;</span>
+.end method
+
+.method public getFormSumbitTextView()Landroid/widget/TextView;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvSubmit:Landroid/widget/TextView;</span>
+.end method
+
+.method public getFormTitleTextView()Landroid/widget/TextView;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvFeedback:Landroid/widget/TextView;</span>
+.end method
+
+.method public getIconImageView()Landroid/widget/ImageView;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->ivIcon:Landroid/widget/ImageView;</span>
+.end method
+
+.method public getNegativeButtonTextView()Landroid/widget/TextView;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvNegative:Landroid/widget/TextView;</span>
+.end method
+
+.method public getPositiveButtonTextView()Landroid/widget/TextView;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvPositive:Landroid/widget/TextView;</span>
+.end method
+
+.method public getRatingBarView()Landroid/widget/RatingBar;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->ratingBar:Landroid/widget/RatingBar;</span>
+.end method
+
+.method public getTitleTextView()Landroid/widget/TextView;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvTitle:Landroid/widget/TextView;</span>
+.end method
+
+.method public onClick(Landroid/view/View;)V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-virtual {p1}, Landroid/view/View;->getId()I</span>
+<span class="">	move-result v0</span>
+<span class="">	sget v1, Lcom/codemybrainsout/ratingdialog/R$id;->dialog_rating_button_negative:I</span>
+<span class="">	if-ne v0, v1, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->dismiss()V</span>
+<span class="">	invoke-direct {p0}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->showNever()V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/View;->getId()I</span>
+<span class="">	move-result v0</span>
+<span class="">	sget v1, Lcom/codemybrainsout/ratingdialog/R$id;->dialog_rating_button_positive:I</span>
+<span class="">	if-ne v0, v1, :cond_1</span>
+<span class="">	invoke-virtual {p0}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->dismiss()V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/View;->getId()I</span>
+<span class="">	move-result v0</span>
+<span class="">	sget v1, Lcom/codemybrainsout/ratingdialog/R$id;->dialog_rating_button_feedback_submit:I</span>
+<span class="">	if-ne v0, v1, :cond_4</span>
+<span class="">	iget-object p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->etFeedback:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {p1}, Landroid/widget/EditText;->getText()Landroid/text/Editable;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/Object;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/String;->trim()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-static {p1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iget-object p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->context:Landroid/content/Context;</span>
+<span class="">	sget v0, Lcom/codemybrainsout/ratingdialog/R$anim;->shake:I</span>
+<span class="">	invoke-static {p1, v0}, Landroid/view/animation/AnimationUtils;->loadAnimation(Landroid/content/Context;I)Landroid/view/animation/Animation;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->etFeedback:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/widget/EditText;->startAnimation(Landroid/view/animation/Animation;)V</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-static {v0}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1800(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder$RatingDialogFormListener;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	iget-object v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {v0}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1800(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder$RatingDialogFormListener;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0, p1}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder$RatingDialogFormListener;->onFormSubmitted(Ljava/lang/String;)V</span>
+<span class="">	invoke-virtual {p0}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->dismiss()V</span>
+<span class="">	:cond_3</span>
+<span class="">	invoke-direct {p0}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->showNever()V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/View;->getId()I</span>
+<span class="">	:cond_4</span>
+<span class="">	move-result p1</span>
+<span class="">	sget v0, Lcom/codemybrainsout/ratingdialog/R$id;->dialog_rating_button_feedback_cancel:I</span>
+<span class="">	if-ne p1, v0, :cond_5</span>
+<span class="">	invoke-virtual {p0}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->dismiss()V</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_5</span>
+.end method
+
+.method protected onCreate(Landroid/os/Bundle;)V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-super {p0, p1}, Landroid/support/v7/app/AppCompatDialog;->onCreate(Landroid/os/Bundle;)V</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->requestWindowFeature(I)Z</span>
+<span class="">	invoke-virtual {p0}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->getWindow()Landroid/view/Window;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	new-instance v0, Landroid/graphics/drawable/ColorDrawable;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-direct {v0, v1}, Landroid/graphics/drawable/ColorDrawable;-><init>(I)V</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/view/Window;->setBackgroundDrawable(Landroid/graphics/drawable/Drawable;)V</span>
+<span class="">	sget p1, Lcom/codemybrainsout/ratingdialog/R$layout;->dialog_rating:I</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->setContentView(I)V</span>
+<span class="">	sget p1, Lcom/codemybrainsout/ratingdialog/R$id;->dialog_rating_title:I</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->findViewById(I)Landroid/view/View;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Landroid/widget/TextView;</span>
+<span class="">	iput-object p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvTitle:Landroid/widget/TextView;</span>
+<span class="">	sget p1, Lcom/codemybrainsout/ratingdialog/R$id;->dialog_rating_button_negative:I</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->findViewById(I)Landroid/view/View;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Landroid/widget/TextView;</span>
+<span class="">	iput-object p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvNegative:Landroid/widget/TextView;</span>
+<span class="">	sget p1, Lcom/codemybrainsout/ratingdialog/R$id;->dialog_rating_button_positive:I</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->findViewById(I)Landroid/view/View;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Landroid/widget/TextView;</span>
+<span class="">	iput-object p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvPositive:Landroid/widget/TextView;</span>
+<span class="">	sget p1, Lcom/codemybrainsout/ratingdialog/R$id;->dialog_rating_feedback_title:I</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->findViewById(I)Landroid/view/View;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Landroid/widget/TextView;</span>
+<span class="">	iput-object p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvFeedback:Landroid/widget/TextView;</span>
+<span class="">	sget p1, Lcom/codemybrainsout/ratingdialog/R$id;->dialog_rating_button_feedback_submit:I</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->findViewById(I)Landroid/view/View;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Landroid/widget/TextView;</span>
+<span class="">	iput-object p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvSubmit:Landroid/widget/TextView;</span>
+<span class="">	sget p1, Lcom/codemybrainsout/ratingdialog/R$id;->dialog_rating_button_feedback_cancel:I</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->findViewById(I)Landroid/view/View;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Landroid/widget/TextView;</span>
+<span class="">	iput-object p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->tvCancel:Landroid/widget/TextView;</span>
+<span class="">	sget p1, Lcom/codemybrainsout/ratingdialog/R$id;->dialog_rating_rating_bar:I</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->findViewById(I)Landroid/view/View;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Landroid/widget/RatingBar;</span>
+<span class="">	iput-object p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->ratingBar:Landroid/widget/RatingBar;</span>
+<span class="">	sget p1, Lcom/codemybrainsout/ratingdialog/R$id;->dialog_rating_icon:I</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->findViewById(I)Landroid/view/View;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Landroid/widget/ImageView;</span>
+<span class="">	iput-object p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->ivIcon:Landroid/widget/ImageView;</span>
+<span class="">	sget p1, Lcom/codemybrainsout/ratingdialog/R$id;->dialog_rating_feedback:I</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->findViewById(I)Landroid/view/View;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Landroid/widget/EditText;</span>
+<span class="">	iput-object p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->etFeedback:Landroid/widget/EditText;</span>
+<span class="">	sget p1, Lcom/codemybrainsout/ratingdialog/R$id;->dialog_rating_buttons:I</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->findViewById(I)Landroid/view/View;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Landroid/widget/LinearLayout;</span>
+<span class="">	iput-object p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->ratingButtons:Landroid/widget/LinearLayout;</span>
+<span class="">	sget p1, Lcom/codemybrainsout/ratingdialog/R$id;->dialog_rating_feedback_buttons:I</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->findViewById(I)Landroid/view/View;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Landroid/widget/LinearLayout;</span>
+<span class="">	iput-object p1, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->feedbackButtons:Landroid/widget/LinearLayout;</span>
+<span class="">	invoke-direct {p0}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->init()V</span>
+.end method
+
+.method public onRatingChanged(Landroid/widget/RatingBar;FZ)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p1}, Landroid/widget/RatingBar;->getRating()F</span>
+<span class="">	move-result p2</span>
+<span class="">	iget p3, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->threshold:F</span>
+<span class="">	cmpl-float p2, p2, p3</span>
+<span class="">	if-ltz p2, :cond_1</span>
+<span class="">	const/4 p2, 0x1</span>
+<span class="">	iput-boolean p2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->thresholdPassed:Z</span>
+<span class="">	iget-object p2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {p2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1900(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder$RatingThresholdClearedListener;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	if-nez p2, :cond_0</span>
+<span class="">	invoke-direct {p0}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->setRatingThresholdClearedListener()V</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object p2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {p2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$1900(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder$RatingThresholdClearedListener;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-virtual {p1}, Landroid/widget/RatingBar;->getRating()F</span>
+<span class="">	move-result p3</span>
+<span class="">	iget-boolean v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->thresholdPassed:Z</span>
+<span class="">	invoke-interface {p2, p0, p3, v0}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder$RatingThresholdClearedListener;->onThresholdCleared(Lcom/codemybrainsout/ratingdialog/RatingDialog;FZ)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 p2, 0x0</span>
+<span class="">	iput-boolean p2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->thresholdPassed:Z</span>
+<span class="">	iget-object p2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {p2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$2000(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder$RatingThresholdFailedListener;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	if-nez p2, :cond_2</span>
+<span class="">	invoke-direct {p0}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->setRatingThresholdFailedListener()V</span>
+<span class="">	:cond_2</span>
+<span class="">	iget-object p2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {p2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$2000(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder$RatingThresholdFailedListener;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-virtual {p1}, Landroid/widget/RatingBar;->getRating()F</span>
+<span class="">	move-result p3</span>
+<span class="">	iget-boolean v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->thresholdPassed:Z</span>
+<span class="">	invoke-interface {p2, p0, p3, v0}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder$RatingThresholdFailedListener;->onThresholdFailed(Lcom/codemybrainsout/ratingdialog/RatingDialog;FZ)V</span>
+<span class="">	:goto_0</span>
+<span class="">	iget-object p2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {p2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$2100(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder$RatingDialogListener;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	if-eqz p2, :cond_3</span>
+<span class="">	iget-object p2, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->builder:Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;</span>
+<span class="">	invoke-static {p2}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;->access$2100(Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder;)Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder$RatingDialogListener;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-virtual {p1}, Landroid/widget/RatingBar;->getRating()F</span>
+<span class="">	move-result p1</span>
+<span class="">	iget-boolean p3, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->thresholdPassed:Z</span>
+<span class="">	invoke-interface {p2, p1, p3}, Lcom/codemybrainsout/ratingdialog/RatingDialog$Builder$RatingDialogListener;->onRatingSelected(FZ)V</span>
+<span class="">	:cond_3</span>
+<span class="">	invoke-direct {p0}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->showNever()V</span>
+.end method
+
+.method public show()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/codemybrainsout/ratingdialog/RatingDialog;->session:I</span>
+<span class="">	invoke-direct {p0, v0}, Lcom/codemybrainsout/ratingdialog/RatingDialog;->checkIfSessionMatches(I)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-super {p0}, Landroid/support/v7/app/AppCompatDialog;->show()V</span>
+<span class="">	:cond_0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

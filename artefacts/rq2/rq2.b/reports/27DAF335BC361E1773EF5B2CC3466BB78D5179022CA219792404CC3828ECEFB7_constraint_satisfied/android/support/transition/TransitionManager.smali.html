@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">android.support.transition</a></li>
+        <li><i class="ico ico-class"></i> TransitionManager.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Landroid/support/transition/TransitionManager;
+.super Ljava/lang/Object;
+.source "TransitionManager.java"
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Landroid/support/transition/TransitionManager$MultiListener;
+}
+.end annotation
+
+.field private static final LOG_TAG:Ljava/lang/String; = "TransitionManager"
+.field private static sDefaultTransition:Landroid/support/transition/Transition;
+.field private static sPendingTransitions:Ljava/util/ArrayList;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/ArrayList<",
+"Landroid/view/ViewGroup;",
+">;"
+}
+.end annotation
+.end field
+.field private static sRunningTransitions:Ljava/lang/ThreadLocal;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/lang/ThreadLocal<",
+"Ljava/lang/ref/WeakReference<",
+"Landroid/support/v4/util/ArrayMap<",
+"Landroid/view/ViewGroup;",
+"Ljava/util/ArrayList<",
+"Landroid/support/transition/Transition;",
+">;>;>;>;"
+}
+.end annotation
+.end field
+.field private mScenePairTransitions:Landroid/support/v4/util/ArrayMap;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Landroid/support/v4/util/ArrayMap<",
+"Landroid/support/transition/Scene;",
+"Landroid/support/v4/util/ArrayMap<",
+"Landroid/support/transition/Scene;",
+"Landroid/support/transition/Transition;",
+">;>;"
+}
+.end annotation
+.end field
+.field private mSceneTransitions:Landroid/support/v4/util/ArrayMap;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Landroid/support/v4/util/ArrayMap<",
+"Landroid/support/transition/Scene;",
+"Landroid/support/transition/Transition;",
+">;"
+}
+.end annotation
+.end field
+
+
+.method static constructor <clinit>()V
+<span class="">	.locals 1</span>
+
+<span class="">	new-instance v0, Landroid/support/transition/AutoTransition;</span>
+<span class="">	invoke-direct {v0}, Landroid/support/transition/AutoTransition;-><init>()V</span>
+<span class="">	sput-object v0, Landroid/support/transition/TransitionManager;->sDefaultTransition:Landroid/support/transition/Transition;</span>
+<span class="">	new-instance v0, Ljava/lang/ThreadLocal;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/ThreadLocal;-><init>()V</span>
+<span class="">	sput-object v0, Landroid/support/transition/TransitionManager;->sRunningTransitions:Ljava/lang/ThreadLocal;</span>
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	sput-object v0, Landroid/support/transition/TransitionManager;->sPendingTransitions:Ljava/util/ArrayList;</span>
+.end method
+
+.method public constructor <init>()V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	new-instance v0, Landroid/support/v4/util/ArrayMap;</span>
+<span class="">	invoke-direct {v0}, Landroid/support/v4/util/ArrayMap;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroid/support/transition/TransitionManager;->mSceneTransitions:Landroid/support/v4/util/ArrayMap;</span>
+<span class="">	new-instance v0, Landroid/support/v4/util/ArrayMap;</span>
+<span class="">	invoke-direct {v0}, Landroid/support/v4/util/ArrayMap;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroid/support/transition/TransitionManager;->mScenePairTransitions:Landroid/support/v4/util/ArrayMap;</span>
+.end method
+
+.method static synthetic access$000()Ljava/util/ArrayList;
+<span class="">	.locals 1</span>
+
+<span class="">	sget-object v0, Landroid/support/transition/TransitionManager;->sPendingTransitions:Ljava/util/ArrayList;</span>
+.end method
+
+.method public static beginDelayedTransition(Landroid/view/ViewGroup;)V
+<span class="">	.locals 1</span>
+<span class="">	.param p0    # Landroid/view/ViewGroup;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-static {p0, v0}, Landroid/support/transition/TransitionManager;->beginDelayedTransition(Landroid/view/ViewGroup;Landroid/support/transition/Transition;)V</span>
+.end method
+
+.method public static beginDelayedTransition(Landroid/view/ViewGroup;Landroid/support/transition/Transition;)V
+<span class="">	.locals 1</span>
+<span class="">	.param p0    # Landroid/view/ViewGroup;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.param p1    # Landroid/support/transition/Transition;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	sget-object v0, Landroid/support/transition/TransitionManager;->sPendingTransitions:Ljava/util/ArrayList;</span>
+<span class="">	invoke-virtual {v0, p0}, Ljava/util/ArrayList;->contains(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	invoke-static {p0}, Landroid/support/v4/view/ViewCompat;->isLaidOut(Landroid/view/View;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	sget-object v0, Landroid/support/transition/TransitionManager;->sPendingTransitions:Ljava/util/ArrayList;</span>
+<span class="">	invoke-virtual {v0, p0}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	sget-object p1, Landroid/support/transition/TransitionManager;->sDefaultTransition:Landroid/support/transition/Transition;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p1}, Landroid/support/transition/Transition;->clone()Landroid/support/transition/Transition;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-static {p0, p1}, Landroid/support/transition/TransitionManager;->sceneChangeSetup(Landroid/view/ViewGroup;Landroid/support/transition/Transition;)V</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-static {p0, v0}, Landroid/support/transition/Scene;->setCurrentScene(Landroid/view/View;Landroid/support/transition/Scene;)V</span>
+<span class="">	invoke-static {p0, p1}, Landroid/support/transition/TransitionManager;->sceneChangeRunTransition(Landroid/view/ViewGroup;Landroid/support/transition/Transition;)V</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method private static changeScene(Landroid/support/transition/Scene;Landroid/support/transition/Transition;)V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/support/transition/Scene;->getSceneRoot()Landroid/view/ViewGroup;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sget-object v1, Landroid/support/transition/TransitionManager;->sPendingTransitions:Ljava/util/ArrayList;</span>
+<span class="">	invoke-virtual {v1, v0}, Ljava/util/ArrayList;->contains(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-nez v1, :cond_2</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/transition/Scene;->enter()V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	sget-object v1, Landroid/support/transition/TransitionManager;->sPendingTransitions:Ljava/util/ArrayList;</span>
+<span class="">	invoke-virtual {v1, v0}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z</span>
+<span class="">	invoke-virtual {p1}, Landroid/support/transition/Transition;->clone()Landroid/support/transition/Transition;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/support/transition/Transition;->setSceneRoot(Landroid/view/ViewGroup;)Landroid/support/transition/Transition;</span>
+<span class="">	invoke-static {v0}, Landroid/support/transition/Scene;->getCurrentScene(Landroid/view/View;)Landroid/support/transition/Scene;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	invoke-virtual {v1}, Landroid/support/transition/Scene;->isCreatedFromLayoutResource()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	invoke-virtual {p1, v1}, Landroid/support/transition/Transition;->setCanRemoveViews(Z)V</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-static {v0, p1}, Landroid/support/transition/TransitionManager;->sceneChangeSetup(Landroid/view/ViewGroup;Landroid/support/transition/Transition;)V</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/transition/Scene;->enter()V</span>
+<span class="">	invoke-static {v0, p1}, Landroid/support/transition/TransitionManager;->sceneChangeRunTransition(Landroid/view/ViewGroup;Landroid/support/transition/Transition;)V</span>
+<span class="">	:cond_2</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public static endTransitions(Landroid/view/ViewGroup;)V
+<span class="">	.locals 3</span>
+
+<span class="">	sget-object v0, Landroid/support/transition/TransitionManager;->sPendingTransitions:Ljava/util/ArrayList;</span>
+<span class="">	invoke-virtual {v0, p0}, Ljava/util/ArrayList;->remove(Ljava/lang/Object;)Z</span>
+<span class="">	invoke-static {}, Landroid/support/transition/TransitionManager;->getRunningTransitions()Landroid/support/v4/util/ArrayMap;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p0}, Landroid/support/v4/util/ArrayMap;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/util/ArrayList;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/ArrayList;->isEmpty()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-nez v1, :cond_0</span>
+<span class="">	new-instance v1, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v1, v0}, Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V</span>
+<span class="">	invoke-virtual {v1}, Ljava/util/ArrayList;->size()I</span>
+<span class="">	move-result v0</span>
+<span class="">	add-int/lit8 v0, v0, -0x1</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ltz v0, :cond_0</span>
+<span class="">	invoke-virtual {v1, v0}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Landroid/support/transition/Transition;</span>
+<span class="">	invoke-virtual {v2, p0}, Landroid/support/transition/Transition;->forceToEnd(Landroid/view/ViewGroup;)V</span>
+<span class="">	add-int/lit8 v0, v0, -0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method static getRunningTransitions()Landroid/support/v4/util/ArrayMap;
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"()",</span>
+<span class="">	"Landroid/support/v4/util/ArrayMap<",</span>
+<span class="">	"Landroid/view/ViewGroup;",</span>
+<span class="">	"Ljava/util/ArrayList<",</span>
+<span class="">	"Landroid/support/transition/Transition;",</span>
+<span class="">	">;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	sget-object v0, Landroid/support/transition/TransitionManager;->sRunningTransitions:Ljava/lang/ThreadLocal;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/ThreadLocal;->get()Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/lang/ref/WeakReference;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	if-nez v1, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	new-instance v0, Landroid/support/v4/util/ArrayMap;</span>
+<span class="">	invoke-direct {v0}, Landroid/support/v4/util/ArrayMap;-><init>()V</span>
+<span class="">	new-instance v1, Ljava/lang/ref/WeakReference;</span>
+<span class="">	invoke-direct {v1, v0}, Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V</span>
+<span class="">	sget-object v0, Landroid/support/transition/TransitionManager;->sRunningTransitions:Ljava/lang/ThreadLocal;</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/ThreadLocal;->set(Ljava/lang/Object;)V</span>
+<span class="">	move-object v0, v1</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroid/support/v4/util/ArrayMap;</span>
+.end method
+
+.method private getTransition(Landroid/support/transition/Scene;)Landroid/support/transition/Transition;
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-virtual {p1}, Landroid/support/transition/Scene;->getSceneRoot()Landroid/view/ViewGroup;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-static {v0}, Landroid/support/transition/Scene;->getCurrentScene(Landroid/view/View;)Landroid/support/transition/Scene;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v1, p0, Landroid/support/transition/TransitionManager;->mScenePairTransitions:Landroid/support/v4/util/ArrayMap;</span>
+<span class="">	invoke-virtual {v1, p1}, Landroid/support/v4/util/ArrayMap;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Landroid/support/v4/util/ArrayMap;</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	invoke-virtual {v1, v0}, Landroid/support/v4/util/ArrayMap;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroid/support/transition/Transition;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/transition/TransitionManager;->mSceneTransitions:Landroid/support/v4/util/ArrayMap;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/v4/util/ArrayMap;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Landroid/support/transition/Transition;</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	sget-object p1, Landroid/support/transition/TransitionManager;->sDefaultTransition:Landroid/support/transition/Transition;</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public static go(Landroid/support/transition/Scene;)V
+<span class="">	.locals 1</span>
+<span class="">	.param p0    # Landroid/support/transition/Scene;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	sget-object v0, Landroid/support/transition/TransitionManager;->sDefaultTransition:Landroid/support/transition/Transition;</span>
+<span class="">	invoke-static {p0, v0}, Landroid/support/transition/TransitionManager;->changeScene(Landroid/support/transition/Scene;Landroid/support/transition/Transition;)V</span>
+.end method
+
+.method public static go(Landroid/support/transition/Scene;Landroid/support/transition/Transition;)V
+<span class="">	.locals 0</span>
+<span class="">	.param p0    # Landroid/support/transition/Scene;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.param p1    # Landroid/support/transition/Transition;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	invoke-static {p0, p1}, Landroid/support/transition/TransitionManager;->changeScene(Landroid/support/transition/Scene;Landroid/support/transition/Transition;)V</span>
+.end method
+
+.method private static sceneChangeRunTransition(Landroid/view/ViewGroup;Landroid/support/transition/Transition;)V
+<span class="">	.locals 1</span>
+
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	new-instance v0, Landroid/support/transition/TransitionManager$MultiListener;</span>
+<span class="">	invoke-direct {v0, p1, p0}, Landroid/support/transition/TransitionManager$MultiListener;-><init>(Landroid/support/transition/Transition;Landroid/view/ViewGroup;)V</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/view/ViewGroup;->addOnAttachStateChangeListener(Landroid/view/View$OnAttachStateChangeListener;)V</span>
+<span class="">	invoke-virtual {p0}, Landroid/view/ViewGroup;->getViewTreeObserver()Landroid/view/ViewTreeObserver;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/view/ViewTreeObserver;->addOnPreDrawListener(Landroid/view/ViewTreeObserver$OnPreDrawListener;)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private static sceneChangeSetup(Landroid/view/ViewGroup;Landroid/support/transition/Transition;)V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-static {}, Landroid/support/transition/TransitionManager;->getRunningTransitions()Landroid/support/v4/util/ArrayMap;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p0}, Landroid/support/v4/util/ArrayMap;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/util/ArrayList;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/ArrayList;->size()I</span>
+<span class="">	move-result v1</span>
+<span class="">	if-lez v1, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Landroid/support/transition/Transition;</span>
+<span class="">	invoke-virtual {v1, p0}, Landroid/support/transition/Transition;->pause(Landroid/view/View;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	invoke-virtual {p1, p0, v0}, Landroid/support/transition/Transition;->captureValues(Landroid/view/ViewGroup;Z)V</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-static {p0}, Landroid/support/transition/Scene;->getCurrentScene(Landroid/view/View;)Landroid/support/transition/Scene;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	if-eqz p0, :cond_2</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/transition/Scene;->exit()V</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method public setTransition(Landroid/support/transition/Scene;Landroid/support/transition/Scene;Landroid/support/transition/Transition;)V
+<span class="">	.locals 2</span>
+<span class="">	.param p1    # Landroid/support/transition/Scene;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.param p2    # Landroid/support/transition/Scene;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.param p3    # Landroid/support/transition/Transition;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/transition/TransitionManager;->mScenePairTransitions:Landroid/support/v4/util/ArrayMap;</span>
+<span class="">	invoke-virtual {v0, p2}, Landroid/support/v4/util/ArrayMap;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroid/support/v4/util/ArrayMap;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	new-instance v0, Landroid/support/v4/util/ArrayMap;</span>
+<span class="">	invoke-direct {v0}, Landroid/support/v4/util/ArrayMap;-><init>()V</span>
+<span class="">	iget-object v1, p0, Landroid/support/transition/TransitionManager;->mScenePairTransitions:Landroid/support/v4/util/ArrayMap;</span>
+<span class="">	invoke-virtual {v1, p2, v0}, Landroid/support/v4/util/ArrayMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {v0, p1, p3}, Landroid/support/v4/util/ArrayMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+.end method
+
+.method public setTransition(Landroid/support/transition/Scene;Landroid/support/transition/Transition;)V
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # Landroid/support/transition/Scene;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+<span class="">	.param p2    # Landroid/support/transition/Transition;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/transition/TransitionManager;->mSceneTransitions:Landroid/support/v4/util/ArrayMap;</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroid/support/v4/util/ArrayMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+.end method
+
+.method public transitionTo(Landroid/support/transition/Scene;)V
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # Landroid/support/transition/Scene;</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	invoke-direct {p0, p1}, Landroid/support/transition/TransitionManager;->getTransition(Landroid/support/transition/Scene;)Landroid/support/transition/Transition;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {p1, v0}, Landroid/support/transition/TransitionManager;->changeScene(Landroid/support/transition/Scene;Landroid/support/transition/Transition;)V</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

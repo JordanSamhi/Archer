@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">net.jsoup.nodes</a></li>
+        <li><i class="ico ico-class"></i> DataNode.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Lnet/jsoup/nodes/DataNode;
+.super Lnet/jsoup/nodes/Node;
+.source "DataNode.java"
+
+
+.field private static final DATA_KEY:Ljava/lang/String; = "data"
+
+
+.method public constructor <init>(Ljava/lang/String;Ljava/lang/String;)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0, p2}, Lnet/jsoup/nodes/Node;-><init>(Ljava/lang/String;)V</span>
+<span class="">	iget-object p2, p0, Lnet/jsoup/nodes/DataNode;->attributes:Lnet/jsoup/nodes/Attributes;</span>
+<span class="">	const-string v0, "data"</span>
+<span class="">	invoke-virtual {p2, v0, p1}, Lnet/jsoup/nodes/Attributes;->put(Ljava/lang/String;Ljava/lang/String;)V</span>
+.end method
+
+.method public static createFromEncoded(Ljava/lang/String;Ljava/lang/String;)Lnet/jsoup/nodes/DataNode;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-static {p0}, Lnet/jsoup/nodes/Entities;->unescape(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	new-instance v0, Lnet/jsoup/nodes/DataNode;</span>
+<span class="">	invoke-direct {v0, p0, p1}, Lnet/jsoup/nodes/DataNode;-><init>(Ljava/lang/String;Ljava/lang/String;)V</span>
+.end method
+
+.method public getWholeData()Ljava/lang/String;
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lnet/jsoup/nodes/DataNode;->attributes:Lnet/jsoup/nodes/Attributes;</span>
+<span class="">	const-string v1, "data"</span>
+<span class="">	invoke-virtual {v0, v1}, Lnet/jsoup/nodes/Attributes;->get(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public nodeName()Ljava/lang/String;
+<span class="">	.locals 1</span>
+
+<span class="">	const-string v0, "#data"</span>
+.end method
+
+.method  outerHtmlHead(Ljava/lang/StringBuilder;ILnet/jsoup/nodes/Document$OutputSettings;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-virtual {p0}, Lnet/jsoup/nodes/DataNode;->getWholeData()Ljava/lang/String;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-virtual {p1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+.end method
+
+.method  outerHtmlTail(Ljava/lang/StringBuilder;ILnet/jsoup/nodes/Document$OutputSettings;)V
+<span class="">	.locals 0</span>
+
+.end method
+
+.method public setWholeData(Ljava/lang/String;)Lnet/jsoup/nodes/DataNode;
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lnet/jsoup/nodes/DataNode;->attributes:Lnet/jsoup/nodes/Attributes;</span>
+<span class="">	const-string v1, "data"</span>
+<span class="">	invoke-virtual {v0, v1, p1}, Lnet/jsoup/nodes/Attributes;->put(Ljava/lang/String;Ljava/lang/String;)V</span>
+.end method
+
+.method public toString()Ljava/lang/String;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Lnet/jsoup/nodes/DataNode;->outerHtml()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

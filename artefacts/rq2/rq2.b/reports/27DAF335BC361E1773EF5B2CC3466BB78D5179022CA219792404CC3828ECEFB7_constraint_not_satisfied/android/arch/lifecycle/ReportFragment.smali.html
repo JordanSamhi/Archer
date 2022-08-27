@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">android.arch.lifecycle</a></li>
+        <li><i class="ico ico-class"></i> ReportFragment.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Landroid/arch/lifecycle/ReportFragment;
+.super Landroid/app/Fragment;
+.source "ReportFragment.java"
+
+.annotation build Landroid/support/annotation/RestrictTo;
+value = {
+.enum Landroid/support/annotation/RestrictTo$Scope;->LIBRARY_GROUP:Landroid/support/annotation/RestrictTo$Scope;
+}
+.end annotation
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Landroid/arch/lifecycle/ReportFragment$ActivityInitializationListener;
+}
+.end annotation
+
+.field private static final REPORT_FRAGMENT_TAG:Ljava/lang/String; = "android.arch.lifecycle.LifecycleDispatcher.report_fragment_tag"
+.field private mProcessListener:Landroid/arch/lifecycle/ReportFragment$ActivityInitializationListener;
+
+
+.method public constructor <init>()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Landroid/app/Fragment;-><init>()V</span>
+.end method
+
+.method private dispatch(Landroid/arch/lifecycle/Lifecycle$Event;)V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/arch/lifecycle/ReportFragment;->getActivity()Landroid/app/Activity;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	instance-of v1, v0, Landroid/arch/lifecycle/LifecycleRegistryOwner;</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	check-cast v0, Landroid/arch/lifecycle/LifecycleRegistryOwner;</span>
+<span class="">	invoke-interface {v0}, Landroid/arch/lifecycle/LifecycleRegistryOwner;->getLifecycle()Landroid/arch/lifecycle/LifecycleRegistry;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/arch/lifecycle/LifecycleRegistry;->handleLifecycleEvent(Landroid/arch/lifecycle/Lifecycle$Event;)V</span>
+<span class="">	instance-of v1, v0, Landroid/arch/lifecycle/LifecycleOwner;</span>
+<span class="">	:cond_0</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	check-cast v0, Landroid/arch/lifecycle/LifecycleOwner;</span>
+<span class="">	invoke-interface {v0}, Landroid/arch/lifecycle/LifecycleOwner;->getLifecycle()Landroid/arch/lifecycle/Lifecycle;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	instance-of v1, v0, Landroid/arch/lifecycle/LifecycleRegistry;</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	check-cast v0, Landroid/arch/lifecycle/LifecycleRegistry;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/arch/lifecycle/LifecycleRegistry;->handleLifecycleEvent(Landroid/arch/lifecycle/Lifecycle$Event;)V</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method private dispatchCreate(Landroid/arch/lifecycle/ReportFragment$ActivityInitializationListener;)V
+<span class="">	.locals 0</span>
+
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	invoke-interface {p1}, Landroid/arch/lifecycle/ReportFragment$ActivityInitializationListener;->onCreate()V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private dispatchResume(Landroid/arch/lifecycle/ReportFragment$ActivityInitializationListener;)V
+<span class="">	.locals 0</span>
+
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	invoke-interface {p1}, Landroid/arch/lifecycle/ReportFragment$ActivityInitializationListener;->onResume()V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private dispatchStart(Landroid/arch/lifecycle/ReportFragment$ActivityInitializationListener;)V
+<span class="">	.locals 0</span>
+
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	invoke-interface {p1}, Landroid/arch/lifecycle/ReportFragment$ActivityInitializationListener;->onStart()V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method static get(Landroid/app/Activity;)Landroid/arch/lifecycle/ReportFragment;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/app/Activity;->getFragmentManager()Landroid/app/FragmentManager;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const-string v0, "android.arch.lifecycle.LifecycleDispatcher.report_fragment_tag"</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/app/FragmentManager;->findFragmentByTag(Ljava/lang/String;)Landroid/app/Fragment;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	check-cast p0, Landroid/arch/lifecycle/ReportFragment;</span>
+.end method
+
+.method public static injectIfNeededIn(Landroid/app/Activity;)V
+<span class="">	.locals 3</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/app/Activity;->getFragmentManager()Landroid/app/FragmentManager;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const-string v0, "android.arch.lifecycle.LifecycleDispatcher.report_fragment_tag"</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/app/FragmentManager;->findFragmentByTag(Ljava/lang/String;)Landroid/app/Fragment;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/app/FragmentManager;->beginTransaction()Landroid/app/FragmentTransaction;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	new-instance v1, Landroid/arch/lifecycle/ReportFragment;</span>
+<span class="">	invoke-direct {v1}, Landroid/arch/lifecycle/ReportFragment;-><init>()V</span>
+<span class="">	const-string v2, "android.arch.lifecycle.LifecycleDispatcher.report_fragment_tag"</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Landroid/app/FragmentTransaction;->add(Landroid/app/Fragment;Ljava/lang/String;)Landroid/app/FragmentTransaction;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Landroid/app/FragmentTransaction;->commit()I</span>
+<span class="">	invoke-virtual {p0}, Landroid/app/FragmentManager;->executePendingTransactions()Z</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public onActivityCreated(Landroid/os/Bundle;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Landroid/app/Fragment;->onActivityCreated(Landroid/os/Bundle;)V</span>
+<span class="">	iget-object p1, p0, Landroid/arch/lifecycle/ReportFragment;->mProcessListener:Landroid/arch/lifecycle/ReportFragment$ActivityInitializationListener;</span>
+<span class="">	invoke-direct {p0, p1}, Landroid/arch/lifecycle/ReportFragment;->dispatchCreate(Landroid/arch/lifecycle/ReportFragment$ActivityInitializationListener;)V</span>
+<span class="">	sget-object p1, Landroid/arch/lifecycle/Lifecycle$Event;->ON_CREATE:Landroid/arch/lifecycle/Lifecycle$Event;</span>
+<span class="">	invoke-direct {p0, p1}, Landroid/arch/lifecycle/ReportFragment;->dispatch(Landroid/arch/lifecycle/Lifecycle$Event;)V</span>
+.end method
+
+.method public onDestroy()V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Landroid/app/Fragment;->onDestroy()V</span>
+<span class="">	sget-object v0, Landroid/arch/lifecycle/Lifecycle$Event;->ON_DESTROY:Landroid/arch/lifecycle/Lifecycle$Event;</span>
+<span class="">	invoke-direct {p0, v0}, Landroid/arch/lifecycle/ReportFragment;->dispatch(Landroid/arch/lifecycle/Lifecycle$Event;)V</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-object v0, p0, Landroid/arch/lifecycle/ReportFragment;->mProcessListener:Landroid/arch/lifecycle/ReportFragment$ActivityInitializationListener;</span>
+.end method
+
+.method public onPause()V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Landroid/app/Fragment;->onPause()V</span>
+<span class="">	sget-object v0, Landroid/arch/lifecycle/Lifecycle$Event;->ON_PAUSE:Landroid/arch/lifecycle/Lifecycle$Event;</span>
+<span class="">	invoke-direct {p0, v0}, Landroid/arch/lifecycle/ReportFragment;->dispatch(Landroid/arch/lifecycle/Lifecycle$Event;)V</span>
+.end method
+
+.method public onResume()V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Landroid/app/Fragment;->onResume()V</span>
+<span class="">	iget-object v0, p0, Landroid/arch/lifecycle/ReportFragment;->mProcessListener:Landroid/arch/lifecycle/ReportFragment$ActivityInitializationListener;</span>
+<span class="">	invoke-direct {p0, v0}, Landroid/arch/lifecycle/ReportFragment;->dispatchResume(Landroid/arch/lifecycle/ReportFragment$ActivityInitializationListener;)V</span>
+<span class="">	sget-object v0, Landroid/arch/lifecycle/Lifecycle$Event;->ON_RESUME:Landroid/arch/lifecycle/Lifecycle$Event;</span>
+<span class="">	invoke-direct {p0, v0}, Landroid/arch/lifecycle/ReportFragment;->dispatch(Landroid/arch/lifecycle/Lifecycle$Event;)V</span>
+.end method
+
+.method public onStart()V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Landroid/app/Fragment;->onStart()V</span>
+<span class="">	iget-object v0, p0, Landroid/arch/lifecycle/ReportFragment;->mProcessListener:Landroid/arch/lifecycle/ReportFragment$ActivityInitializationListener;</span>
+<span class="">	invoke-direct {p0, v0}, Landroid/arch/lifecycle/ReportFragment;->dispatchStart(Landroid/arch/lifecycle/ReportFragment$ActivityInitializationListener;)V</span>
+<span class="">	sget-object v0, Landroid/arch/lifecycle/Lifecycle$Event;->ON_START:Landroid/arch/lifecycle/Lifecycle$Event;</span>
+<span class="">	invoke-direct {p0, v0}, Landroid/arch/lifecycle/ReportFragment;->dispatch(Landroid/arch/lifecycle/Lifecycle$Event;)V</span>
+.end method
+
+.method public onStop()V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Landroid/app/Fragment;->onStop()V</span>
+<span class="">	sget-object v0, Landroid/arch/lifecycle/Lifecycle$Event;->ON_STOP:Landroid/arch/lifecycle/Lifecycle$Event;</span>
+<span class="">	invoke-direct {p0, v0}, Landroid/arch/lifecycle/ReportFragment;->dispatch(Landroid/arch/lifecycle/Lifecycle$Event;)V</span>
+.end method
+
+.method  setProcessListener(Landroid/arch/lifecycle/ReportFragment$ActivityInitializationListener;)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput-object p1, p0, Landroid/arch/lifecycle/ReportFragment;->mProcessListener:Landroid/arch/lifecycle/ReportFragment$ActivityInitializationListener;</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

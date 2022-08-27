@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.gms.ads.mediation.customevent</a></li>
+        <li><i class="ico ico-class"></i> CustomEventAdapter.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public final Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;
+.super Ljava/lang/Object;
+.implements Lcom/google/android/gms/ads/mediation/MediationBannerAdapter;
+.implements Lcom/google/android/gms/ads/mediation/MediationInterstitialAdapter;
+.implements Lcom/google/android/gms/ads/mediation/MediationNativeAdapter;
+
+.annotation build Lcom/google/android/gms/common/annotation/KeepForSdkWithMembers;
+.end annotation
+.annotation build Lcom/google/android/gms/common/annotation/KeepName;
+.end annotation
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter$zzc;,
+Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter$zzb;,
+Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter$zza;
+}
+.end annotation
+
+.field private zzdge:Lcom/google/android/gms/ads/mediation/customevent/CustomEventBanner;
+.annotation build Lcom/google/android/gms/common/util/VisibleForTesting;
+.end annotation
+.end field
+.field private zzdgf:Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitial;
+.annotation build Lcom/google/android/gms/common/util/VisibleForTesting;
+.end annotation
+.end field
+.field private zzdgg:Lcom/google/android/gms/ads/mediation/customevent/CustomEventNative;
+.annotation build Lcom/google/android/gms/common/util/VisibleForTesting;
+.end annotation
+.end field
+.field private zzhq:Landroid/view/View;
+
+
+.method public constructor <init>()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+.end method
+
+.method private final zza(Landroid/view/View;)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput-object p1, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzhq:Landroid/view/View;</span>
+.end method
+
+.method static synthetic zza(Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;Landroid/view/View;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zza(Landroid/view/View;)V</span>
+.end method
+
+.method private static zzi(Ljava/lang/String;)Ljava/lang/Object;
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"<T:",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	">(",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	")TT;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	:try_start_0</span>
+<span class="">	invoke-static {p0}, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Class;->newInstance()Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	move-exception v0</span>
+<span class="">	:catch_0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Throwable;->getMessage()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const/16 v1, 0x2e</span>
+<span class="">	invoke-static {p0}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v2}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v2</span>
+<span class="">	add-int/2addr v1, v2</span>
+<span class="">	invoke-static {v0}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v2}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v2</span>
+<span class="">	add-int/2addr v1, v2</span>
+<span class="">	new-instance v2, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v2, v1}, Ljava/lang/StringBuilder;-><init>(I)V</span>
+<span class="">	const-string v1, "Could not instantiate custom event adapter: "</span>
+<span class="">	invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v2, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string p0, ". "</span>
+<span class="">	invoke-virtual {v2, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/gms/internal/ads/zzane;->zzdk(Ljava/lang/String;)V</span>
+<span class="">	const/4 p0, 0x0</span>
+.end method
+
+.method public final getBannerView()Landroid/view/View;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzhq:Landroid/view/View;</span>
+.end method
+
+.method public final onDestroy()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdge:Lcom/google/android/gms/ads/mediation/customevent/CustomEventBanner;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdge:Lcom/google/android/gms/ads/mediation/customevent/CustomEventBanner;</span>
+<span class="">	invoke-interface {v0}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventBanner;->onDestroy()V</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgf:Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitial;</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgf:Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitial;</span>
+<span class="">	invoke-interface {v0}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitial;->onDestroy()V</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgg:Lcom/google/android/gms/ads/mediation/customevent/CustomEventNative;</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgg:Lcom/google/android/gms/ads/mediation/customevent/CustomEventNative;</span>
+<span class="">	invoke-interface {v0}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventNative;->onDestroy()V</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method public final onPause()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdge:Lcom/google/android/gms/ads/mediation/customevent/CustomEventBanner;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdge:Lcom/google/android/gms/ads/mediation/customevent/CustomEventBanner;</span>
+<span class="">	invoke-interface {v0}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventBanner;->onPause()V</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgf:Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitial;</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgf:Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitial;</span>
+<span class="">	invoke-interface {v0}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitial;->onPause()V</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgg:Lcom/google/android/gms/ads/mediation/customevent/CustomEventNative;</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgg:Lcom/google/android/gms/ads/mediation/customevent/CustomEventNative;</span>
+<span class="">	invoke-interface {v0}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventNative;->onPause()V</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method public final onResume()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdge:Lcom/google/android/gms/ads/mediation/customevent/CustomEventBanner;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdge:Lcom/google/android/gms/ads/mediation/customevent/CustomEventBanner;</span>
+<span class="">	invoke-interface {v0}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventBanner;->onResume()V</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgf:Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitial;</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgf:Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitial;</span>
+<span class="">	invoke-interface {v0}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitial;->onResume()V</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgg:Lcom/google/android/gms/ads/mediation/customevent/CustomEventNative;</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgg:Lcom/google/android/gms/ads/mediation/customevent/CustomEventNative;</span>
+<span class="">	invoke-interface {v0}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventNative;->onResume()V</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method public final requestBannerAd(Landroid/content/Context;Lcom/google/android/gms/ads/mediation/MediationBannerListener;Landroid/os/Bundle;Lcom/google/android/gms/ads/AdSize;Lcom/google/android/gms/ads/mediation/MediationAdRequest;Landroid/os/Bundle;)V
+<span class="">	.locals 7</span>
+
+<span class="">	const-string v0, "class_name"</span>
+<span class="">	invoke-virtual {p3, v0}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzi(Ljava/lang/String;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventBanner;</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdge:Lcom/google/android/gms/ads/mediation/customevent/CustomEventBanner;</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdge:Lcom/google/android/gms/ads/mediation/customevent/CustomEventBanner;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	invoke-interface {p2, p0, p1}, Lcom/google/android/gms/ads/mediation/MediationBannerListener;->onAdFailedToLoad(Lcom/google/android/gms/ads/mediation/MediationBannerAdapter;I)V</span>
+<span class="">	if-nez p6, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p6, 0x0</span>
+<span class="">	move-object v6, p6</span>
+<span class="">	:goto_0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	const-string v0, "class_name"</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {p3, v0}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p6, v0}, Landroid/os/Bundle;->getBundle(Ljava/lang/String;)Landroid/os/Bundle;</span>
+<span class="">	move-result-object p6</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdge:Lcom/google/android/gms/ads/mediation/customevent/CustomEventBanner;</span>
+<span class="">	:goto_1</span>
+<span class="">	new-instance v2, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter$zza;</span>
+<span class="">	invoke-direct {v2, p0, p2}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter$zza;-><init>(Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;Lcom/google/android/gms/ads/mediation/MediationBannerListener;)V</span>
+<span class="">	const-string p2, "parameter"</span>
+<span class="">	invoke-virtual {p3, p2}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	move-object v1, p1</span>
+<span class="">	move-object v4, p4</span>
+<span class="">	move-object v5, p5</span>
+<span class="">	invoke-interface/range {v0 .. v6}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventBanner;->requestBannerAd(Landroid/content/Context;Lcom/google/android/gms/ads/mediation/customevent/CustomEventBannerListener;Ljava/lang/String;Lcom/google/android/gms/ads/AdSize;Lcom/google/android/gms/ads/mediation/MediationAdRequest;Landroid/os/Bundle;)V</span>
+.end method
+
+.method public final requestInterstitialAd(Landroid/content/Context;Lcom/google/android/gms/ads/mediation/MediationInterstitialListener;Landroid/os/Bundle;Lcom/google/android/gms/ads/mediation/MediationAdRequest;Landroid/os/Bundle;)V
+<span class="">	.locals 6</span>
+
+<span class="">	const-string v0, "class_name"</span>
+<span class="">	invoke-virtual {p3, v0}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzi(Ljava/lang/String;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitial;</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgf:Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitial;</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgf:Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitial;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	invoke-interface {p2, p0, p1}, Lcom/google/android/gms/ads/mediation/MediationInterstitialListener;->onAdFailedToLoad(Lcom/google/android/gms/ads/mediation/MediationInterstitialAdapter;I)V</span>
+<span class="">	if-nez p5, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p5, 0x0</span>
+<span class="">	move-object v5, p5</span>
+<span class="">	:goto_0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	const-string v0, "class_name"</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {p3, v0}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p5, v0}, Landroid/os/Bundle;->getBundle(Ljava/lang/String;)Landroid/os/Bundle;</span>
+<span class="">	move-result-object p5</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgf:Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitial;</span>
+<span class="">	:goto_1</span>
+<span class="">	new-instance v2, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter$zzb;</span>
+<span class="">	invoke-direct {v2, p0, p0, p2}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter$zzb;-><init>(Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;Lcom/google/android/gms/ads/mediation/MediationInterstitialListener;)V</span>
+<span class="">	const-string p2, "parameter"</span>
+<span class="">	invoke-virtual {p3, p2}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	move-object v1, p1</span>
+<span class="">	move-object v4, p4</span>
+<span class="">	invoke-interface/range {v0 .. v5}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitial;->requestInterstitialAd(Landroid/content/Context;Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitialListener;Ljava/lang/String;Lcom/google/android/gms/ads/mediation/MediationAdRequest;Landroid/os/Bundle;)V</span>
+.end method
+
+.method public final requestNativeAd(Landroid/content/Context;Lcom/google/android/gms/ads/mediation/MediationNativeListener;Landroid/os/Bundle;Lcom/google/android/gms/ads/mediation/NativeMediationAdRequest;Landroid/os/Bundle;)V
+<span class="">	.locals 6</span>
+
+<span class="">	const-string v0, "class_name"</span>
+<span class="">	invoke-virtual {p3, v0}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzi(Ljava/lang/String;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventNative;</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgg:Lcom/google/android/gms/ads/mediation/customevent/CustomEventNative;</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgg:Lcom/google/android/gms/ads/mediation/customevent/CustomEventNative;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	invoke-interface {p2, p0, p1}, Lcom/google/android/gms/ads/mediation/MediationNativeListener;->onAdFailedToLoad(Lcom/google/android/gms/ads/mediation/MediationNativeAdapter;I)V</span>
+<span class="">	if-nez p5, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p5, 0x0</span>
+<span class="">	move-object v5, p5</span>
+<span class="">	:goto_0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	const-string v0, "class_name"</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {p3, v0}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p5, v0}, Landroid/os/Bundle;->getBundle(Ljava/lang/String;)Landroid/os/Bundle;</span>
+<span class="">	move-result-object p5</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgg:Lcom/google/android/gms/ads/mediation/customevent/CustomEventNative;</span>
+<span class="">	:goto_1</span>
+<span class="">	new-instance v2, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter$zzc;</span>
+<span class="">	invoke-direct {v2, p0, p2}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter$zzc;-><init>(Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;Lcom/google/android/gms/ads/mediation/MediationNativeListener;)V</span>
+<span class="">	const-string p2, "parameter"</span>
+<span class="">	invoke-virtual {p3, p2}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	move-object v1, p1</span>
+<span class="">	move-object v4, p4</span>
+<span class="">	invoke-interface/range {v0 .. v5}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventNative;->requestNativeAd(Landroid/content/Context;Lcom/google/android/gms/ads/mediation/customevent/CustomEventNativeListener;Ljava/lang/String;Lcom/google/android/gms/ads/mediation/NativeMediationAdRequest;Landroid/os/Bundle;)V</span>
+.end method
+
+.method public final showInterstitial()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/gms/ads/mediation/customevent/CustomEventAdapter;->zzdgf:Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitial;</span>
+<span class="">	invoke-interface {v0}, Lcom/google/android/gms/ads/mediation/customevent/CustomEventInterstitial;->showInterstitial()V</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../../../.resources/report.js"></script>
+</body>
+</html>

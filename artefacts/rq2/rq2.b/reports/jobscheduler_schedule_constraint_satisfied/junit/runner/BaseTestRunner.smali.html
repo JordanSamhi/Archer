@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../index.html">lu.uni.trux.jobscheduler_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">junit.runner</a></li>
+        <li><i class="ico ico-class"></i> BaseTestRunner.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public abstract Ljunit/runner/BaseTestRunner;
+.super Ljava/lang/Object;
+.source "BaseTestRunner.java"
+.implements Ljunit/framework/TestListener;
+
+
+.field public static final SUITE_METHODNAME:Ljava/lang/String; = "suite"
+.field private static fPreferences:Ljava/util/Properties; = null
+.field static fgFilterStack:Z = true
+.field static fgMaxMessageLength:I = 0x1f4
+.field  fLoading:Z
+
+
+.method static constructor <clinit>()V
+<span class="">	.locals 2</span>
+
+<span class="">	const-string v0, "maxmessage"</span>
+<span class="">	const/16 v1, 0x1f4</span>
+<span class="">	invoke-static {v0, v1}, Ljunit/runner/BaseTestRunner;->getPreference(Ljava/lang/String;I)I</span>
+<span class="">	move-result v0</span>
+<span class="">	sput v0, Ljunit/runner/BaseTestRunner;->fgMaxMessageLength:I</span>
+.end method
+
+.method public constructor <init>()V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	iput-boolean v0, p0, Ljunit/runner/BaseTestRunner;->fLoading:Z</span>
+.end method
+
+.method static filterLine(Ljava/lang/String;)Z
+<span class="">	.locals 8</span>
+
+<span class="">	const-string v0, "junit.framework.TestCase"</span>
+<span class="">	const-string v1, "junit.framework.TestResult"</span>
+<span class="">	const-string v2, "junit.framework.TestSuite"</span>
+<span class="">	const-string v3, "junit.framework.Assert."</span>
+<span class="">	const-string v4, "junit.swingui.TestRunner"</span>
+<span class="">	const-string v5, "junit.awtui.TestRunner"</span>
+<span class="">	const-string v6, "junit.textui.TestRunner"</span>
+<span class="">	const-string v7, "java.lang.reflect.Method.invoke("</span>
+<span class="">	filled-new-array/range {v0 .. v7}, [Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	move v2, v1</span>
+<span class="">	:goto_0</span>
+<span class="">	const/16 v3, 0x8</span>
+<span class="">	if-ge v2, v3, :cond_1</span>
+<span class="">	aget-object v3, v0, v2</span>
+<span class="">	invoke-virtual {p0, v3}, Ljava/lang/String;->indexOf(Ljava/lang/String;)I</span>
+<span class="">	move-result v3</span>
+<span class="">	if-lez v3, :cond_0</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	:cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public static getFilteredTrace(Ljava/lang/String;)Ljava/lang/String;
+<span class="">	.locals 5</span>
+
+<span class="">	invoke-static {}, Ljunit/runner/BaseTestRunner;->showStackRaw()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	new-instance v0, Ljava/io/StringWriter;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-direct {v0}, Ljava/io/StringWriter;-><init>()V</span>
+<span class="">	new-instance v1, Ljava/io/PrintWriter;</span>
+<span class="">	invoke-direct {v1, v0}, Ljava/io/PrintWriter;-><init>(Ljava/io/Writer;)V</span>
+<span class="">	new-instance v2, Ljava/io/StringReader;</span>
+<span class="">	invoke-direct {v2, p0}, Ljava/io/StringReader;-><init>(Ljava/lang/String;)V</span>
+<span class="">	new-instance v3, Ljava/io/BufferedReader;</span>
+<span class="">	invoke-direct {v3, v2}, Ljava/io/BufferedReader;-><init>(Ljava/io/Reader;)V</span>
+<span class="">	invoke-virtual {v3}, Ljava/io/BufferedReader;->readLine()Ljava/lang/String;</span>
+<span class="">	:goto_0</span>
+<span class="">	:try_start_0</span>
+<span class="">	:cond_1</span>
+<span class="">	move-result-object v2</span>
+<span class="">	if-eqz v2, :cond_2</span>
+<span class="">	invoke-static {v2}, Ljunit/runner/BaseTestRunner;->filterLine(Ljava/lang/String;)Z</span>
+<span class="">	move-result v4</span>
+<span class="">	if-nez v4, :cond_1</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/io/PrintWriter;->println(Ljava/lang/String;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	invoke-virtual {v0}, Ljava/io/StringWriter;->toString()Ljava/lang/String;</span>
+<span class="">	:cond_2</span>
+<span class="">	move-result-object p0</span>
+<span class="">	:catch_0</span>
+.end method
+
+.method public static getFilteredTrace(Ljava/lang/Throwable;)Ljava/lang/String;
+<span class="">	.locals 2</span>
+
+<span class="">	new-instance v0, Ljava/io/StringWriter;</span>
+<span class="">	invoke-direct {v0}, Ljava/io/StringWriter;-><init>()V</span>
+<span class="">	new-instance v1, Ljava/io/PrintWriter;</span>
+<span class="">	invoke-direct {v1, v0}, Ljava/io/PrintWriter;-><init>(Ljava/io/Writer;)V</span>
+<span class="">	invoke-virtual {p0, v1}, Ljava/lang/Throwable;->printStackTrace(Ljava/io/PrintWriter;)V</span>
+<span class="">	invoke-virtual {v0}, Ljava/io/StringWriter;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-static {p0}, Ljunit/runner/BaseTestRunner;->getFilteredTrace(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method public static getPreference(Ljava/lang/String;I)I
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-static {p0}, Ljunit/runner/BaseTestRunner;->getPreference(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	if-nez p0, :cond_0</span>
+<span class="">	invoke-static {p0}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I</span>
+<span class="">	:cond_0</span>
+<span class="">	:try_start_0</span>
+<span class="">	move-result p1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/NumberFormatException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	:catch_0</span>
+.end method
+
+.method public static getPreference(Ljava/lang/String;)Ljava/lang/String;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-static {}, Ljunit/runner/BaseTestRunner;->getPreferences()Ljava/util/Properties;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p0}, Ljava/util/Properties;->getProperty(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method protected static getPreferences()Ljava/util/Properties;
+<span class="">	.locals 3</span>
+
+<span class="">	sget-object v0, Ljunit/runner/BaseTestRunner;->fPreferences:Ljava/util/Properties;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	new-instance v0, Ljava/util/Properties;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/Properties;-><init>()V</span>
+<span class="">	sput-object v0, Ljunit/runner/BaseTestRunner;->fPreferences:Ljava/util/Properties;</span>
+<span class="">	const-string v1, "loading"</span>
+<span class="">	const-string v2, "true"</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/util/Properties;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	sget-object v0, Ljunit/runner/BaseTestRunner;->fPreferences:Ljava/util/Properties;</span>
+<span class="">	const-string v1, "filterstack"</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/util/Properties;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	invoke-static {}, Ljunit/runner/BaseTestRunner;->readPreferences()V</span>
+<span class="">	:cond_0</span>
+<span class="">	sget-object v0, Ljunit/runner/BaseTestRunner;->fPreferences:Ljava/util/Properties;</span>
+.end method
+
+.method private static getPreferencesFile()Ljava/io/File;
+<span class="">	.locals 3</span>
+
+<span class="">	const-string v0, "user.home"</span>
+<span class="">	invoke-static {v0}, Ljava/lang/System;->getProperty(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	new-instance v1, Ljava/io/File;</span>
+<span class="">	const-string v2, "junit.properties"</span>
+<span class="">	invoke-direct {v1, v0, v2}, Ljava/io/File;-><init>(Ljava/lang/String;Ljava/lang/String;)V</span>
+.end method
+
+.method private static readPreferences()V
+<span class="">	.locals 4</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:try_start_0</span>
+<span class="">	new-instance v1, Ljava/io/FileInputStream;</span>
+<span class="">	invoke-static {}, Ljunit/runner/BaseTestRunner;->getPreferencesFile()Ljava/io/File;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-direct {v1, v2}, Ljava/io/FileInputStream;-><init>(Ljava/io/File;)V</span>
+<span class="">	:try_start_1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_0 .. :try_end_0} :catch_2</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_1</span>
+<span class="">	new-instance v0, Ljava/util/Properties;</span>
+<span class="">	invoke-static {}, Ljunit/runner/BaseTestRunner;->getPreferences()Ljava/util/Properties;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-direct {v0, v2}, Ljava/util/Properties;-><init>(Ljava/util/Properties;)V</span>
+<span class="">	invoke-static {v0}, Ljunit/runner/BaseTestRunner;->setPreferences(Ljava/util/Properties;)V</span>
+<span class="">	invoke-static {}, Ljunit/runner/BaseTestRunner;->getPreferences()Ljava/util/Properties;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/util/Properties;->load(Ljava/io/InputStream;)V</span>
+<span class="">	:try_start_2</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_1 .. :try_end_1} :catch_0</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_0</span>
+<span class="">	invoke-virtual {v1}, Ljava/io/InputStream;->close()V</span>
+<span class="">	:try_end_2</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_2 .. :try_end_2} :catch_3</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:catchall_0</span>
+<span class="">	move-exception v0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catch_0</span>
+<span class="">	move-object v0, v1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:catchall_1</span>
+<span class="">	move-exception v1</span>
+<span class="">	move-object v3, v1</span>
+<span class="">	move-object v1, v0</span>
+<span class="">	move-object v0, v3</span>
+<span class="">	:goto_0</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	:try_start_3</span>
+<span class="">	invoke-virtual {v1}, Ljava/io/InputStream;->close()V</span>
+<span class="">	:try_end_3</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_3 .. :try_end_3} :catch_1</span>
+<span class="">	:catch_1</span>
+<span class="">	:cond_0</span>
+<span class="">	throw v0</span>
+<span class="">	:goto_1</span>
+<span class="">	:catch_2</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	:try_start_4</span>
+<span class="">	invoke-virtual {v0}, Ljava/io/InputStream;->close()V</span>
+<span class="">	:goto_2</span>
+<span class="">	:catch_3</span>
+<span class="">	:cond_1</span>
+<span class="">	:try_end_4</span>
+<span class="">	.catch Ljava/io/IOException; {:try_start_4 .. :try_end_4} :catch_3</span>
+.end method
+
+.method public static savePreferences()V
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/io/FileOutputStream;</span>
+<span class="">	invoke-static {}, Ljunit/runner/BaseTestRunner;->getPreferencesFile()Ljava/io/File;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/io/FileOutputStream;-><init>(Ljava/io/File;)V</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-static {}, Ljunit/runner/BaseTestRunner;->getPreferences()Ljava/util/Properties;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	const-string v2, ""</span>
+<span class="">	invoke-virtual {v1, v0, v2}, Ljava/util/Properties;->store(Ljava/io/OutputStream;Ljava/lang/String;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	invoke-virtual {v0}, Ljava/io/FileOutputStream;->close()V</span>
+<span class="">	move-exception v1</span>
+<span class="">	:catchall_0</span>
+<span class="">	invoke-virtual {v0}, Ljava/io/FileOutputStream;->close()V</span>
+<span class="">	throw v1</span>
+.end method
+
+.method public static setPreference(Ljava/lang/String;Ljava/lang/String;)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-static {}, Ljunit/runner/BaseTestRunner;->getPreferences()Ljava/util/Properties;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p0, p1}, Ljava/util/Properties;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+.end method
+
+.method protected static setPreferences(Ljava/util/Properties;)V
+<span class="">	.locals 0</span>
+
+<span class="">	sput-object p0, Ljunit/runner/BaseTestRunner;->fPreferences:Ljava/util/Properties;</span>
+.end method
+
+.method protected static showStackRaw()Z
+<span class="">	.locals 2</span>
+
+<span class="">	const-string v0, "filterstack"</span>
+<span class="">	invoke-static {v0}, Ljunit/runner/BaseTestRunner;->getPreference(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v1, "true"</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	sget-boolean v0, Ljunit/runner/BaseTestRunner;->fgFilterStack:Z</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	:goto_1</span>
+.end method
+
+.method public static truncate(Ljava/lang/String;)Ljava/lang/String;
+<span class="">	.locals 3</span>
+
+<span class="">	sget v0, Ljunit/runner/BaseTestRunner;->fgMaxMessageLength:I</span>
+<span class="">	const/4 v1, -0x1</span>
+<span class="">	if-eq v0, v1, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	sget v1, Ljunit/runner/BaseTestRunner;->fgMaxMessageLength:I</span>
+<span class="">	if-le v0, v1, :cond_0</span>
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	sget v2, Ljunit/runner/BaseTestRunner;->fgMaxMessageLength:I</span>
+<span class="">	invoke-virtual {p0, v1, v2}, Ljava/lang/String;->substring(II)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const-string v0, "..."</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public declared-synchronized addError(Ljunit/framework/Test;Ljava/lang/Throwable;)V
+<span class="">	.locals 1</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p0, v0, p1, p2}, Ljunit/runner/BaseTestRunner;->testFailed(ILjunit/framework/Test;Ljava/lang/Throwable;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public declared-synchronized addFailure(Ljunit/framework/Test;Ljunit/framework/AssertionFailedError;)V
+<span class="">	.locals 1</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	const/4 v0, 0x2</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p0, v0, p1, p2}, Ljunit/runner/BaseTestRunner;->testFailed(ILjunit/framework/Test;Ljava/lang/Throwable;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw p1</span>
+.end method
+
+.method protected clearStatus()V
+<span class="">	.locals 0</span>
+
+.end method
+
+.method public elapsedTimeAsString(J)Ljava/lang/String;
+<span class="">	.locals 3</span>
+
+<span class="">	invoke-static {}, Ljava/text/NumberFormat;->getInstance()Ljava/text/NumberFormat;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	long-to-double p1, p1</span>
+<span class="">	const-wide v1, 0x408f400000000000L    # 1000.0</span>
+<span class="">	div-double/2addr p1, v1</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Ljava/text/NumberFormat;->format(D)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public declared-synchronized endTest(Ljunit/framework/Test;)V
+<span class="">	.locals 0</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/Object;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p0, p1}, Ljunit/runner/BaseTestRunner;->testEnded(Ljava/lang/String;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public extractClassName(Ljava/lang/String;)Ljava/lang/String;
+<span class="">	.locals 1</span>
+
+<span class="">	const-string v0, "Default package for"</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const-string v0, "."</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/String;->lastIndexOf(Ljava/lang/String;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	add-int/lit8 v0, v0, 0x1</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/String;->substring(I)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public getTest(Ljava/lang/String;)Ljunit/framework/Test;
+<span class="">	.locals 5</span>
+
+<span class="">	const-string v0, "Failed to invoke suite():"</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	if-gtz v1, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Ljunit/runner/BaseTestRunner;->clearStatus()V</span>
+<span class="">	invoke-virtual {p0, p1}, Ljunit/runner/BaseTestRunner;->loadSuiteClass(Ljava/lang/String;)Ljava/lang/Class;</span>
+<span class="">	:try_start_0</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string v1, "suite"</span>
+<span class="">	:try_start_1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/ClassNotFoundException; {:try_start_0 .. :try_end_0} :catch_4</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_3</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	new-array v4, v3, [Ljava/lang/Class;</span>
+<span class="">	invoke-virtual {p1, v1, v4}, Ljava/lang/Class;->getMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/reflect/Method;->getModifiers()I</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_2</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {v1}, Ljava/lang/reflect/Modifier;->isStatic(I)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-nez v1, :cond_1</span>
+<span class="">	const-string p1, "Suite() method must be static"</span>
+<span class="">	invoke-virtual {p0, p1}, Ljunit/runner/BaseTestRunner;->runFailed(Ljava/lang/String;)V</span>
+<span class="">	new-array v1, v3, [Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {p1, v2, v1}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	:try_start_2</span>
+<span class="">	:cond_1</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Ljunit/framework/Test;</span>
+<span class="">	if-nez p1, :cond_2</span>
+<span class="">	invoke-virtual {p0}, Ljunit/runner/BaseTestRunner;->clearStatus()V</span>
+<span class="">	:try_end_2</span>
+<span class="">	.catch Ljava/lang/reflect/InvocationTargetException; {:try_start_2 .. :try_end_2} :catch_1</span>
+<span class="">	.catch Ljava/lang/IllegalAccessException; {:try_start_2 .. :try_end_2} :catch_0</span>
+<span class="">	move-exception p1</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	:catch_0</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/IllegalAccessException;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p0, p1}, Ljunit/runner/BaseTestRunner;->runFailed(Ljava/lang/String;)V</span>
+<span class="">	move-exception p1</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:catch_1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/reflect/InvocationTargetException;->getTargetException()Ljava/lang/Throwable;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/Throwable;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p0, p1}, Ljunit/runner/BaseTestRunner;->runFailed(Ljava/lang/String;)V</span>
+<span class="">	invoke-virtual {p0}, Ljunit/runner/BaseTestRunner;->clearStatus()V</span>
+<span class="">	new-instance v0, Ljunit/framework/TestSuite;</span>
+<span class="">	invoke-direct {v0, p1}, Ljunit/framework/TestSuite;-><init>(Ljava/lang/Class;)V</span>
+<span class="">	move-exception p1</span>
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	:catch_2</span>
+<span class="">	const-string v1, "Error: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/Exception;->toString()Ljava/lang/String;</span>
+<span class="">	:catch_3</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p0, p1}, Ljunit/runner/BaseTestRunner;->runFailed(Ljava/lang/String;)V</span>
+<span class="">	move-exception v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/ClassNotFoundException;->getMessage()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-nez v0, :cond_3</span>
+<span class="">	goto :goto_0</span>
+<span class="">	move-object p1, v0</span>
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	:catch_4</span>
+<span class="">	const-string v1, "Class not found \""</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:cond_3</span>
+<span class="">	const-string v0, "\""</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p0, p1}, Ljunit/runner/BaseTestRunner;->runFailed(Ljava/lang/String;)V</span>
+.end method
+
+.method protected loadSuiteClass(Ljava/lang/String;)Ljava/lang/Class;
+<span class="">	.locals 0</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/lang/ClassNotFoundException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	")",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"*>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {p1}, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method protected processArguments([Ljava/lang/String;)Ljava/lang/String;
+<span class="">	.locals 5</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	move v2, v0</span>
+<span class="">	:goto_0</span>
+<span class="">	array-length v3, p1</span>
+<span class="">	if-ge v2, v3, :cond_4</span>
+<span class="">	aget-object v3, p1, v2</span>
+<span class="">	const-string v4, "-noloading"</span>
+<span class="">	invoke-virtual {v3, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_0</span>
+<span class="">	invoke-virtual {p0, v0}, Ljunit/runner/BaseTestRunner;->setLoading(Z)V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	aget-object v3, p1, v2</span>
+<span class="">	const-string v4, "-nofilterstack"</span>
+<span class="">	invoke-virtual {v3, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_1</span>
+<span class="">	sput-boolean v0, Ljunit/runner/BaseTestRunner;->fgFilterStack:Z</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	aget-object v3, p1, v2</span>
+<span class="">	const-string v4, "-c"</span>
+<span class="">	invoke-virtual {v3, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_3</span>
+<span class="">	array-length v3, p1</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	if-le v3, v2, :cond_2</span>
+<span class="">	aget-object v1, p1, v2</span>
+<span class="">	invoke-virtual {p0, v1}, Ljunit/runner/BaseTestRunner;->extractClassName(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_2</span>
+<span class="">	sget-object v3, Ljava/lang/System;->out:Ljava/io/PrintStream;</span>
+<span class="">	const-string v4, "Missing Test class name"</span>
+<span class="">	invoke-virtual {v3, v4}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_3</span>
+<span class="">	aget-object v1, p1, v2</span>
+<span class="">	:goto_1</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_4</span>
+.end method
+
+.method protected abstract runFailed(Ljava/lang/String;)V
+<span class="">	</span>
+
+.end method
+
+.method public setLoading(Z)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput-boolean p1, p0, Ljunit/runner/BaseTestRunner;->fLoading:Z</span>
+.end method
+
+.method public declared-synchronized startTest(Ljunit/framework/Test;)V
+<span class="">	.locals 0</span>
+
+<span class="">	monitor-enter p0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/Object;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p0, p1}, Ljunit/runner/BaseTestRunner;->testStarted(Ljava/lang/String;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	monitor-exit p0</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public abstract testEnded(Ljava/lang/String;)V
+<span class="">	</span>
+
+.end method
+
+.method public abstract testFailed(ILjunit/framework/Test;Ljava/lang/Throwable;)V
+<span class="">	</span>
+
+.end method
+
+.method public abstract testStarted(Ljava/lang/String;)V
+<span class="">	</span>
+
+.end method
+
+.method protected useReloadingTestSuiteLoader()Z
+<span class="">	.locals 2</span>
+
+<span class="">	const-string v0, "loading"</span>
+<span class="">	invoke-static {v0}, Ljunit/runner/BaseTestRunner;->getPreference(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v1, "true"</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-boolean v0, p0, Ljunit/runner/BaseTestRunner;->fLoading:Z</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../.resources/report.js"></script>
+</body>
+</html>

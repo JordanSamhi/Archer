@@ -1,0 +1,1962 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">android.support.design.widget</a></li>
+        <li><i class="ico ico-class"></i> TextInputLayout.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Landroid/support/design/widget/TextInputLayout;
+.super Landroid/widget/LinearLayout;
+.source "TextInputLayout.java"
+.implements Landroid/support/v7/widget/WithHint;
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Landroid/support/design/widget/TextInputLayout$TextInputAccessibilityDelegate;,
+Landroid/support/design/widget/TextInputLayout$SavedState;
+}
+.end annotation
+
+.field private static final ANIMATION_DURATION:I = 0xc8
+.field private static final INVALID_MAX_LENGTH:I = -0x1
+.field private static final LOG_TAG:Ljava/lang/String; = "TextInputLayout"
+.field private mAnimator:Landroid/animation/ValueAnimator;
+.field final mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;
+.field  mCounterEnabled:Z
+.field private mCounterMaxLength:I
+.field private mCounterOverflowTextAppearance:I
+.field private mCounterOverflowed:Z
+.field private mCounterTextAppearance:I
+.field private mCounterView:Landroid/widget/TextView;
+.field private mDefaultTextColor:Landroid/content/res/ColorStateList;
+.field  mEditText:Landroid/widget/EditText;
+.field private mError:Ljava/lang/CharSequence;
+.field private mErrorEnabled:Z
+.field private mErrorShown:Z
+.field private mErrorTextAppearance:I
+.field  mErrorView:Landroid/widget/TextView;
+.field private mFocusedTextColor:Landroid/content/res/ColorStateList;
+.field private mHasPasswordToggleTintList:Z
+.field private mHasPasswordToggleTintMode:Z
+.field private mHasReconstructedEditTextBackground:Z
+.field private mHint:Ljava/lang/CharSequence;
+.field private mHintAnimationEnabled:Z
+.field private mHintEnabled:Z
+.field private mHintExpanded:Z
+.field private mInDrawableStateChanged:Z
+.field private mIndicatorArea:Landroid/widget/LinearLayout;
+.field private mIndicatorsAdded:I
+.field private final mInputFrame:Landroid/widget/FrameLayout;
+.field private mOriginalEditTextEndDrawable:Landroid/graphics/drawable/Drawable;
+.field private mOriginalHint:Ljava/lang/CharSequence;
+.field private mPasswordToggleContentDesc:Ljava/lang/CharSequence;
+.field private mPasswordToggleDrawable:Landroid/graphics/drawable/Drawable;
+.field private mPasswordToggleDummyDrawable:Landroid/graphics/drawable/Drawable;
+.field private mPasswordToggleEnabled:Z
+.field private mPasswordToggleTintList:Landroid/content/res/ColorStateList;
+.field private mPasswordToggleTintMode:Landroid/graphics/PorterDuff$Mode;
+.field private mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;
+.field private mPasswordToggledVisible:Z
+.field private mRestoringSavedState:Z
+.field private mTmpPaint:Landroid/graphics/Paint;
+.field private final mTmpRect:Landroid/graphics/Rect;
+.field private mTypeface:Landroid/graphics/Typeface;
+
+
+.method public constructor <init>(Landroid/content/Context;)V
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-direct {p0, p1, v0}, Landroid/support/design/widget/TextInputLayout;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V</span>
+.end method
+
+.method public constructor <init>(Landroid/content/Context;Landroid/util/AttributeSet;)V
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-direct {p0, p1, p2, v0}, Landroid/support/design/widget/TextInputLayout;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V</span>
+.end method
+
+.method public constructor <init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V
+<span class="">	.locals 4</span>
+
+<span class="">	invoke-direct {p0, p1, p2}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V</span>
+<span class="">	new-instance v0, Landroid/graphics/Rect;</span>
+<span class="">	invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mTmpRect:Landroid/graphics/Rect;</span>
+<span class="">	new-instance v0, Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	invoke-direct {v0, p0}, Landroid/support/design/widget/CollapsingTextHelper;-><init>(Landroid/view/View;)V</span>
+<span class="">	iput-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	invoke-static {p1}, Landroid/support/design/widget/ThemeUtils;->checkAppCompatTheme(Landroid/content/Context;)V</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/support/design/widget/TextInputLayout;->setOrientation(I)V</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-virtual {p0, v1}, Landroid/support/design/widget/TextInputLayout;->setWillNotDraw(Z)V</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/support/design/widget/TextInputLayout;->setAddStatesFromChildren(Z)V</span>
+<span class="">	new-instance v2, Landroid/widget/FrameLayout;</span>
+<span class="">	invoke-direct {v2, p1}, Landroid/widget/FrameLayout;-><init>(Landroid/content/Context;)V</span>
+<span class="">	iput-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mInputFrame:Landroid/widget/FrameLayout;</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mInputFrame:Landroid/widget/FrameLayout;</span>
+<span class="">	invoke-virtual {v2, v0}, Landroid/widget/FrameLayout;->setAddStatesFromChildren(Z)V</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mInputFrame:Landroid/widget/FrameLayout;</span>
+<span class="">	invoke-virtual {p0, v2}, Landroid/support/design/widget/TextInputLayout;->addView(Landroid/view/View;)V</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	sget-object v3, Landroid/support/design/widget/AnimationUtils;->FAST_OUT_SLOW_IN_INTERPOLATOR:Landroid/view/animation/Interpolator;</span>
+<span class="">	invoke-virtual {v2, v3}, Landroid/support/design/widget/CollapsingTextHelper;->setTextSizeInterpolator(Landroid/view/animation/Interpolator;)V</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	new-instance v3, Landroid/view/animation/AccelerateInterpolator;</span>
+<span class="">	invoke-direct {v3}, Landroid/view/animation/AccelerateInterpolator;-><init>()V</span>
+<span class="">	invoke-virtual {v2, v3}, Landroid/support/design/widget/CollapsingTextHelper;->setPositionInterpolator(Landroid/view/animation/Interpolator;)V</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	const v3, 0x800033</span>
+<span class="">	invoke-virtual {v2, v3}, Landroid/support/design/widget/CollapsingTextHelper;->setCollapsedTextGravity(I)V</span>
+<span class="">	sget-object v2, Landroid/support/design/R$styleable;->TextInputLayout:[I</span>
+<span class="">	sget v3, Landroid/support/design/R$style;->Widget_Design_TextInputLayout:I</span>
+<span class="">	invoke-static {p1, p2, v2, p3, v3}, Landroid/support/v7/widget/TintTypedArray;->obtainStyledAttributes(Landroid/content/Context;Landroid/util/AttributeSet;[III)Landroid/support/v7/widget/TintTypedArray;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	sget p2, Landroid/support/design/R$styleable;->TextInputLayout_hintEnabled:I</span>
+<span class="">	invoke-virtual {p1, p2, v0}, Landroid/support/v7/widget/TintTypedArray;->getBoolean(IZ)Z</span>
+<span class="">	move-result p2</span>
+<span class="">	iput-boolean p2, p0, Landroid/support/design/widget/TextInputLayout;->mHintEnabled:Z</span>
+<span class="">	sget p2, Landroid/support/design/R$styleable;->TextInputLayout_android_hint:I</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/support/v7/widget/TintTypedArray;->getText(I)Ljava/lang/CharSequence;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-virtual {p0, p2}, Landroid/support/design/widget/TextInputLayout;->setHint(Ljava/lang/CharSequence;)V</span>
+<span class="">	sget p2, Landroid/support/design/R$styleable;->TextInputLayout_hintAnimationEnabled:I</span>
+<span class="">	invoke-virtual {p1, p2, v0}, Landroid/support/v7/widget/TintTypedArray;->getBoolean(IZ)Z</span>
+<span class="">	move-result p2</span>
+<span class="">	iput-boolean p2, p0, Landroid/support/design/widget/TextInputLayout;->mHintAnimationEnabled:Z</span>
+<span class="">	sget p2, Landroid/support/design/R$styleable;->TextInputLayout_android_textColorHint:I</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/support/v7/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="">	move-result p2</span>
+<span class="">	if-eqz p2, :cond_0</span>
+<span class="">	sget p2, Landroid/support/design/R$styleable;->TextInputLayout_android_textColorHint:I</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/support/v7/widget/TintTypedArray;->getColorStateList(I)Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	iput-object p2, p0, Landroid/support/design/widget/TextInputLayout;->mFocusedTextColor:Landroid/content/res/ColorStateList;</span>
+<span class="">	iput-object p2, p0, Landroid/support/design/widget/TextInputLayout;->mDefaultTextColor:Landroid/content/res/ColorStateList;</span>
+<span class="">	:cond_0</span>
+<span class="">	sget p2, Landroid/support/design/R$styleable;->TextInputLayout_hintTextAppearance:I</span>
+<span class="">	const/4 p3, -0x1</span>
+<span class="">	invoke-virtual {p1, p2, p3}, Landroid/support/v7/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="">	move-result p2</span>
+<span class="">	if-eq p2, p3, :cond_1</span>
+<span class="">	sget p2, Landroid/support/design/R$styleable;->TextInputLayout_hintTextAppearance:I</span>
+<span class="">	invoke-virtual {p1, p2, v1}, Landroid/support/v7/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="">	move-result p2</span>
+<span class="">	invoke-virtual {p0, p2}, Landroid/support/design/widget/TextInputLayout;->setHintTextAppearance(I)V</span>
+<span class="">	:cond_1</span>
+<span class="">	sget p2, Landroid/support/design/R$styleable;->TextInputLayout_errorTextAppearance:I</span>
+<span class="">	invoke-virtual {p1, p2, v1}, Landroid/support/v7/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="">	move-result p2</span>
+<span class="">	iput p2, p0, Landroid/support/design/widget/TextInputLayout;->mErrorTextAppearance:I</span>
+<span class="">	sget p2, Landroid/support/design/R$styleable;->TextInputLayout_errorEnabled:I</span>
+<span class="">	invoke-virtual {p1, p2, v1}, Landroid/support/v7/widget/TintTypedArray;->getBoolean(IZ)Z</span>
+<span class="">	move-result p2</span>
+<span class="">	sget v2, Landroid/support/design/R$styleable;->TextInputLayout_counterEnabled:I</span>
+<span class="">	invoke-virtual {p1, v2, v1}, Landroid/support/v7/widget/TintTypedArray;->getBoolean(IZ)Z</span>
+<span class="">	move-result v2</span>
+<span class="">	sget v3, Landroid/support/design/R$styleable;->TextInputLayout_counterMaxLength:I</span>
+<span class="">	invoke-virtual {p1, v3, p3}, Landroid/support/v7/widget/TintTypedArray;->getInt(II)I</span>
+<span class="">	move-result v3</span>
+<span class="">	invoke-virtual {p0, v3}, Landroid/support/design/widget/TextInputLayout;->setCounterMaxLength(I)V</span>
+<span class="">	sget v3, Landroid/support/design/R$styleable;->TextInputLayout_counterTextAppearance:I</span>
+<span class="">	invoke-virtual {p1, v3, v1}, Landroid/support/v7/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="">	move-result v3</span>
+<span class="">	iput v3, p0, Landroid/support/design/widget/TextInputLayout;->mCounterTextAppearance:I</span>
+<span class="">	sget v3, Landroid/support/design/R$styleable;->TextInputLayout_counterOverflowTextAppearance:I</span>
+<span class="">	invoke-virtual {p1, v3, v1}, Landroid/support/v7/widget/TintTypedArray;->getResourceId(II)I</span>
+<span class="">	move-result v3</span>
+<span class="">	iput v3, p0, Landroid/support/design/widget/TextInputLayout;->mCounterOverflowTextAppearance:I</span>
+<span class="">	sget v3, Landroid/support/design/R$styleable;->TextInputLayout_passwordToggleEnabled:I</span>
+<span class="">	invoke-virtual {p1, v3, v1}, Landroid/support/v7/widget/TintTypedArray;->getBoolean(IZ)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	iput-boolean v1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleEnabled:Z</span>
+<span class="">	sget v1, Landroid/support/design/R$styleable;->TextInputLayout_passwordToggleDrawable:I</span>
+<span class="">	invoke-virtual {p1, v1}, Landroid/support/v7/widget/TintTypedArray;->getDrawable(I)Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iput-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	sget v1, Landroid/support/design/R$styleable;->TextInputLayout_passwordToggleContentDescription:I</span>
+<span class="">	invoke-virtual {p1, v1}, Landroid/support/v7/widget/TintTypedArray;->getText(I)Ljava/lang/CharSequence;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iput-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleContentDesc:Ljava/lang/CharSequence;</span>
+<span class="">	sget v1, Landroid/support/design/R$styleable;->TextInputLayout_passwordToggleTint:I</span>
+<span class="">	invoke-virtual {p1, v1}, Landroid/support/v7/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_2</span>
+<span class="">	iput-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mHasPasswordToggleTintList:Z</span>
+<span class="">	sget v1, Landroid/support/design/R$styleable;->TextInputLayout_passwordToggleTint:I</span>
+<span class="">	invoke-virtual {p1, v1}, Landroid/support/v7/widget/TintTypedArray;->getColorStateList(I)Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iput-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleTintList:Landroid/content/res/ColorStateList;</span>
+<span class="">	:cond_2</span>
+<span class="">	sget v1, Landroid/support/design/R$styleable;->TextInputLayout_passwordToggleTintMode:I</span>
+<span class="">	invoke-virtual {p1, v1}, Landroid/support/v7/widget/TintTypedArray;->hasValue(I)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_3</span>
+<span class="">	iput-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mHasPasswordToggleTintMode:Z</span>
+<span class="">	sget v1, Landroid/support/design/R$styleable;->TextInputLayout_passwordToggleTintMode:I</span>
+<span class="">	invoke-virtual {p1, v1, p3}, Landroid/support/v7/widget/TintTypedArray;->getInt(II)I</span>
+<span class="">	move-result p3</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-static {p3, v1}, Landroid/support/design/widget/ViewUtils;->parseTintMode(ILandroid/graphics/PorterDuff$Mode;)Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	move-result-object p3</span>
+<span class="">	iput-object p3, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleTintMode:Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	:cond_3</span>
+<span class="">	invoke-virtual {p1}, Landroid/support/v7/widget/TintTypedArray;->recycle()V</span>
+<span class="">	invoke-virtual {p0, p2}, Landroid/support/design/widget/TextInputLayout;->setErrorEnabled(Z)V</span>
+<span class="">	invoke-virtual {p0, v2}, Landroid/support/design/widget/TextInputLayout;->setCounterEnabled(Z)V</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->applyPasswordToggleTint()V</span>
+<span class="">	invoke-static {p0}, Landroid/support/v4/view/ViewCompat;->getImportantForAccessibility(Landroid/view/View;)I</span>
+<span class="">	move-result p1</span>
+<span class="">	if-nez p1, :cond_4</span>
+<span class="">	invoke-static {p0, v0}, Landroid/support/v4/view/ViewCompat;->setImportantForAccessibility(Landroid/view/View;I)V</span>
+<span class="">	:cond_4</span>
+<span class="">	new-instance p1, Landroid/support/design/widget/TextInputLayout$TextInputAccessibilityDelegate;</span>
+<span class="">	invoke-direct {p1, p0}, Landroid/support/design/widget/TextInputLayout$TextInputAccessibilityDelegate;-><init>(Landroid/support/design/widget/TextInputLayout;)V</span>
+<span class="">	invoke-static {p0, p1}, Landroid/support/v4/view/ViewCompat;->setAccessibilityDelegate(Landroid/view/View;Landroid/support/v4/view/AccessibilityDelegateCompat;)V</span>
+.end method
+
+.method static synthetic access$000(Landroid/support/design/widget/TextInputLayout;)Z
+<span class="">	.locals 0</span>
+
+<span class="">	iget-boolean p0, p0, Landroid/support/design/widget/TextInputLayout;->mRestoringSavedState:Z</span>
+.end method
+
+.method static synthetic access$100(Landroid/support/design/widget/TextInputLayout;Z)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0, p1}, Landroid/support/design/widget/TextInputLayout;->passwordVisibilityToggleRequested(Z)V</span>
+.end method
+
+.method private addIndicator(Landroid/widget/TextView;I)V
+<span class="">	.locals 4</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mIndicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	new-instance v0, Landroid/widget/LinearLayout;</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-direct {v0, v2}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V</span>
+<span class="">	iput-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mIndicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mIndicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/LinearLayout;->setOrientation(I)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mIndicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	const/4 v2, -0x1</span>
+<span class="">	const/4 v3, -0x2</span>
+<span class="">	invoke-virtual {p0, v0, v2, v3}, Landroid/support/design/widget/TextInputLayout;->addView(Landroid/view/View;II)V</span>
+<span class="">	new-instance v0, Landroid/support/v4/widget/Space;</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-direct {v0, v2}, Landroid/support/v4/widget/Space;-><init>(Landroid/content/Context;)V</span>
+<span class="">	new-instance v2, Landroid/widget/LinearLayout$LayoutParams;</span>
+<span class="">	const/high16 v3, 0x3f800000    # 1.0f</span>
+<span class="">	invoke-direct {v2, v1, v1, v3}, Landroid/widget/LinearLayout$LayoutParams;-><init>(IIF)V</span>
+<span class="">	iget-object v3, p0, Landroid/support/design/widget/TextInputLayout;->mIndicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	invoke-virtual {v3, v0, v2}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->adjustIndicatorPadding()V</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mIndicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/LinearLayout;->setVisibility(I)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mIndicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;I)V</span>
+<span class="">	iget p1, p0, Landroid/support/design/widget/TextInputLayout;->mIndicatorsAdded:I</span>
+<span class="">	add-int/lit8 p1, p1, 0x1</span>
+<span class="">	iput p1, p0, Landroid/support/design/widget/TextInputLayout;->mIndicatorsAdded:I</span>
+.end method
+
+.method private adjustIndicatorPadding()V
+<span class="">	.locals 5</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mIndicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-static {v1}, Landroid/support/v4/view/ViewCompat;->getPaddingStart(Landroid/view/View;)I</span>
+<span class="">	move-result v1</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-static {v2}, Landroid/support/v4/view/ViewCompat;->getPaddingEnd(Landroid/view/View;)I</span>
+<span class="">	move-result v2</span>
+<span class="">	iget-object v3, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {v3}, Landroid/widget/EditText;->getPaddingBottom()I</span>
+<span class="">	move-result v3</span>
+<span class="">	const/4 v4, 0x0</span>
+<span class="">	invoke-static {v0, v1, v4, v2, v3}, Landroid/support/v4/view/ViewCompat;->setPaddingRelative(Landroid/view/View;IIII)V</span>
+.end method
+
+.method private applyPasswordToggleTint()V
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mHasPasswordToggleTintList:Z</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mHasPasswordToggleTintMode:Z</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-static {v0}, Landroid/support/v4/graphics/drawable/DrawableCompat;->wrap(Landroid/graphics/drawable/Drawable;)Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/drawable/Drawable;->mutate()Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mHasPasswordToggleTintList:Z</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleTintList:Landroid/content/res/ColorStateList;</span>
+<span class="">	invoke-static {v0, v1}, Landroid/support/v4/graphics/drawable/DrawableCompat;->setTintList(Landroid/graphics/drawable/Drawable;Landroid/content/res/ColorStateList;)V</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mHasPasswordToggleTintMode:Z</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleTintMode:Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	invoke-static {v0, v1}, Landroid/support/v4/graphics/drawable/DrawableCompat;->setTintMode(Landroid/graphics/drawable/Drawable;Landroid/graphics/PorterDuff$Mode;)V</span>
+<span class="">	:cond_2</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	invoke-virtual {v0}, Landroid/support/design/widget/CheckableImageButton;->getDrawable()Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	if-eq v0, v1, :cond_3</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/support/design/widget/CheckableImageButton;->setImageDrawable(Landroid/graphics/drawable/Drawable;)V</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method private static arrayContains([II)Z
+<span class="">	.locals 4</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	array-length v1, p0</span>
+<span class="">	move v2, v0</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v2, v1, :cond_1</span>
+<span class="">	aget v3, p0, v2</span>
+<span class="">	if-ne v3, p1, :cond_0</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	:cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method private collapseHint(Z)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mAnimator:Landroid/animation/ValueAnimator;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mAnimator:Landroid/animation/ValueAnimator;</span>
+<span class="">	invoke-virtual {v0}, Landroid/animation/ValueAnimator;->isRunning()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mAnimator:Landroid/animation/ValueAnimator;</span>
+<span class="">	invoke-virtual {v0}, Landroid/animation/ValueAnimator;->cancel()V</span>
+<span class="">	:cond_0</span>
+<span class="">	const/high16 v0, 0x3f800000    # 1.0f</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	iget-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mHintAnimationEnabled:Z</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/support/design/widget/TextInputLayout;->animateToExpansionFraction(F)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/support/design/widget/CollapsingTextHelper;->setExpansionFraction(F)V</span>
+<span class="">	:goto_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	iput-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mHintExpanded:Z</span>
+.end method
+
+.method private ensureBackgroundDrawableStateWorkaround()V
+<span class="">	.locals 3</span>
+
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v1, 0x15</span>
+<span class="">	if-eq v0, v1, :cond_0</span>
+<span class="">	const/16 v1, 0x16</span>
+<span class="">	if-eq v0, v1, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/EditText;->getBackground()Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	iget-boolean v1, p0, Landroid/support/design/widget/TextInputLayout;->mHasReconstructedEditTextBackground:Z</span>
+<span class="">	if-nez v1, :cond_3</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/drawable/Drawable;->getConstantState()Landroid/graphics/drawable/Drawable$ConstantState;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Landroid/graphics/drawable/Drawable$ConstantState;->newDrawable()Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	instance-of v2, v0, Landroid/graphics/drawable/DrawableContainer;</span>
+<span class="">	if-eqz v2, :cond_2</span>
+<span class="">	check-cast v0, Landroid/graphics/drawable/DrawableContainer;</span>
+<span class="">	invoke-virtual {v1}, Landroid/graphics/drawable/Drawable;->getConstantState()Landroid/graphics/drawable/Drawable$ConstantState;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-static {v0, v2}, Landroid/support/design/widget/DrawableUtils;->setContainerConstantState(Landroid/graphics/drawable/DrawableContainer;Landroid/graphics/drawable/Drawable$ConstantState;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	iput-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mHasReconstructedEditTextBackground:Z</span>
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mHasReconstructedEditTextBackground:Z</span>
+<span class="">	if-nez v0, :cond_3</span>
+<span class="">	:cond_2</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-static {v0, v1}, Landroid/support/v4/view/ViewCompat;->setBackground(Landroid/view/View;Landroid/graphics/drawable/Drawable;)V</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	iput-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mHasReconstructedEditTextBackground:Z</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method private expandHint(Z)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mAnimator:Landroid/animation/ValueAnimator;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mAnimator:Landroid/animation/ValueAnimator;</span>
+<span class="">	invoke-virtual {v0}, Landroid/animation/ValueAnimator;->isRunning()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mAnimator:Landroid/animation/ValueAnimator;</span>
+<span class="">	invoke-virtual {v0}, Landroid/animation/ValueAnimator;->cancel()V</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	iget-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mHintAnimationEnabled:Z</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/support/design/widget/TextInputLayout;->animateToExpansionFraction(F)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/support/design/widget/CollapsingTextHelper;->setExpansionFraction(F)V</span>
+<span class="">	:goto_0</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	iput-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mHintExpanded:Z</span>
+.end method
+
+.method private hasPasswordTransformation()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/EditText;->getTransformationMethod()Landroid/text/method/TransformationMethod;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	instance-of v0, v0, Landroid/text/method/PasswordTransformationMethod;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method private passwordVisibilityToggleRequested(Z)V
+<span class="">	.locals 3</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleEnabled:Z</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/EditText;->getSelectionEnd()I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->hasPasswordTransformation()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/widget/EditText;->setTransformationMethod(Landroid/text/method/TransformationMethod;)V</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	iput-boolean v1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggledVisible:Z</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-static {}, Landroid/text/method/PasswordTransformationMethod;->getInstance()Landroid/text/method/PasswordTransformationMethod;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/widget/EditText;->setTransformationMethod(Landroid/text/method/TransformationMethod;)V</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	iput-boolean v1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggledVisible:Z</span>
+<span class="">	:goto_0</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	iget-boolean v2, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggledVisible:Z</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/support/design/widget/CheckableImageButton;->setChecked(Z)V</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	invoke-virtual {p1}, Landroid/support/design/widget/CheckableImageButton;->jumpDrawablesToCurrentState()V</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/widget/EditText;->setSelection(I)V</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method private static recursiveSetEnabled(Landroid/view/ViewGroup;Z)V
+<span class="">	.locals 4</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/view/ViewGroup;->getChildCount()I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v1, v0, :cond_1</span>
+<span class="">	invoke-virtual {p0, v1}, Landroid/view/ViewGroup;->getChildAt(I)Landroid/view/View;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v2, p1}, Landroid/view/View;->setEnabled(Z)V</span>
+<span class="">	instance-of v3, v2, Landroid/view/ViewGroup;</span>
+<span class="">	if-eqz v3, :cond_0</span>
+<span class="">	check-cast v2, Landroid/view/ViewGroup;</span>
+<span class="">	invoke-static {v2, p1}, Landroid/support/design/widget/TextInputLayout;->recursiveSetEnabled(Landroid/view/ViewGroup;Z)V</span>
+<span class="">	:cond_0</span>
+<span class="">	add-int/lit8 v1, v1, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method private removeIndicator(Landroid/widget/TextView;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mIndicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mIndicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/widget/LinearLayout;->removeView(Landroid/view/View;)V</span>
+<span class="">	iget p1, p0, Landroid/support/design/widget/TextInputLayout;->mIndicatorsAdded:I</span>
+<span class="">	add-int/lit8 p1, p1, -0x1</span>
+<span class="">	iput p1, p0, Landroid/support/design/widget/TextInputLayout;->mIndicatorsAdded:I</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mIndicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	const/16 v0, 0x8</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/widget/LinearLayout;->setVisibility(I)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private setEditText(Landroid/widget/EditText;)V
+<span class="">	.locals 3</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	const-string v0, "We already have an EditText, can only have one"</span>
+<span class="">	invoke-direct {p1, v0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	:cond_0</span>
+<span class="">	instance-of v0, p1, Landroid/support/design/widget/TextInputEditText;</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	const-string v0, "TextInputLayout"</span>
+<span class="">	const-string v1, "EditText added is not a TextInputEditText. Please switch to using that class instead."</span>
+<span class="">	invoke-static {v0, v1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	:cond_1</span>
+<span class="">	iput-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->hasPasswordTransformation()Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-nez p1, :cond_2</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/EditText;->getTypeface()Landroid/graphics/Typeface;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/support/design/widget/CollapsingTextHelper;->setTypefaces(Landroid/graphics/Typeface;)V</span>
+<span class="">	:cond_2</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/EditText;->getTextSize()F</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/support/design/widget/CollapsingTextHelper;->setExpandedTextSize(F)V</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {p1}, Landroid/widget/EditText;->getGravity()I</span>
+<span class="">	move-result p1</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	const/16 v1, 0x30</span>
+<span class="">	and-int/lit8 v2, p1, -0x71</span>
+<span class="">	or-int/2addr v1, v2</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/support/design/widget/CollapsingTextHelper;->setCollapsedTextGravity(I)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/design/widget/CollapsingTextHelper;->setExpandedTextGravity(I)V</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	new-instance v0, Landroid/support/design/widget/TextInputLayout$1;</span>
+<span class="">	invoke-direct {v0, p0}, Landroid/support/design/widget/TextInputLayout$1;-><init>(Landroid/support/design/widget/TextInputLayout;)V</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/widget/EditText;->addTextChangedListener(Landroid/text/TextWatcher;)V</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mDefaultTextColor:Landroid/content/res/ColorStateList;</span>
+<span class="">	if-nez p1, :cond_3</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {p1}, Landroid/widget/EditText;->getHintTextColors()Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iput-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mDefaultTextColor:Landroid/content/res/ColorStateList;</span>
+<span class="">	:cond_3</span>
+<span class="">	iget-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mHintEnabled:Z</span>
+<span class="">	if-eqz p1, :cond_4</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mHint:Ljava/lang/CharSequence;</span>
+<span class="">	invoke-static {p1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_4</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {p1}, Landroid/widget/EditText;->getHint()Ljava/lang/CharSequence;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iput-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mOriginalHint:Ljava/lang/CharSequence;</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mOriginalHint:Ljava/lang/CharSequence;</span>
+<span class="">	invoke-virtual {p0, p1}, Landroid/support/design/widget/TextInputLayout;->setHint(Ljava/lang/CharSequence;)V</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/widget/EditText;->setHint(Ljava/lang/CharSequence;)V</span>
+<span class="">	:cond_4</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz p1, :cond_5</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {p1}, Landroid/widget/EditText;->getText()Landroid/text/Editable;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-interface {p1}, Landroid/text/Editable;->length()I</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-virtual {p0, p1}, Landroid/support/design/widget/TextInputLayout;->updateCounter(I)V</span>
+<span class="">	:cond_5</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mIndicatorArea:Landroid/widget/LinearLayout;</span>
+<span class="">	if-eqz p1, :cond_6</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->adjustIndicatorPadding()V</span>
+<span class="">	:cond_6</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->updatePasswordToggleView()V</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	invoke-virtual {p0, p1, v0}, Landroid/support/design/widget/TextInputLayout;->updateLabelState(ZZ)V</span>
+.end method
+
+.method private setError(Ljava/lang/CharSequence;Z)V
+<span class="">	.locals 4</span>
+<span class="">	.param p1    # Ljava/lang/CharSequence;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	iput-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mError:Ljava/lang/CharSequence;</span>
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorEnabled:Z</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	invoke-static {p1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {p0, v1}, Landroid/support/design/widget/TextInputLayout;->setErrorEnabled(Z)V</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-static {p1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	:cond_1</span>
+<span class="">	move-result v0</span>
+<span class="">	xor-int/2addr v0, v1</span>
+<span class="">	iput-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorShown:Z</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/TextView;->animate()Landroid/view/ViewPropertyAnimator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Landroid/view/ViewPropertyAnimator;->cancel()V</span>
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorShown:Z</span>
+<span class="">	const-wide/16 v1, 0xc8</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	if-eqz v0, :cond_4</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/widget/TextView;->setVisibility(I)V</span>
+<span class="">	const/high16 p1, 0x3f800000    # 1.0f</span>
+<span class="">	if-eqz p2, :cond_3</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/TextView;->getAlpha()F</span>
+<span class="">	move-result v0</span>
+<span class="">	cmpl-float v0, v0, p1</span>
+<span class="">	if-nez v0, :cond_2</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0, v3}, Landroid/widget/TextView;->setAlpha(F)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/TextView;->animate()Landroid/view/ViewPropertyAnimator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/view/ViewPropertyAnimator;->alpha(F)Landroid/view/ViewPropertyAnimator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1, v1, v2}, Landroid/view/ViewPropertyAnimator;->setDuration(J)Landroid/view/ViewPropertyAnimator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	sget-object v0, Landroid/support/design/widget/AnimationUtils;->LINEAR_OUT_SLOW_IN_INTERPOLATOR:Landroid/view/animation/Interpolator;</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/view/ViewPropertyAnimator;->setInterpolator(Landroid/animation/TimeInterpolator;)Landroid/view/ViewPropertyAnimator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	new-instance v0, Landroid/support/design/widget/TextInputLayout$2;</span>
+<span class="">	invoke-direct {v0, p0}, Landroid/support/design/widget/TextInputLayout$2;-><init>(Landroid/support/design/widget/TextInputLayout;)V</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/view/ViewPropertyAnimator;->setListener(Landroid/animation/Animator$AnimatorListener;)Landroid/view/ViewPropertyAnimator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/ViewPropertyAnimator;->start()V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	:cond_3</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/widget/TextView;->setAlpha(F)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	:cond_4</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/TextView;->getVisibility()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_6</span>
+<span class="">	if-eqz p2, :cond_5</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/TextView;->animate()Landroid/view/ViewPropertyAnimator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, v3}, Landroid/view/ViewPropertyAnimator;->alpha(F)Landroid/view/ViewPropertyAnimator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Landroid/view/ViewPropertyAnimator;->setDuration(J)Landroid/view/ViewPropertyAnimator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sget-object v1, Landroid/support/design/widget/AnimationUtils;->FAST_OUT_LINEAR_IN_INTERPOLATOR:Landroid/view/animation/Interpolator;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/view/ViewPropertyAnimator;->setInterpolator(Landroid/animation/TimeInterpolator;)Landroid/view/ViewPropertyAnimator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	new-instance v1, Landroid/support/design/widget/TextInputLayout$3;</span>
+<span class="">	invoke-direct {v1, p0, p1}, Landroid/support/design/widget/TextInputLayout$3;-><init>(Landroid/support/design/widget/TextInputLayout;Ljava/lang/CharSequence;)V</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/view/ViewPropertyAnimator;->setListener(Landroid/animation/Animator$AnimatorListener;)Landroid/view/ViewPropertyAnimator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/ViewPropertyAnimator;->start()V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	:cond_5</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	const/4 v0, 0x4</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/widget/TextView;->setVisibility(I)V</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->updateEditTextBackground()V</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_6</span>
+<span class="">	invoke-virtual {p0, p2}, Landroid/support/design/widget/TextInputLayout;->updateLabelState(Z)V</span>
+.end method
+
+.method private setHintInternal(Ljava/lang/CharSequence;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iput-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mHint:Ljava/lang/CharSequence;</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/design/widget/CollapsingTextHelper;->setText(Ljava/lang/CharSequence;)V</span>
+.end method
+
+.method private shouldShowPasswordIcon()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleEnabled:Z</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->hasPasswordTransformation()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggledVisible:Z</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method private updateEditTextBackground()V
+<span class="">	.locals 3</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/EditText;->getBackground()Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->ensureBackgroundDrawableStateWorkaround()V</span>
+<span class="">	invoke-static {v0}, Landroid/support/v7/widget/DrawableUtils;->canSafelyMutateDrawable(Landroid/graphics/drawable/Drawable;)Z</span>
+<span class="">	:cond_1</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_2</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/drawable/Drawable;->mutate()Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-boolean v1, p0, Landroid/support/design/widget/TextInputLayout;->mErrorShown:Z</span>
+<span class="">	if-eqz v1, :cond_3</span>
+<span class="">	:cond_2</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz v1, :cond_3</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v1}, Landroid/widget/TextView;->getCurrentTextColor()I</span>
+<span class="">	move-result v1</span>
+<span class="">	sget-object v2, Landroid/graphics/PorterDuff$Mode;->SRC_IN:Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	invoke-static {v1, v2}, Landroid/support/v7/widget/AppCompatDrawableManager;->getPorterDuffColorFilter(ILandroid/graphics/PorterDuff$Mode;)Landroid/graphics/PorterDuffColorFilter;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/graphics/drawable/Drawable;->setColorFilter(Landroid/graphics/ColorFilter;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-boolean v1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterOverflowed:Z</span>
+<span class="">	if-eqz v1, :cond_4</span>
+<span class="">	:cond_3</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz v1, :cond_4</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v1}, Landroid/widget/TextView;->getCurrentTextColor()I</span>
+<span class="">	move-result v1</span>
+<span class="">	sget-object v2, Landroid/graphics/PorterDuff$Mode;->SRC_IN:Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	invoke-static {v1, v2}, Landroid/support/v7/widget/AppCompatDrawableManager;->getPorterDuffColorFilter(ILandroid/graphics/PorterDuff$Mode;)Landroid/graphics/PorterDuffColorFilter;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/graphics/drawable/Drawable;->setColorFilter(Landroid/graphics/ColorFilter;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	invoke-static {v0}, Landroid/support/v4/graphics/drawable/DrawableCompat;->clearColorFilter(Landroid/graphics/drawable/Drawable;)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	:cond_4</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/EditText;->refreshDrawableState()V</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method private updateInputLayoutMargins()V
+<span class="">	.locals 3</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mInputFrame:Landroid/widget/FrameLayout;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/FrameLayout;->getLayoutParams()Landroid/view/ViewGroup$LayoutParams;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroid/widget/LinearLayout$LayoutParams;</span>
+<span class="">	iget-boolean v1, p0, Landroid/support/design/widget/TextInputLayout;->mHintEnabled:Z</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mTmpPaint:Landroid/graphics/Paint;</span>
+<span class="">	if-nez v1, :cond_0</span>
+<span class="">	new-instance v1, Landroid/graphics/Paint;</span>
+<span class="">	invoke-direct {v1}, Landroid/graphics/Paint;-><init>()V</span>
+<span class="">	iput-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mTmpPaint:Landroid/graphics/Paint;</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mTmpPaint:Landroid/graphics/Paint;</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	invoke-virtual {v2}, Landroid/support/design/widget/CollapsingTextHelper;->getCollapsedTypeface()Landroid/graphics/Typeface;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/graphics/Paint;->setTypeface(Landroid/graphics/Typeface;)Landroid/graphics/Typeface;</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mTmpPaint:Landroid/graphics/Paint;</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	invoke-virtual {v2}, Landroid/support/design/widget/CollapsingTextHelper;->getCollapsedTextSize()F</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/graphics/Paint;->setTextSize(F)V</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mTmpPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v1}, Landroid/graphics/Paint;->ascent()F</span>
+<span class="">	move-result v1</span>
+<span class="">	neg-float v1, v1</span>
+<span class="">	float-to-int v1, v1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	iget v2, v0, Landroid/widget/LinearLayout$LayoutParams;->topMargin:I</span>
+<span class="">	if-eq v1, v2, :cond_2</span>
+<span class="">	iput v1, v0, Landroid/widget/LinearLayout$LayoutParams;->topMargin:I</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mInputFrame:Landroid/widget/FrameLayout;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/FrameLayout;->requestLayout()V</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method private updatePasswordToggleView()V
+<span class="">	.locals 7</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->shouldShowPasswordIcon()Z</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x3</span>
+<span class="">	const/4 v2, 0x2</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	const/4 v4, 0x0</span>
+<span class="">	if-eqz v0, :cond_5</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Landroid/view/LayoutInflater;->from(Landroid/content/Context;)Landroid/view/LayoutInflater;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sget v5, Landroid/support/design/R$layout;->design_text_input_password_icon:I</span>
+<span class="">	iget-object v6, p0, Landroid/support/design/widget/TextInputLayout;->mInputFrame:Landroid/widget/FrameLayout;</span>
+<span class="">	invoke-virtual {v0, v5, v6, v4}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	iput-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	iget-object v5, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0, v5}, Landroid/support/design/widget/CheckableImageButton;->setImageDrawable(Landroid/graphics/drawable/Drawable;)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	iget-object v5, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleContentDesc:Ljava/lang/CharSequence;</span>
+<span class="">	invoke-virtual {v0, v5}, Landroid/support/design/widget/CheckableImageButton;->setContentDescription(Ljava/lang/CharSequence;)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mInputFrame:Landroid/widget/FrameLayout;</span>
+<span class="">	iget-object v5, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	invoke-virtual {v0, v5}, Landroid/widget/FrameLayout;->addView(Landroid/view/View;)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	new-instance v5, Landroid/support/design/widget/TextInputLayout$4;</span>
+<span class="">	invoke-direct {v5, p0}, Landroid/support/design/widget/TextInputLayout$4;-><init>(Landroid/support/design/widget/TextInputLayout;)V</span>
+<span class="">	invoke-virtual {v0, v5}, Landroid/support/design/widget/CheckableImageButton;->setOnClickListener(Landroid/view/View$OnClickListener;)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	:cond_1</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-static {v0}, Landroid/support/v4/view/ViewCompat;->getMinimumHeight(Landroid/view/View;)I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-gtz v0, :cond_2</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	iget-object v5, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	invoke-static {v5}, Landroid/support/v4/view/ViewCompat;->getMinimumHeight(Landroid/view/View;)I</span>
+<span class="">	move-result v5</span>
+<span class="">	invoke-virtual {v0, v5}, Landroid/widget/EditText;->setMinimumHeight(I)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-virtual {v0, v4}, Landroid/support/design/widget/CheckableImageButton;->setVisibility(I)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	iget-boolean v5, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggledVisible:Z</span>
+<span class="">	invoke-virtual {v0, v5}, Landroid/support/design/widget/CheckableImageButton;->setChecked(Z)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDummyDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	if-nez v0, :cond_3</span>
+<span class="">	new-instance v0, Landroid/graphics/drawable/ColorDrawable;</span>
+<span class="">	invoke-direct {v0}, Landroid/graphics/drawable/ColorDrawable;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDummyDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDummyDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	:cond_3</span>
+<span class="">	iget-object v5, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	invoke-virtual {v5}, Landroid/support/design/widget/CheckableImageButton;->getMeasuredWidth()I</span>
+<span class="">	move-result v5</span>
+<span class="">	invoke-virtual {v0, v4, v4, v5, v3}, Landroid/graphics/drawable/Drawable;->setBounds(IIII)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-static {v0}, Landroid/support/v4/widget/TextViewCompat;->getCompoundDrawablesRelative(Landroid/widget/TextView;)[Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	aget-object v5, v0, v2</span>
+<span class="">	iget-object v6, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDummyDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	if-eq v5, v6, :cond_4</span>
+<span class="">	aget-object v2, v0, v2</span>
+<span class="">	iput-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mOriginalEditTextEndDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	:cond_4</span>
+<span class="">	aget-object v4, v0, v4</span>
+<span class="">	aget-object v3, v0, v3</span>
+<span class="">	iget-object v5, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDummyDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	aget-object v0, v0, v1</span>
+<span class="">	invoke-static {v2, v4, v3, v5, v0}, Landroid/support/v4/widget/TextViewCompat;->setCompoundDrawablesRelative(Landroid/widget/TextView;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {v1}, Landroid/widget/EditText;->getPaddingLeft()I</span>
+<span class="">	move-result v1</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {v2}, Landroid/widget/EditText;->getPaddingTop()I</span>
+<span class="">	move-result v2</span>
+<span class="">	iget-object v3, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {v3}, Landroid/widget/EditText;->getPaddingRight()I</span>
+<span class="">	move-result v3</span>
+<span class="">	iget-object v4, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {v4}, Landroid/widget/EditText;->getPaddingBottom()I</span>
+<span class="">	move-result v4</span>
+<span class="">	invoke-virtual {v0, v1, v2, v3, v4}, Landroid/support/design/widget/CheckableImageButton;->setPadding(IIII)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	:cond_5</span>
+<span class="">	if-eqz v0, :cond_6</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	invoke-virtual {v0}, Landroid/support/design/widget/CheckableImageButton;->getVisibility()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_6</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	const/16 v5, 0x8</span>
+<span class="">	invoke-virtual {v0, v5}, Landroid/support/design/widget/CheckableImageButton;->setVisibility(I)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDummyDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	:cond_6</span>
+<span class="">	if-eqz v0, :cond_7</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-static {v0}, Landroid/support/v4/widget/TextViewCompat;->getCompoundDrawablesRelative(Landroid/widget/TextView;)[Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	aget-object v2, v0, v2</span>
+<span class="">	iget-object v5, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDummyDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	if-ne v2, v5, :cond_7</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	aget-object v4, v0, v4</span>
+<span class="">	aget-object v3, v0, v3</span>
+<span class="">	iget-object v5, p0, Landroid/support/design/widget/TextInputLayout;->mOriginalEditTextEndDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	aget-object v0, v0, v1</span>
+<span class="">	invoke-static {v2, v4, v3, v5, v0}, Landroid/support/v4/widget/TextViewCompat;->setCompoundDrawablesRelative(Landroid/widget/TextView;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;)V</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDummyDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_7</span>
+.end method
+
+.method public addView(Landroid/view/View;ILandroid/view/ViewGroup$LayoutParams;)V
+<span class="">	.locals 2</span>
+
+<span class="">	instance-of v0, p1, Landroid/widget/EditText;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	new-instance p2, Landroid/widget/FrameLayout$LayoutParams;</span>
+<span class="">	invoke-direct {p2, p3}, Landroid/widget/FrameLayout$LayoutParams;-><init>(Landroid/view/ViewGroup$LayoutParams;)V</span>
+<span class="">	const/16 v0, 0x10</span>
+<span class="">	iget v1, p2, Landroid/widget/FrameLayout$LayoutParams;->gravity:I</span>
+<span class="">	and-int/lit8 v1, v1, -0x71</span>
+<span class="">	or-int/2addr v0, v1</span>
+<span class="">	iput v0, p2, Landroid/widget/FrameLayout$LayoutParams;->gravity:I</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mInputFrame:Landroid/widget/FrameLayout;</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroid/widget/FrameLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V</span>
+<span class="">	iget-object p2, p0, Landroid/support/design/widget/TextInputLayout;->mInputFrame:Landroid/widget/FrameLayout;</span>
+<span class="">	invoke-virtual {p2, p3}, Landroid/widget/FrameLayout;->setLayoutParams(Landroid/view/ViewGroup$LayoutParams;)V</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->updateInputLayoutMargins()V</span>
+<span class="">	check-cast p1, Landroid/widget/EditText;</span>
+<span class="">	invoke-direct {p0, p1}, Landroid/support/design/widget/TextInputLayout;->setEditText(Landroid/widget/EditText;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-super {p0, p1, p2, p3}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;ILandroid/view/ViewGroup$LayoutParams;)V</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method  animateToExpansionFraction(F)V
+<span class="">	.locals 4</span>
+<span class="">	.annotation build Landroid/support/annotation/VisibleForTesting;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	invoke-virtual {v0}, Landroid/support/design/widget/CollapsingTextHelper;->getExpansionFraction()F</span>
+<span class="">	move-result v0</span>
+<span class="">	cmpl-float v0, v0, p1</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mAnimator:Landroid/animation/ValueAnimator;</span>
+<span class="">	:cond_0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	new-instance v0, Landroid/animation/ValueAnimator;</span>
+<span class="">	invoke-direct {v0}, Landroid/animation/ValueAnimator;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mAnimator:Landroid/animation/ValueAnimator;</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mAnimator:Landroid/animation/ValueAnimator;</span>
+<span class="">	sget-object v1, Landroid/support/design/widget/AnimationUtils;->LINEAR_INTERPOLATOR:Landroid/view/animation/Interpolator;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/animation/ValueAnimator;->setInterpolator(Landroid/animation/TimeInterpolator;)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mAnimator:Landroid/animation/ValueAnimator;</span>
+<span class="">	const-wide/16 v1, 0xc8</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Landroid/animation/ValueAnimator;->setDuration(J)Landroid/animation/ValueAnimator;</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mAnimator:Landroid/animation/ValueAnimator;</span>
+<span class="">	new-instance v1, Landroid/support/design/widget/TextInputLayout$5;</span>
+<span class="">	invoke-direct {v1, p0}, Landroid/support/design/widget/TextInputLayout$5;-><init>(Landroid/support/design/widget/TextInputLayout;)V</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/animation/ValueAnimator;->addUpdateListener(Landroid/animation/ValueAnimator$AnimatorUpdateListener;)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mAnimator:Landroid/animation/ValueAnimator;</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 v1, 0x2</span>
+<span class="">	new-array v1, v1, [F</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	iget-object v3, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	invoke-virtual {v3}, Landroid/support/design/widget/CollapsingTextHelper;->getExpansionFraction()F</span>
+<span class="">	move-result v3</span>
+<span class="">	aput v3, v1, v2</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	aput p1, v1, v2</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/animation/ValueAnimator;->setFloatValues([F)V</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mAnimator:Landroid/animation/ValueAnimator;</span>
+<span class="">	invoke-virtual {p1}, Landroid/animation/ValueAnimator;->start()V</span>
+.end method
+
+.method public dispatchProvideAutofillStructure(Landroid/view/ViewStructure;I)V
+<span class="">	.locals 3</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mOriginalHint:Ljava/lang/CharSequence;</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/EditText;->getHint()Ljava/lang/CharSequence;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mOriginalHint:Ljava/lang/CharSequence;</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/widget/EditText;->setHint(Ljava/lang/CharSequence;)V</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-super {p0, p1, p2}, Landroid/widget/LinearLayout;->dispatchProvideAutofillStructure(Landroid/view/ViewStructure;I)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/widget/EditText;->setHint(Ljava/lang/CharSequence;)V</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	iget-object p2, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {p2, v0}, Landroid/widget/EditText;->setHint(Ljava/lang/CharSequence;)V</span>
+<span class="">	throw p1</span>
+<span class="">	invoke-super {p0, p1, p2}, Landroid/widget/LinearLayout;->dispatchProvideAutofillStructure(Landroid/view/ViewStructure;I)V</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method protected dispatchRestoreInstanceState(Landroid/util/SparseArray;)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Landroid/util/SparseArray<",</span>
+<span class="">	"Landroid/os/Parcelable;",</span>
+<span class="">	">;)V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	iput-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mRestoringSavedState:Z</span>
+<span class="">	invoke-super {p0, p1}, Landroid/widget/LinearLayout;->dispatchRestoreInstanceState(Landroid/util/SparseArray;)V</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	iput-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mRestoringSavedState:Z</span>
+.end method
+
+.method public draw(Landroid/graphics/Canvas;)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0, p1}, Landroid/widget/LinearLayout;->draw(Landroid/graphics/Canvas;)V</span>
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mHintEnabled:Z</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/design/widget/CollapsingTextHelper;->draw(Landroid/graphics/Canvas;)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method protected drawableStateChanged()V
+<span class="">	.locals 4</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mInDrawableStateChanged:Z</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	:cond_0</span>
+<span class="">	iput-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mInDrawableStateChanged:Z</span>
+<span class="">	invoke-super {p0}, Landroid/widget/LinearLayout;->drawableStateChanged()V</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->getDrawableState()[I</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-static {p0}, Landroid/support/v4/view/ViewCompat;->isLaidOut(Landroid/view/View;)Z</span>
+<span class="">	move-result v2</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	if-eqz v2, :cond_1</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->isEnabled()Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	move v0, v3</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/support/design/widget/TextInputLayout;->updateLabelState(Z)V</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->updateEditTextBackground()V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/support/design/widget/CollapsingTextHelper;->setState([I)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	or-int/2addr v0, v3</span>
+<span class="">	goto :goto_1</span>
+<span class="">	move v0, v3</span>
+<span class="">	:cond_2</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	:goto_1</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->invalidate()V</span>
+<span class="">	iput-boolean v3, p0, Landroid/support/design/widget/TextInputLayout;->mInDrawableStateChanged:Z</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method public getCounterMaxLength()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Landroid/support/design/widget/TextInputLayout;->mCounterMaxLength:I</span>
+.end method
+
+.method public getEditText()Landroid/widget/EditText;
+<span class="">	.locals 1</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+.end method
+
+.method public getError()Ljava/lang/CharSequence;
+<span class="">	.locals 1</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorEnabled:Z</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mError:Ljava/lang/CharSequence;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public getHint()Ljava/lang/CharSequence;
+<span class="">	.locals 1</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mHintEnabled:Z</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mHint:Ljava/lang/CharSequence;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public getPasswordVisibilityToggleContentDescription()Ljava/lang/CharSequence;
+<span class="">	.locals 1</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleContentDesc:Ljava/lang/CharSequence;</span>
+.end method
+
+.method public getPasswordVisibilityToggleDrawable()Landroid/graphics/drawable/Drawable;
+<span class="">	.locals 1</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDrawable:Landroid/graphics/drawable/Drawable;</span>
+.end method
+
+.method public getTypeface()Landroid/graphics/Typeface;
+<span class="">	.locals 1</span>
+<span class="">	.annotation build Landroid/support/annotation/NonNull;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mTypeface:Landroid/graphics/Typeface;</span>
+.end method
+
+.method public isCounterEnabled()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mCounterEnabled:Z</span>
+.end method
+
+.method public isErrorEnabled()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorEnabled:Z</span>
+.end method
+
+.method public isHintAnimationEnabled()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mHintAnimationEnabled:Z</span>
+.end method
+
+.method public isHintEnabled()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mHintEnabled:Z</span>
+.end method
+
+.method final isHintExpanded()Z
+<span class="">	.locals 1</span>
+<span class="">	.annotation build Landroid/support/annotation/VisibleForTesting;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mHintExpanded:Z</span>
+.end method
+
+.method public isPasswordVisibilityToggleEnabled()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleEnabled:Z</span>
+.end method
+
+.method protected onLayout(ZIIII)V
+<span class="">	.locals 3</span>
+
+<span class="">	invoke-super/range {p0 .. p5}, Landroid/widget/LinearLayout;->onLayout(ZIIII)V</span>
+<span class="">	iget-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mHintEnabled:Z</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mTmpRect:Landroid/graphics/Rect;</span>
+<span class="">	iget-object p2, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-static {p0, p2, p1}, Landroid/support/v4/widget/ViewGroupUtils;->getDescendantRect(Landroid/view/ViewGroup;Landroid/view/View;Landroid/graphics/Rect;)V</span>
+<span class="">	iget p2, p1, Landroid/graphics/Rect;->left:I</span>
+<span class="">	iget-object p4, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {p4}, Landroid/widget/EditText;->getCompoundPaddingLeft()I</span>
+<span class="">	move-result p4</span>
+<span class="">	add-int/2addr p2, p4</span>
+<span class="">	iget p4, p1, Landroid/graphics/Rect;->right:I</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/EditText;->getCompoundPaddingRight()I</span>
+<span class="">	move-result v0</span>
+<span class="">	sub-int/2addr p4, v0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	iget v1, p1, Landroid/graphics/Rect;->top:I</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {v2}, Landroid/widget/EditText;->getCompoundPaddingTop()I</span>
+<span class="">	move-result v2</span>
+<span class="">	add-int/2addr v1, v2</span>
+<span class="">	iget p1, p1, Landroid/graphics/Rect;->bottom:I</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {v2}, Landroid/widget/EditText;->getCompoundPaddingBottom()I</span>
+<span class="">	move-result v2</span>
+<span class="">	sub-int/2addr p1, v2</span>
+<span class="">	invoke-virtual {v0, p2, v1, p4, p1}, Landroid/support/design/widget/CollapsingTextHelper;->setExpandedBounds(IIII)V</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->getPaddingTop()I</span>
+<span class="">	move-result v0</span>
+<span class="">	sub-int/2addr p5, p3</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->getPaddingBottom()I</span>
+<span class="">	move-result p3</span>
+<span class="">	sub-int/2addr p5, p3</span>
+<span class="">	invoke-virtual {p1, p2, v0, p4, p5}, Landroid/support/design/widget/CollapsingTextHelper;->setCollapsedBounds(IIII)V</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	invoke-virtual {p1}, Landroid/support/design/widget/CollapsingTextHelper;->recalculate()V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method protected onMeasure(II)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->updatePasswordToggleView()V</span>
+<span class="">	invoke-super {p0, p1, p2}, Landroid/widget/LinearLayout;->onMeasure(II)V</span>
+.end method
+
+.method protected onRestoreInstanceState(Landroid/os/Parcelable;)V
+<span class="">	.locals 1</span>
+
+<span class="">	instance-of v0, p1, Landroid/support/design/widget/TextInputLayout$SavedState;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	invoke-super {p0, p1}, Landroid/widget/LinearLayout;->onRestoreInstanceState(Landroid/os/Parcelable;)V</span>
+<span class="">	check-cast p1, Landroid/support/design/widget/TextInputLayout$SavedState;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p1}, Landroid/support/design/widget/TextInputLayout$SavedState;->getSuperState()Landroid/os/Parcelable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-super {p0, v0}, Landroid/widget/LinearLayout;->onRestoreInstanceState(Landroid/os/Parcelable;)V</span>
+<span class="">	iget-object v0, p1, Landroid/support/design/widget/TextInputLayout$SavedState;->error:Ljava/lang/CharSequence;</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/support/design/widget/TextInputLayout;->setError(Ljava/lang/CharSequence;)V</span>
+<span class="">	iget-boolean p1, p1, Landroid/support/design/widget/TextInputLayout$SavedState;->isPasswordToggledVisible:Z</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	invoke-direct {p0, p1}, Landroid/support/design/widget/TextInputLayout;->passwordVisibilityToggleRequested(Z)V</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->requestLayout()V</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public onSaveInstanceState()Landroid/os/Parcelable;
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-super {p0}, Landroid/widget/LinearLayout;->onSaveInstanceState()Landroid/os/Parcelable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	new-instance v1, Landroid/support/design/widget/TextInputLayout$SavedState;</span>
+<span class="">	invoke-direct {v1, v0}, Landroid/support/design/widget/TextInputLayout$SavedState;-><init>(Landroid/os/Parcelable;)V</span>
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorShown:Z</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->getError()Ljava/lang/CharSequence;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, v1, Landroid/support/design/widget/TextInputLayout$SavedState;->error:Ljava/lang/CharSequence;</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggledVisible:Z</span>
+<span class="">	iput-boolean v0, v1, Landroid/support/design/widget/TextInputLayout$SavedState;->isPasswordToggledVisible:Z</span>
+.end method
+
+.method public setCounterEnabled(Z)V
+<span class="">	.locals 3</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mCounterEnabled:Z</span>
+<span class="">	if-eq v0, p1, :cond_3</span>
+<span class="">	if-eqz p1, :cond_2</span>
+<span class="">	new-instance v0, Landroid/support/v7/widget/AppCompatTextView;</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-direct {v0, v1}, Landroid/support/v7/widget/AppCompatTextView;-><init>(Landroid/content/Context;)V</span>
+<span class="">	iput-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	sget v1, Landroid/support/design/R$id;->textinput_counter:I</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setId(I)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mTypeface:Landroid/graphics/Typeface;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mTypeface:Landroid/graphics/Typeface;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;)V</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setMaxLines(I)V</span>
+<span class="">	:try_start_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	iget v1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterTextAppearance:I</span>
+<span class="">	invoke-static {v0, v1}, Landroid/support/v4/widget/TextViewCompat;->setTextAppearance(Landroid/widget/TextView;I)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catch_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	sget v1, Landroid/support/v7/appcompat/R$style;->TextAppearance_AppCompat_Caption:I</span>
+<span class="">	invoke-static {v0, v1}, Landroid/support/v4/widget/TextViewCompat;->setTextAppearance(Landroid/widget/TextView;I)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	sget v2, Landroid/support/v7/appcompat/R$color;->error_color_material:I</span>
+<span class="">	invoke-static {v1, v2}, Landroid/support/v4/content/ContextCompat;->getColor(Landroid/content/Context;I)I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setTextColor(I)V</span>
+<span class="">	:goto_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	const/4 v1, -0x1</span>
+<span class="">	invoke-direct {p0, v0, v1}, Landroid/support/design/widget/TextInputLayout;->addIndicator(Landroid/widget/TextView;I)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/support/design/widget/TextInputLayout;->updateCounter(I)V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/EditText;->getText()Landroid/text/Editable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0}, Landroid/text/Editable;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/support/design/widget/TextInputLayout;->updateCounter(I)V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_2</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	invoke-direct {p0, v0}, Landroid/support/design/widget/TextInputLayout;->removeIndicator(Landroid/widget/TextView;)V</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	:goto_1</span>
+<span class="">	iput-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterEnabled:Z</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method public setCounterMaxLength(I)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Landroid/support/design/widget/TextInputLayout;->mCounterMaxLength:I</span>
+<span class="">	if-eq v0, p1, :cond_2</span>
+<span class="">	if-lez p1, :cond_0</span>
+<span class="">	iput p1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterMaxLength:I</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p1, -0x1</span>
+<span class="">	iput p1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterMaxLength:I</span>
+<span class="">	:goto_0</span>
+<span class="">	iget-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterEnabled:Z</span>
+<span class="">	if-eqz p1, :cond_2</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	if-nez p1, :cond_1</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {p1}, Landroid/widget/EditText;->getText()Landroid/text/Editable;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-interface {p1}, Landroid/text/Editable;->length()I</span>
+<span class="">	move-result p1</span>
+<span class="">	:goto_1</span>
+<span class="">	invoke-virtual {p0, p1}, Landroid/support/design/widget/TextInputLayout;->updateCounter(I)V</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method public setEnabled(Z)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-static {p0, p1}, Landroid/support/design/widget/TextInputLayout;->recursiveSetEnabled(Landroid/view/ViewGroup;Z)V</span>
+<span class="">	invoke-super {p0, p1}, Landroid/widget/LinearLayout;->setEnabled(Z)V</span>
+.end method
+
+.method public setError(Ljava/lang/CharSequence;)V
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # Ljava/lang/CharSequence;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	invoke-static {p0}, Landroid/support/v4/view/ViewCompat;->isLaidOut(Landroid/view/View;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->isEnabled()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/TextView;->getText()Ljava/lang/CharSequence;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0, p1}, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-direct {p0, p1, v0}, Landroid/support/design/widget/TextInputLayout;->setError(Ljava/lang/CharSequence;Z)V</span>
+.end method
+
+.method public setErrorEnabled(Z)V
+<span class="">	.locals 5</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorEnabled:Z</span>
+<span class="">	if-eq v0, p1, :cond_5</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0}, Landroid/widget/TextView;->animate()Landroid/view/ViewPropertyAnimator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Landroid/view/ViewPropertyAnimator;->cancel()V</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	if-eqz p1, :cond_4</span>
+<span class="">	new-instance v1, Landroid/support/v7/widget/AppCompatTextView;</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-direct {v1, v2}, Landroid/support/v7/widget/AppCompatTextView;-><init>(Landroid/content/Context;)V</span>
+<span class="">	iput-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	sget v2, Landroid/support/design/R$id;->textinput_error:I</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/widget/TextView;->setId(I)V</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mTypeface:Landroid/graphics/Typeface;</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mTypeface:Landroid/graphics/Typeface;</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;)V</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	:try_start_0</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	iget v3, p0, Landroid/support/design/widget/TextInputLayout;->mErrorTextAppearance:I</span>
+<span class="">	invoke-static {v2, v3}, Landroid/support/v4/widget/TextViewCompat;->setTextAppearance(Landroid/widget/TextView;I)V</span>
+<span class="">	sget v2, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v3, 0x17</span>
+<span class="">	if-lt v2, v3, :cond_2</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v2}, Landroid/widget/TextView;->getTextColors()Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v2}, Landroid/content/res/ColorStateList;->getDefaultColor()I</span>
+<span class="">	move-result v2</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	const v3, -0xff01</span>
+<span class="">	if-ne v2, v3, :cond_2</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_2</span>
+<span class="">	move v2, v0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:goto_0</span>
+<span class="">	:catch_0</span>
+<span class="">	move v2, v1</span>
+<span class="">	:goto_1</span>
+<span class="">	if-eqz v2, :cond_3</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	sget v3, Landroid/support/v7/appcompat/R$style;->TextAppearance_AppCompat_Caption:I</span>
+<span class="">	invoke-static {v2, v3}, Landroid/support/v4/widget/TextViewCompat;->setTextAppearance(Landroid/widget/TextView;I)V</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	sget v4, Landroid/support/v7/appcompat/R$color;->error_color_material:I</span>
+<span class="">	invoke-static {v3, v4}, Landroid/support/v4/content/ContextCompat;->getColor(Landroid/content/Context;I)I</span>
+<span class="">	move-result v3</span>
+<span class="">	invoke-virtual {v2, v3}, Landroid/widget/TextView;->setTextColor(I)V</span>
+<span class="">	:cond_3</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	const/4 v3, 0x4</span>
+<span class="">	invoke-virtual {v2, v3}, Landroid/widget/TextView;->setVisibility(I)V</span>
+<span class="">	iget-object v2, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-static {v2, v1}, Landroid/support/v4/view/ViewCompat;->setAccessibilityLiveRegion(Landroid/view/View;I)V</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-direct {p0, v1, v0}, Landroid/support/design/widget/TextInputLayout;->addIndicator(Landroid/widget/TextView;I)V</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_4</span>
+<span class="">	iput-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorShown:Z</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->updateEditTextBackground()V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-direct {p0, v0}, Landroid/support/design/widget/TextInputLayout;->removeIndicator(Landroid/widget/TextView;)V</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	:goto_2</span>
+<span class="">	iput-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mErrorEnabled:Z</span>
+<span class="">	:cond_5</span>
+.end method
+
+.method public setErrorTextAppearance(I)V
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # I</span>
+<span class="">	.annotation build Landroid/support/annotation/StyleRes;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	iput p1, p0, Landroid/support/design/widget/TextInputLayout;->mErrorTextAppearance:I</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-static {v0, p1}, Landroid/support/v4/widget/TextViewCompat;->setTextAppearance(Landroid/widget/TextView;I)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public setHint(Ljava/lang/CharSequence;)V
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # Ljava/lang/CharSequence;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mHintEnabled:Z</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-direct {p0, p1}, Landroid/support/design/widget/TextInputLayout;->setHintInternal(Ljava/lang/CharSequence;)V</span>
+<span class="">	const/16 p1, 0x800</span>
+<span class="">	invoke-virtual {p0, p1}, Landroid/support/design/widget/TextInputLayout;->sendAccessibilityEvent(I)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public setHintAnimationEnabled(Z)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mHintAnimationEnabled:Z</span>
+.end method
+
+.method public setHintEnabled(Z)V
+<span class="">	.locals 2</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mHintEnabled:Z</span>
+<span class="">	if-eq p1, v0, :cond_4</span>
+<span class="">	iput-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mHintEnabled:Z</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {p1}, Landroid/widget/EditText;->getHint()Ljava/lang/CharSequence;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mHintEnabled:Z</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mHint:Ljava/lang/CharSequence;</span>
+<span class="">	invoke-static {v0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	invoke-static {p1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mHint:Ljava/lang/CharSequence;</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/widget/EditText;->setHint(Ljava/lang/CharSequence;)V</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-direct {p0, v1}, Landroid/support/design/widget/TextInputLayout;->setHintInternal(Ljava/lang/CharSequence;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-static {p1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_3</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mHint:Ljava/lang/CharSequence;</span>
+<span class="">	invoke-static {v0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	invoke-virtual {p0, p1}, Landroid/support/design/widget/TextInputLayout;->setHint(Ljava/lang/CharSequence;)V</span>
+<span class="">	:cond_2</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {p1, v1}, Landroid/widget/EditText;->setHint(Ljava/lang/CharSequence;)V</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_3</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	if-eqz p1, :cond_4</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->updateInputLayoutMargins()V</span>
+<span class="">	:cond_4</span>
+.end method
+
+.method public setHintTextAppearance(I)V
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # I</span>
+<span class="">	.annotation build Landroid/support/annotation/StyleRes;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/design/widget/CollapsingTextHelper;->setCollapsedTextAppearance(I)V</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	invoke-virtual {p1}, Landroid/support/design/widget/CollapsingTextHelper;->getCollapsedTextColor()Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iput-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mFocusedTextColor:Landroid/content/res/ColorStateList;</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	invoke-virtual {p0, p1}, Landroid/support/design/widget/TextInputLayout;->updateLabelState(Z)V</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->updateInputLayoutMargins()V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public setPasswordVisibilityToggleContentDescription(I)V
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # I</span>
+<span class="">	.annotation build Landroid/support/annotation/StringRes;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->getResources()Landroid/content/res/Resources;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/content/res/Resources;->getText(I)Ljava/lang/CharSequence;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {p0, p1}, Landroid/support/design/widget/TextInputLayout;->setPasswordVisibilityToggleContentDescription(Ljava/lang/CharSequence;)V</span>
+.end method
+
+.method public setPasswordVisibilityToggleContentDescription(Ljava/lang/CharSequence;)V
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # Ljava/lang/CharSequence;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	iput-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleContentDesc:Ljava/lang/CharSequence;</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/design/widget/CheckableImageButton;->setContentDescription(Ljava/lang/CharSequence;)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public setPasswordVisibilityToggleDrawable(I)V
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # I</span>
+<span class="">	.annotation build Landroid/support/annotation/DrawableRes;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0, p1}, Landroid/support/v7/content/res/AppCompatResources;->getDrawable(Landroid/content/Context;I)Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {p0, p1}, Landroid/support/design/widget/TextInputLayout;->setPasswordVisibilityToggleDrawable(Landroid/graphics/drawable/Drawable;)V</span>
+.end method
+
+.method public setPasswordVisibilityToggleDrawable(Landroid/graphics/drawable/Drawable;)V
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # Landroid/graphics/drawable/Drawable;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	iput-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleView:Landroid/support/design/widget/CheckableImageButton;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/design/widget/CheckableImageButton;->setImageDrawable(Landroid/graphics/drawable/Drawable;)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public setPasswordVisibilityToggleEnabled(Z)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleEnabled:Z</span>
+<span class="">	if-eq v0, p1, :cond_1</span>
+<span class="">	iput-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleEnabled:Z</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	iget-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggledVisible:Z</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-static {}, Landroid/text/method/PasswordTransformationMethod;->getInstance()Landroid/text/method/PasswordTransformationMethod;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/widget/EditText;->setTransformationMethod(Landroid/text/method/TransformationMethod;)V</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	iput-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggledVisible:Z</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->updatePasswordToggleView()V</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public setPasswordVisibilityToggleTintList(Landroid/content/res/ColorStateList;)V
+<span class="">	.locals 0</span>
+<span class="">	.param p1    # Landroid/content/res/ColorStateList;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	iput-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleTintList:Landroid/content/res/ColorStateList;</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	iput-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mHasPasswordToggleTintList:Z</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->applyPasswordToggleTint()V</span>
+.end method
+
+.method public setPasswordVisibilityToggleTintMode(Landroid/graphics/PorterDuff$Mode;)V
+<span class="">	.locals 0</span>
+<span class="">	.param p1    # Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	iput-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mPasswordToggleTintMode:Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	iput-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mHasPasswordToggleTintMode:Z</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->applyPasswordToggleTint()V</span>
+.end method
+
+.method public setTypeface(Landroid/graphics/Typeface;)V
+<span class="">	.locals 1</span>
+<span class="">	.param p1    # Landroid/graphics/Typeface;</span>
+<span class="">	.annotation build Landroid/support/annotation/Nullable;</span>
+<span class="">	.end annotation</span>
+<span class="">	.end param</span>
+
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mTypeface:Landroid/graphics/Typeface;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mTypeface:Landroid/graphics/Typeface;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/Typeface;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mTypeface:Landroid/graphics/Typeface;</span>
+<span class="">	if-nez v0, :cond_3</span>
+<span class="">	if-eqz p1, :cond_3</span>
+<span class="">	:cond_1</span>
+<span class="">	iput-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mTypeface:Landroid/graphics/Typeface;</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/support/design/widget/CollapsingTextHelper;->setTypefaces(Landroid/graphics/Typeface;)V</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;)V</span>
+<span class="">	:cond_2</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mErrorView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;)V</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method  updateCounter(I)V
+<span class="">	.locals 7</span>
+
+<span class="">	iget-boolean v0, p0, Landroid/support/design/widget/TextInputLayout;->mCounterOverflowed:Z</span>
+<span class="">	iget v1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterMaxLength:I</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	const/4 v3, -0x1</span>
+<span class="">	if-ne v1, v3, :cond_0</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	invoke-static {p1}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {v1, p1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="">	iput-boolean v2, p0, Landroid/support/design/widget/TextInputLayout;->mCounterOverflowed:Z</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_0</span>
+<span class="">	iget v1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterMaxLength:I</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	if-le p1, v1, :cond_1</span>
+<span class="">	move v1, v3</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	move v1, v2</span>
+<span class="">	:goto_0</span>
+<span class="">	iput-boolean v1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterOverflowed:Z</span>
+<span class="">	iget-boolean v1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterOverflowed:Z</span>
+<span class="">	if-eq v0, v1, :cond_3</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	iget-boolean v4, p0, Landroid/support/design/widget/TextInputLayout;->mCounterOverflowed:Z</span>
+<span class="">	if-eqz v4, :cond_2</span>
+<span class="">	iget v4, p0, Landroid/support/design/widget/TextInputLayout;->mCounterOverflowTextAppearance:I</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_2</span>
+<span class="">	iget v4, p0, Landroid/support/design/widget/TextInputLayout;->mCounterTextAppearance:I</span>
+<span class="">	:goto_1</span>
+<span class="">	invoke-static {v1, v4}, Landroid/support/v4/widget/TextViewCompat;->setTextAppearance(Landroid/widget/TextView;I)V</span>
+<span class="">	:cond_3</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	sget v5, Landroid/support/design/R$string;->character_counter_pattern:I</span>
+<span class="">	const/4 v6, 0x2</span>
+<span class="">	new-array v6, v6, [Ljava/lang/Object;</span>
+<span class="">	invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	aput-object p1, v6, v2</span>
+<span class="">	iget p1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterMaxLength:I</span>
+<span class="">	invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	aput-object p1, v6, v3</span>
+<span class="">	invoke-virtual {v4, v5, v6}, Landroid/content/Context;->getString(I[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {v1, p1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="">	:goto_2</span>
+<span class="">	iget-object p1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	if-eqz p1, :cond_4</span>
+<span class="">	iget-boolean p1, p0, Landroid/support/design/widget/TextInputLayout;->mCounterOverflowed:Z</span>
+<span class="">	if-eq v0, p1, :cond_4</span>
+<span class="">	invoke-virtual {p0, v2}, Landroid/support/design/widget/TextInputLayout;->updateLabelState(Z)V</span>
+<span class="">	invoke-direct {p0}, Landroid/support/design/widget/TextInputLayout;->updateEditTextBackground()V</span>
+<span class="">	:cond_4</span>
+.end method
+
+.method  updateLabelState(Z)V
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-virtual {p0, p1, v0}, Landroid/support/design/widget/TextInputLayout;->updateLabelState(ZZ)V</span>
+.end method
+
+.method  updateLabelState(ZZ)V
+<span class="">	.locals 6</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->isEnabled()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	iget-object v1, p0, Landroid/support/design/widget/TextInputLayout;->mEditText:Landroid/widget/EditText;</span>
+<span class="">	invoke-virtual {v1}, Landroid/widget/EditText;->getText()Landroid/text/Editable;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-static {v1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-nez v1, :cond_0</span>
+<span class="">	move v1, v2</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->getDrawableState()[I</span>
+<span class="">	move-result-object v3</span>
+<span class="">	const v4, 0x101009c</span>
+<span class="">	invoke-static {v3, v4}, Landroid/support/design/widget/TextInputLayout;->arrayContains([II)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->getError()Ljava/lang/CharSequence;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-static {v4}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+<span class="">	move-result v4</span>
+<span class="">	xor-int/2addr v2, v4</span>
+<span class="">	iget-object v4, p0, Landroid/support/design/widget/TextInputLayout;->mDefaultTextColor:Landroid/content/res/ColorStateList;</span>
+<span class="">	if-eqz v4, :cond_1</span>
+<span class="">	iget-object v4, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	iget-object v5, p0, Landroid/support/design/widget/TextInputLayout;->mDefaultTextColor:Landroid/content/res/ColorStateList;</span>
+<span class="">	invoke-virtual {v4, v5}, Landroid/support/design/widget/CollapsingTextHelper;->setExpandedTextColor(Landroid/content/res/ColorStateList;)V</span>
+<span class="">	:cond_1</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iget-boolean v4, p0, Landroid/support/design/widget/TextInputLayout;->mCounterOverflowed:Z</span>
+<span class="">	if-eqz v4, :cond_2</span>
+<span class="">	iget-object v4, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	if-eqz v4, :cond_2</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	iget-object v4, p0, Landroid/support/design/widget/TextInputLayout;->mCounterView:Landroid/widget/TextView;</span>
+<span class="">	invoke-virtual {v4}, Landroid/widget/TextView;->getTextColors()Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v0, v4}, Landroid/support/design/widget/CollapsingTextHelper;->setCollapsedTextColor(Landroid/content/res/ColorStateList;)V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_2</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	if-eqz v3, :cond_3</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mFocusedTextColor:Landroid/content/res/ColorStateList;</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	iget-object v4, p0, Landroid/support/design/widget/TextInputLayout;->mFocusedTextColor:Landroid/content/res/ColorStateList;</span>
+<span class="">	invoke-virtual {v0, v4}, Landroid/support/design/widget/CollapsingTextHelper;->setCollapsedTextColor(Landroid/content/res/ColorStateList;)V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_3</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mDefaultTextColor:Landroid/content/res/ColorStateList;</span>
+<span class="">	if-eqz v0, :cond_4</span>
+<span class="">	iget-object v0, p0, Landroid/support/design/widget/TextInputLayout;->mCollapsingTextHelper:Landroid/support/design/widget/CollapsingTextHelper;</span>
+<span class="">	iget-object v4, p0, Landroid/support/design/widget/TextInputLayout;->mDefaultTextColor:Landroid/content/res/ColorStateList;</span>
+<span class="">	invoke-virtual {v0, v4}, Landroid/support/design/widget/CollapsingTextHelper;->setCollapsedTextColor(Landroid/content/res/ColorStateList;)V</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_4</span>
+<span class="">	if-nez v1, :cond_7</span>
+<span class="">	invoke-virtual {p0}, Landroid/support/design/widget/TextInputLayout;->isEnabled()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_5</span>
+<span class="">	if-nez v3, :cond_7</span>
+<span class="">	if-eqz v2, :cond_5</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_5</span>
+<span class="">	if-nez p2, :cond_6</span>
+<span class="">	iget-boolean p2, p0, Landroid/support/design/widget/TextInputLayout;->mHintExpanded:Z</span>
+<span class="">	if-nez p2, :cond_9</span>
+<span class="">	:cond_6</span>
+<span class="">	invoke-direct {p0, p1}, Landroid/support/design/widget/TextInputLayout;->expandHint(Z)V</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:goto_2</span>
+<span class="">	:cond_7</span>
+<span class="">	if-nez p2, :cond_8</span>
+<span class="">	iget-boolean p2, p0, Landroid/support/design/widget/TextInputLayout;->mHintExpanded:Z</span>
+<span class="">	if-eqz p2, :cond_9</span>
+<span class="">	:cond_8</span>
+<span class="">	invoke-direct {p0, p1}, Landroid/support/design/widget/TextInputLayout;->collapseHint(Z)V</span>
+<span class="">	:goto_3</span>
+<span class="">	:cond_9</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../.resources/report.js"></script>
+</body>
+</html>

@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../../index.html">org.wifi.analyzer.network.boost</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">org.wifi.analyzer.network.boost.Activity</a></li>
+        <li><i class="ico ico-class"></i> MainActivity.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Lorg/wifi/analyzer/network/boost/Activity/MainActivity;
+.super Lorg/wifi/analyzer/network/boost/Activity/BaseActivity;
+.source "MainActivity.java"
+.implements Landroid/view/View$OnClickListener;
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Lorg/wifi/analyzer/network/boost/Activity/MainActivity$WiFiScanReceiver;
+}
+.end annotation
+
+.field private static final TAG:Ljava/lang/String; = "WiFiDemo"
+.field public static adCounter:I = 0x0
+.field private static bar1:Lcom/dinuscxj/progressbar/CircleProgressBar; = null
+.field public static networkId:Ljava/lang/String; = ""
+.field  context:Landroid/content/Context;
+.field private image4:Landroid/widget/ImageView;
+.field  mRandom:Ljava/util/Random;
+.field private more:Landroid/widget/Button;
+.field private textSpeed:Landroid/widget/TextView;
+.field private textStatus:Landroid/widget/TextView;
+.field private textchannel:Landroid/widget/TextView;
+.field private textfre:Landroid/widget/TextView;
+.field private textip:Landroid/widget/TextView;
+.field private textmac:Landroid/widget/TextView;
+.field  timer:Ljava/util/Timer;
+.field private tv_wifi_ssid:Landroid/widget/TextView;
+.field  who_is_my_wifi_card:Landroid/widget/Button;
+.field  wiFiScanReceiver:Lorg/wifi/analyzer/network/boost/Activity/MainActivity$WiFiScanReceiver;
+.field public wifi:Landroid/net/wifi/WifiManager;
+.field  wifiManager:Landroid/net/wifi/WifiManager;
+.field  wifi_menu:Landroid/widget/ImageView;
+
+
+<span class="cov">.method static constructor &lt;clinit&gt;()V</span>
+<span class="">	.locals 0</span>
+
+.end method
+
+<span class="cov">.method public constructor &lt;init&gt;()V</span>
+<span class="">	.locals 1</span>
+
+<span class="cov">	invoke-direct {p0}, Lorg/wifi/analyzer/network/boost/Activity/BaseActivity;-><init>()V</span>
+<span class="cov">	new-instance v0, Ljava/util/Timer;</span>
+<span class="cov">	invoke-direct {v0}, Ljava/util/Timer;-><init>()V</span>
+<span class="cov">	iput-object v0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->timer:Ljava/util/Timer;</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method static synthetic access$000(Lorg/wifi/analyzer/network/boost/Activity/MainActivity;)V</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	invoke-direct {p0}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->setWiFiStatus()V</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method static synthetic access$100(Lorg/wifi/analyzer/network/boost/Activity/MainActivity;)Landroid/widget/TextView;</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	iget-object p0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textStatus:Landroid/widget/TextView;</span>
+<span class="exec">	return-object p0</span>
+.end method
+
+<span class="cov">.method static synthetic access$200(Lorg/wifi/analyzer/network/boost/Activity/MainActivity;)Landroid/widget/TextView;</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	iget-object p0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textSpeed:Landroid/widget/TextView;</span>
+<span class="exec">	return-object p0</span>
+.end method
+
+<span class="cov">.method static synthetic access$300(Lorg/wifi/analyzer/network/boost/Activity/MainActivity;)Landroid/widget/TextView;</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	iget-object p0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textip:Landroid/widget/TextView;</span>
+<span class="exec">	return-object p0</span>
+.end method
+
+<span class="cov">.method static synthetic access$400(Lorg/wifi/analyzer/network/boost/Activity/MainActivity;)Landroid/widget/TextView;</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	iget-object p0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textmac:Landroid/widget/TextView;</span>
+<span class="exec">	return-object p0</span>
+.end method
+
+<span class="cov">.method static synthetic access$500(Lorg/wifi/analyzer/network/boost/Activity/MainActivity;)Landroid/widget/TextView;</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	iget-object p0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textfre:Landroid/widget/TextView;</span>
+<span class="exec">	return-object p0</span>
+.end method
+
+<span class="cov">.method static synthetic access$600(Lorg/wifi/analyzer/network/boost/Activity/MainActivity;)Landroid/widget/TextView;</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	iget-object p0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textchannel:Landroid/widget/TextView;</span>
+<span class="exec">	return-object p0</span>
+.end method
+
+<span class="cov">.method static synthetic access$700(Lorg/wifi/analyzer/network/boost/Activity/MainActivity;)Landroid/widget/TextView;</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	iget-object p0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->tv_wifi_ssid:Landroid/widget/TextView;</span>
+<span class="exec">	return-object p0</span>
+.end method
+
+<span class="cov">.method static synthetic access$800(Lorg/wifi/analyzer/network/boost/Activity/MainActivity;)Landroid/widget/ImageView;</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	iget-object p0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->image4:Landroid/widget/ImageView;</span>
+<span class="exec">	return-object p0</span>
+.end method
+
+<span class="cov">.method private handleRssi(I)I</span>
+<span class="">	.locals 2</span>
+
+<span class="cov">	iget-object v0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->mRandom:Ljava/util/Random;</span>
+<span class="cov">	if-nez v0, :cond_0</span>
+<span class="cov">	new-instance v0, Ljava/util/Random;</span>
+<span class="cov">	invoke-direct {v0}, Ljava/util/Random;-><init>()V</span>
+<span class="cov">	iput-object v0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->mRandom:Ljava/util/Random;</span>
+<span class="cov">	:cond_0</span>
+<span class="cov">	add-int/lit8 p1, p1, 0x23</span>
+<span class="cov">	const/4 v0, 0x2</span>
+<span class="">	if-ltz p1, :cond_1</span>
+<span class="">	iget-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->mRandom:Ljava/util/Random;</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/util/Random;->nextInt(I)I</span>
+<span class="">	move-result p1</span>
+<span class="">	rsub-int/lit8 p1, p1, 0x64</span>
+<span class="cov">	const/16 v1, -0x14</span>
+<span class="cov">	:cond_1</span>
+<span class="cov">	if-lt p1, v1, :cond_2</span>
+<span class="cov">	div-int/lit8 p1, p1, 0x3</span>
+<span class="cov">	add-int/lit8 p1, p1, 0x64</span>
+<span class="exec">	return p1</span>
+<span class="">	const/16 v1, -0x1e</span>
+<span class="">	:cond_2</span>
+<span class="">	if-lt p1, v1, :cond_3</span>
+<span class="">	add-int/lit8 p1, p1, 0x6e</span>
+<span class="">	const/16 v1, -0x2d</span>
+<span class="">	if-lt p1, v1, :cond_4</span>
+<span class="">	:cond_3</span>
+<span class="">	add-int/lit8 p1, p1, 0x1e</span>
+<span class="">	mul-int/lit8 p1, p1, 0x4</span>
+<span class="">	add-int/lit8 p1, p1, 0x50</span>
+<span class="">	const/16 v1, -0x37</span>
+<span class="">	if-lt p1, v1, :cond_5</span>
+<span class="">	add-int/lit8 p1, p1, 0x2d</span>
+<span class="">	:cond_4</span>
+<span class="">	mul-int/2addr p1, v0</span>
+<span class="">	add-int/lit8 p1, p1, 0x14</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:cond_5</span>
+.end method
+
+.method public static isAppRunning(Landroid/content/Context;Ljava/lang/String;)Z
+<span class="">	.locals 1</span>
+
+<span class="">	const-string v0, "activity"</span>
+<span class="">	invoke-virtual {p0, v0}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	check-cast p0, Landroid/app/ActivityManager;</span>
+<span class="">	invoke-virtual {p0}, Landroid/app/ActivityManager;->getRunningAppProcesses()Ljava/util/List;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	if-eqz p0, :cond_1</span>
+<span class="">	invoke-interface {p0}, Ljava/util/List;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroid/app/ActivityManager$RunningAppProcessInfo;</span>
+<span class="">	iget-object v0, v0, Landroid/app/ActivityManager$RunningAppProcessInfo;->processName:Ljava/lang/String;</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method private isServiceRunning()Z
+<span class="">	.locals 3</span>
+
+<span class="">	const-string v0, "activity"</span>
+<span class="">	invoke-virtual {p0, v0}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroid/app/ActivityManager;</span>
+<span class="">	const v1, 0x7fffffff</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/app/ActivityManager;->getRunningServices(I)Ljava/util/List;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Landroid/app/ActivityManager$RunningServiceInfo;</span>
+<span class="">	const-string v2, "com.appworld.wifi.free.Receiver.WifiService"</span>
+<span class="">	iget-object v1, v1, Landroid/app/ActivityManager$RunningServiceInfo;->service:Landroid/content/ComponentName;</span>
+<span class="">	invoke-virtual {v1}, Landroid/content/ComponentName;->getClassName()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v2, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:cond_1</span>
+.end method
+
+<span class="cov">.method private setWiFiStatus()V</span>
+<span class="">	.locals 5</span>
+<span class="">	.annotation build Landroid/annotation/SuppressLint;</span>
+<span class="">	value = {</span>
+<span class="">	"WifiManagerLeak",</span>
+<span class="">	"NewApi"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="cov">	const-string v0, "wifi"</span>
+<span class="exec">	invoke-virtual {p0, v0}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	check-cast v0, Landroid/net/wifi/WifiManager;</span>
+<span class="cov">	iput-object v0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->wifi:Landroid/net/wifi/WifiManager;</span>
+<span class="cov">	iget-object v0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->wifi:Landroid/net/wifi/WifiManager;</span>
+<span class="exec">	invoke-virtual {v0}, Landroid/net/wifi/WifiManager;->getConnectionInfo()Landroid/net/wifi/WifiInfo;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	iget-object v1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textStatus:Landroid/widget/TextView;</span>
+<span class="cov">	new-instance v2, Ljava/lang/StringBuilder;</span>
+<span class="cov">	invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="exec">	invoke-virtual {v0}, Landroid/net/wifi/WifiInfo;->getRssi()I</span>
+<span class="cov">	move-result v3</span>
+<span class="cov">	invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="cov">	const-string v3, "dbm"</span>
+<span class="cov">	invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="exec">	invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="cov">	move-result-object v2</span>
+<span class="cov">	invoke-virtual {v1, v2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="cov">	iget-object v1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textSpeed:Landroid/widget/TextView;</span>
+<span class="cov">	new-instance v2, Ljava/lang/StringBuilder;</span>
+<span class="cov">	invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="cov">	const-string v3, " "</span>
+<span class="cov">	invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="exec">	invoke-static {p0}, Lorg/wifi/analyzer/network/boost/WiFiUtil;->getSpeed(Landroid/content/Context;)D</span>
+<span class="cov">	move-result-wide v3</span>
+<span class="cov">	double-to-int v3, v3</span>
+<span class="exec">	invoke-static {v3}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;</span>
+<span class="cov">	move-result-object v3</span>
+<span class="cov">	invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="cov">	const-string v3, " Mbps"</span>
+<span class="cov">	invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="exec">	invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="cov">	move-result-object v2</span>
+<span class="cov">	invoke-virtual {v1, v2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="cov">	iget-object v1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textip:Landroid/widget/TextView;</span>
+<span class="cov">	new-instance v2, Ljava/lang/StringBuilder;</span>
+<span class="cov">	invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="cov">	const-string v3, " "</span>
+<span class="cov">	invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="exec">	invoke-virtual {v0}, Landroid/net/wifi/WifiInfo;->getIpAddress()I</span>
+<span class="cov">	move-result v3</span>
+<span class="cov">	int-to-long v3, v3</span>
+<span class="exec">	invoke-static {v3, v4}, Lorg/wifi/analyzer/network/boost/Utils;->long2ip(J)Ljava/lang/String;</span>
+<span class="cov">	move-result-object v3</span>
+<span class="cov">	invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="exec">	invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="cov">	move-result-object v2</span>
+<span class="cov">	invoke-virtual {v1, v2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="exec">	invoke-virtual {v0}, Landroid/net/wifi/WifiInfo;->getBSSID()Ljava/lang/String;</span>
+<span class="cov">	move-result-object v1</span>
+<span class="cov">	if-eqz v1, :cond_0</span>
+<span class="cov">	iget-object v1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textmac:Landroid/widget/TextView;</span>
+<span class="cov">	new-instance v2, Ljava/lang/StringBuilder;</span>
+<span class="cov">	invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="cov">	const-string v3, ""</span>
+<span class="cov">	invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="exec">	invoke-virtual {v0}, Landroid/net/wifi/WifiInfo;->getBSSID()Ljava/lang/String;</span>
+<span class="cov">	move-result-object v3</span>
+<span class="exec">	invoke-virtual {v3}, Ljava/lang/String;->toUpperCase()Ljava/lang/String;</span>
+<span class="cov">	move-result-object v3</span>
+<span class="cov">	invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="exec">	invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="cov">	move-result-object v2</span>
+<span class="cov">	invoke-virtual {v1, v2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="cov">	:cond_0</span>
+<span class="cov">	sget v1, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="cov">	const/16 v2, 0x15</span>
+<span class="cov">	if-lt v1, v2, :cond_1</span>
+<span class="cov">	iget-object v1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textfre:Landroid/widget/TextView;</span>
+<span class="cov">	new-instance v2, Ljava/lang/StringBuilder;</span>
+<span class="cov">	invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="cov">	const-string v3, " "</span>
+<span class="cov">	invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="exec">	invoke-virtual {v0}, Landroid/net/wifi/WifiInfo;->getFrequency()I</span>
+<span class="cov">	move-result v3</span>
+<span class="cov">	invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="cov">	const-string v3, " MHz"</span>
+<span class="cov">	invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="exec">	invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="cov">	move-result-object v2</span>
+<span class="cov">	invoke-virtual {v1, v2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="cov">	iget-object v1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textchannel:Landroid/widget/TextView;</span>
+<span class="cov">	new-instance v2, Ljava/lang/StringBuilder;</span>
+<span class="cov">	invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="cov">	const-string v3, ""</span>
+<span class="cov">	invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="exec">	invoke-virtual {v0}, Landroid/net/wifi/WifiInfo;->getFrequency()I</span>
+<span class="cov">	move-result v0</span>
+<span class="exec">	invoke-static {v0}, Lorg/wifi/analyzer/network/boost/WiFiUtil;->getChannelByFrequency(I)I</span>
+<span class="cov">	move-result v0</span>
+<span class="exec">	invoke-static {v0}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="exec">	invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	invoke-virtual {v1, v0}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textfre:Landroid/widget/TextView;</span>
+<span class="">	const-string v1, "N/A"</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="">	iget-object v0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textchannel:Landroid/widget/TextView;</span>
+<span class="">	const-string v1, "N/A"</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="cov">	:goto_0</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method private simulateProgress()V</span>
+<span class="">	.locals 3</span>
+
+<span class="cov">	const/4 v0, 0x2</span>
+<span class="cov">	new-array v0, v0, [I</span>
+<span class="cov">	fill-array-data v0, :array_0</span>
+<span class="exec">	invoke-static {v0}, Landroid/animation/ValueAnimator;->ofInt([I)Landroid/animation/ValueAnimator;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	new-instance v1, Lorg/wifi/analyzer/network/boost/Activity/MainActivity$4;</span>
+<span class="cov">	invoke-direct {v1, p0}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity$4;-><init>(Lorg/wifi/analyzer/network/boost/Activity/MainActivity;)V</span>
+<span class="cov">	invoke-virtual {v0, v1}, Landroid/animation/ValueAnimator;->addUpdateListener(Landroid/animation/ValueAnimator$AnimatorUpdateListener;)V</span>
+<span class="cov">	const/4 v1, -0x1</span>
+<span class="cov">	invoke-virtual {v0, v1}, Landroid/animation/ValueAnimator;->setRepeatCount(I)V</span>
+<span class="cov">	const-wide/16 v1, 0xfa0</span>
+<span class="cov">	invoke-virtual {v0, v1, v2}, Landroid/animation/ValueAnimator;->setDuration(J)Landroid/animation/ValueAnimator;</span>
+<span class="cov">	invoke-virtual {v0}, Landroid/animation/ValueAnimator;->start()V</span>
+<span class="exec">	return-void</span>
+<span class="">	nop</span>
+<span class="">	:array_0</span>
+<span class="">	.array-data 4</span>
+<span class="">	0x0</span>
+<span class="">	0x64</span>
+<span class="">	.end array-data</span>
+.end method
+
+<span class="cov">.method public getWifiStrength(Landroid/content/Context;)I</span>
+<span class="">	.locals 1</span>
+
+<span class="cov">	:try_start_0</span>
+<span class="exec">	invoke-static {p1}, Lorg/wifi/analyzer/network/boost/WiFiUtil;->getConnectedWiFiInfo(Landroid/content/Context;)Landroid/net/wifi/WifiInfo;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="exec">	invoke-virtual {p1}, Landroid/net/wifi/WifiInfo;->getRssi()I</span>
+<span class="cov">	move-result p1</span>
+<span class="exec">	invoke-direct {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->handleRssi(I)I</span>
+<span class="cov">	move-result p1</span>
+<span class="cov">	sget-object v0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->bar1:Lcom/dinuscxj/progressbar/CircleProgressBar;</span>
+<span class="cov">	invoke-virtual {v0, p1}, Lcom/dinuscxj/progressbar/CircleProgressBar;->setProgress(I)V</span>
+<span class="cov">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="exec">	return p1</span>
+<span class="cov">	:catch_0</span>
+<span class="cov">	const/4 p1, 0x0</span>
+<span class="exec">	return p1</span>
+.end method
+
+<span class="cov">.method public onClick(Landroid/view/View;)V</span>
+<span class="">	.locals 1</span>
+
+<span class="exec">	invoke-virtual {p1}, Landroid/view/View;->getId()I</span>
+<span class="cov">	move-result p1</span>
+<span class="cov">	const v0, 0x7f09013d</span>
+<span class="">	if-eq p1, v0, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="cov">	:cond_0</span>
+<span class="cov">	new-instance p1, Landroid/content/Intent;</span>
+<span class="cov">	const-class v0, Lorg/wifi/analyzer/network/boost/Activity/WhoUseWifiActivity;</span>
+<span class="cov">	invoke-direct {p1, p0, v0}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V</span>
+<span class="cov">	invoke-virtual {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->startActivity(Landroid/content/Intent;)V</span>
+<span class="cov">	:goto_0</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method protected onCreate(Landroid/os/Bundle;)V</span>
+<span class="">	.locals 7</span>
+<span class="">	.annotation build Landroid/annotation/SuppressLint;</span>
+<span class="">	value = {</span>
+<span class="">	"WifiManagerLeak"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="cov">	invoke-super {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/BaseActivity;->onCreate(Landroid/os/Bundle;)V</span>
+<span class="cov">	const p1, 0x7f0b001e</span>
+<span class="cov">	invoke-virtual {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->setContentView(I)V</span>
+<span class="cov">	iget-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->toolbar:Landroid/support/v7/widget/Toolbar;</span>
+<span class="cov">	const v0, 0x7f07006e</span>
+<span class="cov">	invoke-virtual {p1, v0}, Landroid/support/v7/widget/Toolbar;->setNavigationIcon(I)V</span>
+<span class="cov">	new-instance p1, Landroid/content/IntentFilter;</span>
+<span class="cov">	invoke-direct {p1}, Landroid/content/IntentFilter;-><init>()V</span>
+<span class="cov">	const-string v0, "android.net.conn.CONNECTIVITY_CHANGE"</span>
+<span class="cov">	invoke-virtual {p1, v0}, Landroid/content/IntentFilter;->addAction(Ljava/lang/String;)V</span>
+<span class="cov">	new-instance v0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity$WiFiScanReceiver;</span>
+<span class="cov">	invoke-direct {v0, p0, p0}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity$WiFiScanReceiver;-><init>(Lorg/wifi/analyzer/network/boost/Activity/MainActivity;Lorg/wifi/analyzer/network/boost/Activity/MainActivity;)V</span>
+<span class="cov">	iput-object v0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->wiFiScanReceiver:Lorg/wifi/analyzer/network/boost/Activity/MainActivity$WiFiScanReceiver;</span>
+<span class="cov">	iget-object v0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->wiFiScanReceiver:Lorg/wifi/analyzer/network/boost/Activity/MainActivity$WiFiScanReceiver;</span>
+<span class="cov">	invoke-virtual {p0, v0, p1}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->registerReceiver(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;)Landroid/content/Intent;</span>
+<span class="cov">	const p1, 0x7f09010a</span>
+<span class="exec">	invoke-virtual {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->findViewById(I)Landroid/view/View;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	check-cast p1, Landroid/widget/TextView;</span>
+<span class="cov">	iput-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textStatus:Landroid/widget/TextView;</span>
+<span class="cov">	const p1, 0x7f090109</span>
+<span class="exec">	invoke-virtual {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->findViewById(I)Landroid/view/View;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	check-cast p1, Landroid/widget/TextView;</span>
+<span class="cov">	iput-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textSpeed:Landroid/widget/TextView;</span>
+<span class="cov">	const p1, 0x7f090111</span>
+<span class="exec">	invoke-virtual {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->findViewById(I)Landroid/view/View;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	check-cast p1, Landroid/widget/TextView;</span>
+<span class="cov">	iput-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textip:Landroid/widget/TextView;</span>
+<span class="cov">	const p1, 0x7f090112</span>
+<span class="exec">	invoke-virtual {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->findViewById(I)Landroid/view/View;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	check-cast p1, Landroid/widget/TextView;</span>
+<span class="cov">	iput-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textmac:Landroid/widget/TextView;</span>
+<span class="cov">	const p1, 0x7f09010e</span>
+<span class="exec">	invoke-virtual {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->findViewById(I)Landroid/view/View;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	check-cast p1, Landroid/widget/TextView;</span>
+<span class="cov">	iput-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textfre:Landroid/widget/TextView;</span>
+<span class="cov">	const p1, 0x7f09010d</span>
+<span class="exec">	invoke-virtual {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->findViewById(I)Landroid/view/View;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	check-cast p1, Landroid/widget/TextView;</span>
+<span class="cov">	iput-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->textchannel:Landroid/widget/TextView;</span>
+<span class="cov">	const p1, 0x7f090080</span>
+<span class="exec">	invoke-virtual {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->findViewById(I)Landroid/view/View;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	check-cast p1, Landroid/widget/ImageView;</span>
+<span class="cov">	iput-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->image4:Landroid/widget/ImageView;</span>
+<span class="cov">	const p1, 0x7f09012e</span>
+<span class="exec">	invoke-virtual {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->findViewById(I)Landroid/view/View;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	check-cast p1, Landroid/widget/TextView;</span>
+<span class="cov">	iput-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->tv_wifi_ssid:Landroid/widget/TextView;</span>
+<span class="cov">	const p1, 0x7f0900a8</span>
+<span class="exec">	invoke-virtual {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->findViewById(I)Landroid/view/View;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	check-cast p1, Landroid/widget/Button;</span>
+<span class="cov">	iput-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->more:Landroid/widget/Button;</span>
+<span class="cov">	new-instance p1, Landroid/support/v7/app/ActionBarDrawerToggle;</span>
+<span class="cov">	iget-object v2, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->leftDrawer:Landroid/support/v4/widget/DrawerLayout;</span>
+<span class="cov">	iget-object v3, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->toolbar:Landroid/support/v7/widget/Toolbar;</span>
+<span class="cov">	const/4 v4, 0x0</span>
+<span class="cov">	const/4 v5, 0x0</span>
+<span class="cov">	move-object v0, p1</span>
+<span class="cov">	move-object v1, p0</span>
+<span class="cov">	invoke-direct/range {v0 .. v5}, Landroid/support/v7/app/ActionBarDrawerToggle;-><init>(Landroid/app/Activity;Landroid/support/v4/widget/DrawerLayout;Landroid/support/v7/widget/Toolbar;II)V</span>
+<span class="cov">	iget-object v0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->leftDrawer:Landroid/support/v4/widget/DrawerLayout;</span>
+<span class="cov">	invoke-virtual {v0, p1}, Landroid/support/v4/widget/DrawerLayout;->addDrawerListener(Landroid/support/v4/widget/DrawerLayout$DrawerListener;)V</span>
+<span class="cov">	const p1, 0x7f09013d</span>
+<span class="exec">	invoke-virtual {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->findViewById(I)Landroid/view/View;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	check-cast p1, Landroid/widget/Button;</span>
+<span class="cov">	iput-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->who_is_my_wifi_card:Landroid/widget/Button;</span>
+<span class="cov">	iget-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->who_is_my_wifi_card:Landroid/widget/Button;</span>
+<span class="cov">	invoke-virtual {p1, p0}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V</span>
+<span class="cov">	iget-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->context:Landroid/content/Context;</span>
+<span class="cov">	invoke-virtual {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->getWifiStrength(Landroid/content/Context;)I</span>
+<span class="cov">	invoke-direct {p0}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->setWiFiStatus()V</span>
+<span class="cov">	iput-object p0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->context:Landroid/content/Context;</span>
+<span class="cov">	const p1, 0x7f090023</span>
+<span class="exec">	invoke-virtual {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->findViewById(I)Landroid/view/View;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	check-cast p1, Lcom/dinuscxj/progressbar/CircleProgressBar;</span>
+<span class="cov">	sput-object p1, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->bar1:Lcom/dinuscxj/progressbar/CircleProgressBar;</span>
+<span class="cov">	const-string p1, "wifi"</span>
+<span class="exec">	invoke-virtual {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	check-cast p1, Landroid/net/wifi/WifiManager;</span>
+<span class="cov">	iput-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->wifiManager:Landroid/net/wifi/WifiManager;</span>
+<span class="cov">	iget-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->more:Landroid/widget/Button;</span>
+<span class="cov">	new-instance v0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity$1;</span>
+<span class="cov">	invoke-direct {v0, p0}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity$1;-><init>(Lorg/wifi/analyzer/network/boost/Activity/MainActivity;)V</span>
+<span class="cov">	invoke-virtual {p1, v0}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V</span>
+<span class="cov">	new-instance v2, Lorg/wifi/analyzer/network/boost/Activity/MainActivity$2;</span>
+<span class="cov">	invoke-direct {v2, p0}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity$2;-><init>(Lorg/wifi/analyzer/network/boost/Activity/MainActivity;)V</span>
+<span class="cov">	iget-object v1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->timer:Ljava/util/Timer;</span>
+<span class="cov">	const-wide/16 v3, 0x0</span>
+<span class="cov">	const-wide/16 v5, 0x2710</span>
+<span class="cov">	invoke-virtual/range {v1 .. v6}, Ljava/util/Timer;->schedule(Ljava/util/TimerTask;JJ)V</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method public onCreateOptionsMenu(Landroid/view/Menu;)Z</span>
+<span class="">	.locals 2</span>
+
+<span class="cov">	invoke-super {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/BaseActivity;->onCreateOptionsMenu(Landroid/view/Menu;)Z</span>
+<span class="exec">	invoke-virtual {p0}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->getMenuInflater()Landroid/view/MenuInflater;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	const v1, 0x7f0c0001</span>
+<span class="cov">	invoke-virtual {v0, v1, p1}, Landroid/view/MenuInflater;->inflate(ILandroid/view/Menu;)V</span>
+<span class="cov">	const v0, 0x7f090018</span>
+<span class="exec">	invoke-interface {p1, v0}, Landroid/view/Menu;->findItem(I)Landroid/view/MenuItem;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="exec">	invoke-interface {p1}, Landroid/view/MenuItem;->getActionView()Landroid/view/View;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	check-cast p1, Landroid/widget/LinearLayout;</span>
+<span class="cov">	const v0, 0x7f090019</span>
+<span class="exec">	invoke-virtual {p1, v0}, Landroid/widget/LinearLayout;->findViewById(I)Landroid/view/View;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	check-cast p1, Landroid/widget/ImageView;</span>
+<span class="cov">	iput-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->wifi_menu:Landroid/widget/ImageView;</span>
+<span class="cov">	iget-object p1, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->wifi_menu:Landroid/widget/ImageView;</span>
+<span class="cov">	new-instance v0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity$3;</span>
+<span class="cov">	invoke-direct {v0, p0}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity$3;-><init>(Lorg/wifi/analyzer/network/boost/Activity/MainActivity;)V</span>
+<span class="cov">	invoke-virtual {p1, v0}, Landroid/widget/ImageView;->setOnClickListener(Landroid/view/View$OnClickListener;)V</span>
+<span class="cov">	const/4 p1, 0x1</span>
+<span class="exec">	return p1</span>
+.end method
+
+.method protected onDestroy()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->wiFiScanReceiver:Lorg/wifi/analyzer/network/boost/Activity/MainActivity$WiFiScanReceiver;</span>
+<span class="">	invoke-virtual {p0, v0}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->unregisterReceiver(Landroid/content/BroadcastReceiver;)V</span>
+<span class="">	invoke-super {p0}, Lorg/wifi/analyzer/network/boost/Activity/BaseActivity;->onDestroy()V</span>
+.end method
+
+.method public onOptionsItemSelected(Landroid/view/MenuItem;)Z
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-interface {p1}, Landroid/view/MenuItem;->getItemId()I</span>
+<span class="">	move-result v0</span>
+<span class="">	const v1, 0x7f090018</span>
+<span class="">	if-ne v0, v1, :cond_0</span>
+<span class="">	new-instance v0, Landroid/content/Intent;</span>
+<span class="">	const-string v1, "android.settings.WIFI_SETTINGS"</span>
+<span class="">	invoke-direct {v0, v1}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V</span>
+<span class="">	invoke-virtual {p0, v0}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->startActivity(Landroid/content/Intent;)V</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-super {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/BaseActivity;->onOptionsItemSelected(Landroid/view/MenuItem;)Z</span>
+<span class="">	move-result p1</span>
+.end method
+
+<span class="cov">.method protected onPause()V</span>
+<span class="">	.locals 0</span>
+<span class="">	.annotation build Landroid/annotation/SuppressLint;</span>
+<span class="">	value = {</span>
+<span class="">	"MissingPermission"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="cov">	invoke-super {p0}, Lorg/wifi/analyzer/network/boost/Activity/BaseActivity;->onPause()V</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method public onPrepareOptionsMenu(Landroid/view/Menu;)Z</span>
+<span class="">	.locals 0</span>
+
+<span class="exec">	invoke-super {p0, p1}, Lorg/wifi/analyzer/network/boost/Activity/BaseActivity;->onPrepareOptionsMenu(Landroid/view/Menu;)Z</span>
+<span class="cov">	move-result p1</span>
+<span class="exec">	return p1</span>
+.end method
+
+<span class="cov">.method protected onResume()V</span>
+<span class="">	.locals 2</span>
+
+<span class="cov">	iget-object v0, p0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->tv_wifi_ssid:Landroid/widget/TextView;</span>
+<span class="exec">	invoke-static {p0}, Lorg/wifi/analyzer/network/boost/WiFiUtil;->getConnectedSsid(Landroid/content/Context;)Ljava/lang/String;</span>
+<span class="cov">	move-result-object v1</span>
+<span class="cov">	invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V</span>
+<span class="exec">	invoke-static {p0}, Lorg/wifi/analyzer/network/boost/WiFiUtil;->getConnectedSsid(Landroid/content/Context;)Ljava/lang/String;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	sput-object v0, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->networkId:Ljava/lang/String;</span>
+<span class="cov">	invoke-super {p0}, Lorg/wifi/analyzer/network/boost/Activity/BaseActivity;->onResume()V</span>
+<span class="cov">	invoke-direct {p0}, Lorg/wifi/analyzer/network/boost/Activity/MainActivity;->simulateProgress()V</span>
+<span class="exec">	return-void</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../../.resources/report.js"></script>
+</body>
+</html>
