@@ -1,6 +1,6 @@
 # Archer
 
-Implicit-calling-relationship-aware static Android app analyzer.
+Conditional Implicit Call aware static analyzer for Android apps.
 
 ## Getting started
 
