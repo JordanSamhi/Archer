@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         Constraints constraints = new Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
-                .setRequiresCharging(false)
+                .setRequiresCharging(true)
                 .setRequiresDeviceIdle(false)
                 .build();
         OneTimeWorkRequest wr = new OneTimeWorkRequest.Builder(MyWorker.class)
