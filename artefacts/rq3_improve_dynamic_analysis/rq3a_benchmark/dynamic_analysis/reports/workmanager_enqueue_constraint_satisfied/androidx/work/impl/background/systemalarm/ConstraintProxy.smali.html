@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../index.html">lu.uni.trux.workmanager_enqueue</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.work.impl.background.systemalarm</a></li>
+        <li><i class="ico ico-class"></i> ConstraintProxy.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class abstract Landroidx/work/impl/background/systemalarm/ConstraintProxy;
+.super Landroid/content/BroadcastReceiver;
+.source "ConstraintProxy.java"
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Landroidx/work/impl/background/systemalarm/ConstraintProxy$NetworkStateProxy;,
+Landroidx/work/impl/background/systemalarm/ConstraintProxy$StorageNotLowProxy;,
+Landroidx/work/impl/background/systemalarm/ConstraintProxy$BatteryChargingProxy;,
+Landroidx/work/impl/background/systemalarm/ConstraintProxy$BatteryNotLowProxy;
+}
+.end annotation
+
+.field private static final TAG:Ljava/lang/String;
+
+
+.method static constructor <clinit>()V
+<span class="">	.locals 1</span>
+
+<span class="">	const-string v0, "ConstraintProxy"</span>
+<span class="">	invoke-static {v0}, Landroidx/work/Logger;->tagWithPrefix(Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Landroidx/work/impl/background/systemalarm/ConstraintProxy;->TAG:Ljava/lang/String;</span>
+.end method
+
+.method constructor <init>()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Landroid/content/BroadcastReceiver;-><init>()V</span>
+.end method
+
+.method static updateAll(Landroid/content/Context;Ljava/util/List;)V
+<span class="">	.locals 7</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Landroid/content/Context;",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Landroidx/work/impl/model/WorkSpec;",</span>
+<span class="">	">;)V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"context",</span>
+<span class="">	"workSpecs"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-interface {p1}, Ljava/util/List;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	move v1, v0</span>
+<span class="">	move v2, v1</span>
+<span class="">	move v3, v2</span>
+<span class="">	move v4, v3</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v5</span>
+<span class="">	if-eqz v5, :cond_2</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	check-cast v5, Landroidx/work/impl/model/WorkSpec;</span>
+<span class="">	iget-object v5, v5, Landroidx/work/impl/model/WorkSpec;->constraints:Landroidx/work/Constraints;</span>
+<span class="">	invoke-virtual {v5}, Landroidx/work/Constraints;->requiresBatteryNotLow()Z</span>
+<span class="">	move-result v6</span>
+<span class="">	or-int/2addr v1, v6</span>
+<span class="">	invoke-virtual {v5}, Landroidx/work/Constraints;->requiresCharging()Z</span>
+<span class="">	move-result v6</span>
+<span class="">	or-int/2addr v2, v6</span>
+<span class="">	invoke-virtual {v5}, Landroidx/work/Constraints;->requiresStorageNotLow()Z</span>
+<span class="">	move-result v6</span>
+<span class="">	or-int/2addr v3, v6</span>
+<span class="">	invoke-virtual {v5}, Landroidx/work/Constraints;->getRequiredNetworkType()Landroidx/work/NetworkType;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	sget-object v6, Landroidx/work/NetworkType;->NOT_REQUIRED:Landroidx/work/NetworkType;</span>
+<span class="">	if-eq v5, v6, :cond_1</span>
+<span class="">	const/4 v5, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	move v5, v0</span>
+<span class="">	:goto_0</span>
+<span class="">	or-int/2addr v4, v5</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	if-eqz v2, :cond_0</span>
+<span class="">	if-eqz v3, :cond_0</span>
+<span class="">	if-eqz v4, :cond_0</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-static {p0, v1, v2, v3, v4}, Landroidx/work/impl/background/systemalarm/ConstraintProxyUpdateReceiver;->newConstraintProxyUpdateIntent(Landroid/content/Context;ZZZZ)Landroid/content/Intent;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p0, p1}, Landroid/content/Context;->sendBroadcast(Landroid/content/Intent;)V</span>
+.end method
+
+.method public onReceive(Landroid/content/Context;Landroid/content/Intent;)V
+<span class="">	.locals 4</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"context",</span>
+<span class="">	"intent"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {}, Landroidx/work/Logger;->get()Landroidx/work/Logger;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sget-object v1, Landroidx/work/impl/background/systemalarm/ConstraintProxy;->TAG:Ljava/lang/String;</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	new-array v2, v2, [Ljava/lang/Object;</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	aput-object p2, v2, v3</span>
+<span class="">	const-string p2, "onReceive : %s"</span>
+<span class="">	invoke-static {p2, v2}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	new-array v2, v3, [Ljava/lang/Throwable;</span>
+<span class="">	invoke-virtual {v0, v1, p2, v2}, Landroidx/work/Logger;->debug(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Throwable;)V</span>
+<span class="">	invoke-static {p1}, Landroidx/work/impl/background/systemalarm/CommandHandler;->createConstraintsChangedIntent(Landroid/content/Context;)Landroid/content/Intent;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/content/Context;->startService(Landroid/content/Intent;)Landroid/content/ComponentName;</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../.resources/report.js"></script>
+</body>
+</html>

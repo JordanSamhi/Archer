@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../index.html">lu.uni.trux.jobscheduler_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">org.junit.experimental.theories.internal</a></li>
+        <li><i class="ico ico-class"></i> Assignments.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Lorg/junit/experimental/theories/internal/Assignments;
+.super Ljava/lang/Object;
+.source "Assignments.java"
+
+
+.field private final assigned:Ljava/util/List;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/List<",
+"Lorg/junit/experimental/theories/PotentialAssignment;",
+">;"
+}
+.end annotation
+.end field
+.field private final clazz:Lorg/junit/runners/model/TestClass;
+.field private final unassigned:Ljava/util/List;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/List<",
+"Lorg/junit/experimental/theories/ParameterSignature;",
+">;"
+}
+.end annotation
+.end field
+
+
+.method private constructor <init>(Ljava/util/List;Ljava/util/List;Lorg/junit/runners/model/TestClass;)V
+<span class="">	.locals 0</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Lorg/junit/experimental/theories/PotentialAssignment;",</span>
+<span class="">	">;",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Lorg/junit/experimental/theories/ParameterSignature;",</span>
+<span class="">	">;",</span>
+<span class="">	"Lorg/junit/runners/model/TestClass;",</span>
+<span class="">	")V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	iput-object p2, p0, Lorg/junit/experimental/theories/internal/Assignments;->unassigned:Ljava/util/List;</span>
+<span class="">	iput-object p1, p0, Lorg/junit/experimental/theories/internal/Assignments;->assigned:Ljava/util/List;</span>
+<span class="">	iput-object p3, p0, Lorg/junit/experimental/theories/internal/Assignments;->clazz:Lorg/junit/runners/model/TestClass;</span>
+.end method
+
+.method public static allUnassigned(Ljava/lang/reflect/Method;Lorg/junit/runners/model/TestClass;)Lorg/junit/experimental/theories/internal/Assignments;
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-virtual {p1}, Lorg/junit/runners/model/TestClass;->getOnlyConstructor()Ljava/lang/reflect/Constructor;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Lorg/junit/experimental/theories/ParameterSignature;->signatures(Ljava/lang/reflect/Constructor;)Ljava/util/List;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {p0}, Lorg/junit/experimental/theories/ParameterSignature;->signatures(Ljava/lang/reflect/Method;)Ljava/util/ArrayList;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-interface {v0, p0}, Ljava/util/List;->addAll(Ljava/util/Collection;)Z</span>
+<span class="">	new-instance p0, Lorg/junit/experimental/theories/internal/Assignments;</span>
+<span class="">	new-instance v1, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	invoke-direct {p0, v1, v0, p1}, Lorg/junit/experimental/theories/internal/Assignments;-><init>(Ljava/util/List;Ljava/util/List;Lorg/junit/runners/model/TestClass;)V</span>
+.end method
+
+.method private buildParameterSupplierFromClass(Ljava/lang/Class;)Lorg/junit/experimental/theories/ParameterSupplier;
+<span class="">	.locals 8</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/lang/Exception;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"+",</span>
+<span class="">	"Lorg/junit/experimental/theories/ParameterSupplier;",</span>
+<span class="">	">;)",</span>
+<span class="">	"Lorg/junit/experimental/theories/ParameterSupplier;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p1}, Ljava/lang/Class;->getConstructors()[Ljava/lang/reflect/Constructor;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	array-length v1, v0</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	move v3, v2</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v3, v1, :cond_1</span>
+<span class="">	aget-object v4, v0, v3</span>
+<span class="">	invoke-virtual {v4}, Ljava/lang/reflect/Constructor;->getParameterTypes()[Ljava/lang/Class;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	array-length v6, v5</span>
+<span class="">	const/4 v7, 0x1</span>
+<span class="">	if-ne v6, v7, :cond_0</span>
+<span class="">	aget-object v5, v5, v2</span>
+<span class="">	const-class v6, Lorg/junit/runners/model/TestClass;</span>
+<span class="">	invoke-virtual {v5, v6}, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v5</span>
+<span class="">	if-eqz v5, :cond_0</span>
+<span class="">	new-array p1, v7, [Ljava/lang/Object;</span>
+<span class="">	iget-object v0, p0, Lorg/junit/experimental/theories/internal/Assignments;->clazz:Lorg/junit/runners/model/TestClass;</span>
+<span class="">	aput-object v0, p1, v2</span>
+<span class="">	invoke-virtual {v4, p1}, Ljava/lang/reflect/Constructor;->newInstance([Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Lorg/junit/experimental/theories/ParameterSupplier;</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	:cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/Class;->newInstance()Ljava/lang/Object;</span>
+<span class="">	:cond_1</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Lorg/junit/experimental/theories/ParameterSupplier;</span>
+.end method
+
+.method private generateAssignmentsFromTypeAlone(Lorg/junit/experimental/theories/ParameterSignature;)Ljava/util/List;
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Lorg/junit/experimental/theories/ParameterSignature;",</span>
+<span class="">	")",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Lorg/junit/experimental/theories/PotentialAssignment;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p1}, Lorg/junit/experimental/theories/ParameterSignature;->getType()Ljava/lang/Class;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Class;->isEnum()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	new-instance v1, Lorg/junit/experimental/theories/internal/EnumSupplier;</span>
+<span class="">	invoke-direct {v1, v0}, Lorg/junit/experimental/theories/internal/EnumSupplier;-><init>(Ljava/lang/Class;)V</span>
+<span class="">	invoke-virtual {v1, p1}, Lorg/junit/experimental/theories/internal/EnumSupplier;->getValueSources(Lorg/junit/experimental/theories/ParameterSignature;)Ljava/util/List;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-class v1, Ljava/lang/Boolean;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-nez v1, :cond_2</span>
+<span class="">	sget-object v1, Ljava/lang/Boolean;->TYPE:Ljava/lang/Class;</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	invoke-static {}, Ljava/util/Collections;->emptyList()Ljava/util/List;</span>
+<span class="">	:cond_1</span>
+<span class="">	move-result-object p1</span>
+<span class="">	new-instance v0, Lorg/junit/experimental/theories/internal/BooleanSupplier;</span>
+<span class="">	invoke-direct {v0}, Lorg/junit/experimental/theories/internal/BooleanSupplier;-><init>()V</span>
+<span class="">	:cond_2</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {v0, p1}, Lorg/junit/experimental/theories/internal/BooleanSupplier;->getValueSources(Lorg/junit/experimental/theories/ParameterSignature;)Ljava/util/List;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method private getConstructorParameterCount()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/experimental/theories/internal/Assignments;->clazz:Lorg/junit/runners/model/TestClass;</span>
+<span class="">	invoke-virtual {v0}, Lorg/junit/runners/model/TestClass;->getOnlyConstructor()Ljava/lang/reflect/Constructor;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Lorg/junit/experimental/theories/ParameterSignature;->signatures(Ljava/lang/reflect/Constructor;)Ljava/util/List;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->size()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method private getSupplier(Lorg/junit/experimental/theories/ParameterSignature;)Lorg/junit/experimental/theories/ParameterSupplier;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/lang/Exception;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const-class v0, Lorg/junit/experimental/theories/ParametersSuppliedBy;</span>
+<span class="">	invoke-virtual {p1, v0}, Lorg/junit/experimental/theories/ParameterSignature;->findDeepAnnotation(Ljava/lang/Class;)Ljava/lang/annotation/Annotation;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Lorg/junit/experimental/theories/ParametersSuppliedBy;</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	invoke-interface {p1}, Lorg/junit/experimental/theories/ParametersSuppliedBy;->value()Ljava/lang/Class;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {p0, p1}, Lorg/junit/experimental/theories/internal/Assignments;->buildParameterSupplierFromClass(Ljava/lang/Class;)Lorg/junit/experimental/theories/ParameterSupplier;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	new-instance p1, Lorg/junit/experimental/theories/internal/AllMembersSupplier;</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Lorg/junit/experimental/theories/internal/Assignments;->clazz:Lorg/junit/runners/model/TestClass;</span>
+<span class="">	invoke-direct {p1, v0}, Lorg/junit/experimental/theories/internal/AllMembersSupplier;-><init>(Lorg/junit/runners/model/TestClass;)V</span>
+.end method
+
+.method public assignNext(Lorg/junit/experimental/theories/PotentialAssignment;)Lorg/junit/experimental/theories/internal/Assignments;
+<span class="">	.locals 4</span>
+
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	iget-object v1, p0, Lorg/junit/experimental/theories/internal/Assignments;->assigned:Ljava/util/List;</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	new-instance p1, Lorg/junit/experimental/theories/internal/Assignments;</span>
+<span class="">	iget-object v1, p0, Lorg/junit/experimental/theories/internal/Assignments;->unassigned:Ljava/util/List;</span>
+<span class="">	invoke-interface {v1}, Ljava/util/List;->size()I</span>
+<span class="">	move-result v2</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	invoke-interface {v1, v3, v2}, Ljava/util/List;->subList(II)Ljava/util/List;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iget-object v2, p0, Lorg/junit/experimental/theories/internal/Assignments;->clazz:Lorg/junit/runners/model/TestClass;</span>
+<span class="">	invoke-direct {p1, v0, v1, v2}, Lorg/junit/experimental/theories/internal/Assignments;-><init>(Ljava/util/List;Ljava/util/List;Lorg/junit/runners/model/TestClass;)V</span>
+.end method
+
+.method public getActualValues(II)[Ljava/lang/Object;
+<span class="">	.locals 4</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Lorg/junit/experimental/theories/PotentialAssignment$CouldNotGenerateValueException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	sub-int v0, p2, p1</span>
+<span class="">	new-array v0, v0, [Ljava/lang/Object;</span>
+<span class="">	move v1, p1</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v1, p2, :cond_0</span>
+<span class="">	sub-int v2, v1, p1</span>
+<span class="">	iget-object v3, p0, Lorg/junit/experimental/theories/internal/Assignments;->assigned:Ljava/util/List;</span>
+<span class="">	invoke-interface {v3, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	check-cast v3, Lorg/junit/experimental/theories/PotentialAssignment;</span>
+<span class="">	invoke-virtual {v3}, Lorg/junit/experimental/theories/PotentialAssignment;->getValue()Ljava/lang/Object;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	aput-object v3, v0, v2</span>
+<span class="">	add-int/lit8 v1, v1, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public getAllArguments()[Ljava/lang/Object;
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Lorg/junit/experimental/theories/PotentialAssignment$CouldNotGenerateValueException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/experimental/theories/internal/Assignments;->assigned:Ljava/util/List;</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->size()I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-virtual {p0, v1, v0}, Lorg/junit/experimental/theories/internal/Assignments;->getActualValues(II)[Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public getArgumentStrings(Z)[Ljava/lang/Object;
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Lorg/junit/experimental/theories/PotentialAssignment$CouldNotGenerateValueException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object p1, p0, Lorg/junit/experimental/theories/internal/Assignments;->assigned:Ljava/util/List;</span>
+<span class="">	invoke-interface {p1}, Ljava/util/List;->size()I</span>
+<span class="">	move-result p1</span>
+<span class="">	new-array v0, p1, [Ljava/lang/Object;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v1, p1, :cond_0</span>
+<span class="">	iget-object v2, p0, Lorg/junit/experimental/theories/internal/Assignments;->assigned:Ljava/util/List;</span>
+<span class="">	invoke-interface {v2, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Lorg/junit/experimental/theories/PotentialAssignment;</span>
+<span class="">	invoke-virtual {v2}, Lorg/junit/experimental/theories/PotentialAssignment;->getDescription()Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	aput-object v2, v0, v1</span>
+<span class="">	add-int/lit8 v1, v1, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public getConstructorArguments()[Ljava/lang/Object;
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Lorg/junit/experimental/theories/PotentialAssignment$CouldNotGenerateValueException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-direct {p0}, Lorg/junit/experimental/theories/internal/Assignments;->getConstructorParameterCount()I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-virtual {p0, v1, v0}, Lorg/junit/experimental/theories/internal/Assignments;->getActualValues(II)[Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public getMethodArguments()[Ljava/lang/Object;
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Lorg/junit/experimental/theories/PotentialAssignment$CouldNotGenerateValueException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-direct {p0}, Lorg/junit/experimental/theories/internal/Assignments;->getConstructorParameterCount()I</span>
+<span class="">	move-result v0</span>
+<span class="">	iget-object v1, p0, Lorg/junit/experimental/theories/internal/Assignments;->assigned:Ljava/util/List;</span>
+<span class="">	invoke-interface {v1}, Ljava/util/List;->size()I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-virtual {p0, v0, v1}, Lorg/junit/experimental/theories/internal/Assignments;->getActualValues(II)[Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public isComplete()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/experimental/theories/internal/Assignments;->unassigned:Ljava/util/List;</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->size()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public nextUnassigned()Lorg/junit/experimental/theories/ParameterSignature;
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/experimental/theories/internal/Assignments;->unassigned:Ljava/util/List;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-interface {v0, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Lorg/junit/experimental/theories/ParameterSignature;</span>
+.end method
+
+.method public potentialsForNextUnassigned()Ljava/util/List;
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/lang/Throwable;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"()",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Lorg/junit/experimental/theories/PotentialAssignment;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Lorg/junit/experimental/theories/internal/Assignments;->nextUnassigned()Lorg/junit/experimental/theories/ParameterSignature;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-direct {p0, v0}, Lorg/junit/experimental/theories/internal/Assignments;->getSupplier(Lorg/junit/experimental/theories/ParameterSignature;)Lorg/junit/experimental/theories/ParameterSupplier;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1, v0}, Lorg/junit/experimental/theories/ParameterSupplier;->getValueSources(Lorg/junit/experimental/theories/ParameterSignature;)Ljava/util/List;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-interface {v1}, Ljava/util/List;->size()I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-nez v2, :cond_0</span>
+<span class="">	invoke-direct {p0, v0}, Lorg/junit/experimental/theories/internal/Assignments;->generateAssignmentsFromTypeAlone(Lorg/junit/experimental/theories/ParameterSignature;)Ljava/util/List;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	:cond_0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../.resources/report.js"></script>
+</body>
+</html>

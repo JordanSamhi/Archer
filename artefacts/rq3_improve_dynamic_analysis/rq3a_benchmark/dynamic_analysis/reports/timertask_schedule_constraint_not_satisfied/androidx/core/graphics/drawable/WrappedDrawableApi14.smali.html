@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../index.html">lu.uni.trux.timertask_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.core.graphics.drawable</a></li>
+        <li><i class="ico ico-class"></i> WrappedDrawableApi14.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class  Landroidx/core/graphics/drawable/WrappedDrawableApi14;
+.super Landroid/graphics/drawable/Drawable;
+.source "WrappedDrawableApi14.java"
+.implements Landroid/graphics/drawable/Drawable$Callback;
+.implements Landroidx/core/graphics/drawable/WrappedDrawable;
+.implements Landroidx/core/graphics/drawable/TintAwareDrawable;
+
+
+.field static final DEFAULT_TINT_MODE:Landroid/graphics/PorterDuff$Mode;
+.field private mColorFilterSet:Z
+.field private mCurrentColor:I
+.field private mCurrentMode:Landroid/graphics/PorterDuff$Mode;
+.field  mDrawable:Landroid/graphics/drawable/Drawable;
+.field private mMutated:Z
+.field  mState:Landroidx/core/graphics/drawable/WrappedDrawableState;
+
+
+.method static constructor <clinit>()V
+<span class="">	.locals 1</span>
+
+<span class="">	sget-object v0, Landroid/graphics/PorterDuff$Mode;->SRC_IN:Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	sput-object v0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->DEFAULT_TINT_MODE:Landroid/graphics/PorterDuff$Mode;</span>
+.end method
+
+.method constructor <init>(Landroid/graphics/drawable/Drawable;)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Landroid/graphics/drawable/Drawable;-><init>()V</span>
+<span class="">	invoke-direct {p0}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mutateConstantState()Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mState:Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	invoke-virtual {p0, p1}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->setWrappedDrawable(Landroid/graphics/drawable/Drawable;)V</span>
+.end method
+
+.method constructor <init>(Landroidx/core/graphics/drawable/WrappedDrawableState;Landroid/content/res/Resources;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Landroid/graphics/drawable/Drawable;-><init>()V</span>
+<span class="">	iput-object p1, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mState:Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	invoke-direct {p0, p2}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->updateLocalState(Landroid/content/res/Resources;)V</span>
+.end method
+
+.method private mutateConstantState()Landroidx/core/graphics/drawable/WrappedDrawableState;
+<span class="">	.locals 2</span>
+
+<span class="">	new-instance v0, Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	iget-object v1, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mState:Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	invoke-direct {v0, v1}, Landroidx/core/graphics/drawable/WrappedDrawableState;-><init>(Landroidx/core/graphics/drawable/WrappedDrawableState;)V</span>
+.end method
+
+.method private updateLocalState(Landroid/content/res/Resources;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mState:Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, v0, Landroidx/core/graphics/drawable/WrappedDrawableState;->mDrawableState:Landroid/graphics/drawable/Drawable$ConstantState;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mState:Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	iget-object v0, v0, Landroidx/core/graphics/drawable/WrappedDrawableState;->mDrawableState:Landroid/graphics/drawable/Drawable$ConstantState;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/drawable/Drawable$ConstantState;->newDrawable(Landroid/content/res/Resources;)Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p0, p1}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->setWrappedDrawable(Landroid/graphics/drawable/Drawable;)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private updateTint([I)Z
+<span class="">	.locals 4</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->isCompatTintEnabled()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mState:Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, v0, Landroidx/core/graphics/drawable/WrappedDrawableState;->mTint:Landroid/content/res/ColorStateList;</span>
+<span class="">	iget-object v2, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mState:Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	iget-object v2, v2, Landroidx/core/graphics/drawable/WrappedDrawableState;->mTintMode:Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	if-eqz v2, :cond_2</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/res/ColorStateList;->getDefaultColor()I</span>
+<span class="">	move-result v3</span>
+<span class="">	invoke-virtual {v0, p1, v3}, Landroid/content/res/ColorStateList;->getColorForState([II)I</span>
+<span class="">	move-result p1</span>
+<span class="">	iget-boolean v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mColorFilterSet:Z</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mCurrentColor:I</span>
+<span class="">	if-ne p1, v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mCurrentMode:Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	if-eq v2, v0, :cond_3</span>
+<span class="">	invoke-virtual {p0, p1, v2}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->setColorFilter(ILandroid/graphics/PorterDuff$Mode;)V</span>
+<span class="">	:cond_1</span>
+<span class="">	iput p1, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mCurrentColor:I</span>
+<span class="">	iput-object v2, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mCurrentMode:Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	iput-boolean p1, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mColorFilterSet:Z</span>
+<span class="">	iput-boolean v1, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mColorFilterSet:Z</span>
+<span class="">	invoke-virtual {p0}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->clearColorFilter()V</span>
+<span class="">	:cond_2</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method public draw(Landroid/graphics/Canvas;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/drawable/Drawable;->draw(Landroid/graphics/Canvas;)V</span>
+.end method
+
+.method public getChangingConfigurations()I
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-super {p0}, Landroid/graphics/drawable/Drawable;->getChangingConfigurations()I</span>
+<span class="">	move-result v0</span>
+<span class="">	iget-object v1, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mState:Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	invoke-virtual {v1}, Landroidx/core/graphics/drawable/WrappedDrawableState;->getChangingConfigurations()I</span>
+<span class="">	move-result v1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	or-int/2addr v0, v1</span>
+<span class="">	iget-object v1, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v1}, Landroid/graphics/drawable/Drawable;->getChangingConfigurations()I</span>
+<span class="">	move-result v1</span>
+<span class="">	or-int/2addr v0, v1</span>
+.end method
+
+.method public getConstantState()Landroid/graphics/drawable/Drawable$ConstantState;
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mState:Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Landroidx/core/graphics/drawable/WrappedDrawableState;->canConstantState()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mState:Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	invoke-virtual {p0}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->getChangingConfigurations()I</span>
+<span class="">	move-result v1</span>
+<span class="">	iput v1, v0, Landroidx/core/graphics/drawable/WrappedDrawableState;->mChangingConfigurations:I</span>
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mState:Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public getCurrent()Landroid/graphics/drawable/Drawable;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/drawable/Drawable;->getCurrent()Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public getIntrinsicHeight()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/drawable/Drawable;->getIntrinsicHeight()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public getIntrinsicWidth()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/drawable/Drawable;->getIntrinsicWidth()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public getLayoutDirection()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-static {v0}, Landroidx/core/graphics/drawable/DrawableCompat;->getLayoutDirection(Landroid/graphics/drawable/Drawable;)I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public getMinimumHeight()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/drawable/Drawable;->getMinimumHeight()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public getMinimumWidth()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/drawable/Drawable;->getMinimumWidth()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public getOpacity()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/drawable/Drawable;->getOpacity()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public getPadding(Landroid/graphics/Rect;)Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/drawable/Drawable;->getPadding(Landroid/graphics/Rect;)Z</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public getState()[I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/drawable/Drawable;->getState()[I</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public getTransparentRegion()Landroid/graphics/Region;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/drawable/Drawable;->getTransparentRegion()Landroid/graphics/Region;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public final getWrappedDrawable()Landroid/graphics/drawable/Drawable;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+.end method
+
+.method public invalidateDrawable(Landroid/graphics/drawable/Drawable;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->invalidateSelf()V</span>
+.end method
+
+.method public isAutoMirrored()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-static {v0}, Landroidx/core/graphics/drawable/DrawableCompat;->isAutoMirrored(Landroid/graphics/drawable/Drawable;)Z</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method protected isCompatTintEnabled()Z
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x1</span>
+.end method
+
+.method public isStateful()Z
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->isCompatTintEnabled()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mState:Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, v0, Landroidx/core/graphics/drawable/WrappedDrawableState;->mTint:Landroid/content/res/ColorStateList;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/res/ColorStateList;->isStateful()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_2</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/drawable/Drawable;->isStateful()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	:cond_2</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_3</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_1</span>
+.end method
+
+.method public jumpToCurrentState()V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/drawable/Drawable;->jumpToCurrentState()V</span>
+.end method
+
+.method public mutate()Landroid/graphics/drawable/Drawable;
+<span class="">	.locals 2</span>
+
+<span class="">	iget-boolean v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mMutated:Z</span>
+<span class="">	if-nez v0, :cond_3</span>
+<span class="">	invoke-super {p0}, Landroid/graphics/drawable/Drawable;->mutate()Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-ne v0, p0, :cond_3</span>
+<span class="">	invoke-direct {p0}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mutateConstantState()Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mState:Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/drawable/Drawable;->mutate()Landroid/graphics/drawable/Drawable;</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mState:Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iget-object v1, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	invoke-virtual {v1}, Landroid/graphics/drawable/Drawable;->getConstantState()Landroid/graphics/drawable/Drawable$ConstantState;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	iput-object v1, v0, Landroidx/core/graphics/drawable/WrappedDrawableState;->mDrawableState:Landroid/graphics/drawable/Drawable$ConstantState;</span>
+<span class="">	:cond_2</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	iput-boolean v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mMutated:Z</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method protected onBoundsChange(Landroid/graphics/Rect;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/drawable/Drawable;->setBounds(Landroid/graphics/Rect;)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public onLayoutDirectionChanged(I)Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-static {v0, p1}, Landroidx/core/graphics/drawable/DrawableCompat;->setLayoutDirection(Landroid/graphics/drawable/Drawable;I)Z</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method protected onLevelChange(I)Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/drawable/Drawable;->setLevel(I)Z</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public scheduleDrawable(Landroid/graphics/drawable/Drawable;Ljava/lang/Runnable;J)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-virtual {p0, p2, p3, p4}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->scheduleSelf(Ljava/lang/Runnable;J)V</span>
+.end method
+
+.method public setAlpha(I)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/drawable/Drawable;->setAlpha(I)V</span>
+.end method
+
+.method public setAutoMirrored(Z)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-static {v0, p1}, Landroidx/core/graphics/drawable/DrawableCompat;->setAutoMirrored(Landroid/graphics/drawable/Drawable;Z)V</span>
+.end method
+
+.method public setChangingConfigurations(I)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/drawable/Drawable;->setChangingConfigurations(I)V</span>
+.end method
+
+.method public setColorFilter(Landroid/graphics/ColorFilter;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/drawable/Drawable;->setColorFilter(Landroid/graphics/ColorFilter;)V</span>
+.end method
+
+.method public setDither(Z)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/drawable/Drawable;->setDither(Z)V</span>
+.end method
+
+.method public setFilterBitmap(Z)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/drawable/Drawable;->setFilterBitmap(Z)V</span>
+.end method
+
+.method public setState([I)Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/drawable/Drawable;->setState([I)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-direct {p0, p1}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->updateTint([I)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-nez p1, :cond_1</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	:goto_1</span>
+.end method
+
+.method public setTint(I)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-static {p1}, Landroid/content/res/ColorStateList;->valueOf(I)Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p0, p1}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->setTintList(Landroid/content/res/ColorStateList;)V</span>
+.end method
+
+.method public setTintList(Landroid/content/res/ColorStateList;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mState:Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	iput-object p1, v0, Landroidx/core/graphics/drawable/WrappedDrawableState;->mTint:Landroid/content/res/ColorStateList;</span>
+<span class="">	invoke-virtual {p0}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->getState()[I</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {p0, p1}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->updateTint([I)Z</span>
+.end method
+
+.method public setTintMode(Landroid/graphics/PorterDuff$Mode;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mState:Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	iput-object p1, v0, Landroidx/core/graphics/drawable/WrappedDrawableState;->mTintMode:Landroid/graphics/PorterDuff$Mode;</span>
+<span class="">	invoke-virtual {p0}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->getState()[I</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {p0, p1}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->updateTint([I)Z</span>
+.end method
+
+.method public setVisible(ZZ)Z
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0, p1, p2}, Landroid/graphics/drawable/Drawable;->setVisible(ZZ)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Landroid/graphics/drawable/Drawable;->setVisible(ZZ)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	:goto_1</span>
+.end method
+
+.method public final setWrappedDrawable(Landroid/graphics/drawable/Drawable;)V
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/graphics/drawable/Drawable;->setCallback(Landroid/graphics/drawable/Drawable$Callback;)V</span>
+<span class="">	:cond_0</span>
+<span class="">	iput-object p1, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mDrawable:Landroid/graphics/drawable/Drawable;</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	invoke-virtual {p1, p0}, Landroid/graphics/drawable/Drawable;->setCallback(Landroid/graphics/drawable/Drawable$Callback;)V</span>
+<span class="">	invoke-virtual {p1}, Landroid/graphics/drawable/Drawable;->isVisible()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	invoke-virtual {p0, v0, v1}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->setVisible(ZZ)Z</span>
+<span class="">	invoke-virtual {p1}, Landroid/graphics/drawable/Drawable;->getState()[I</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->setState([I)Z</span>
+<span class="">	invoke-virtual {p1}, Landroid/graphics/drawable/Drawable;->getLevel()I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->setLevel(I)Z</span>
+<span class="">	invoke-virtual {p1}, Landroid/graphics/drawable/Drawable;->getBounds()Landroid/graphics/Rect;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->setBounds(Landroid/graphics/Rect;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->mState:Landroidx/core/graphics/drawable/WrappedDrawableState;</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	invoke-virtual {p1}, Landroid/graphics/drawable/Drawable;->getConstantState()Landroid/graphics/drawable/Drawable$ConstantState;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iput-object p1, v0, Landroidx/core/graphics/drawable/WrappedDrawableState;->mDrawableState:Landroid/graphics/drawable/Drawable$ConstantState;</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {p0}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->invalidateSelf()V</span>
+.end method
+
+.method public unscheduleDrawable(Landroid/graphics/drawable/Drawable;Ljava/lang/Runnable;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-virtual {p0, p2}, Landroidx/core/graphics/drawable/WrappedDrawableApi14;->unscheduleSelf(Ljava/lang/Runnable;)V</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../.resources/report.js"></script>
+</body>
+</html>

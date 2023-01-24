@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../index.html">lu.uni.trux.scheduledthreadpoolexecutor_scheduledatfixedrate</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.material.transition</a></li>
+        <li><i class="ico ico-class"></i> FadeThroughProvider.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public final Lcom/google/android/material/transition/FadeThroughProvider;
+.super Ljava/lang/Object;
+.source "FadeThroughProvider.java"
+.implements Lcom/google/android/material/transition/VisibilityAnimatorProvider;
+
+
+.field static final FADE_THROUGH_THRESHOLD:F = 0.35f
+.field private progressThreshold:F
+
+
+.method public constructor <init>()V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	const v0, 0x3eb33333    # 0.35f</span>
+<span class="">	iput v0, p0, Lcom/google/android/material/transition/FadeThroughProvider;->progressThreshold:F</span>
+.end method
+
+.method private static createFadeThroughAnimator(Landroid/view/View;FFFFF)Landroid/animation/Animator;
+<span class="">	.locals 8</span>
+
+<span class="">	const/4 v0, 0x2</span>
+<span class="">	new-array v0, v0, [F</span>
+<span class="">	fill-array-data v0, :array_0</span>
+<span class="">	invoke-static {v0}, Landroid/animation/ValueAnimator;->ofFloat([F)Landroid/animation/ValueAnimator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	new-instance v7, Lcom/google/android/material/transition/FadeThroughProvider$1;</span>
+<span class="">	move-object v1, v7</span>
+<span class="">	move-object v2, p0</span>
+<span class="">	move v3, p1</span>
+<span class="">	move v4, p2</span>
+<span class="">	move v5, p3</span>
+<span class="">	move v6, p4</span>
+<span class="">	invoke-direct/range {v1 .. v6}, Lcom/google/android/material/transition/FadeThroughProvider$1;-><init>(Landroid/view/View;FFFF)V</span>
+<span class="">	invoke-virtual {v0, v7}, Landroid/animation/ValueAnimator;->addUpdateListener(Landroid/animation/ValueAnimator$AnimatorUpdateListener;)V</span>
+<span class="">	new-instance p1, Lcom/google/android/material/transition/FadeThroughProvider$2;</span>
+<span class="">	invoke-direct {p1, p0, p5}, Lcom/google/android/material/transition/FadeThroughProvider$2;-><init>(Landroid/view/View;F)V</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/animation/ValueAnimator;->addListener(Landroid/animation/Animator$AnimatorListener;)V</span>
+<span class="">	nop</span>
+<span class="">	:array_0</span>
+<span class="">	.array-data 4</span>
+<span class="">	0x0</span>
+<span class="">	0x3f800000    # 1.0f</span>
+<span class="">	.end array-data</span>
+.end method
+
+.method public createAppear(Landroid/view/ViewGroup;Landroid/view/View;)Landroid/animation/Animator;
+<span class="">	.locals 6</span>
+
+<span class="">	invoke-virtual {p2}, Landroid/view/View;->getAlpha()F</span>
+<span class="">	move-result p1</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	cmpl-float p1, p1, v0</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	const/high16 p1, 0x3f800000    # 1.0f</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p2}, Landroid/view/View;->getAlpha()F</span>
+<span class="">	move-result p1</span>
+<span class="">	:goto_0</span>
+<span class="">	move v5, p1</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	iget v3, p0, Lcom/google/android/material/transition/FadeThroughProvider;->progressThreshold:F</span>
+<span class="">	const/high16 v4, 0x3f800000    # 1.0f</span>
+<span class="">	move-object v0, p2</span>
+<span class="">	move v2, v5</span>
+<span class="">	invoke-static/range {v0 .. v5}, Lcom/google/android/material/transition/FadeThroughProvider;->createFadeThroughAnimator(Landroid/view/View;FFFFF)Landroid/animation/Animator;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public createDisappear(Landroid/view/ViewGroup;Landroid/view/View;)Landroid/animation/Animator;
+<span class="">	.locals 6</span>
+
+<span class="">	invoke-virtual {p2}, Landroid/view/View;->getAlpha()F</span>
+<span class="">	move-result p1</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	cmpl-float p1, p1, v0</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	const/high16 p1, 0x3f800000    # 1.0f</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p2}, Landroid/view/View;->getAlpha()F</span>
+<span class="">	move-result p1</span>
+<span class="">	:goto_0</span>
+<span class="">	move v5, p1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	iget v4, p0, Lcom/google/android/material/transition/FadeThroughProvider;->progressThreshold:F</span>
+<span class="">	move-object v0, p2</span>
+<span class="">	move v1, v5</span>
+<span class="">	invoke-static/range {v0 .. v5}, Lcom/google/android/material/transition/FadeThroughProvider;->createFadeThroughAnimator(Landroid/view/View;FFFFF)Landroid/animation/Animator;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public getProgressThreshold()F
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/google/android/material/transition/FadeThroughProvider;->progressThreshold:F</span>
+.end method
+
+.method public setProgressThreshold(F)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput p1, p0, Lcom/google/android/material/transition/FadeThroughProvider;->progressThreshold:F</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../.resources/report.js"></script>
+</body>
+</html>

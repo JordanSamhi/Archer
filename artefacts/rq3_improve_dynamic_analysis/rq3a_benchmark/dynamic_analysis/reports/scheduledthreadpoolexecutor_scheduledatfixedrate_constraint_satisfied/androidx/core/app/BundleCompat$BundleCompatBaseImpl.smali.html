@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">lu.uni.trux.scheduledthreadpoolexecutor_scheduledatfixedrate</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.core.app</a></li>
+        <li><i class="ico ico-class"></i> BundleCompat$BundleCompatBaseImpl.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class  Landroidx/core/app/BundleCompat$BundleCompatBaseImpl;
+.super Ljava/lang/Object;
+.source "BundleCompat.java"
+
+.annotation system Ldalvik/annotation/EnclosingClass;
+value = Landroidx/core/app/BundleCompat;
+.end annotation
+.annotation system Ldalvik/annotation/InnerClass;
+accessFlags = 0x8
+name = "BundleCompatBaseImpl"
+.end annotation
+
+.field private static final TAG:Ljava/lang/String; = "BundleCompatBaseImpl"
+.field private static sGetIBinderMethod:Ljava/lang/reflect/Method;
+.field private static sGetIBinderMethodFetched:Z
+.field private static sPutIBinderMethod:Ljava/lang/reflect/Method;
+.field private static sPutIBinderMethodFetched:Z
+
+
+.method private constructor <init>()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+.end method
+
+.method public static getBinder(Landroid/os/Bundle;Ljava/lang/String;)Landroid/os/IBinder;
+<span class="">	.locals 7</span>
+
+<span class="">	sget-boolean v0, Landroidx/core/app/BundleCompat$BundleCompatBaseImpl;->sGetIBinderMethodFetched:Z</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	const-string v2, "BundleCompatBaseImpl"</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	:try_start_0</span>
+<span class="">	const-class v0, Landroid/os/Bundle;</span>
+<span class="">	const-string v4, "getIBinder"</span>
+<span class="">	new-array v5, v3, [Ljava/lang/Class;</span>
+<span class="">	const-class v6, Ljava/lang/String;</span>
+<span class="">	aput-object v6, v5, v1</span>
+<span class="">	invoke-virtual {v0, v4, v5}, Ljava/lang/Class;->getMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Landroidx/core/app/BundleCompat$BundleCompatBaseImpl;->sGetIBinderMethod:Ljava/lang/reflect/Method;</span>
+<span class="">	invoke-virtual {v0, v3}, Ljava/lang/reflect/Method;->setAccessible(Z)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/NoSuchMethodException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catch_0</span>
+<span class="">	move-exception v0</span>
+<span class="">	const-string v4, "Failed to retrieve getIBinder method"</span>
+<span class="">	invoke-static {v2, v4, v0}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I</span>
+<span class="">	:goto_0</span>
+<span class="">	sput-boolean v3, Landroidx/core/app/BundleCompat$BundleCompatBaseImpl;->sGetIBinderMethodFetched:Z</span>
+<span class="">	:cond_0</span>
+<span class="">	sget-object v0, Landroidx/core/app/BundleCompat$BundleCompatBaseImpl;->sGetIBinderMethod:Ljava/lang/reflect/Method;</span>
+<span class="">	const/4 v4, 0x0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	:try_start_1</span>
+<span class="">	new-array v3, v3, [Ljava/lang/Object;</span>
+<span class="">	aput-object p1, v3, v1</span>
+<span class="">	invoke-virtual {v0, p0, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	check-cast p0, Landroid/os/IBinder;</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catch Ljava/lang/reflect/InvocationTargetException; {:try_start_1 .. :try_end_1} :catch_3</span>
+<span class="">	.catch Ljava/lang/IllegalAccessException; {:try_start_1 .. :try_end_1} :catch_2</span>
+<span class="">	.catch Ljava/lang/IllegalArgumentException; {:try_start_1 .. :try_end_1} :catch_1</span>
+<span class="">	move-exception p0</span>
+<span class="">	:catch_1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	move-exception p0</span>
+<span class="">	:catch_2</span>
+<span class="">	goto :goto_1</span>
+<span class="">	move-exception p0</span>
+<span class="">	:catch_3</span>
+<span class="">	const-string p1, "Failed to invoke getIBinder via reflection"</span>
+<span class="">	:goto_1</span>
+<span class="">	invoke-static {v2, p1, p0}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I</span>
+<span class="">	sput-object v4, Landroidx/core/app/BundleCompat$BundleCompatBaseImpl;->sGetIBinderMethod:Ljava/lang/reflect/Method;</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public static putBinder(Landroid/os/Bundle;Ljava/lang/String;Landroid/os/IBinder;)V
+<span class="">	.locals 8</span>
+
+<span class="">	sget-boolean v0, Landroidx/core/app/BundleCompat$BundleCompatBaseImpl;->sPutIBinderMethodFetched:Z</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	const-string v2, "BundleCompatBaseImpl"</span>
+<span class="">	const/4 v3, 0x2</span>
+<span class="">	const/4 v4, 0x1</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	:try_start_0</span>
+<span class="">	const-class v0, Landroid/os/Bundle;</span>
+<span class="">	const-string v5, "putIBinder"</span>
+<span class="">	new-array v6, v3, [Ljava/lang/Class;</span>
+<span class="">	const-class v7, Ljava/lang/String;</span>
+<span class="">	aput-object v7, v6, v1</span>
+<span class="">	const-class v7, Landroid/os/IBinder;</span>
+<span class="">	aput-object v7, v6, v4</span>
+<span class="">	invoke-virtual {v0, v5, v6}, Ljava/lang/Class;->getMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Landroidx/core/app/BundleCompat$BundleCompatBaseImpl;->sPutIBinderMethod:Ljava/lang/reflect/Method;</span>
+<span class="">	invoke-virtual {v0, v4}, Ljava/lang/reflect/Method;->setAccessible(Z)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/NoSuchMethodException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catch_0</span>
+<span class="">	move-exception v0</span>
+<span class="">	const-string v5, "Failed to retrieve putIBinder method"</span>
+<span class="">	invoke-static {v2, v5, v0}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I</span>
+<span class="">	:goto_0</span>
+<span class="">	sput-boolean v4, Landroidx/core/app/BundleCompat$BundleCompatBaseImpl;->sPutIBinderMethodFetched:Z</span>
+<span class="">	:cond_0</span>
+<span class="">	sget-object v0, Landroidx/core/app/BundleCompat$BundleCompatBaseImpl;->sPutIBinderMethod:Ljava/lang/reflect/Method;</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	:try_start_1</span>
+<span class="">	new-array v3, v3, [Ljava/lang/Object;</span>
+<span class="">	aput-object p1, v3, v1</span>
+<span class="">	aput-object p2, v3, v4</span>
+<span class="">	invoke-virtual {v0, p0, v3}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catch Ljava/lang/reflect/InvocationTargetException; {:try_start_1 .. :try_end_1} :catch_3</span>
+<span class="">	.catch Ljava/lang/IllegalAccessException; {:try_start_1 .. :try_end_1} :catch_2</span>
+<span class="">	.catch Ljava/lang/IllegalArgumentException; {:try_start_1 .. :try_end_1} :catch_1</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:catch_1</span>
+<span class="">	move-exception p0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:catch_2</span>
+<span class="">	move-exception p0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:catch_3</span>
+<span class="">	move-exception p0</span>
+<span class="">	:goto_1</span>
+<span class="">	const-string p1, "Failed to invoke putIBinder via reflection"</span>
+<span class="">	invoke-static {v2, p1, p0}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	sput-object p0, Landroidx/core/app/BundleCompat$BundleCompatBaseImpl;->sPutIBinderMethod:Ljava/lang/reflect/Method;</span>
+<span class="">	:goto_2</span>
+<span class="">	:cond_1</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../index.html">lu.uni.trux.workmanager_enqueueuniquework</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.work</a></li>
+        <li><i class="ico ico-class"></i> WorkManager.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public abstract Landroidx/work/WorkManager;
+.super Ljava/lang/Object;
+.source "WorkManager.java"
+
+
+
+
+<span class="cov">.method protected constructor &lt;init&gt;()V</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method public static getInstance()Landroidx/work/WorkManager;
+<span class="">	.locals 2</span>
+<span class="">	.annotation runtime Ljava/lang/Deprecated;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {}, Landroidx/work/impl/WorkManagerImpl;->getInstance()Landroidx/work/impl/WorkManagerImpl;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	new-instance v0, Ljava/lang/IllegalStateException;</span>
+<span class="">	:cond_0</span>
+<span class="">	const-string v1, "WorkManager is not initialized properly.  The most likely cause is that you disabled WorkManagerInitializer in your manifest but forgot to call WorkManager#initialize in your Application#onCreate or a ContentProvider."</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw v0</span>
+.end method
+
+<span class="cov">.method public static getInstance(Landroid/content/Context;)Landroidx/work/WorkManager;</span>
+<span class="">	.locals 0</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"context"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="exec">	invoke-static {p0}, Landroidx/work/impl/WorkManagerImpl;->getInstance(Landroid/content/Context;)Landroidx/work/impl/WorkManagerImpl;</span>
+<span class="cov">	move-result-object p0</span>
+<span class="exec">	return-object p0</span>
+.end method
+
+<span class="cov">.method public static initialize(Landroid/content/Context;Landroidx/work/Configuration;)V</span>
+<span class="">	.locals 0</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"context",</span>
+<span class="">	"configuration"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="cov">	invoke-static {p0, p1}, Landroidx/work/impl/WorkManagerImpl;->initialize(Landroid/content/Context;Landroidx/work/Configuration;)V</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method public final beginUniqueWork(Ljava/lang/String;Landroidx/work/ExistingWorkPolicy;Landroidx/work/OneTimeWorkRequest;)Landroidx/work/WorkContinuation;
+<span class="">	.locals 0</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"uniqueWorkName",</span>
+<span class="">	"existingWorkPolicy",</span>
+<span class="">	"work"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {p3}, Ljava/util/Collections;->singletonList(Ljava/lang/Object;)Ljava/util/List;</span>
+<span class="">	move-result-object p3</span>
+<span class="">	invoke-virtual {p0, p1, p2, p3}, Landroidx/work/WorkManager;->beginUniqueWork(Ljava/lang/String;Landroidx/work/ExistingWorkPolicy;Ljava/util/List;)Landroidx/work/WorkContinuation;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public abstract beginUniqueWork(Ljava/lang/String;Landroidx/work/ExistingWorkPolicy;Ljava/util/List;)Landroidx/work/WorkContinuation;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	"Landroidx/work/ExistingWorkPolicy;",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Landroidx/work/OneTimeWorkRequest;",</span>
+<span class="">	">;)",</span>
+<span class="">	"Landroidx/work/WorkContinuation;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"uniqueWorkName",</span>
+<span class="">	"existingWorkPolicy",</span>
+<span class="">	"work"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public final beginWith(Landroidx/work/OneTimeWorkRequest;)Landroidx/work/WorkContinuation;
+<span class="">	.locals 0</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"work"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {p1}, Ljava/util/Collections;->singletonList(Ljava/lang/Object;)Ljava/util/List;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p0, p1}, Landroidx/work/WorkManager;->beginWith(Ljava/util/List;)Landroidx/work/WorkContinuation;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public abstract beginWith(Ljava/util/List;)Landroidx/work/WorkContinuation;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Landroidx/work/OneTimeWorkRequest;",</span>
+<span class="">	">;)",</span>
+<span class="">	"Landroidx/work/WorkContinuation;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"work"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public abstract cancelAllWork()Landroidx/work/Operation;
+<span class="">	</span>
+
+.end method
+
+.method public abstract cancelAllWorkByTag(Ljava/lang/String;)Landroidx/work/Operation;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"tag"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public abstract cancelUniqueWork(Ljava/lang/String;)Landroidx/work/Operation;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"uniqueWorkName"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public abstract cancelWorkById(Ljava/util/UUID;)Landroidx/work/Operation;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"id"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public abstract createCancelPendingIntent(Ljava/util/UUID;)Landroid/app/PendingIntent;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"id"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public final enqueue(Landroidx/work/WorkRequest;)Landroidx/work/Operation;
+<span class="">	.locals 0</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"workRequest"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {p1}, Ljava/util/Collections;->singletonList(Ljava/lang/Object;)Ljava/util/List;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p0, p1}, Landroidx/work/WorkManager;->enqueue(Ljava/util/List;)Landroidx/work/Operation;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public abstract enqueue(Ljava/util/List;)Landroidx/work/Operation;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"+",</span>
+<span class="">	"Landroidx/work/WorkRequest;",</span>
+<span class="">	">;)",</span>
+<span class="">	"Landroidx/work/Operation;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"requests"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public abstract enqueueUniquePeriodicWork(Ljava/lang/String;Landroidx/work/ExistingPeriodicWorkPolicy;Landroidx/work/PeriodicWorkRequest;)Landroidx/work/Operation;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"uniqueWorkName",</span>
+<span class="">	"existingPeriodicWorkPolicy",</span>
+<span class="">	"periodicWork"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+<span class="cov">.method public enqueueUniqueWork(Ljava/lang/String;Landroidx/work/ExistingWorkPolicy;Landroidx/work/OneTimeWorkRequest;)Landroidx/work/Operation;</span>
+<span class="">	.locals 0</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"uniqueWorkName",</span>
+<span class="">	"existingWorkPolicy",</span>
+<span class="">	"work"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="exec">	invoke-static {p3}, Ljava/util/Collections;->singletonList(Ljava/lang/Object;)Ljava/util/List;</span>
+<span class="cov">	move-result-object p3</span>
+<span class="exec">	invoke-virtual {p0, p1, p2, p3}, Landroidx/work/WorkManager;->enqueueUniqueWork(Ljava/lang/String;Landroidx/work/ExistingWorkPolicy;Ljava/util/List;)Landroidx/work/Operation;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="exec">	return-object p1</span>
+.end method
+
+.method public abstract enqueueUniqueWork(Ljava/lang/String;Landroidx/work/ExistingWorkPolicy;Ljava/util/List;)Landroidx/work/Operation;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	"Landroidx/work/ExistingWorkPolicy;",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Landroidx/work/OneTimeWorkRequest;",</span>
+<span class="">	">;)",</span>
+<span class="">	"Landroidx/work/Operation;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"uniqueWorkName",</span>
+<span class="">	"existingWorkPolicy",</span>
+<span class="">	"work"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public abstract getLastCancelAllTimeMillis()Lcom/google/common/util/concurrent/ListenableFuture;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"()",</span>
+<span class="">	"Lcom/google/common/util/concurrent/ListenableFuture<",</span>
+<span class="">	"Ljava/lang/Long;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public abstract getLastCancelAllTimeMillisLiveData()Landroidx/lifecycle/LiveData;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"()",</span>
+<span class="">	"Landroidx/lifecycle/LiveData<",</span>
+<span class="">	"Ljava/lang/Long;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public abstract getWorkInfoById(Ljava/util/UUID;)Lcom/google/common/util/concurrent/ListenableFuture;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/UUID;",</span>
+<span class="">	")",</span>
+<span class="">	"Lcom/google/common/util/concurrent/ListenableFuture<",</span>
+<span class="">	"Landroidx/work/WorkInfo;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"id"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public abstract getWorkInfoByIdLiveData(Ljava/util/UUID;)Landroidx/lifecycle/LiveData;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/UUID;",</span>
+<span class="">	")",</span>
+<span class="">	"Landroidx/lifecycle/LiveData<",</span>
+<span class="">	"Landroidx/work/WorkInfo;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"id"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public abstract getWorkInfos(Landroidx/work/WorkQuery;)Lcom/google/common/util/concurrent/ListenableFuture;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Landroidx/work/WorkQuery;",</span>
+<span class="">	")",</span>
+<span class="">	"Lcom/google/common/util/concurrent/ListenableFuture<",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Landroidx/work/WorkInfo;",</span>
+<span class="">	">;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"workQuery"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public abstract getWorkInfosByTag(Ljava/lang/String;)Lcom/google/common/util/concurrent/ListenableFuture;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	")",</span>
+<span class="">	"Lcom/google/common/util/concurrent/ListenableFuture<",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Landroidx/work/WorkInfo;",</span>
+<span class="">	">;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"tag"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public abstract getWorkInfosByTagLiveData(Ljava/lang/String;)Landroidx/lifecycle/LiveData;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	")",</span>
+<span class="">	"Landroidx/lifecycle/LiveData<",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Landroidx/work/WorkInfo;",</span>
+<span class="">	">;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"tag"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public abstract getWorkInfosForUniqueWork(Ljava/lang/String;)Lcom/google/common/util/concurrent/ListenableFuture;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	")",</span>
+<span class="">	"Lcom/google/common/util/concurrent/ListenableFuture<",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Landroidx/work/WorkInfo;",</span>
+<span class="">	">;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"uniqueWorkName"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public abstract getWorkInfosForUniqueWorkLiveData(Ljava/lang/String;)Landroidx/lifecycle/LiveData;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	")",</span>
+<span class="">	"Landroidx/lifecycle/LiveData<",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Landroidx/work/WorkInfo;",</span>
+<span class="">	">;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"uniqueWorkName"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public abstract getWorkInfosLiveData(Landroidx/work/WorkQuery;)Landroidx/lifecycle/LiveData;
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Landroidx/work/WorkQuery;",</span>
+<span class="">	")",</span>
+<span class="">	"Landroidx/lifecycle/LiveData<",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Landroidx/work/WorkInfo;",</span>
+<span class="">	">;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"workQuery"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public abstract pruneWork()Landroidx/work/Operation;
+<span class="">	</span>
+
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../.resources/report.js"></script>
+</body>
+</html>

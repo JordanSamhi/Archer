@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../index.html">lu.uni.trux.jobscheduler_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">org.junit.internal.runners</a></li>
+        <li><i class="ico ico-class"></i> MethodValidator.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Lorg/junit/internal/runners/MethodValidator;
+.super Ljava/lang/Object;
+.source "MethodValidator.java"
+
+.annotation runtime Ljava/lang/Deprecated;
+.end annotation
+
+.field private final errors:Ljava/util/List;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/List<",
+"Ljava/lang/Throwable;",
+">;"
+}
+.end annotation
+.end field
+.field private testClass:Lorg/junit/internal/runners/TestClass;
+
+
+.method public constructor <init>(Lorg/junit/internal/runners/TestClass;)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	iput-object v0, p0, Lorg/junit/internal/runners/MethodValidator;->errors:Ljava/util/List;</span>
+<span class="">	iput-object p1, p0, Lorg/junit/internal/runners/MethodValidator;->testClass:Lorg/junit/internal/runners/TestClass;</span>
+.end method
+
+.method private validateTestMethods(Ljava/lang/Class;Z)V
+<span class="">	.locals 7</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"+",</span>
+<span class="">	"Ljava/lang/annotation/Annotation;",</span>
+<span class="">	">;Z)V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/internal/runners/MethodValidator;->testClass:Lorg/junit/internal/runners/TestClass;</span>
+<span class="">	invoke-virtual {v0, p1}, Lorg/junit/internal/runners/TestClass;->getAnnotatedMethods(Ljava/lang/Class;)Ljava/util/List;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-interface {p1}, Ljava/util/List;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_6</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/lang/reflect/Method;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/reflect/Method;->getModifiers()I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {v1}, Ljava/lang/reflect/Modifier;->isStatic(I)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	const-string v2, "Method "</span>
+<span class="">	if-eq v1, p2, :cond_2</span>
+<span class="">	if-eqz p2, :cond_1</span>
+<span class="">	const-string v1, "should"</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	const-string v1, "should not"</span>
+<span class="">	:goto_1</span>
+<span class="">	iget-object v3, p0, Lorg/junit/internal/runners/MethodValidator;->errors:Ljava/util/List;</span>
+<span class="">	new-instance v4, Ljava/lang/Exception;</span>
+<span class="">	new-instance v5, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {v5, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/reflect/Method;->getName()Ljava/lang/String;</span>
+<span class="">	move-result-object v6</span>
+<span class="">	invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	const-string v6, "() "</span>
+<span class="">	invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {v5, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	const-string v5, " be static"</span>
+<span class="">	invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-direct {v4, v1}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {v3, v4}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/reflect/Method;->getDeclaringClass()Ljava/lang/Class;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/Class;->getModifiers()I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {v1}, Ljava/lang/reflect/Modifier;->isPublic(I)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	const-string v3, " should be public"</span>
+<span class="">	if-nez v1, :cond_3</span>
+<span class="">	iget-object v1, p0, Lorg/junit/internal/runners/MethodValidator;->errors:Ljava/util/List;</span>
+<span class="">	new-instance v4, Ljava/lang/Exception;</span>
+<span class="">	new-instance v5, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v6, "Class "</span>
+<span class="">	invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/reflect/Method;->getDeclaringClass()Ljava/lang/Class;</span>
+<span class="">	move-result-object v6</span>
+<span class="">	invoke-virtual {v6}, Ljava/lang/Class;->getName()Ljava/lang/String;</span>
+<span class="">	move-result-object v6</span>
+<span class="">	invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {v5, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-direct {v4, v5}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {v1, v4}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:cond_3</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/reflect/Method;->getModifiers()I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {v1}, Ljava/lang/reflect/Modifier;->isPublic(I)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-nez v1, :cond_4</span>
+<span class="">	iget-object v1, p0, Lorg/junit/internal/runners/MethodValidator;->errors:Ljava/util/List;</span>
+<span class="">	new-instance v4, Ljava/lang/Exception;</span>
+<span class="">	new-instance v5, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {v5, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/reflect/Method;->getName()Ljava/lang/String;</span>
+<span class="">	move-result-object v6</span>
+<span class="">	invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {v5, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-direct {v4, v3}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {v1, v4}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:cond_4</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/reflect/Method;->getReturnType()Ljava/lang/Class;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	sget-object v3, Ljava/lang/Void;->TYPE:Ljava/lang/Class;</span>
+<span class="">	if-eq v1, v3, :cond_5</span>
+<span class="">	iget-object v1, p0, Lorg/junit/internal/runners/MethodValidator;->errors:Ljava/util/List;</span>
+<span class="">	new-instance v3, Ljava/lang/Exception;</span>
+<span class="">	new-instance v4, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {v4, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/reflect/Method;->getName()Ljava/lang/String;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	const-string v5, " should be void"</span>
+<span class="">	invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-direct {v3, v4}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {v1, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:cond_5</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/reflect/Method;->getParameterTypes()[Ljava/lang/Class;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	array-length v1, v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	iget-object v1, p0, Lorg/junit/internal/runners/MethodValidator;->errors:Ljava/util/List;</span>
+<span class="">	new-instance v3, Ljava/lang/Exception;</span>
+<span class="">	new-instance v4, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {v4, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/reflect/Method;->getName()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v2, " should have no parameters"</span>
+<span class="">	invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-direct {v3, v0}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {v1, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	:cond_6</span>
+.end method
+
+.method public assertValid()V
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Lorg/junit/internal/runners/InitializationError;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/internal/runners/MethodValidator;->errors:Ljava/util/List;</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->isEmpty()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	new-instance v0, Lorg/junit/internal/runners/InitializationError;</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v1, p0, Lorg/junit/internal/runners/MethodValidator;->errors:Ljava/util/List;</span>
+<span class="">	invoke-direct {v0, v1}, Lorg/junit/internal/runners/InitializationError;-><init>(Ljava/util/List;)V</span>
+<span class="">	throw v0</span>
+.end method
+
+.method public validateInstanceMethods()V
+<span class="">	.locals 3</span>
+
+<span class="">	const-class v0, Lorg/junit/After;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-direct {p0, v0, v1}, Lorg/junit/internal/runners/MethodValidator;->validateTestMethods(Ljava/lang/Class;Z)V</span>
+<span class="">	const-class v0, Lorg/junit/Before;</span>
+<span class="">	invoke-direct {p0, v0, v1}, Lorg/junit/internal/runners/MethodValidator;->validateTestMethods(Ljava/lang/Class;Z)V</span>
+<span class="">	const-class v0, Lorg/junit/Test;</span>
+<span class="">	invoke-direct {p0, v0, v1}, Lorg/junit/internal/runners/MethodValidator;->validateTestMethods(Ljava/lang/Class;Z)V</span>
+<span class="">	iget-object v0, p0, Lorg/junit/internal/runners/MethodValidator;->testClass:Lorg/junit/internal/runners/TestClass;</span>
+<span class="">	const-class v1, Lorg/junit/Test;</span>
+<span class="">	invoke-virtual {v0, v1}, Lorg/junit/internal/runners/TestClass;->getAnnotatedMethods(Ljava/lang/Class;)Ljava/util/List;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->size()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lorg/junit/internal/runners/MethodValidator;->errors:Ljava/util/List;</span>
+<span class="">	new-instance v1, Ljava/lang/Exception;</span>
+<span class="">	const-string v2, "No runnable methods"</span>
+<span class="">	invoke-direct {v1, v2}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {v0, v1}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public validateMethodsForDefaultRunner()Ljava/util/List;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"()",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Ljava/lang/Throwable;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Lorg/junit/internal/runners/MethodValidator;->validateNoArgConstructor()V</span>
+<span class="">	invoke-virtual {p0}, Lorg/junit/internal/runners/MethodValidator;->validateStaticMethods()V</span>
+<span class="">	invoke-virtual {p0}, Lorg/junit/internal/runners/MethodValidator;->validateInstanceMethods()V</span>
+<span class="">	iget-object v0, p0, Lorg/junit/internal/runners/MethodValidator;->errors:Ljava/util/List;</span>
+.end method
+
+.method public validateNoArgConstructor()V
+<span class="">	.locals 4</span>
+
+<span class="">	:try_start_0</span>
+<span class="">	iget-object v0, p0, Lorg/junit/internal/runners/MethodValidator;->testClass:Lorg/junit/internal/runners/TestClass;</span>
+<span class="">	invoke-virtual {v0}, Lorg/junit/internal/runners/TestClass;->getConstructor()Ljava/lang/reflect/Constructor;</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catch_0</span>
+<span class="">	move-exception v0</span>
+<span class="">	iget-object v1, p0, Lorg/junit/internal/runners/MethodValidator;->errors:Ljava/util/List;</span>
+<span class="">	new-instance v2, Ljava/lang/Exception;</span>
+<span class="">	const-string v3, "Test class should have public zero-argument constructor"</span>
+<span class="">	invoke-direct {v2, v3, v0}, Ljava/lang/Exception;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V</span>
+<span class="">	invoke-interface {v1, v2}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public validateStaticMethods()V
+<span class="">	.locals 2</span>
+
+<span class="">	const-class v0, Lorg/junit/BeforeClass;</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	invoke-direct {p0, v0, v1}, Lorg/junit/internal/runners/MethodValidator;->validateTestMethods(Ljava/lang/Class;Z)V</span>
+<span class="">	const-class v0, Lorg/junit/AfterClass;</span>
+<span class="">	invoke-direct {p0, v0, v1}, Lorg/junit/internal/runners/MethodValidator;->validateTestMethods(Ljava/lang/Class;Z)V</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../.resources/report.js"></script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">lu.uni.trux.scheduledthreadpoolexecutor_scheduledatfixedrate</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.emoji2.text</a></li>
+        <li><i class="ico ico-class"></i> DefaultEmojiCompatConfig$DefaultEmojiCompatConfigFactory.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigFactory;
+.super Ljava/lang/Object;
+.source "DefaultEmojiCompatConfig.java"
+
+.annotation system Ldalvik/annotation/EnclosingClass;
+value = Landroidx/emoji2/text/DefaultEmojiCompatConfig;
+.end annotation
+.annotation system Ldalvik/annotation/InnerClass;
+accessFlags = 0x9
+name = "DefaultEmojiCompatConfigFactory"
+.end annotation
+
+.field private static final DEFAULT_EMOJI_QUERY:Ljava/lang/String; = "emojicompat-emoji-font"
+.field private static final INTENT_LOAD_EMOJI_FONT:Ljava/lang/String; = "androidx.content.action.LOAD_EMOJI_FONT"
+.field private static final TAG:Ljava/lang/String; = "emoji2.text.DefaultEmojiConfig"
+.field private final mHelper:Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper;
+
+
+<span class="cov">.method public constructor &lt;init&gt;(Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper;)V</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="cov">	:cond_0</span>
+<span class="exec">	invoke-static {}, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigFactory;->getHelperForApi()Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	:goto_0</span>
+<span class="cov">	iput-object p1, p0, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigFactory;->mHelper:Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper;</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method private configOrNull(Landroid/content/Context;Landroidx/core/provider/FontRequest;)Landroidx/emoji2/text/EmojiCompat$Config;</span>
+<span class="">	.locals 1</span>
+
+<span class="cov">	if-nez p2, :cond_0</span>
+<span class="cov">	const/4 p1, 0x0</span>
+<span class="exec">	return-object p1</span>
+<span class="">	:cond_0</span>
+<span class="">	new-instance v0, Landroidx/emoji2/text/FontRequestEmojiCompatConfig;</span>
+<span class="">	invoke-direct {v0, p1, p2}, Landroidx/emoji2/text/FontRequestEmojiCompatConfig;-><init>(Landroid/content/Context;Landroidx/core/provider/FontRequest;)V</span>
+.end method
+
+.method private convertToByteArray([Landroid/content/pm/Signature;)Ljava/util/List;
+<span class="">	.locals 4</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"([",</span>
+<span class="">	"Landroid/content/pm/Signature;",</span>
+<span class="">	")",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"[B>;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	array-length v1, p1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v2, v1, :cond_0</span>
+<span class="">	aget-object v3, p1, v2</span>
+<span class="">	invoke-virtual {v3}, Landroid/content/pm/Signature;->toByteArray()[B</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-interface {v0, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-static {v0}, Ljava/util/Collections;->singletonList(Ljava/lang/Object;)Ljava/util/List;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method private generateFontRequestFrom(Landroid/content/pm/ProviderInfo;Landroid/content/pm/PackageManager;)Landroidx/core/provider/FontRequest;
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Landroid/content/pm/PackageManager$NameNotFoundException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p1, Landroid/content/pm/ProviderInfo;->authority:Ljava/lang/String;</span>
+<span class="">	iget-object p1, p1, Landroid/content/pm/ProviderInfo;->packageName:Ljava/lang/String;</span>
+<span class="">	iget-object v1, p0, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigFactory;->mHelper:Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper;</span>
+<span class="">	invoke-virtual {v1, p2, p1}, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper;->getSigningSignatures(Landroid/content/pm/PackageManager;Ljava/lang/String;)[Landroid/content/pm/Signature;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-direct {p0, p2}, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigFactory;->convertToByteArray([Landroid/content/pm/Signature;)Ljava/util/List;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	new-instance v1, Landroidx/core/provider/FontRequest;</span>
+<span class="">	const-string v2, "emojicompat-emoji-font"</span>
+<span class="">	invoke-direct {v1, v0, p1, v2, p2}, Landroidx/core/provider/FontRequest;-><init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;)V</span>
+.end method
+
+<span class="cov">.method private static getHelperForApi()Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper;</span>
+<span class="">	.locals 2</span>
+
+<span class="cov">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="cov">	const/16 v1, 0x1c</span>
+<span class="cov">	if-lt v0, v1, :cond_0</span>
+<span class="cov">	new-instance v0, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper_API28;</span>
+<span class="cov">	invoke-direct {v0}, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper_API28;-><init>()V</span>
+<span class="exec">	return-object v0</span>
+<span class="">	:cond_0</span>
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v1, 0x13</span>
+<span class="">	if-lt v0, v1, :cond_1</span>
+<span class="">	new-instance v0, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper_API19;</span>
+<span class="">	invoke-direct {v0}, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper_API19;-><init>()V</span>
+<span class="">	new-instance v0, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper;</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-direct {v0}, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper;-><init>()V</span>
+.end method
+
+.method private hasFlagSystem(Landroid/content/pm/ProviderInfo;)Z
+<span class="">	.locals 2</span>
+
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	iget-object v1, p1, Landroid/content/pm/ProviderInfo;->applicationInfo:Landroid/content/pm/ApplicationInfo;</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	iget-object p1, p1, Landroid/content/pm/ProviderInfo;->applicationInfo:Landroid/content/pm/ApplicationInfo;</span>
+<span class="">	iget p1, p1, Landroid/content/pm/ApplicationInfo;->flags:I</span>
+<span class="">	and-int/2addr p1, v0</span>
+<span class="">	if-ne p1, v0, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+<span class="cov">.method private queryDefaultInstalledContentProvider(Landroid/content/pm/PackageManager;)Landroid/content/pm/ProviderInfo;</span>
+<span class="">	.locals 3</span>
+
+<span class="cov">	iget-object v0, p0, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigFactory;->mHelper:Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper;</span>
+<span class="cov">	new-instance v1, Landroid/content/Intent;</span>
+<span class="cov">	const-string v2, "androidx.content.action.LOAD_EMOJI_FONT"</span>
+<span class="cov">	invoke-direct {v1, v2}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V</span>
+<span class="cov">	const/4 v2, 0x0</span>
+<span class="exec">	invoke-virtual {v0, p1, v1, v2}, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper;->queryIntentContentProviders(Landroid/content/pm/PackageManager;Landroid/content/Intent;I)Ljava/util/List;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="exec">	invoke-interface {p1}, Ljava/util/List;->iterator()Ljava/util/Iterator;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	:cond_0</span>
+<span class="exec">	invoke-interface {p1}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="cov">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroid/content/pm/ResolveInfo;</span>
+<span class="">	iget-object v1, p0, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigFactory;->mHelper:Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper;</span>
+<span class="">	invoke-virtual {v1, v0}, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigHelper;->getProviderInfo(Landroid/content/pm/ResolveInfo;)Landroid/content/pm/ProviderInfo;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-direct {p0, v0}, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigFactory;->hasFlagSystem(Landroid/content/pm/ProviderInfo;)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="cov">	const/4 p1, 0x0</span>
+<span class="cov">	:cond_1</span>
+<span class="exec">	return-object p1</span>
+.end method
+
+<span class="cov">.method public create(Landroid/content/Context;)Landroidx/emoji2/text/EmojiCompat$Config;</span>
+<span class="">	.locals 1</span>
+
+<span class="exec">	invoke-virtual {p0, p1}, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigFactory;->queryForDefaultFontRequest(Landroid/content/Context;)Landroidx/core/provider/FontRequest;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="exec">	invoke-direct {p0, p1, v0}, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigFactory;->configOrNull(Landroid/content/Context;Landroidx/core/provider/FontRequest;)Landroidx/emoji2/text/EmojiCompat$Config;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="exec">	return-object p1</span>
+.end method
+
+<span class="cov">.method  queryForDefaultFontRequest(Landroid/content/Context;)Landroidx/core/provider/FontRequest;</span>
+<span class="">	.locals 2</span>
+
+<span class="exec">	invoke-virtual {p1}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	const-string v0, "Package manager required to locate emoji font provider"</span>
+<span class="cov">	invoke-static {p1, v0}, Landroidx/core/util/Preconditions;->checkNotNull(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="exec">	invoke-direct {p0, p1}, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigFactory;->queryDefaultInstalledContentProvider(Landroid/content/pm/PackageManager;)Landroid/content/pm/ProviderInfo;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	const/4 v1, 0x0</span>
+<span class="cov">	if-nez v0, :cond_0</span>
+<span class="exec">	return-object v1</span>
+<span class="">	:cond_0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-direct {p0, v0, p1}, Landroidx/emoji2/text/DefaultEmojiCompatConfig$DefaultEmojiCompatConfigFactory;->generateFontRequestFrom(Landroid/content/pm/ProviderInfo;Landroid/content/pm/PackageManager;)Landroidx/core/provider/FontRequest;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Landroid/content/pm/PackageManager$NameNotFoundException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catch_0</span>
+<span class="">	const-string v0, "emoji2.text.DefaultEmojiConfig"</span>
+<span class="">	invoke-static {v0, p1}, Landroid/util/Log;->wtf(Ljava/lang/String;Ljava/lang/Throwable;)I</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

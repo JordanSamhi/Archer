@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../index.html">lu.uni.trux.poolexecutor_schedulewithfixeddelay_enqueue</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.room</a></li>
+        <li><i class="ico ico-class"></i> EntityInsertionAdapter.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public abstract Landroidx/room/EntityInsertionAdapter;
+.super Landroidx/room/SharedSQLiteStatement;
+.source "EntityInsertionAdapter.java"
+
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"<T:",
+"Ljava/lang/Object;",
+">",
+"Landroidx/room/SharedSQLiteStatement;"
+}
+.end annotation
+
+
+
+<span class="cov">.method public constructor &lt;init&gt;(Landroidx/room/RoomDatabase;)V</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	invoke-direct {p0, p1}, Landroidx/room/SharedSQLiteStatement;-><init>(Landroidx/room/RoomDatabase;)V</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method protected abstract bind(Landroidx/sqlite/db/SupportSQLiteStatement;Ljava/lang/Object;)V
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Landroidx/sqlite/db/SupportSQLiteStatement;",</span>
+<span class="">	"TT;)V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public final insert(Ljava/lang/Iterable;)V
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/Iterable<",</span>
+<span class="">	"+TT;>;)V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/room/EntityInsertionAdapter;->acquire()Landroidx/sqlite/db/SupportSQLiteStatement;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-interface {p1}, Ljava/lang/Iterable;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {p0, v0, v1}, Landroidx/room/EntityInsertionAdapter;->bind(Landroidx/sqlite/db/SupportSQLiteStatement;Ljava/lang/Object;)V</span>
+<span class="">	invoke-interface {v0}, Landroidx/sqlite/db/SupportSQLiteStatement;->executeInsert()J</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+<span class="cov">.method public final insert(Ljava/lang/Object;)V</span>
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(TT;)V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="exec">	invoke-virtual {p0}, Landroidx/room/EntityInsertionAdapter;->acquire()Landroidx/sqlite/db/SupportSQLiteStatement;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	:try_start_0</span>
+<span class="cov">	invoke-virtual {p0, v0, p1}, Landroidx/room/EntityInsertionAdapter;->bind(Landroidx/sqlite/db/SupportSQLiteStatement;Ljava/lang/Object;)V</span>
+<span class="cov">	invoke-interface {v0}, Landroidx/sqlite/db/SupportSQLiteStatement;->executeInsert()J</span>
+<span class="cov">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="cov">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="exec">	return-void</span>
+<span class="">	:catchall_0</span>
+<span class="">	move-exception p1</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public final insert([Ljava/lang/Object;)V
+<span class="">	.locals 4</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"([TT;)V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/room/EntityInsertionAdapter;->acquire()Landroidx/sqlite/db/SupportSQLiteStatement;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:try_start_0</span>
+<span class="">	array-length v1, p1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v2, v1, :cond_0</span>
+<span class="">	aget-object v3, p1, v2</span>
+<span class="">	invoke-virtual {p0, v0, v3}, Landroidx/room/EntityInsertionAdapter;->bind(Landroidx/sqlite/db/SupportSQLiteStatement;Ljava/lang/Object;)V</span>
+<span class="">	invoke-interface {v0}, Landroidx/sqlite/db/SupportSQLiteStatement;->executeInsert()J</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public final insertAndReturnId(Ljava/lang/Object;)J
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(TT;)J"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/room/EntityInsertionAdapter;->acquire()Landroidx/sqlite/db/SupportSQLiteStatement;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p0, v0, p1}, Landroidx/room/EntityInsertionAdapter;->bind(Landroidx/sqlite/db/SupportSQLiteStatement;Ljava/lang/Object;)V</span>
+<span class="">	invoke-interface {v0}, Landroidx/sqlite/db/SupportSQLiteStatement;->executeInsert()J</span>
+<span class="">	move-result-wide v1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public final insertAndReturnIdsArray(Ljava/util/Collection;)[J
+<span class="">	.locals 5</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/Collection<",</span>
+<span class="">	"+TT;>;)[J"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/room/EntityInsertionAdapter;->acquire()Landroidx/sqlite/db/SupportSQLiteStatement;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Collection;->size()I</span>
+<span class="">	move-result v1</span>
+<span class="">	new-array v1, v1, [J</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Collection;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {p0, v0, v3}, Landroidx/room/EntityInsertionAdapter;->bind(Landroidx/sqlite/db/SupportSQLiteStatement;Ljava/lang/Object;)V</span>
+<span class="">	invoke-interface {v0}, Landroidx/sqlite/db/SupportSQLiteStatement;->executeInsert()J</span>
+<span class="">	move-result-wide v3</span>
+<span class="">	aput-wide v3, v1, v2</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public final insertAndReturnIdsArray([Ljava/lang/Object;)[J
+<span class="">	.locals 7</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"([TT;)[J"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/room/EntityInsertionAdapter;->acquire()Landroidx/sqlite/db/SupportSQLiteStatement;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:try_start_0</span>
+<span class="">	array-length v1, p1</span>
+<span class="">	new-array v1, v1, [J</span>
+<span class="">	array-length v2, p1</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	move v4, v3</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v3, v2, :cond_0</span>
+<span class="">	aget-object v5, p1, v3</span>
+<span class="">	invoke-virtual {p0, v0, v5}, Landroidx/room/EntityInsertionAdapter;->bind(Landroidx/sqlite/db/SupportSQLiteStatement;Ljava/lang/Object;)V</span>
+<span class="">	invoke-interface {v0}, Landroidx/sqlite/db/SupportSQLiteStatement;->executeInsert()J</span>
+<span class="">	move-result-wide v5</span>
+<span class="">	aput-wide v5, v1, v4</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	add-int/lit8 v4, v4, 0x1</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public final insertAndReturnIdsArrayBox(Ljava/util/Collection;)[Ljava/lang/Long;
+<span class="">	.locals 5</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/Collection<",</span>
+<span class="">	"+TT;>;)[",</span>
+<span class="">	"Ljava/lang/Long;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/room/EntityInsertionAdapter;->acquire()Landroidx/sqlite/db/SupportSQLiteStatement;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Collection;->size()I</span>
+<span class="">	move-result v1</span>
+<span class="">	new-array v1, v1, [Ljava/lang/Long;</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Collection;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {p0, v0, v3}, Landroidx/room/EntityInsertionAdapter;->bind(Landroidx/sqlite/db/SupportSQLiteStatement;Ljava/lang/Object;)V</span>
+<span class="">	invoke-interface {v0}, Landroidx/sqlite/db/SupportSQLiteStatement;->executeInsert()J</span>
+<span class="">	move-result-wide v3</span>
+<span class="">	invoke-static {v3, v4}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	aput-object v3, v1, v2</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public final insertAndReturnIdsArrayBox([Ljava/lang/Object;)[Ljava/lang/Long;
+<span class="">	.locals 7</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"([TT;)[",</span>
+<span class="">	"Ljava/lang/Long;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/room/EntityInsertionAdapter;->acquire()Landroidx/sqlite/db/SupportSQLiteStatement;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:try_start_0</span>
+<span class="">	array-length v1, p1</span>
+<span class="">	new-array v1, v1, [Ljava/lang/Long;</span>
+<span class="">	array-length v2, p1</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	move v4, v3</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v3, v2, :cond_0</span>
+<span class="">	aget-object v5, p1, v3</span>
+<span class="">	invoke-virtual {p0, v0, v5}, Landroidx/room/EntityInsertionAdapter;->bind(Landroidx/sqlite/db/SupportSQLiteStatement;Ljava/lang/Object;)V</span>
+<span class="">	invoke-interface {v0}, Landroidx/sqlite/db/SupportSQLiteStatement;->executeInsert()J</span>
+<span class="">	move-result-wide v5</span>
+<span class="">	invoke-static {v5, v6}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	aput-object v5, v1, v4</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	add-int/lit8 v4, v4, 0x1</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public final insertAndReturnIdsList(Ljava/util/Collection;)Ljava/util/List;
+<span class="">	.locals 5</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/Collection<",</span>
+<span class="">	"+TT;>;)",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Ljava/lang/Long;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/room/EntityInsertionAdapter;->acquire()Landroidx/sqlite/db/SupportSQLiteStatement;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:try_start_0</span>
+<span class="">	new-instance v1, Ljava/util/ArrayList;</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Collection;->size()I</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-direct {v1, v2}, Ljava/util/ArrayList;-><init>(I)V</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Collection;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {p0, v0, v3}, Landroidx/room/EntityInsertionAdapter;->bind(Landroidx/sqlite/db/SupportSQLiteStatement;Ljava/lang/Object;)V</span>
+<span class="">	invoke-interface {v0}, Landroidx/sqlite/db/SupportSQLiteStatement;->executeInsert()J</span>
+<span class="">	move-result-wide v3</span>
+<span class="">	invoke-static {v3, v4}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-interface {v1, v2, v3}, Ljava/util/List;->add(ILjava/lang/Object;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public final insertAndReturnIdsList([Ljava/lang/Object;)Ljava/util/List;
+<span class="">	.locals 7</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"([TT;)",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Ljava/lang/Long;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/room/EntityInsertionAdapter;->acquire()Landroidx/sqlite/db/SupportSQLiteStatement;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:try_start_0</span>
+<span class="">	new-instance v1, Ljava/util/ArrayList;</span>
+<span class="">	array-length v2, p1</span>
+<span class="">	invoke-direct {v1, v2}, Ljava/util/ArrayList;-><init>(I)V</span>
+<span class="">	array-length v2, p1</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	move v4, v3</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v3, v2, :cond_0</span>
+<span class="">	aget-object v5, p1, v3</span>
+<span class="">	invoke-virtual {p0, v0, v5}, Landroidx/room/EntityInsertionAdapter;->bind(Landroidx/sqlite/db/SupportSQLiteStatement;Ljava/lang/Object;)V</span>
+<span class="">	invoke-interface {v0}, Landroidx/sqlite/db/SupportSQLiteStatement;->executeInsert()J</span>
+<span class="">	move-result-wide v5</span>
+<span class="">	invoke-static {v5, v6}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-interface {v1, v4, v5}, Ljava/util/List;->add(ILjava/lang/Object;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	add-int/lit8 v4, v4, 0x1</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/room/EntityInsertionAdapter;->release(Landroidx/sqlite/db/SupportSQLiteStatement;)V</span>
+<span class="">	throw p1</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../.resources/report.js"></script>
+</body>
+</html>

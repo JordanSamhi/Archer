@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../index.html">lu.uni.trux.jobscheduler_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">org.junit.runners.model</a></li>
+        <li><i class="ico ico-class"></i> TestClass.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Lorg/junit/runners/model/TestClass;
+.super Ljava/lang/Object;
+.source "TestClass.java"
+.implements Lorg/junit/runners/model/Annotatable;
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Lorg/junit/runners/model/TestClass$MethodComparator;,
+Lorg/junit/runners/model/TestClass$FieldComparator;
+}
+.end annotation
+
+.field private static final FIELD_COMPARATOR:Lorg/junit/runners/model/TestClass$FieldComparator;
+.field private static final METHOD_COMPARATOR:Lorg/junit/runners/model/TestClass$MethodComparator;
+.field private final clazz:Ljava/lang/Class;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/lang/Class<",
+"*>;"
+}
+.end annotation
+.end field
+.field private final fieldsForAnnotations:Ljava/util/Map;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/Map<",
+"Ljava/lang/Class<",
+"+",
+"Ljava/lang/annotation/Annotation;",
+">;",
+"Ljava/util/List<",
+"Lorg/junit/runners/model/FrameworkField;",
+">;>;"
+}
+.end annotation
+.end field
+.field private final methodsForAnnotations:Ljava/util/Map;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/Map<",
+"Ljava/lang/Class<",
+"+",
+"Ljava/lang/annotation/Annotation;",
+">;",
+"Ljava/util/List<",
+"Lorg/junit/runners/model/FrameworkMethod;",
+">;>;"
+}
+.end annotation
+.end field
+
+
+.method static constructor <clinit>()V
+<span class="">	.locals 2</span>
+
+<span class="">	new-instance v0, Lorg/junit/runners/model/TestClass$FieldComparator;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-direct {v0, v1}, Lorg/junit/runners/model/TestClass$FieldComparator;-><init>(Lorg/junit/runners/model/TestClass$1;)V</span>
+<span class="">	sput-object v0, Lorg/junit/runners/model/TestClass;->FIELD_COMPARATOR:Lorg/junit/runners/model/TestClass$FieldComparator;</span>
+<span class="">	new-instance v0, Lorg/junit/runners/model/TestClass$MethodComparator;</span>
+<span class="">	invoke-direct {v0, v1}, Lorg/junit/runners/model/TestClass$MethodComparator;-><init>(Lorg/junit/runners/model/TestClass$1;)V</span>
+<span class="">	sput-object v0, Lorg/junit/runners/model/TestClass;->METHOD_COMPARATOR:Lorg/junit/runners/model/TestClass$MethodComparator;</span>
+.end method
+
+.method public constructor <init>(Ljava/lang/Class;)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"*>;)V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	iput-object p1, p0, Lorg/junit/runners/model/TestClass;->clazz:Ljava/lang/Class;</span>
+<span class="">	if-eqz p1, :cond_1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/Class;->getConstructors()[Ljava/lang/reflect/Constructor;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	array-length p1, p1</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	if-gt p1, v0, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	const-string v0, "Test class can only have one constructor"</span>
+<span class="">	invoke-direct {p1, v0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+<span class="">	new-instance p1, Ljava/util/LinkedHashMap;</span>
+<span class="">	invoke-direct {p1}, Ljava/util/LinkedHashMap;-><init>()V</span>
+<span class="">	new-instance v0, Ljava/util/LinkedHashMap;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/LinkedHashMap;-><init>()V</span>
+<span class="">	invoke-virtual {p0, p1, v0}, Lorg/junit/runners/model/TestClass;->scanAnnotatedMembers(Ljava/util/Map;Ljava/util/Map;)V</span>
+<span class="">	invoke-static {p1}, Lorg/junit/runners/model/TestClass;->makeDeeplyUnmodifiable(Ljava/util/Map;)Ljava/util/Map;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iput-object p1, p0, Lorg/junit/runners/model/TestClass;->methodsForAnnotations:Ljava/util/Map;</span>
+<span class="">	invoke-static {v0}, Lorg/junit/runners/model/TestClass;->makeDeeplyUnmodifiable(Ljava/util/Map;)Ljava/util/Map;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iput-object p1, p0, Lorg/junit/runners/model/TestClass;->fieldsForAnnotations:Ljava/util/Map;</span>
+.end method
+
+.method protected static addToAnnotationLists(Lorg/junit/runners/model/FrameworkMember;Ljava/util/Map;)V
+<span class="">	.locals 7</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"<T:",</span>
+<span class="">	"Lorg/junit/runners/model/FrameworkMember<",</span>
+<span class="">	"TT;>;>(TT;",</span>
+<span class="">	"Ljava/util/Map<",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"+",</span>
+<span class="">	"Ljava/lang/annotation/Annotation;",</span>
+<span class="">	">;",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"TT;>;>;)V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Lorg/junit/runners/model/FrameworkMember;->getAnnotations()[Ljava/lang/annotation/Annotation;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	array-length v1, v0</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	move v3, v2</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v3, v1, :cond_2</span>
+<span class="">	aget-object v4, v0, v3</span>
+<span class="">	invoke-interface {v4}, Ljava/lang/annotation/Annotation;->annotationType()Ljava/lang/Class;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	const/4 v5, 0x1</span>
+<span class="">	invoke-static {p1, v4, v5}, Lorg/junit/runners/model/TestClass;->getAnnotatedMembers(Ljava/util/Map;Ljava/lang/Class;Z)Ljava/util/List;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {p0, v5}, Lorg/junit/runners/model/FrameworkMember;->isShadowedBy(Ljava/util/List;)Z</span>
+<span class="">	move-result v6</span>
+<span class="">	if-eqz v6, :cond_0</span>
+<span class="">	invoke-static {v4}, Lorg/junit/runners/model/TestClass;->runsTopToBottom(Ljava/lang/Class;)Z</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result v4</span>
+<span class="">	if-eqz v4, :cond_1</span>
+<span class="">	invoke-interface {v5, v2, p0}, Ljava/util/List;->add(ILjava/lang/Object;)V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	invoke-interface {v5, p0}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:cond_1</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	:goto_1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method private collectValues(Ljava/util/Map;)Ljava/util/List;
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"<T:",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	">(",</span>
+<span class="">	"Ljava/util/Map<",</span>
+<span class="">	"*",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"TT;>;>;)",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"TT;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/util/LinkedHashSet;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/LinkedHashSet;-><init>()V</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Map;->values()Ljava/util/Collection;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Collection;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljava/util/List;</span>
+<span class="">	invoke-interface {v0, v1}, Ljava/util/Set;->addAll(Ljava/util/Collection;)Z</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	new-instance p1, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {p1, v0}, Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V</span>
+.end method
+
+.method private static getAnnotatedMembers(Ljava/util/Map;Ljava/lang/Class;Z)Ljava/util/List;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"<T:",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	">(",</span>
+<span class="">	"Ljava/util/Map<",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"+",</span>
+<span class="">	"Ljava/lang/annotation/Annotation;",</span>
+<span class="">	">;",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"TT;>;>;",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"+",</span>
+<span class="">	"Ljava/lang/annotation/Annotation;",</span>
+<span class="">	">;Z)",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"TT;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-interface {p0, p1}, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	if-eqz p2, :cond_0</span>
+<span class="">	new-instance p2, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {p2}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	invoke-interface {p0, p1, p2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {p0, p1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	check-cast p0, Ljava/util/List;</span>
+<span class="">	if-nez p0, :cond_1</span>
+<span class="">	invoke-static {}, Ljava/util/Collections;->emptyList()Ljava/util/List;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method private static getSortedDeclaredFields(Ljava/lang/Class;)[Ljava/lang/reflect/Field;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"*>;)[",</span>
+<span class="">	"Ljava/lang/reflect/Field;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Ljava/lang/Class;->getDeclaredFields()[Ljava/lang/reflect/Field;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	sget-object v0, Lorg/junit/runners/model/TestClass;->FIELD_COMPARATOR:Lorg/junit/runners/model/TestClass$FieldComparator;</span>
+<span class="">	invoke-static {p0, v0}, Ljava/util/Arrays;->sort([Ljava/lang/Object;Ljava/util/Comparator;)V</span>
+.end method
+
+.method private static getSuperClasses(Ljava/lang/Class;)Ljava/util/List;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"*>;)",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"*>;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	:goto_0</span>
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	invoke-virtual {v0, p0}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/Class;->getSuperclass()Ljava/lang/Class;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private static makeDeeplyUnmodifiable(Ljava/util/Map;)Ljava/util/Map;
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"<T:",</span>
+<span class="">	"Lorg/junit/runners/model/FrameworkMember<",</span>
+<span class="">	"TT;>;>(",</span>
+<span class="">	"Ljava/util/Map<",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"+",</span>
+<span class="">	"Ljava/lang/annotation/Annotation;",</span>
+<span class="">	">;",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"TT;>;>;)",</span>
+<span class="">	"Ljava/util/Map<",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"+",</span>
+<span class="">	"Ljava/lang/annotation/Annotation;",</span>
+<span class="">	">;",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"TT;>;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/util/LinkedHashMap;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/LinkedHashMap;-><init>()V</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Map;->entrySet()Ljava/util/Set;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Set;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	invoke-interface {p0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljava/util/Map$Entry;</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljava/util/List;</span>
+<span class="">	invoke-static {v1}, Ljava/util/Collections;->unmodifiableList(Ljava/util/List;)Ljava/util/List;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v2, v1}, Ljava/util/LinkedHashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-static {v0}, Ljava/util/Collections;->unmodifiableMap(Ljava/util/Map;)Ljava/util/Map;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method private static runsTopToBottom(Ljava/lang/Class;)Z
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"+",</span>
+<span class="">	"Ljava/lang/annotation/Annotation;",</span>
+<span class="">	">;)Z"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const-class v0, Lorg/junit/Before;</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	const-class v0, Lorg/junit/BeforeClass;</span>
+<span class="">	invoke-virtual {p0, v0}, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result p0</span>
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	:goto_1</span>
+.end method
+
+.method public equals(Ljava/lang/Object;)Z
+<span class="">	.locals 4</span>
+
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	if-ne p0, p1, :cond_0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	:cond_0</span>
+<span class="">	if-nez p1, :cond_1</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/Object;->getClass()Ljava/lang/Class;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	if-eq v2, v3, :cond_2</span>
+<span class="">	check-cast p1, Lorg/junit/runners/model/TestClass;</span>
+<span class="">	iget-object v2, p0, Lorg/junit/runners/model/TestClass;->clazz:Ljava/lang/Class;</span>
+<span class="">	iget-object p1, p1, Lorg/junit/runners/model/TestClass;->clazz:Ljava/lang/Class;</span>
+<span class="">	:cond_2</span>
+<span class="">	if-ne v2, p1, :cond_3</span>
+<span class="">	goto :goto_0</span>
+<span class="">	move v0, v1</span>
+<span class="">	:cond_3</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public getAnnotatedFieldValues(Ljava/lang/Object;Ljava/lang/Class;Ljava/lang/Class;)Ljava/util/List;
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"<T:",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	">(",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"+",</span>
+<span class="">	"Ljava/lang/annotation/Annotation;",</span>
+<span class="">	">;",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"TT;>;)",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"TT;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	invoke-virtual {p0, p2}, Lorg/junit/runners/model/TestClass;->getAnnotatedFields(Ljava/lang/Class;)Ljava/util/List;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-interface {p2}, Ljava/util/List;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {p2}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	invoke-interface {p2}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Lorg/junit/runners/model/FrameworkField;</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {v1, p1}, Lorg/junit/runners/model/FrameworkField;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {p3, v1}, Ljava/lang/Class;->isInstance(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_0</span>
+<span class="">	invoke-virtual {p3, v1}, Ljava/lang/Class;->cast(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-interface {v0, v1}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/IllegalAccessException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catch_0</span>
+<span class="">	move-exception p1</span>
+<span class="">	new-instance p2, Ljava/lang/RuntimeException;</span>
+<span class="">	const-string p3, "How did getFields return a field we couldn\'t access?"</span>
+<span class="">	invoke-direct {p2, p3, p1}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V</span>
+<span class="">	throw p2</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public getAnnotatedFields()Ljava/util/List;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"()",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Lorg/junit/runners/model/FrameworkField;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runners/model/TestClass;->fieldsForAnnotations:Ljava/util/Map;</span>
+<span class="">	invoke-direct {p0, v0}, Lorg/junit/runners/model/TestClass;->collectValues(Ljava/util/Map;)Ljava/util/List;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public getAnnotatedFields(Ljava/lang/Class;)Ljava/util/List;
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"+",</span>
+<span class="">	"Ljava/lang/annotation/Annotation;",</span>
+<span class="">	">;)",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Lorg/junit/runners/model/FrameworkField;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runners/model/TestClass;->fieldsForAnnotations:Ljava/util/Map;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-static {v0, p1, v1}, Lorg/junit/runners/model/TestClass;->getAnnotatedMembers(Ljava/util/Map;Ljava/lang/Class;Z)Ljava/util/List;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-static {p1}, Ljava/util/Collections;->unmodifiableList(Ljava/util/List;)Ljava/util/List;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public getAnnotatedMethodValues(Ljava/lang/Object;Ljava/lang/Class;Ljava/lang/Class;)Ljava/util/List;
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"<T:",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	">(",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"+",</span>
+<span class="">	"Ljava/lang/annotation/Annotation;",</span>
+<span class="">	">;",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"TT;>;)",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"TT;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	invoke-virtual {p0, p2}, Lorg/junit/runners/model/TestClass;->getAnnotatedMethods(Ljava/lang/Class;)Ljava/util/List;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-interface {p2}, Ljava/util/List;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {p2}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	invoke-interface {p2}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Lorg/junit/runners/model/FrameworkMethod;</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {v1}, Lorg/junit/runners/model/FrameworkMethod;->getReturnType()Ljava/lang/Class;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {p3, v2}, Ljava/lang/Class;->isAssignableFrom(Ljava/lang/Class;)Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_0</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	new-array v2, v2, [Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {v1, p1, v2}, Lorg/junit/runners/model/FrameworkMethod;->invokeExplosively(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {p3, v2}, Ljava/lang/Class;->cast(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-interface {v0, v2}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catchall_0</span>
+<span class="">	move-exception p1</span>
+<span class="">	new-instance p2, Ljava/lang/RuntimeException;</span>
+<span class="">	new-instance p3, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {p3}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v0, "Exception in "</span>
+<span class="">	invoke-virtual {p3, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p3</span>
+<span class="">	invoke-virtual {v1}, Lorg/junit/runners/model/FrameworkMethod;->getName()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p3, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p3</span>
+<span class="">	invoke-virtual {p3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p3</span>
+<span class="">	invoke-direct {p2, p3, p1}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V</span>
+<span class="">	throw p2</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public getAnnotatedMethods()Ljava/util/List;
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"()",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Lorg/junit/runners/model/FrameworkMethod;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runners/model/TestClass;->methodsForAnnotations:Ljava/util/Map;</span>
+<span class="">	invoke-direct {p0, v0}, Lorg/junit/runners/model/TestClass;->collectValues(Ljava/util/Map;)Ljava/util/List;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sget-object v1, Lorg/junit/runners/model/TestClass;->METHOD_COMPARATOR:Lorg/junit/runners/model/TestClass$MethodComparator;</span>
+<span class="">	invoke-static {v0, v1}, Ljava/util/Collections;->sort(Ljava/util/List;Ljava/util/Comparator;)V</span>
+.end method
+
+.method public getAnnotatedMethods(Ljava/lang/Class;)Ljava/util/List;
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"+",</span>
+<span class="">	"Ljava/lang/annotation/Annotation;",</span>
+<span class="">	">;)",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Lorg/junit/runners/model/FrameworkMethod;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runners/model/TestClass;->methodsForAnnotations:Ljava/util/Map;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-static {v0, p1, v1}, Lorg/junit/runners/model/TestClass;->getAnnotatedMembers(Ljava/util/Map;Ljava/lang/Class;Z)Ljava/util/List;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-static {p1}, Ljava/util/Collections;->unmodifiableList(Ljava/util/List;)Ljava/util/List;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public getAnnotation(Ljava/lang/Class;)Ljava/lang/annotation/Annotation;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"<T::",</span>
+<span class="">	"Ljava/lang/annotation/Annotation;",</span>
+<span class="">	">(",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"TT;>;)TT;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runners/model/TestClass;->clazz:Ljava/lang/Class;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/lang/Class;->getAnnotation(Ljava/lang/Class;)Ljava/lang/annotation/Annotation;</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public getAnnotations()[Ljava/lang/annotation/Annotation;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runners/model/TestClass;->clazz:Ljava/lang/Class;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	new-array v0, v0, [Ljava/lang/annotation/Annotation;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Class;->getAnnotations()[Ljava/lang/annotation/Annotation;</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public getJavaClass()Ljava/lang/Class;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"()",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"*>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runners/model/TestClass;->clazz:Ljava/lang/Class;</span>
+.end method
+
+.method public getName()Ljava/lang/String;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runners/model/TestClass;->clazz:Ljava/lang/Class;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	const-string v0, "null"</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Class;->getName()Ljava/lang/String;</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method public getOnlyConstructor()Ljava/lang/reflect/Constructor;
+<span class="">	.locals 5</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"()",</span>
+<span class="">	"Ljava/lang/reflect/Constructor<",</span>
+<span class="">	"*>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runners/model/TestClass;->clazz:Ljava/lang/Class;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Class;->getConstructors()[Ljava/lang/reflect/Constructor;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	array-length v1, v0</span>
+<span class="">	int-to-long v1, v1</span>
+<span class="">	const-wide/16 v3, 0x1</span>
+<span class="">	invoke-static {v3, v4, v1, v2}, Lorg/junit/Assert;->assertEquals(JJ)V</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	aget-object v0, v0, v1</span>
+.end method
+
+.method public hashCode()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runners/model/TestClass;->clazz:Ljava/lang/Class;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Object;->hashCode()I</span>
+<span class="">	move-result v0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public isANonStaticInnerClass()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runners/model/TestClass;->clazz:Ljava/lang/Class;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Class;->isMemberClass()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Lorg/junit/runners/model/TestClass;->clazz:Ljava/lang/Class;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Class;->getModifiers()I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-static {v0}, Ljava/lang/reflect/Modifier;->isStatic(I)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public isPublic()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runners/model/TestClass;->clazz:Ljava/lang/Class;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Class;->getModifiers()I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-static {v0}, Ljava/lang/reflect/Modifier;->isPublic(I)Z</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method protected scanAnnotatedMembers(Ljava/util/Map;Ljava/util/Map;)V
+<span class="">	.locals 8</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/Map<",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"+",</span>
+<span class="">	"Ljava/lang/annotation/Annotation;",</span>
+<span class="">	">;",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Lorg/junit/runners/model/FrameworkMethod;",</span>
+<span class="">	">;>;",</span>
+<span class="">	"Ljava/util/Map<",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"+",</span>
+<span class="">	"Ljava/lang/annotation/Annotation;",</span>
+<span class="">	">;",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Lorg/junit/runners/model/FrameworkField;",</span>
+<span class="">	">;>;)V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runners/model/TestClass;->clazz:Ljava/lang/Class;</span>
+<span class="">	invoke-static {v0}, Lorg/junit/runners/model/TestClass;->getSuperClasses(Ljava/lang/Class;)Ljava/util/List;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_2</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljava/lang/Class;</span>
+<span class="">	invoke-static {v1}, Lorg/junit/internal/MethodSorter;->getDeclaredMethods(Ljava/lang/Class;)[Ljava/lang/reflect/Method;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	array-length v3, v2</span>
+<span class="">	const/4 v4, 0x0</span>
+<span class="">	move v5, v4</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v5, v3, :cond_1</span>
+<span class="">	aget-object v6, v2, v5</span>
+<span class="">	new-instance v7, Lorg/junit/runners/model/FrameworkMethod;</span>
+<span class="">	invoke-direct {v7, v6}, Lorg/junit/runners/model/FrameworkMethod;-><init>(Ljava/lang/reflect/Method;)V</span>
+<span class="">	invoke-static {v7, p1}, Lorg/junit/runners/model/TestClass;->addToAnnotationLists(Lorg/junit/runners/model/FrameworkMember;Ljava/util/Map;)V</span>
+<span class="">	add-int/lit8 v5, v5, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-static {v1}, Lorg/junit/runners/model/TestClass;->getSortedDeclaredFields(Ljava/lang/Class;)[Ljava/lang/reflect/Field;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	array-length v2, v1</span>
+<span class="">	:goto_1</span>
+<span class="">	if-ge v4, v2, :cond_0</span>
+<span class="">	aget-object v3, v1, v4</span>
+<span class="">	new-instance v5, Lorg/junit/runners/model/FrameworkField;</span>
+<span class="">	invoke-direct {v5, v3}, Lorg/junit/runners/model/FrameworkField;-><init>(Ljava/lang/reflect/Field;)V</span>
+<span class="">	invoke-static {v5, p2}, Lorg/junit/runners/model/TestClass;->addToAnnotationLists(Lorg/junit/runners/model/FrameworkMember;Ljava/util/Map;)V</span>
+<span class="">	add-int/lit8 v4, v4, 0x1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_2</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../.resources/report.js"></script>
+</body>
+</html>

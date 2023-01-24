@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">lu.uni.trux.workmanager_enqueueuniquework</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.activity.result</a></li>
+        <li><i class="ico ico-class"></i> ActivityResultRegistry.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public abstract Landroidx/activity/result/ActivityResultRegistry;
+.super Ljava/lang/Object;
+.source "ActivityResultRegistry.java"
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Landroidx/activity/result/ActivityResultRegistry$LifecycleContainer;,
+Landroidx/activity/result/ActivityResultRegistry$CallbackAndContract;
+}
+.end annotation
+
+.field private static final INITIAL_REQUEST_CODE_VALUE:I = 0x10000
+.field private static final KEY_COMPONENT_ACTIVITY_LAUNCHED_KEYS:Ljava/lang/String; = "KEY_COMPONENT_ACTIVITY_LAUNCHED_KEYS"
+.field private static final KEY_COMPONENT_ACTIVITY_PENDING_RESULTS:Ljava/lang/String; = "KEY_COMPONENT_ACTIVITY_PENDING_RESULT"
+.field private static final KEY_COMPONENT_ACTIVITY_RANDOM_OBJECT:Ljava/lang/String; = "KEY_COMPONENT_ACTIVITY_RANDOM_OBJECT"
+.field private static final KEY_COMPONENT_ACTIVITY_REGISTERED_KEYS:Ljava/lang/String; = "KEY_COMPONENT_ACTIVITY_REGISTERED_KEYS"
+.field private static final KEY_COMPONENT_ACTIVITY_REGISTERED_RCS:Ljava/lang/String; = "KEY_COMPONENT_ACTIVITY_REGISTERED_RCS"
+.field private static final LOG_TAG:Ljava/lang/String; = "ActivityResultRegistry"
+.field final transient mKeyToCallback:Ljava/util/Map;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/Map<",
+"Ljava/lang/String;",
+"Landroidx/activity/result/ActivityResultRegistry$CallbackAndContract<",
+"*>;>;"
+}
+.end annotation
+.end field
+.field private final mKeyToLifecycleContainers:Ljava/util/Map;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/Map<",
+"Ljava/lang/String;",
+"Landroidx/activity/result/ActivityResultRegistry$LifecycleContainer;",
+">;"
+}
+.end annotation
+.end field
+.field final mKeyToRc:Ljava/util/Map;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/Map<",
+"Ljava/lang/String;",
+"Ljava/lang/Integer;",
+">;"
+}
+.end annotation
+.end field
+.field  mLaunchedKeys:Ljava/util/ArrayList;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/ArrayList<",
+"Ljava/lang/String;",
+">;"
+}
+.end annotation
+.end field
+.field final mParsedPendingResults:Ljava/util/Map;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/Map<",
+"Ljava/lang/String;",
+"Ljava/lang/Object;",
+">;"
+}
+.end annotation
+.end field
+.field final mPendingResults:Landroid/os/Bundle;
+.field private mRandom:Ljava/util/Random;
+.field private final mRcToKey:Ljava/util/Map;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/Map<",
+"Ljava/lang/Integer;",
+"Ljava/lang/String;",
+">;"
+}
+.end annotation
+.end field
+
+
+<span class="cov">.method public constructor &lt;init&gt;()V</span>
+<span class="">	.locals 1</span>
+
+<span class="cov">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="cov">	new-instance v0, Ljava/util/Random;</span>
+<span class="cov">	invoke-direct {v0}, Ljava/util/Random;-><init>()V</span>
+<span class="cov">	iput-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mRandom:Ljava/util/Random;</span>
+<span class="cov">	new-instance v0, Ljava/util/HashMap;</span>
+<span class="cov">	invoke-direct {v0}, Ljava/util/HashMap;-><init>()V</span>
+<span class="cov">	iput-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mRcToKey:Ljava/util/Map;</span>
+<span class="cov">	new-instance v0, Ljava/util/HashMap;</span>
+<span class="cov">	invoke-direct {v0}, Ljava/util/HashMap;-><init>()V</span>
+<span class="cov">	iput-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToRc:Ljava/util/Map;</span>
+<span class="cov">	new-instance v0, Ljava/util/HashMap;</span>
+<span class="cov">	invoke-direct {v0}, Ljava/util/HashMap;-><init>()V</span>
+<span class="cov">	iput-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToLifecycleContainers:Ljava/util/Map;</span>
+<span class="cov">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="cov">	invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="cov">	iput-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mLaunchedKeys:Ljava/util/ArrayList;</span>
+<span class="cov">	new-instance v0, Ljava/util/HashMap;</span>
+<span class="cov">	invoke-direct {v0}, Ljava/util/HashMap;-><init>()V</span>
+<span class="cov">	iput-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToCallback:Ljava/util/Map;</span>
+<span class="cov">	new-instance v0, Ljava/util/HashMap;</span>
+<span class="cov">	invoke-direct {v0}, Ljava/util/HashMap;-><init>()V</span>
+<span class="cov">	iput-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mParsedPendingResults:Ljava/util/Map;</span>
+<span class="cov">	new-instance v0, Landroid/os/Bundle;</span>
+<span class="cov">	invoke-direct {v0}, Landroid/os/Bundle;-><init>()V</span>
+<span class="cov">	iput-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mPendingResults:Landroid/os/Bundle;</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method private bindRcKey(ILjava/lang/String;)V</span>
+<span class="">	.locals 2</span>
+
+<span class="cov">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mRcToKey:Ljava/util/Map;</span>
+<span class="exec">	invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="cov">	move-result-object v1</span>
+<span class="cov">	invoke-interface {v0, v1, p2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="cov">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToRc:Ljava/util/Map;</span>
+<span class="exec">	invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="cov">	invoke-interface {v0, p2, p1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method private doDispatch(Ljava/lang/String;ILandroid/content/Intent;Landroidx/activity/result/ActivityResultRegistry$CallbackAndContract;)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"<O:",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	">(",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	"I",</span>
+<span class="">	"Landroid/content/Intent;",</span>
+<span class="">	"Landroidx/activity/result/ActivityResultRegistry$CallbackAndContract<",</span>
+<span class="">	"TO;>;)V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	if-eqz p4, :cond_0</span>
+<span class="">	iget-object v0, p4, Landroidx/activity/result/ActivityResultRegistry$CallbackAndContract;->mCallback:Landroidx/activity/result/ActivityResultCallback;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object p1, p4, Landroidx/activity/result/ActivityResultRegistry$CallbackAndContract;->mCallback:Landroidx/activity/result/ActivityResultCallback;</span>
+<span class="">	iget-object p4, p4, Landroidx/activity/result/ActivityResultRegistry$CallbackAndContract;->mContract:Landroidx/activity/result/contract/ActivityResultContract;</span>
+<span class="">	invoke-virtual {p4, p2, p3}, Landroidx/activity/result/contract/ActivityResultContract;->parseResult(ILandroid/content/Intent;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-interface {p1, p2}, Landroidx/activity/result/ActivityResultCallback;->onActivityResult(Ljava/lang/Object;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object p4, p0, Landroidx/activity/result/ActivityResultRegistry;->mParsedPendingResults:Ljava/util/Map;</span>
+<span class="">	invoke-interface {p4, p1}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	iget-object p4, p0, Landroidx/activity/result/ActivityResultRegistry;->mPendingResults:Landroid/os/Bundle;</span>
+<span class="">	new-instance v0, Landroidx/activity/result/ActivityResult;</span>
+<span class="">	invoke-direct {v0, p2, p3}, Landroidx/activity/result/ActivityResult;-><init>(ILandroid/content/Intent;)V</span>
+<span class="">	invoke-virtual {p4, p1, v0}, Landroid/os/Bundle;->putParcelable(Ljava/lang/String;Landroid/os/Parcelable;)V</span>
+<span class="">	:goto_0</span>
+.end method
+
+<span class="cov">.method private generateRandomNumber()I</span>
+<span class="">	.locals 5</span>
+
+<span class="cov">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mRandom:Ljava/util/Random;</span>
+<span class="cov">	const/high16 v1, 0x7fff0000</span>
+<span class="exec">	invoke-virtual {v0, v1}, Ljava/util/Random;->nextInt(I)I</span>
+<span class="cov">	move-result v0</span>
+<span class="cov">	const/high16 v2, 0x10000</span>
+<span class="cov">	:goto_0</span>
+<span class="cov">	add-int/2addr v0, v2</span>
+<span class="cov">	iget-object v3, p0, Landroidx/activity/result/ActivityResultRegistry;->mRcToKey:Ljava/util/Map;</span>
+<span class="exec">	invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="cov">	move-result-object v4</span>
+<span class="exec">	invoke-interface {v3, v4}, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z</span>
+<span class="cov">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mRandom:Ljava/util/Random;</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/util/Random;->nextInt(I)I</span>
+<span class="">	move-result v0</span>
+<span class="">	goto :goto_0</span>
+<span class="cov">	:cond_0</span>
+<span class="exec">	return v0</span>
+.end method
+
+<span class="cov">.method private registerKey(Ljava/lang/String;)I</span>
+<span class="">	.locals 1</span>
+
+<span class="cov">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToRc:Ljava/util/Map;</span>
+<span class="exec">	invoke-interface {v0, p1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	check-cast v0, Ljava/lang/Integer;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Integer;->intValue()I</span>
+<span class="">	move-result p1</span>
+<span class="exec">	invoke-direct {p0}, Landroidx/activity/result/ActivityResultRegistry;->generateRandomNumber()I</span>
+<span class="cov">	:cond_0</span>
+<span class="cov">	move-result v0</span>
+<span class="cov">	invoke-direct {p0, v0, p1}, Landroidx/activity/result/ActivityResultRegistry;->bindRcKey(ILjava/lang/String;)V</span>
+<span class="exec">	return v0</span>
+.end method
+
+.method public final dispatchResult(IILandroid/content/Intent;)Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mRcToKey:Ljava/util/Map;</span>
+<span class="">	invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Ljava/lang/String;</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mLaunchedKeys:Ljava/util/ArrayList;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/util/ArrayList;->remove(Ljava/lang/Object;)Z</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToCallback:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroidx/activity/result/ActivityResultRegistry$CallbackAndContract;</span>
+<span class="">	invoke-direct {p0, p1, p2, p3, v0}, Landroidx/activity/result/ActivityResultRegistry;->doDispatch(Ljava/lang/String;ILandroid/content/Intent;Landroidx/activity/result/ActivityResultRegistry$CallbackAndContract;)V</span>
+<span class="">	const/4 p1, 0x1</span>
+.end method
+
+.method public final dispatchResult(ILjava/lang/Object;)Z
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"<O:",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	">(ITO;)Z"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mRcToKey:Ljava/util/Map;</span>
+<span class="">	invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Ljava/lang/String;</span>
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mLaunchedKeys:Ljava/util/ArrayList;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/util/ArrayList;->remove(Ljava/lang/Object;)Z</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToCallback:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroidx/activity/result/ActivityResultRegistry$CallbackAndContract;</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iget-object v1, v0, Landroidx/activity/result/ActivityResultRegistry$CallbackAndContract;->mCallback:Landroidx/activity/result/ActivityResultCallback;</span>
+<span class="">	if-nez v1, :cond_1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object p1, v0, Landroidx/activity/result/ActivityResultRegistry$CallbackAndContract;->mCallback:Landroidx/activity/result/ActivityResultCallback;</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-interface {p1, p2}, Landroidx/activity/result/ActivityResultCallback;->onActivityResult(Ljava/lang/Object;)V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mPendingResults:Landroid/os/Bundle;</span>
+<span class="">	:cond_2</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/os/Bundle;->remove(Ljava/lang/String;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mParsedPendingResults:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1, p2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	:goto_1</span>
+.end method
+
+.method public abstract onLaunch(ILandroidx/activity/result/contract/ActivityResultContract;Ljava/lang/Object;Landroidx/core/app/ActivityOptionsCompat;)V
+<span class="">	</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"<I:",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	"O:",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	">(I",</span>
+<span class="">	"Landroidx/activity/result/contract/ActivityResultContract<",</span>
+<span class="">	"TI;TO;>;TI;",</span>
+<span class="">	"Landroidx/core/app/ActivityOptionsCompat;",</span>
+<span class="">	")V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+.end method
+
+.method public final onRestoreInstanceState(Landroid/os/Bundle;)V
+<span class="">	.locals 5</span>
+
+<span class="">	if-nez p1, :cond_0</span>
+<span class="">	const-string v0, "KEY_COMPONENT_ACTIVITY_REGISTERED_RCS"</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/os/Bundle;->getIntegerArrayList(Ljava/lang/String;)Ljava/util/ArrayList;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v1, "KEY_COMPONENT_ACTIVITY_REGISTERED_KEYS"</span>
+<span class="">	invoke-virtual {p1, v1}, Landroid/os/Bundle;->getStringArrayList(Ljava/lang/String;)Ljava/util/ArrayList;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	if-eqz v1, :cond_3</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	const-string v2, "KEY_COMPONENT_ACTIVITY_LAUNCHED_KEYS"</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {p1, v2}, Landroid/os/Bundle;->getStringArrayList(Ljava/lang/String;)Ljava/util/ArrayList;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	iput-object v2, p0, Landroidx/activity/result/ActivityResultRegistry;->mLaunchedKeys:Ljava/util/ArrayList;</span>
+<span class="">	const-string v2, "KEY_COMPONENT_ACTIVITY_RANDOM_OBJECT"</span>
+<span class="">	invoke-virtual {p1, v2}, Landroid/os/Bundle;->getSerializable(Ljava/lang/String;)Ljava/io/Serializable;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Ljava/util/Random;</span>
+<span class="">	iput-object v2, p0, Landroidx/activity/result/ActivityResultRegistry;->mRandom:Ljava/util/Random;</span>
+<span class="">	iget-object v2, p0, Landroidx/activity/result/ActivityResultRegistry;->mPendingResults:Landroid/os/Bundle;</span>
+<span class="">	const-string v3, "KEY_COMPONENT_ACTIVITY_PENDING_RESULT"</span>
+<span class="">	invoke-virtual {p1, v3}, Landroid/os/Bundle;->getBundle(Ljava/lang/String;)Landroid/os/Bundle;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {v2, p1}, Landroid/os/Bundle;->putAll(Landroid/os/Bundle;)V</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	invoke-virtual {v1}, Ljava/util/ArrayList;->size()I</span>
+<span class="">	:goto_0</span>
+<span class="">	move-result v2</span>
+<span class="">	if-ge p1, v2, :cond_3</span>
+<span class="">	invoke-virtual {v1, p1}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Ljava/lang/String;</span>
+<span class="">	iget-object v3, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToRc:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v3, v2}, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_2</span>
+<span class="">	iget-object v3, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToRc:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v3, v2}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	check-cast v3, Ljava/lang/Integer;</span>
+<span class="">	iget-object v4, p0, Landroidx/activity/result/ActivityResultRegistry;->mPendingResults:Landroid/os/Bundle;</span>
+<span class="">	invoke-virtual {v4, v2}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-nez v2, :cond_2</span>
+<span class="">	iget-object v2, p0, Landroidx/activity/result/ActivityResultRegistry;->mRcToKey:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v2, v3}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;</span>
+<span class="">	:cond_2</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Ljava/lang/Integer;</span>
+<span class="">	invoke-virtual {v2}, Ljava/lang/Integer;->intValue()I</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-virtual {v1, p1}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	check-cast v3, Ljava/lang/String;</span>
+<span class="">	invoke-direct {p0, v2, v3}, Landroidx/activity/result/ActivityResultRegistry;->bindRcKey(ILjava/lang/String;)V</span>
+<span class="">	add-int/lit8 p1, p1, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method public final onSaveInstanceState(Landroid/os/Bundle;)V
+<span class="">	.locals 2</span>
+
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	iget-object v1, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToRc:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Map;->values()Ljava/util/Collection;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V</span>
+<span class="">	const-string v1, "KEY_COMPONENT_ACTIVITY_REGISTERED_RCS"</span>
+<span class="">	invoke-virtual {p1, v1, v0}, Landroid/os/Bundle;->putIntegerArrayList(Ljava/lang/String;Ljava/util/ArrayList;)V</span>
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	iget-object v1, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToRc:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Map;->keySet()Ljava/util/Set;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V</span>
+<span class="">	const-string v1, "KEY_COMPONENT_ACTIVITY_REGISTERED_KEYS"</span>
+<span class="">	invoke-virtual {p1, v1, v0}, Landroid/os/Bundle;->putStringArrayList(Ljava/lang/String;Ljava/util/ArrayList;)V</span>
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	iget-object v1, p0, Landroidx/activity/result/ActivityResultRegistry;->mLaunchedKeys:Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V</span>
+<span class="">	const-string v1, "KEY_COMPONENT_ACTIVITY_LAUNCHED_KEYS"</span>
+<span class="">	invoke-virtual {p1, v1, v0}, Landroid/os/Bundle;->putStringArrayList(Ljava/lang/String;Ljava/util/ArrayList;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mPendingResults:Landroid/os/Bundle;</span>
+<span class="">	invoke-virtual {v0}, Landroid/os/Bundle;->clone()Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroid/os/Bundle;</span>
+<span class="">	const-string v1, "KEY_COMPONENT_ACTIVITY_PENDING_RESULT"</span>
+<span class="">	invoke-virtual {p1, v1, v0}, Landroid/os/Bundle;->putBundle(Ljava/lang/String;Landroid/os/Bundle;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mRandom:Ljava/util/Random;</span>
+<span class="">	const-string v1, "KEY_COMPONENT_ACTIVITY_RANDOM_OBJECT"</span>
+<span class="">	invoke-virtual {p1, v1, v0}, Landroid/os/Bundle;->putSerializable(Ljava/lang/String;Ljava/io/Serializable;)V</span>
+.end method
+
+<span class="cov">.method public final register(Ljava/lang/String;Landroidx/activity/result/contract/ActivityResultContract;Landroidx/activity/result/ActivityResultCallback;)Landroidx/activity/result/ActivityResultLauncher;</span>
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"<I:",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	"O:",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	">(",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	"Landroidx/activity/result/contract/ActivityResultContract<",</span>
+<span class="">	"TI;TO;>;",</span>
+<span class="">	"Landroidx/activity/result/ActivityResultCallback<",</span>
+<span class="">	"TO;>;)",</span>
+<span class="">	"Landroidx/activity/result/ActivityResultLauncher<",</span>
+<span class="">	"TI;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="exec">	invoke-direct {p0, p1}, Landroidx/activity/result/ActivityResultRegistry;->registerKey(Ljava/lang/String;)I</span>
+<span class="cov">	move-result v0</span>
+<span class="cov">	iget-object v1, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToCallback:Ljava/util/Map;</span>
+<span class="cov">	new-instance v2, Landroidx/activity/result/ActivityResultRegistry$CallbackAndContract;</span>
+<span class="cov">	invoke-direct {v2, p3, p2}, Landroidx/activity/result/ActivityResultRegistry$CallbackAndContract;-><init>(Landroidx/activity/result/ActivityResultCallback;Landroidx/activity/result/contract/ActivityResultContract;)V</span>
+<span class="cov">	invoke-interface {v1, p1, v2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="cov">	iget-object v1, p0, Landroidx/activity/result/ActivityResultRegistry;->mParsedPendingResults:Ljava/util/Map;</span>
+<span class="exec">	invoke-interface {v1, p1}, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z</span>
+<span class="cov">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	iget-object v1, p0, Landroidx/activity/result/ActivityResultRegistry;->mParsedPendingResults:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v1, p1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iget-object v2, p0, Landroidx/activity/result/ActivityResultRegistry;->mParsedPendingResults:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v2, p1}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	invoke-interface {p3, v1}, Landroidx/activity/result/ActivityResultCallback;->onActivityResult(Ljava/lang/Object;)V</span>
+<span class="cov">	:cond_0</span>
+<span class="cov">	iget-object v1, p0, Landroidx/activity/result/ActivityResultRegistry;->mPendingResults:Landroid/os/Bundle;</span>
+<span class="exec">	invoke-virtual {v1, p1}, Landroid/os/Bundle;->getParcelable(Ljava/lang/String;)Landroid/os/Parcelable;</span>
+<span class="cov">	move-result-object v1</span>
+<span class="cov">	check-cast v1, Landroidx/activity/result/ActivityResult;</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	iget-object v2, p0, Landroidx/activity/result/ActivityResultRegistry;->mPendingResults:Landroid/os/Bundle;</span>
+<span class="">	invoke-virtual {v2, p1}, Landroid/os/Bundle;->remove(Ljava/lang/String;)V</span>
+<span class="">	invoke-virtual {v1}, Landroidx/activity/result/ActivityResult;->getResultCode()I</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-virtual {v1}, Landroidx/activity/result/ActivityResult;->getData()Landroid/content/Intent;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {p2, v2, v1}, Landroidx/activity/result/contract/ActivityResultContract;->parseResult(ILandroid/content/Intent;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-interface {p3, v1}, Landroidx/activity/result/ActivityResultCallback;->onActivityResult(Ljava/lang/Object;)V</span>
+<span class="cov">	:cond_1</span>
+<span class="cov">	new-instance p3, Landroidx/activity/result/ActivityResultRegistry$3;</span>
+<span class="cov">	invoke-direct {p3, p0, p1, v0, p2}, Landroidx/activity/result/ActivityResultRegistry$3;-><init>(Landroidx/activity/result/ActivityResultRegistry;Ljava/lang/String;ILandroidx/activity/result/contract/ActivityResultContract;)V</span>
+<span class="exec">	return-object p3</span>
+.end method
+
+.method public final register(Ljava/lang/String;Landroidx/lifecycle/LifecycleOwner;Landroidx/activity/result/contract/ActivityResultContract;Landroidx/activity/result/ActivityResultCallback;)Landroidx/activity/result/ActivityResultLauncher;
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"<I:",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	"O:",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	">(",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	"Landroidx/lifecycle/LifecycleOwner;",</span>
+<span class="">	"Landroidx/activity/result/contract/ActivityResultContract<",</span>
+<span class="">	"TI;TO;>;",</span>
+<span class="">	"Landroidx/activity/result/ActivityResultCallback<",</span>
+<span class="">	"TO;>;)",</span>
+<span class="">	"Landroidx/activity/result/ActivityResultLauncher<",</span>
+<span class="">	"TI;>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-interface {p2}, Landroidx/lifecycle/LifecycleOwner;->getLifecycle()Landroidx/lifecycle/Lifecycle;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Landroidx/lifecycle/Lifecycle;->getCurrentState()Landroidx/lifecycle/Lifecycle$State;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	sget-object v2, Landroidx/lifecycle/Lifecycle$State;->STARTED:Landroidx/lifecycle/Lifecycle$State;</span>
+<span class="">	invoke-virtual {v1, v2}, Landroidx/lifecycle/Lifecycle$State;->isAtLeast(Landroidx/lifecycle/Lifecycle$State;)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-nez v1, :cond_1</span>
+<span class="">	invoke-direct {p0, p1}, Landroidx/activity/result/ActivityResultRegistry;->registerKey(Ljava/lang/String;)I</span>
+<span class="">	move-result p2</span>
+<span class="">	iget-object v1, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToLifecycleContainers:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v1, p1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Landroidx/activity/result/ActivityResultRegistry$LifecycleContainer;</span>
+<span class="">	if-nez v1, :cond_0</span>
+<span class="">	new-instance v1, Landroidx/activity/result/ActivityResultRegistry$LifecycleContainer;</span>
+<span class="">	invoke-direct {v1, v0}, Landroidx/activity/result/ActivityResultRegistry$LifecycleContainer;-><init>(Landroidx/lifecycle/Lifecycle;)V</span>
+<span class="">	:cond_0</span>
+<span class="">	new-instance v0, Landroidx/activity/result/ActivityResultRegistry$1;</span>
+<span class="">	invoke-direct {v0, p0, p1, p4, p3}, Landroidx/activity/result/ActivityResultRegistry$1;-><init>(Landroidx/activity/result/ActivityResultRegistry;Ljava/lang/String;Landroidx/activity/result/ActivityResultCallback;Landroidx/activity/result/contract/ActivityResultContract;)V</span>
+<span class="">	invoke-virtual {v1, v0}, Landroidx/activity/result/ActivityResultRegistry$LifecycleContainer;->addObserver(Landroidx/lifecycle/LifecycleEventObserver;)V</span>
+<span class="">	iget-object p4, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToLifecycleContainers:Ljava/util/Map;</span>
+<span class="">	invoke-interface {p4, p1, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	new-instance p4, Landroidx/activity/result/ActivityResultRegistry$2;</span>
+<span class="">	invoke-direct {p4, p0, p1, p2, p3}, Landroidx/activity/result/ActivityResultRegistry$2;-><init>(Landroidx/activity/result/ActivityResultRegistry;Ljava/lang/String;ILandroidx/activity/result/contract/ActivityResultContract;)V</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalStateException;</span>
+<span class="">	:cond_1</span>
+<span class="">	new-instance p3, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {p3}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string p4, "LifecycleOwner "</span>
+<span class="">	invoke-virtual {p3, p4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p3</span>
+<span class="">	invoke-virtual {p3, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	const-string p3, " is attempting to register while current state is "</span>
+<span class="">	invoke-virtual {p2, p3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-virtual {v0}, Landroidx/lifecycle/Lifecycle;->getCurrentState()Landroidx/lifecycle/Lifecycle$State;</span>
+<span class="">	move-result-object p3</span>
+<span class="">	invoke-virtual {p2, p3}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	const-string p3, ". LifecycleOwners must call register before they are STARTED."</span>
+<span class="">	invoke-virtual {p2, p3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-direct {p1, p2}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method final unregister(Ljava/lang/String;)V
+<span class="">	.locals 5</span>
+
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mLaunchedKeys:Ljava/util/ArrayList;</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/util/ArrayList;->contains(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToRc:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/lang/Integer;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v1, p0, Landroidx/activity/result/ActivityResultRegistry;->mRcToKey:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v1, v0}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToCallback:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mParsedPendingResults:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	const-string v1, ": "</span>
+<span class="">	const-string v2, "Dropping pending result for request "</span>
+<span class="">	const-string v3, "ActivityResultRegistry"</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v4, p0, Landroidx/activity/result/ActivityResultRegistry;->mParsedPendingResults:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v4, p1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v0, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v3, v0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mParsedPendingResults:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mPendingResults:Landroid/os/Bundle;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/os/Bundle;->containsKey(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Landroidx/activity/result/ActivityResultRegistry;->mPendingResults:Landroid/os/Bundle;</span>
+<span class="">	invoke-virtual {v1, p1}, Landroid/os/Bundle;->getParcelable(Ljava/lang/String;)Landroid/os/Parcelable;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v3, v0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mPendingResults:Landroid/os/Bundle;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/os/Bundle;->remove(Ljava/lang/String;)V</span>
+<span class="">	:cond_2</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToLifecycleContainers:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroidx/activity/result/ActivityResultRegistry$LifecycleContainer;</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	invoke-virtual {v0}, Landroidx/activity/result/ActivityResultRegistry$LifecycleContainer;->clearObservers()V</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/result/ActivityResultRegistry;->mKeyToLifecycleContainers:Ljava/util/Map;</span>
+<span class="">	invoke-interface {v0, p1}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	:cond_3</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

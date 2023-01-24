@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../index.html">lu.uni.trux.timertask_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.material.motion</a></li>
+        <li><i class="ico ico-class"></i> MotionUtils.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Lcom/google/android/material/motion/MotionUtils;
+.super Ljava/lang/Object;
+.source "MotionUtils.java"
+
+
+.field private static final EASING_TYPE_CUBIC_BEZIER:Ljava/lang/String; = "cubic-bezier"
+.field private static final EASING_TYPE_FORMAT_END:Ljava/lang/String; = ")"
+.field private static final EASING_TYPE_FORMAT_START:Ljava/lang/String; = "("
+.field private static final EASING_TYPE_PATH:Ljava/lang/String; = "path"
+
+
+.method private constructor <init>()V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+.end method
+
+.method private static getControlPoint([Ljava/lang/String;I)F
+<span class="">	.locals 2</span>
+
+<span class="">	aget-object p0, p0, p1</span>
+<span class="">	invoke-static {p0}, Ljava/lang/Float;->parseFloat(Ljava/lang/String;)F</span>
+<span class="">	move-result p0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	cmpg-float p1, p0, p1</span>
+<span class="">	if-ltz p1, :cond_0</span>
+<span class="">	const/high16 p1, 0x3f800000    # 1.0f</span>
+<span class="">	cmpl-float p1, p0, p1</span>
+<span class="">	if-gtz p1, :cond_0</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	:cond_0</span>
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v1, "Motion easing control point value must be between 0 and 1; instead got: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(F)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-direct {p1, p0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method private static getEasingContent(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p1}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result p1</span>
+<span class="">	add-int/lit8 p1, p1, 0x1</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	add-int/lit8 v0, v0, -0x1</span>
+<span class="">	invoke-virtual {p0, p1, v0}, Ljava/lang/String;->substring(II)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method private static isEasingType(Ljava/lang/String;Ljava/lang/String;)Z
+<span class="">	.locals 1</span>
+
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string v0, "("</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p0, p1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	const-string p1, ")"</span>
+<span class="">	invoke-virtual {p0, p1}, Ljava/lang/String;->endsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result p0</span>
+<span class="">	if-eqz p0, :cond_0</span>
+<span class="">	const/4 p0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public static resolveThemeDuration(Landroid/content/Context;II)I
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-static {p0, p1, p2}, Lcom/google/android/material/resources/MaterialAttributes;->resolveInteger(Landroid/content/Context;II)I</span>
+<span class="">	move-result p0</span>
+.end method
+
+.method public static resolveThemeInterpolator(Landroid/content/Context;ILandroid/animation/TimeInterpolator;)Landroid/animation/TimeInterpolator;
+<span class="">	.locals 2</span>
+
+<span class="">	new-instance v0, Landroid/util/TypedValue;</span>
+<span class="">	invoke-direct {v0}, Landroid/util/TypedValue;-><init>()V</span>
+<span class="">	invoke-virtual {p0}, Landroid/content/Context;->getTheme()Landroid/content/res/Resources$Theme;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	invoke-virtual {p0, p1, v0, v1}, Landroid/content/res/Resources$Theme;->resolveAttribute(ILandroid/util/TypedValue;Z)Z</span>
+<span class="">	move-result p0</span>
+<span class="">	if-eqz p0, :cond_4</span>
+<span class="">	iget p0, v0, Landroid/util/TypedValue;->type:I</span>
+<span class="">	const/4 p1, 0x3</span>
+<span class="">	if-ne p0, p1, :cond_3</span>
+<span class="">	iget-object p0, v0, Landroid/util/TypedValue;->string:Ljava/lang/CharSequence;</span>
+<span class="">	invoke-static {p0}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const-string p2, "cubic-bezier"</span>
+<span class="">	invoke-static {p0, p2}, Lcom/google/android/material/motion/MotionUtils;->isEasingType(Ljava/lang/String;Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	invoke-static {p0, p2}, Lcom/google/android/material/motion/MotionUtils;->getEasingContent(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	const-string p2, ","</span>
+<span class="">	invoke-virtual {p0, p2}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	array-length p2, p0</span>
+<span class="">	const/4 v0, 0x4</span>
+<span class="">	if-ne p2, v0, :cond_0</span>
+<span class="">	const/4 p2, 0x0</span>
+<span class="">	invoke-static {p0, p2}, Lcom/google/android/material/motion/MotionUtils;->getControlPoint([Ljava/lang/String;I)F</span>
+<span class="">	move-result p2</span>
+<span class="">	invoke-static {p0, v1}, Lcom/google/android/material/motion/MotionUtils;->getControlPoint([Ljava/lang/String;I)F</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x2</span>
+<span class="">	invoke-static {p0, v1}, Lcom/google/android/material/motion/MotionUtils;->getControlPoint([Ljava/lang/String;I)F</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {p0, p1}, Lcom/google/android/material/motion/MotionUtils;->getControlPoint([Ljava/lang/String;I)F</span>
+<span class="">	move-result p0</span>
+<span class="">	invoke-static {p2, v0, v1, p0}, Landroidx/core/view/animation/PathInterpolatorCompat;->create(FFFF)Landroid/view/animation/Interpolator;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	:cond_0</span>
+<span class="">	new-instance p2, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v0, "Motion easing theme attribute must have 4 control points if using bezier curve format; instead got: "</span>
+<span class="">	invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	array-length p0, p0</span>
+<span class="">	invoke-virtual {p2, p0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-direct {p1, p0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	const-string p1, "path"</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-static {p0, p1}, Lcom/google/android/material/motion/MotionUtils;->isEasingType(Ljava/lang/String;Ljava/lang/String;)Z</span>
+<span class="">	move-result p2</span>
+<span class="">	if-eqz p2, :cond_2</span>
+<span class="">	invoke-static {p0, p1}, Lcom/google/android/material/motion/MotionUtils;->getEasingContent(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-static {p0}, Landroidx/core/graphics/PathParser;->createPathFromPathData(Ljava/lang/String;)Landroid/graphics/Path;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-static {p0}, Landroidx/core/view/animation/PathInterpolatorCompat;->create(Landroid/graphics/Path;)Landroid/view/animation/Interpolator;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	new-instance p2, Ljava/lang/StringBuilder;</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v0, "Invalid motion easing type: "</span>
+<span class="">	invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-virtual {p2, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	invoke-direct {p1, p0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	new-instance p0, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	const-string p1, "Motion easing theme attribute must be a string"</span>
+<span class="">	:cond_3</span>
+<span class="">	invoke-direct {p0, p1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p0</span>
+<span class="">	:cond_4</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../.resources/report.js"></script>
+</body>
+</html>

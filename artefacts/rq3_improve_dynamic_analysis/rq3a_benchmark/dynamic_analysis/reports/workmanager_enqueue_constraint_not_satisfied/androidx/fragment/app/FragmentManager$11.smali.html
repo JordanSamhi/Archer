@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">lu.uni.trux.workmanager_enqueue</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.fragment.app</a></li>
+        <li><i class="ico ico-class"></i> FragmentManager$11.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class  Landroidx/fragment/app/FragmentManager$11;
+.super Ljava/lang/Object;
+.source "FragmentManager.java"
+.implements Landroidx/activity/result/ActivityResultCallback;
+
+.annotation system Ldalvik/annotation/EnclosingMethod;
+value = Landroidx/fragment/app/FragmentManager;->attachController(Landroidx/fragment/app/FragmentHostCallback;Landroidx/fragment/app/FragmentContainer;Landroidx/fragment/app/Fragment;)V
+.end annotation
+.annotation system Ldalvik/annotation/InnerClass;
+accessFlags = 0x0
+name = null
+.end annotation
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/lang/Object;",
+"Landroidx/activity/result/ActivityResultCallback<",
+"Ljava/util/Map<",
+"Ljava/lang/String;",
+"Ljava/lang/Boolean;",
+">;>;"
+}
+.end annotation
+
+.field final synthetic this$0:Landroidx/fragment/app/FragmentManager;
+
+
+<span class="cov">.method constructor &lt;init&gt;(Landroidx/fragment/app/FragmentManager;)V</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	iput-object p1, p0, Landroidx/fragment/app/FragmentManager$11;->this$0:Landroidx/fragment/app/FragmentManager;</span>
+<span class="cov">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method public bridge synthetic onActivityResult(Ljava/lang/Object;)V
+<span class="">	.locals 0</span>
+
+<span class="">	check-cast p1, Ljava/util/Map;</span>
+<span class="">	invoke-virtual {p0, p1}, Landroidx/fragment/app/FragmentManager$11;->onActivityResult(Ljava/util/Map;)V</span>
+.end method
+
+.method public onActivityResult(Ljava/util/Map;)V
+<span class="">	.locals 5</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/util/Map<",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	"Ljava/lang/Boolean;",</span>
+<span class="">	">;)V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-interface {p1}, Ljava/util/Map;->keySet()Ljava/util/Set;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	new-array v2, v1, [Ljava/lang/String;</span>
+<span class="">	invoke-interface {v0, v2}, Ljava/util/Set;->toArray([Ljava/lang/Object;)[Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, [Ljava/lang/String;</span>
+<span class="">	new-instance v2, Ljava/util/ArrayList;</span>
+<span class="">	invoke-interface {p1}, Ljava/util/Map;->values()Ljava/util/Collection;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {v2, p1}, Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V</span>
+<span class="">	invoke-virtual {v2}, Ljava/util/ArrayList;->size()I</span>
+<span class="">	move-result p1</span>
+<span class="">	new-array p1, p1, [I</span>
+<span class="">	move v3, v1</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {v2}, Ljava/util/ArrayList;->size()I</span>
+<span class="">	move-result v4</span>
+<span class="">	if-ge v3, v4, :cond_1</span>
+<span class="">	invoke-virtual {v2, v3}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	check-cast v4, Ljava/lang/Boolean;</span>
+<span class="">	invoke-virtual {v4}, Ljava/lang/Boolean;->booleanValue()Z</span>
+<span class="">	move-result v4</span>
+<span class="">	if-eqz v4, :cond_0</span>
+<span class="">	move v4, v1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v4, -0x1</span>
+<span class="">	:goto_1</span>
+<span class="">	aput v4, p1, v3</span>
+<span class="">	add-int/lit8 v3, v3, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v1, p0, Landroidx/fragment/app/FragmentManager$11;->this$0:Landroidx/fragment/app/FragmentManager;</span>
+<span class="">	iget-object v1, v1, Landroidx/fragment/app/FragmentManager;->mLaunchedFragments:Ljava/util/ArrayDeque;</span>
+<span class="">	invoke-virtual {v1}, Ljava/util/ArrayDeque;->pollFirst()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Landroidx/fragment/app/FragmentManager$LaunchedFragmentInfo;</span>
+<span class="">	const-string v2, "FragmentManager"</span>
+<span class="">	if-nez v1, :cond_2</span>
+<span class="">	new-instance p1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {p1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v0, "No permissions were requested for "</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-static {v2, p1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	iget-object v3, v1, Landroidx/fragment/app/FragmentManager$LaunchedFragmentInfo;->mWho:Ljava/lang/String;</span>
+<span class="">	:cond_2</span>
+<span class="">	iget v1, v1, Landroidx/fragment/app/FragmentManager$LaunchedFragmentInfo;->mRequestCode:I</span>
+<span class="">	iget-object v4, p0, Landroidx/fragment/app/FragmentManager$11;->this$0:Landroidx/fragment/app/FragmentManager;</span>
+<span class="">	invoke-static {v4}, Landroidx/fragment/app/FragmentManager;->access$200(Landroidx/fragment/app/FragmentManager;)Landroidx/fragment/app/FragmentStore;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v4, v3}, Landroidx/fragment/app/FragmentStore;->findFragmentByWho(Ljava/lang/String;)Landroidx/fragment/app/Fragment;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	if-nez v4, :cond_3</span>
+<span class="">	new-instance p1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {p1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v0, "Permission request result delivered for unknown Fragment "</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-static {v2, p1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	invoke-virtual {v4, v1, v0, p1}, Landroidx/fragment/app/Fragment;->onRequestPermissionsResult(I[Ljava/lang/String;[I)V</span>
+<span class="">	:cond_3</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

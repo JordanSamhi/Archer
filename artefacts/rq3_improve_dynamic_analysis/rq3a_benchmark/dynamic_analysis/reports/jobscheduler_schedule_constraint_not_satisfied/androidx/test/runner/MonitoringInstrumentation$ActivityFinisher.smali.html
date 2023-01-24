@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">lu.uni.trux.jobscheduler_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.test.runner</a></li>
+        <li><i class="ico ico-class"></i> MonitoringInstrumentation$ActivityFinisher.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Landroidx/test/runner/MonitoringInstrumentation$ActivityFinisher;
+.super Ljava/lang/Object;
+.source "MonitoringInstrumentation.java"
+.implements Ljava/lang/Runnable;
+
+.annotation system Ldalvik/annotation/EnclosingClass;
+value = Landroidx/test/runner/MonitoringInstrumentation;
+.end annotation
+.annotation system Ldalvik/annotation/InnerClass;
+accessFlags = 0x1
+name = "ActivityFinisher"
+.end annotation
+
+.field final synthetic this$0:Landroidx/test/runner/MonitoringInstrumentation;
+
+
+.method public constructor <init>(Landroidx/test/runner/MonitoringInstrumentation;)V
+<span class="">	.locals 0</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x8010</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"this$0"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iput-object p1, p0, Landroidx/test/runner/MonitoringInstrumentation$ActivityFinisher;->this$0:Landroidx/test/runner/MonitoringInstrumentation;</span>
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+.end method
+
+.method public run()V
+<span class="">	.locals 6</span>
+
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	sget-object v1, Landroidx/test/runner/lifecycle/Stage;->CREATED:Landroidx/test/runner/lifecycle/Stage;</span>
+<span class="">	sget-object v2, Landroidx/test/runner/lifecycle/Stage;->STOPPED:Landroidx/test/runner/lifecycle/Stage;</span>
+<span class="">	invoke-static {v1, v2}, Ljava/util/EnumSet;->range(Ljava/lang/Enum;Ljava/lang/Enum;)Ljava/util/EnumSet;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/util/EnumSet;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_0</span>
+<span class="">	invoke-interface {v1}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Landroidx/test/runner/lifecycle/Stage;</span>
+<span class="">	iget-object v3, p0, Landroidx/test/runner/MonitoringInstrumentation$ActivityFinisher;->this$0:Landroidx/test/runner/MonitoringInstrumentation;</span>
+<span class="">	invoke-static {v3}, Landroidx/test/runner/MonitoringInstrumentation;->access$400(Landroidx/test/runner/MonitoringInstrumentation;)Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {v3, v2}, Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;->getActivitiesInStage(Landroidx/test/runner/lifecycle/Stage;)Ljava/util/Collection;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-interface {v0, v2}, Ljava/util/List;->addAll(Ljava/util/Collection;)Z</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->size()I</span>
+<span class="">	move-result v1</span>
+<span class="">	const-string v2, "MonitoringInstr"</span>
+<span class="">	if-lez v1, :cond_1</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->size()I</span>
+<span class="">	move-result v1</span>
+<span class="">	const/16 v3, 0x3c</span>
+<span class="">	new-instance v4, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v4, v3}, Ljava/lang/StringBuilder;-><init>(I)V</span>
+<span class="">	const-string v3, "Activities that are still in CREATED to STOPPED: "</span>
+<span class="">	invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-static {v2, v1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_3</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Landroid/app/Activity;</span>
+<span class="">	invoke-virtual {v1}, Landroid/app/Activity;->isFinishing()Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-nez v3, :cond_2</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-static {v1}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-static {v3}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v4}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v4</span>
+<span class="">	add-int/lit8 v4, v4, 0x14</span>
+<span class="">	new-instance v5, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v5, v4}, Ljava/lang/StringBuilder;-><init>(I)V</span>
+<span class="">	const-string v4, "Finishing activity: "</span>
+<span class="">	invoke-virtual {v5, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-static {v2, v3}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	invoke-virtual {v1}, Landroid/app/Activity;->finish()V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:catch_0</span>
+<span class="">	move-exception v1</span>
+<span class="">	const-string v3, "Failed to finish activity."</span>
+<span class="">	invoke-static {v2, v3, v1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_3</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

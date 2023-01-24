@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">lu.uni.trux.jobscheduler_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">org.junit.runner</a></li>
+        <li><i class="ico ico-class"></i> Result.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Lorg/junit/runner/Result;
+.super Ljava/lang/Object;
+.source "Result.java"
+.implements Ljava/io/Serializable;
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Lorg/junit/runner/Result$SerializedForm;,
+Lorg/junit/runner/Result$Listener;
+}
+.end annotation
+
+.field private static final serialPersistentFields:[Ljava/io/ObjectStreamField;
+.field private static final serialVersionUID:J = 0x1L
+.field private final count:Ljava/util/concurrent/atomic/AtomicInteger;
+.field private final failures:Ljava/util/concurrent/CopyOnWriteArrayList;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/concurrent/CopyOnWriteArrayList<",
+"Lorg/junit/runner/notification/Failure;",
+">;"
+}
+.end annotation
+.end field
+.field private final ignoreCount:Ljava/util/concurrent/atomic/AtomicInteger;
+.field private final runTime:Ljava/util/concurrent/atomic/AtomicLong;
+.field private serializedForm:Lorg/junit/runner/Result$SerializedForm;
+.field private final startTime:Ljava/util/concurrent/atomic/AtomicLong;
+
+
+.method static constructor <clinit>()V
+<span class="">	.locals 1</span>
+
+<span class="">	const-class v0, Lorg/junit/runner/Result$SerializedForm;</span>
+<span class="">	invoke-static {v0}, Ljava/io/ObjectStreamClass;->lookup(Ljava/lang/Class;)Ljava/io/ObjectStreamClass;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/io/ObjectStreamClass;->getFields()[Ljava/io/ObjectStreamField;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Lorg/junit/runner/Result;->serialPersistentFields:[Ljava/io/ObjectStreamField;</span>
+.end method
+
+.method public constructor <init>()V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	new-instance v0, Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/concurrent/atomic/AtomicInteger;-><init>()V</span>
+<span class="">	iput-object v0, p0, Lorg/junit/runner/Result;->count:Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	new-instance v0, Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/concurrent/atomic/AtomicInteger;-><init>()V</span>
+<span class="">	iput-object v0, p0, Lorg/junit/runner/Result;->ignoreCount:Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	new-instance v0, Ljava/util/concurrent/CopyOnWriteArrayList;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/concurrent/CopyOnWriteArrayList;-><init>()V</span>
+<span class="">	iput-object v0, p0, Lorg/junit/runner/Result;->failures:Ljava/util/concurrent/CopyOnWriteArrayList;</span>
+<span class="">	new-instance v0, Ljava/util/concurrent/atomic/AtomicLong;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/concurrent/atomic/AtomicLong;-><init>()V</span>
+<span class="">	iput-object v0, p0, Lorg/junit/runner/Result;->runTime:Ljava/util/concurrent/atomic/AtomicLong;</span>
+<span class="">	new-instance v0, Ljava/util/concurrent/atomic/AtomicLong;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/concurrent/atomic/AtomicLong;-><init>()V</span>
+<span class="">	iput-object v0, p0, Lorg/junit/runner/Result;->startTime:Ljava/util/concurrent/atomic/AtomicLong;</span>
+.end method
+
+.method private constructor <init>(Lorg/junit/runner/Result$SerializedForm;)V
+<span class="">	.locals 3</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	invoke-static {p1}, Lorg/junit/runner/Result$SerializedForm;->access$000(Lorg/junit/runner/Result$SerializedForm;)Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Lorg/junit/runner/Result;->count:Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	invoke-static {p1}, Lorg/junit/runner/Result$SerializedForm;->access$100(Lorg/junit/runner/Result$SerializedForm;)Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Lorg/junit/runner/Result;->ignoreCount:Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	new-instance v0, Ljava/util/concurrent/CopyOnWriteArrayList;</span>
+<span class="">	invoke-static {p1}, Lorg/junit/runner/Result$SerializedForm;->access$200(Lorg/junit/runner/Result$SerializedForm;)Ljava/util/List;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/util/concurrent/CopyOnWriteArrayList;-><init>(Ljava/util/Collection;)V</span>
+<span class="">	iput-object v0, p0, Lorg/junit/runner/Result;->failures:Ljava/util/concurrent/CopyOnWriteArrayList;</span>
+<span class="">	new-instance v0, Ljava/util/concurrent/atomic/AtomicLong;</span>
+<span class="">	invoke-static {p1}, Lorg/junit/runner/Result$SerializedForm;->access$300(Lorg/junit/runner/Result$SerializedForm;)J</span>
+<span class="">	move-result-wide v1</span>
+<span class="">	invoke-direct {v0, v1, v2}, Ljava/util/concurrent/atomic/AtomicLong;-><init>(J)V</span>
+<span class="">	iput-object v0, p0, Lorg/junit/runner/Result;->runTime:Ljava/util/concurrent/atomic/AtomicLong;</span>
+<span class="">	new-instance v0, Ljava/util/concurrent/atomic/AtomicLong;</span>
+<span class="">	invoke-static {p1}, Lorg/junit/runner/Result$SerializedForm;->access$400(Lorg/junit/runner/Result$SerializedForm;)J</span>
+<span class="">	move-result-wide v1</span>
+<span class="">	invoke-direct {v0, v1, v2}, Ljava/util/concurrent/atomic/AtomicLong;-><init>(J)V</span>
+<span class="">	iput-object v0, p0, Lorg/junit/runner/Result;->startTime:Ljava/util/concurrent/atomic/AtomicLong;</span>
+.end method
+
+.method static synthetic access$500(Lorg/junit/runner/Result;)Ljava/util/concurrent/atomic/AtomicLong;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p0, p0, Lorg/junit/runner/Result;->startTime:Ljava/util/concurrent/atomic/AtomicLong;</span>
+.end method
+
+.method static synthetic access$600(Lorg/junit/runner/Result;)Ljava/util/concurrent/atomic/AtomicLong;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p0, p0, Lorg/junit/runner/Result;->runTime:Ljava/util/concurrent/atomic/AtomicLong;</span>
+.end method
+
+.method static synthetic access$700(Lorg/junit/runner/Result;)Ljava/util/concurrent/atomic/AtomicInteger;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p0, p0, Lorg/junit/runner/Result;->count:Ljava/util/concurrent/atomic/AtomicInteger;</span>
+.end method
+
+.method static synthetic access$800(Lorg/junit/runner/Result;)Ljava/util/concurrent/CopyOnWriteArrayList;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p0, p0, Lorg/junit/runner/Result;->failures:Ljava/util/concurrent/CopyOnWriteArrayList;</span>
+.end method
+
+.method static synthetic access$900(Lorg/junit/runner/Result;)Ljava/util/concurrent/atomic/AtomicInteger;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p0, p0, Lorg/junit/runner/Result;->ignoreCount:Ljava/util/concurrent/atomic/AtomicInteger;</span>
+.end method
+
+.method private readObject(Ljava/io/ObjectInputStream;)V
+<span class="">	.locals 0</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/lang/ClassNotFoundException;,</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {p1}, Lorg/junit/runner/Result$SerializedForm;->deserialize(Ljava/io/ObjectInputStream;)Lorg/junit/runner/Result$SerializedForm;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iput-object p1, p0, Lorg/junit/runner/Result;->serializedForm:Lorg/junit/runner/Result$SerializedForm;</span>
+.end method
+
+.method private readResolve()Ljava/lang/Object;
+<span class="">	.locals 2</span>
+
+<span class="">	new-instance v0, Lorg/junit/runner/Result;</span>
+<span class="">	iget-object v1, p0, Lorg/junit/runner/Result;->serializedForm:Lorg/junit/runner/Result$SerializedForm;</span>
+<span class="">	invoke-direct {v0, v1}, Lorg/junit/runner/Result;-><init>(Lorg/junit/runner/Result$SerializedForm;)V</span>
+.end method
+
+.method private writeObject(Ljava/io/ObjectOutputStream;)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/io/IOException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Lorg/junit/runner/Result$SerializedForm;</span>
+<span class="">	invoke-direct {v0, p0}, Lorg/junit/runner/Result$SerializedForm;-><init>(Lorg/junit/runner/Result;)V</span>
+<span class="">	invoke-virtual {v0, p1}, Lorg/junit/runner/Result$SerializedForm;->serialize(Ljava/io/ObjectOutputStream;)V</span>
+.end method
+
+.method public createListener()Lorg/junit/runner/notification/RunListener;
+<span class="">	.locals 2</span>
+
+<span class="">	new-instance v0, Lorg/junit/runner/Result$Listener;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-direct {v0, p0, v1}, Lorg/junit/runner/Result$Listener;-><init>(Lorg/junit/runner/Result;Lorg/junit/runner/Result$1;)V</span>
+.end method
+
+.method public getFailureCount()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runner/Result;->failures:Ljava/util/concurrent/CopyOnWriteArrayList;</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/concurrent/CopyOnWriteArrayList;->size()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public getFailures()Ljava/util/List;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"()",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Lorg/junit/runner/notification/Failure;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runner/Result;->failures:Ljava/util/concurrent/CopyOnWriteArrayList;</span>
+.end method
+
+.method public getIgnoreCount()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runner/Result;->ignoreCount:Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicInteger;->get()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public getRunCount()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runner/Result;->count:Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicInteger;->get()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public getRunTime()J
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/runner/Result;->runTime:Ljava/util/concurrent/atomic/AtomicLong;</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicLong;->get()J</span>
+<span class="">	move-result-wide v0</span>
+.end method
+
+.method public wasSuccessful()Z
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Lorg/junit/runner/Result;->getFailureCount()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

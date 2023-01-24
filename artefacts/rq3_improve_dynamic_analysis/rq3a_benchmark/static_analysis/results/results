@@ -1,0 +1,579 @@
+-e [0;36m[*] Processing ../benchmark_apps/CompletableFuture_runAsync.apk[0;0m
+[36m[*] Archer v1.0 started on Tue Jan 24 19:15:04 CET 2023
+[0m
+[36m[*] Processing: lu.uni.trux.completablefuture_runasync[0m
+[36m[*] Initializing Environment[0m
+[32m[✓] Done[0m
+[36m[*] Solving data flow problems...[0m
+[32m[✓] Done[0m
+[36m[*] Patching Call graph...[0m
+[32m[✓] Done[0m
+[36m[*] Running taint analysis[0m
+[32m[✓] Taint analysis terminated[0m
+[32m[✓] Flowdroid found leaks:[0m
+[36m[*] Leak 1: [0m
+    From: $r1 = virtualinvoke $r2.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() in method: <lu.uni.trux.completablefuture_runasync.MyRunnable: void run()>
+    To: staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) in method: <lu.uni.trux.completablefuture_runasync.MyRunnable: void run()>
+    Detailed path:
+      -$r1 = virtualinvoke $r2.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() => in method: <lu.uni.trux.completablefuture_runasync.MyRunnable: void run()>
+      -staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) => in method: <lu.uni.trux.completablefuture_runasync.MyRunnable: void run()>
+Results:
+ - App name: CompletableFuture_runAsync
+ - Analysis elapsed time: 17
+ - Instrumentation elapsed time: 2
+ - Taint Analysis elapsed time: 1
+ - Number of new Edges in call graph: 1
+ - Number of new Nodes in call graph: 1
+ - Number of Edges in call graph: 6908
+ - Number of Nodes in call graph: 2145
+ - Number of extra statement covered: 5
+ - Proportion of extra code covered: 0.02% 
+ - Reached timeout: no
+ - Constraints:
+   - Method call "runAsync" in methods <lu.uni.trux.completablefuture_runasync.MainActivity: void onCreate(android.os.Bundle)>:
+    - Potential targets:
+     - lu.uni.trux.completablefuture_runasync.MyRunnable.run
+    - No constraints
+-e [0;36m[*] Processing ../benchmark_apps/CompletableFuture_runAsync1.apk[0;0m
+[36m[*] Archer v1.0 started on Tue Jan 24 19:15:21 CET 2023
+[0m
+[36m[*] Processing: lu.uni.trux.completablefuture_runasync1[0m
+[36m[*] Initializing Environment[0m
+[32m[✓] Done[0m
+[36m[*] Solving data flow problems...[0m
+[32m[✓] Done[0m
+[36m[*] Patching Call graph...[0m
+[32m[✓] Done[0m
+[36m[*] Running taint analysis[0m
+[32m[✓] Taint analysis terminated[0m
+[33m[*] No leak found[0m
+Results:
+ - App name: CompletableFuture_runAsync1
+ - Analysis elapsed time: 17
+ - Instrumentation elapsed time: 3
+ - Taint Analysis elapsed time: 0
+ - Number of new Edges in call graph: 1
+ - Number of new Nodes in call graph: 1
+ - Number of Edges in call graph: 6908
+ - Number of Nodes in call graph: 2145
+ - Number of extra statement covered: 5
+ - Proportion of extra code covered: 0.02% 
+ - Reached timeout: no
+ - Constraints:
+   - Method call "runAsync" in methods <lu.uni.trux.completablefuture_runasync1.MainActivity: void onCreate(android.os.Bundle)>:
+    - Potential targets:
+     - lu.uni.trux.completablefuture_runasync1.MyRunnable.run
+    - No constraints
+-e [0;36m[*] Processing ../benchmark_apps/CompletableFuture_thenRun.apk[0;0m
+[36m[*] Archer v1.0 started on Tue Jan 24 19:15:39 CET 2023
+[0m
+[36m[*] Processing: lu.uni.trux.completablefuture_thenrun[0m
+[36m[*] Initializing Environment[0m
+[32m[✓] Done[0m
+[36m[*] Solving data flow problems...[0m
+[32m[✓] Done[0m
+[36m[*] Patching Call graph...[0m
+[32m[✓] Done[0m
+[36m[*] Running taint analysis[0m
+[32m[✓] Taint analysis terminated[0m
+[32m[✓] Flowdroid found leaks:[0m
+[36m[*] Leak 1: [0m
+    From: $r5 = virtualinvoke $r4.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() in method: <lu.uni.trux.completablefuture_thenrun.MainActivity: void onCreate(android.os.Bundle)>
+    To: staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) in method: <lu.uni.trux.completablefuture_thenrun.MyRunnable: void run()>
+    Detailed path:
+      -$r5 = virtualinvoke $r4.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() => in method: <lu.uni.trux.completablefuture_thenrun.MainActivity: void onCreate(android.os.Bundle)>
+      -<lu.uni.trux.completablefuture_thenrun.MyRunnable: java.lang.String phoneNumber> = $r5 => in method: <lu.uni.trux.completablefuture_thenrun.MainActivity: void onCreate(android.os.Bundle)>
+      -virtualinvoke $r6.<java.util.concurrent.CompletableFuture: java.util.concurrent.CompletableFuture thenRun(java.lang.Runnable)>($r1) => in method: <lu.uni.trux.completablefuture_thenrun.MainActivity: void onCreate(android.os.Bundle)>
+      -virtualinvoke target4.<lu.uni.trux.completablefuture_thenrun.MyRunnable: void run()>() => in method: <java.util.concurrent.CompletableFuture: java.util.concurrent.CompletableFuture thenRun(java.lang.Runnable)>
+      -$r1 = <lu.uni.trux.completablefuture_thenrun.MyRunnable: java.lang.String phoneNumber> => in method: <lu.uni.trux.completablefuture_thenrun.MyRunnable: void run()>
+      -staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) => in method: <lu.uni.trux.completablefuture_thenrun.MyRunnable: void run()>
+Results:
+ - App name: CompletableFuture_thenRun
+ - Analysis elapsed time: 18
+ - Instrumentation elapsed time: 3
+ - Taint Analysis elapsed time: 1
+ - Number of new Edges in call graph: 2
+ - Number of new Nodes in call graph: 2
+ - Number of Edges in call graph: 6914
+ - Number of Nodes in call graph: 2149
+ - Number of extra statement covered: 6
+ - Proportion of extra code covered: 0.02% 
+ - Reached timeout: no
+ - Constraints:
+   - Method call "runAsync" in methods <lu.uni.trux.completablefuture_thenrun.MainActivity: void onCreate(android.os.Bundle)>:
+    - Potential targets:
+     - lu.uni.trux.completablefuture_thenrun.MyRunnable1.run
+    - No constraints
+ - Constraints:
+   - Method call "thenRun" in methods <lu.uni.trux.completablefuture_thenrun.MainActivity: void onCreate(android.os.Bundle)>:
+    - Potential targets:
+     - lu.uni.trux.completablefuture_thenrun.MyRunnable.run
+    - No constraints
+-e [0;36m[*] Processing ../benchmark_apps/ExecutorCompletionService_submit.apk[0;0m
+[36m[*] Archer v1.0 started on Tue Jan 24 19:15:57 CET 2023
+[0m
+[36m[*] Processing: lu.uni.trux.executorcompletionservice_submit[0m
+[36m[*] Initializing Environment[0m
+[32m[✓] Done[0m
+[36m[*] Solving data flow problems...[0m
+[32m[✓] Done[0m
+[36m[*] Patching Call graph...[0m
+[32m[✓] Done[0m
+[36m[*] Running taint analysis[0m
+[32m[✓] Taint analysis terminated[0m
+[32m[✓] Flowdroid found leaks:[0m
+[36m[*] Leak 1: [0m
+    From: $r2 = virtualinvoke $r1.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() in method: <lu.uni.trux.executorcompletionservice_submit.MyCallable: java.lang.Object call()>
+    To: staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r2) in method: <lu.uni.trux.executorcompletionservice_submit.MyCallable: java.lang.Object call()>
+    Detailed path:
+      -$r2 = virtualinvoke $r1.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() => in method: <lu.uni.trux.executorcompletionservice_submit.MyCallable: java.lang.Object call()>
+      -staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r2) => in method: <lu.uni.trux.executorcompletionservice_submit.MyCallable: java.lang.Object call()>
+Results:
+ - App name: ExecutorCompletionService_submit
+ - Analysis elapsed time: 21
+ - Instrumentation elapsed time: 3
+ - Taint Analysis elapsed time: 1
+ - Number of new Edges in call graph: 1
+ - Number of new Nodes in call graph: 1
+ - Number of Edges in call graph: 6912
+ - Number of Nodes in call graph: 2147
+ - Number of extra statement covered: 6
+ - Proportion of extra code covered: 0.02% 
+ - Reached timeout: no
+ - Constraints:
+   - Method call "submit" in methods <lu.uni.trux.executorcompletionservice_submit.MainActivity: void onCreate(android.os.Bundle)>:
+    - Potential targets:
+     - lu.uni.trux.executorcompletionservice_submit.MyCallable.call
+    - No constraints
+-e [0;36m[*] Processing ../benchmark_apps/ExecutorService_submit.apk[0;0m
+[36m[*] Archer v1.0 started on Tue Jan 24 19:16:19 CET 2023
+[0m
+[36m[*] Processing: lu.uni.trux.executorservice_submit[0m
+[36m[*] Initializing Environment[0m
+[32m[✓] Done[0m
+[36m[*] Solving data flow problems...[0m
+[32m[✓] Done[0m
+[36m[*] Patching Call graph...[0m
+[32m[✓] Done[0m
+[36m[*] Running taint analysis[0m
+[32m[✓] Taint analysis terminated[0m
+[32m[✓] Flowdroid found leaks:[0m
+[36m[*] Leak 1: [0m
+    From: $r5 = virtualinvoke $r4.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() in method: <lu.uni.trux.executorservice_submit.MainActivity: void onCreate(android.os.Bundle)>
+    To: staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) in method: <lu.uni.trux.executorservice_submit.MyCallable: java.lang.Object call()>
+    Detailed path:
+      -$r5 = virtualinvoke $r4.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() => in method: <lu.uni.trux.executorservice_submit.MainActivity: void onCreate(android.os.Bundle)>
+      -<lu.uni.trux.executorservice_submit.MyCallable: java.lang.String phoneNumber> = $r5 => in method: <lu.uni.trux.executorservice_submit.MainActivity: void onCreate(android.os.Bundle)>
+      -virtualinvoke $r6.<java.util.concurrent.AbstractExecutorService: java.util.concurrent.Future submit(java.util.concurrent.Callable)>($r1) => in method: <lu.uni.trux.executorservice_submit.MainActivity: void onCreate(android.os.Bundle)>
+      -virtualinvoke target2.<lu.uni.trux.executorservice_submit.MyCallable: java.lang.Object call()>() => in method: <java.util.concurrent.AbstractExecutorService: java.util.concurrent.Future submit(java.util.concurrent.Callable)>
+      -$r1 = <lu.uni.trux.executorservice_submit.MyCallable: java.lang.String phoneNumber> => in method: <lu.uni.trux.executorservice_submit.MyCallable: java.lang.Object call()>
+      -staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) => in method: <lu.uni.trux.executorservice_submit.MyCallable: java.lang.Object call()>
+Results:
+ - App name: ExecutorService_submit
+ - Analysis elapsed time: 19
+ - Instrumentation elapsed time: 3
+ - Taint Analysis elapsed time: 1
+ - Number of new Edges in call graph: 1
+ - Number of new Nodes in call graph: 1
+ - Number of Edges in call graph: 6910
+ - Number of Nodes in call graph: 2147
+ - Number of extra statement covered: 4
+ - Proportion of extra code covered: 0.02% 
+ - Reached timeout: no
+ - Constraints:
+   - Method call "submit" in methods <lu.uni.trux.executorservice_submit.MainActivity: void onCreate(android.os.Bundle)>:
+    - Potential targets:
+     - lu.uni.trux.executorservice_submit.MyCallable.call
+    - No constraints
+-e [0;36m[*] Processing ../benchmark_apps/JobScheduler_schedule.apk[0;0m
+[36m[*] Archer v1.0 started on Tue Jan 24 19:16:39 CET 2023
+[0m
+[36m[*] Processing: lu.uni.trux.jobscheduler_schedule[0m
+[36m[*] Initializing Environment[0m
+[32m[✓] Done[0m
+[36m[*] Solving data flow problems...[0m
+[32m[✓] Done[0m
+[36m[*] Patching Call graph...[0m
+[32m[✓] Done[0m
+[36m[*] Running taint analysis[0m
+[32m[✓] Taint analysis terminated[0m
+[32m[✓] Flowdroid found leaks:[0m
+[36m[*] Leak 1: [0m
+    From: $r1 = virtualinvoke $r3.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() in method: <lu.uni.trux.jobscheduler_schedule.ReceiverService: boolean onStartJob(android.app.job.JobParameters)>
+    To: staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) in method: <lu.uni.trux.jobscheduler_schedule.ReceiverService: boolean onStartJob(android.app.job.JobParameters)>
+    Detailed path:
+      -$r1 = virtualinvoke $r3.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() => in method: <lu.uni.trux.jobscheduler_schedule.ReceiverService: boolean onStartJob(android.app.job.JobParameters)>
+      -staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) => in method: <lu.uni.trux.jobscheduler_schedule.ReceiverService: boolean onStartJob(android.app.job.JobParameters)>
+Results:
+ - App name: JobScheduler_schedule
+ - Analysis elapsed time: 20
+ - Instrumentation elapsed time: 3
+ - Taint Analysis elapsed time: 1
+ - Number of new Edges in call graph: 1
+ - Number of new Nodes in call graph: 1
+ - Number of Edges in call graph: 7043
+ - Number of Nodes in call graph: 2197
+ - Number of extra statement covered: 6
+ - Proportion of extra code covered: 0.02% 
+ - Reached timeout: no
+ - Constraints:
+   - Method call "schedule" in methods <lu.uni.trux.jobscheduler_schedule.MainActivity: void onCreate(android.os.Bundle)>:
+    - Potential targets:
+     - lu.uni.trux.jobscheduler_schedule.ReceiverService.onStartJob
+    - Potential constraints:
+     - Latency: 1000L
+     - Required charging: 1
+     - Network type: 1
+-e [0;36m[*] Processing ../benchmark_apps/JobScheduler_schedule1.apk[0;0m
+[36m[*] Archer v1.0 started on Tue Jan 24 19:17:00 CET 2023
+[0m
+[36m[*] Processing: lu.uni.trux.jobscheduler_schedule1[0m
+[36m[*] Initializing Environment[0m
+[32m[✓] Done[0m
+[36m[*] Solving data flow problems...[0m
+[32m[✓] Done[0m
+[36m[*] Patching Call graph...[0m
+[32m[✓] Done[0m
+[36m[*] Running taint analysis[0m
+[32m[✓] Taint analysis terminated[0m
+[33m[*] No leak found[0m
+Results:
+ - App name: JobScheduler_schedule1
+ - Analysis elapsed time: 16
+ - Instrumentation elapsed time: 3
+ - Taint Analysis elapsed time: 0
+ - Number of new Edges in call graph: 0
+ - Number of new Nodes in call graph: 0
+ - Number of Edges in call graph: 6923
+ - Number of Nodes in call graph: 2151
+ - Number of extra statement covered: 0
+ - Proportion of extra code covered: 0.00% 
+ - Reached timeout: no
+-e [0;36m[*] Processing ../benchmark_apps/PoolExecutor_scheduleWithFixedDelay_enqueue.apk[0;0m
+[36m[*] Archer v1.0 started on Tue Jan 24 19:17:17 CET 2023
+[0m
+[36m[*] Processing: lu.uni.trux.poolexecutor_schedulewithfixeddelay_enqueue[0m
+[36m[*] Initializing Environment[0m
+[32m[✓] Done[0m
+[36m[*] Solving data flow problems...[0m
+[32m[✓] Done[0m
+[36m[*] Patching Call graph...[0m
+[32m[✓] Done[0m
+[36m[*] Running taint analysis[0m
+[32m[✓] Taint analysis terminated[0m
+[32m[✓] Flowdroid found leaks:[0m
+[36m[*] Leak 1: [0m
+    From: $r1 = virtualinvoke $r2.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() in method: <lu.uni.trux.poolexecutor_schedulewithfixeddelay_enqueue.MyWorker: androidx.work.ListenableWorker$Result doWork()>
+    To: staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK: ", $r1) in method: <lu.uni.trux.poolexecutor_schedulewithfixeddelay_enqueue.MyWorker: androidx.work.ListenableWorker$Result doWork()>
+    Detailed path:
+      -$r1 = virtualinvoke $r2.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() => in method: <lu.uni.trux.poolexecutor_schedulewithfixeddelay_enqueue.MyWorker: androidx.work.ListenableWorker$Result doWork()>
+      -staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK: ", $r1) => in method: <lu.uni.trux.poolexecutor_schedulewithfixeddelay_enqueue.MyWorker: androidx.work.ListenableWorker$Result doWork()>
+Results:
+ - App name: PoolExecutor_scheduleWithFixedDelay_enqueue
+ - Analysis elapsed time: 22
+ - Instrumentation elapsed time: 4
+ - Taint Analysis elapsed time: 1
+ - Number of new Edges in call graph: 2
+ - Number of new Nodes in call graph: 2
+ - Number of Edges in call graph: 9567
+ - Number of Nodes in call graph: 2830
+ - Number of extra statement covered: 14
+ - Proportion of extra code covered: 0.04% 
+ - Reached timeout: no
+ - Constraints:
+   - Method call "scheduleWithFixedDelay" in methods <lu.uni.trux.poolexecutor_schedulewithfixeddelay_enqueue.MainActivity: void onCreate(android.os.Bundle)>:
+    - Potential targets:
+     - lu.uni.trux.poolexecutor_schedulewithfixeddelay_enqueue.MyRunnable.run
+    - Potential constraints:
+     - Time before execution: 10L
+     - Period after next execution: 1L
+     - TimeUnit: SECONDS
+ - Constraints:
+   - Method call "enqueue" in methods <lu.uni.trux.poolexecutor_schedulewithfixeddelay_enqueue.MyRunnable: void run()>:
+    - Potential targets:
+     - lu.uni.trux.poolexecutor_schedulewithfixeddelay_enqueue.MyWorker.doWork
+    - No constraints
+-e [0;36m[*] Processing ../benchmark_apps/ScheduledThreadPoolExecutor_invokeAll.apk[0;0m
+[36m[*] Archer v1.0 started on Tue Jan 24 19:17:40 CET 2023
+[0m
+[36m[*] Processing: lu.uni.trux.scheduledthreadpoolexecutor_invokeall[0m
+[36m[*] Initializing Environment[0m
+[32m[✓] Done[0m
+[36m[*] Solving data flow problems...[0m
+[32m[✓] Done[0m
+[36m[*] Patching Call graph...[0m
+[32m[✓] Done[0m
+[36m[*] Running taint analysis[0m
+[32m[✓] Taint analysis terminated[0m
+[32m[✓] Flowdroid found leaks:[0m
+[36m[*] Leak 1: [0m
+    From: $r1 = virtualinvoke $r2.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() in method: <lu.uni.trux.scheduledthreadpoolexecutor_invokeall.MyCallable: java.lang.String call()>
+    To: staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) in method: <lu.uni.trux.scheduledthreadpoolexecutor_invokeall.MyCallable: java.lang.String call()>
+    Detailed path:
+      -$r1 = virtualinvoke $r2.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() => in method: <lu.uni.trux.scheduledthreadpoolexecutor_invokeall.MyCallable: java.lang.String call()>
+      -staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) => in method: <lu.uni.trux.scheduledthreadpoolexecutor_invokeall.MyCallable: java.lang.String call()>
+Results:
+ - App name: ScheduledThreadPoolExecutor_invokeAll
+ - Analysis elapsed time: 19
+ - Instrumentation elapsed time: 3
+ - Taint Analysis elapsed time: 1
+ - Number of new Edges in call graph: 1
+ - Number of new Nodes in call graph: 1
+ - Number of Edges in call graph: 6912
+ - Number of Nodes in call graph: 2147
+ - Number of extra statement covered: 3
+ - Proportion of extra code covered: 0.01% 
+ - Reached timeout: no
+ - Constraints:
+   - Method call "invokeAll" in methods <lu.uni.trux.scheduledthreadpoolexecutor_invokeall.MainActivity: void onCreate(android.os.Bundle)>:
+    - Potential targets:
+     - lu.uni.trux.scheduledthreadpoolexecutor_invokeall.MyCallable.call
+    - No constraints
+-e [0;36m[*] Processing ../benchmark_apps/ScheduledThreadPoolExecutor_scheduleWithFixedDelay.apk[0;0m
+[36m[*] Archer v1.0 started on Tue Jan 24 19:17:59 CET 2023
+[0m
+[36m[*] Processing: lu.uni.trux.scheduledthreadpoolexecutor_schedulewithfixeddelay[0m
+[36m[*] Initializing Environment[0m
+[32m[✓] Done[0m
+[36m[*] Solving data flow problems...[0m
+[32m[✓] Done[0m
+[36m[*] Patching Call graph...[0m
+[32m[✓] Done[0m
+[36m[*] Running taint analysis[0m
+[32m[✓] Taint analysis terminated[0m
+[32m[✓] Flowdroid found leaks:[0m
+[36m[*] Leak 1: [0m
+    From: $r1 = virtualinvoke $r2.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() in method: <lu.uni.trux.scheduledthreadpoolexecutor_schedulewithfixeddelay.MyRunnable: void run()>
+    To: staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK: ", $r1) in method: <lu.uni.trux.scheduledthreadpoolexecutor_schedulewithfixeddelay.MyRunnable: void run()>
+    Detailed path:
+      -$r1 = virtualinvoke $r2.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() => in method: <lu.uni.trux.scheduledthreadpoolexecutor_schedulewithfixeddelay.MyRunnable: void run()>
+      -staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK: ", $r1) => in method: <lu.uni.trux.scheduledthreadpoolexecutor_schedulewithfixeddelay.MyRunnable: void run()>
+Results:
+ - App name: ScheduledThreadPoolExecutor_scheduleWithFixedDelay
+ - Analysis elapsed time: 17
+ - Instrumentation elapsed time: 2
+ - Taint Analysis elapsed time: 1
+ - Number of new Edges in call graph: 1
+ - Number of new Nodes in call graph: 1
+ - Number of Edges in call graph: 6914
+ - Number of Nodes in call graph: 2149
+ - Number of extra statement covered: 5
+ - Proportion of extra code covered: 0.02% 
+ - Reached timeout: no
+ - Constraints:
+   - Method call "scheduleWithFixedDelay" in methods <lu.uni.trux.scheduledthreadpoolexecutor_schedulewithfixeddelay.MainActivity: void onCreate(android.os.Bundle)>:
+    - Potential targets:
+     - lu.uni.trux.scheduledthreadpoolexecutor_schedulewithfixeddelay.MyRunnable.run
+    - Potential constraints:
+     - Time before execution: 1L
+     - TimeUnit: SECONDS
+     - Period after next execution: -1L
+-e [0;36m[*] Processing ../benchmark_apps/ScheduledThreadPoolExecutor_scheduledAtFixedRate.apk[0;0m
+[36m[*] Archer v1.0 started on Tue Jan 24 19:18:17 CET 2023
+[0m
+[36m[*] Processing: lu.uni.trux.scheduledthreadpoolexecutor_scheduledatfixedrate[0m
+[36m[*] Initializing Environment[0m
+[32m[✓] Done[0m
+[36m[*] Solving data flow problems...[0m
+[32m[✓] Done[0m
+[36m[*] Patching Call graph...[0m
+[32m[✓] Done[0m
+[36m[*] Running taint analysis[0m
+[32m[✓] Taint analysis terminated[0m
+[32m[✓] Flowdroid found leaks:[0m
+[36m[*] Leak 1: [0m
+    From: $r1 = virtualinvoke $r2.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() in method: <lu.uni.trux.scheduledthreadpoolexecutor_scheduledatfixedrate.MyRunnable: void run()>
+    To: staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) in method: <lu.uni.trux.scheduledthreadpoolexecutor_scheduledatfixedrate.MyRunnable: void run()>
+    Detailed path:
+      -$r1 = virtualinvoke $r2.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() => in method: <lu.uni.trux.scheduledthreadpoolexecutor_scheduledatfixedrate.MyRunnable: void run()>
+      -staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) => in method: <lu.uni.trux.scheduledthreadpoolexecutor_scheduledatfixedrate.MyRunnable: void run()>
+Results:
+ - App name: ScheduledThreadPoolExecutor_scheduledAtFixedRate
+ - Analysis elapsed time: 18
+ - Instrumentation elapsed time: 3
+ - Taint Analysis elapsed time: 1
+ - Number of new Edges in call graph: 1
+ - Number of new Nodes in call graph: 1
+ - Number of Edges in call graph: 6910
+ - Number of Nodes in call graph: 2147
+ - Number of extra statement covered: 5
+ - Proportion of extra code covered: 0.02% 
+ - Reached timeout: no
+ - Constraints:
+   - Method call "scheduleAtFixedRate" in methods <lu.uni.trux.scheduledthreadpoolexecutor_scheduledatfixedrate.MainActivity: void onCreate(android.os.Bundle)>:
+    - Potential targets:
+     - lu.uni.trux.scheduledthreadpoolexecutor_scheduledatfixedrate.MyRunnable.run
+    - Potential constraints:
+     - Time before execution: 10L
+     - TimeUnit: SECONDS
+     - Period after next execution: 1L
+-e [0;36m[*] Processing ../benchmark_apps/SynchronousExecutor_execute.apk[0;0m
+[36m[*] Archer v1.0 started on Tue Jan 24 19:18:35 CET 2023
+[0m
+[36m[*] Processing: lu.uni.trux.synchronousexecutor_execute[0m
+[36m[*] Initializing Environment[0m
+[32m[✓] Done[0m
+[36m[*] Solving data flow problems...[0m
+[32m[✓] Done[0m
+[36m[*] Patching Call graph...[0m
+[32m[✓] Done[0m
+[36m[*] Running taint analysis[0m
+[32m[✓] Taint analysis terminated[0m
+[33m[*] No leak found[0m
+Results:
+ - App name: SynchronousExecutor_execute
+ - Analysis elapsed time: 23
+ - Instrumentation elapsed time: 5
+ - Taint Analysis elapsed time: 0
+ - Number of new Edges in call graph: 0
+ - Number of new Nodes in call graph: 0
+ - Number of Edges in call graph: 9755
+ - Number of Nodes in call graph: 2878
+ - Number of extra statement covered: 0
+ - Proportion of extra code covered: 0.00% 
+ - Reached timeout: no
+-e [0;36m[*] Processing ../benchmark_apps/TimerTask_schedule.apk[0;0m
+[36m[*] Archer v1.0 started on Tue Jan 24 19:18:59 CET 2023
+[0m
+[36m[*] Processing: lu.uni.trux.timertask_schedule[0m
+[36m[*] Initializing Environment[0m
+[32m[✓] Done[0m
+[36m[*] Solving data flow problems...[0m
+[32m[✓] Done[0m
+[36m[*] Patching Call graph...[0m
+[32m[✓] Done[0m
+[36m[*] Running taint analysis[0m
+[32m[✓] Taint analysis terminated[0m
+[32m[✓] Flowdroid found leaks:[0m
+[36m[*] Leak 1: [0m
+    From: $r1 = virtualinvoke $r2.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() in method: <lu.uni.trux.timertask_schedule.MyTimerTask: void run()>
+    To: staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) in method: <lu.uni.trux.timertask_schedule.MyTimerTask: void run()>
+    Detailed path:
+      -$r1 = virtualinvoke $r2.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() => in method: <lu.uni.trux.timertask_schedule.MyTimerTask: void run()>
+      -staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) => in method: <lu.uni.trux.timertask_schedule.MyTimerTask: void run()>
+Results:
+ - App name: TimerTask_schedule
+ - Analysis elapsed time: 17
+ - Instrumentation elapsed time: 3
+ - Taint Analysis elapsed time: 1
+ - Number of new Edges in call graph: 1
+ - Number of new Nodes in call graph: 1
+ - Number of Edges in call graph: 6909
+ - Number of Nodes in call graph: 2147
+ - Number of extra statement covered: 5
+ - Proportion of extra code covered: 0.02% 
+ - Reached timeout: no
+ - Constraints:
+   - Method call "schedule" in methods <lu.uni.trux.timertask_schedule.MainActivity: void onCreate(android.os.Bundle)>:
+    - Potential targets:
+     - lu.uni.trux.timertask_schedule.MyTimerTask.run
+    - Potential constraints:
+     - Delay of execution in ms: 10000L
+-e [0;36m[*] Processing ../benchmark_apps/WorkManager_enqueue.apk[0;0m
+[36m[*] Archer v1.0 started on Tue Jan 24 19:19:17 CET 2023
+[0m
+[36m[*] Processing: lu.uni.trux.workmanager_enqueue[0m
+[36m[*] Initializing Environment[0m
+[32m[✓] Done[0m
+[36m[*] Solving data flow problems...[0m
+[32m[✓] Done[0m
+[36m[*] Patching Call graph...[0m
+[32m[✓] Done[0m
+[36m[*] Running taint analysis[0m
+[32m[✓] Taint analysis terminated[0m
+[32m[✓] Flowdroid found leaks:[0m
+[36m[*] Leak 1: [0m
+    From: $r1 = virtualinvoke $r2.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() in method: <lu.uni.trux.workmanager_enqueue.MyWorker: androidx.work.ListenableWorker$Result doWork()>
+    To: staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) in method: <lu.uni.trux.workmanager_enqueue.MyWorker: androidx.work.ListenableWorker$Result doWork()>
+    Detailed path:
+      -$r1 = virtualinvoke $r2.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() => in method: <lu.uni.trux.workmanager_enqueue.MyWorker: androidx.work.ListenableWorker$Result doWork()>
+      -staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) => in method: <lu.uni.trux.workmanager_enqueue.MyWorker: androidx.work.ListenableWorker$Result doWork()>
+Results:
+ - App name: WorkManager_enqueue
+ - Analysis elapsed time: 23
+ - Instrumentation elapsed time: 5
+ - Taint Analysis elapsed time: 1
+ - Number of new Edges in call graph: 1
+ - Number of new Nodes in call graph: 1
+ - Number of Edges in call graph: 9606
+ - Number of Nodes in call graph: 2833
+ - Number of extra statement covered: 5
+ - Proportion of extra code covered: 0.01% 
+ - Reached timeout: no
+ - Constraints:
+   - Method call "enqueue" in methods <lu.uni.trux.workmanager_enqueue.MainActivity: void onCreate(android.os.Bundle)>:
+    - Potential targets:
+     - lu.uni.trux.workmanager_enqueue.MyWorker.doWork
+    - Potential constraints:
+     - Network Status: CONNECTED
+     - Required charging: 1
+-e [0;36m[*] Processing ../benchmark_apps/WorkManager_enqueue1.apk[0;0m
+[36m[*] Archer v1.0 started on Tue Jan 24 19:19:41 CET 2023
+[0m
+[36m[*] Processing: lu.uni.trux.workmanager_enqueue1[0m
+[36m[*] Initializing Environment[0m
+[32m[✓] Done[0m
+[36m[*] Solving data flow problems...[0m
+[32m[✓] Done[0m
+[36m[*] Patching Call graph...[0m
+[32m[✓] Done[0m
+[36m[*] Running taint analysis[0m
+[32m[✓] Taint analysis terminated[0m
+[33m[*] No leak found[0m
+Results:
+ - App name: WorkManager_enqueue1
+ - Analysis elapsed time: 22
+ - Instrumentation elapsed time: 4
+ - Taint Analysis elapsed time: 0
+ - Number of new Edges in call graph: 1
+ - Number of new Nodes in call graph: 1
+ - Number of Edges in call graph: 9560
+ - Number of Nodes in call graph: 2826
+ - Number of extra statement covered: 5
+ - Proportion of extra code covered: 0.01% 
+ - Reached timeout: no
+ - Constraints:
+   - Method call "enqueue" in methods <lu.uni.trux.workmanager_enqueue1.MainActivity: void onCreate(android.os.Bundle)>:
+    - Potential targets:
+     - lu.uni.trux.workmanager_enqueue1.MyWorker.doWork
+    - Potential constraints:
+     - Battery not low: 1
+-e [0;36m[*] Processing ../benchmark_apps/WorkManager_enqueueUniqueWork.apk[0;0m
+[36m[*] Archer v1.0 started on Tue Jan 24 19:20:03 CET 2023
+[0m
+[36m[*] Processing: lu.uni.trux.workmanager_enqueueuniquework[0m
+[36m[*] Initializing Environment[0m
+[32m[✓] Done[0m
+[36m[*] Solving data flow problems...[0m
+[32m[✓] Done[0m
+[36m[*] Patching Call graph...[0m
+[32m[✓] Done[0m
+[36m[*] Running taint analysis[0m
+[32m[✓] Taint analysis terminated[0m
+[32m[✓] Flowdroid found leaks:[0m
+[36m[*] Leak 1: [0m
+    From: $r1 = virtualinvoke $r2.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() in method: <lu.uni.trux.workmanager_enqueueuniquework.MyWorker: androidx.work.ListenableWorker$Result doWork()>
+    To: staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) in method: <lu.uni.trux.workmanager_enqueueuniquework.MyWorker: androidx.work.ListenableWorker$Result doWork()>
+    Detailed path:
+      -$r1 = virtualinvoke $r2.<android.telephony.TelephonyManager: java.lang.String getLine1Number()>() => in method: <lu.uni.trux.workmanager_enqueueuniquework.MyWorker: androidx.work.ListenableWorker$Result doWork()>
+      -staticinvoke <android.util.Log: int d(java.lang.String,java.lang.String)>("LEAK", $r1) => in method: <lu.uni.trux.workmanager_enqueueuniquework.MyWorker: androidx.work.ListenableWorker$Result doWork()>
+Results:
+ - App name: WorkManager_enqueueUniqueWork
+ - Analysis elapsed time: 22
+ - Instrumentation elapsed time: 4
+ - Taint Analysis elapsed time: 1
+ - Number of new Edges in call graph: 1
+ - Number of new Nodes in call graph: 1
+ - Number of Edges in call graph: 9772
+ - Number of Nodes in call graph: 2882
+ - Number of extra statement covered: 5
+ - Proportion of extra code covered: 0.01% 
+ - Reached timeout: no
+ - Constraints:
+   - Method call "enqueueUniqueWork" in methods <lu.uni.trux.workmanager_enqueueuniquework.MainActivity: void onCreate(android.os.Bundle)>:
+    - Potential targets:
+     - lu.uni.trux.workmanager_enqueueuniquework.MyWorker.doWork
+    - Potential constraints:
+     - Requires device idle: 0
+     - Required charging: 1
+     - Network Status: CONNECTED

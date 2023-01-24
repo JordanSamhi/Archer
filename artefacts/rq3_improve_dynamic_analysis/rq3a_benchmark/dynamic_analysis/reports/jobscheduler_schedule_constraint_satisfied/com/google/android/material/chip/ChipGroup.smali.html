@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../index.html">lu.uni.trux.jobscheduler_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.material.chip</a></li>
+        <li><i class="ico ico-class"></i> ChipGroup.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Lcom/google/android/material/chip/ChipGroup;
+.super Lcom/google/android/material/internal/FlowLayout;
+.source "ChipGroup.java"
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Lcom/google/android/material/chip/ChipGroup$PassThroughHierarchyChangeListener;,
+Lcom/google/android/material/chip/ChipGroup$CheckedStateTracker;,
+Lcom/google/android/material/chip/ChipGroup$LayoutParams;,
+Lcom/google/android/material/chip/ChipGroup$OnCheckedChangeListener;
+}
+.end annotation
+
+.field private static final DEF_STYLE_RES:I
+.field private checkedId:I
+.field private final checkedStateTracker:Lcom/google/android/material/chip/ChipGroup$CheckedStateTracker;
+.field private chipSpacingHorizontal:I
+.field private chipSpacingVertical:I
+.field private onCheckedChangeListener:Lcom/google/android/material/chip/ChipGroup$OnCheckedChangeListener;
+.field private passThroughListener:Lcom/google/android/material/chip/ChipGroup$PassThroughHierarchyChangeListener;
+.field private protectFromCheckedChange:Z
+.field private selectionRequired:Z
+.field private singleSelection:Z
+
+
+.method static constructor <clinit>()V
+<span class="">	.locals 1</span>
+
+<span class="">	sget v0, Lcom/google/android/material/R$style;->Widget_MaterialComponents_ChipGroup:I</span>
+<span class="">	sput v0, Lcom/google/android/material/chip/ChipGroup;->DEF_STYLE_RES:I</span>
+.end method
+
+.method public constructor <init>(Landroid/content/Context;)V
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-direct {p0, p1, v0}, Lcom/google/android/material/chip/ChipGroup;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V</span>
+.end method
+
+.method public constructor <init>(Landroid/content/Context;Landroid/util/AttributeSet;)V
+<span class="">	.locals 1</span>
+
+<span class="">	sget v0, Lcom/google/android/material/R$attr;->chipGroupStyle:I</span>
+<span class="">	invoke-direct {p0, p1, p2, v0}, Lcom/google/android/material/chip/ChipGroup;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V</span>
+.end method
+
+.method public constructor <init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V
+<span class="">	.locals 7</span>
+
+<span class="">	sget v4, Lcom/google/android/material/chip/ChipGroup;->DEF_STYLE_RES:I</span>
+<span class="">	invoke-static {p1, p2, p3, v4}, Lcom/google/android/material/theme/overlay/MaterialThemeOverlay;->wrap(Landroid/content/Context;Landroid/util/AttributeSet;II)Landroid/content/Context;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {p0, p1, p2, p3}, Lcom/google/android/material/internal/FlowLayout;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V</span>
+<span class="">	new-instance p1, Lcom/google/android/material/chip/ChipGroup$CheckedStateTracker;</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-direct {p1, p0, v0}, Lcom/google/android/material/chip/ChipGroup$CheckedStateTracker;-><init>(Lcom/google/android/material/chip/ChipGroup;Lcom/google/android/material/chip/ChipGroup$1;)V</span>
+<span class="">	iput-object p1, p0, Lcom/google/android/material/chip/ChipGroup;->checkedStateTracker:Lcom/google/android/material/chip/ChipGroup$CheckedStateTracker;</span>
+<span class="">	new-instance p1, Lcom/google/android/material/chip/ChipGroup$PassThroughHierarchyChangeListener;</span>
+<span class="">	invoke-direct {p1, p0, v0}, Lcom/google/android/material/chip/ChipGroup$PassThroughHierarchyChangeListener;-><init>(Lcom/google/android/material/chip/ChipGroup;Lcom/google/android/material/chip/ChipGroup$1;)V</span>
+<span class="">	iput-object p1, p0, Lcom/google/android/material/chip/ChipGroup;->passThroughListener:Lcom/google/android/material/chip/ChipGroup$PassThroughHierarchyChangeListener;</span>
+<span class="">	const/4 p1, -0x1</span>
+<span class="">	iput p1, p0, Lcom/google/android/material/chip/ChipGroup;->checkedId:I</span>
+<span class="">	const/4 v6, 0x0</span>
+<span class="">	iput-boolean v6, p0, Lcom/google/android/material/chip/ChipGroup;->protectFromCheckedChange:Z</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/chip/ChipGroup;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sget-object v2, Lcom/google/android/material/R$styleable;->ChipGroup:[I</span>
+<span class="">	new-array v5, v6, [I</span>
+<span class="">	move-object v1, p2</span>
+<span class="">	move v3, p3</span>
+<span class="">	invoke-static/range {v0 .. v5}, Lcom/google/android/material/internal/ThemeEnforcement;->obtainStyledAttributes(Landroid/content/Context;Landroid/util/AttributeSet;[III[I)Landroid/content/res/TypedArray;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	sget p3, Lcom/google/android/material/R$styleable;->ChipGroup_chipSpacing:I</span>
+<span class="">	invoke-virtual {p2, p3, v6}, Landroid/content/res/TypedArray;->getDimensionPixelOffset(II)I</span>
+<span class="">	move-result p3</span>
+<span class="">	sget v0, Lcom/google/android/material/R$styleable;->ChipGroup_chipSpacingHorizontal:I</span>
+<span class="">	invoke-virtual {p2, v0, p3}, Landroid/content/res/TypedArray;->getDimensionPixelOffset(II)I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-virtual {p0, v0}, Lcom/google/android/material/chip/ChipGroup;->setChipSpacingHorizontal(I)V</span>
+<span class="">	sget v0, Lcom/google/android/material/R$styleable;->ChipGroup_chipSpacingVertical:I</span>
+<span class="">	invoke-virtual {p2, v0, p3}, Landroid/content/res/TypedArray;->getDimensionPixelOffset(II)I</span>
+<span class="">	move-result p3</span>
+<span class="">	invoke-virtual {p0, p3}, Lcom/google/android/material/chip/ChipGroup;->setChipSpacingVertical(I)V</span>
+<span class="">	sget p3, Lcom/google/android/material/R$styleable;->ChipGroup_singleLine:I</span>
+<span class="">	invoke-virtual {p2, p3, v6}, Landroid/content/res/TypedArray;->getBoolean(IZ)Z</span>
+<span class="">	move-result p3</span>
+<span class="">	invoke-virtual {p0, p3}, Lcom/google/android/material/chip/ChipGroup;->setSingleLine(Z)V</span>
+<span class="">	sget p3, Lcom/google/android/material/R$styleable;->ChipGroup_singleSelection:I</span>
+<span class="">	invoke-virtual {p2, p3, v6}, Landroid/content/res/TypedArray;->getBoolean(IZ)Z</span>
+<span class="">	move-result p3</span>
+<span class="">	invoke-virtual {p0, p3}, Lcom/google/android/material/chip/ChipGroup;->setSingleSelection(Z)V</span>
+<span class="">	sget p3, Lcom/google/android/material/R$styleable;->ChipGroup_selectionRequired:I</span>
+<span class="">	invoke-virtual {p2, p3, v6}, Landroid/content/res/TypedArray;->getBoolean(IZ)Z</span>
+<span class="">	move-result p3</span>
+<span class="">	invoke-virtual {p0, p3}, Lcom/google/android/material/chip/ChipGroup;->setSelectionRequired(Z)V</span>
+<span class="">	sget p3, Lcom/google/android/material/R$styleable;->ChipGroup_checkedChip:I</span>
+<span class="">	invoke-virtual {p2, p3, p1}, Landroid/content/res/TypedArray;->getResourceId(II)I</span>
+<span class="">	move-result p3</span>
+<span class="">	if-eq p3, p1, :cond_0</span>
+<span class="">	iput p3, p0, Lcom/google/android/material/chip/ChipGroup;->checkedId:I</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p2}, Landroid/content/res/TypedArray;->recycle()V</span>
+<span class="">	iget-object p1, p0, Lcom/google/android/material/chip/ChipGroup;->passThroughListener:Lcom/google/android/material/chip/ChipGroup$PassThroughHierarchyChangeListener;</span>
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/internal/FlowLayout;->setOnHierarchyChangeListener(Landroid/view/ViewGroup$OnHierarchyChangeListener;)V</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	invoke-static {p0, p1}, Landroidx/core/view/ViewCompat;->setImportantForAccessibility(Landroid/view/View;I)V</span>
+.end method
+
+.method static synthetic access$1000(Lcom/google/android/material/chip/ChipGroup;)Lcom/google/android/material/chip/ChipGroup$CheckedStateTracker;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p0, p0, Lcom/google/android/material/chip/ChipGroup;->checkedStateTracker:Lcom/google/android/material/chip/ChipGroup$CheckedStateTracker;</span>
+.end method
+
+.method static synthetic access$300(Lcom/google/android/material/chip/ChipGroup;)Z
+<span class="">	.locals 0</span>
+
+<span class="">	iget-boolean p0, p0, Lcom/google/android/material/chip/ChipGroup;->protectFromCheckedChange:Z</span>
+.end method
+
+.method static synthetic access$400(Lcom/google/android/material/chip/ChipGroup;)Z
+<span class="">	.locals 0</span>
+
+<span class="">	iget-boolean p0, p0, Lcom/google/android/material/chip/ChipGroup;->selectionRequired:Z</span>
+.end method
+
+.method static synthetic access$500(Lcom/google/android/material/chip/ChipGroup;IZ)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0, p1, p2}, Lcom/google/android/material/chip/ChipGroup;->setCheckedStateForView(IZ)V</span>
+.end method
+
+.method static synthetic access$600(Lcom/google/android/material/chip/ChipGroup;IZ)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0, p1, p2}, Lcom/google/android/material/chip/ChipGroup;->setCheckedId(IZ)V</span>
+.end method
+
+.method static synthetic access$700(Lcom/google/android/material/chip/ChipGroup;)I
+<span class="">	.locals 0</span>
+
+<span class="">	iget p0, p0, Lcom/google/android/material/chip/ChipGroup;->checkedId:I</span>
+.end method
+
+.method static synthetic access$800(Lcom/google/android/material/chip/ChipGroup;)Z
+<span class="">	.locals 0</span>
+
+<span class="">	iget-boolean p0, p0, Lcom/google/android/material/chip/ChipGroup;->singleSelection:Z</span>
+.end method
+
+.method static synthetic access$900(Lcom/google/android/material/chip/ChipGroup;I)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/material/chip/ChipGroup;->setCheckedId(I)V</span>
+.end method
+
+.method private getChipCount()I
+<span class="">	.locals 3</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	move v1, v0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/chip/ChipGroup;->getChildCount()I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-ge v0, v2, :cond_1</span>
+<span class="">	invoke-virtual {p0, v0}, Lcom/google/android/material/chip/ChipGroup;->getChildAt(I)Landroid/view/View;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	instance-of v2, v2, Lcom/google/android/material/chip/Chip;</span>
+<span class="">	if-eqz v2, :cond_0</span>
+<span class="">	add-int/lit8 v1, v1, 0x1</span>
+<span class="">	:cond_0</span>
+<span class="">	add-int/lit8 v0, v0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method private setCheckedId(I)V
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	invoke-direct {p0, p1, v0}, Lcom/google/android/material/chip/ChipGroup;->setCheckedId(IZ)V</span>
+.end method
+
+.method private setCheckedId(IZ)V
+<span class="">	.locals 2</span>
+
+<span class="">	iput p1, p0, Lcom/google/android/material/chip/ChipGroup;->checkedId:I</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/chip/ChipGroup;->onCheckedChangeListener:Lcom/google/android/material/chip/ChipGroup$OnCheckedChangeListener;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-boolean v1, p0, Lcom/google/android/material/chip/ChipGroup;->singleSelection:Z</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	if-eqz p2, :cond_0</span>
+<span class="">	invoke-interface {v0, p0, p1}, Lcom/google/android/material/chip/ChipGroup$OnCheckedChangeListener;->onCheckedChanged(Lcom/google/android/material/chip/ChipGroup;I)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private setCheckedStateForView(IZ)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0, p1}, Lcom/google/android/material/chip/ChipGroup;->findViewById(I)Landroid/view/View;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	instance-of v0, p1, Lcom/google/android/material/chip/Chip;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	iput-boolean v0, p0, Lcom/google/android/material/chip/ChipGroup;->protectFromCheckedChange:Z</span>
+<span class="">	check-cast p1, Lcom/google/android/material/chip/Chip;</span>
+<span class="">	invoke-virtual {p1, p2}, Lcom/google/android/material/chip/Chip;->setChecked(Z)V</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	iput-boolean p1, p0, Lcom/google/android/material/chip/ChipGroup;->protectFromCheckedChange:Z</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public addView(Landroid/view/View;ILandroid/view/ViewGroup$LayoutParams;)V
+<span class="">	.locals 3</span>
+
+<span class="">	instance-of v0, p1, Lcom/google/android/material/chip/Chip;</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	move-object v0, p1</span>
+<span class="">	check-cast v0, Lcom/google/android/material/chip/Chip;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/chip/Chip;->isChecked()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/chip/ChipGroup;->checkedId:I</span>
+<span class="">	const/4 v2, -0x1</span>
+<span class="">	if-eq v1, v2, :cond_0</span>
+<span class="">	iget-boolean v2, p0, Lcom/google/android/material/chip/ChipGroup;->singleSelection:Z</span>
+<span class="">	if-eqz v2, :cond_0</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-direct {p0, v1, v2}, Lcom/google/android/material/chip/ChipGroup;->setCheckedStateForView(IZ)V</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/chip/Chip;->getId()I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-direct {p0, v0}, Lcom/google/android/material/chip/ChipGroup;->setCheckedId(I)V</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-super {p0, p1, p2, p3}, Lcom/google/android/material/internal/FlowLayout;->addView(Landroid/view/View;ILandroid/view/ViewGroup$LayoutParams;)V</span>
+.end method
+
+.method public check(I)V
+<span class="">	.locals 3</span>
+
+<span class="">	iget v0, p0, Lcom/google/android/material/chip/ChipGroup;->checkedId:I</span>
+<span class="">	if-ne p1, v0, :cond_0</span>
+<span class="">	const/4 v1, -0x1</span>
+<span class="">	:cond_0</span>
+<span class="">	if-eq v0, v1, :cond_1</span>
+<span class="">	iget-boolean v2, p0, Lcom/google/android/material/chip/ChipGroup;->singleSelection:Z</span>
+<span class="">	if-eqz v2, :cond_1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-direct {p0, v0, v2}, Lcom/google/android/material/chip/ChipGroup;->setCheckedStateForView(IZ)V</span>
+<span class="">	if-eq p1, v1, :cond_2</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	invoke-direct {p0, p1, v0}, Lcom/google/android/material/chip/ChipGroup;->setCheckedStateForView(IZ)V</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/material/chip/ChipGroup;->setCheckedId(I)V</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method protected checkLayoutParams(Landroid/view/ViewGroup$LayoutParams;)Z
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/internal/FlowLayout;->checkLayoutParams(Landroid/view/ViewGroup$LayoutParams;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	instance-of p1, p1, Lcom/google/android/material/chip/ChipGroup$LayoutParams;</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public clearCheck()V
+<span class="">	.locals 4</span>
+
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	iput-boolean v0, p0, Lcom/google/android/material/chip/ChipGroup;->protectFromCheckedChange:Z</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	move v1, v0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/chip/ChipGroup;->getChildCount()I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-ge v1, v2, :cond_1</span>
+<span class="">	invoke-virtual {p0, v1}, Lcom/google/android/material/chip/ChipGroup;->getChildAt(I)Landroid/view/View;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	instance-of v3, v2, Lcom/google/android/material/chip/Chip;</span>
+<span class="">	if-eqz v3, :cond_0</span>
+<span class="">	check-cast v2, Lcom/google/android/material/chip/Chip;</span>
+<span class="">	invoke-virtual {v2, v0}, Lcom/google/android/material/chip/Chip;->setChecked(Z)V</span>
+<span class="">	:cond_0</span>
+<span class="">	add-int/lit8 v1, v1, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	iput-boolean v0, p0, Lcom/google/android/material/chip/ChipGroup;->protectFromCheckedChange:Z</span>
+<span class="">	const/4 v0, -0x1</span>
+<span class="">	invoke-direct {p0, v0}, Lcom/google/android/material/chip/ChipGroup;->setCheckedId(I)V</span>
+.end method
+
+.method protected generateDefaultLayoutParams()Landroid/view/ViewGroup$LayoutParams;
+<span class="">	.locals 2</span>
+
+<span class="">	new-instance v0, Lcom/google/android/material/chip/ChipGroup$LayoutParams;</span>
+<span class="">	const/4 v1, -0x2</span>
+<span class="">	invoke-direct {v0, v1, v1}, Lcom/google/android/material/chip/ChipGroup$LayoutParams;-><init>(II)V</span>
+.end method
+
+.method public generateLayoutParams(Landroid/util/AttributeSet;)Landroid/view/ViewGroup$LayoutParams;
+<span class="">	.locals 2</span>
+
+<span class="">	new-instance v0, Lcom/google/android/material/chip/ChipGroup$LayoutParams;</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/chip/ChipGroup;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-direct {v0, v1, p1}, Lcom/google/android/material/chip/ChipGroup$LayoutParams;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V</span>
+.end method
+
+.method protected generateLayoutParams(Landroid/view/ViewGroup$LayoutParams;)Landroid/view/ViewGroup$LayoutParams;
+<span class="">	.locals 1</span>
+
+<span class="">	new-instance v0, Lcom/google/android/material/chip/ChipGroup$LayoutParams;</span>
+<span class="">	invoke-direct {v0, p1}, Lcom/google/android/material/chip/ChipGroup$LayoutParams;-><init>(Landroid/view/ViewGroup$LayoutParams;)V</span>
+.end method
+
+.method public getCheckedChipId()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Lcom/google/android/material/chip/ChipGroup;->singleSelection:Z</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget v0, p0, Lcom/google/android/material/chip/ChipGroup;->checkedId:I</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, -0x1</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public getCheckedChipIds()Ljava/util/List;
+<span class="">	.locals 4</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"()",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Ljava/lang/Integer;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/chip/ChipGroup;->getChildCount()I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-ge v1, v2, :cond_1</span>
+<span class="">	invoke-virtual {p0, v1}, Lcom/google/android/material/chip/ChipGroup;->getChildAt(I)Landroid/view/View;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	instance-of v3, v2, Lcom/google/android/material/chip/Chip;</span>
+<span class="">	if-eqz v3, :cond_0</span>
+<span class="">	move-object v3, v2</span>
+<span class="">	check-cast v3, Lcom/google/android/material/chip/Chip;</span>
+<span class="">	invoke-virtual {v3}, Lcom/google/android/material/chip/Chip;->isChecked()Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_0</span>
+<span class="">	invoke-virtual {v2}, Landroid/view/View;->getId()I</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v0, v2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z</span>
+<span class="">	iget-boolean v2, p0, Lcom/google/android/material/chip/ChipGroup;->singleSelection:Z</span>
+<span class="">	if-eqz v2, :cond_0</span>
+<span class="">	add-int/lit8 v1, v1, 0x1</span>
+<span class="">	:cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public getChipSpacingHorizontal()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/google/android/material/chip/ChipGroup;->chipSpacingHorizontal:I</span>
+.end method
+
+.method public getChipSpacingVertical()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/google/android/material/chip/ChipGroup;->chipSpacingVertical:I</span>
+.end method
+
+.method  getIndexOfChip(Landroid/view/View;)I
+<span class="">	.locals 4</span>
+
+<span class="">	instance-of v0, p1, Lcom/google/android/material/chip/Chip;</span>
+<span class="">	const/4 v1, -0x1</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:cond_0</span>
+<span class="">	move v2, v0</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/chip/ChipGroup;->getChildCount()I</span>
+<span class="">	:goto_0</span>
+<span class="">	move-result v3</span>
+<span class="">	if-ge v0, v3, :cond_3</span>
+<span class="">	invoke-virtual {p0, v0}, Lcom/google/android/material/chip/ChipGroup;->getChildAt(I)Landroid/view/View;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	instance-of v3, v3, Lcom/google/android/material/chip/Chip;</span>
+<span class="">	if-eqz v3, :cond_2</span>
+<span class="">	invoke-virtual {p0, v0}, Lcom/google/android/material/chip/ChipGroup;->getChildAt(I)Landroid/view/View;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	check-cast v3, Lcom/google/android/material/chip/Chip;</span>
+<span class="">	if-ne v3, p1, :cond_1</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	add-int/lit8 v0, v0, 0x1</span>
+<span class="">	:cond_1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_2</span>
+<span class="">	:cond_3</span>
+.end method
+
+.method public isSelectionRequired()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Lcom/google/android/material/chip/ChipGroup;->selectionRequired:Z</span>
+.end method
+
+.method public isSingleLine()Z
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/internal/FlowLayout;->isSingleLine()Z</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public isSingleSelection()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Lcom/google/android/material/chip/ChipGroup;->singleSelection:Z</span>
+.end method
+
+.method protected onFinishInflate()V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-super {p0}, Lcom/google/android/material/internal/FlowLayout;->onFinishInflate()V</span>
+<span class="">	iget v0, p0, Lcom/google/android/material/chip/ChipGroup;->checkedId:I</span>
+<span class="">	const/4 v1, -0x1</span>
+<span class="">	if-eq v0, v1, :cond_0</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	invoke-direct {p0, v0, v1}, Lcom/google/android/material/chip/ChipGroup;->setCheckedStateForView(IZ)V</span>
+<span class="">	iget v0, p0, Lcom/google/android/material/chip/ChipGroup;->checkedId:I</span>
+<span class="">	invoke-direct {p0, v0}, Lcom/google/android/material/chip/ChipGroup;->setCheckedId(I)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public onInitializeAccessibilityNodeInfo(Landroid/view/accessibility/AccessibilityNodeInfo;)V
+<span class="">	.locals 4</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/internal/FlowLayout;->onInitializeAccessibilityNodeInfo(Landroid/view/accessibility/AccessibilityNodeInfo;)V</span>
+<span class="">	invoke-static {p1}, Landroidx/core/view/accessibility/AccessibilityNodeInfoCompat;->wrap(Landroid/view/accessibility/AccessibilityNodeInfo;)Landroidx/core/view/accessibility/AccessibilityNodeInfoCompat;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/chip/ChipGroup;->isSingleLine()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-direct {p0}, Lcom/google/android/material/chip/ChipGroup;->getChipCount()I</span>
+<span class="">	move-result v0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, -0x1</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/chip/ChipGroup;->getRowCount()I</span>
+<span class="">	move-result v1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/chip/ChipGroup;->isSingleSelection()Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-eqz v3, :cond_1</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 v3, 0x2</span>
+<span class="">	:goto_1</span>
+<span class="">	invoke-static {v1, v0, v2, v3}, Landroidx/core/view/accessibility/AccessibilityNodeInfoCompat$CollectionInfoCompat;->obtain(IIZI)Landroidx/core/view/accessibility/AccessibilityNodeInfoCompat$CollectionInfoCompat;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p1, v0}, Landroidx/core/view/accessibility/AccessibilityNodeInfoCompat;->setCollectionInfo(Ljava/lang/Object;)V</span>
+.end method
+
+.method public setChipSpacing(I)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-virtual {p0, p1}, Lcom/google/android/material/chip/ChipGroup;->setChipSpacingHorizontal(I)V</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/google/android/material/chip/ChipGroup;->setChipSpacingVertical(I)V</span>
+.end method
+
+.method public setChipSpacingHorizontal(I)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/google/android/material/chip/ChipGroup;->chipSpacingHorizontal:I</span>
+<span class="">	if-eq v0, p1, :cond_0</span>
+<span class="">	iput p1, p0, Lcom/google/android/material/chip/ChipGroup;->chipSpacingHorizontal:I</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/google/android/material/chip/ChipGroup;->setItemSpacing(I)V</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/chip/ChipGroup;->requestLayout()V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public setChipSpacingHorizontalResource(I)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/chip/ChipGroup;->getResources()Landroid/content/res/Resources;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/content/res/Resources;->getDimensionPixelOffset(I)I</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/google/android/material/chip/ChipGroup;->setChipSpacingHorizontal(I)V</span>
+.end method
+
+.method public setChipSpacingResource(I)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/chip/ChipGroup;->getResources()Landroid/content/res/Resources;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/content/res/Resources;->getDimensionPixelOffset(I)I</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/google/android/material/chip/ChipGroup;->setChipSpacing(I)V</span>
+.end method
+
+.method public setChipSpacingVertical(I)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/google/android/material/chip/ChipGroup;->chipSpacingVertical:I</span>
+<span class="">	if-eq v0, p1, :cond_0</span>
+<span class="">	iput p1, p0, Lcom/google/android/material/chip/ChipGroup;->chipSpacingVertical:I</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/google/android/material/chip/ChipGroup;->setLineSpacing(I)V</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/chip/ChipGroup;->requestLayout()V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public setChipSpacingVerticalResource(I)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/chip/ChipGroup;->getResources()Landroid/content/res/Resources;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/content/res/Resources;->getDimensionPixelOffset(I)I</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/google/android/material/chip/ChipGroup;->setChipSpacingVertical(I)V</span>
+.end method
+
+.method public setDividerDrawableHorizontal(Landroid/graphics/drawable/Drawable;)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation runtime Ljava/lang/Deprecated;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance p1, Ljava/lang/UnsupportedOperationException;</span>
+<span class="">	const-string v0, "Changing divider drawables have no effect. ChipGroup do not use divider drawables as spacing."</span>
+<span class="">	invoke-direct {p1, v0}, Ljava/lang/UnsupportedOperationException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public setDividerDrawableVertical(Landroid/graphics/drawable/Drawable;)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation runtime Ljava/lang/Deprecated;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance p1, Ljava/lang/UnsupportedOperationException;</span>
+<span class="">	const-string v0, "Changing divider drawables have no effect. ChipGroup do not use divider drawables as spacing."</span>
+<span class="">	invoke-direct {p1, v0}, Ljava/lang/UnsupportedOperationException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public setFlexWrap(I)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation runtime Ljava/lang/Deprecated;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance p1, Ljava/lang/UnsupportedOperationException;</span>
+<span class="">	const-string v0, "Changing flex wrap not allowed. ChipGroup exposes a singleLine attribute instead."</span>
+<span class="">	invoke-direct {p1, v0}, Ljava/lang/UnsupportedOperationException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public setOnCheckedChangeListener(Lcom/google/android/material/chip/ChipGroup$OnCheckedChangeListener;)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput-object p1, p0, Lcom/google/android/material/chip/ChipGroup;->onCheckedChangeListener:Lcom/google/android/material/chip/ChipGroup$OnCheckedChangeListener;</span>
+.end method
+
+.method public setOnHierarchyChangeListener(Landroid/view/ViewGroup$OnHierarchyChangeListener;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/chip/ChipGroup;->passThroughListener:Lcom/google/android/material/chip/ChipGroup$PassThroughHierarchyChangeListener;</span>
+<span class="">	invoke-static {v0, p1}, Lcom/google/android/material/chip/ChipGroup$PassThroughHierarchyChangeListener;->access$202(Lcom/google/android/material/chip/ChipGroup$PassThroughHierarchyChangeListener;Landroid/view/ViewGroup$OnHierarchyChangeListener;)Landroid/view/ViewGroup$OnHierarchyChangeListener;</span>
+.end method
+
+.method public setSelectionRequired(Z)V
+<span class="">	.locals 0</span>
+
+<span class="">	iput-boolean p1, p0, Lcom/google/android/material/chip/ChipGroup;->selectionRequired:Z</span>
+.end method
+
+.method public setShowDividerHorizontal(I)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation runtime Ljava/lang/Deprecated;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance p1, Ljava/lang/UnsupportedOperationException;</span>
+<span class="">	const-string v0, "Changing divider modes has no effect. ChipGroup do not use divider drawables as spacing."</span>
+<span class="">	invoke-direct {p1, v0}, Ljava/lang/UnsupportedOperationException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public setShowDividerVertical(I)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation runtime Ljava/lang/Deprecated;</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance p1, Ljava/lang/UnsupportedOperationException;</span>
+<span class="">	const-string v0, "Changing divider modes has no effect. ChipGroup do not use divider drawables as spacing."</span>
+<span class="">	invoke-direct {p1, v0}, Ljava/lang/UnsupportedOperationException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public setSingleLine(I)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/chip/ChipGroup;->getResources()Landroid/content/res/Resources;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/content/res/Resources;->getBoolean(I)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/google/android/material/chip/ChipGroup;->setSingleLine(Z)V</span>
+.end method
+
+.method public setSingleLine(Z)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Lcom/google/android/material/internal/FlowLayout;->setSingleLine(Z)V</span>
+.end method
+
+.method public setSingleSelection(I)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/chip/ChipGroup;->getResources()Landroid/content/res/Resources;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/content/res/Resources;->getBoolean(I)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-virtual {p0, p1}, Lcom/google/android/material/chip/ChipGroup;->setSingleSelection(Z)V</span>
+.end method
+
+.method public setSingleSelection(Z)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-boolean v0, p0, Lcom/google/android/material/chip/ChipGroup;->singleSelection:Z</span>
+<span class="">	if-eq v0, p1, :cond_0</span>
+<span class="">	iput-boolean p1, p0, Lcom/google/android/material/chip/ChipGroup;->singleSelection:Z</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/chip/ChipGroup;->clearCheck()V</span>
+<span class="">	:cond_0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../.resources/report.js"></script>
+</body>
+</html>

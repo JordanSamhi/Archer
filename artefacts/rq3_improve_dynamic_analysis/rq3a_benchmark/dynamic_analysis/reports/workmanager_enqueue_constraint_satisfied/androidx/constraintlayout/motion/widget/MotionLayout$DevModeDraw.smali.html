@@ -1,0 +1,1143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../index.html">lu.uni.trux.workmanager_enqueue</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.constraintlayout.motion.widget</a></li>
+        <li><i class="ico ico-class"></i> MotionLayout$DevModeDraw.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class  Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;
+.super Ljava/lang/Object;
+.source "MotionLayout.java"
+
+.annotation system Ldalvik/annotation/EnclosingClass;
+value = Landroidx/constraintlayout/motion/widget/MotionLayout;
+.end annotation
+.annotation system Ldalvik/annotation/InnerClass;
+accessFlags = 0x2
+name = "DevModeDraw"
+.end annotation
+
+.field private static final DEBUG_PATH_TICKS_PER_MS:I = 0x10
+.field final DIAMOND_SIZE:I
+.field final GRAPH_COLOR:I
+.field final KEYFRAME_COLOR:I
+.field final RED_COLOR:I
+.field final SHADOW_COLOR:I
+.field  mBounds:Landroid/graphics/Rect;
+.field  mDashPathEffect:Landroid/graphics/DashPathEffect;
+.field  mFillPaint:Landroid/graphics/Paint;
+.field  mKeyFrameCount:I
+.field  mKeyFramePoints:[F
+.field  mPaint:Landroid/graphics/Paint;
+.field  mPaintGraph:Landroid/graphics/Paint;
+.field  mPaintKeyframes:Landroid/graphics/Paint;
+.field  mPath:Landroid/graphics/Path;
+.field  mPathMode:[I
+.field  mPoints:[F
+.field  mPresentationMode:Z
+.field private mRectangle:[F
+.field  mShadowTranslate:I
+.field  mTextPaint:Landroid/graphics/Paint;
+.field final synthetic this$0:Landroidx/constraintlayout/motion/widget/MotionLayout;
+
+
+.method public constructor <init>(Landroidx/constraintlayout/motion/widget/MotionLayout;)V
+<span class="">	.locals 6</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x1010</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"this$0"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iput-object p1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->this$0:Landroidx/constraintlayout/motion/widget/MotionLayout;</span>
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	const/16 v0, -0x55cd</span>
+<span class="">	iput v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->RED_COLOR:I</span>
+<span class="">	const v1, -0x1f8a66</span>
+<span class="">	iput v1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->KEYFRAME_COLOR:I</span>
+<span class="">	const v2, -0xcc5600</span>
+<span class="">	iput v2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->GRAPH_COLOR:I</span>
+<span class="">	const/high16 v3, 0x77000000</span>
+<span class="">	iput v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->SHADOW_COLOR:I</span>
+<span class="">	const/16 v3, 0xa</span>
+<span class="">	iput v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->DIAMOND_SIZE:I</span>
+<span class="">	new-instance v3, Landroid/graphics/Rect;</span>
+<span class="">	invoke-direct {v3}, Landroid/graphics/Rect;-><init>()V</span>
+<span class="">	iput-object v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mBounds:Landroid/graphics/Rect;</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	iput-boolean v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPresentationMode:Z</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	iput v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mShadowTranslate:I</span>
+<span class="">	new-instance v4, Landroid/graphics/Paint;</span>
+<span class="">	invoke-direct {v4}, Landroid/graphics/Paint;-><init>()V</span>
+<span class="">	iput-object v4, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v4, v3}, Landroid/graphics/Paint;->setAntiAlias(Z)V</span>
+<span class="">	iget-object v4, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v4, v0}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaint:Landroid/graphics/Paint;</span>
+<span class="">	const/high16 v4, 0x40000000    # 2.0f</span>
+<span class="">	invoke-virtual {v0, v4}, Landroid/graphics/Paint;->setStrokeWidth(F)V</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaint:Landroid/graphics/Paint;</span>
+<span class="">	sget-object v5, Landroid/graphics/Paint$Style;->STROKE:Landroid/graphics/Paint$Style;</span>
+<span class="">	invoke-virtual {v0, v5}, Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V</span>
+<span class="">	new-instance v0, Landroid/graphics/Paint;</span>
+<span class="">	invoke-direct {v0}, Landroid/graphics/Paint;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintKeyframes:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0, v3}, Landroid/graphics/Paint;->setAntiAlias(Z)V</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintKeyframes:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintKeyframes:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0, v4}, Landroid/graphics/Paint;->setStrokeWidth(F)V</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintKeyframes:Landroid/graphics/Paint;</span>
+<span class="">	sget-object v1, Landroid/graphics/Paint$Style;->STROKE:Landroid/graphics/Paint$Style;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V</span>
+<span class="">	new-instance v0, Landroid/graphics/Paint;</span>
+<span class="">	invoke-direct {v0}, Landroid/graphics/Paint;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintGraph:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0, v3}, Landroid/graphics/Paint;->setAntiAlias(Z)V</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintGraph:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0, v2}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintGraph:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0, v4}, Landroid/graphics/Paint;->setStrokeWidth(F)V</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintGraph:Landroid/graphics/Paint;</span>
+<span class="">	sget-object v1, Landroid/graphics/Paint$Style;->STROKE:Landroid/graphics/Paint$Style;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V</span>
+<span class="">	new-instance v0, Landroid/graphics/Paint;</span>
+<span class="">	invoke-direct {v0}, Landroid/graphics/Paint;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mTextPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0, v3}, Landroid/graphics/Paint;->setAntiAlias(Z)V</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mTextPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0, v2}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mTextPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p1}, Landroidx/constraintlayout/motion/widget/MotionLayout;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Landroid/content/res/Resources;->getDisplayMetrics()Landroid/util/DisplayMetrics;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	iget p1, p1, Landroid/util/DisplayMetrics;->density:F</span>
+<span class="">	const/high16 v1, 0x41400000    # 12.0f</span>
+<span class="">	mul-float/2addr p1, v1</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/Paint;->setTextSize(F)V</span>
+<span class="">	const/16 p1, 0x8</span>
+<span class="">	new-array p1, p1, [F</span>
+<span class="">	iput-object p1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mRectangle:[F</span>
+<span class="">	new-instance p1, Landroid/graphics/Paint;</span>
+<span class="">	invoke-direct {p1}, Landroid/graphics/Paint;-><init>()V</span>
+<span class="">	iput-object p1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mFillPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p1, v3}, Landroid/graphics/Paint;->setAntiAlias(Z)V</span>
+<span class="">	new-instance p1, Landroid/graphics/DashPathEffect;</span>
+<span class="">	const/4 v0, 0x2</span>
+<span class="">	new-array v0, v0, [F</span>
+<span class="">	fill-array-data v0, :array_0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-direct {p1, v0, v1}, Landroid/graphics/DashPathEffect;-><init>([FF)V</span>
+<span class="">	iput-object p1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mDashPathEffect:Landroid/graphics/DashPathEffect;</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintGraph:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0, p1}, Landroid/graphics/Paint;->setPathEffect(Landroid/graphics/PathEffect;)Landroid/graphics/PathEffect;</span>
+<span class="">	const/16 p1, 0x64</span>
+<span class="">	new-array p1, p1, [F</span>
+<span class="">	iput-object p1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mKeyFramePoints:[F</span>
+<span class="">	const/16 p1, 0x32</span>
+<span class="">	new-array p1, p1, [I</span>
+<span class="">	iput-object p1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPathMode:[I</span>
+<span class="">	iget-boolean p1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPresentationMode:Z</span>
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	iget-object p1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaint:Landroid/graphics/Paint;</span>
+<span class="">	const/high16 v0, 0x41000000    # 8.0f</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/graphics/Paint;->setStrokeWidth(F)V</span>
+<span class="">	iget-object p1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mFillPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/graphics/Paint;->setStrokeWidth(F)V</span>
+<span class="">	iget-object p1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintKeyframes:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/graphics/Paint;->setStrokeWidth(F)V</span>
+<span class="">	const/4 p1, 0x4</span>
+<span class="">	iput p1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mShadowTranslate:I</span>
+<span class="">	:cond_0</span>
+<span class="">	:array_0</span>
+<span class="">	.array-data 4</span>
+<span class="">	0x40800000    # 4.0f</span>
+<span class="">	0x41000000    # 8.0f</span>
+<span class="">	.end array-data</span>
+.end method
+
+.method private drawBasicPath(Landroid/graphics/Canvas;)V
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"canvas"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPoints:[F</span>
+<span class="">	iget-object v1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p1, v0, v1}, Landroid/graphics/Canvas;->drawLines([FLandroid/graphics/Paint;)V</span>
+.end method
+
+.method private drawPathAsConfigured(Landroid/graphics/Canvas;)V
+<span class="">	.locals 6</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"canvas"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	move v1, v0</span>
+<span class="">	move v2, v1</span>
+<span class="">	:goto_0</span>
+<span class="">	iget v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mKeyFrameCount:I</span>
+<span class="">	if-ge v0, v3, :cond_2</span>
+<span class="">	iget-object v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPathMode:[I</span>
+<span class="">	aget v4, v3, v0</span>
+<span class="">	const/4 v5, 0x1</span>
+<span class="">	if-ne v4, v5, :cond_0</span>
+<span class="">	move v1, v5</span>
+<span class="">	:cond_0</span>
+<span class="">	aget v3, v3, v0</span>
+<span class="">	if-nez v3, :cond_1</span>
+<span class="">	move v2, v5</span>
+<span class="">	:cond_1</span>
+<span class="">	add-int/lit8 v0, v0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_2</span>
+<span class="">	if-eqz v1, :cond_3</span>
+<span class="">	invoke-direct {p0, p1}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->drawPathRelative(Landroid/graphics/Canvas;)V</span>
+<span class="">	:cond_3</span>
+<span class="">	if-eqz v2, :cond_4</span>
+<span class="">	invoke-direct {p0, p1}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->drawPathCartesian(Landroid/graphics/Canvas;)V</span>
+<span class="">	:cond_4</span>
+.end method
+
+.method private drawPathCartesian(Landroid/graphics/Canvas;)V
+<span class="">	.locals 18</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"canvas"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	move-object/from16 v0, p0</span>
+<span class="">	iget-object v1, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPoints:[F</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	aget v2, v1, v2</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	aget v4, v1, v3</span>
+<span class="">	array-length v5, v1</span>
+<span class="">	add-int/lit8 v5, v5, -0x2</span>
+<span class="">	aget v5, v1, v5</span>
+<span class="">	array-length v6, v1</span>
+<span class="">	sub-int/2addr v6, v3</span>
+<span class="">	aget v1, v1, v6</span>
+<span class="">	invoke-static {v2, v5}, Ljava/lang/Math;->min(FF)F</span>
+<span class="">	move-result v7</span>
+<span class="">	invoke-static {v4, v1}, Ljava/lang/Math;->max(FF)F</span>
+<span class="">	move-result v8</span>
+<span class="">	invoke-static {v2, v5}, Ljava/lang/Math;->max(FF)F</span>
+<span class="">	move-result v9</span>
+<span class="">	invoke-static {v4, v1}, Ljava/lang/Math;->max(FF)F</span>
+<span class="">	move-result v10</span>
+<span class="">	iget-object v11, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintGraph:Landroid/graphics/Paint;</span>
+<span class="">	move-object/from16 v6, p1</span>
+<span class="">	invoke-virtual/range {v6 .. v11}, Landroid/graphics/Canvas;->drawLine(FFFFLandroid/graphics/Paint;)V</span>
+<span class="">	invoke-static {v2, v5}, Ljava/lang/Math;->min(FF)F</span>
+<span class="">	move-result v13</span>
+<span class="">	invoke-static {v4, v1}, Ljava/lang/Math;->min(FF)F</span>
+<span class="">	move-result v14</span>
+<span class="">	invoke-static {v2, v5}, Ljava/lang/Math;->min(FF)F</span>
+<span class="">	move-result v15</span>
+<span class="">	invoke-static {v4, v1}, Ljava/lang/Math;->max(FF)F</span>
+<span class="">	move-result v16</span>
+<span class="">	iget-object v1, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintGraph:Landroid/graphics/Paint;</span>
+<span class="">	move-object/from16 v12, p1</span>
+<span class="">	move-object/from16 v17, v1</span>
+<span class="">	invoke-virtual/range {v12 .. v17}, Landroid/graphics/Canvas;->drawLine(FFFFLandroid/graphics/Paint;)V</span>
+.end method
+
+.method private drawPathCartesianTicks(Landroid/graphics/Canvas;FF)V
+<span class="">	.locals 18</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"canvas",</span>
+<span class="">	"x",</span>
+<span class="">	"y"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	move-object/from16 v0, p0</span>
+<span class="">	move-object/from16 v7, p1</span>
+<span class="">	iget-object v1, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPoints:[F</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	aget v2, v1, v2</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	aget v8, v1, v3</span>
+<span class="">	array-length v4, v1</span>
+<span class="">	add-int/lit8 v4, v4, -0x2</span>
+<span class="">	aget v4, v1, v4</span>
+<span class="">	array-length v5, v1</span>
+<span class="">	sub-int/2addr v5, v3</span>
+<span class="">	aget v9, v1, v5</span>
+<span class="">	invoke-static {v2, v4}, Ljava/lang/Math;->min(FF)F</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {v8, v9}, Ljava/lang/Math;->max(FF)F</span>
+<span class="">	move-result v10</span>
+<span class="">	invoke-static {v2, v4}, Ljava/lang/Math;->min(FF)F</span>
+<span class="">	move-result v3</span>
+<span class="">	sub-float v3, p2, v3</span>
+<span class="">	invoke-static {v8, v9}, Ljava/lang/Math;->max(FF)F</span>
+<span class="">	move-result v5</span>
+<span class="">	sub-float v11, v5, p3</span>
+<span class="">	new-instance v5, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v12, ""</span>
+<span class="">	invoke-virtual {v5, v12}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	const/high16 v13, 0x42c80000    # 100.0f</span>
+<span class="">	mul-float v6, v3, v13</span>
+<span class="">	sub-float v14, v4, v2</span>
+<span class="">	invoke-static {v14}, Ljava/lang/Math;->abs(F)F</span>
+<span class="">	move-result v14</span>
+<span class="">	div-float/2addr v6, v14</span>
+<span class="">	float-to-double v14, v6</span>
+<span class="">	const-wide/high16 v16, 0x3fe0000000000000L    # 0.5</span>
+<span class="">	add-double v14, v14, v16</span>
+<span class="">	double-to-int v6, v14</span>
+<span class="">	int-to-float v6, v6</span>
+<span class="">	div-float/2addr v6, v13</span>
+<span class="">	invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(F)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	iget-object v6, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mTextPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0, v5, v6}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->getTextBounds(Ljava/lang/String;Landroid/graphics/Paint;)V</span>
+<span class="">	const/high16 v14, 0x40000000    # 2.0f</span>
+<span class="">	div-float/2addr v3, v14</span>
+<span class="">	iget-object v6, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mBounds:Landroid/graphics/Rect;</span>
+<span class="">	invoke-virtual {v6}, Landroid/graphics/Rect;->width()I</span>
+<span class="">	move-result v6</span>
+<span class="">	div-int/lit8 v6, v6, 0x2</span>
+<span class="">	int-to-float v6, v6</span>
+<span class="">	sub-float/2addr v3, v6</span>
+<span class="">	add-float/2addr v3, v1</span>
+<span class="">	const/high16 v1, 0x41a00000    # 20.0f</span>
+<span class="">	sub-float v1, p3, v1</span>
+<span class="">	iget-object v6, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mTextPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v7, v5, v3, v1, v6}, Landroid/graphics/Canvas;->drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V</span>
+<span class="">	invoke-static {v2, v4}, Ljava/lang/Math;->min(FF)F</span>
+<span class="">	move-result v4</span>
+<span class="">	iget-object v6, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintGraph:Landroid/graphics/Paint;</span>
+<span class="">	move-object/from16 v1, p1</span>
+<span class="">	move/from16 v2, p2</span>
+<span class="">	move/from16 v3, p3</span>
+<span class="">	move/from16 v5, p3</span>
+<span class="">	invoke-virtual/range {v1 .. v6}, Landroid/graphics/Canvas;->drawLine(FFFFLandroid/graphics/Paint;)V</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {v1, v12}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	mul-float v2, v11, v13</span>
+<span class="">	sub-float v3, v9, v8</span>
+<span class="">	invoke-static {v3}, Ljava/lang/Math;->abs(F)F</span>
+<span class="">	move-result v3</span>
+<span class="">	div-float/2addr v2, v3</span>
+<span class="">	float-to-double v2, v2</span>
+<span class="">	add-double v2, v2, v16</span>
+<span class="">	double-to-int v2, v2</span>
+<span class="">	int-to-float v2, v2</span>
+<span class="">	div-float/2addr v2, v13</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(F)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iget-object v2, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mTextPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->getTextBounds(Ljava/lang/String;Landroid/graphics/Paint;)V</span>
+<span class="">	div-float/2addr v11, v14</span>
+<span class="">	iget-object v2, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mBounds:Landroid/graphics/Rect;</span>
+<span class="">	invoke-virtual {v2}, Landroid/graphics/Rect;->height()I</span>
+<span class="">	move-result v2</span>
+<span class="">	div-int/lit8 v2, v2, 0x2</span>
+<span class="">	int-to-float v2, v2</span>
+<span class="">	sub-float/2addr v11, v2</span>
+<span class="">	const/high16 v2, 0x40a00000    # 5.0f</span>
+<span class="">	add-float v2, p2, v2</span>
+<span class="">	sub-float/2addr v10, v11</span>
+<span class="">	iget-object v3, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mTextPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v7, v1, v2, v10, v3}, Landroid/graphics/Canvas;->drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V</span>
+<span class="">	invoke-static {v8, v9}, Ljava/lang/Math;->max(FF)F</span>
+<span class="">	move-result v5</span>
+<span class="">	iget-object v6, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintGraph:Landroid/graphics/Paint;</span>
+<span class="">	move-object/from16 v1, p1</span>
+<span class="">	move/from16 v2, p2</span>
+<span class="">	move/from16 v3, p3</span>
+<span class="">	move/from16 v4, p2</span>
+<span class="">	invoke-virtual/range {v1 .. v6}, Landroid/graphics/Canvas;->drawLine(FFFFLandroid/graphics/Paint;)V</span>
+.end method
+
+.method private drawPathRelative(Landroid/graphics/Canvas;)V
+<span class="">	.locals 8</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"canvas"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPoints:[F</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	aget v3, v0, v1</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	aget v4, v0, v1</span>
+<span class="">	array-length v2, v0</span>
+<span class="">	add-int/lit8 v2, v2, -0x2</span>
+<span class="">	aget v5, v0, v2</span>
+<span class="">	array-length v2, v0</span>
+<span class="">	sub-int/2addr v2, v1</span>
+<span class="">	aget v6, v0, v2</span>
+<span class="">	iget-object v7, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintGraph:Landroid/graphics/Paint;</span>
+<span class="">	move-object v2, p1</span>
+<span class="">	invoke-virtual/range {v2 .. v7}, Landroid/graphics/Canvas;->drawLine(FFFFLandroid/graphics/Paint;)V</span>
+.end method
+
+.method private drawPathRelativeTicks(Landroid/graphics/Canvas;FF)V
+<span class="">	.locals 12</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"canvas",</span>
+<span class="">	"x",</span>
+<span class="">	"y"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPoints:[F</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	aget v1, v0, v1</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	aget v3, v0, v2</span>
+<span class="">	array-length v4, v0</span>
+<span class="">	add-int/lit8 v4, v4, -0x2</span>
+<span class="">	aget v4, v0, v4</span>
+<span class="">	array-length v5, v0</span>
+<span class="">	sub-int/2addr v5, v2</span>
+<span class="">	aget v0, v0, v5</span>
+<span class="">	sub-float v2, v1, v4</span>
+<span class="">	float-to-double v5, v2</span>
+<span class="">	sub-float v2, v3, v0</span>
+<span class="">	float-to-double v7, v2</span>
+<span class="">	invoke-static {v5, v6, v7, v8}, Ljava/lang/Math;->hypot(DD)D</span>
+<span class="">	move-result-wide v5</span>
+<span class="">	double-to-float v2, v5</span>
+<span class="">	sub-float v5, p2, v1</span>
+<span class="">	sub-float/2addr v4, v1</span>
+<span class="">	mul-float/2addr v5, v4</span>
+<span class="">	sub-float v6, p3, v3</span>
+<span class="">	sub-float/2addr v0, v3</span>
+<span class="">	mul-float/2addr v6, v0</span>
+<span class="">	add-float/2addr v5, v6</span>
+<span class="">	mul-float v6, v2, v2</span>
+<span class="">	div-float/2addr v5, v6</span>
+<span class="">	mul-float/2addr v4, v5</span>
+<span class="">	add-float v9, v1, v4</span>
+<span class="">	mul-float/2addr v5, v0</span>
+<span class="">	add-float v10, v3, v5</span>
+<span class="">	new-instance v5, Landroid/graphics/Path;</span>
+<span class="">	invoke-direct {v5}, Landroid/graphics/Path;-><init>()V</span>
+<span class="">	invoke-virtual {v5, p2, p3}, Landroid/graphics/Path;->moveTo(FF)V</span>
+<span class="">	invoke-virtual {v5, v9, v10}, Landroid/graphics/Path;->lineTo(FF)V</span>
+<span class="">	sub-float v0, v9, p2</span>
+<span class="">	float-to-double v0, v0</span>
+<span class="">	sub-float v3, v10, p3</span>
+<span class="">	float-to-double v3, v3</span>
+<span class="">	invoke-static {v0, v1, v3, v4}, Ljava/lang/Math;->hypot(DD)D</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	double-to-float v0, v0</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v3, ""</span>
+<span class="">	invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	const/high16 v3, 0x42c80000    # 100.0f</span>
+<span class="">	mul-float v4, v0, v3</span>
+<span class="">	div-float/2addr v4, v2</span>
+<span class="">	float-to-int v2, v4</span>
+<span class="">	int-to-float v2, v2</span>
+<span class="">	div-float/2addr v2, v3</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(F)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	iget-object v1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mTextPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p0, v4, v1}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->getTextBounds(Ljava/lang/String;Landroid/graphics/Paint;)V</span>
+<span class="">	const/high16 v1, 0x40000000    # 2.0f</span>
+<span class="">	div-float/2addr v0, v1</span>
+<span class="">	iget-object v1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mBounds:Landroid/graphics/Rect;</span>
+<span class="">	invoke-virtual {v1}, Landroid/graphics/Rect;->width()I</span>
+<span class="">	move-result v1</span>
+<span class="">	div-int/lit8 v1, v1, 0x2</span>
+<span class="">	int-to-float v1, v1</span>
+<span class="">	sub-float v6, v0, v1</span>
+<span class="">	iget-object v8, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mTextPaint:Landroid/graphics/Paint;</span>
+<span class="">	const/high16 v7, -0x3e600000    # -20.0f</span>
+<span class="">	move-object v3, p1</span>
+<span class="">	invoke-virtual/range {v3 .. v8}, Landroid/graphics/Canvas;->drawTextOnPath(Ljava/lang/String;Landroid/graphics/Path;FFLandroid/graphics/Paint;)V</span>
+<span class="">	iget-object v11, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintGraph:Landroid/graphics/Paint;</span>
+<span class="">	move-object v6, p1</span>
+<span class="">	move v7, p2</span>
+<span class="">	move v8, p3</span>
+<span class="">	invoke-virtual/range {v6 .. v11}, Landroid/graphics/Canvas;->drawLine(FFFFLandroid/graphics/Paint;)V</span>
+.end method
+
+.method private drawPathScreenTicks(Landroid/graphics/Canvas;FFII)V
+<span class="">	.locals 15</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"canvas",</span>
+<span class="">	"x",</span>
+<span class="">	"y",</span>
+<span class="">	"viewWidth",</span>
+<span class="">	"viewHeight"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	move-object v0, p0</span>
+<span class="">	move-object/from16 v7, p1</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const-string v8, ""</span>
+<span class="">	invoke-virtual {v1, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	div-int/lit8 v2, p4, 0x2</span>
+<span class="">	int-to-float v2, v2</span>
+<span class="">	sub-float v2, p2, v2</span>
+<span class="">	const/high16 v9, 0x42c80000    # 100.0f</span>
+<span class="">	mul-float/2addr v2, v9</span>
+<span class="">	iget-object v3, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->this$0:Landroidx/constraintlayout/motion/widget/MotionLayout;</span>
+<span class="">	invoke-virtual {v3}, Landroidx/constraintlayout/motion/widget/MotionLayout;->getWidth()I</span>
+<span class="">	move-result v3</span>
+<span class="">	sub-int v3, v3, p4</span>
+<span class="">	int-to-float v3, v3</span>
+<span class="">	div-float/2addr v2, v3</span>
+<span class="">	float-to-double v2, v2</span>
+<span class="">	const-wide/high16 v10, 0x3fe0000000000000L    # 0.5</span>
+<span class="">	add-double/2addr v2, v10</span>
+<span class="">	double-to-int v2, v2</span>
+<span class="">	int-to-float v2, v2</span>
+<span class="">	div-float/2addr v2, v9</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(F)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iget-object v2, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mTextPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p0, v1, v2}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->getTextBounds(Ljava/lang/String;Landroid/graphics/Paint;)V</span>
+<span class="">	const/high16 v12, 0x40000000    # 2.0f</span>
+<span class="">	div-float v2, p2, v12</span>
+<span class="">	iget-object v3, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mBounds:Landroid/graphics/Rect;</span>
+<span class="">	invoke-virtual {v3}, Landroid/graphics/Rect;->width()I</span>
+<span class="">	move-result v3</span>
+<span class="">	div-int/lit8 v3, v3, 0x2</span>
+<span class="">	int-to-float v3, v3</span>
+<span class="">	sub-float/2addr v2, v3</span>
+<span class="">	const/4 v13, 0x0</span>
+<span class="">	add-float/2addr v2, v13</span>
+<span class="">	const/high16 v3, 0x41a00000    # 20.0f</span>
+<span class="">	sub-float v3, p3, v3</span>
+<span class="">	iget-object v4, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mTextPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v7, v1, v2, v3, v4}, Landroid/graphics/Canvas;->drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V</span>
+<span class="">	const/high16 v14, 0x3f800000    # 1.0f</span>
+<span class="">	invoke-static {v13, v14}, Ljava/lang/Math;->min(FF)F</span>
+<span class="">	move-result v4</span>
+<span class="">	iget-object v6, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintGraph:Landroid/graphics/Paint;</span>
+<span class="">	move-object/from16 v1, p1</span>
+<span class="">	move/from16 v2, p2</span>
+<span class="">	move/from16 v3, p3</span>
+<span class="">	move/from16 v5, p3</span>
+<span class="">	invoke-virtual/range {v1 .. v6}, Landroid/graphics/Canvas;->drawLine(FFFFLandroid/graphics/Paint;)V</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-virtual {v1, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	div-int/lit8 v2, p5, 0x2</span>
+<span class="">	int-to-float v2, v2</span>
+<span class="">	sub-float v2, p3, v2</span>
+<span class="">	mul-float/2addr v2, v9</span>
+<span class="">	iget-object v3, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->this$0:Landroidx/constraintlayout/motion/widget/MotionLayout;</span>
+<span class="">	invoke-virtual {v3}, Landroidx/constraintlayout/motion/widget/MotionLayout;->getHeight()I</span>
+<span class="">	move-result v3</span>
+<span class="">	sub-int v3, v3, p5</span>
+<span class="">	int-to-float v3, v3</span>
+<span class="">	div-float/2addr v2, v3</span>
+<span class="">	float-to-double v2, v2</span>
+<span class="">	add-double/2addr v2, v10</span>
+<span class="">	double-to-int v2, v2</span>
+<span class="">	int-to-float v2, v2</span>
+<span class="">	div-float/2addr v2, v9</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(F)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iget-object v2, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mTextPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p0, v1, v2}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->getTextBounds(Ljava/lang/String;Landroid/graphics/Paint;)V</span>
+<span class="">	div-float v2, p3, v12</span>
+<span class="">	iget-object v3, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mBounds:Landroid/graphics/Rect;</span>
+<span class="">	invoke-virtual {v3}, Landroid/graphics/Rect;->height()I</span>
+<span class="">	move-result v3</span>
+<span class="">	div-int/lit8 v3, v3, 0x2</span>
+<span class="">	int-to-float v3, v3</span>
+<span class="">	sub-float/2addr v2, v3</span>
+<span class="">	const/high16 v3, 0x40a00000    # 5.0f</span>
+<span class="">	add-float v3, p2, v3</span>
+<span class="">	sub-float v2, v13, v2</span>
+<span class="">	iget-object v4, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mTextPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v7, v1, v3, v2, v4}, Landroid/graphics/Canvas;->drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V</span>
+<span class="">	invoke-static {v13, v14}, Ljava/lang/Math;->max(FF)F</span>
+<span class="">	move-result v5</span>
+<span class="">	iget-object v6, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintGraph:Landroid/graphics/Paint;</span>
+<span class="">	move-object/from16 v1, p1</span>
+<span class="">	move/from16 v2, p2</span>
+<span class="">	move/from16 v3, p3</span>
+<span class="">	move/from16 v4, p2</span>
+<span class="">	invoke-virtual/range {v1 .. v6}, Landroid/graphics/Canvas;->drawLine(FFFFLandroid/graphics/Paint;)V</span>
+.end method
+
+.method private drawRectangle(Landroid/graphics/Canvas;Landroidx/constraintlayout/motion/widget/MotionController;)V
+<span class="">	.locals 6</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"canvas",</span>
+<span class="">	"motionController"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPath:Landroid/graphics/Path;</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/Path;->reset()V</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	move v1, v0</span>
+<span class="">	:goto_0</span>
+<span class="">	const/16 v2, 0x32</span>
+<span class="">	if-gt v1, v2, :cond_0</span>
+<span class="">	int-to-float v3, v1</span>
+<span class="">	int-to-float v2, v2</span>
+<span class="">	div-float/2addr v3, v2</span>
+<span class="">	iget-object v2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mRectangle:[F</span>
+<span class="">	invoke-virtual {p2, v3, v2, v0}, Landroidx/constraintlayout/motion/widget/MotionController;->buildRect(F[FI)V</span>
+<span class="">	iget-object v2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPath:Landroid/graphics/Path;</span>
+<span class="">	iget-object v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mRectangle:[F</span>
+<span class="">	aget v4, v3, v0</span>
+<span class="">	const/4 v5, 0x1</span>
+<span class="">	aget v3, v3, v5</span>
+<span class="">	invoke-virtual {v2, v4, v3}, Landroid/graphics/Path;->moveTo(FF)V</span>
+<span class="">	iget-object v2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPath:Landroid/graphics/Path;</span>
+<span class="">	iget-object v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mRectangle:[F</span>
+<span class="">	const/4 v4, 0x2</span>
+<span class="">	aget v4, v3, v4</span>
+<span class="">	const/4 v5, 0x3</span>
+<span class="">	aget v3, v3, v5</span>
+<span class="">	invoke-virtual {v2, v4, v3}, Landroid/graphics/Path;->lineTo(FF)V</span>
+<span class="">	iget-object v2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPath:Landroid/graphics/Path;</span>
+<span class="">	iget-object v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mRectangle:[F</span>
+<span class="">	const/4 v4, 0x4</span>
+<span class="">	aget v4, v3, v4</span>
+<span class="">	const/4 v5, 0x5</span>
+<span class="">	aget v3, v3, v5</span>
+<span class="">	invoke-virtual {v2, v4, v3}, Landroid/graphics/Path;->lineTo(FF)V</span>
+<span class="">	iget-object v2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPath:Landroid/graphics/Path;</span>
+<span class="">	iget-object v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mRectangle:[F</span>
+<span class="">	const/4 v4, 0x6</span>
+<span class="">	aget v4, v3, v4</span>
+<span class="">	const/4 v5, 0x7</span>
+<span class="">	aget v3, v3, v5</span>
+<span class="">	invoke-virtual {v2, v4, v3}, Landroid/graphics/Path;->lineTo(FF)V</span>
+<span class="">	iget-object v2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPath:Landroid/graphics/Path;</span>
+<span class="">	invoke-virtual {v2}, Landroid/graphics/Path;->close()V</span>
+<span class="">	add-int/lit8 v1, v1, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object p2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaint:Landroid/graphics/Paint;</span>
+<span class="">	const/high16 v0, 0x44000000    # 512.0f</span>
+<span class="">	invoke-virtual {p2, v0}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	const/high16 p2, 0x40000000    # 2.0f</span>
+<span class="">	invoke-virtual {p1, p2, p2}, Landroid/graphics/Canvas;->translate(FF)V</span>
+<span class="">	iget-object p2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPath:Landroid/graphics/Path;</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p1, p2, v0}, Landroid/graphics/Canvas;->drawPath(Landroid/graphics/Path;Landroid/graphics/Paint;)V</span>
+<span class="">	const/high16 p2, -0x40000000    # -2.0f</span>
+<span class="">	invoke-virtual {p1, p2, p2}, Landroid/graphics/Canvas;->translate(FF)V</span>
+<span class="">	iget-object p2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaint:Landroid/graphics/Paint;</span>
+<span class="">	const/high16 v0, -0x10000</span>
+<span class="">	invoke-virtual {p2, v0}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	iget-object p2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPath:Landroid/graphics/Path;</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p1, p2, v0}, Landroid/graphics/Canvas;->drawPath(Landroid/graphics/Path;Landroid/graphics/Paint;)V</span>
+.end method
+
+.method private drawTicks(Landroid/graphics/Canvas;IILandroidx/constraintlayout/motion/widget/MotionController;)V
+<span class="">	.locals 19</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"canvas",</span>
+<span class="">	"mode",</span>
+<span class="">	"keyFrames",</span>
+<span class="">	"motionController"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	move-object/from16 v6, p0</span>
+<span class="">	move-object/from16 v7, p1</span>
+<span class="">	move/from16 v8, p2</span>
+<span class="">	move-object/from16 v9, p4</span>
+<span class="">	iget-object v0, v9, Landroidx/constraintlayout/motion/widget/MotionController;->mView:Landroid/view/View;</span>
+<span class="">	const/4 v10, 0x0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, v9, Landroidx/constraintlayout/motion/widget/MotionController;->mView:Landroid/view/View;</span>
+<span class="">	invoke-virtual {v0}, Landroid/view/View;->getWidth()I</span>
+<span class="">	move-result v0</span>
+<span class="">	iget-object v1, v9, Landroidx/constraintlayout/motion/widget/MotionController;->mView:Landroid/view/View;</span>
+<span class="">	invoke-virtual {v1}, Landroid/view/View;->getHeight()I</span>
+<span class="">	move-result v1</span>
+<span class="">	move v11, v0</span>
+<span class="">	move v12, v1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	move v11, v10</span>
+<span class="">	move v12, v11</span>
+<span class="">	:goto_0</span>
+<span class="">	const/4 v13, 0x1</span>
+<span class="">	move v14, v13</span>
+<span class="">	:goto_1</span>
+<span class="">	add-int/lit8 v0, p3, -0x1</span>
+<span class="">	const/4 v15, 0x2</span>
+<span class="">	if-ge v14, v0, :cond_9</span>
+<span class="">	const/4 v0, 0x4</span>
+<span class="">	if-ne v8, v0, :cond_1</span>
+<span class="">	iget-object v1, v6, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPathMode:[I</span>
+<span class="">	add-int/lit8 v2, v14, -0x1</span>
+<span class="">	aget v1, v1, v2</span>
+<span class="">	if-nez v1, :cond_1</span>
+<span class="">	goto/16 :goto_5</span>
+<span class="">	:cond_1</span>
+<span class="">	iget-object v1, v6, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mKeyFramePoints:[F</span>
+<span class="">	mul-int/lit8 v2, v14, 0x2</span>
+<span class="">	aget v5, v1, v2</span>
+<span class="">	add-int/2addr v2, v13</span>
+<span class="">	aget v4, v1, v2</span>
+<span class="">	iget-object v1, v6, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPath:Landroid/graphics/Path;</span>
+<span class="">	invoke-virtual {v1}, Landroid/graphics/Path;->reset()V</span>
+<span class="">	iget-object v1, v6, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPath:Landroid/graphics/Path;</span>
+<span class="">	const/high16 v2, 0x41200000    # 10.0f</span>
+<span class="">	add-float v3, v4, v2</span>
+<span class="">	invoke-virtual {v1, v5, v3}, Landroid/graphics/Path;->moveTo(FF)V</span>
+<span class="">	iget-object v1, v6, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPath:Landroid/graphics/Path;</span>
+<span class="">	add-float v3, v5, v2</span>
+<span class="">	invoke-virtual {v1, v3, v4}, Landroid/graphics/Path;->lineTo(FF)V</span>
+<span class="">	iget-object v1, v6, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPath:Landroid/graphics/Path;</span>
+<span class="">	sub-float v3, v4, v2</span>
+<span class="">	invoke-virtual {v1, v5, v3}, Landroid/graphics/Path;->lineTo(FF)V</span>
+<span class="">	iget-object v1, v6, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPath:Landroid/graphics/Path;</span>
+<span class="">	sub-float v2, v5, v2</span>
+<span class="">	invoke-virtual {v1, v2, v4}, Landroid/graphics/Path;->lineTo(FF)V</span>
+<span class="">	iget-object v1, v6, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPath:Landroid/graphics/Path;</span>
+<span class="">	invoke-virtual {v1}, Landroid/graphics/Path;->close()V</span>
+<span class="">	add-int/lit8 v1, v14, -0x1</span>
+<span class="">	invoke-virtual {v9, v1}, Landroidx/constraintlayout/motion/widget/MotionController;->getKeyFrame(I)Landroidx/constraintlayout/motion/widget/MotionPaths;</span>
+<span class="">	const/16 v16, 0x0</span>
+<span class="">	if-ne v8, v0, :cond_5</span>
+<span class="">	iget-object v0, v6, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPathMode:[I</span>
+<span class="">	aget v2, v0, v1</span>
+<span class="">	if-ne v2, v13, :cond_3</span>
+<span class="">	sub-float v0, v5, v16</span>
+<span class="">	sub-float v1, v4, v16</span>
+<span class="">	invoke-direct {v6, v7, v0, v1}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->drawPathRelativeTicks(Landroid/graphics/Canvas;FF)V</span>
+<span class="">	:goto_2</span>
+<span class="">	:cond_2</span>
+<span class="">	move/from16 v17, v4</span>
+<span class="">	move/from16 v18, v5</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:cond_3</span>
+<span class="">	aget v2, v0, v1</span>
+<span class="">	if-nez v2, :cond_4</span>
+<span class="">	sub-float v0, v5, v16</span>
+<span class="">	sub-float v1, v4, v16</span>
+<span class="">	invoke-direct {v6, v7, v0, v1}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->drawPathCartesianTicks(Landroid/graphics/Canvas;FF)V</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_4</span>
+<span class="">	aget v0, v0, v1</span>
+<span class="">	if-ne v0, v15, :cond_2</span>
+<span class="">	sub-float v2, v5, v16</span>
+<span class="">	sub-float v3, v4, v16</span>
+<span class="">	move-object/from16 v0, p0</span>
+<span class="">	move-object/from16 v1, p1</span>
+<span class="">	move/from16 v17, v4</span>
+<span class="">	move v4, v11</span>
+<span class="">	move/from16 v18, v5</span>
+<span class="">	move v5, v12</span>
+<span class="">	invoke-direct/range {v0 .. v5}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->drawPathScreenTicks(Landroid/graphics/Canvas;FFII)V</span>
+<span class="">	:goto_3</span>
+<span class="">	iget-object v0, v6, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPath:Landroid/graphics/Path;</span>
+<span class="">	iget-object v1, v6, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mFillPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v7, v0, v1}, Landroid/graphics/Canvas;->drawPath(Landroid/graphics/Path;Landroid/graphics/Paint;)V</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:cond_5</span>
+<span class="">	move/from16 v17, v4</span>
+<span class="">	move/from16 v18, v5</span>
+<span class="">	:goto_4</span>
+<span class="">	if-ne v8, v15, :cond_6</span>
+<span class="">	sub-float v5, v18, v16</span>
+<span class="">	sub-float v4, v17, v16</span>
+<span class="">	invoke-direct {v6, v7, v5, v4}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->drawPathRelativeTicks(Landroid/graphics/Canvas;FF)V</span>
+<span class="">	:cond_6</span>
+<span class="">	const/4 v0, 0x3</span>
+<span class="">	if-ne v8, v0, :cond_7</span>
+<span class="">	sub-float v5, v18, v16</span>
+<span class="">	sub-float v4, v17, v16</span>
+<span class="">	invoke-direct {v6, v7, v5, v4}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->drawPathCartesianTicks(Landroid/graphics/Canvas;FF)V</span>
+<span class="">	:cond_7</span>
+<span class="">	const/4 v0, 0x6</span>
+<span class="">	if-ne v8, v0, :cond_8</span>
+<span class="">	sub-float v2, v18, v16</span>
+<span class="">	sub-float v3, v17, v16</span>
+<span class="">	move-object/from16 v0, p0</span>
+<span class="">	move-object/from16 v1, p1</span>
+<span class="">	move v4, v11</span>
+<span class="">	move v5, v12</span>
+<span class="">	invoke-direct/range {v0 .. v5}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->drawPathScreenTicks(Landroid/graphics/Canvas;FFII)V</span>
+<span class="">	:cond_8</span>
+<span class="">	iget-object v0, v6, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPath:Landroid/graphics/Path;</span>
+<span class="">	iget-object v1, v6, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mFillPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v7, v0, v1}, Landroid/graphics/Canvas;->drawPath(Landroid/graphics/Path;Landroid/graphics/Paint;)V</span>
+<span class="">	:goto_5</span>
+<span class="">	add-int/lit8 v14, v14, 0x1</span>
+<span class="">	goto/16 :goto_1</span>
+<span class="">	:cond_9</span>
+<span class="">	iget-object v0, v6, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPoints:[F</span>
+<span class="">	array-length v1, v0</span>
+<span class="">	if-le v1, v13, :cond_a</span>
+<span class="">	aget v1, v0, v10</span>
+<span class="">	aget v0, v0, v13</span>
+<span class="">	iget-object v2, v6, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintKeyframes:Landroid/graphics/Paint;</span>
+<span class="">	const/high16 v3, 0x41000000    # 8.0f</span>
+<span class="">	invoke-virtual {v7, v1, v0, v3, v2}, Landroid/graphics/Canvas;->drawCircle(FFFLandroid/graphics/Paint;)V</span>
+<span class="">	iget-object v0, v6, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPoints:[F</span>
+<span class="">	array-length v1, v0</span>
+<span class="">	sub-int/2addr v1, v15</span>
+<span class="">	aget v1, v0, v1</span>
+<span class="">	array-length v2, v0</span>
+<span class="">	sub-int/2addr v2, v13</span>
+<span class="">	aget v0, v0, v2</span>
+<span class="">	iget-object v2, v6, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintKeyframes:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v7, v1, v0, v3, v2}, Landroid/graphics/Canvas;->drawCircle(FFFLandroid/graphics/Paint;)V</span>
+<span class="">	:cond_a</span>
+.end method
+
+.method private drawTranslation(Landroid/graphics/Canvas;FFFF)V
+<span class="">	.locals 13</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"canvas",</span>
+<span class="">	"x1",</span>
+<span class="">	"y1",</span>
+<span class="">	"x2",</span>
+<span class="">	"y2"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	move-object v0, p0</span>
+<span class="">	iget-object v6, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintGraph:Landroid/graphics/Paint;</span>
+<span class="">	move-object v1, p1</span>
+<span class="">	move v2, p2</span>
+<span class="">	move/from16 v3, p3</span>
+<span class="">	move/from16 v4, p4</span>
+<span class="">	move/from16 v5, p5</span>
+<span class="">	invoke-virtual/range {v1 .. v6}, Landroid/graphics/Canvas;->drawRect(FFFFLandroid/graphics/Paint;)V</span>
+<span class="">	iget-object v12, v0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintGraph:Landroid/graphics/Paint;</span>
+<span class="">	move-object v7, p1</span>
+<span class="">	move v8, p2</span>
+<span class="">	move/from16 v9, p3</span>
+<span class="">	move/from16 v10, p4</span>
+<span class="">	move/from16 v11, p5</span>
+<span class="">	invoke-virtual/range {v7 .. v12}, Landroid/graphics/Canvas;->drawLine(FFFFLandroid/graphics/Paint;)V</span>
+.end method
+
+.method public draw(Landroid/graphics/Canvas;Ljava/util/HashMap;II)V
+<span class="">	.locals 5</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Landroid/graphics/Canvas;",</span>
+<span class="">	"Ljava/util/HashMap<",</span>
+<span class="">	"Landroid/view/View;",</span>
+<span class="">	"Landroidx/constraintlayout/motion/widget/MotionController;",</span>
+<span class="">	">;II)V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"canvas",</span>
+<span class="">	"frameArrayList",</span>
+<span class="">	"duration",</span>
+<span class="">	"debugPath"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	if-eqz p2, :cond_8</span>
+<span class="">	invoke-virtual {p2}, Ljava/util/HashMap;->size()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	goto/16 :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p1}, Landroid/graphics/Canvas;->save()I</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->this$0:Landroidx/constraintlayout/motion/widget/MotionLayout;</span>
+<span class="">	invoke-virtual {v0}, Landroidx/constraintlayout/motion/widget/MotionLayout;->isInEditMode()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	and-int/lit8 v0, p4, 0x1</span>
+<span class="">	const/4 v1, 0x2</span>
+<span class="">	if-ne v0, v1, :cond_1</span>
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	iget-object v1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->this$0:Landroidx/constraintlayout/motion/widget/MotionLayout;</span>
+<span class="">	invoke-virtual {v1}, Landroidx/constraintlayout/motion/widget/MotionLayout;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	iget-object v2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->this$0:Landroidx/constraintlayout/motion/widget/MotionLayout;</span>
+<span class="">	invoke-static {v2}, Landroidx/constraintlayout/motion/widget/MotionLayout;->access$100(Landroidx/constraintlayout/motion/widget/MotionLayout;)I</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-virtual {v1, v2}, Landroid/content/res/Resources;->getResourceName(I)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v1, ":"</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->this$0:Landroidx/constraintlayout/motion/widget/MotionLayout;</span>
+<span class="">	invoke-virtual {v1}, Landroidx/constraintlayout/motion/widget/MotionLayout;->getProgress()F</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(F)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const/high16 v1, 0x41200000    # 10.0f</span>
+<span class="">	iget-object v2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->this$0:Landroidx/constraintlayout/motion/widget/MotionLayout;</span>
+<span class="">	invoke-virtual {v2}, Landroidx/constraintlayout/motion/widget/MotionLayout;->getHeight()I</span>
+<span class="">	move-result v2</span>
+<span class="">	add-int/lit8 v2, v2, -0x1e</span>
+<span class="">	int-to-float v2, v2</span>
+<span class="">	iget-object v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mTextPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p1, v0, v1, v2, v3}, Landroid/graphics/Canvas;->drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V</span>
+<span class="">	const/high16 v1, 0x41300000    # 11.0f</span>
+<span class="">	iget-object v2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->this$0:Landroidx/constraintlayout/motion/widget/MotionLayout;</span>
+<span class="">	invoke-virtual {v2}, Landroidx/constraintlayout/motion/widget/MotionLayout;->getHeight()I</span>
+<span class="">	move-result v2</span>
+<span class="">	add-int/lit8 v2, v2, -0x1d</span>
+<span class="">	int-to-float v2, v2</span>
+<span class="">	iget-object v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p1, v0, v1, v2, v3}, Landroid/graphics/Canvas;->drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {p2}, Ljava/util/HashMap;->values()Ljava/util/Collection;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-interface {p2}, Ljava/util/Collection;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-interface {p2}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_7</span>
+<span class="">	invoke-interface {p2}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroidx/constraintlayout/motion/widget/MotionController;</span>
+<span class="">	invoke-virtual {v0}, Landroidx/constraintlayout/motion/widget/MotionController;->getDrawPath()I</span>
+<span class="">	move-result v1</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	if-lez p4, :cond_3</span>
+<span class="">	if-nez v1, :cond_3</span>
+<span class="">	move v1, v2</span>
+<span class="">	:cond_3</span>
+<span class="">	if-nez v1, :cond_4</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_4</span>
+<span class="">	iget-object v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mKeyFramePoints:[F</span>
+<span class="">	iget-object v4, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPathMode:[I</span>
+<span class="">	invoke-virtual {v0, v3, v4}, Landroidx/constraintlayout/motion/widget/MotionController;->buildKeyFrames([F[I)I</span>
+<span class="">	move-result v3</span>
+<span class="">	iput v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mKeyFrameCount:I</span>
+<span class="">	if-lt v1, v2, :cond_2</span>
+<span class="">	div-int/lit8 v2, p3, 0x10</span>
+<span class="">	iget-object v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPoints:[F</span>
+<span class="">	if-eqz v3, :cond_5</span>
+<span class="">	array-length v3, v3</span>
+<span class="">	mul-int/lit8 v4, v2, 0x2</span>
+<span class="">	if-eq v3, v4, :cond_6</span>
+<span class="">	:cond_5</span>
+<span class="">	mul-int/lit8 v3, v2, 0x2</span>
+<span class="">	new-array v3, v3, [F</span>
+<span class="">	iput-object v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPoints:[F</span>
+<span class="">	new-instance v3, Landroid/graphics/Path;</span>
+<span class="">	invoke-direct {v3}, Landroid/graphics/Path;-><init>()V</span>
+<span class="">	iput-object v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPath:Landroid/graphics/Path;</span>
+<span class="">	:cond_6</span>
+<span class="">	iget v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mShadowTranslate:I</span>
+<span class="">	int-to-float v4, v3</span>
+<span class="">	int-to-float v3, v3</span>
+<span class="">	invoke-virtual {p1, v4, v3}, Landroid/graphics/Canvas;->translate(FF)V</span>
+<span class="">	iget-object v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaint:Landroid/graphics/Paint;</span>
+<span class="">	const/high16 v4, 0x77000000</span>
+<span class="">	invoke-virtual {v3, v4}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	iget-object v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mFillPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v3, v4}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	iget-object v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintKeyframes:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v3, v4}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	iget-object v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintGraph:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v3, v4}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	iget-object v3, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPoints:[F</span>
+<span class="">	invoke-virtual {v0, v3, v2}, Landroidx/constraintlayout/motion/widget/MotionController;->buildPath([FI)V</span>
+<span class="">	iget v2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mKeyFrameCount:I</span>
+<span class="">	invoke-virtual {p0, p1, v1, v2, v0}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->drawAll(Landroid/graphics/Canvas;IILandroidx/constraintlayout/motion/widget/MotionController;)V</span>
+<span class="">	iget-object v2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaint:Landroid/graphics/Paint;</span>
+<span class="">	const/16 v3, -0x55cd</span>
+<span class="">	invoke-virtual {v2, v3}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	iget-object v2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintKeyframes:Landroid/graphics/Paint;</span>
+<span class="">	const v3, -0x1f8a66</span>
+<span class="">	invoke-virtual {v2, v3}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	iget-object v2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mFillPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v2, v3}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	iget-object v2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mPaintGraph:Landroid/graphics/Paint;</span>
+<span class="">	const v3, -0xcc5600</span>
+<span class="">	invoke-virtual {v2, v3}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	iget v2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mShadowTranslate:I</span>
+<span class="">	neg-int v3, v2</span>
+<span class="">	int-to-float v3, v3</span>
+<span class="">	neg-int v2, v2</span>
+<span class="">	int-to-float v2, v2</span>
+<span class="">	invoke-virtual {p1, v3, v2}, Landroid/graphics/Canvas;->translate(FF)V</span>
+<span class="">	iget v2, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mKeyFrameCount:I</span>
+<span class="">	invoke-virtual {p0, p1, v1, v2, v0}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->drawAll(Landroid/graphics/Canvas;IILandroidx/constraintlayout/motion/widget/MotionController;)V</span>
+<span class="">	const/4 v2, 0x5</span>
+<span class="">	if-ne v1, v2, :cond_2</span>
+<span class="">	invoke-direct {p0, p1, v0}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->drawRectangle(Landroid/graphics/Canvas;Landroidx/constraintlayout/motion/widget/MotionController;)V</span>
+<span class="">	goto/16 :goto_0</span>
+<span class="">	:cond_7</span>
+<span class="">	invoke-virtual {p1}, Landroid/graphics/Canvas;->restore()V</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_8</span>
+.end method
+
+.method public drawAll(Landroid/graphics/Canvas;IILandroidx/constraintlayout/motion/widget/MotionController;)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"canvas",</span>
+<span class="">	"mode",</span>
+<span class="">	"keyFrames",</span>
+<span class="">	"motionController"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x4</span>
+<span class="">	if-ne p2, v0, :cond_0</span>
+<span class="">	invoke-direct {p0, p1}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->drawPathAsConfigured(Landroid/graphics/Canvas;)V</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v0, 0x2</span>
+<span class="">	if-ne p2, v0, :cond_1</span>
+<span class="">	invoke-direct {p0, p1}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->drawPathRelative(Landroid/graphics/Canvas;)V</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 v0, 0x3</span>
+<span class="">	if-ne p2, v0, :cond_2</span>
+<span class="">	invoke-direct {p0, p1}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->drawPathCartesian(Landroid/graphics/Canvas;)V</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-direct {p0, p1}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->drawBasicPath(Landroid/graphics/Canvas;)V</span>
+<span class="">	invoke-direct {p0, p1, p2, p3, p4}, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->drawTicks(Landroid/graphics/Canvas;IILandroidx/constraintlayout/motion/widget/MotionController;)V</span>
+.end method
+
+.method  getTextBounds(Ljava/lang/String;Landroid/graphics/Paint;)V
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"text",</span>
+<span class="">	"paint"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p1}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	iget-object v1, p0, Landroidx/constraintlayout/motion/widget/MotionLayout$DevModeDraw;->mBounds:Landroid/graphics/Rect;</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-virtual {p2, p1, v2, v0, v1}, Landroid/graphics/Paint;->getTextBounds(Ljava/lang/String;IILandroid/graphics/Rect;)V</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../.resources/report.js"></script>
+</body>
+</html>

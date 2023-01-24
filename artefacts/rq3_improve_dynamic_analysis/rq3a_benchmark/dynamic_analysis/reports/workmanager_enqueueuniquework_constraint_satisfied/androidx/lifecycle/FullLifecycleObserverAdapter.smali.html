@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../index.html">lu.uni.trux.workmanager_enqueueuniquework</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.lifecycle</a></li>
+        <li><i class="ico ico-class"></i> FullLifecycleObserverAdapter.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class  Landroidx/lifecycle/FullLifecycleObserverAdapter;
+.super Ljava/lang/Object;
+.source "FullLifecycleObserverAdapter.java"
+.implements Landroidx/lifecycle/LifecycleEventObserver;
+
+
+.field private final mFullLifecycleObserver:Landroidx/lifecycle/FullLifecycleObserver;
+.field private final mLifecycleEventObserver:Landroidx/lifecycle/LifecycleEventObserver;
+
+
+<span class="cov">.method constructor &lt;init&gt;(Landroidx/lifecycle/FullLifecycleObserver;Landroidx/lifecycle/LifecycleEventObserver;)V</span>
+<span class="">	.locals 0</span>
+
+<span class="cov">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="cov">	iput-object p1, p0, Landroidx/lifecycle/FullLifecycleObserverAdapter;->mFullLifecycleObserver:Landroidx/lifecycle/FullLifecycleObserver;</span>
+<span class="cov">	iput-object p2, p0, Landroidx/lifecycle/FullLifecycleObserverAdapter;->mLifecycleEventObserver:Landroidx/lifecycle/LifecycleEventObserver;</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method public onStateChanged(Landroidx/lifecycle/LifecycleOwner;Landroidx/lifecycle/Lifecycle$Event;)V</span>
+<span class="">	.locals 2</span>
+
+<span class="cov">	sget-object v0, Landroidx/lifecycle/FullLifecycleObserverAdapter$1;->$SwitchMap$androidx$lifecycle$Lifecycle$Event:[I</span>
+<span class="exec">	invoke-virtual {p2}, Landroidx/lifecycle/Lifecycle$Event;->ordinal()I</span>
+<span class="cov">	move-result v1</span>
+<span class="cov">	aget v0, v0, v1</span>
+<span class="">	packed-switch v0, :pswitch_data_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:pswitch_0</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalArgumentException;</span>
+<span class="">	const-string p2, "ON_ANY must not been send by anybody"</span>
+<span class="">	invoke-direct {p1, p2}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+<span class="">	:pswitch_1</span>
+<span class="">	iget-object v0, p0, Landroidx/lifecycle/FullLifecycleObserverAdapter;->mFullLifecycleObserver:Landroidx/lifecycle/FullLifecycleObserver;</span>
+<span class="">	invoke-interface {v0, p1}, Landroidx/lifecycle/FullLifecycleObserver;->onDestroy(Landroidx/lifecycle/LifecycleOwner;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:pswitch_2</span>
+<span class="">	iget-object v0, p0, Landroidx/lifecycle/FullLifecycleObserverAdapter;->mFullLifecycleObserver:Landroidx/lifecycle/FullLifecycleObserver;</span>
+<span class="">	invoke-interface {v0, p1}, Landroidx/lifecycle/FullLifecycleObserver;->onStop(Landroidx/lifecycle/LifecycleOwner;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:pswitch_3</span>
+<span class="">	iget-object v0, p0, Landroidx/lifecycle/FullLifecycleObserverAdapter;->mFullLifecycleObserver:Landroidx/lifecycle/FullLifecycleObserver;</span>
+<span class="">	invoke-interface {v0, p1}, Landroidx/lifecycle/FullLifecycleObserver;->onPause(Landroidx/lifecycle/LifecycleOwner;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="cov">	:pswitch_4</span>
+<span class="cov">	iget-object v0, p0, Landroidx/lifecycle/FullLifecycleObserverAdapter;->mFullLifecycleObserver:Landroidx/lifecycle/FullLifecycleObserver;</span>
+<span class="cov">	invoke-interface {v0, p1}, Landroidx/lifecycle/FullLifecycleObserver;->onResume(Landroidx/lifecycle/LifecycleOwner;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="cov">	:pswitch_5</span>
+<span class="cov">	iget-object v0, p0, Landroidx/lifecycle/FullLifecycleObserverAdapter;->mFullLifecycleObserver:Landroidx/lifecycle/FullLifecycleObserver;</span>
+<span class="cov">	invoke-interface {v0, p1}, Landroidx/lifecycle/FullLifecycleObserver;->onStart(Landroidx/lifecycle/LifecycleOwner;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="cov">	:pswitch_6</span>
+<span class="cov">	iget-object v0, p0, Landroidx/lifecycle/FullLifecycleObserverAdapter;->mFullLifecycleObserver:Landroidx/lifecycle/FullLifecycleObserver;</span>
+<span class="cov">	invoke-interface {v0, p1}, Landroidx/lifecycle/FullLifecycleObserver;->onCreate(Landroidx/lifecycle/LifecycleOwner;)V</span>
+<span class="cov">	:goto_0</span>
+<span class="cov">	iget-object v0, p0, Landroidx/lifecycle/FullLifecycleObserverAdapter;->mLifecycleEventObserver:Landroidx/lifecycle/LifecycleEventObserver;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-interface {v0, p1, p2}, Landroidx/lifecycle/LifecycleEventObserver;->onStateChanged(Landroidx/lifecycle/LifecycleOwner;Landroidx/lifecycle/Lifecycle$Event;)V</span>
+<span class="cov">	:cond_0</span>
+<span class="exec">	return-void</span>
+<span class="">	nop</span>
+<span class="">	:pswitch_data_0</span>
+<span class="">	.packed-switch 0x1</span>
+<span class="">	:pswitch_6</span>
+<span class="">	:pswitch_5</span>
+<span class="">	:pswitch_4</span>
+<span class="">	:pswitch_3</span>
+<span class="">	:pswitch_2</span>
+<span class="">	:pswitch_1</span>
+<span class="">	:pswitch_0</span>
+<span class="">	.end packed-switch</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../.resources/report.js"></script>
+</body>
+</html>

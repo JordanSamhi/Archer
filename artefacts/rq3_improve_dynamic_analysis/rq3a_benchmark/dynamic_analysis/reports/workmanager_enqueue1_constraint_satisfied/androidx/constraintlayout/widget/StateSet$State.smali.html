@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">lu.uni.trux.workmanager_enqueue1</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.constraintlayout.widget</a></li>
+        <li><i class="ico ico-class"></i> StateSet$State.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class  Landroidx/constraintlayout/widget/StateSet$State;
+.super Ljava/lang/Object;
+.source "StateSet.java"
+
+.annotation system Ldalvik/annotation/EnclosingClass;
+value = Landroidx/constraintlayout/widget/StateSet;
+.end annotation
+.annotation system Ldalvik/annotation/InnerClass;
+accessFlags = 0x8
+name = "State"
+.end annotation
+
+.field  mConstraintID:I
+.field  mId:I
+.field  mIsLayout:Z
+.field  mVariants:Ljava/util/ArrayList;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/ArrayList<",
+"Landroidx/constraintlayout/widget/StateSet$Variant;",
+">;"
+}
+.end annotation
+.end field
+
+
+.method public constructor <init>(Landroid/content/Context;Lorg/xmlpull/v1/XmlPullParser;)V
+<span class="">	.locals 5</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"context",</span>
+<span class="">	"parser"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/constraintlayout/widget/StateSet$State;->mVariants:Ljava/util/ArrayList;</span>
+<span class="">	const/4 v0, -0x1</span>
+<span class="">	iput v0, p0, Landroidx/constraintlayout/widget/StateSet$State;->mConstraintID:I</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-boolean v0, p0, Landroidx/constraintlayout/widget/StateSet$State;->mIsLayout:Z</span>
+<span class="">	invoke-static {p2}, Landroid/util/Xml;->asAttributeSet(Lorg/xmlpull/v1/XmlPullParser;)Landroid/util/AttributeSet;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	sget-object v1, Landroidx/constraintlayout/widget/R$styleable;->State:[I</span>
+<span class="">	invoke-virtual {p1, p2, v1}, Landroid/content/Context;->obtainStyledAttributes(Landroid/util/AttributeSet;[I)Landroid/content/res/TypedArray;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-virtual {p2}, Landroid/content/res/TypedArray;->getIndexCount()I</span>
+<span class="">	move-result v1</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v0, v1, :cond_2</span>
+<span class="">	invoke-virtual {p2, v0}, Landroid/content/res/TypedArray;->getIndex(I)I</span>
+<span class="">	move-result v2</span>
+<span class="">	sget v3, Landroidx/constraintlayout/widget/R$styleable;->State_android_id:I</span>
+<span class="">	if-ne v2, v3, :cond_0</span>
+<span class="">	iget v3, p0, Landroidx/constraintlayout/widget/StateSet$State;->mId:I</span>
+<span class="">	invoke-virtual {p2, v2, v3}, Landroid/content/res/TypedArray;->getResourceId(II)I</span>
+<span class="">	move-result v2</span>
+<span class="">	iput v2, p0, Landroidx/constraintlayout/widget/StateSet$State;->mId:I</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	sget v3, Landroidx/constraintlayout/widget/R$styleable;->State_constraints:I</span>
+<span class="">	if-ne v2, v3, :cond_1</span>
+<span class="">	iget v3, p0, Landroidx/constraintlayout/widget/StateSet$State;->mConstraintID:I</span>
+<span class="">	invoke-virtual {p2, v2, v3}, Landroid/content/res/TypedArray;->getResourceId(II)I</span>
+<span class="">	move-result v2</span>
+<span class="">	iput v2, p0, Landroidx/constraintlayout/widget/StateSet$State;->mConstraintID:I</span>
+<span class="">	invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	iget v3, p0, Landroidx/constraintlayout/widget/StateSet$State;->mConstraintID:I</span>
+<span class="">	invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getResourceTypeName(I)Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	iget v4, p0, Landroidx/constraintlayout/widget/StateSet$State;->mConstraintID:I</span>
+<span class="">	invoke-virtual {v3, v4}, Landroid/content/res/Resources;->getResourceName(I)Ljava/lang/String;</span>
+<span class="">	const-string v3, "layout"</span>
+<span class="">	invoke-virtual {v3, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_1</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	iput-boolean v2, p0, Landroidx/constraintlayout/widget/StateSet$State;->mIsLayout:Z</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_1</span>
+<span class="">	add-int/lit8 v0, v0, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-virtual {p2}, Landroid/content/res/TypedArray;->recycle()V</span>
+.end method
+
+.method  add(Landroidx/constraintlayout/widget/StateSet$Variant;)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"size"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/widget/StateSet$State;->mVariants:Ljava/util/ArrayList;</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z</span>
+.end method
+
+.method public findMatch(FF)I
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"width",</span>
+<span class="">	"height"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	iget-object v1, p0, Landroidx/constraintlayout/widget/StateSet$State;->mVariants:Ljava/util/ArrayList;</span>
+<span class="">	invoke-virtual {v1}, Ljava/util/ArrayList;->size()I</span>
+<span class="">	move-result v1</span>
+<span class="">	if-ge v0, v1, :cond_1</span>
+<span class="">	iget-object v1, p0, Landroidx/constraintlayout/widget/StateSet$State;->mVariants:Ljava/util/ArrayList;</span>
+<span class="">	invoke-virtual {v1, v0}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Landroidx/constraintlayout/widget/StateSet$Variant;</span>
+<span class="">	invoke-virtual {v1, p1, p2}, Landroidx/constraintlayout/widget/StateSet$Variant;->match(FF)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	add-int/lit8 v0, v0, 0x1</span>
+<span class="">	:cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	const/4 p1, -0x1</span>
+<span class="">	:cond_1</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

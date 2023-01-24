@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../index.html">lu.uni.trux.workmanager_enqueue</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.material.animation</a></li>
+        <li><i class="ico ico-class"></i> MotionTiming.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Lcom/google/android/material/animation/MotionTiming;
+.super Ljava/lang/Object;
+.source "MotionTiming.java"
+
+
+.field private delay:J
+.field private duration:J
+.field private interpolator:Landroid/animation/TimeInterpolator;
+.field private repeatCount:I
+.field private repeatMode:I
+
+
+.method public constructor <init>(JJ)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/material/animation/MotionTiming;->interpolator:Landroid/animation/TimeInterpolator;</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput v0, p0, Lcom/google/android/material/animation/MotionTiming;->repeatCount:I</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	iput v0, p0, Lcom/google/android/material/animation/MotionTiming;->repeatMode:I</span>
+<span class="">	iput-wide p1, p0, Lcom/google/android/material/animation/MotionTiming;->delay:J</span>
+<span class="">	iput-wide p3, p0, Lcom/google/android/material/animation/MotionTiming;->duration:J</span>
+.end method
+
+.method public constructor <init>(JJLandroid/animation/TimeInterpolator;)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput v0, p0, Lcom/google/android/material/animation/MotionTiming;->repeatCount:I</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	iput v0, p0, Lcom/google/android/material/animation/MotionTiming;->repeatMode:I</span>
+<span class="">	iput-wide p1, p0, Lcom/google/android/material/animation/MotionTiming;->delay:J</span>
+<span class="">	iput-wide p3, p0, Lcom/google/android/material/animation/MotionTiming;->duration:J</span>
+<span class="">	iput-object p5, p0, Lcom/google/android/material/animation/MotionTiming;->interpolator:Landroid/animation/TimeInterpolator;</span>
+.end method
+
+.method static createFromAnimator(Landroid/animation/ValueAnimator;)Lcom/google/android/material/animation/MotionTiming;
+<span class="">	.locals 7</span>
+
+<span class="">	new-instance v6, Lcom/google/android/material/animation/MotionTiming;</span>
+<span class="">	invoke-virtual {p0}, Landroid/animation/ValueAnimator;->getStartDelay()J</span>
+<span class="">	move-result-wide v1</span>
+<span class="">	invoke-virtual {p0}, Landroid/animation/ValueAnimator;->getDuration()J</span>
+<span class="">	move-result-wide v3</span>
+<span class="">	invoke-static {p0}, Lcom/google/android/material/animation/MotionTiming;->getInterpolatorCompat(Landroid/animation/ValueAnimator;)Landroid/animation/TimeInterpolator;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	move-object v0, v6</span>
+<span class="">	invoke-direct/range {v0 .. v5}, Lcom/google/android/material/animation/MotionTiming;-><init>(JJLandroid/animation/TimeInterpolator;)V</span>
+<span class="">	invoke-virtual {p0}, Landroid/animation/ValueAnimator;->getRepeatCount()I</span>
+<span class="">	move-result v0</span>
+<span class="">	iput v0, v6, Lcom/google/android/material/animation/MotionTiming;->repeatCount:I</span>
+<span class="">	invoke-virtual {p0}, Landroid/animation/ValueAnimator;->getRepeatMode()I</span>
+<span class="">	move-result p0</span>
+<span class="">	iput p0, v6, Lcom/google/android/material/animation/MotionTiming;->repeatMode:I</span>
+.end method
+
+.method private static getInterpolatorCompat(Landroid/animation/ValueAnimator;)Landroid/animation/TimeInterpolator;
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/animation/ValueAnimator;->getInterpolator()Landroid/animation/TimeInterpolator;</span>
+<span class="">	move-result-object p0</span>
+<span class="">	instance-of v0, p0, Landroid/view/animation/AccelerateDecelerateInterpolator;</span>
+<span class="">	if-nez v0, :cond_3</span>
+<span class="">	if-nez p0, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	instance-of v0, p0, Landroid/view/animation/AccelerateInterpolator;</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	sget-object p0, Lcom/google/android/material/animation/AnimationUtils;->FAST_OUT_LINEAR_IN_INTERPOLATOR:Landroid/animation/TimeInterpolator;</span>
+<span class="">	instance-of v0, p0, Landroid/view/animation/DecelerateInterpolator;</span>
+<span class="">	:cond_1</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	sget-object p0, Lcom/google/android/material/animation/AnimationUtils;->LINEAR_OUT_SLOW_IN_INTERPOLATOR:Landroid/animation/TimeInterpolator;</span>
+<span class="">	sget-object p0, Lcom/google/android/material/animation/AnimationUtils;->FAST_OUT_SLOW_IN_INTERPOLATOR:Landroid/animation/TimeInterpolator;</span>
+<span class="">	:cond_2</span>
+<span class="">	:cond_3</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public apply(Landroid/animation/Animator;)V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getDelay()J</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	invoke-virtual {p1, v0, v1}, Landroid/animation/Animator;->setStartDelay(J)V</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getDuration()J</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	invoke-virtual {p1, v0, v1}, Landroid/animation/Animator;->setDuration(J)Landroid/animation/Animator;</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getInterpolator()Landroid/animation/TimeInterpolator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/animation/Animator;->setInterpolator(Landroid/animation/TimeInterpolator;)V</span>
+<span class="">	instance-of v0, p1, Landroid/animation/ValueAnimator;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	check-cast p1, Landroid/animation/ValueAnimator;</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getRepeatCount()I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/animation/ValueAnimator;->setRepeatCount(I)V</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getRepeatMode()I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/animation/ValueAnimator;->setRepeatMode(I)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public equals(Ljava/lang/Object;)Z
+<span class="">	.locals 6</span>
+
+<span class="">	if-ne p0, p1, :cond_0</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	instance-of v0, p1, Lcom/google/android/material/animation/MotionTiming;</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	check-cast p1, Lcom/google/android/material/animation/MotionTiming;</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getDelay()J</span>
+<span class="">	:cond_1</span>
+<span class="">	move-result-wide v2</span>
+<span class="">	invoke-virtual {p1}, Lcom/google/android/material/animation/MotionTiming;->getDelay()J</span>
+<span class="">	move-result-wide v4</span>
+<span class="">	cmp-long v0, v2, v4</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getDuration()J</span>
+<span class="">	move-result-wide v2</span>
+<span class="">	invoke-virtual {p1}, Lcom/google/android/material/animation/MotionTiming;->getDuration()J</span>
+<span class="">	:cond_2</span>
+<span class="">	move-result-wide v4</span>
+<span class="">	cmp-long v0, v2, v4</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getRepeatCount()I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-virtual {p1}, Lcom/google/android/material/animation/MotionTiming;->getRepeatCount()I</span>
+<span class="">	move-result v2</span>
+<span class="">	:cond_3</span>
+<span class="">	if-eq v0, v2, :cond_4</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getRepeatMode()I</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-virtual {p1}, Lcom/google/android/material/animation/MotionTiming;->getRepeatMode()I</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eq v0, v2, :cond_5</span>
+<span class="">	:cond_4</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getInterpolator()Landroid/animation/TimeInterpolator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p1}, Lcom/google/android/material/animation/MotionTiming;->getInterpolator()Landroid/animation/TimeInterpolator;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:cond_5</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/Object;->getClass()Ljava/lang/Class;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public getDelay()J
+<span class="">	.locals 2</span>
+
+<span class="">	iget-wide v0, p0, Lcom/google/android/material/animation/MotionTiming;->delay:J</span>
+.end method
+
+.method public getDuration()J
+<span class="">	.locals 2</span>
+
+<span class="">	iget-wide v0, p0, Lcom/google/android/material/animation/MotionTiming;->duration:J</span>
+.end method
+
+.method public getInterpolator()Landroid/animation/TimeInterpolator;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/animation/MotionTiming;->interpolator:Landroid/animation/TimeInterpolator;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	sget-object v0, Lcom/google/android/material/animation/AnimationUtils;->FAST_OUT_SLOW_IN_INTERPOLATOR:Landroid/animation/TimeInterpolator;</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public getRepeatCount()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/google/android/material/animation/MotionTiming;->repeatCount:I</span>
+.end method
+
+.method public getRepeatMode()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/google/android/material/animation/MotionTiming;->repeatMode:I</span>
+.end method
+
+.method public hashCode()I
+<span class="">	.locals 7</span>
+
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getDelay()J</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getDelay()J</span>
+<span class="">	move-result-wide v2</span>
+<span class="">	const/16 v4, 0x20</span>
+<span class="">	ushr-long/2addr v2, v4</span>
+<span class="">	xor-long/2addr v0, v2</span>
+<span class="">	long-to-int v0, v0</span>
+<span class="">	mul-int/lit8 v0, v0, 0x1f</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getDuration()J</span>
+<span class="">	move-result-wide v1</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getDuration()J</span>
+<span class="">	move-result-wide v5</span>
+<span class="">	ushr-long v3, v5, v4</span>
+<span class="">	xor-long/2addr v1, v3</span>
+<span class="">	long-to-int v1, v1</span>
+<span class="">	add-int/2addr v0, v1</span>
+<span class="">	mul-int/lit8 v0, v0, 0x1f</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getInterpolator()Landroid/animation/TimeInterpolator;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/Object;->getClass()Ljava/lang/Class;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/Object;->hashCode()I</span>
+<span class="">	move-result v1</span>
+<span class="">	add-int/2addr v0, v1</span>
+<span class="">	mul-int/lit8 v0, v0, 0x1f</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getRepeatCount()I</span>
+<span class="">	move-result v1</span>
+<span class="">	add-int/2addr v0, v1</span>
+<span class="">	mul-int/lit8 v0, v0, 0x1f</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getRepeatMode()I</span>
+<span class="">	move-result v1</span>
+<span class="">	add-int/2addr v0, v1</span>
+.end method
+
+.method public toString()Ljava/lang/String;
+<span class="">	.locals 3</span>
+
+<span class="">	new-instance v0, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	const/16 v1, 0xa</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {p0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/Class;->getName()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const/16 v1, 0x7b</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-static {p0}, Ljava/lang/System;->identityHashCode(Ljava/lang/Object;)I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {v1}, Ljava/lang/Integer;->toHexString(I)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, " delay: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getDelay()J</span>
+<span class="">	move-result-wide v1</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, " duration: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getDuration()J</span>
+<span class="">	move-result-wide v1</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, " interpolator: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getInterpolator()Landroid/animation/TimeInterpolator;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/Object;->getClass()Ljava/lang/Class;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, " repeatCount: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getRepeatCount()I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, " repeatMode: "</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/animation/MotionTiming;->getRepeatMode()I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v1, "}\n"</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../.resources/report.js"></script>
+</body>
+</html>

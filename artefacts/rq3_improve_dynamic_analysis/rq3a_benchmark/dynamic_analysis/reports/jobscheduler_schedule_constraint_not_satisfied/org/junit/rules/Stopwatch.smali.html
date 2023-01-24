@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">lu.uni.trux.jobscheduler_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">org.junit.rules</a></li>
+        <li><i class="ico ico-class"></i> Stopwatch.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public abstract Lorg/junit/rules/Stopwatch;
+.super Ljava/lang/Object;
+.source "Stopwatch.java"
+.implements Lorg/junit/rules/TestRule;
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Lorg/junit/rules/Stopwatch$Clock;,
+Lorg/junit/rules/Stopwatch$InternalWatcher;
+}
+.end annotation
+
+.field private final clock:Lorg/junit/rules/Stopwatch$Clock;
+.field private volatile endNanos:J
+.field private volatile startNanos:J
+
+
+.method public constructor <init>()V
+<span class="">	.locals 1</span>
+
+<span class="">	new-instance v0, Lorg/junit/rules/Stopwatch$Clock;</span>
+<span class="">	invoke-direct {v0}, Lorg/junit/rules/Stopwatch$Clock;-><init>()V</span>
+<span class="">	invoke-direct {p0, v0}, Lorg/junit/rules/Stopwatch;-><init>(Lorg/junit/rules/Stopwatch$Clock;)V</span>
+.end method
+
+.method constructor <init>(Lorg/junit/rules/Stopwatch$Clock;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	iput-object p1, p0, Lorg/junit/rules/Stopwatch;->clock:Lorg/junit/rules/Stopwatch$Clock;</span>
+.end method
+
+.method static synthetic access$100(Lorg/junit/rules/Stopwatch;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Lorg/junit/rules/Stopwatch;->starting()V</span>
+.end method
+
+.method static synthetic access$200(Lorg/junit/rules/Stopwatch;)J
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-direct {p0}, Lorg/junit/rules/Stopwatch;->getNanos()J</span>
+<span class="">	move-result-wide v0</span>
+.end method
+
+.method static synthetic access$300(Lorg/junit/rules/Stopwatch;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Lorg/junit/rules/Stopwatch;->stopping()V</span>
+.end method
+
+.method private getNanos()J
+<span class="">	.locals 4</span>
+
+<span class="">	iget-wide v0, p0, Lorg/junit/rules/Stopwatch;->startNanos:J</span>
+<span class="">	const-wide/16 v2, 0x0</span>
+<span class="">	cmp-long v0, v0, v2</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget-wide v0, p0, Lorg/junit/rules/Stopwatch;->endNanos:J</span>
+<span class="">	cmp-long v2, v0, v2</span>
+<span class="">	if-nez v2, :cond_0</span>
+<span class="">	iget-object v0, p0, Lorg/junit/rules/Stopwatch;->clock:Lorg/junit/rules/Stopwatch$Clock;</span>
+<span class="">	invoke-virtual {v0}, Lorg/junit/rules/Stopwatch$Clock;->nanoTime()J</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-wide v2, p0, Lorg/junit/rules/Stopwatch;->startNanos:J</span>
+<span class="">	sub-long/2addr v0, v2</span>
+<span class="">	new-instance v0, Ljava/lang/IllegalStateException;</span>
+<span class="">	:cond_1</span>
+<span class="">	const-string v1, "Test has not started"</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw v0</span>
+.end method
+
+.method private starting()V
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/rules/Stopwatch;->clock:Lorg/junit/rules/Stopwatch$Clock;</span>
+<span class="">	invoke-virtual {v0}, Lorg/junit/rules/Stopwatch$Clock;->nanoTime()J</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	iput-wide v0, p0, Lorg/junit/rules/Stopwatch;->startNanos:J</span>
+<span class="">	const-wide/16 v0, 0x0</span>
+<span class="">	iput-wide v0, p0, Lorg/junit/rules/Stopwatch;->endNanos:J</span>
+.end method
+
+.method private stopping()V
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Lorg/junit/rules/Stopwatch;->clock:Lorg/junit/rules/Stopwatch$Clock;</span>
+<span class="">	invoke-virtual {v0}, Lorg/junit/rules/Stopwatch$Clock;->nanoTime()J</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	iput-wide v0, p0, Lorg/junit/rules/Stopwatch;->endNanos:J</span>
+.end method
+
+.method public final apply(Lorg/junit/runners/model/Statement;Lorg/junit/runner/Description;)Lorg/junit/runners/model/Statement;
+<span class="">	.locals 2</span>
+
+<span class="">	new-instance v0, Lorg/junit/rules/Stopwatch$InternalWatcher;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-direct {v0, p0, v1}, Lorg/junit/rules/Stopwatch$InternalWatcher;-><init>(Lorg/junit/rules/Stopwatch;Lorg/junit/rules/Stopwatch$1;)V</span>
+<span class="">	invoke-virtual {v0, p1, p2}, Lorg/junit/rules/Stopwatch$InternalWatcher;->apply(Lorg/junit/runners/model/Statement;Lorg/junit/runner/Description;)Lorg/junit/runners/model/Statement;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method protected failed(JLjava/lang/Throwable;Lorg/junit/runner/Description;)V
+<span class="">	.locals 0</span>
+
+.end method
+
+.method protected finished(JLorg/junit/runner/Description;)V
+<span class="">	.locals 0</span>
+
+.end method
+
+.method public runtime(Ljava/util/concurrent/TimeUnit;)J
+<span class="">	.locals 3</span>
+
+<span class="">	invoke-direct {p0}, Lorg/junit/rules/Stopwatch;->getNanos()J</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	sget-object v2, Ljava/util/concurrent/TimeUnit;->NANOSECONDS:Ljava/util/concurrent/TimeUnit;</span>
+<span class="">	invoke-virtual {p1, v0, v1, v2}, Ljava/util/concurrent/TimeUnit;->convert(JLjava/util/concurrent/TimeUnit;)J</span>
+<span class="">	move-result-wide v0</span>
+.end method
+
+.method protected skipped(JLorg/junit/AssumptionViolatedException;Lorg/junit/runner/Description;)V
+<span class="">	.locals 0</span>
+
+.end method
+
+.method protected succeeded(JLorg/junit/runner/Description;)V
+<span class="">	.locals 0</span>
+
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

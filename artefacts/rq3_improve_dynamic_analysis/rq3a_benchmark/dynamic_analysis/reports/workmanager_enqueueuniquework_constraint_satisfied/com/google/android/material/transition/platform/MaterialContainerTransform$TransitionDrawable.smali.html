@@ -1,0 +1,846 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../../index.html">lu.uni.trux.workmanager_enqueueuniquework</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.material.transition.platform</a></li>
+        <li><i class="ico ico-class"></i> MaterialContainerTransform$TransitionDrawable.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class final Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;
+.super Landroid/graphics/drawable/Drawable;
+.source "MaterialContainerTransform.java"
+
+.annotation system Ldalvik/annotation/EnclosingClass;
+value = Lcom/google/android/material/transition/platform/MaterialContainerTransform;
+.end annotation
+.annotation system Ldalvik/annotation/InnerClass;
+accessFlags = 0x1a
+name = "TransitionDrawable"
+.end annotation
+
+.field private static final COMPAT_SHADOW_COLOR:I = -0x777778
+.field private static final SHADOW_COLOR:I = 0x2d000000
+.field private static final SHADOW_DX_MULTIPLIER_ADJUSTMENT:F = 0.3f
+.field private static final SHADOW_DY_MULTIPLIER_ADJUSTMENT:F = 1.5f
+.field private final compatShadowDrawable:Lcom/google/android/material/shape/MaterialShapeDrawable;
+.field private final containerPaint:Landroid/graphics/Paint;
+.field private currentElevation:F
+.field private currentElevationDy:F
+.field private final currentEndBounds:Landroid/graphics/RectF;
+.field private final currentEndBoundsMasked:Landroid/graphics/RectF;
+.field private currentMaskBounds:Landroid/graphics/RectF;
+.field private final currentStartBounds:Landroid/graphics/RectF;
+.field private final currentStartBoundsMasked:Landroid/graphics/RectF;
+.field private final debugPaint:Landroid/graphics/Paint;
+.field private final debugPath:Landroid/graphics/Path;
+.field private final displayHeight:F
+.field private final displayWidth:F
+.field private final drawDebugEnabled:Z
+.field private final elevationShadowEnabled:Z
+.field private final endBounds:Landroid/graphics/RectF;
+.field private final endContainerPaint:Landroid/graphics/Paint;
+.field private final endElevation:F
+.field private final endShapeAppearanceModel:Lcom/google/android/material/shape/ShapeAppearanceModel;
+.field private final endView:Landroid/view/View;
+.field private final entering:Z
+.field private final fadeModeEvaluator:Lcom/google/android/material/transition/platform/FadeModeEvaluator;
+.field private fadeModeResult:Lcom/google/android/material/transition/platform/FadeModeResult;
+.field private final fitModeEvaluator:Lcom/google/android/material/transition/platform/FitModeEvaluator;
+.field private fitModeResult:Lcom/google/android/material/transition/platform/FitModeResult;
+.field private final maskEvaluator:Lcom/google/android/material/transition/platform/MaskEvaluator;
+.field private final motionPathLength:F
+.field private final motionPathMeasure:Landroid/graphics/PathMeasure;
+.field private final motionPathPosition:[F
+.field private progress:F
+.field private final progressThresholds:Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;
+.field private final scrimPaint:Landroid/graphics/Paint;
+.field private final shadowPaint:Landroid/graphics/Paint;
+.field private final startBounds:Landroid/graphics/RectF;
+.field private final startContainerPaint:Landroid/graphics/Paint;
+.field private final startElevation:F
+.field private final startShapeAppearanceModel:Lcom/google/android/material/shape/ShapeAppearanceModel;
+.field private final startView:Landroid/view/View;
+
+
+.method private constructor <init>(Landroid/transition/PathMotion;Landroid/view/View;Landroid/graphics/RectF;Lcom/google/android/material/shape/ShapeAppearanceModel;FLandroid/view/View;Landroid/graphics/RectF;Lcom/google/android/material/shape/ShapeAppearanceModel;FIIIIZZLcom/google/android/material/transition/platform/FadeModeEvaluator;Lcom/google/android/material/transition/platform/FitModeEvaluator;Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;Z)V
+<span class="">	.locals 13</span>
+
+<span class="">	move-object v0, p0</span>
+<span class="">	move-object/from16 v1, p3</span>
+<span class="">	invoke-direct {p0}, Landroid/graphics/drawable/Drawable;-><init>()V</span>
+<span class="">	new-instance v2, Landroid/graphics/Paint;</span>
+<span class="">	invoke-direct {v2}, Landroid/graphics/Paint;-><init>()V</span>
+<span class="">	iput-object v2, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->containerPaint:Landroid/graphics/Paint;</span>
+<span class="">	new-instance v3, Landroid/graphics/Paint;</span>
+<span class="">	invoke-direct {v3}, Landroid/graphics/Paint;-><init>()V</span>
+<span class="">	iput-object v3, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->startContainerPaint:Landroid/graphics/Paint;</span>
+<span class="">	new-instance v4, Landroid/graphics/Paint;</span>
+<span class="">	invoke-direct {v4}, Landroid/graphics/Paint;-><init>()V</span>
+<span class="">	iput-object v4, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->endContainerPaint:Landroid/graphics/Paint;</span>
+<span class="">	new-instance v5, Landroid/graphics/Paint;</span>
+<span class="">	invoke-direct {v5}, Landroid/graphics/Paint;-><init>()V</span>
+<span class="">	iput-object v5, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->shadowPaint:Landroid/graphics/Paint;</span>
+<span class="">	new-instance v5, Landroid/graphics/Paint;</span>
+<span class="">	invoke-direct {v5}, Landroid/graphics/Paint;-><init>()V</span>
+<span class="">	iput-object v5, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->scrimPaint:Landroid/graphics/Paint;</span>
+<span class="">	new-instance v6, Lcom/google/android/material/transition/platform/MaskEvaluator;</span>
+<span class="">	invoke-direct {v6}, Lcom/google/android/material/transition/platform/MaskEvaluator;-><init>()V</span>
+<span class="">	iput-object v6, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->maskEvaluator:Lcom/google/android/material/transition/platform/MaskEvaluator;</span>
+<span class="">	const/4 v6, 0x2</span>
+<span class="">	new-array v7, v6, [F</span>
+<span class="">	iput-object v7, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->motionPathPosition:[F</span>
+<span class="">	new-instance v8, Lcom/google/android/material/shape/MaterialShapeDrawable;</span>
+<span class="">	invoke-direct {v8}, Lcom/google/android/material/shape/MaterialShapeDrawable;-><init>()V</span>
+<span class="">	iput-object v8, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->compatShadowDrawable:Lcom/google/android/material/shape/MaterialShapeDrawable;</span>
+<span class="">	new-instance v9, Landroid/graphics/Paint;</span>
+<span class="">	invoke-direct {v9}, Landroid/graphics/Paint;-><init>()V</span>
+<span class="">	iput-object v9, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->debugPaint:Landroid/graphics/Paint;</span>
+<span class="">	new-instance v10, Landroid/graphics/Path;</span>
+<span class="">	invoke-direct {v10}, Landroid/graphics/Path;-><init>()V</span>
+<span class="">	iput-object v10, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->debugPath:Landroid/graphics/Path;</span>
+<span class="">	move-object v10, p2</span>
+<span class="">	iput-object v10, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->startView:Landroid/view/View;</span>
+<span class="">	iput-object v1, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->startBounds:Landroid/graphics/RectF;</span>
+<span class="">	move-object/from16 v11, p4</span>
+<span class="">	iput-object v11, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->startShapeAppearanceModel:Lcom/google/android/material/shape/ShapeAppearanceModel;</span>
+<span class="">	move/from16 v11, p5</span>
+<span class="">	iput v11, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->startElevation:F</span>
+<span class="">	move-object/from16 v11, p6</span>
+<span class="">	iput-object v11, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->endView:Landroid/view/View;</span>
+<span class="">	move-object/from16 v11, p7</span>
+<span class="">	iput-object v11, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->endBounds:Landroid/graphics/RectF;</span>
+<span class="">	move-object/from16 v12, p8</span>
+<span class="">	iput-object v12, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->endShapeAppearanceModel:Lcom/google/android/material/shape/ShapeAppearanceModel;</span>
+<span class="">	move/from16 v12, p9</span>
+<span class="">	iput v12, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->endElevation:F</span>
+<span class="">	move/from16 v12, p14</span>
+<span class="">	iput-boolean v12, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->entering:Z</span>
+<span class="">	move/from16 v12, p15</span>
+<span class="">	iput-boolean v12, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->elevationShadowEnabled:Z</span>
+<span class="">	move-object/from16 v12, p16</span>
+<span class="">	iput-object v12, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fadeModeEvaluator:Lcom/google/android/material/transition/platform/FadeModeEvaluator;</span>
+<span class="">	move-object/from16 v12, p17</span>
+<span class="">	iput-object v12, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fitModeEvaluator:Lcom/google/android/material/transition/platform/FitModeEvaluator;</span>
+<span class="">	move-object/from16 v12, p18</span>
+<span class="">	iput-object v12, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->progressThresholds:Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;</span>
+<span class="">	move/from16 v12, p19</span>
+<span class="">	iput-boolean v12, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->drawDebugEnabled:Z</span>
+<span class="">	invoke-virtual {p2}, Landroid/view/View;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v10</span>
+<span class="">	const-string v12, "window"</span>
+<span class="">	invoke-virtual {v10, v12}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v10</span>
+<span class="">	check-cast v10, Landroid/view/WindowManager;</span>
+<span class="">	new-instance v12, Landroid/util/DisplayMetrics;</span>
+<span class="">	invoke-direct {v12}, Landroid/util/DisplayMetrics;-><init>()V</span>
+<span class="">	invoke-interface {v10}, Landroid/view/WindowManager;->getDefaultDisplay()Landroid/view/Display;</span>
+<span class="">	move-result-object v10</span>
+<span class="">	invoke-virtual {v10, v12}, Landroid/view/Display;->getMetrics(Landroid/util/DisplayMetrics;)V</span>
+<span class="">	iget v10, v12, Landroid/util/DisplayMetrics;->widthPixels:I</span>
+<span class="">	int-to-float v10, v10</span>
+<span class="">	iput v10, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->displayWidth:F</span>
+<span class="">	iget v10, v12, Landroid/util/DisplayMetrics;->heightPixels:I</span>
+<span class="">	int-to-float v10, v10</span>
+<span class="">	iput v10, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->displayHeight:F</span>
+<span class="">	move/from16 v10, p10</span>
+<span class="">	invoke-virtual {v2, v10}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	move/from16 v2, p11</span>
+<span class="">	invoke-virtual {v3, v2}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	move/from16 v2, p12</span>
+<span class="">	invoke-virtual {v4, v2}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-static {v2}, Landroid/content/res/ColorStateList;->valueOf(I)Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {v8, v3}, Lcom/google/android/material/shape/MaterialShapeDrawable;->setFillColor(Landroid/content/res/ColorStateList;)V</span>
+<span class="">	invoke-virtual {v8, v6}, Lcom/google/android/material/shape/MaterialShapeDrawable;->setShadowCompatibilityMode(I)V</span>
+<span class="">	invoke-virtual {v8, v2}, Lcom/google/android/material/shape/MaterialShapeDrawable;->setShadowBitmapDrawingEnable(Z)V</span>
+<span class="">	const v3, -0x777778</span>
+<span class="">	invoke-virtual {v8, v3}, Lcom/google/android/material/shape/MaterialShapeDrawable;->setShadowColor(I)V</span>
+<span class="">	new-instance v3, Landroid/graphics/RectF;</span>
+<span class="">	invoke-direct {v3, v1}, Landroid/graphics/RectF;-><init>(Landroid/graphics/RectF;)V</span>
+<span class="">	iput-object v3, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentStartBounds:Landroid/graphics/RectF;</span>
+<span class="">	new-instance v4, Landroid/graphics/RectF;</span>
+<span class="">	invoke-direct {v4, v3}, Landroid/graphics/RectF;-><init>(Landroid/graphics/RectF;)V</span>
+<span class="">	iput-object v4, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentStartBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	new-instance v4, Landroid/graphics/RectF;</span>
+<span class="">	invoke-direct {v4, v3}, Landroid/graphics/RectF;-><init>(Landroid/graphics/RectF;)V</span>
+<span class="">	iput-object v4, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentEndBounds:Landroid/graphics/RectF;</span>
+<span class="">	new-instance v3, Landroid/graphics/RectF;</span>
+<span class="">	invoke-direct {v3, v4}, Landroid/graphics/RectF;-><init>(Landroid/graphics/RectF;)V</span>
+<span class="">	iput-object v3, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentEndBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	invoke-static/range {p3 .. p3}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->getMotionPathPoint(Landroid/graphics/RectF;)Landroid/graphics/PointF;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-static/range {p7 .. p7}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->getMotionPathPoint(Landroid/graphics/RectF;)Landroid/graphics/PointF;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	iget v6, v3, Landroid/graphics/PointF;->x:F</span>
+<span class="">	iget v3, v3, Landroid/graphics/PointF;->y:F</span>
+<span class="">	iget v8, v4, Landroid/graphics/PointF;->x:F</span>
+<span class="">	iget v4, v4, Landroid/graphics/PointF;->y:F</span>
+<span class="">	move-object v10, p1</span>
+<span class="">	invoke-virtual {p1, v6, v3, v8, v4}, Landroid/transition/PathMotion;->getPath(FFFF)Landroid/graphics/Path;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	new-instance v4, Landroid/graphics/PathMeasure;</span>
+<span class="">	invoke-direct {v4, v3, v2}, Landroid/graphics/PathMeasure;-><init>(Landroid/graphics/Path;Z)V</span>
+<span class="">	iput-object v4, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->motionPathMeasure:Landroid/graphics/PathMeasure;</span>
+<span class="">	invoke-virtual {v4}, Landroid/graphics/PathMeasure;->getLength()F</span>
+<span class="">	move-result v3</span>
+<span class="">	iput v3, v0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->motionPathLength:F</span>
+<span class="">	invoke-virtual/range {p3 .. p3}, Landroid/graphics/RectF;->centerX()F</span>
+<span class="">	move-result v3</span>
+<span class="">	aput v3, v7, v2</span>
+<span class="">	iget v1, v1, Landroid/graphics/RectF;->top:F</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	aput v1, v7, v2</span>
+<span class="">	sget-object v1, Landroid/graphics/Paint$Style;->FILL:Landroid/graphics/Paint$Style;</span>
+<span class="">	invoke-virtual {v5, v1}, Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V</span>
+<span class="">	invoke-static/range {p13 .. p13}, Lcom/google/android/material/transition/platform/TransitionUtils;->createColorShader(I)Landroid/graphics/Shader;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v5, v1}, Landroid/graphics/Paint;->setShader(Landroid/graphics/Shader;)Landroid/graphics/Shader;</span>
+<span class="">	sget-object v1, Landroid/graphics/Paint$Style;->STROKE:Landroid/graphics/Paint$Style;</span>
+<span class="">	invoke-virtual {v9, v1}, Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V</span>
+<span class="">	const/high16 v1, 0x41200000    # 10.0f</span>
+<span class="">	invoke-virtual {v9, v1}, Landroid/graphics/Paint;->setStrokeWidth(F)V</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-direct {p0, v1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->updateProgress(F)V</span>
+.end method
+
+.method synthetic constructor <init>(Landroid/transition/PathMotion;Landroid/view/View;Landroid/graphics/RectF;Lcom/google/android/material/shape/ShapeAppearanceModel;FLandroid/view/View;Landroid/graphics/RectF;Lcom/google/android/material/shape/ShapeAppearanceModel;FIIIIZZLcom/google/android/material/transition/platform/FadeModeEvaluator;Lcom/google/android/material/transition/platform/FitModeEvaluator;Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;ZLcom/google/android/material/transition/platform/MaterialContainerTransform$1;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct/range {p0 .. p19}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;-><init>(Landroid/transition/PathMotion;Landroid/view/View;Landroid/graphics/RectF;Lcom/google/android/material/shape/ShapeAppearanceModel;FLandroid/view/View;Landroid/graphics/RectF;Lcom/google/android/material/shape/ShapeAppearanceModel;FIIIIZZLcom/google/android/material/transition/platform/FadeModeEvaluator;Lcom/google/android/material/transition/platform/FitModeEvaluator;Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;Z)V</span>
+.end method
+
+.method static synthetic access$200(Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;F)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->setProgress(F)V</span>
+.end method
+
+.method static synthetic access$800(Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;)Landroid/view/View;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->startView:Landroid/view/View;</span>
+.end method
+
+.method static synthetic access$900(Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;)Landroid/view/View;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->endView:Landroid/view/View;</span>
+.end method
+
+.method private static calculateElevationDxMultiplier(Landroid/graphics/RectF;F)F
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/graphics/RectF;->centerX()F</span>
+<span class="">	move-result p0</span>
+<span class="">	const/high16 v0, 0x40000000    # 2.0f</span>
+<span class="">	div-float/2addr p1, v0</span>
+<span class="">	div-float/2addr p0, p1</span>
+<span class="">	const/high16 p1, 0x3f800000    # 1.0f</span>
+<span class="">	sub-float/2addr p0, p1</span>
+<span class="">	const p1, 0x3e99999a    # 0.3f</span>
+<span class="">	mul-float/2addr p0, p1</span>
+.end method
+
+.method private static calculateElevationDyMultiplier(Landroid/graphics/RectF;F)F
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-virtual {p0}, Landroid/graphics/RectF;->centerY()F</span>
+<span class="">	move-result p0</span>
+<span class="">	div-float/2addr p0, p1</span>
+<span class="">	const/high16 p1, 0x3fc00000    # 1.5f</span>
+<span class="">	mul-float/2addr p0, p1</span>
+.end method
+
+.method private drawDebugCumulativePath(Landroid/graphics/Canvas;Landroid/graphics/RectF;Landroid/graphics/Path;I)V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-static {p2}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->getMotionPathPoint(Landroid/graphics/RectF;)Landroid/graphics/PointF;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	iget v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->progress:F</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	cmpl-float v0, v0, v1</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	invoke-virtual {p3}, Landroid/graphics/Path;->reset()V</span>
+<span class="">	iget p1, p2, Landroid/graphics/PointF;->x:F</span>
+<span class="">	iget p2, p2, Landroid/graphics/PointF;->y:F</span>
+<span class="">	invoke-virtual {p3, p1, p2}, Landroid/graphics/Path;->moveTo(FF)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	iget v0, p2, Landroid/graphics/PointF;->x:F</span>
+<span class="">	iget p2, p2, Landroid/graphics/PointF;->y:F</span>
+<span class="">	invoke-virtual {p3, v0, p2}, Landroid/graphics/Path;->lineTo(FF)V</span>
+<span class="">	iget-object p2, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->debugPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p2, p4}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	iget-object p2, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->debugPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p1, p3, p2}, Landroid/graphics/Canvas;->drawPath(Landroid/graphics/Path;Landroid/graphics/Paint;)V</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method private drawDebugRect(Landroid/graphics/Canvas;Landroid/graphics/RectF;I)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->debugPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0, p3}, Landroid/graphics/Paint;->setColor(I)V</span>
+<span class="">	iget-object p3, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->debugPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p1, p2, p3}, Landroid/graphics/Canvas;->drawRect(Landroid/graphics/RectF;Landroid/graphics/Paint;)V</span>
+.end method
+
+.method private drawElevationShadow(Landroid/graphics/Canvas;)V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-virtual {p1}, Landroid/graphics/Canvas;->save()I</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->maskEvaluator:Lcom/google/android/material/transition/platform/MaskEvaluator;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/transition/platform/MaskEvaluator;->getPath()Landroid/graphics/Path;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sget-object v1, Landroid/graphics/Region$Op;->DIFFERENCE:Landroid/graphics/Region$Op;</span>
+<span class="">	invoke-virtual {p1, v0, v1}, Landroid/graphics/Canvas;->clipPath(Landroid/graphics/Path;Landroid/graphics/Region$Op;)Z</span>
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v1, 0x1c</span>
+<span class="">	if-le v0, v1, :cond_0</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->drawElevationShadowWithPaintShadowLayer(Landroid/graphics/Canvas;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->drawElevationShadowWithMaterialShapeDrawable(Landroid/graphics/Canvas;)V</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {p1}, Landroid/graphics/Canvas;->restore()V</span>
+.end method
+
+.method private drawElevationShadowWithMaterialShapeDrawable(Landroid/graphics/Canvas;)V
+<span class="">	.locals 5</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->compatShadowDrawable:Lcom/google/android/material/shape/MaterialShapeDrawable;</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentMaskBounds:Landroid/graphics/RectF;</span>
+<span class="">	iget v1, v1, Landroid/graphics/RectF;->left:F</span>
+<span class="">	float-to-int v1, v1</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentMaskBounds:Landroid/graphics/RectF;</span>
+<span class="">	iget v2, v2, Landroid/graphics/RectF;->top:F</span>
+<span class="">	float-to-int v2, v2</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentMaskBounds:Landroid/graphics/RectF;</span>
+<span class="">	iget v3, v3, Landroid/graphics/RectF;->right:F</span>
+<span class="">	float-to-int v3, v3</span>
+<span class="">	iget-object v4, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentMaskBounds:Landroid/graphics/RectF;</span>
+<span class="">	iget v4, v4, Landroid/graphics/RectF;->bottom:F</span>
+<span class="">	float-to-int v4, v4</span>
+<span class="">	invoke-virtual {v0, v1, v2, v3, v4}, Lcom/google/android/material/shape/MaterialShapeDrawable;->setBounds(IIII)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->compatShadowDrawable:Lcom/google/android/material/shape/MaterialShapeDrawable;</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentElevation:F</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/material/shape/MaterialShapeDrawable;->setElevation(F)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->compatShadowDrawable:Lcom/google/android/material/shape/MaterialShapeDrawable;</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentElevationDy:F</span>
+<span class="">	float-to-int v1, v1</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/material/shape/MaterialShapeDrawable;->setShadowVerticalOffset(I)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->compatShadowDrawable:Lcom/google/android/material/shape/MaterialShapeDrawable;</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->maskEvaluator:Lcom/google/android/material/transition/platform/MaskEvaluator;</span>
+<span class="">	invoke-virtual {v1}, Lcom/google/android/material/transition/platform/MaskEvaluator;->getCurrentShapeAppearanceModel()Lcom/google/android/material/shape/ShapeAppearanceModel;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/material/shape/MaterialShapeDrawable;->setShapeAppearanceModel(Lcom/google/android/material/shape/ShapeAppearanceModel;)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->compatShadowDrawable:Lcom/google/android/material/shape/MaterialShapeDrawable;</span>
+<span class="">	invoke-virtual {v0, p1}, Lcom/google/android/material/shape/MaterialShapeDrawable;->draw(Landroid/graphics/Canvas;)V</span>
+.end method
+
+.method private drawElevationShadowWithPaintShadowLayer(Landroid/graphics/Canvas;)V
+<span class="">	.locals 3</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->maskEvaluator:Lcom/google/android/material/transition/platform/MaskEvaluator;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/transition/platform/MaskEvaluator;->getCurrentShapeAppearanceModel()Lcom/google/android/material/shape/ShapeAppearanceModel;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentMaskBounds:Landroid/graphics/RectF;</span>
+<span class="">	invoke-virtual {v0, v1}, Lcom/google/android/material/shape/ShapeAppearanceModel;->isRoundRect(Landroid/graphics/RectF;)Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/shape/ShapeAppearanceModel;->getTopLeftCornerSize()Lcom/google/android/material/shape/CornerSize;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentMaskBounds:Landroid/graphics/RectF;</span>
+<span class="">	invoke-interface {v0, v1}, Lcom/google/android/material/shape/CornerSize;->getCornerSize(Landroid/graphics/RectF;)F</span>
+<span class="">	move-result v0</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentMaskBounds:Landroid/graphics/RectF;</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->shadowPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p1, v1, v0, v0, v2}, Landroid/graphics/Canvas;->drawRoundRect(Landroid/graphics/RectF;FFLandroid/graphics/Paint;)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->maskEvaluator:Lcom/google/android/material/transition/platform/MaskEvaluator;</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/transition/platform/MaskEvaluator;->getPath()Landroid/graphics/Path;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->shadowPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p1, v0, v1}, Landroid/graphics/Canvas;->drawPath(Landroid/graphics/Path;Landroid/graphics/Paint;)V</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method private drawEndView(Landroid/graphics/Canvas;)V
+<span class="">	.locals 8</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->endContainerPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-direct {p0, p1, v0}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->maybeDrawContainerColor(Landroid/graphics/Canvas;Landroid/graphics/Paint;)V</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->getBounds()Landroid/graphics/Rect;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentEndBounds:Landroid/graphics/RectF;</span>
+<span class="">	iget v3, v0, Landroid/graphics/RectF;->left:F</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentEndBounds:Landroid/graphics/RectF;</span>
+<span class="">	iget v4, v0, Landroid/graphics/RectF;->top:F</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fitModeResult:Lcom/google/android/material/transition/platform/FitModeResult;</span>
+<span class="">	iget v5, v0, Lcom/google/android/material/transition/platform/FitModeResult;->endScale:F</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fadeModeResult:Lcom/google/android/material/transition/platform/FadeModeResult;</span>
+<span class="">	iget v6, v0, Lcom/google/android/material/transition/platform/FadeModeResult;->endAlpha:I</span>
+<span class="">	new-instance v7, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable$2;</span>
+<span class="">	invoke-direct {v7, p0}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable$2;-><init>(Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;)V</span>
+<span class="">	move-object v1, p1</span>
+<span class="">	invoke-static/range {v1 .. v7}, Lcom/google/android/material/transition/platform/TransitionUtils;->transform(Landroid/graphics/Canvas;Landroid/graphics/Rect;FFFILcom/google/android/material/transition/platform/TransitionUtils$CanvasOperation;)V</span>
+.end method
+
+.method private drawStartView(Landroid/graphics/Canvas;)V
+<span class="">	.locals 8</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->startContainerPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-direct {p0, p1, v0}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->maybeDrawContainerColor(Landroid/graphics/Canvas;Landroid/graphics/Paint;)V</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->getBounds()Landroid/graphics/Rect;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentStartBounds:Landroid/graphics/RectF;</span>
+<span class="">	iget v3, v0, Landroid/graphics/RectF;->left:F</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentStartBounds:Landroid/graphics/RectF;</span>
+<span class="">	iget v4, v0, Landroid/graphics/RectF;->top:F</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fitModeResult:Lcom/google/android/material/transition/platform/FitModeResult;</span>
+<span class="">	iget v5, v0, Lcom/google/android/material/transition/platform/FitModeResult;->startScale:F</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fadeModeResult:Lcom/google/android/material/transition/platform/FadeModeResult;</span>
+<span class="">	iget v6, v0, Lcom/google/android/material/transition/platform/FadeModeResult;->startAlpha:I</span>
+<span class="">	new-instance v7, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable$1;</span>
+<span class="">	invoke-direct {v7, p0}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable$1;-><init>(Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;)V</span>
+<span class="">	move-object v1, p1</span>
+<span class="">	invoke-static/range {v1 .. v7}, Lcom/google/android/material/transition/platform/TransitionUtils;->transform(Landroid/graphics/Canvas;Landroid/graphics/Rect;FFFILcom/google/android/material/transition/platform/TransitionUtils$CanvasOperation;)V</span>
+.end method
+
+.method private static getMotionPathPoint(Landroid/graphics/RectF;)Landroid/graphics/PointF;
+<span class="">	.locals 2</span>
+
+<span class="">	new-instance v0, Landroid/graphics/PointF;</span>
+<span class="">	invoke-virtual {p0}, Landroid/graphics/RectF;->centerX()F</span>
+<span class="">	move-result v1</span>
+<span class="">	iget p0, p0, Landroid/graphics/RectF;->top:F</span>
+<span class="">	invoke-direct {v0, v1, p0}, Landroid/graphics/PointF;-><init>(FF)V</span>
+.end method
+
+.method private maybeDrawContainerColor(Landroid/graphics/Canvas;Landroid/graphics/Paint;)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p2}, Landroid/graphics/Paint;->getColor()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-virtual {p2}, Landroid/graphics/Paint;->getAlpha()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-lez v0, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->getBounds()Landroid/graphics/Rect;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p1, v0, p2}, Landroid/graphics/Canvas;->drawRect(Landroid/graphics/Rect;Landroid/graphics/Paint;)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private setProgress(F)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->progress:F</span>
+<span class="">	cmpl-float v0, v0, p1</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->updateProgress(F)V</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method private updateProgress(F)V
+<span class="">	.locals 12</span>
+
+<span class="">	iput p1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->progress:F</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->scrimPaint:Landroid/graphics/Paint;</span>
+<span class="">	iget-boolean v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->entering:Z</span>
+<span class="">	const/high16 v2, 0x437f0000    # 255.0f</span>
+<span class="">	const/4 v8, 0x0</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	invoke-static {v8, v2, p1}, Lcom/google/android/material/transition/platform/TransitionUtils;->lerp(FFF)F</span>
+<span class="">	move-result v1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-static {v2, v8, p1}, Lcom/google/android/material/transition/platform/TransitionUtils;->lerp(FFF)F</span>
+<span class="">	move-result v1</span>
+<span class="">	:goto_0</span>
+<span class="">	float-to-int v1, v1</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setAlpha(I)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->motionPathMeasure:Landroid/graphics/PathMeasure;</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->motionPathLength:F</span>
+<span class="">	mul-float/2addr v1, p1</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->motionPathPosition:[F</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	invoke-virtual {v0, v1, v2, v3}, Landroid/graphics/PathMeasure;->getPosTan(F[F[F)Z</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->motionPathPosition:[F</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	aget v2, v0, v1</span>
+<span class="">	const/4 v4, 0x1</span>
+<span class="">	aget v5, v0, v4</span>
+<span class="">	const/high16 v9, 0x3f800000    # 1.0f</span>
+<span class="">	cmpl-float v6, p1, v9</span>
+<span class="">	if-gtz v6, :cond_2</span>
+<span class="">	cmpg-float v7, p1, v8</span>
+<span class="">	if-gez v7, :cond_1</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	move v10, v2</span>
+<span class="">	move v11, v5</span>
+<span class="">	goto :goto_4</span>
+<span class="">	:goto_2</span>
+<span class="">	:cond_2</span>
+<span class="">	if-lez v6, :cond_3</span>
+<span class="">	const v6, 0x3f7d70a4    # 0.99f</span>
+<span class="">	sub-float v7, p1, v9</span>
+<span class="">	const v10, 0x3c23d700    # 0.00999999f</span>
+<span class="">	div-float/2addr v7, v10</span>
+<span class="">	goto :goto_3</span>
+<span class="">	:cond_3</span>
+<span class="">	const v6, 0x3c23d70a    # 0.01f</span>
+<span class="">	div-float v7, p1, v6</span>
+<span class="">	const/high16 v10, -0x40800000    # -1.0f</span>
+<span class="">	mul-float/2addr v7, v10</span>
+<span class="">	:goto_3</span>
+<span class="">	iget-object v10, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->motionPathMeasure:Landroid/graphics/PathMeasure;</span>
+<span class="">	iget v11, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->motionPathLength:F</span>
+<span class="">	mul-float/2addr v11, v6</span>
+<span class="">	invoke-virtual {v10, v11, v0, v3}, Landroid/graphics/PathMeasure;->getPosTan(F[F[F)Z</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->motionPathPosition:[F</span>
+<span class="">	aget v1, v0, v1</span>
+<span class="">	aget v0, v0, v4</span>
+<span class="">	sub-float v1, v2, v1</span>
+<span class="">	mul-float/2addr v1, v7</span>
+<span class="">	add-float/2addr v2, v1</span>
+<span class="">	sub-float v0, v5, v0</span>
+<span class="">	mul-float/2addr v0, v7</span>
+<span class="">	add-float/2addr v5, v0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:goto_4</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->progressThresholds:Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;</span>
+<span class="">	invoke-static {v0}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;->access$500(Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;)Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;->access$1000(Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;)F</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-static {v0}, Ljava/lang/Float;->valueOf(F)Ljava/lang/Float;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Landroidx/core/util/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/lang/Float;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Float;->floatValue()F</span>
+<span class="">	move-result v2</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->progressThresholds:Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;</span>
+<span class="">	invoke-static {v0}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;->access$500(Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;)Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;->access$1100(Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;)F</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-static {v0}, Ljava/lang/Float;->valueOf(F)Ljava/lang/Float;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Landroidx/core/util/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/lang/Float;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Float;->floatValue()F</span>
+<span class="">	move-result v3</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fitModeEvaluator:Lcom/google/android/material/transition/platform/FitModeEvaluator;</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->startBounds:Landroid/graphics/RectF;</span>
+<span class="">	invoke-virtual {v1}, Landroid/graphics/RectF;->width()F</span>
+<span class="">	move-result v4</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->startBounds:Landroid/graphics/RectF;</span>
+<span class="">	invoke-virtual {v1}, Landroid/graphics/RectF;->height()F</span>
+<span class="">	move-result v5</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->endBounds:Landroid/graphics/RectF;</span>
+<span class="">	invoke-virtual {v1}, Landroid/graphics/RectF;->width()F</span>
+<span class="">	move-result v6</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->endBounds:Landroid/graphics/RectF;</span>
+<span class="">	invoke-virtual {v1}, Landroid/graphics/RectF;->height()F</span>
+<span class="">	move-result v7</span>
+<span class="">	move v1, p1</span>
+<span class="">	invoke-interface/range {v0 .. v7}, Lcom/google/android/material/transition/platform/FitModeEvaluator;->evaluate(FFFFFFF)Lcom/google/android/material/transition/platform/FitModeResult;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fitModeResult:Lcom/google/android/material/transition/platform/FitModeResult;</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentStartBounds:Landroid/graphics/RectF;</span>
+<span class="">	iget v0, v0, Lcom/google/android/material/transition/platform/FitModeResult;->currentStartWidth:F</span>
+<span class="">	const/high16 v2, 0x40000000    # 2.0f</span>
+<span class="">	div-float/2addr v0, v2</span>
+<span class="">	sub-float v0, v10, v0</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fitModeResult:Lcom/google/android/material/transition/platform/FitModeResult;</span>
+<span class="">	iget v3, v3, Lcom/google/android/material/transition/platform/FitModeResult;->currentStartWidth:F</span>
+<span class="">	div-float/2addr v3, v2</span>
+<span class="">	add-float/2addr v3, v10</span>
+<span class="">	iget-object v4, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fitModeResult:Lcom/google/android/material/transition/platform/FitModeResult;</span>
+<span class="">	iget v4, v4, Lcom/google/android/material/transition/platform/FitModeResult;->currentStartHeight:F</span>
+<span class="">	add-float/2addr v4, v11</span>
+<span class="">	invoke-virtual {v1, v0, v11, v3, v4}, Landroid/graphics/RectF;->set(FFFF)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentEndBounds:Landroid/graphics/RectF;</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fitModeResult:Lcom/google/android/material/transition/platform/FitModeResult;</span>
+<span class="">	iget v1, v1, Lcom/google/android/material/transition/platform/FitModeResult;->currentEndWidth:F</span>
+<span class="">	div-float/2addr v1, v2</span>
+<span class="">	sub-float v1, v10, v1</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fitModeResult:Lcom/google/android/material/transition/platform/FitModeResult;</span>
+<span class="">	iget v3, v3, Lcom/google/android/material/transition/platform/FitModeResult;->currentEndWidth:F</span>
+<span class="">	div-float/2addr v3, v2</span>
+<span class="">	add-float/2addr v10, v3</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fitModeResult:Lcom/google/android/material/transition/platform/FitModeResult;</span>
+<span class="">	iget v2, v2, Lcom/google/android/material/transition/platform/FitModeResult;->currentEndHeight:F</span>
+<span class="">	add-float/2addr v2, v11</span>
+<span class="">	invoke-virtual {v0, v1, v11, v10, v2}, Landroid/graphics/RectF;->set(FFFF)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentStartBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentStartBounds:Landroid/graphics/RectF;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/graphics/RectF;->set(Landroid/graphics/RectF;)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentEndBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentEndBounds:Landroid/graphics/RectF;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/graphics/RectF;->set(Landroid/graphics/RectF;)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->progressThresholds:Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;</span>
+<span class="">	invoke-static {v0}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;->access$600(Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;)Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;->access$1000(Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;)F</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-static {v0}, Ljava/lang/Float;->valueOf(F)Ljava/lang/Float;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Landroidx/core/util/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/lang/Float;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Float;->floatValue()F</span>
+<span class="">	move-result v0</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->progressThresholds:Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;</span>
+<span class="">	invoke-static {v1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;->access$600(Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;)Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-static {v1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;->access$1100(Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;)F</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {v1}, Ljava/lang/Float;->valueOf(F)Ljava/lang/Float;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-static {v1}, Landroidx/core/util/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljava/lang/Float;</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/Float;->floatValue()F</span>
+<span class="">	move-result v1</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fitModeEvaluator:Lcom/google/android/material/transition/platform/FitModeEvaluator;</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fitModeResult:Lcom/google/android/material/transition/platform/FitModeResult;</span>
+<span class="">	invoke-interface {v2, v3}, Lcom/google/android/material/transition/platform/FitModeEvaluator;->shouldMaskStartBounds(Lcom/google/android/material/transition/platform/FitModeResult;)Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_4</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentStartBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	goto :goto_5</span>
+<span class="">	:cond_4</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentEndBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	:goto_5</span>
+<span class="">	invoke-static {v8, v9, v0, v1, p1}, Lcom/google/android/material/transition/platform/TransitionUtils;->lerp(FFFFF)F</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v2, :cond_5</span>
+<span class="">	goto :goto_6</span>
+<span class="">	:cond_5</span>
+<span class="">	sub-float v0, v9, v0</span>
+<span class="">	:goto_6</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fitModeEvaluator:Lcom/google/android/material/transition/platform/FitModeEvaluator;</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fitModeResult:Lcom/google/android/material/transition/platform/FitModeResult;</span>
+<span class="">	invoke-interface {v1, v3, v0, v2}, Lcom/google/android/material/transition/platform/FitModeEvaluator;->applyMask(Landroid/graphics/RectF;FLcom/google/android/material/transition/platform/FitModeResult;)V</span>
+<span class="">	new-instance v0, Landroid/graphics/RectF;</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentStartBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	iget v1, v1, Landroid/graphics/RectF;->left:F</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentEndBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	iget v2, v2, Landroid/graphics/RectF;->left:F</span>
+<span class="">	invoke-static {v1, v2}, Ljava/lang/Math;->min(FF)F</span>
+<span class="">	move-result v1</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentStartBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	iget v2, v2, Landroid/graphics/RectF;->top:F</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentEndBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	iget v3, v3, Landroid/graphics/RectF;->top:F</span>
+<span class="">	invoke-static {v2, v3}, Ljava/lang/Math;->min(FF)F</span>
+<span class="">	move-result v2</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentStartBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	iget v3, v3, Landroid/graphics/RectF;->right:F</span>
+<span class="">	iget-object v4, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentEndBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	iget v4, v4, Landroid/graphics/RectF;->right:F</span>
+<span class="">	invoke-static {v3, v4}, Ljava/lang/Math;->max(FF)F</span>
+<span class="">	move-result v3</span>
+<span class="">	iget-object v4, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentStartBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	iget v4, v4, Landroid/graphics/RectF;->bottom:F</span>
+<span class="">	iget-object v5, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentEndBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	iget v5, v5, Landroid/graphics/RectF;->bottom:F</span>
+<span class="">	invoke-static {v4, v5}, Ljava/lang/Math;->max(FF)F</span>
+<span class="">	move-result v4</span>
+<span class="">	invoke-direct {v0, v1, v2, v3, v4}, Landroid/graphics/RectF;-><init>(FFFF)V</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentMaskBounds:Landroid/graphics/RectF;</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->maskEvaluator:Lcom/google/android/material/transition/platform/MaskEvaluator;</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->startShapeAppearanceModel:Lcom/google/android/material/shape/ShapeAppearanceModel;</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->endShapeAppearanceModel:Lcom/google/android/material/shape/ShapeAppearanceModel;</span>
+<span class="">	iget-object v4, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentStartBounds:Landroid/graphics/RectF;</span>
+<span class="">	iget-object v5, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentStartBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	iget-object v6, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentEndBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->progressThresholds:Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;</span>
+<span class="">	invoke-static {v1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;->access$700(Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;)Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;</span>
+<span class="">	move-result-object v7</span>
+<span class="">	move v1, p1</span>
+<span class="">	invoke-virtual/range {v0 .. v7}, Lcom/google/android/material/transition/platform/MaskEvaluator;->evaluate(FLcom/google/android/material/shape/ShapeAppearanceModel;Lcom/google/android/material/shape/ShapeAppearanceModel;Landroid/graphics/RectF;Landroid/graphics/RectF;Landroid/graphics/RectF;Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;)V</span>
+<span class="">	iget v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->startElevation:F</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->endElevation:F</span>
+<span class="">	invoke-static {v0, v1, p1}, Lcom/google/android/material/transition/platform/TransitionUtils;->lerp(FFF)F</span>
+<span class="">	move-result v0</span>
+<span class="">	iput v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentElevation:F</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentMaskBounds:Landroid/graphics/RectF;</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->displayWidth:F</span>
+<span class="">	invoke-static {v0, v1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->calculateElevationDxMultiplier(Landroid/graphics/RectF;F)F</span>
+<span class="">	move-result v0</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentMaskBounds:Landroid/graphics/RectF;</span>
+<span class="">	iget v2, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->displayHeight:F</span>
+<span class="">	invoke-static {v1, v2}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->calculateElevationDyMultiplier(Landroid/graphics/RectF;F)F</span>
+<span class="">	move-result v1</span>
+<span class="">	iget v2, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentElevation:F</span>
+<span class="">	mul-float/2addr v0, v2</span>
+<span class="">	float-to-int v0, v0</span>
+<span class="">	int-to-float v0, v0</span>
+<span class="">	mul-float/2addr v1, v2</span>
+<span class="">	float-to-int v1, v1</span>
+<span class="">	int-to-float v1, v1</span>
+<span class="">	iput v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentElevationDy:F</span>
+<span class="">	iget-object v3, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->shadowPaint:Landroid/graphics/Paint;</span>
+<span class="">	const/high16 v4, 0x2d000000</span>
+<span class="">	invoke-virtual {v3, v2, v0, v1, v4}, Landroid/graphics/Paint;->setShadowLayer(FFFI)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->progressThresholds:Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;</span>
+<span class="">	invoke-static {v0}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;->access$400(Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;)Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;->access$1000(Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;)F</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-static {v0}, Ljava/lang/Float;->valueOf(F)Ljava/lang/Float;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Landroidx/core/util/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/lang/Float;</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Float;->floatValue()F</span>
+<span class="">	move-result v0</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->progressThresholds:Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;</span>
+<span class="">	invoke-static {v1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;->access$400(Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholdsGroup;)Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-static {v1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;->access$1100(Lcom/google/android/material/transition/platform/MaterialContainerTransform$ProgressThresholds;)F</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-static {v1}, Ljava/lang/Float;->valueOf(F)Ljava/lang/Float;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-static {v1}, Landroidx/core/util/Preconditions;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Ljava/lang/Float;</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/Float;->floatValue()F</span>
+<span class="">	move-result v1</span>
+<span class="">	iget-object v2, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fadeModeEvaluator:Lcom/google/android/material/transition/platform/FadeModeEvaluator;</span>
+<span class="">	const v3, 0x3eb33333    # 0.35f</span>
+<span class="">	invoke-interface {v2, p1, v0, v1, v3}, Lcom/google/android/material/transition/platform/FadeModeEvaluator;->evaluate(FFFF)Lcom/google/android/material/transition/platform/FadeModeResult;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fadeModeResult:Lcom/google/android/material/transition/platform/FadeModeResult;</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->startContainerPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/Paint;->getColor()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_6</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->startContainerPaint:Landroid/graphics/Paint;</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fadeModeResult:Lcom/google/android/material/transition/platform/FadeModeResult;</span>
+<span class="">	iget v1, v1, Lcom/google/android/material/transition/platform/FadeModeResult;->startAlpha:I</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setAlpha(I)V</span>
+<span class="">	:cond_6</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->endContainerPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/Paint;->getColor()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_7</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->endContainerPaint:Landroid/graphics/Paint;</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fadeModeResult:Lcom/google/android/material/transition/platform/FadeModeResult;</span>
+<span class="">	iget v1, v1, Lcom/google/android/material/transition/platform/FadeModeResult;->endAlpha:I</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/graphics/Paint;->setAlpha(I)V</span>
+<span class="">	:cond_7</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->invalidateSelf()V</span>
+.end method
+
+.method public draw(Landroid/graphics/Canvas;)V
+<span class="">	.locals 3</span>
+
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->scrimPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {v0}, Landroid/graphics/Paint;->getAlpha()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-lez v0, :cond_0</span>
+<span class="">	invoke-virtual {p0}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->getBounds()Landroid/graphics/Rect;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->scrimPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-virtual {p1, v0, v1}, Landroid/graphics/Canvas;->drawRect(Landroid/graphics/Rect;Landroid/graphics/Paint;)V</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-boolean v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->drawDebugEnabled:Z</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	invoke-virtual {p1}, Landroid/graphics/Canvas;->save()I</span>
+<span class="">	move-result v0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 v0, -0x1</span>
+<span class="">	:goto_0</span>
+<span class="">	iget-boolean v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->elevationShadowEnabled:Z</span>
+<span class="">	if-eqz v1, :cond_2</span>
+<span class="">	iget v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentElevation:F</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	cmpl-float v1, v1, v2</span>
+<span class="">	if-lez v1, :cond_2</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->drawElevationShadow(Landroid/graphics/Canvas;)V</span>
+<span class="">	:cond_2</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->maskEvaluator:Lcom/google/android/material/transition/platform/MaskEvaluator;</span>
+<span class="">	invoke-virtual {v1, p1}, Lcom/google/android/material/transition/platform/MaskEvaluator;->clip(Landroid/graphics/Canvas;)V</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->containerPaint:Landroid/graphics/Paint;</span>
+<span class="">	invoke-direct {p0, p1, v1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->maybeDrawContainerColor(Landroid/graphics/Canvas;Landroid/graphics/Paint;)V</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->fadeModeResult:Lcom/google/android/material/transition/platform/FadeModeResult;</span>
+<span class="">	iget-boolean v1, v1, Lcom/google/android/material/transition/platform/FadeModeResult;->endOnTop:Z</span>
+<span class="">	if-eqz v1, :cond_3</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->drawStartView(Landroid/graphics/Canvas;)V</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->drawEndView(Landroid/graphics/Canvas;)V</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_3</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->drawEndView(Landroid/graphics/Canvas;)V</span>
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->drawStartView(Landroid/graphics/Canvas;)V</span>
+<span class="">	:goto_1</span>
+<span class="">	iget-boolean v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->drawDebugEnabled:Z</span>
+<span class="">	if-eqz v1, :cond_4</span>
+<span class="">	invoke-virtual {p1, v0}, Landroid/graphics/Canvas;->restoreToCount(I)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentStartBounds:Landroid/graphics/RectF;</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->debugPath:Landroid/graphics/Path;</span>
+<span class="">	const v2, -0xff01</span>
+<span class="">	invoke-direct {p0, p1, v0, v1, v2}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->drawDebugCumulativePath(Landroid/graphics/Canvas;Landroid/graphics/RectF;Landroid/graphics/Path;I)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentStartBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	const/16 v1, -0x100</span>
+<span class="">	invoke-direct {p0, p1, v0, v1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->drawDebugRect(Landroid/graphics/Canvas;Landroid/graphics/RectF;I)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentStartBounds:Landroid/graphics/RectF;</span>
+<span class="">	const v1, -0xff0100</span>
+<span class="">	invoke-direct {p0, p1, v0, v1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->drawDebugRect(Landroid/graphics/Canvas;Landroid/graphics/RectF;I)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentEndBoundsMasked:Landroid/graphics/RectF;</span>
+<span class="">	const v1, -0xff0001</span>
+<span class="">	invoke-direct {p0, p1, v0, v1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->drawDebugRect(Landroid/graphics/Canvas;Landroid/graphics/RectF;I)V</span>
+<span class="">	iget-object v0, p0, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->currentEndBounds:Landroid/graphics/RectF;</span>
+<span class="">	const v1, -0xffff01</span>
+<span class="">	invoke-direct {p0, p1, v0, v1}, Lcom/google/android/material/transition/platform/MaterialContainerTransform$TransitionDrawable;->drawDebugRect(Landroid/graphics/Canvas;Landroid/graphics/RectF;I)V</span>
+<span class="">	:cond_4</span>
+.end method
+
+.method public getOpacity()I
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, -0x3</span>
+.end method
+
+.method public setAlpha(I)V
+<span class="">	.locals 1</span>
+
+<span class="">	new-instance p1, Ljava/lang/UnsupportedOperationException;</span>
+<span class="">	const-string v0, "Setting alpha on is not supported"</span>
+<span class="">	invoke-direct {p1, v0}, Ljava/lang/UnsupportedOperationException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public setColorFilter(Landroid/graphics/ColorFilter;)V
+<span class="">	.locals 1</span>
+
+<span class="">	new-instance p1, Ljava/lang/UnsupportedOperationException;</span>
+<span class="">	const-string v0, "Setting a color filter is not supported"</span>
+<span class="">	invoke-direct {p1, v0}, Ljava/lang/UnsupportedOperationException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../../.resources/report.js"></script>
+</body>
+</html>

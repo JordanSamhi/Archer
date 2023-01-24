@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../index.html">lu.uni.trux.workmanager_enqueueuniquework</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.constraintlayout.core.widgets.analyzer</a></li>
+        <li><i class="ico ico-class"></i> RunGroup.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class  Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;
+.super Ljava/lang/Object;
+.source "RunGroup.java"
+
+
+.field public static final BASELINE:I = 0x2
+.field public static final END:I = 0x1
+.field public static final START:I
+.field public static index:I
+.field  direction:I
+.field public dual:Z
+.field  firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;
+.field  groupIndex:I
+.field  lastRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;
+.field public position:I
+.field  runs:Ljava/util/ArrayList;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/ArrayList<",
+"Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;",
+">;"
+}
+.end annotation
+.end field
+
+
+.method public constructor <init>(Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;I)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput v0, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->position:I</span>
+<span class="">	iput-boolean v0, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->dual:Z</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-object v0, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iput-object v0, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->lastRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	new-instance v0, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->runs:Ljava/util/ArrayList;</span>
+<span class="">	sget v0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->index:I</span>
+<span class="">	iput v0, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->groupIndex:I</span>
+<span class="">	add-int/lit8 v0, v0, 0x1</span>
+<span class="">	sput v0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->index:I</span>
+<span class="">	iput-object p1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iput-object p1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->lastRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iput p2, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->direction:I</span>
+.end method
+
+.method private defineTerminalWidget(Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;I)Z
+<span class="">	.locals 5</span>
+
+<span class="">	iget-object v0, p1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->widget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	iget-object v0, v0, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->isTerminalWidget:[Z</span>
+<span class="">	aget-boolean v0, v0, p2</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	iget-object v0, p1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v0, v0, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->dependencies:Ljava/util/List;</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_5</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Landroidx/constraintlayout/core/widgets/analyzer/Dependency;</span>
+<span class="">	instance-of v3, v2, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	if-eqz v3, :cond_1</span>
+<span class="">	check-cast v2, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget-object v3, v2, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->run:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	if-ne v3, p1, :cond_2</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v3, v2, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->run:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	:cond_2</span>
+<span class="">	iget-object v3, v3, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	if-ne v2, v3, :cond_1</span>
+<span class="">	instance-of v3, p1, Landroidx/constraintlayout/core/widgets/analyzer/ChainRun;</span>
+<span class="">	if-eqz v3, :cond_3</span>
+<span class="">	move-object v3, p1</span>
+<span class="">	check-cast v3, Landroidx/constraintlayout/core/widgets/analyzer/ChainRun;</span>
+<span class="">	iget-object v3, v3, Landroidx/constraintlayout/core/widgets/analyzer/ChainRun;->widgets:Ljava/util/ArrayList;</span>
+<span class="">	invoke-virtual {v3}, Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-interface {v3}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	:goto_1</span>
+<span class="">	move-result v4</span>
+<span class="">	if-eqz v4, :cond_4</span>
+<span class="">	invoke-interface {v3}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	check-cast v4, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	invoke-direct {p0, v4, p2}, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->defineTerminalWidget(Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;I)Z</span>
+<span class="">	goto :goto_1</span>
+<span class="">	instance-of v3, p1, Landroidx/constraintlayout/core/widgets/analyzer/HelperReferences;</span>
+<span class="">	:cond_3</span>
+<span class="">	if-nez v3, :cond_4</span>
+<span class="">	iget-object v3, p1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->widget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	iget-object v3, v3, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->isTerminalWidget:[Z</span>
+<span class="">	aput-boolean v1, v3, p2</span>
+<span class="">	iget-object v2, v2, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->run:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	:cond_4</span>
+<span class="">	invoke-direct {p0, v2, p2}, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->defineTerminalWidget(Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;I)Z</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->end:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	:cond_5</span>
+<span class="">	iget-object v0, v0, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->dependencies:Ljava/util/List;</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	:goto_2</span>
+<span class="">	:cond_6</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_a</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Landroidx/constraintlayout/core/widgets/analyzer/Dependency;</span>
+<span class="">	instance-of v3, v2, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	if-eqz v3, :cond_6</span>
+<span class="">	check-cast v2, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget-object v3, v2, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->run:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	if-ne v3, p1, :cond_7</span>
+<span class="">	goto :goto_2</span>
+<span class="">	iget-object v3, v2, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->run:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	:cond_7</span>
+<span class="">	iget-object v3, v3, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	if-ne v2, v3, :cond_6</span>
+<span class="">	instance-of v3, p1, Landroidx/constraintlayout/core/widgets/analyzer/ChainRun;</span>
+<span class="">	if-eqz v3, :cond_8</span>
+<span class="">	move-object v3, p1</span>
+<span class="">	check-cast v3, Landroidx/constraintlayout/core/widgets/analyzer/ChainRun;</span>
+<span class="">	iget-object v3, v3, Landroidx/constraintlayout/core/widgets/analyzer/ChainRun;->widgets:Ljava/util/ArrayList;</span>
+<span class="">	invoke-virtual {v3}, Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-interface {v3}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	:goto_3</span>
+<span class="">	move-result v4</span>
+<span class="">	if-eqz v4, :cond_9</span>
+<span class="">	invoke-interface {v3}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	check-cast v4, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	invoke-direct {p0, v4, p2}, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->defineTerminalWidget(Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;I)Z</span>
+<span class="">	goto :goto_3</span>
+<span class="">	instance-of v3, p1, Landroidx/constraintlayout/core/widgets/analyzer/HelperReferences;</span>
+<span class="">	:cond_8</span>
+<span class="">	if-nez v3, :cond_9</span>
+<span class="">	iget-object v3, p1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->widget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	iget-object v3, v3, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->isTerminalWidget:[Z</span>
+<span class="">	aput-boolean v1, v3, p2</span>
+<span class="">	iget-object v2, v2, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->run:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	:cond_9</span>
+<span class="">	invoke-direct {p0, v2, p2}, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->defineTerminalWidget(Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;I)Z</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_a</span>
+.end method
+
+.method private traverseEnd(Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;J)J
+<span class="">	.locals 8</span>
+
+<span class="">	iget-object v0, p1, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->run:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	instance-of v1, v0, Landroidx/constraintlayout/core/widgets/analyzer/HelperReferences;</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	iget-object v1, p1, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->dependencies:Ljava/util/List;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {v1}, Ljava/util/List;->size()I</span>
+<span class="">	move-result v1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	move-wide v3, p2</span>
+<span class="">	if-ge v2, v1, :cond_3</span>
+<span class="">	:goto_0</span>
+<span class="">	iget-object v5, p1, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->dependencies:Ljava/util/List;</span>
+<span class="">	invoke-interface {v5, v2}, Ljava/util/List;->get(I)Ljava/lang/Object;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	check-cast v5, Landroidx/constraintlayout/core/widgets/analyzer/Dependency;</span>
+<span class="">	instance-of v6, v5, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	if-eqz v6, :cond_2</span>
+<span class="">	check-cast v5, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget-object v6, v5, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->run:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	if-ne v6, v0, :cond_1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	iget v6, v5, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->margin:I</span>
+<span class="">	:cond_1</span>
+<span class="">	int-to-long v6, v6</span>
+<span class="">	add-long/2addr v6, p2</span>
+<span class="">	invoke-direct {p0, v5, v6, v7}, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->traverseEnd(Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;J)J</span>
+<span class="">	move-result-wide v5</span>
+<span class="">	invoke-static {v3, v4, v5, v6}, Ljava/lang/Math;->min(JJ)J</span>
+<span class="">	move-result-wide v3</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_2</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v1, v0, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->end:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	:cond_3</span>
+<span class="">	if-ne p1, v1, :cond_4</span>
+<span class="">	invoke-virtual {v0}, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->getWrapDimension()J</span>
+<span class="">	move-result-wide v1</span>
+<span class="">	iget-object p1, v0, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	sub-long/2addr p2, v1</span>
+<span class="">	invoke-direct {p0, p1, p2, p3}, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->traverseEnd(Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;J)J</span>
+<span class="">	move-result-wide v1</span>
+<span class="">	invoke-static {v3, v4, v1, v2}, Ljava/lang/Math;->min(JJ)J</span>
+<span class="">	move-result-wide v1</span>
+<span class="">	iget-object p1, v0, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->margin:I</span>
+<span class="">	int-to-long v3, p1</span>
+<span class="">	sub-long/2addr p2, v3</span>
+<span class="">	invoke-static {v1, v2, p2, p3}, Ljava/lang/Math;->min(JJ)J</span>
+<span class="">	move-result-wide v3</span>
+<span class="">	:cond_4</span>
+.end method
+
+.method private traverseStart(Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;J)J
+<span class="">	.locals 8</span>
+
+<span class="">	iget-object v0, p1, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->run:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	instance-of v1, v0, Landroidx/constraintlayout/core/widgets/analyzer/HelperReferences;</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	iget-object v1, p1, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->dependencies:Ljava/util/List;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {v1}, Ljava/util/List;->size()I</span>
+<span class="">	move-result v1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	move-wide v3, p2</span>
+<span class="">	if-ge v2, v1, :cond_3</span>
+<span class="">	:goto_0</span>
+<span class="">	iget-object v5, p1, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->dependencies:Ljava/util/List;</span>
+<span class="">	invoke-interface {v5, v2}, Ljava/util/List;->get(I)Ljava/lang/Object;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	check-cast v5, Landroidx/constraintlayout/core/widgets/analyzer/Dependency;</span>
+<span class="">	instance-of v6, v5, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	if-eqz v6, :cond_2</span>
+<span class="">	check-cast v5, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget-object v6, v5, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->run:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	if-ne v6, v0, :cond_1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	iget v6, v5, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->margin:I</span>
+<span class="">	:cond_1</span>
+<span class="">	int-to-long v6, v6</span>
+<span class="">	add-long/2addr v6, p2</span>
+<span class="">	invoke-direct {p0, v5, v6, v7}, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->traverseStart(Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;J)J</span>
+<span class="">	move-result-wide v5</span>
+<span class="">	invoke-static {v3, v4, v5, v6}, Ljava/lang/Math;->max(JJ)J</span>
+<span class="">	move-result-wide v3</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	:goto_1</span>
+<span class="">	:cond_2</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v1, v0, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	:cond_3</span>
+<span class="">	if-ne p1, v1, :cond_4</span>
+<span class="">	invoke-virtual {v0}, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->getWrapDimension()J</span>
+<span class="">	move-result-wide v1</span>
+<span class="">	iget-object p1, v0, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->end:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	add-long/2addr p2, v1</span>
+<span class="">	invoke-direct {p0, p1, p2, p3}, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->traverseStart(Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;J)J</span>
+<span class="">	move-result-wide v1</span>
+<span class="">	invoke-static {v3, v4, v1, v2}, Ljava/lang/Math;->max(JJ)J</span>
+<span class="">	move-result-wide v1</span>
+<span class="">	iget-object p1, v0, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->end:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->margin:I</span>
+<span class="">	int-to-long v3, p1</span>
+<span class="">	sub-long/2addr p2, v3</span>
+<span class="">	invoke-static {v1, v2, p2, p3}, Ljava/lang/Math;->max(JJ)J</span>
+<span class="">	move-result-wide v3</span>
+<span class="">	:cond_4</span>
+.end method
+
+.method public add(Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;)V
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->runs:Ljava/util/ArrayList;</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z</span>
+<span class="">	iput-object p1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->lastRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+.end method
+
+.method public computeWrapSize(Landroidx/constraintlayout/core/widgets/ConstraintWidgetContainer;I)J
+<span class="">	.locals 10</span>
+
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	instance-of v1, v0, Landroidx/constraintlayout/core/widgets/analyzer/ChainRun;</span>
+<span class="">	const-wide/16 v2, 0x0</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	check-cast v0, Landroidx/constraintlayout/core/widgets/analyzer/ChainRun;</span>
+<span class="">	iget v0, v0, Landroidx/constraintlayout/core/widgets/analyzer/ChainRun;->orientation:I</span>
+<span class="">	if-eq v0, p2, :cond_2</span>
+<span class="">	if-nez p2, :cond_1</span>
+<span class="">	:cond_0</span>
+<span class="">	instance-of v0, v0, Landroidx/constraintlayout/core/widgets/analyzer/HorizontalWidgetRun;</span>
+<span class="">	if-nez v0, :cond_2</span>
+<span class="">	instance-of v0, v0, Landroidx/constraintlayout/core/widgets/analyzer/VerticalWidgetRun;</span>
+<span class="">	if-nez v0, :cond_2</span>
+<span class="">	:cond_1</span>
+<span class="">	if-nez p2, :cond_3</span>
+<span class="">	iget-object v0, p1, Landroidx/constraintlayout/core/widgets/ConstraintWidgetContainer;->horizontalRun:Landroidx/constraintlayout/core/widgets/analyzer/HorizontalWidgetRun;</span>
+<span class="">	iget-object v0, v0, Landroidx/constraintlayout/core/widgets/analyzer/HorizontalWidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	:cond_2</span>
+<span class="">	goto :goto_0</span>
+<span class="">	iget-object v0, p1, Landroidx/constraintlayout/core/widgets/ConstraintWidgetContainer;->verticalRun:Landroidx/constraintlayout/core/widgets/analyzer/VerticalWidgetRun;</span>
+<span class="">	iget-object v0, v0, Landroidx/constraintlayout/core/widgets/analyzer/VerticalWidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	if-nez p2, :cond_4</span>
+<span class="">	:cond_3</span>
+<span class="">	iget-object p1, p1, Landroidx/constraintlayout/core/widgets/ConstraintWidgetContainer;->horizontalRun:Landroidx/constraintlayout/core/widgets/analyzer/HorizontalWidgetRun;</span>
+<span class="">	iget-object p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/HorizontalWidgetRun;->end:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	:goto_0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	iget-object p1, p1, Landroidx/constraintlayout/core/widgets/ConstraintWidgetContainer;->verticalRun:Landroidx/constraintlayout/core/widgets/analyzer/VerticalWidgetRun;</span>
+<span class="">	iget-object p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/VerticalWidgetRun;->end:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget-object v1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	:cond_4</span>
+<span class="">	iget-object v1, v1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget-object v1, v1, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->targets:Ljava/util/List;</span>
+<span class="">	:goto_1</span>
+<span class="">	invoke-interface {v1, v0}, Ljava/util/List;->contains(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	iget-object v1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object v1, v1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->end:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget-object v1, v1, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->targets:Ljava/util/List;</span>
+<span class="">	invoke-interface {v1, p1}, Ljava/util/List;->contains(Ljava/lang/Object;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	iget-object v1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	invoke-virtual {v1}, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->getWrapDimension()J</span>
+<span class="">	move-result-wide v4</span>
+<span class="">	if-eqz v0, :cond_8</span>
+<span class="">	if-eqz p1, :cond_8</span>
+<span class="">	iget-object p1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	invoke-direct {p0, p1, v2, v3}, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->traverseStart(Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;J)J</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	iget-object p1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->end:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	invoke-direct {p0, p1, v2, v3}, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->traverseEnd(Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;J)J</span>
+<span class="">	move-result-wide v6</span>
+<span class="">	sub-long/2addr v0, v4</span>
+<span class="">	iget-object p1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->end:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->margin:I</span>
+<span class="">	neg-int p1, p1</span>
+<span class="">	int-to-long v8, p1</span>
+<span class="">	cmp-long p1, v0, v8</span>
+<span class="">	if-ltz p1, :cond_5</span>
+<span class="">	iget-object p1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->end:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->margin:I</span>
+<span class="">	int-to-long v8, p1</span>
+<span class="">	add-long/2addr v0, v8</span>
+<span class="">	neg-long v6, v6</span>
+<span class="">	sub-long/2addr v6, v4</span>
+<span class="">	iget-object p1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	:cond_5</span>
+<span class="">	iget-object p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->margin:I</span>
+<span class="">	int-to-long v8, p1</span>
+<span class="">	sub-long/2addr v6, v8</span>
+<span class="">	iget-object p1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->margin:I</span>
+<span class="">	int-to-long v8, p1</span>
+<span class="">	cmp-long p1, v6, v8</span>
+<span class="">	if-ltz p1, :cond_6</span>
+<span class="">	iget-object p1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->margin:I</span>
+<span class="">	int-to-long v8, p1</span>
+<span class="">	sub-long/2addr v6, v8</span>
+<span class="">	iget-object p1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->widget:Landroidx/constraintlayout/core/widgets/ConstraintWidget;</span>
+<span class="">	invoke-virtual {p1, p2}, Landroidx/constraintlayout/core/widgets/ConstraintWidget;->getBiasPercent(I)F</span>
+<span class="">	:cond_6</span>
+<span class="">	move-result p1</span>
+<span class="">	const/4 p2, 0x0</span>
+<span class="">	cmpl-float p2, p1, p2</span>
+<span class="">	const/high16 v8, 0x3f800000    # 1.0f</span>
+<span class="">	if-lez p2, :cond_7</span>
+<span class="">	long-to-float p2, v6</span>
+<span class="">	div-float/2addr p2, p1</span>
+<span class="">	long-to-float v0, v0</span>
+<span class="">	sub-float v1, v8, p1</span>
+<span class="">	div-float/2addr v0, v1</span>
+<span class="">	add-float/2addr p2, v0</span>
+<span class="">	float-to-long v2, p2</span>
+<span class="">	long-to-float p2, v2</span>
+<span class="">	mul-float v0, p2, p1</span>
+<span class="">	const/high16 v1, 0x3f000000    # 0.5f</span>
+<span class="">	:cond_7</span>
+<span class="">	add-float/2addr v0, v1</span>
+<span class="">	float-to-long v2, v0</span>
+<span class="">	sub-float/2addr v8, p1</span>
+<span class="">	mul-float/2addr p2, v8</span>
+<span class="">	add-float/2addr p2, v1</span>
+<span class="">	float-to-long p1, p2</span>
+<span class="">	add-long/2addr v2, v4</span>
+<span class="">	add-long/2addr v2, p1</span>
+<span class="">	iget-object p1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->margin:I</span>
+<span class="">	int-to-long p1, p1</span>
+<span class="">	add-long/2addr p1, v2</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object v0, v0, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->end:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget v0, v0, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->margin:I</span>
+<span class="">	goto :goto_2</span>
+<span class="">	if-eqz v0, :cond_9</span>
+<span class="">	iget-object p1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	:cond_8</span>
+<span class="">	iget-object p2, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object p2, p2, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget p2, p2, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->margin:I</span>
+<span class="">	int-to-long v0, p2</span>
+<span class="">	invoke-direct {p0, p1, v0, v1}, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->traverseStart(Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;J)J</span>
+<span class="">	move-result-wide p1</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object v0, v0, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget v0, v0, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->margin:I</span>
+<span class="">	int-to-long v0, v0</span>
+<span class="">	add-long/2addr v0, v4</span>
+<span class="">	invoke-static {p1, p2, v0, v1}, Ljava/lang/Math;->max(JJ)J</span>
+<span class="">	move-result-wide p1</span>
+<span class="">	goto :goto_3</span>
+<span class="">	if-eqz p1, :cond_a</span>
+<span class="">	iget-object p1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->end:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	:cond_9</span>
+<span class="">	iget-object p2, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object p2, p2, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->end:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget p2, p2, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->margin:I</span>
+<span class="">	int-to-long v0, p2</span>
+<span class="">	invoke-direct {p0, p1, v0, v1}, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->traverseEnd(Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;J)J</span>
+<span class="">	move-result-wide p1</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object v0, v0, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->end:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget v0, v0, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->margin:I</span>
+<span class="">	neg-int v0, v0</span>
+<span class="">	int-to-long v0, v0</span>
+<span class="">	add-long/2addr v0, v4</span>
+<span class="">	neg-long p1, p1</span>
+<span class="">	invoke-static {p1, p2, v0, v1}, Ljava/lang/Math;->max(JJ)J</span>
+<span class="">	move-result-wide p1</span>
+<span class="">	goto :goto_3</span>
+<span class="">	iget-object p1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->start:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget p1, p1, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->margin:I</span>
+<span class="">	:cond_a</span>
+<span class="">	int-to-long p1, p1</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	invoke-virtual {v0}, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->getWrapDimension()J</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	add-long/2addr p1, v0</span>
+<span class="">	iget-object v0, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	iget-object v0, v0, Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;->end:Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;</span>
+<span class="">	iget v0, v0, Landroidx/constraintlayout/core/widgets/analyzer/DependencyNode;->margin:I</span>
+<span class="">	int-to-long v0, v0</span>
+<span class="">	sub-long/2addr p1, v0</span>
+<span class="">	:goto_2</span>
+<span class="">	:goto_3</span>
+.end method
+
+.method public defineTerminalWidgets(ZZ)V
+<span class="">	.locals 1</span>
+
+<span class="">	if-eqz p1, :cond_0</span>
+<span class="">	iget-object p1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	instance-of v0, p1, Landroidx/constraintlayout/core/widgets/analyzer/HorizontalWidgetRun;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-direct {p0, p1, v0}, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->defineTerminalWidget(Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;I)Z</span>
+<span class="">	:cond_0</span>
+<span class="">	if-eqz p2, :cond_1</span>
+<span class="">	iget-object p1, p0, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->firstRun:Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;</span>
+<span class="">	instance-of p2, p1, Landroidx/constraintlayout/core/widgets/analyzer/VerticalWidgetRun;</span>
+<span class="">	if-eqz p2, :cond_1</span>
+<span class="">	const/4 p2, 0x1</span>
+<span class="">	invoke-direct {p0, p1, p2}, Landroidx/constraintlayout/core/widgets/analyzer/RunGroup;->defineTerminalWidget(Landroidx/constraintlayout/core/widgets/analyzer/WidgetRun;I)Z</span>
+<span class="">	:cond_1</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../.resources/report.js"></script>
+</body>
+</html>

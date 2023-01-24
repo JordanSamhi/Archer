@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../index.html">lu.uni.trux.timertask_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.activity</a></li>
+        <li><i class="ico ico-class"></i> ImmLeaksCleaner.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class final Landroidx/activity/ImmLeaksCleaner;
+.super Ljava/lang/Object;
+.source "ImmLeaksCleaner.java"
+.implements Landroidx/lifecycle/LifecycleEventObserver;
+
+
+.field private static final INIT_FAILED:I = 0x2
+.field private static final INIT_SUCCESS:I = 0x1
+.field private static final NOT_INITIALIAZED:I
+.field private static sHField:Ljava/lang/reflect/Field;
+.field private static sNextServedViewField:Ljava/lang/reflect/Field;
+.field private static sReflectedFieldsInitialized:I
+.field private static sServedViewField:Ljava/lang/reflect/Field;
+.field private mActivity:Landroid/app/Activity;
+
+
+.method static constructor <clinit>()V
+<span class="">	.locals 0</span>
+
+.end method
+
+.method constructor <init>(Landroid/app/Activity;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="">	iput-object p1, p0, Landroidx/activity/ImmLeaksCleaner;->mActivity:Landroid/app/Activity;</span>
+.end method
+
+.method private static initializeReflectiveFields()V
+<span class="">	.locals 3</span>
+
+<span class="">	const/4 v0, 0x2</span>
+<span class="">	:try_start_0</span>
+<span class="">	sput v0, Landroidx/activity/ImmLeaksCleaner;->sReflectedFieldsInitialized:I</span>
+<span class="">	const-class v0, Landroid/view/inputmethod/InputMethodManager;</span>
+<span class="">	const-string v1, "mServedView"</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/Class;->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Landroidx/activity/ImmLeaksCleaner;->sServedViewField:Ljava/lang/reflect/Field;</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/reflect/Field;->setAccessible(Z)V</span>
+<span class="">	const-class v0, Landroid/view/inputmethod/InputMethodManager;</span>
+<span class="">	const-string v2, "mNextServedView"</span>
+<span class="">	invoke-virtual {v0, v2}, Ljava/lang/Class;->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Landroidx/activity/ImmLeaksCleaner;->sNextServedViewField:Ljava/lang/reflect/Field;</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/reflect/Field;->setAccessible(Z)V</span>
+<span class="">	const-class v0, Landroid/view/inputmethod/InputMethodManager;</span>
+<span class="">	const-string v2, "mH"</span>
+<span class="">	invoke-virtual {v0, v2}, Ljava/lang/Class;->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	sput-object v0, Landroidx/activity/ImmLeaksCleaner;->sHField:Ljava/lang/reflect/Field;</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/reflect/Field;->setAccessible(Z)V</span>
+<span class="">	sput v1, Landroidx/activity/ImmLeaksCleaner;->sReflectedFieldsInitialized:I</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/NoSuchFieldException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	:catch_0</span>
+.end method
+
+.method public onStateChanged(Landroidx/lifecycle/LifecycleOwner;Landroidx/lifecycle/Lifecycle$Event;)V
+<span class="">	.locals 2</span>
+
+<span class="">	sget-object p1, Landroidx/lifecycle/Lifecycle$Event;->ON_DESTROY:Landroidx/lifecycle/Lifecycle$Event;</span>
+<span class="">	if-eq p2, p1, :cond_0</span>
+<span class="">	sget p1, Landroidx/activity/ImmLeaksCleaner;->sReflectedFieldsInitialized:I</span>
+<span class="">	:cond_0</span>
+<span class="">	if-nez p1, :cond_1</span>
+<span class="">	invoke-static {}, Landroidx/activity/ImmLeaksCleaner;->initializeReflectiveFields()V</span>
+<span class="">	sget p1, Landroidx/activity/ImmLeaksCleaner;->sReflectedFieldsInitialized:I</span>
+<span class="">	:cond_1</span>
+<span class="">	const/4 p2, 0x1</span>
+<span class="">	if-ne p1, p2, :cond_5</span>
+<span class="">	iget-object p1, p0, Landroidx/activity/ImmLeaksCleaner;->mActivity:Landroid/app/Activity;</span>
+<span class="">	const-string p2, "input_method"</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/app/Activity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Landroid/view/inputmethod/InputMethodManager;</span>
+<span class="">	sget-object p2, Landroidx/activity/ImmLeaksCleaner;->sHField:Ljava/lang/reflect/Field;</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {p2, p1}, Ljava/lang/reflect/Field;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	if-nez p2, :cond_2</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/IllegalAccessException; {:try_start_0 .. :try_end_0} :catch_3</span>
+<span class="">	monitor-enter p2</span>
+<span class="">	sget-object v0, Landroidx/activity/ImmLeaksCleaner;->sServedViewField:Ljava/lang/reflect/Field;</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-virtual {v0, p1}, Ljava/lang/reflect/Field;->get(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	:try_start_1</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroid/view/View;</span>
+<span class="">	if-nez v0, :cond_3</span>
+<span class="">	monitor-exit p2</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catch Ljava/lang/IllegalAccessException; {:try_start_1 .. :try_end_1} :catch_2</span>
+<span class="">	.catch Ljava/lang/ClassCastException; {:try_start_1 .. :try_end_1} :catch_1</span>
+<span class="">	.catchall {:try_start_1 .. :try_end_1} :catchall_0</span>
+<span class="">	invoke-virtual {v0}, Landroid/view/View;->isAttachedToWindow()Z</span>
+<span class="">	:try_start_2</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_4</span>
+<span class="">	:cond_3</span>
+<span class="">	monitor-exit p2</span>
+<span class="">	sget-object v0, Landroidx/activity/ImmLeaksCleaner;->sNextServedViewField:Ljava/lang/reflect/Field;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-virtual {v0, p1, v1}, Ljava/lang/reflect/Field;->set(Ljava/lang/Object;Ljava/lang/Object;)V</span>
+<span class="">	:try_end_2</span>
+<span class="">	.catchall {:try_start_2 .. :try_end_2} :catchall_0</span>
+<span class="">	monitor-exit p2</span>
+<span class="">	:try_start_3</span>
+<span class="">	:cond_4</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/inputmethod/InputMethodManager;->isActive()Z</span>
+<span class="">	goto :goto_1</span>
+<span class="">	monitor-exit p2</span>
+<span class="">	:try_start_4</span>
+<span class="">	:try_end_3</span>
+<span class="">	.catch Ljava/lang/IllegalAccessException; {:try_start_3 .. :try_end_3} :catch_0</span>
+<span class="">	.catchall {:try_start_3 .. :try_end_3} :catchall_0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:try_end_4</span>
+<span class="">	.catchall {:try_start_4 .. :try_end_4} :catchall_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	monitor-exit p2</span>
+<span class="">	:try_start_5</span>
+<span class="">	:catch_0</span>
+<span class="">	monitor-exit p2</span>
+<span class="">	monitor-exit p2</span>
+<span class="">	:catchall_0</span>
+<span class="">	throw p1</span>
+<span class="">	:catch_1</span>
+<span class="">	:catch_2</span>
+<span class="">	:goto_0</span>
+<span class="">	:try_end_5</span>
+<span class="">	.catchall {:try_start_5 .. :try_end_5} :catchall_0</span>
+<span class="">	:goto_1</span>
+<span class="">	:catch_3</span>
+<span class="">	:cond_5</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../.resources/report.js"></script>
+</body>
+</html>

@@ -1,0 +1,1735 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">lu.uni.trux.jobscheduler_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.test.runner</a></li>
+        <li><i class="ico ico-class"></i> MonitoringInstrumentation.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public Landroidx/test/runner/MonitoringInstrumentation;
+.super Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;
+.source "MonitoringInstrumentation.java"
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Landroidx/test/runner/MonitoringInstrumentation$ActivityFinisher;,
+Landroidx/test/runner/MonitoringInstrumentation$StubResultCallable;
+}
+.end annotation
+
+.field private static final MILLIS_TO_POLL_FOR_ACTIVITY_STOP:J
+.field private static final MILLIS_TO_WAIT_FOR_ACTIVITY_TO_STOP:J
+.field private static final TAG:Ljava/lang/String; = "MonitoringInstr"
+.field private anActivityHasBeenLaunched:Ljava/util/concurrent/atomic/AtomicBoolean;
+.field private applicationMonitor:Landroidx/test/internal/runner/lifecycle/ApplicationLifecycleMonitorImpl;
+.field private executorService:Ljava/util/concurrent/ExecutorService;
+.field private volatile finished:Z
+.field private handlerForMainLooper:Landroid/os/Handler;
+.field private idleHandler:Landroid/os/MessageQueue$IdleHandler;
+.field private intentMonitor:Landroidx/test/internal/runner/intent/IntentMonitorImpl;
+.field private volatile interceptingActivityFactory:Landroidx/test/runner/intercepting/InterceptingActivityFactory;
+.field private isDexmakerClassLoaderInitialized:Ljava/lang/ThreadLocal;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/lang/ThreadLocal<",
+"Ljava/lang/Boolean;",
+">;"
+}
+.end annotation
+.end field
+.field private isJsBridgeLoaded:Ljava/util/concurrent/atomic/AtomicBoolean;
+.field private volatile isOriginalInstr:Ljava/lang/Boolean;
+.field private jsBridgeClassName:Ljava/lang/String;
+.field private lastIdleTime:Ljava/util/concurrent/atomic/AtomicLong;
+.field private lifecycleMonitor:Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;
+.field private standardHandler:Ljava/lang/Thread$UncaughtExceptionHandler;
+.field private startedActivityCounter:Ljava/util/concurrent/atomic/AtomicInteger;
+
+
+.method static constructor <clinit>()V
+<span class="">	.locals 4</span>
+
+<span class="">	sget-object v0, Ljava/util/concurrent/TimeUnit;->SECONDS:Ljava/util/concurrent/TimeUnit;</span>
+<span class="">	const-wide/16 v1, 0x2</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Ljava/util/concurrent/TimeUnit;->toMillis(J)J</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	sput-wide v0, Landroidx/test/runner/MonitoringInstrumentation;->MILLIS_TO_WAIT_FOR_ACTIVITY_TO_STOP:J</span>
+<span class="">	const-wide/16 v2, 0x28</span>
+<span class="">	div-long/2addr v0, v2</span>
+<span class="">	sput-wide v0, Landroidx/test/runner/MonitoringInstrumentation;->MILLIS_TO_POLL_FOR_ACTIVITY_STOP:J</span>
+.end method
+
+.method public constructor <init>()V
+<span class="">	.locals 4</span>
+
+<span class="">	invoke-direct {p0}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;-><init>()V</span>
+<span class="">	new-instance v0, Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;</span>
+<span class="">	invoke-direct {v0}, Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->lifecycleMonitor:Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;</span>
+<span class="">	new-instance v0, Landroidx/test/internal/runner/lifecycle/ApplicationLifecycleMonitorImpl;</span>
+<span class="">	invoke-direct {v0}, Landroidx/test/internal/runner/lifecycle/ApplicationLifecycleMonitorImpl;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->applicationMonitor:Landroidx/test/internal/runner/lifecycle/ApplicationLifecycleMonitorImpl;</span>
+<span class="">	new-instance v0, Landroidx/test/internal/runner/intent/IntentMonitorImpl;</span>
+<span class="">	invoke-direct {v0}, Landroidx/test/internal/runner/intent/IntentMonitorImpl;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->intentMonitor:Landroidx/test/internal/runner/intent/IntentMonitorImpl;</span>
+<span class="">	new-instance v0, Ljava/util/concurrent/atomic/AtomicBoolean;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/util/concurrent/atomic/AtomicBoolean;-><init>(Z)V</span>
+<span class="">	iput-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->anActivityHasBeenLaunched:Ljava/util/concurrent/atomic/AtomicBoolean;</span>
+<span class="">	new-instance v0, Ljava/util/concurrent/atomic/AtomicLong;</span>
+<span class="">	const-wide/16 v2, 0x0</span>
+<span class="">	invoke-direct {v0, v2, v3}, Ljava/util/concurrent/atomic/AtomicLong;-><init>(J)V</span>
+<span class="">	iput-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->lastIdleTime:Ljava/util/concurrent/atomic/AtomicLong;</span>
+<span class="">	new-instance v0, Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/util/concurrent/atomic/AtomicInteger;-><init>(I)V</span>
+<span class="">	iput-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->startedActivityCounter:Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	new-instance v0, Ljava/util/concurrent/atomic/AtomicBoolean;</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/util/concurrent/atomic/AtomicBoolean;-><init>(Z)V</span>
+<span class="">	iput-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->isJsBridgeLoaded:Ljava/util/concurrent/atomic/AtomicBoolean;</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	iput-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->isOriginalInstr:Ljava/lang/Boolean;</span>
+<span class="">	new-instance v0, Ljava/lang/ThreadLocal;</span>
+<span class="">	invoke-direct {v0}, Ljava/lang/ThreadLocal;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->isDexmakerClassLoaderInitialized:Ljava/lang/ThreadLocal;</span>
+<span class="">	new-instance v0, Landroidx/test/runner/MonitoringInstrumentation$1;</span>
+<span class="">	invoke-direct {v0, p0}, Landroidx/test/runner/MonitoringInstrumentation$1;-><init>(Landroidx/test/runner/MonitoringInstrumentation;)V</span>
+<span class="">	iput-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->idleHandler:Landroid/os/MessageQueue$IdleHandler;</span>
+<span class="">	iput-boolean v1, p0, Landroidx/test/runner/MonitoringInstrumentation;->finished:Z</span>
+.end method
+
+.method static synthetic access$000(Landroidx/test/runner/MonitoringInstrumentation;)Ljava/util/concurrent/atomic/AtomicLong;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p0, p0, Landroidx/test/runner/MonitoringInstrumentation;->lastIdleTime:Ljava/util/concurrent/atomic/AtomicLong;</span>
+.end method
+
+.method static synthetic access$100(Landroidx/test/runner/MonitoringInstrumentation;)Ljava/lang/Thread$UncaughtExceptionHandler;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p0, p0, Landroidx/test/runner/MonitoringInstrumentation;->standardHandler:Ljava/lang/Thread$UncaughtExceptionHandler;</span>
+.end method
+
+.method static synthetic access$201(Landroidx/test/runner/MonitoringInstrumentation;Landroid/content/Intent;)Landroid/app/Activity;
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-super {p0, p1}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->startActivitySync(Landroid/content/Intent;)Landroid/app/Activity;</span>
+<span class="">	move-result-object p0</span>
+.end method
+
+.method static synthetic access$300(Landroidx/test/runner/MonitoringInstrumentation;)Ljava/util/concurrent/atomic/AtomicBoolean;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p0, p0, Landroidx/test/runner/MonitoringInstrumentation;->isJsBridgeLoaded:Ljava/util/concurrent/atomic/AtomicBoolean;</span>
+.end method
+
+.method static synthetic access$400(Landroidx/test/runner/MonitoringInstrumentation;)Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p0, p0, Landroidx/test/runner/MonitoringInstrumentation;->lifecycleMonitor:Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;</span>
+.end method
+
+.method private static getMultiDexClass()Ljava/lang/Class;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/lang/ClassNotFoundException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"()",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"*>;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const-string v0, "androidx.multidex.MultiDex"</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-static {v0}, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/ClassNotFoundException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	invoke-static {v0}, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;</span>
+<span class="">	:catch_0</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method private getTargetProcessValues()Ljava/util/List;
+<span class="">	.locals 6</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"()",</span>
+<span class="">	"Ljava/util/List<",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	">;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v1, 0x1a</span>
+<span class="">	if-ge v0, v1, :cond_0</span>
+<span class="">	invoke-static {}, Ljava/util/Collections;->emptyList()Ljava/util/List;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->getContext()Landroid/content/Context;</span>
+<span class="">	:try_start_0</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->getComponentName()Landroid/content/ComponentName;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Landroid/content/pm/PackageManager;->getInstrumentationInfo(Landroid/content/ComponentName;I)Landroid/content/pm/InstrumentationInfo;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v0, v0, Landroid/content/pm/InstrumentationInfo;->targetProcesses:Ljava/lang/String;</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	const-string v0, ""</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/String;->trim()Ljava/lang/String;</span>
+<span class="">	:cond_1</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/String;->length()I</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Landroid/content/pm/PackageManager$NameNotFoundException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	move-result v1</span>
+<span class="">	if-nez v1, :cond_2</span>
+<span class="">	invoke-static {}, Ljava/util/Collections;->emptyList()Ljava/util/List;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	new-instance v1, Ljava/util/ArrayList;</span>
+<span class="">	invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V</span>
+<span class="">	:cond_2</span>
+<span class="">	const/4 v3, -0x1</span>
+<span class="">	const-string v4, ","</span>
+<span class="">	invoke-virtual {v0, v4, v3}, Ljava/lang/String;->split(Ljava/lang/String;I)[Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	array-length v3, v0</span>
+<span class="">	if-ge v2, v3, :cond_4</span>
+<span class="">	aget-object v4, v0, v2</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-virtual {v4}, Ljava/lang/String;->trim()Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v4}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v5</span>
+<span class="">	if-lez v5, :cond_3</span>
+<span class="">	invoke-interface {v1, v4}, Ljava/util/List;->add(Ljava/lang/Object;)Z</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_3</span>
+<span class="">	move-exception v0</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->getComponentName()Landroid/content/ComponentName;</span>
+<span class="">	:cond_4</span>
+<span class="">	move-result-object v1</span>
+<span class="">	:catch_0</span>
+<span class="">	invoke-static {v1}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-static {v1}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v2}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v2</span>
+<span class="">	add-int/lit8 v2, v2, 0x19</span>
+<span class="">	new-instance v3, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v3, v2}, Ljava/lang/StringBuilder;-><init>(I)V</span>
+<span class="">	const-string v2, "Cannot locate ourselves: "</span>
+<span class="">	invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	const-string v3, "MonitoringInstr"</span>
+<span class="">	invoke-static {v3, v1, v0}, Landroid/util/Log;->wtf(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I</span>
+<span class="">	new-instance v1, Ljava/lang/IllegalStateException;</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->getComponentName()Landroid/content/ComponentName;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-static {v3}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-static {v3}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v4}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v4</span>
+<span class="">	add-int/lit8 v4, v4, 0x19</span>
+<span class="">	new-instance v5, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v5, v4}, Ljava/lang/StringBuilder;-><init>(I)V</span>
+<span class="">	invoke-virtual {v5, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-direct {v1, v2, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V</span>
+<span class="">	throw v1</span>
+.end method
+
+.method private isHostingProcess(Ljava/lang/String;Landroidx/test/internal/util/ProcSummary;)Z
+<span class="">	.locals 3</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"wantName",</span>
+<span class="">	"ps"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p1}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	iget-object v1, p2, Landroidx/test/internal/util/ProcSummary;->cmdline:Ljava/lang/String;</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v1</span>
+<span class="">	if-ne v0, v1, :cond_0</span>
+<span class="">	iget-object p2, p2, Landroidx/test/internal/util/ProcSummary;->cmdline:Ljava/lang/String;</span>
+<span class="">	invoke-virtual {p1, p2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	:cond_0</span>
+<span class="">	if-ge v0, v1, :cond_1</span>
+<span class="">	iget-object v0, p2, Landroidx/test/internal/util/ProcSummary;->cmdline:Ljava/lang/String;</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z</span>
+<span class="">	:cond_1</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	iget-object v0, p2, Landroidx/test/internal/util/ProcSummary;->name:Ljava/lang/String;</span>
+<span class="">	invoke-virtual {p1, v0}, Ljava/lang/String;->endsWith(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	invoke-static {p2}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-static {p2}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v0</span>
+<span class="">	add-int/lit16 v0, v0, 0xa5</span>
+<span class="">	invoke-static {p1}, Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/String;->length()I</span>
+<span class="">	move-result v1</span>
+<span class="">	add-int/2addr v0, v1</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v1, v0}, Ljava/lang/StringBuilder;-><init>(I)V</span>
+<span class="">	const-string v0, "Use smaller processNames in AndroidManifest.xml. Long names are truncated. This process\'s cmdline is a prefix of the processName and suffix of comm - assuming: "</span>
+<span class="">	invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	const-string v0, " is: "</span>
+<span class="">	invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p2</span>
+<span class="">	invoke-virtual {p2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string p2, "MonitoringInstr"</span>
+<span class="">	invoke-static {p2, p1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	:cond_2</span>
+.end method
+
+.method private isOriginalInstrumentationProcess()Z
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->isOriginalInstr:Ljava/lang/Boolean;</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	invoke-direct {p0}, Landroidx/test/runner/MonitoringInstrumentation;->isOriginalUncached()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-static {v0}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->isOriginalInstr:Ljava/lang/Boolean;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Boolean;->booleanValue()Z</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method private isOriginalUncached()Z
+<span class="">	.locals 5</span>
+
+<span class="">	sget v0, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	const/16 v2, 0x1a</span>
+<span class="">	if-ge v0, v2, :cond_0</span>
+<span class="">	invoke-direct {p0}, Landroidx/test/runner/MonitoringInstrumentation;->getTargetProcessValues()Ljava/util/List;</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->isEmpty()Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_1</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-interface {v0, v2}, Ljava/util/List;->get(I)Ljava/lang/Object;</span>
+<span class="">	:cond_1</span>
+<span class="">	move-result-object v3</span>
+<span class="">	const-string v4, "*"</span>
+<span class="">	invoke-virtual {v4, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	invoke-interface {v0}, Ljava/util/List;->size()I</span>
+<span class="">	move-result v4</span>
+<span class="">	if-ne v4, v1, :cond_2</span>
+<span class="">	if-nez v3, :cond_2</span>
+<span class="">	const-string v1, "self"</span>
+<span class="">	invoke-static {v1}, Landroidx/test/internal/util/ProcSummary;->summarize(Ljava/lang/String;)Landroidx/test/internal/util/ProcSummary;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	:try_start_0</span>
+<span class="">	:cond_2</span>
+<span class="">	if-eqz v3, :cond_4</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->getTargetContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Landroidx/test/internal/util/ProcSummary$SummaryException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/Context;->getApplicationInfo()Landroid/content/pm/ApplicationInfo;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v0, v0, Landroid/content/pm/ApplicationInfo;->processName:Ljava/lang/String;</span>
+<span class="">	if-nez v0, :cond_3</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->getTargetContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/Context;->getPackageName()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-direct {p0, v0, v1}, Landroidx/test/runner/MonitoringInstrumentation;->isHostingProcess(Ljava/lang/String;Landroidx/test/internal/util/ProcSummary;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	invoke-interface {v0, v2}, Ljava/util/List;->get(I)Ljava/lang/Object;</span>
+<span class="">	:cond_3</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Ljava/lang/String;</span>
+<span class="">	invoke-direct {p0, v0, v1}, Landroidx/test/runner/MonitoringInstrumentation;->isHostingProcess(Ljava/lang/String;Landroidx/test/internal/util/ProcSummary;)Z</span>
+<span class="">	:cond_4</span>
+<span class="">	move-result v0</span>
+<span class="">	move-exception v0</span>
+<span class="">	const-string v1, "MonitoringInstr"</span>
+<span class="">	const-string v3, "Could not list apps for this user, running in sandbox? Assuming primary"</span>
+<span class="">	invoke-static {v1, v3, v0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I</span>
+<span class="">	:catch_0</span>
+.end method
+
+.method private logUncaughtExceptions()V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Thread;->getUncaughtExceptionHandler()Ljava/lang/Thread$UncaughtExceptionHandler;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iput-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->standardHandler:Ljava/lang/Thread$UncaughtExceptionHandler;</span>
+<span class="">	invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	new-instance v1, Landroidx/test/runner/MonitoringInstrumentation$3;</span>
+<span class="">	invoke-direct {v1, p0}, Landroidx/test/runner/MonitoringInstrumentation$3;-><init>(Landroidx/test/runner/MonitoringInstrumentation;)V</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/Thread;->setUncaughtExceptionHandler(Ljava/lang/Thread$UncaughtExceptionHandler;)V</span>
+.end method
+
+.method private setupDexmakerClassloader()V
+<span class="">	.locals 4</span>
+
+<span class="">	sget-object v0, Ljava/lang/Boolean;->TRUE:Ljava/lang/Boolean;</span>
+<span class="">	iget-object v1, p0, Landroidx/test/runner/MonitoringInstrumentation;->isDexmakerClassLoaderInitialized:Ljava/lang/ThreadLocal;</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/ThreadLocal;->get()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/Boolean;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Thread;->getContextClassLoader()Ljava/lang/ClassLoader;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->getTargetContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v1}, Landroid/content/Context;->getClassLoader()Ljava/lang/ClassLoader;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	if-eq v0, v1, :cond_1</span>
+<span class="">	const/4 v2, 0x2</span>
+<span class="">	new-array v2, v2, [Ljava/lang/Object;</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	aput-object v1, v2, v3</span>
+<span class="">	const/4 v3, 0x1</span>
+<span class="">	aput-object v0, v2, v3</span>
+<span class="">	const-string v0, "Setting context classloader to \'%s\', Original: \'%s\'"</span>
+<span class="">	invoke-static {v0, v2}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v2, "MonitoringInstr"</span>
+<span class="">	invoke-static {v2, v0}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/Thread;->setContextClassLoader(Ljava/lang/ClassLoader;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->isDexmakerClassLoaderInitialized:Ljava/lang/ThreadLocal;</span>
+<span class="">	:cond_1</span>
+<span class="">	sget-object v1, Ljava/lang/Boolean;->TRUE:Ljava/lang/Boolean;</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/ThreadLocal;->set(Ljava/lang/Object;)V</span>
+.end method
+
+.method private stubResultFor(Landroid/content/Intent;)Landroid/app/Instrumentation$ActivityResult;
+<span class="">	.locals 4</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"intent"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {}, Landroidx/test/runner/intent/IntentStubberRegistry;->isLoaded()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	invoke-static {}, Landroid/os/Looper;->myLooper()Landroid/os/Looper;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {}, Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	if-eq v0, v1, :cond_0</span>
+<span class="">	new-instance v0, Ljava/util/concurrent/FutureTask;</span>
+<span class="">	new-instance v1, Landroidx/test/runner/MonitoringInstrumentation$StubResultCallable;</span>
+<span class="">	invoke-direct {v1, p1}, Landroidx/test/runner/MonitoringInstrumentation$StubResultCallable;-><init>(Landroid/content/Intent;)V</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/util/concurrent/FutureTask;-><init>(Ljava/util/concurrent/Callable;)V</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/test/runner/MonitoringInstrumentation;->runOnMainSync(Ljava/lang/Runnable;)V</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/concurrent/FutureTask;->get()Ljava/lang/Object;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	check-cast v0, Landroid/app/Instrumentation$ActivityResult;</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/util/concurrent/ExecutionException; {:try_start_0 .. :try_end_0} :catch_1</span>
+<span class="">	.catch Ljava/lang/InterruptedException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catch_0</span>
+<span class="">	invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Thread;->interrupt()V</span>
+<span class="">	new-instance v0, Ljava/lang/RuntimeException;</span>
+<span class="">	invoke-direct {v0, p1}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/Throwable;)V</span>
+<span class="">	throw v0</span>
+<span class="">	move-exception v0</span>
+<span class="">	:catch_1</span>
+<span class="">	new-instance v1, Ljava/lang/RuntimeException;</span>
+<span class="">	const/4 v2, 0x1</span>
+<span class="">	new-array v2, v2, [Ljava/lang/Object;</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	aput-object p1, v2, v3</span>
+<span class="">	const-string p1, "Could not retrieve stub result for intent %s"</span>
+<span class="">	invoke-static {p1, v2}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {v1, p1, v0}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V</span>
+<span class="">	throw v1</span>
+<span class="">	invoke-static {}, Landroidx/test/runner/intent/IntentStubberRegistry;->getInstance()Landroidx/test/runner/intent/IntentStubber;</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0, p1}, Landroidx/test/runner/intent/IntentStubber;->getActivityResultForIntent(Landroid/content/Intent;)Landroid/app/Instrumentation$ActivityResult;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const/4 p1, 0x0</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method private tryLoadingJsBridge(Ljava/lang/String;)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x10</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"className"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const-string v0, "JsBridge class name cannot be null!"</span>
+<span class="">	invoke-static {p1, v0}, Ljava/util/Objects;->requireNonNull(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;</span>
+<span class="">	new-instance v0, Landroidx/test/runner/MonitoringInstrumentation$5;</span>
+<span class="">	invoke-direct {v0, p0, p1}, Landroidx/test/runner/MonitoringInstrumentation$5;-><init>(Landroidx/test/runner/MonitoringInstrumentation;Ljava/lang/String;)V</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/test/runner/MonitoringInstrumentation;->runOnMainSync(Ljava/lang/Runnable;)V</span>
+.end method
+
+.method public callActivityOnCreate(Landroid/app/Activity;Landroid/os/Bundle;)V
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"activity",</span>
+<span class="">	"bundle"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->lifecycleMonitor:Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;</span>
+<span class="">	sget-object v1, Landroidx/test/runner/lifecycle/Stage;->PRE_ON_CREATE:Landroidx/test/runner/lifecycle/Stage;</span>
+<span class="">	invoke-virtual {v0, v1, p1}, Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;->signalLifecycleChange(Landroidx/test/runner/lifecycle/Stage;Landroid/app/Activity;)V</span>
+<span class="">	invoke-super {p0, p1, p2}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->callActivityOnCreate(Landroid/app/Activity;Landroid/os/Bundle;)V</span>
+<span class="">	iget-object p2, p0, Landroidx/test/runner/MonitoringInstrumentation;->lifecycleMonitor:Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;</span>
+<span class="">	sget-object v0, Landroidx/test/runner/lifecycle/Stage;->CREATED:Landroidx/test/runner/lifecycle/Stage;</span>
+<span class="">	invoke-virtual {p2, v0, p1}, Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;->signalLifecycleChange(Landroidx/test/runner/lifecycle/Stage;Landroid/app/Activity;)V</span>
+.end method
+
+.method public callActivityOnDestroy(Landroid/app/Activity;)V
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"activity"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-super {p0, p1}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->callActivityOnDestroy(Landroid/app/Activity;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->lifecycleMonitor:Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;</span>
+<span class="">	sget-object v1, Landroidx/test/runner/lifecycle/Stage;->DESTROYED:Landroidx/test/runner/lifecycle/Stage;</span>
+<span class="">	invoke-virtual {v0, v1, p1}, Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;->signalLifecycleChange(Landroidx/test/runner/lifecycle/Stage;Landroid/app/Activity;)V</span>
+.end method
+
+.method public callActivityOnPause(Landroid/app/Activity;)V
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"activity"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-super {p0, p1}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->callActivityOnPause(Landroid/app/Activity;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->lifecycleMonitor:Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;</span>
+<span class="">	sget-object v1, Landroidx/test/runner/lifecycle/Stage;->PAUSED:Landroidx/test/runner/lifecycle/Stage;</span>
+<span class="">	invoke-virtual {v0, v1, p1}, Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;->signalLifecycleChange(Landroidx/test/runner/lifecycle/Stage;Landroid/app/Activity;)V</span>
+.end method
+
+.method public callActivityOnRestart(Landroid/app/Activity;)V
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"activity"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-super {p0, p1}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->callActivityOnRestart(Landroid/app/Activity;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->lifecycleMonitor:Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;</span>
+<span class="">	sget-object v1, Landroidx/test/runner/lifecycle/Stage;->RESTARTED:Landroidx/test/runner/lifecycle/Stage;</span>
+<span class="">	invoke-virtual {v0, v1, p1}, Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;->signalLifecycleChange(Landroidx/test/runner/lifecycle/Stage;Landroid/app/Activity;)V</span>
+.end method
+
+.method public callActivityOnResume(Landroid/app/Activity;)V
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"activity"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-super {p0, p1}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->callActivityOnResume(Landroid/app/Activity;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->lifecycleMonitor:Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;</span>
+<span class="">	sget-object v1, Landroidx/test/runner/lifecycle/Stage;->RESUMED:Landroidx/test/runner/lifecycle/Stage;</span>
+<span class="">	invoke-virtual {v0, v1, p1}, Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;->signalLifecycleChange(Landroidx/test/runner/lifecycle/Stage;Landroid/app/Activity;)V</span>
+.end method
+
+.method public callActivityOnStart(Landroid/app/Activity;)V
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"activity"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->startedActivityCounter:Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicInteger;->incrementAndGet()I</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-super {p0, p1}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->callActivityOnStart(Landroid/app/Activity;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->lifecycleMonitor:Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;</span>
+<span class="">	sget-object v1, Landroidx/test/runner/lifecycle/Stage;->STARTED:Landroidx/test/runner/lifecycle/Stage;</span>
+<span class="">	invoke-virtual {v0, v1, p1}, Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;->signalLifecycleChange(Landroidx/test/runner/lifecycle/Stage;Landroid/app/Activity;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catch_0</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->startedActivityCounter:Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicInteger;->decrementAndGet()I</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public callActivityOnStop(Landroid/app/Activity;)V
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"activity"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	:try_start_0</span>
+<span class="">	invoke-super {p0, p1}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->callActivityOnStop(Landroid/app/Activity;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->lifecycleMonitor:Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;</span>
+<span class="">	sget-object v1, Landroidx/test/runner/lifecycle/Stage;->STOPPED:Landroidx/test/runner/lifecycle/Stage;</span>
+<span class="">	invoke-virtual {v0, v1, p1}, Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;->signalLifecycleChange(Landroidx/test/runner/lifecycle/Stage;Landroid/app/Activity;)V</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catchall {:try_start_0 .. :try_end_0} :catchall_0</span>
+<span class="">	iget-object p1, p0, Landroidx/test/runner/MonitoringInstrumentation;->startedActivityCounter:Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	invoke-virtual {p1}, Ljava/util/concurrent/atomic/AtomicInteger;->decrementAndGet()I</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catchall_0</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->startedActivityCounter:Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicInteger;->decrementAndGet()I</span>
+<span class="">	throw p1</span>
+.end method
+
+.method public callApplicationOnCreate(Landroid/app/Application;)V
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"app"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->applicationMonitor:Landroidx/test/internal/runner/lifecycle/ApplicationLifecycleMonitorImpl;</span>
+<span class="">	sget-object v1, Landroidx/test/runner/lifecycle/ApplicationStage;->PRE_ON_CREATE:Landroidx/test/runner/lifecycle/ApplicationStage;</span>
+<span class="">	invoke-virtual {v0, p1, v1}, Landroidx/test/internal/runner/lifecycle/ApplicationLifecycleMonitorImpl;->signalLifecycleChange(Landroid/app/Application;Landroidx/test/runner/lifecycle/ApplicationStage;)V</span>
+<span class="">	invoke-super {p0, p1}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->callApplicationOnCreate(Landroid/app/Application;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->applicationMonitor:Landroidx/test/internal/runner/lifecycle/ApplicationLifecycleMonitorImpl;</span>
+<span class="">	sget-object v1, Landroidx/test/runner/lifecycle/ApplicationStage;->CREATED:Landroidx/test/runner/lifecycle/ApplicationStage;</span>
+<span class="">	invoke-virtual {v0, p1, v1}, Landroidx/test/internal/runner/lifecycle/ApplicationLifecycleMonitorImpl;->signalLifecycleChange(Landroid/app/Application;Landroidx/test/runner/lifecycle/ApplicationStage;)V</span>
+.end method
+
+.method protected dumpThreadStateToOutputs(Ljava/lang/String;)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"outputFileName"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->getThreadState()Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string v0, "THREAD_STATE"</span>
+<span class="">	invoke-static {v0, p1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I</span>
+.end method
+
+.method public execStartActivities(Landroid/content/Context;Landroid/os/IBinder;Landroid/os/IBinder;Landroid/app/Activity;[Landroid/content/Intent;Landroid/os/Bundle;)V
+<span class="">	.locals 11</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"who",</span>
+<span class="">	"contextThread",</span>
+<span class="">	"token",</span>
+<span class="">	"target",</span>
+<span class="">	"intents",</span>
+<span class="">	"options"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	move-object/from16 v0, p5</span>
+<span class="">	const-string v1, "MonitoringInstr"</span>
+<span class="">	const-string v2, "execStartActivities(context, ibinder, ibinder, activity, intent[], bundle)"</span>
+<span class="">	invoke-static {v1, v2}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	array-length v1, v0</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	if-ge v2, v1, :cond_0</span>
+<span class="">	aget-object v8, v0, v2</span>
+<span class="">	const/4 v9, -0x1</span>
+<span class="">	move-object v3, p0</span>
+<span class="">	move-object v4, p1</span>
+<span class="">	move-object v5, p2</span>
+<span class="">	move-object v6, p3</span>
+<span class="">	move-object v7, p4</span>
+<span class="">	move-object/from16 v10, p6</span>
+<span class="">	invoke-virtual/range {v3 .. v10}, Landroidx/test/runner/MonitoringInstrumentation;->execStartActivity(Landroid/content/Context;Landroid/os/IBinder;Landroid/os/IBinder;Landroid/app/Activity;Landroid/content/Intent;ILandroid/os/Bundle;)Landroid/app/Instrumentation$ActivityResult;</span>
+<span class="">	add-int/lit8 v2, v2, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method public execStartActivity(Landroid/content/Context;Landroid/os/IBinder;Landroid/os/IBinder;Landroid/app/Activity;Landroid/content/Intent;I)Landroid/app/Instrumentation$ActivityResult;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"who",</span>
+<span class="">	"contextThread",</span>
+<span class="">	"token",</span>
+<span class="">	"target",</span>
+<span class="">	"intent",</span>
+<span class="">	"requestCode"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->intentMonitor:Landroidx/test/internal/runner/intent/IntentMonitorImpl;</span>
+<span class="">	invoke-virtual {v0, p5}, Landroidx/test/internal/runner/intent/IntentMonitorImpl;->signalIntent(Landroid/content/Intent;)V</span>
+<span class="">	invoke-direct {p0, p5}, Landroidx/test/runner/MonitoringInstrumentation;->stubResultFor(Landroid/content/Intent;)Landroid/app/Instrumentation$ActivityResult;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	new-array p1, p1, [Ljava/lang/Object;</span>
+<span class="">	const/4 p2, 0x0</span>
+<span class="">	aput-object p5, p1, p2</span>
+<span class="">	const-string p2, "Stubbing intent %s"</span>
+<span class="">	invoke-static {p2, p1}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string p2, "MonitoringInstr"</span>
+<span class="">	invoke-static {p2, p1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	invoke-super/range {p0 .. p6}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->execStartActivity(Landroid/content/Context;Landroid/os/IBinder;Landroid/os/IBinder;Landroid/app/Activity;Landroid/content/Intent;I)Landroid/app/Instrumentation$ActivityResult;</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public execStartActivity(Landroid/content/Context;Landroid/os/IBinder;Landroid/os/IBinder;Landroid/app/Activity;Landroid/content/Intent;ILandroid/os/Bundle;)Landroid/app/Instrumentation$ActivityResult;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"who",</span>
+<span class="">	"contextThread",</span>
+<span class="">	"token",</span>
+<span class="">	"target",</span>
+<span class="">	"intent",</span>
+<span class="">	"requestCode",</span>
+<span class="">	"options"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->intentMonitor:Landroidx/test/internal/runner/intent/IntentMonitorImpl;</span>
+<span class="">	invoke-virtual {v0, p5}, Landroidx/test/internal/runner/intent/IntentMonitorImpl;->signalIntent(Landroid/content/Intent;)V</span>
+<span class="">	invoke-direct {p0, p5}, Landroidx/test/runner/MonitoringInstrumentation;->stubResultFor(Landroid/content/Intent;)Landroid/app/Instrumentation$ActivityResult;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	new-array p1, p1, [Ljava/lang/Object;</span>
+<span class="">	const/4 p2, 0x0</span>
+<span class="">	aput-object p5, p1, p2</span>
+<span class="">	const-string p2, "Stubbing intent %s"</span>
+<span class="">	invoke-static {p2, p1}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string p2, "MonitoringInstr"</span>
+<span class="">	invoke-static {p2, p1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	invoke-super/range {p0 .. p7}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->execStartActivity(Landroid/content/Context;Landroid/os/IBinder;Landroid/os/IBinder;Landroid/app/Activity;Landroid/content/Intent;ILandroid/os/Bundle;)Landroid/app/Instrumentation$ActivityResult;</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public execStartActivity(Landroid/content/Context;Landroid/os/IBinder;Landroid/os/IBinder;Landroid/app/Activity;Landroid/content/Intent;ILandroid/os/Bundle;Landroid/os/UserHandle;)Landroid/app/Instrumentation$ActivityResult;
+<span class="">	.locals 0</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"who",</span>
+<span class="">	"contextThread",</span>
+<span class="">	"token",</span>
+<span class="">	"target",</span>
+<span class="">	"intent",</span>
+<span class="">	"requestCode",</span>
+<span class="">	"options",</span>
+<span class="">	"user"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-super/range {p0 .. p8}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->execStartActivity(Landroid/content/Context;Landroid/os/IBinder;Landroid/os/IBinder;Landroid/app/Activity;Landroid/content/Intent;ILandroid/os/Bundle;Landroid/os/UserHandle;)Landroid/app/Instrumentation$ActivityResult;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public execStartActivity(Landroid/content/Context;Landroid/os/IBinder;Landroid/os/IBinder;Landroid/app/Fragment;Landroid/content/Intent;ILandroid/os/Bundle;)Landroid/app/Instrumentation$ActivityResult;
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"who",</span>
+<span class="">	"contextThread",</span>
+<span class="">	"token",</span>
+<span class="">	"target",</span>
+<span class="">	"intent",</span>
+<span class="">	"requestCode",</span>
+<span class="">	"options"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const-string v0, "MonitoringInstr"</span>
+<span class="">	const-string v1, "execStartActivity(context, IBinder, IBinder, Fragment, Intent, int, Bundle)"</span>
+<span class="">	invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	iget-object v1, p0, Landroidx/test/runner/MonitoringInstrumentation;->intentMonitor:Landroidx/test/internal/runner/intent/IntentMonitorImpl;</span>
+<span class="">	invoke-virtual {v1, p5}, Landroidx/test/internal/runner/intent/IntentMonitorImpl;->signalIntent(Landroid/content/Intent;)V</span>
+<span class="">	invoke-direct {p0, p5}, Landroidx/test/runner/MonitoringInstrumentation;->stubResultFor(Landroid/content/Intent;)Landroid/app/Instrumentation$ActivityResult;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	new-array p1, p1, [Ljava/lang/Object;</span>
+<span class="">	const/4 p2, 0x0</span>
+<span class="">	aput-object p5, p1, p2</span>
+<span class="">	const-string p2, "Stubbing intent %s"</span>
+<span class="">	invoke-static {p2, p1}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-static {v0, p1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	invoke-super/range {p0 .. p7}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->execStartActivity(Landroid/content/Context;Landroid/os/IBinder;Landroid/os/IBinder;Landroid/app/Fragment;Landroid/content/Intent;ILandroid/os/Bundle;)Landroid/app/Instrumentation$ActivityResult;</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public execStartActivity(Landroid/content/Context;Landroid/os/IBinder;Landroid/os/IBinder;Ljava/lang/String;Landroid/content/Intent;ILandroid/os/Bundle;)Landroid/app/Instrumentation$ActivityResult;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"who",</span>
+<span class="">	"contextThread",</span>
+<span class="">	"token",</span>
+<span class="">	"target",</span>
+<span class="">	"intent",</span>
+<span class="">	"requestCode",</span>
+<span class="">	"options"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->intentMonitor:Landroidx/test/internal/runner/intent/IntentMonitorImpl;</span>
+<span class="">	invoke-virtual {v0, p5}, Landroidx/test/internal/runner/intent/IntentMonitorImpl;->signalIntent(Landroid/content/Intent;)V</span>
+<span class="">	invoke-direct {p0, p5}, Landroidx/test/runner/MonitoringInstrumentation;->stubResultFor(Landroid/content/Intent;)Landroid/app/Instrumentation$ActivityResult;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const/4 p1, 0x1</span>
+<span class="">	new-array p1, p1, [Ljava/lang/Object;</span>
+<span class="">	const/4 p2, 0x0</span>
+<span class="">	aput-object p5, p1, p2</span>
+<span class="">	const-string p2, "Stubbing intent %s"</span>
+<span class="">	invoke-static {p2, p1}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string p2, "MonitoringInstr"</span>
+<span class="">	invoke-static {p2, p1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	invoke-super/range {p0 .. p7}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->execStartActivity(Landroid/content/Context;Landroid/os/IBinder;Landroid/os/IBinder;Ljava/lang/String;Landroid/content/Intent;ILandroid/os/Bundle;)Landroid/app/Instrumentation$ActivityResult;</span>
+<span class="">	:cond_0</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public finish(ILandroid/os/Bundle;)V
+<span class="">	.locals 7</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"resultCode",</span>
+<span class="">	"results"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-boolean v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->finished:Z</span>
+<span class="">	const-string v1, "MonitoringInstr"</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	const-string p1, "finish called 2x!"</span>
+<span class="">	invoke-static {v1, p1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	:cond_0</span>
+<span class="">	iput-boolean v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->finished:Z</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->shouldWaitForActivitiesToComplete()Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_1</span>
+<span class="">	iget-object v2, p0, Landroidx/test/runner/MonitoringInstrumentation;->handlerForMainLooper:Landroid/os/Handler;</span>
+<span class="">	new-instance v3, Landroidx/test/runner/MonitoringInstrumentation$ActivityFinisher;</span>
+<span class="">	invoke-direct {v3, p0}, Landroidx/test/runner/MonitoringInstrumentation$ActivityFinisher;-><init>(Landroidx/test/runner/MonitoringInstrumentation;)V</span>
+<span class="">	invoke-virtual {v2, v3}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z</span>
+<span class="">	invoke-static {}, Ljava/lang/System;->currentTimeMillis()J</span>
+<span class="">	move-result-wide v2</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->waitForActivitiesToComplete()V</span>
+<span class="">	invoke-static {}, Ljava/lang/System;->currentTimeMillis()J</span>
+<span class="">	move-result-wide v4</span>
+<span class="">	new-array v0, v0, [Ljava/lang/Object;</span>
+<span class="">	const/4 v6, 0x0</span>
+<span class="">	sub-long/2addr v4, v2</span>
+<span class="">	invoke-static {v4, v5}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	aput-object v2, v0, v6</span>
+<span class="">	const-string v2, "waitForActivitiesToComplete() took: %sms"</span>
+<span class="">	invoke-static {v2, v0}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v1, v0}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-static {v0}, Landroidx/test/runner/lifecycle/ActivityLifecycleMonitorRegistry;->registerInstance(Landroidx/test/runner/lifecycle/ActivityLifecycleMonitor;)V</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->restoreUncaughtExceptionHandler()V</span>
+<span class="">	invoke-super {p0, p1, p2}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->finish(ILandroid/os/Bundle;)V</span>
+.end method
+
+.method protected getThreadState()Ljava/lang/String;
+<span class="">	.locals 9</span>
+
+<span class="">	invoke-static {}, Ljava/lang/Thread;->getAllStackTraces()Ljava/util/Map;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Map;->entrySet()Ljava/util/Set;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	new-instance v1, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Set;->iterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:goto_0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_1</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, Ljava/util/Map$Entry;</span>
+<span class="">	new-instance v3, Ljava/lang/StringBuilder;</span>
+<span class="">	const-string v4, "  "</span>
+<span class="">	invoke-direct {v3, v4}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {v2}, Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	const-string v4, "\n"</span>
+<span class="">	invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-interface {v2}, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	check-cast v2, [Ljava/lang/StackTraceElement;</span>
+<span class="">	array-length v5, v2</span>
+<span class="">	const/4 v6, 0x0</span>
+<span class="">	:goto_1</span>
+<span class="">	if-ge v6, v5, :cond_0</span>
+<span class="">	aget-object v7, v2, v6</span>
+<span class="">	const-string v8, "    "</span>
+<span class="">	invoke-virtual {v3, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v7}, Ljava/lang/StackTraceElement;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v7</span>
+<span class="">	invoke-virtual {v3, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	add-int/lit8 v6, v6, 0x1</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+.end method
+
+.method protected installMultidex()V
+<span class="">	.locals 10</span>
+
+<span class="">	const-string v0, "multidex is available at runtime, but calling it failed."</span>
+<span class="">	const-string v1, "No multidex."</span>
+<span class="">	const-string v2, "MonitoringInstr"</span>
+<span class="">	sget v3, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v4, 0x15</span>
+<span class="">	if-ge v3, v4, :cond_0</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-static {}, Landroidx/test/runner/MonitoringInstrumentation;->getMultiDexClass()Ljava/lang/Class;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	:try_start_1</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/ClassNotFoundException; {:try_start_0 .. :try_end_0} :catch_4</span>
+<span class="">	.catch Ljava/lang/NoSuchMethodException; {:try_start_0 .. :try_end_0} :catch_3</span>
+<span class="">	.catch Ljava/lang/reflect/InvocationTargetException; {:try_start_0 .. :try_end_0} :catch_2</span>
+<span class="">	.catch Ljava/lang/IllegalAccessException; {:try_start_0 .. :try_end_0} :catch_1</span>
+<span class="">	const-string v4, "installInstrumentation"</span>
+<span class="">	const/4 v5, 0x2</span>
+<span class="">	new-array v6, v5, [Ljava/lang/Class;</span>
+<span class="">	const-class v7, Landroid/content/Context;</span>
+<span class="">	const/4 v8, 0x0</span>
+<span class="">	aput-object v7, v6, v8</span>
+<span class="">	const-class v7, Landroid/content/Context;</span>
+<span class="">	const/4 v9, 0x1</span>
+<span class="">	aput-object v7, v6, v9</span>
+<span class="">	invoke-virtual {v3, v4, v6}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	const/4 v6, 0x0</span>
+<span class="">	new-array v5, v5, [Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->getContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v7</span>
+<span class="">	aput-object v7, v5, v8</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->getTargetContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v7</span>
+<span class="">	aput-object v7, v5, v9</span>
+<span class="">	invoke-virtual {v4, v6, v5}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	:try_end_1</span>
+<span class="">	.catch Ljava/lang/NoSuchMethodException; {:try_start_1 .. :try_end_1} :catch_0</span>
+<span class="">	.catch Ljava/lang/ClassNotFoundException; {:try_start_1 .. :try_end_1} :catch_4</span>
+<span class="">	.catch Ljava/lang/reflect/InvocationTargetException; {:try_start_1 .. :try_end_1} :catch_2</span>
+<span class="">	.catch Ljava/lang/IllegalAccessException; {:try_start_1 .. :try_end_1} :catch_1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:try_start_2</span>
+<span class="">	:catch_0</span>
+<span class="">	const-string v4, "Could not find MultiDex.installInstrumentation. Calling MultiDex.install instead. Is an old version of the multidex library being used? If test app is using multidex, classes might not be found"</span>
+<span class="">	invoke-static {v2, v4}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	invoke-virtual {p0, v3}, Landroidx/test/runner/MonitoringInstrumentation;->installOldMultiDex(Ljava/lang/Class;)V</span>
+<span class="">	:try_end_2</span>
+<span class="">	.catch Ljava/lang/ClassNotFoundException; {:try_start_2 .. :try_end_2} :catch_4</span>
+<span class="">	.catch Ljava/lang/NoSuchMethodException; {:try_start_2 .. :try_end_2} :catch_3</span>
+<span class="">	.catch Ljava/lang/reflect/InvocationTargetException; {:try_start_2 .. :try_end_2} :catch_2</span>
+<span class="">	.catch Ljava/lang/IllegalAccessException; {:try_start_2 .. :try_end_2} :catch_1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catch_1</span>
+<span class="">	move-exception v1</span>
+<span class="">	new-instance v2, Ljava/lang/RuntimeException;</span>
+<span class="">	invoke-direct {v2, v0, v1}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V</span>
+<span class="">	throw v2</span>
+<span class="">	:catch_2</span>
+<span class="">	move-exception v1</span>
+<span class="">	new-instance v2, Ljava/lang/RuntimeException;</span>
+<span class="">	invoke-direct {v2, v0, v1}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V</span>
+<span class="">	throw v2</span>
+<span class="">	:catch_3</span>
+<span class="">	move-exception v0</span>
+<span class="">	invoke-static {v2, v1, v0}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catch_4</span>
+<span class="">	invoke-static {v2, v1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	:goto_0</span>
+<span class="">	:cond_0</span>
+.end method
+
+.method protected installOldMultiDex(Ljava/lang/Class;)V
+<span class="">	.locals 4</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/lang/NoSuchMethodException;,</span>
+<span class="">	Ljava/lang/reflect/InvocationTargetException;,</span>
+<span class="">	Ljava/lang/IllegalAccessException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"*>;)V"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"multidexClass"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	new-array v1, v0, [Ljava/lang/Class;</span>
+<span class="">	const-class v2, Landroid/content/Context;</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	aput-object v2, v1, v3</span>
+<span class="">	const-string v2, "install"</span>
+<span class="">	invoke-virtual {p1, v2, v1}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	new-array v0, v0, [Ljava/lang/Object;</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->getTargetContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	aput-object v1, v0, v3</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-virtual {p1, v1, v0}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;</span>
+.end method
+
+.method public interceptActivityUsing(Landroidx/test/runner/intercepting/InterceptingActivityFactory;)V
+<span class="">	.locals 0</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"interceptingActivityFactory"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {p1}, Landroidx/test/internal/util/Checks;->checkNotNull(Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	iput-object p1, p0, Landroidx/test/runner/MonitoringInstrumentation;->interceptingActivityFactory:Landroidx/test/runner/intercepting/InterceptingActivityFactory;</span>
+.end method
+
+.method protected final isPrimaryInstrProcess()Z
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Landroidx/test/runner/MonitoringInstrumentation;->isOriginalInstrumentationProcess()Z</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method protected isPrimaryInstrProcess(Ljava/lang/String;)Z
+<span class="">	.locals 0</span>
+<span class="">	.annotation runtime Ljava/lang/Deprecated;</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"argsProcessName"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->isPrimaryInstrProcess()Z</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public newActivity(Ljava/lang/Class;Landroid/content/Context;Landroid/os/IBinder;Landroid/app/Application;Landroid/content/Intent;Landroid/content/pm/ActivityInfo;Ljava/lang/CharSequence;Landroid/app/Activity;Ljava/lang/String;Ljava/lang/Object;)Landroid/app/Activity;
+<span class="">	.locals 4</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/lang/InstantiationException;,</span>
+<span class="">	Ljava/lang/IllegalAccessException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/Signature;</span>
+<span class="">	value = {</span>
+<span class="">	"(",</span>
+<span class="">	"Ljava/lang/Class<",</span>
+<span class="">	"*>;",</span>
+<span class="">	"Landroid/content/Context;",</span>
+<span class="">	"Landroid/os/IBinder;",</span>
+<span class="">	"Landroid/app/Application;",</span>
+<span class="">	"Landroid/content/Intent;",</span>
+<span class="">	"Landroid/content/pm/ActivityInfo;",</span>
+<span class="">	"Ljava/lang/CharSequence;",</span>
+<span class="">	"Landroid/app/Activity;",</span>
+<span class="">	"Ljava/lang/String;",</span>
+<span class="">	"Ljava/lang/Object;",</span>
+<span class="">	")",</span>
+<span class="">	"Landroid/app/Activity;"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"clazz",</span>
+<span class="">	"context",</span>
+<span class="">	"token",</span>
+<span class="">	"application",</span>
+<span class="">	"intent",</span>
+<span class="">	"info",</span>
+<span class="">	"title",</span>
+<span class="">	"parent",</span>
+<span class="">	"id",</span>
+<span class="">	"lastNonConfigurationInstance"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-virtual {p1}, Ljava/lang/Class;->getPackage()Ljava/lang/Package;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Package;->getName()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {p2}, Landroid/content/Context;->getPackageName()Ljava/lang/String;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {p5}, Landroid/content/Intent;->getComponent()Landroid/content/ComponentName;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-virtual {v2}, Landroid/content/ComponentName;->getPackageName()Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {v1, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v3</span>
+<span class="">	if-nez v3, :cond_0</span>
+<span class="">	invoke-virtual {v2}, Landroid/content/ComponentName;->getPackageName()Ljava/lang/String;</span>
+<span class="">	move-result-object v3</span>
+<span class="">	invoke-virtual {v0, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	new-instance v0, Landroid/content/ComponentName;</span>
+<span class="">	invoke-virtual {v2}, Landroid/content/ComponentName;->getClassName()Ljava/lang/String;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	invoke-direct {v0, v1, v2}, Landroid/content/ComponentName;-><init>(Ljava/lang/String;Ljava/lang/String;)V</span>
+<span class="">	invoke-virtual {p5, v0}, Landroid/content/Intent;->setComponent(Landroid/content/ComponentName;)Landroid/content/Intent;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-super/range {p0 .. p10}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->newActivity(Ljava/lang/Class;Landroid/content/Context;Landroid/os/IBinder;Landroid/app/Application;Landroid/content/Intent;Landroid/content/pm/ActivityInfo;Ljava/lang/CharSequence;Landroid/app/Activity;Ljava/lang/String;Ljava/lang/Object;)Landroid/app/Activity;</span>
+<span class="">	move-result-object p1</span>
+.end method
+
+.method public newActivity(Ljava/lang/ClassLoader;Ljava/lang/String;Landroid/content/Intent;)Landroid/app/Activity;
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/Throws;</span>
+<span class="">	value = {</span>
+<span class="">	Ljava/lang/InstantiationException;,</span>
+<span class="">	Ljava/lang/IllegalAccessException;,</span>
+<span class="">	Ljava/lang/ClassNotFoundException;</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"cl",</span>
+<span class="">	"className",</span>
+<span class="">	"intent"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->interceptingActivityFactory:Landroidx/test/runner/intercepting/InterceptingActivityFactory;</span>
+<span class="">	invoke-interface {v0, p1, p2, p3}, Landroidx/test/runner/intercepting/InterceptingActivityFactory;->shouldIntercept(Ljava/lang/ClassLoader;Ljava/lang/String;Landroid/content/Intent;)Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->interceptingActivityFactory:Landroidx/test/runner/intercepting/InterceptingActivityFactory;</span>
+<span class="">	invoke-interface {v0, p1, p2, p3}, Landroidx/test/runner/intercepting/InterceptingActivityFactory;->create(Ljava/lang/ClassLoader;Ljava/lang/String;Landroid/content/Intent;)Landroid/app/Activity;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-super {p0, p1, p2, p3}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->newActivity(Ljava/lang/ClassLoader;Ljava/lang/String;Landroid/content/Intent;)Landroid/app/Activity;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public onCreate(Landroid/os/Bundle;)V
+<span class="">	.locals 10</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"arguments"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const-string v0, "MonitoringInstr"</span>
+<span class="">	const-string v1, "Instrumentation started!"</span>
+<span class="">	invoke-static {v0, v1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	invoke-direct {p0}, Landroidx/test/runner/MonitoringInstrumentation;->logUncaughtExceptions()V</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->installMultidex()V</span>
+<span class="">	invoke-static {p0, p1}, Landroidx/test/platform/app/InstrumentationRegistry;->registerInstance(Landroid/app/Instrumentation;Landroid/os/Bundle;)V</span>
+<span class="">	invoke-static {p0, p1}, Landroidx/test/InstrumentationRegistry;->registerInstance(Landroid/app/Instrumentation;Landroid/os/Bundle;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->lifecycleMonitor:Landroidx/test/internal/runner/lifecycle/ActivityLifecycleMonitorImpl;</span>
+<span class="">	invoke-static {v0}, Landroidx/test/runner/lifecycle/ActivityLifecycleMonitorRegistry;->registerInstance(Landroidx/test/runner/lifecycle/ActivityLifecycleMonitor;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->applicationMonitor:Landroidx/test/internal/runner/lifecycle/ApplicationLifecycleMonitorImpl;</span>
+<span class="">	invoke-static {v0}, Landroidx/test/runner/lifecycle/ApplicationLifecycleMonitorRegistry;->registerInstance(Landroidx/test/runner/lifecycle/ApplicationLifecycleMonitor;)V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->intentMonitor:Landroidx/test/internal/runner/intent/IntentMonitorImpl;</span>
+<span class="">	invoke-static {v0}, Landroidx/test/runner/intent/IntentMonitorRegistry;->registerInstance(Landroidx/test/runner/intent/IntentMonitor;)V</span>
+<span class="">	new-instance v0, Landroid/os/Handler;</span>
+<span class="">	invoke-static {}, Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-direct {v0, v1}, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V</span>
+<span class="">	iput-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->handlerForMainLooper:Landroid/os/Handler;</span>
+<span class="">	new-instance v0, Ljava/util/concurrent/ThreadPoolExecutor;</span>
+<span class="">	sget-object v7, Ljava/util/concurrent/TimeUnit;->SECONDS:Ljava/util/concurrent/TimeUnit;</span>
+<span class="">	new-instance v8, Ljava/util/concurrent/SynchronousQueue;</span>
+<span class="">	invoke-direct {v8}, Ljava/util/concurrent/SynchronousQueue;-><init>()V</span>
+<span class="">	new-instance v9, Landroidx/test/runner/MonitoringInstrumentation$2;</span>
+<span class="">	invoke-direct {v9, p0}, Landroidx/test/runner/MonitoringInstrumentation$2;-><init>(Landroidx/test/runner/MonitoringInstrumentation;)V</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	const v4, 0x7fffffff</span>
+<span class="">	const-wide/16 v5, 0x0</span>
+<span class="">	move-object v2, v0</span>
+<span class="">	invoke-direct/range {v2 .. v9}, Ljava/util/concurrent/ThreadPoolExecutor;-><init>(IIJLjava/util/concurrent/TimeUnit;Ljava/util/concurrent/BlockingQueue;Ljava/util/concurrent/ThreadFactory;)V</span>
+<span class="">	iput-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->executorService:Ljava/util/concurrent/ExecutorService;</span>
+<span class="">	invoke-static {}, Landroid/os/Looper;->myQueue()Landroid/os/MessageQueue;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Landroidx/test/runner/MonitoringInstrumentation;->idleHandler:Landroid/os/MessageQueue$IdleHandler;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V</span>
+<span class="">	invoke-super {p0, p1}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->onCreate(Landroid/os/Bundle;)V</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->specifyDexMakerCacheProperty()V</span>
+<span class="">	invoke-direct {p0}, Landroidx/test/runner/MonitoringInstrumentation;->setupDexmakerClassloader()V</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->useDefaultInterceptingActivityFactory()V</span>
+.end method
+
+.method public onDestroy()V
+<span class="">	.locals 2</span>
+
+<span class="">	const-string v0, "MonitoringInstr"</span>
+<span class="">	const-string v1, "Instrumentation Finished!"</span>
+<span class="">	invoke-static {v0, v1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	invoke-static {}, Landroid/os/Looper;->myQueue()Landroid/os/MessageQueue;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Landroidx/test/runner/MonitoringInstrumentation;->idleHandler:Landroid/os/MessageQueue$IdleHandler;</span>
+<span class="">	invoke-virtual {v0, v1}, Landroid/os/MessageQueue;->removeIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V</span>
+<span class="">	invoke-static {}, Landroidx/test/internal/runner/InstrumentationConnection;->getInstance()Landroidx/test/internal/runner/InstrumentationConnection;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Landroidx/test/internal/runner/InstrumentationConnection;->terminate()V</span>
+<span class="">	invoke-super {p0}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->onDestroy()V</span>
+.end method
+
+.method public onException(Ljava/lang/Object;Ljava/lang/Throwable;)Z
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0,</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"obj",</span>
+<span class="">	"e"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	new-array v0, v0, [Ljava/lang/Object;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	aput-object p1, v0, v1</span>
+<span class="">	const-string v1, "Exception encountered by: %s. Dumping thread state to outputs and pining for the fjords."</span>
+<span class="">	invoke-static {v1, v0}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v1, "MonitoringInstr"</span>
+<span class="">	invoke-static {v1, v0, p2}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I</span>
+<span class="">	const-string v0, "ThreadState-onException.txt"</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/test/runner/MonitoringInstrumentation;->dumpThreadStateToOutputs(Ljava/lang/String;)V</span>
+<span class="">	const-string v0, "Dying now..."</span>
+<span class="">	invoke-static {v1, v0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	invoke-super {p0, p1, p2}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->onException(Ljava/lang/Object;Ljava/lang/Throwable;)Z</span>
+<span class="">	move-result p1</span>
+.end method
+
+.method public onStart()V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-super {p0}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->onStart()V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->jsBridgeClassName:Ljava/lang/String;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	invoke-direct {p0, v0}, Landroidx/test/runner/MonitoringInstrumentation;->tryLoadingJsBridge(Ljava/lang/String;)V</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->waitForIdleSync()V</span>
+<span class="">	invoke-direct {p0}, Landroidx/test/runner/MonitoringInstrumentation;->setupDexmakerClassloader()V</span>
+<span class="">	invoke-static {}, Landroidx/test/internal/runner/InstrumentationConnection;->getInstance()Landroidx/test/internal/runner/InstrumentationConnection;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	new-instance v1, Landroidx/test/runner/MonitoringInstrumentation$ActivityFinisher;</span>
+<span class="">	invoke-direct {v1, p0}, Landroidx/test/runner/MonitoringInstrumentation$ActivityFinisher;-><init>(Landroidx/test/runner/MonitoringInstrumentation;)V</span>
+<span class="">	invoke-virtual {v0, p0, v1}, Landroidx/test/internal/runner/InstrumentationConnection;->init(Landroid/app/Instrumentation;Landroidx/test/runner/MonitoringInstrumentation$ActivityFinisher;)V</span>
+.end method
+
+.method protected restoreUncaughtExceptionHandler()V
+<span class="">	.locals 2</span>
+
+<span class="">	invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	iget-object v1, p0, Landroidx/test/runner/MonitoringInstrumentation;->standardHandler:Ljava/lang/Thread$UncaughtExceptionHandler;</span>
+<span class="">	invoke-virtual {v0, v1}, Ljava/lang/Thread;->setUncaughtExceptionHandler(Ljava/lang/Thread$UncaughtExceptionHandler;)V</span>
+.end method
+
+.method public runOnMainSync(Ljava/lang/Runnable;)V
+<span class="">	.locals 2</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x0</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"runnable"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	new-instance v0, Ljava/util/concurrent/FutureTask;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-direct {v0, p1, v1}, Ljava/util/concurrent/FutureTask;-><init>(Ljava/lang/Runnable;Ljava/lang/Object;)V</span>
+<span class="">	invoke-super {p0, v0}, Landroidx/test/internal/runner/hidden/ExposedInstrumentationApi;->runOnMainSync(Ljava/lang/Runnable;)V</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/concurrent/FutureTask;->get()Ljava/lang/Object;</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/InterruptedException; {:try_start_0 .. :try_end_0} :catch_1</span>
+<span class="">	.catch Ljava/util/concurrent/ExecutionException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catch_0</span>
+<span class="">	invoke-virtual {p1}, Ljava/util/concurrent/ExecutionException;->getCause()Ljava/lang/Throwable;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	instance-of v0, p1, Ljava/lang/RuntimeException;</span>
+<span class="">	if-nez v0, :cond_1</span>
+<span class="">	instance-of v0, p1, Ljava/lang/Error;</span>
+<span class="">	if-eqz v0, :cond_0</span>
+<span class="">	check-cast p1, Ljava/lang/Error;</span>
+<span class="">	throw p1</span>
+<span class="">	new-instance v0, Ljava/lang/RuntimeException;</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-direct {v0, p1}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/Throwable;)V</span>
+<span class="">	throw v0</span>
+<span class="">	check-cast p1, Ljava/lang/RuntimeException;</span>
+<span class="">	:cond_1</span>
+<span class="">	throw p1</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catch_1</span>
+<span class="">	new-instance v0, Ljava/lang/RuntimeException;</span>
+<span class="">	invoke-direct {v0, p1}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/Throwable;)V</span>
+<span class="">	throw v0</span>
+.end method
+
+.method protected final setJsBridgeClassName(Ljava/lang/String;)V
+<span class="">	.locals 1</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x10</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"className"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	const-string v0, "JsBridge class name cannot be null!"</span>
+<span class="">	invoke-static {p1, v0}, Ljava/util/Objects;->requireNonNull(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->isJsBridgeLoaded:Ljava/util/concurrent/atomic/AtomicBoolean;</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicBoolean;->get()Z</span>
+<span class="">	move-result v0</span>
+<span class="">	if-nez v0, :cond_0</span>
+<span class="">	iput-object p1, p0, Landroidx/test/runner/MonitoringInstrumentation;->jsBridgeClassName:Ljava/lang/String;</span>
+<span class="">	new-instance p1, Ljava/lang/IllegalStateException;</span>
+<span class="">	:cond_0</span>
+<span class="">	const-string v0, "JsBridge is already loaded!"</span>
+<span class="">	invoke-direct {p1, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw p1</span>
+.end method
+
+.method protected shouldWaitForActivitiesToComplete()Z
+<span class="">	.locals 3</span>
+
+<span class="">	invoke-static {}, Landroidx/test/platform/app/InstrumentationRegistry;->getArguments()Landroid/os/Bundle;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v1, "waitForActivitiesToComplete"</span>
+<span class="">	const-string v2, "true"</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Landroid/os/Bundle;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v0}, Ljava/lang/Boolean;->parseBoolean(Ljava/lang/String;)Z</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method protected specifyDexMakerCacheProperty()V
+<span class="">	.locals 3</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/test/runner/MonitoringInstrumentation;->getTargetContext()Landroid/content/Context;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v1, "dxmaker_cache"</span>
+<span class="">	const/4 v2, 0x0</span>
+<span class="">	invoke-virtual {v0, v1, v2}, Landroid/content/Context;->getDir(Ljava/lang/String;I)Ljava/io/File;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {}, Ljava/lang/System;->getProperties()Ljava/util/Properties;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	invoke-virtual {v0}, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	const-string v2, "dexmaker.dexcache"</span>
+<span class="">	invoke-virtual {v1, v2, v0}, Ljava/util/Properties;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+.end method
+
+.method public startActivitySync(Landroid/content/Intent;)Landroid/app/Activity;
+<span class="">	.locals 8</span>
+<span class="">	.annotation system Ldalvik/annotation/MethodParameters;</span>
+<span class="">	accessFlags = {</span>
+<span class="">	0x10</span>
+<span class="">	}</span>
+<span class="">	names = {</span>
+<span class="">	"intent"</span>
+<span class="">	}</span>
+<span class="">	.end annotation</span>
+
+<span class="">	invoke-static {}, Landroidx/test/internal/util/Checks;->checkNotMainThread()V</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->lastIdleTime:Ljava/util/concurrent/atomic/AtomicLong;</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicLong;->get()J</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	iget-object v2, p0, Landroidx/test/runner/MonitoringInstrumentation;->anActivityHasBeenLaunched:Ljava/util/concurrent/atomic/AtomicBoolean;</span>
+<span class="">	const/4 v3, 0x0</span>
+<span class="">	const/4 v4, 0x1</span>
+<span class="">	invoke-virtual {v2, v3, v4}, Ljava/util/concurrent/atomic/AtomicBoolean;->compareAndSet(ZZ)Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_0</span>
+<span class="">	const/high16 v2, 0x4000000</span>
+<span class="">	invoke-virtual {p1, v2}, Landroid/content/Intent;->addFlags(I)Landroid/content/Intent;</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-object v2, p0, Landroidx/test/runner/MonitoringInstrumentation;->executorService:Ljava/util/concurrent/ExecutorService;</span>
+<span class="">	new-instance v5, Landroidx/test/runner/MonitoringInstrumentation$4;</span>
+<span class="">	invoke-direct {v5, p0, p1}, Landroidx/test/runner/MonitoringInstrumentation$4;-><init>(Landroidx/test/runner/MonitoringInstrumentation;Landroid/content/Intent;)V</span>
+<span class="">	invoke-interface {v2, v5}, Ljava/util/concurrent/ExecutorService;->submit(Ljava/util/concurrent/Callable;)Ljava/util/concurrent/Future;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	:try_start_0</span>
+<span class="">	invoke-static {}, Landroidx/test/internal/platform/app/ActivityLifecycleTimeout;->getMillis()J</span>
+<span class="">	move-result-wide v5</span>
+<span class="">	sget-object v7, Ljava/util/concurrent/TimeUnit;->MILLISECONDS:Ljava/util/concurrent/TimeUnit;</span>
+<span class="">	invoke-interface {v2, v5, v6, v7}, Ljava/util/concurrent/Future;->get(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;</span>
+<span class="">	move-result-object v5</span>
+<span class="">	check-cast v5, Landroid/app/Activity;</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/util/concurrent/TimeoutException; {:try_start_0 .. :try_end_0} :catch_2</span>
+<span class="">	.catch Ljava/util/concurrent/ExecutionException; {:try_start_0 .. :try_end_0} :catch_1</span>
+<span class="">	.catch Ljava/lang/InterruptedException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catch_0</span>
+<span class="">	invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Ljava/lang/Thread;->interrupt()V</span>
+<span class="">	new-instance v0, Ljava/lang/RuntimeException;</span>
+<span class="">	const-string v1, "interrupted"</span>
+<span class="">	invoke-direct {v0, v1, p1}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V</span>
+<span class="">	throw v0</span>
+<span class="">	move-exception p1</span>
+<span class="">	:catch_1</span>
+<span class="">	new-instance v0, Ljava/lang/RuntimeException;</span>
+<span class="">	invoke-virtual {p1}, Ljava/util/concurrent/ExecutionException;->getCause()Ljava/lang/Throwable;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	const-string v1, "Could not launch activity"</span>
+<span class="">	invoke-direct {v0, v1, p1}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V</span>
+<span class="">	throw v0</span>
+<span class="">	const-string v5, "ThreadState-startActivityTimeout.txt"</span>
+<span class="">	:catch_2</span>
+<span class="">	invoke-virtual {p0, v5}, Landroidx/test/runner/MonitoringInstrumentation;->dumpThreadStateToOutputs(Ljava/lang/String;)V</span>
+<span class="">	invoke-interface {v2, v4}, Ljava/util/concurrent/Future;->cancel(Z)Z</span>
+<span class="">	new-instance v2, Ljava/lang/RuntimeException;</span>
+<span class="">	const/4 v5, 0x4</span>
+<span class="">	new-array v5, v5, [Ljava/lang/Object;</span>
+<span class="">	aput-object p1, v5, v3</span>
+<span class="">	invoke-static {}, Landroidx/test/internal/platform/app/ActivityLifecycleTimeout;->getMillis()J</span>
+<span class="">	move-result-wide v6</span>
+<span class="">	invoke-static {v6, v7}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	aput-object p1, v5, v4</span>
+<span class="">	const/4 p1, 0x2</span>
+<span class="">	invoke-static {v0, v1}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	aput-object v0, v5, p1</span>
+<span class="">	const/4 p1, 0x3</span>
+<span class="">	iget-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->lastIdleTime:Ljava/util/concurrent/atomic/AtomicLong;</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicLong;->get()J</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	invoke-static {v0, v1}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	aput-object v0, v5, p1</span>
+<span class="">	const-string p1, "Could not launch intent %s within %s milliseconds. Perhaps the main thread has not gone idle within a reasonable amount of time? There could be an animation or something constantly repainting the screen. Or the activity is doing network calls on creation? See the threaddump logs. For your reference the last time the event queue was idle before your activity launch request was %s and now the last time the queue went idle was: %s. If these numbers are the same your activity might be hogging the event queue."</span>
+<span class="">	invoke-static {p1, v5}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	invoke-direct {v2, p1}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw v2</span>
+.end method
+
+.method public useDefaultInterceptingActivityFactory()V
+<span class="">	.locals 1</span>
+
+<span class="">	new-instance v0, Landroidx/test/internal/runner/intercepting/DefaultInterceptingActivityFactory;</span>
+<span class="">	invoke-direct {v0}, Landroidx/test/internal/runner/intercepting/DefaultInterceptingActivityFactory;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/test/runner/MonitoringInstrumentation;->interceptingActivityFactory:Landroidx/test/runner/intercepting/InterceptingActivityFactory;</span>
+.end method
+
+.method protected waitForActivitiesToComplete()V
+<span class="">	.locals 6</span>
+
+<span class="">	invoke-static {}, Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {}, Landroid/os/Looper;->myLooper()Landroid/os/Looper;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	if-eq v0, v1, :cond_2</span>
+<span class="">	invoke-static {}, Ljava/lang/System;->currentTimeMillis()J</span>
+<span class="">	move-result-wide v0</span>
+<span class="">	sget-wide v2, Landroidx/test/runner/MonitoringInstrumentation;->MILLIS_TO_WAIT_FOR_ACTIVITY_TO_STOP:J</span>
+<span class="">	add-long/2addr v0, v2</span>
+<span class="">	iget-object v2, p0, Landroidx/test/runner/MonitoringInstrumentation;->startedActivityCounter:Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	invoke-virtual {v2}, Ljava/util/concurrent/atomic/AtomicInteger;->get()I</span>
+<span class="">	move-result v2</span>
+<span class="">	:goto_0</span>
+<span class="">	const-string v3, "MonitoringInstr"</span>
+<span class="">	if-lez v2, :cond_0</span>
+<span class="">	invoke-static {}, Ljava/lang/System;->currentTimeMillis()J</span>
+<span class="">	move-result-wide v4</span>
+<span class="">	cmp-long v4, v4, v0</span>
+<span class="">	if-gez v4, :cond_0</span>
+<span class="">	const/16 v4, 0x25</span>
+<span class="">	:try_start_0</span>
+<span class="">	new-instance v5, Ljava/lang/StringBuilder;</span>
+<span class="">	invoke-direct {v5, v4}, Ljava/lang/StringBuilder;-><init>(I)V</span>
+<span class="">	const-string v4, "Unstopped activity count: "</span>
+<span class="">	invoke-virtual {v5, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v4, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;</span>
+<span class="">	move-result-object v4</span>
+<span class="">	invoke-static {v3, v4}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	sget-wide v4, Landroidx/test/runner/MonitoringInstrumentation;->MILLIS_TO_POLL_FOR_ACTIVITY_STOP:J</span>
+<span class="">	invoke-static {v4, v5}, Ljava/lang/Thread;->sleep(J)V</span>
+<span class="">	iget-object v4, p0, Landroidx/test/runner/MonitoringInstrumentation;->startedActivityCounter:Ljava/util/concurrent/atomic/AtomicInteger;</span>
+<span class="">	invoke-virtual {v4}, Ljava/util/concurrent/atomic/AtomicInteger;->get()I</span>
+<span class="">	move-result v2</span>
+<span class="">	:try_end_0</span>
+<span class="">	.catch Ljava/lang/InterruptedException; {:try_start_0 .. :try_end_0} :catch_0</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:catch_0</span>
+<span class="">	move-exception v0</span>
+<span class="">	const-string v1, "Abandoning activity wait due to interruption."</span>
+<span class="">	invoke-static {v3, v1, v0}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I</span>
+<span class="">	:cond_0</span>
+<span class="">	if-lez v2, :cond_1</span>
+<span class="">	const-string v0, "ThreadState-unstopped.txt"</span>
+<span class="">	invoke-virtual {p0, v0}, Landroidx/test/runner/MonitoringInstrumentation;->dumpThreadStateToOutputs(Ljava/lang/String;)V</span>
+<span class="">	const/4 v0, 0x2</span>
+<span class="">	new-array v0, v0, [Ljava/lang/Object;</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	aput-object v2, v0, v1</span>
+<span class="">	const/4 v1, 0x1</span>
+<span class="">	sget-wide v4, Landroidx/test/runner/MonitoringInstrumentation;->MILLIS_TO_WAIT_FOR_ACTIVITY_TO_STOP:J</span>
+<span class="">	invoke-static {v4, v5}, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;</span>
+<span class="">	move-result-object v2</span>
+<span class="">	aput-object v2, v0, v1</span>
+<span class="">	const-string v1, "Still %s activities active after waiting %s ms."</span>
+<span class="">	invoke-static {v1, v0}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-static {v3, v0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I</span>
+<span class="">	:cond_1</span>
+<span class="">	new-instance v0, Ljava/lang/IllegalStateException;</span>
+<span class="">	:cond_2</span>
+<span class="">	const-string v1, "Cannot be called from main thread!"</span>
+<span class="">	invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V</span>
+<span class="">	throw v0</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

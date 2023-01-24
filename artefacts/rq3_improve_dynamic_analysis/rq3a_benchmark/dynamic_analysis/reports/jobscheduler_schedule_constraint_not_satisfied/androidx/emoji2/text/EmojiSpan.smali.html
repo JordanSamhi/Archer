@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../index.html">lu.uni.trux.jobscheduler_schedule</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.emoji2.text</a></li>
+        <li><i class="ico ico-class"></i> EmojiSpan.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public abstract Landroidx/emoji2/text/EmojiSpan;
+.super Landroid/text/style/ReplacementSpan;
+.source "EmojiSpan.java"
+
+
+.field private mHeight:S
+.field private final mMetadata:Landroidx/emoji2/text/EmojiMetadata;
+.field private mRatio:F
+.field private final mTmpFontMetrics:Landroid/graphics/Paint$FontMetricsInt;
+.field private mWidth:S
+
+
+.method constructor <init>(Landroidx/emoji2/text/EmojiMetadata;)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Landroid/text/style/ReplacementSpan;-><init>()V</span>
+<span class="">	new-instance v0, Landroid/graphics/Paint$FontMetricsInt;</span>
+<span class="">	invoke-direct {v0}, Landroid/graphics/Paint$FontMetricsInt;-><init>()V</span>
+<span class="">	iput-object v0, p0, Landroidx/emoji2/text/EmojiSpan;->mTmpFontMetrics:Landroid/graphics/Paint$FontMetricsInt;</span>
+<span class="">	const/4 v0, -0x1</span>
+<span class="">	iput-short v0, p0, Landroidx/emoji2/text/EmojiSpan;->mWidth:S</span>
+<span class="">	iput-short v0, p0, Landroidx/emoji2/text/EmojiSpan;->mHeight:S</span>
+<span class="">	const/high16 v0, 0x3f800000    # 1.0f</span>
+<span class="">	iput v0, p0, Landroidx/emoji2/text/EmojiSpan;->mRatio:F</span>
+<span class="">	const-string v0, "metadata cannot be null"</span>
+<span class="">	invoke-static {p1, v0}, Landroidx/core/util/Preconditions;->checkNotNull(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</span>
+<span class="">	iput-object p1, p0, Landroidx/emoji2/text/EmojiSpan;->mMetadata:Landroidx/emoji2/text/EmojiMetadata;</span>
+.end method
+
+.method public final getHeight()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-short v0, p0, Landroidx/emoji2/text/EmojiSpan;->mHeight:S</span>
+.end method
+
+.method public final getId()I
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-virtual {p0}, Landroidx/emoji2/text/EmojiSpan;->getMetadata()Landroidx/emoji2/text/EmojiMetadata;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Landroidx/emoji2/text/EmojiMetadata;->getId()I</span>
+<span class="">	move-result v0</span>
+.end method
+
+.method public final getMetadata()Landroidx/emoji2/text/EmojiMetadata;
+<span class="">	.locals 1</span>
+
+<span class="">	iget-object v0, p0, Landroidx/emoji2/text/EmojiSpan;->mMetadata:Landroidx/emoji2/text/EmojiMetadata;</span>
+.end method
+
+.method final getRatio()F
+<span class="">	.locals 1</span>
+
+<span class="">	iget v0, p0, Landroidx/emoji2/text/EmojiSpan;->mRatio:F</span>
+.end method
+
+.method public getSize(Landroid/graphics/Paint;Ljava/lang/CharSequence;IILandroid/graphics/Paint$FontMetricsInt;)I
+<span class="">	.locals 0</span>
+
+<span class="">	iget-object p2, p0, Landroidx/emoji2/text/EmojiSpan;->mTmpFontMetrics:Landroid/graphics/Paint$FontMetricsInt;</span>
+<span class="">	invoke-virtual {p1, p2}, Landroid/graphics/Paint;->getFontMetricsInt(Landroid/graphics/Paint$FontMetricsInt;)I</span>
+<span class="">	iget-object p1, p0, Landroidx/emoji2/text/EmojiSpan;->mTmpFontMetrics:Landroid/graphics/Paint$FontMetricsInt;</span>
+<span class="">	iget p1, p1, Landroid/graphics/Paint$FontMetricsInt;->descent:I</span>
+<span class="">	iget-object p2, p0, Landroidx/emoji2/text/EmojiSpan;->mTmpFontMetrics:Landroid/graphics/Paint$FontMetricsInt;</span>
+<span class="">	iget p2, p2, Landroid/graphics/Paint$FontMetricsInt;->ascent:I</span>
+<span class="">	sub-int/2addr p1, p2</span>
+<span class="">	invoke-static {p1}, Ljava/lang/Math;->abs(I)I</span>
+<span class="">	move-result p1</span>
+<span class="">	int-to-float p1, p1</span>
+<span class="">	const/high16 p2, 0x3f800000    # 1.0f</span>
+<span class="">	mul-float/2addr p1, p2</span>
+<span class="">	iget-object p2, p0, Landroidx/emoji2/text/EmojiSpan;->mMetadata:Landroidx/emoji2/text/EmojiMetadata;</span>
+<span class="">	invoke-virtual {p2}, Landroidx/emoji2/text/EmojiMetadata;->getHeight()S</span>
+<span class="">	move-result p2</span>
+<span class="">	int-to-float p2, p2</span>
+<span class="">	div-float/2addr p1, p2</span>
+<span class="">	iput p1, p0, Landroidx/emoji2/text/EmojiSpan;->mRatio:F</span>
+<span class="">	iget-object p1, p0, Landroidx/emoji2/text/EmojiSpan;->mMetadata:Landroidx/emoji2/text/EmojiMetadata;</span>
+<span class="">	invoke-virtual {p1}, Landroidx/emoji2/text/EmojiMetadata;->getHeight()S</span>
+<span class="">	move-result p1</span>
+<span class="">	int-to-float p1, p1</span>
+<span class="">	iget p2, p0, Landroidx/emoji2/text/EmojiSpan;->mRatio:F</span>
+<span class="">	mul-float/2addr p1, p2</span>
+<span class="">	float-to-int p1, p1</span>
+<span class="">	int-to-short p1, p1</span>
+<span class="">	iput-short p1, p0, Landroidx/emoji2/text/EmojiSpan;->mHeight:S</span>
+<span class="">	iget-object p1, p0, Landroidx/emoji2/text/EmojiSpan;->mMetadata:Landroidx/emoji2/text/EmojiMetadata;</span>
+<span class="">	invoke-virtual {p1}, Landroidx/emoji2/text/EmojiMetadata;->getWidth()S</span>
+<span class="">	move-result p1</span>
+<span class="">	int-to-float p1, p1</span>
+<span class="">	iget p2, p0, Landroidx/emoji2/text/EmojiSpan;->mRatio:F</span>
+<span class="">	mul-float/2addr p1, p2</span>
+<span class="">	float-to-int p1, p1</span>
+<span class="">	int-to-short p1, p1</span>
+<span class="">	iput-short p1, p0, Landroidx/emoji2/text/EmojiSpan;->mWidth:S</span>
+<span class="">	if-eqz p5, :cond_0</span>
+<span class="">	iget-object p1, p0, Landroidx/emoji2/text/EmojiSpan;->mTmpFontMetrics:Landroid/graphics/Paint$FontMetricsInt;</span>
+<span class="">	iget p1, p1, Landroid/graphics/Paint$FontMetricsInt;->ascent:I</span>
+<span class="">	iput p1, p5, Landroid/graphics/Paint$FontMetricsInt;->ascent:I</span>
+<span class="">	iget-object p1, p0, Landroidx/emoji2/text/EmojiSpan;->mTmpFontMetrics:Landroid/graphics/Paint$FontMetricsInt;</span>
+<span class="">	iget p1, p1, Landroid/graphics/Paint$FontMetricsInt;->descent:I</span>
+<span class="">	iput p1, p5, Landroid/graphics/Paint$FontMetricsInt;->descent:I</span>
+<span class="">	iget-object p1, p0, Landroidx/emoji2/text/EmojiSpan;->mTmpFontMetrics:Landroid/graphics/Paint$FontMetricsInt;</span>
+<span class="">	iget p1, p1, Landroid/graphics/Paint$FontMetricsInt;->top:I</span>
+<span class="">	iput p1, p5, Landroid/graphics/Paint$FontMetricsInt;->top:I</span>
+<span class="">	iget-object p1, p0, Landroidx/emoji2/text/EmojiSpan;->mTmpFontMetrics:Landroid/graphics/Paint$FontMetricsInt;</span>
+<span class="">	iget p1, p1, Landroid/graphics/Paint$FontMetricsInt;->bottom:I</span>
+<span class="">	iput p1, p5, Landroid/graphics/Paint$FontMetricsInt;->bottom:I</span>
+<span class="">	:cond_0</span>
+<span class="">	iget-short p1, p0, Landroidx/emoji2/text/EmojiSpan;->mWidth:S</span>
+.end method
+
+.method final getWidth()I
+<span class="">	.locals 1</span>
+
+<span class="">	iget-short v0, p0, Landroidx/emoji2/text/EmojiSpan;->mWidth:S</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../.resources/report.js"></script>
+</body>
+</html>

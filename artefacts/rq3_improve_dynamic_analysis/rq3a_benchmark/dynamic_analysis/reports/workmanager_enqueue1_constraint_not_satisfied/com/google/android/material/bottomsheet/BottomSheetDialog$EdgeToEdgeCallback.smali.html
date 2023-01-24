@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../../../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../../../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../../../../index.html">lu.uni.trux.workmanager_enqueue1</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">com.google.android.material.bottomsheet</a></li>
+        <li><i class="ico ico-class"></i> BottomSheetDialog$EdgeToEdgeCallback.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class  Lcom/google/android/material/bottomsheet/BottomSheetDialog$EdgeToEdgeCallback;
+.super Lcom/google/android/material/bottomsheet/BottomSheetBehavior$BottomSheetCallback;
+.source "BottomSheetDialog.java"
+
+.annotation system Ldalvik/annotation/EnclosingClass;
+value = Lcom/google/android/material/bottomsheet/BottomSheetDialog;
+.end annotation
+.annotation system Ldalvik/annotation/InnerClass;
+accessFlags = 0xa
+name = "EdgeToEdgeCallback"
+.end annotation
+
+.field private final insetsCompat:Landroidx/core/view/WindowInsetsCompat;
+.field private final lightBottomSheet:Z
+.field private final lightStatusBar:Z
+
+
+.method private constructor <init>(Landroid/view/View;Landroidx/core/view/WindowInsetsCompat;)V
+<span class="">	.locals 1</span>
+
+<span class="">	invoke-direct {p0}, Lcom/google/android/material/bottomsheet/BottomSheetBehavior$BottomSheetCallback;-><init>()V</span>
+<span class="">	iput-object p2, p0, Lcom/google/android/material/bottomsheet/BottomSheetDialog$EdgeToEdgeCallback;->insetsCompat:Landroidx/core/view/WindowInsetsCompat;</span>
+<span class="">	sget p2, Landroid/os/Build$VERSION;->SDK_INT:I</span>
+<span class="">	const/16 v0, 0x17</span>
+<span class="">	if-lt p2, v0, :cond_0</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/View;->getSystemUiVisibility()I</span>
+<span class="">	move-result p2</span>
+<span class="">	and-int/lit16 p2, p2, 0x2000</span>
+<span class="">	if-eqz p2, :cond_0</span>
+<span class="">	const/4 p2, 0x1</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	const/4 p2, 0x0</span>
+<span class="">	:goto_0</span>
+<span class="">	iput-boolean p2, p0, Lcom/google/android/material/bottomsheet/BottomSheetDialog$EdgeToEdgeCallback;->lightStatusBar:Z</span>
+<span class="">	invoke-static {p1}, Lcom/google/android/material/bottomsheet/BottomSheetBehavior;->from(Landroid/view/View;)Lcom/google/android/material/bottomsheet/BottomSheetBehavior;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/bottomsheet/BottomSheetBehavior;->getMaterialShapeDrawable()Lcom/google/android/material/shape/MaterialShapeDrawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	invoke-virtual {v0}, Lcom/google/android/material/shape/MaterialShapeDrawable;->getFillColor()Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	goto :goto_1</span>
+<span class="">	:cond_1</span>
+<span class="">	invoke-static {p1}, Landroidx/core/view/ViewCompat;->getBackgroundTintList(Landroid/view/View;)Landroid/content/res/ColorStateList;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:goto_1</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	invoke-virtual {v0}, Landroid/content/res/ColorStateList;->getDefaultColor()I</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-static {p1}, Lcom/google/android/material/color/MaterialColors;->isColorLight(I)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	iput-boolean p1, p0, Lcom/google/android/material/bottomsheet/BottomSheetDialog$EdgeToEdgeCallback;->lightBottomSheet:Z</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_2</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/View;->getBackground()Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	instance-of v0, v0, Landroid/graphics/drawable/ColorDrawable;</span>
+<span class="">	if-eqz v0, :cond_3</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/View;->getBackground()Landroid/graphics/drawable/Drawable;</span>
+<span class="">	move-result-object p1</span>
+<span class="">	check-cast p1, Landroid/graphics/drawable/ColorDrawable;</span>
+<span class="">	invoke-virtual {p1}, Landroid/graphics/drawable/ColorDrawable;->getColor()I</span>
+<span class="">	move-result p1</span>
+<span class="">	invoke-static {p1}, Lcom/google/android/material/color/MaterialColors;->isColorLight(I)Z</span>
+<span class="">	move-result p1</span>
+<span class="">	iput-boolean p1, p0, Lcom/google/android/material/bottomsheet/BottomSheetDialog$EdgeToEdgeCallback;->lightBottomSheet:Z</span>
+<span class="">	goto :goto_2</span>
+<span class="">	:cond_3</span>
+<span class="">	iput-boolean p2, p0, Lcom/google/android/material/bottomsheet/BottomSheetDialog$EdgeToEdgeCallback;->lightBottomSheet:Z</span>
+<span class="">	:goto_2</span>
+.end method
+
+.method synthetic constructor <init>(Landroid/view/View;Landroidx/core/view/WindowInsetsCompat;Lcom/google/android/material/bottomsheet/BottomSheetDialog$1;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0, p1, p2}, Lcom/google/android/material/bottomsheet/BottomSheetDialog$EdgeToEdgeCallback;-><init>(Landroid/view/View;Landroidx/core/view/WindowInsetsCompat;)V</span>
+.end method
+
+.method private setPaddingForPosition(Landroid/view/View;)V
+<span class="">	.locals 4</span>
+
+<span class="">	invoke-virtual {p1}, Landroid/view/View;->getTop()I</span>
+<span class="">	move-result v0</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/bottomsheet/BottomSheetDialog$EdgeToEdgeCallback;->insetsCompat:Landroidx/core/view/WindowInsetsCompat;</span>
+<span class="">	invoke-virtual {v1}, Landroidx/core/view/WindowInsetsCompat;->getSystemWindowInsetTop()I</span>
+<span class="">	move-result v1</span>
+<span class="">	if-ge v0, v1, :cond_0</span>
+<span class="">	iget-boolean v0, p0, Lcom/google/android/material/bottomsheet/BottomSheetDialog$EdgeToEdgeCallback;->lightBottomSheet:Z</span>
+<span class="">	invoke-static {p1, v0}, Lcom/google/android/material/bottomsheet/BottomSheetDialog;->setLightStatusBar(Landroid/view/View;Z)V</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/View;->getPaddingLeft()I</span>
+<span class="">	move-result v0</span>
+<span class="">	iget-object v1, p0, Lcom/google/android/material/bottomsheet/BottomSheetDialog$EdgeToEdgeCallback;->insetsCompat:Landroidx/core/view/WindowInsetsCompat;</span>
+<span class="">	invoke-virtual {v1}, Landroidx/core/view/WindowInsetsCompat;->getSystemWindowInsetTop()I</span>
+<span class="">	move-result v1</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/View;->getTop()I</span>
+<span class="">	move-result v2</span>
+<span class="">	sub-int/2addr v1, v2</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/View;->getPaddingRight()I</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/View;->getPaddingBottom()I</span>
+<span class="">	move-result v3</span>
+<span class="">	invoke-virtual {p1, v0, v1, v2, v3}, Landroid/view/View;->setPadding(IIII)V</span>
+<span class="">	goto :goto_0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/View;->getTop()I</span>
+<span class="">	move-result v0</span>
+<span class="">	if-eqz v0, :cond_1</span>
+<span class="">	iget-boolean v0, p0, Lcom/google/android/material/bottomsheet/BottomSheetDialog$EdgeToEdgeCallback;->lightStatusBar:Z</span>
+<span class="">	invoke-static {p1, v0}, Lcom/google/android/material/bottomsheet/BottomSheetDialog;->setLightStatusBar(Landroid/view/View;Z)V</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/View;->getPaddingLeft()I</span>
+<span class="">	move-result v0</span>
+<span class="">	const/4 v1, 0x0</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/View;->getPaddingRight()I</span>
+<span class="">	move-result v2</span>
+<span class="">	invoke-virtual {p1}, Landroid/view/View;->getPaddingBottom()I</span>
+<span class="">	move-result v3</span>
+<span class="">	invoke-virtual {p1, v0, v1, v2, v3}, Landroid/view/View;->setPadding(IIII)V</span>
+<span class="">	:cond_1</span>
+<span class="">	:goto_0</span>
+.end method
+
+.method public onSlide(Landroid/view/View;F)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/material/bottomsheet/BottomSheetDialog$EdgeToEdgeCallback;->setPaddingForPosition(Landroid/view/View;)V</span>
+.end method
+
+.method public onStateChanged(Landroid/view/View;I)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-direct {p0, p1}, Lcom/google/android/material/bottomsheet/BottomSheetDialog$EdgeToEdgeCallback;->setPaddingForPosition(Landroid/view/View;)V</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../../../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../../../../.resources/report.js"></script>
+</body>
+</html>

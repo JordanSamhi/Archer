@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" href="../../.resources/highlight/styles/default.css" />
+	<link rel="stylesheet" href="../../.resources/report.css" />
+</head>
+<body>
+    <ul class="breadcrumb">
+		<li><i class="ico ico-android"></i><a href="../../index.html">lu.uni.trux.workmanager_enqueueuniquework</a></li>
+		<li><i class="ico ico-package"></i><a href="index.html">androidx.activity</a></li>
+        <li><i class="ico ico-class"></i> OnBackPressedDispatcher.smali</li>
+    </ul>
+    <p class="left-margin">granularity level: instruction</p>
+	<pre class="source lang-smali" id='source'>
+		<code>.class public final Landroidx/activity/OnBackPressedDispatcher;
+.super Ljava/lang/Object;
+.source "OnBackPressedDispatcher.java"
+
+.annotation system Ldalvik/annotation/MemberClasses;
+value = {
+Landroidx/activity/OnBackPressedDispatcher$LifecycleOnBackPressedCancellable;,
+Landroidx/activity/OnBackPressedDispatcher$OnBackPressedCancellable;
+}
+.end annotation
+
+.field private final mFallbackOnBackPressed:Ljava/lang/Runnable;
+.field final mOnBackPressedCallbacks:Ljava/util/ArrayDeque;
+.annotation system Ldalvik/annotation/Signature;
+value = {
+"Ljava/util/ArrayDeque<",
+"Landroidx/activity/OnBackPressedCallback;",
+">;"
+}
+.end annotation
+.end field
+
+
+.method public constructor <init>()V
+<span class="">	.locals 1</span>
+
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	invoke-direct {p0, v0}, Landroidx/activity/OnBackPressedDispatcher;-><init>(Ljava/lang/Runnable;)V</span>
+.end method
+
+<span class="cov">.method public constructor &lt;init&gt;(Ljava/lang/Runnable;)V</span>
+<span class="">	.locals 1</span>
+
+<span class="cov">	invoke-direct {p0}, Ljava/lang/Object;-><init>()V</span>
+<span class="cov">	new-instance v0, Ljava/util/ArrayDeque;</span>
+<span class="cov">	invoke-direct {v0}, Ljava/util/ArrayDeque;-><init>()V</span>
+<span class="cov">	iput-object v0, p0, Landroidx/activity/OnBackPressedDispatcher;->mOnBackPressedCallbacks:Ljava/util/ArrayDeque;</span>
+<span class="cov">	iput-object p1, p0, Landroidx/activity/OnBackPressedDispatcher;->mFallbackOnBackPressed:Ljava/lang/Runnable;</span>
+<span class="exec">	return-void</span>
+.end method
+
+.method public addCallback(Landroidx/activity/OnBackPressedCallback;)V
+<span class="">	.locals 0</span>
+
+<span class="">	invoke-virtual {p0, p1}, Landroidx/activity/OnBackPressedDispatcher;->addCancellableCallback(Landroidx/activity/OnBackPressedCallback;)Landroidx/activity/Cancellable;</span>
+.end method
+
+<span class="cov">.method public addCallback(Landroidx/lifecycle/LifecycleOwner;Landroidx/activity/OnBackPressedCallback;)V</span>
+<span class="">	.locals 2</span>
+
+<span class="exec">	invoke-interface {p1}, Landroidx/lifecycle/LifecycleOwner;->getLifecycle()Landroidx/lifecycle/Lifecycle;</span>
+<span class="cov">	move-result-object p1</span>
+<span class="exec">	invoke-virtual {p1}, Landroidx/lifecycle/Lifecycle;->getCurrentState()Landroidx/lifecycle/Lifecycle$State;</span>
+<span class="cov">	move-result-object v0</span>
+<span class="cov">	sget-object v1, Landroidx/lifecycle/Lifecycle$State;->DESTROYED:Landroidx/lifecycle/Lifecycle$State;</span>
+<span class="">	if-ne v0, v1, :cond_0</span>
+<span class="cov">	new-instance v0, Landroidx/activity/OnBackPressedDispatcher$LifecycleOnBackPressedCancellable;</span>
+<span class="cov">	:cond_0</span>
+<span class="cov">	invoke-direct {v0, p0, p1, p2}, Landroidx/activity/OnBackPressedDispatcher$LifecycleOnBackPressedCancellable;-><init>(Landroidx/activity/OnBackPressedDispatcher;Landroidx/lifecycle/Lifecycle;Landroidx/activity/OnBackPressedCallback;)V</span>
+<span class="cov">	invoke-virtual {p2, v0}, Landroidx/activity/OnBackPressedCallback;->addCancellable(Landroidx/activity/Cancellable;)V</span>
+<span class="exec">	return-void</span>
+.end method
+
+<span class="cov">.method  addCancellableCallback(Landroidx/activity/OnBackPressedCallback;)Landroidx/activity/Cancellable;</span>
+<span class="">	.locals 1</span>
+
+<span class="cov">	iget-object v0, p0, Landroidx/activity/OnBackPressedDispatcher;->mOnBackPressedCallbacks:Ljava/util/ArrayDeque;</span>
+<span class="cov">	invoke-virtual {v0, p1}, Ljava/util/ArrayDeque;->add(Ljava/lang/Object;)Z</span>
+<span class="cov">	new-instance v0, Landroidx/activity/OnBackPressedDispatcher$OnBackPressedCancellable;</span>
+<span class="cov">	invoke-direct {v0, p0, p1}, Landroidx/activity/OnBackPressedDispatcher$OnBackPressedCancellable;-><init>(Landroidx/activity/OnBackPressedDispatcher;Landroidx/activity/OnBackPressedCallback;)V</span>
+<span class="cov">	invoke-virtual {p1, v0}, Landroidx/activity/OnBackPressedCallback;->addCancellable(Landroidx/activity/Cancellable;)V</span>
+<span class="exec">	return-object v0</span>
+.end method
+
+.method public hasEnabledCallbacks()Z
+<span class="">	.locals 2</span>
+
+<span class="">	iget-object v0, p0, Landroidx/activity/OnBackPressedDispatcher;->mOnBackPressedCallbacks:Ljava/util/ArrayDeque;</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/ArrayDeque;->descendingIterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Landroidx/activity/OnBackPressedCallback;</span>
+<span class="">	invoke-virtual {v1}, Landroidx/activity/OnBackPressedCallback;->isEnabled()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_0</span>
+<span class="">	const/4 v0, 0x1</span>
+<span class="">	const/4 v0, 0x0</span>
+<span class="">	:cond_1</span>
+.end method
+
+.method public onBackPressed()V
+<span class="">	.locals 3</span>
+
+<span class="">	iget-object v0, p0, Landroidx/activity/OnBackPressedDispatcher;->mOnBackPressedCallbacks:Ljava/util/ArrayDeque;</span>
+<span class="">	invoke-virtual {v0}, Ljava/util/ArrayDeque;->descendingIterator()Ljava/util/Iterator;</span>
+<span class="">	move-result-object v0</span>
+<span class="">	:cond_0</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z</span>
+<span class="">	move-result v1</span>
+<span class="">	if-eqz v1, :cond_1</span>
+<span class="">	invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;</span>
+<span class="">	move-result-object v1</span>
+<span class="">	check-cast v1, Landroidx/activity/OnBackPressedCallback;</span>
+<span class="">	invoke-virtual {v1}, Landroidx/activity/OnBackPressedCallback;->isEnabled()Z</span>
+<span class="">	move-result v2</span>
+<span class="">	if-eqz v2, :cond_0</span>
+<span class="">	invoke-virtual {v1}, Landroidx/activity/OnBackPressedCallback;->handleOnBackPressed()V</span>
+<span class="">	iget-object v0, p0, Landroidx/activity/OnBackPressedDispatcher;->mFallbackOnBackPressed:Ljava/lang/Runnable;</span>
+<span class="">	:cond_1</span>
+<span class="">	if-eqz v0, :cond_2</span>
+<span class="">	invoke-interface {v0}, Ljava/lang/Runnable;->run()V</span>
+<span class="">	:cond_2</span>
+.end method</code>
+	</pre>
+    <div class="footer"><span class="right">Created with <a href="https://github.com/pilgun/acvtool">ACVTool</a> 0.1</span></div>
+
+	<script type="text/javascript" src="../../.resources/highlight/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../.resources/report.js"></script>
+</body>
+</html>
