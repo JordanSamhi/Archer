@@ -2,6 +2,17 @@
 
 Conditional Implicit Call aware static analyzer for Android apps.
 
+:warning: :warning: :warning:
+:loudspeaker: All artifacts are available in Zenodo, **<ins>LINK BELOW</ins>**.
+
+## Link to the Zenodo archive
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7568685.svg)](https://doi.org/10.5281/zenodo.7568685)
+
+
+
+:link: Link: https://doi.org/10.5281/zenodo.7568685
+
 ## Artifacts
 
 The `artifacts` folder contains all the artifacts, i.e., datasets, scripts, results, source code, etc., to reproduce our study.
