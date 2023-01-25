@@ -18,14 +18,21 @@ df_malware = pd.read_csv(malware_file, delimiter=";", names=['sha', 'analysis_ti
 
 print("On 350 malware")
 print("Before Archer")
+print("-------------")
 print(f"Number of Nodes: {round(df_malware['nodes_in_cg'].mean() - df_malware['new_nodes'].mean())}")
 print(f"Number of Edges: {round(df_malware['edges_in_cg'].mean() - df_malware['new_edges'].mean())}")
 print("After Archer")
+print("-------------")
 print(f"Number of Nodes: {round(df_malware['nodes_in_cg'].mean())}")
 print(f"Number of Edges: {round(df_malware['edges_in_cg'].mean())}")
 print("Difference")
+print("-------------")
 print(f"Number of Nodes: {round(df_malware['new_nodes'].mean())} ({round(df_malware['new_nodes'].mean() * 100 / (df_malware['nodes_in_cg'].mean() - df_malware['new_nodes'].mean()))}%)")
 print(f"Number of Edges: {round(df_malware['new_edges'].mean())} ({round(df_malware['new_edges'].mean() * 100 / (df_malware['edges_in_cg'].mean() - df_malware['new_edges'].mean()))}%)")
+print("Total")
+print("-------------")
+print(f"Total number of new nodes: {round(df_malware['new_nodes'].sum())}")
+print(f"Total number of new edges: {round(df_malware['new_edges'].sum())}")
 
 
 
@@ -41,14 +48,21 @@ df_goodware = pd.read_csv(goodware_file, delimiter=";", names=['sha', 'analysis_
                                                       'timeout', 'constraints'])
 print("On 576 goodware")
 print("Before Archer")
+print("-------------")
 print(f"Number of Nodes: {round(df_goodware['nodes_in_cg'].mean() - df_goodware['new_nodes'].mean())}")
 print(f"Number of Edges: {round(df_goodware['edges_in_cg'].mean() - df_goodware['new_edges'].mean())}")
 print("After Archer")
+print("-------------")
 print(f"Number of Nodes: {round(df_goodware['nodes_in_cg'].mean())}")
 print(f"Number of Edges: {round(df_goodware['edges_in_cg'].mean())}")
 print("Difference")
+print("-------------")
 print(f"Number of Nodes: {round(df_goodware['new_nodes'].mean())} ({round(df_goodware['new_nodes'].mean() * 100 / (df_goodware['nodes_in_cg'].mean() - df_goodware['new_nodes'].mean()))}%)")
 print(f"Number of Edges: {round(df_goodware['new_edges'].mean())} ({round(df_goodware['new_edges'].mean() * 100 / (df_goodware['edges_in_cg'].mean() - df_goodware['new_edges'].mean()))}%)")
+print("Total")
+print("-------------")
+print(f"Total number of new nodes: {round(df_goodware['new_nodes'].sum())}")
+print(f"Total number of new edges: {round(df_goodware['new_edges'].sum())}")
 
 
 print()
