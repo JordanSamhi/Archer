@@ -1,6 +1,6 @@
 import pandas as pd
 
-def process_constraints(file_path):
+def process_constraints(file_path, file_constraint_path):
     goodwares_f = "../datasets/goodwares"
     malwares_f = "../datasets/malwares"
     number_of_constraints = 0
@@ -19,6 +19,7 @@ def process_constraints(file_path):
             malwares.add(l)
     constraints_dic = {}
     shas_with_constraints = set()
+    constraints_extracted = []
     with open(file_path, 'r') as f:
         lines = f.readlines()
         for line in lines:
@@ -31,6 +32,8 @@ def process_constraints(file_path):
             for edge in edges_split:
                 edge_split = edge.split("|")
                 if len(edge_split) > 3:
+                    callee = edge_split[0]
+                    current_method = edge_split[1]
                     constraints = edge_split[3]
                     if constraints:
                         if sha in goodwares or sha in malwares:
@@ -46,6 +49,7 @@ def process_constraints(file_path):
                                 if not c in constraints_dic:
                                     constraints_dic[c] = 0
                                 constraints_dic[c] = constraints_dic[c] + 1
+                                constraints_extracted.append(f"{sha};{callee};{current_method};{c};{v}")
             if number_of_constraints_per_app != 0:
                 number_of_constraints_per_app_tab.append(number_of_constraints_per_app)
     for k,v in constraints_dic.items():
@@ -53,14 +57,18 @@ def process_constraints(file_path):
     print(f"Count of apps with constraints: {len(shas_with_constraints)}")
     print(f"Number of constraints found: {number_of_constraints}")
     df_constraints_per_app = pd.DataFrame(data=number_of_constraints_per_app_tab)
+    with open(file_constraint_path, "w") as f:
+        for elt in constraints_extracted:
+            f.write(f"{elt}\n")
+
     return df_constraints_per_app
     
     
 
 print("GOODWARES")
-process_constraints("goodware_results.lst")
+process_constraints("goodware_results.lst", "goodware_constraints.lst")
 print()
 print("=======")
 print()
 print("MALWARES")
-process_constraints("malware_results.lst")
+process_constraints("malware_results.lst", "malware_constraints.lst")
