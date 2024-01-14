@@ -7,11 +7,10 @@ Conditional Implicit Call aware static analyzer for Android apps.
 
 ## Link to the Zenodo archive
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7568685.svg)](https://doi.org/10.5281/zenodo.7568685)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10474310.svg)](https://doi.org/10.5281/zenodo.10474310)
 
 
-
-:link: Link: https://doi.org/10.5281/zenodo.7568685
+:link: Link: https://doi.org/10.5281/zenodo.10474310
 
 ## Artifacts
 
